@@ -1,0 +1,26 @@
+(W1=w6)
+W1		broad intro and institutions
+W2		measuring liquidity
+W2b		problems: liquidity, spreads
+W3		intro to info&prices, Glosten-Milgrom (fixed trade size)
+W4		GM cleanup; order-processing costs, inventory risk
+W4b		problems: GM
+W5		Kyle (trade size), empirics of liquidity?
+W6		LOB (Glosten)
+W6b		problems: Kyle, Glosten
+assign PS1
+W7		Fragmentation costs and benefits
+W8		Transparency (expand?)
+W8b		solve PS1
+W9		Value of liquidity
+W10		Liquidity and corporate policy
+assign PS2
+W11		HFT
+W12		Public information (Kondor)
+W12b	solve PS2
+W13		Bubbles 1 (herding)
+W14		Bubbles 2 (Abreu-Brunnermeier)
+W15		review
+W16		office hours?
+
+alt: W15: information and markets (censorship, memory&markets...?)
