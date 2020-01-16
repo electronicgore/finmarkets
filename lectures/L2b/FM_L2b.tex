@@ -44,9 +44,6 @@
 
 \title{Financial Markets Microstructure \\ Exercise class 1}
 
-%\subtitle{Introduction and institutions \\
-%Chapters 0 and 1 of FPR}
-
 \author{Egor Starkov}
 
 \date{K{\o}benhavns Unversitet \\
@@ -59,7 +56,10 @@
 \addtocounter{framenumber}{-1}
 
 
-\begin{frame}{Problem 1}
+
+\section{Strategic vs Competitive behavior}
+
+\begin{frame}{Problem 0}
 	How does \alert{strategic} behavior differ from \structure{competitive behavior}?
 \end{frame}
 
@@ -87,6 +87,255 @@
 		\includegraphics[width=.4\paperwidth]{pics/Image_Strategic2}
 	\end{figure}
 	Why would agent 2 want fewer units? Pay lower price on all units. (Parallel to monopolist restricting supply to get higher price). \hyperlink{main2}{\beamerbutton{back}}
+\end{frame}
+
+
+
+\section{Problems from Lecture 1}
+
+\begin{frame}{Problems 1-3}
+	From Lecture 1: problems 1-3 from FPR ch.1 (pp. 44-45)
+\end{frame}
+
+
+\begin{frame}{Orders}
+	We have a collection of limit orders and market orders
+	\begin{itemize}
+		\item Limit buy orders:
+		\begin{itemize}
+			\item 100 shares at bid price 3
+			\item 200 shares at bid price 4
+			\item 200 shares at bid price 3.5
+			\item 500 shares at bid price 2.5
+		\end{itemize}
+		\item Limit sell orders:
+		\begin{itemize}
+			\item 500 shares at ask price 5
+			\item 600 shares at ask price 3
+			\item 500 shares at ask price 4
+		\end{itemize}
+		\item Market buy order: 500
+		\item Market sell order: 200
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Call auction}
+	Recall idea of a call auction:
+	\begin{itemize}
+		\item Orders are collected (in a `batch') and cleared at a certain frequency
+		\item The price is chosen so as to maximize the number of executed orders
+		\item \textcolor{red}{Uniform price}: all orders in a batch trades at same price
+	\end{itemize}
+	\quad
+	Let's build the auction step by step
+\end{frame}
+
+
+\begin{frame}{Call auction}
+	Limit buy order of 100 shares at bid price 3
+	\quad
+	\center
+	\includegraphics[width=.75\linewidth]{pics/Call_t1}
+\end{frame}
+
+
+\begin{frame}{Call auction}
+	Limit buy order of 200 shares at bid price 4
+	\quad
+	\center
+	\includegraphics[width=.75\linewidth]{pics/Call_t2}
+\end{frame}
+
+
+\begin{frame}{Call auction}
+	Limit buy order of 200 shares at bid price 3.5
+	\quad
+	\center
+	\includegraphics[width=.75\linewidth]{pics/Call_t3}
+\end{frame}
+
+
+\begin{frame}{Call auction}
+	Limit buy order of 500 shares at bid price 2.5
+	\quad
+	\center
+	\includegraphics[width=.75\linewidth]{pics/Call_t4}
+\end{frame}
+
+
+\begin{frame}{Call auction}
+	Limit sell order of 500 shares at ask price 5
+	\quad
+	\center
+	\includegraphics[width=.75\linewidth]{pics/Call_t5}
+\end{frame}
+
+
+\begin{frame}{Call auction}
+	Limit sell order of 600 shares at ask price 3
+	\quad
+	\center
+	\includegraphics[width=.75\linewidth]{pics/Call_t6}
+\end{frame}
+
+
+\begin{frame}{Call auction}
+	Limit sell order of 500 shares at ask price 4
+	\quad
+	\center
+	\includegraphics[width=.75\linewidth]{pics/Call_t7}
+\end{frame}
+
+
+\begin{frame}{Call auction}
+	Market buy order of 500 shares
+	\quad
+	\center
+	\includegraphics[width=.75\linewidth]{pics/Call_t8}
+\end{frame}
+
+
+\begin{frame}{Call auction}
+	Market sell order of 200 shares
+	\quad
+	\center
+	\includegraphics[width=.75\linewidth]{pics/Call_Clearing}
+\end{frame}
+
+
+\begin{frame}{Call auction}
+	Market clears at price 3.5, with 800 units being sold
+	Filled buy orders:
+	\begin{itemize}
+		\item The market order is filled completely
+		\item The limit order for 200 shares at price 4 is filled completely
+		\item The limit order for 200 shares at price 3.5 is filled partially (100 shares)
+	\end{itemize}
+	Filled sell orders:
+	\begin{itemize}
+		\item The market order is filled completely
+		\item The limit order for 600 shares at price 3 is filled completely
+	\end{itemize}
+	Thus: \textit{Excess demand} at the clearing price
+\end{frame}
+
+
+\begin{frame}{Continuous auction}
+	Recall idea of a continuous auction:
+	\begin{itemize}
+		\item Some traders post limit orders (provide liquidity)
+		\item Some traders post market orders (take liquidity)
+		\item Trades occur either through 
+		\begin{enumerate}
+			\item a limit order 'match' (somebody posts a bid price above the lowest ask price), or
+			\item through market orders
+		\end{enumerate}
+		\item \textcolor{red}{Discriminatory price}: depends on how your order is matched
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Continuous auction}
+	Limit buy order of 100 shares at bid price 3
+	\quad
+	\center
+	\includegraphics[width=.75\linewidth]{pics/Continuous_t1}
+\end{frame}
+
+
+\begin{frame}{Continuous auction}
+	Limit buy order of 200 shares at bid price 4
+	\quad
+	\center
+	\includegraphics[width=.75\linewidth]{pics/Continuous_t2}
+\end{frame}
+
+
+\begin{frame}{Continuous auction}
+	Limit buy order of 200 shares at bid price 3.5
+	\quad
+	\center
+	\includegraphics[width=.75\linewidth]{pics/Continuous_t3}
+\end{frame}
+
+
+\begin{frame}{Continuous auction}
+	Limit buy order of 500 shares at bid price 2.5
+	\quad
+	\center
+	\includegraphics[width=.75\linewidth]{pics/Continuous_t4}
+\end{frame}
+
+
+\begin{frame}{Continuous auction}
+	Limit sell order of 500 shares at ask price 5. Spread =  1
+	\quad
+	\center
+	\includegraphics[width=.75\linewidth]{pics/Continuous_t5}
+\end{frame}
+
+
+\begin{frame}{Continuous auction}
+	Limit sell order of 600 shares at ask price 3
+	\quad
+	\center
+	\includegraphics[width=.75\linewidth]{pics/Continuous_t6open}
+\end{frame}
+
+
+\begin{frame}{Continuous auction}
+	Seller executes 200 shares at price 4, 200 at price 3.5, and 100 at price 3. Spread = 0.5
+	\center
+	\includegraphics[width=.75\linewidth]{pics/Continuous_t6close}
+\end{frame}
+
+
+\begin{frame}{Continuous auction}
+	Limit sell order of 500 shares at ask price 4. Spread = 0.5
+	\center
+	\includegraphics[width=.75\linewidth]{pics/Continuous_t7}
+\end{frame}
+
+
+\begin{frame}{Continuous auction}
+	Market buy order of 500 shares. Executes against 100 shares at price 3, and 400 shares at price 4. Spread = 1.5
+	\center
+	\includegraphics[width=.75\linewidth]{pics/Continuous_t8}
+\end{frame}
+
+
+\begin{frame}{Continuous auction}
+	Market sell order of 200 shares. Executes against 200 shares at price 2.5. Spread = 1.5
+	\center
+	\includegraphics[width=.75\linewidth]{pics/Continuous_t9}
+\end{frame}
+
+
+\begin{frame}{Efficiency}
+	Suppose limit order traders' valuation is equal to their price, market order buyers have valuation 10, market order sellers have valuation 0
+	\quad
+	\center
+	\includegraphics[width=.5\linewidth]{pics/Efficiency}
+	\quad
+	Can any profitable trades be made after market closes?
+\end{frame}
+
+
+\begin{frame}{Welfare}
+	We can also do a welfare calculation, using the post market holdings of each type
+	\quad
+	\center
+	\includegraphics[width=.6\linewidth]{pics/Welfare}
+	\quad
+\end{frame}
+
+
+
+\section{Problems from Lecture 2}
+
+\begin{frame}{Problem 8}
+From Lecture 2: problem 8 from FPR ch.2 (p. 75)
 \end{frame}
 
 
