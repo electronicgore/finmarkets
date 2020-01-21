@@ -60,6 +60,8 @@
 \section{Strategic vs Competitive behavior}
 
 \begin{frame}{Problem 0}
+	(Related to Lecture 1, not stated in the slides:)
+	
 	How does \alert{strategic} behavior differ from \structure{competitive behavior}?
 \end{frame}
 
@@ -93,7 +95,7 @@
 
 \section{Problems from Lecture 1}
 
-\begin{frame}{Problems 1-3}
+\begin{frame}{Lecture 1}
 	From Lecture 1: problems 1-3 from FPR ch.1 (pp. 44-45)
 \end{frame}
 
@@ -334,8 +336,41 @@
 
 \section{Problems from Lecture 2}
 
-\begin{frame}{Problem 8}
-From Lecture 2: problem 8 from FPR ch.2 (p. 75)
+\begin{frame}{Lecture 2}
+From Lecture 2: 
+\begin{itemize}
+	\item problems 1 and 8 from FRP ch.2 (pp.72-76)
+	\item reproduce graphs from lecture ($\approx$ problems 6-7 from FPR ch.2) -- we did that in lecture (duh)
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Problem 1: Market Depth}
+\begin{figure}
+	\includegraphics[width=.7\paperwidth]{pics/Image_LOB}
+\end{figure}
+\end{frame}
+
+
+\begin{frame}{Problem 1: Market Depth}
+\begin{figure}
+	\includegraphics[width=.7\paperwidth]{pics/Graph_LOB}
+\end{figure}
+\end{frame}
+
+
+\begin{frame}{Problem 8: Implementation Shortfall}
+	\begin{quotation}
+		Your client wants to buy $q$ shares in company XYZ at time $0$ and hold them until time $t$. Midprice at time $0$ is $m_0$. Market is not perfectly liquid, so realized [average] purchase price will be $\bar{p} = m_0 + \lambda k q$, where $k \in [0,1]$ is the share of the order fulfilled, $\lambda$ price pressure parameter. Expected midprice at time $t$ is $m_t$.
+		
+		Choose $k$ to minimize the implementation shortfall.
+	\end{quotation}
+
+	Clarifications:
+	\begin{itemize}
+		\item you can only buy at time $0$, cannot split purchase over many periods;
+		\item $m_t$ is independent of $k$.
+	\end{itemize}
 \end{frame}
 
 
