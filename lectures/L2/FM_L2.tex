@@ -300,6 +300,14 @@ Chapter 2 of FPR}
 \end{frame}
 
 
+
+\section{Estimating Direction of Trade}
+
+\begin{frame}{Today on FMM:}
+\tableofcontents[currentsection]
+\end{frame}
+
+
 \begin{frame}{Estimating direction of trade}
 	\begin{itemize}
 		\item We often only observe quotes and realized prices: not the direction of trade
@@ -346,57 +354,6 @@ Chapter 2 of FPR}
 	Checking with the actual trade directions, we see that we only made one mistake
 	\center
 	\includegraphics[scale=0.39]{pics/L2_leereadysuccess}
-\end{frame}
-
-
-\begin{frame}{Volume based measure}
-	\begin{itemize}
-		\item Let $q_t$ be the order imbalance (net market purchase)
-		\item \alert{Volume-Weighted Average Price} (VWAP):
-		\[
-		VWAP = \sum  w_t p_t,
-		\]
-		where $w_t = |q_t|/\sum |q_t|$ is the order weight
-		\item  This equals the amount of dollars traded over the number of shares traded: average price
-		\item This measure may depend excessively on few orders (if they are large) and therefore be subject to manipulation
-		\item For our example, $VWAP=3.02$
-	\end{itemize}
-\end{frame}
-
-
-\begin{frame}{Price impact}
-	\begin{itemize}
-		\item How much do trades affect prices? We can estimate this by
-		\[
-		\Delta m_t = \lambda q_t + \epsilon_t.
-		\]
-		In our example: $\lambda = 0.15 $ ($q_t$ in 100,000EUR)
-		\item  $\lambda$ captures price impact;  $1/\lambda$ captures market \textit{depth}
-		\item Hasbrouck: sensitivity of returns to trading volume
-		\[
-		|\Delta m_t | = \gamma Vol_t + \epsilon_t.
-		\]
-		In our example: $\gamma = 0.01$ ($Vol_t$ in 100,000EUR)
-		\item Amihud: take ratio btw return $r_t$ and volume to get \textit{illiquidity ratio}: 
-		\center
-		$I_t = \frac{|r_t|}{Vol_t}$.
-	\end{itemize}
-	%TODO: look up
-\end{frame}
-
-
-\begin{frame}{Amihud's Illiquidity Ratio}
-	\center
-	\includegraphics[scale=0.39]{pics/L2_Amihud}
-\end{frame}
-
-
-\begin{frame}{Other measures}
-	\begin{itemize}
-		\item Measures such as trading volume, turnover rate, trade frequency are also used
-		\item Problem: trading volume and spreads are both positively correlated with information releases (think about why this is?)
-		\item Frequency of trading or related measures may be more relevant in `thin' markets, for instance in emerging economies
-	\end{itemize}
 \end{frame}
 
 
@@ -471,9 +428,58 @@ Chapter 2 of FPR}
 \end{frame}
 
 
+\section{Other Measures of Liquidity}
+
+\begin{frame}{Today on FMM:}
+	\tableofcontents[currentsection]
+\end{frame}
+
+
+\begin{frame}{Volume based measure}
+\begin{itemize}
+	\item Let $q_t$ be the order imbalance (net market purchase)
+	\item \alert{Volume-Weighted Average Price} (VWAP):
+	\[
+	VWAP = \sum  w_t p_t,
+	\]
+	where $w_t = |q_t|/\sum |q_t|$ is the order weight
+	\item  This equals the amount of dollars traded over the number of shares traded: average price
+	\item This measure may depend excessively on few orders (if they are large) and therefore be subject to manipulation
+	\item For our example, $VWAP=3.02$
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Price impact}
+\begin{itemize}
+	\item How much do trades affect prices? \alert{Price impact} ($\lambda$)
+	\[
+	\Delta m_t = \lambda q_t + \epsilon_t.
+	\]
+	In our example: $\lambda = 0.15 $ ($q_t$ in 100,000EUR)
+	\item  $\lambda$ captures price impact;  $1/\lambda$ captures market \textit{depth}
+	\item \alert{Hasbrouck measure} ($\gamma$): sensitivity of returns to trading volume
+	\[
+	|\Delta m_t | = \gamma Vol_t + \epsilon_t.
+	\]
+	In our example: $\gamma = 0.01$ ($Vol_t$ in 100,000EUR)
+	\item \alert{Amihud measure} ($I_t$): take ratio btw return $r_t$ and volume to get \textit{illiquidity ratio}: 
+	\center
+	$I_t = \frac{|r_t|}{Vol_t}$.
+\end{itemize}
+%TODO: look up (e.g., how are returns measured)
+\end{frame}
+
+
+\begin{frame}{Amihud's Illiquidity Ratio}
+\center
+\includegraphics[scale=0.39]{pics/L2_Amihud}
+\end{frame}
+
+
 \begin{frame}{Implementation shortfall}
 	\begin{itemize}
-		\item The previous measures the time it takes to execute order %TODO - ???
+		%\item The previous measures the time it takes to execute order %TODO - ???
 		\item Aim at time 0: to (net) purchase $q$ shares
 		\begin{itemize}
 			\item By time $t$, fraction $\kappa_t$ has been executed, at an average execution price $\bar{p}_t$
@@ -491,12 +497,11 @@ Chapter 2 of FPR}
 \end{frame}
 
 
-
 \begin{frame}{Implementation shortfall}
 	In the example... 
 	\begin{itemize}
 		\item Suppose you want to buy 3,500 shares
-		\item And suppose all the buy orders come from you
+		\item And suppose all the buy orders in the data came from you
 	\end{itemize}
 	\center
 	\includegraphics[scale=0.39]{pics/L2_is}
@@ -507,6 +512,15 @@ Chapter 2 of FPR}
 	Breaking down the shortfall into opportunity cost and execution cost
 	\center
 	\includegraphics[scale=0.39]{pics/L2_is2}
+\end{frame}
+
+
+\begin{frame}{Other measures}
+\begin{itemize}
+	\item Measures such as trading volume, turnover rate, trade frequency are also used
+	\item Problem: trading volume and spreads are both positively correlated with information releases (think about why this is?)
+	\item Frequency of trading or related measures may be more relevant in `thin' markets, for instance in emerging economies
+\end{itemize}
 \end{frame}
 
 
@@ -525,8 +539,7 @@ Chapter 2 of FPR}
 		%\item In Absalon, I have attached a commission and fee schedule from Robinhood Financial. More information on \url{www.robinhood.io/}. Discuss the potential effect on other brokerage services.
 		\item Recreate the graphs and figures I presented today using the KrispyKreme dataset
 		\item Solve exercise 8 regarding implementation shortfall, on page 75 in the textbook.
-		Discuss the meaning of $m_t$ in this analysis. 
-		%TODO: bad ambiguous problem, consider replacing
+		Discuss the meaning of $m_t$ in this analysis.
 	\end{itemize}
 \end{frame}
 
