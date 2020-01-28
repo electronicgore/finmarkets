@@ -6,7 +6,7 @@ W3		intro to info&prices, Glosten-Milgrom (fixed trade size)
 W4		GM cleanup; order-processing costs, inventory risk
 W4b		problems: GM
 W5		Kyle (trade size), empirics of liquidity?
-W6		LOB (Glosten)
+W6		LOB (Glosten) -- SEE Foucault slides (deck 5)
 W6b		problems: Kyle, Glosten
 assign PS1
 W7		Fragmentation costs and benefits
