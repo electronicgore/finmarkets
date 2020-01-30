@@ -1,0 +1,51 @@
+\ProvidesPackage{beamerouterthemereMedian}
+\RequirePackage{tikz, datetime, textpos}
+
+\yyyymmdddate \renewcommand{\dateseparator}{.}
+\definecolor{box1}{RGB}{145,65,158} % I haven't figured out how to pull these from color theme
+\definecolor{box2}{RGB}{99,65,158}
+
+%%% Header and footer
+\setbeamertemplate{navigation symbols}{}
+\defbeamertemplate{frame footer}{none}{}
+\defbeamertemplate{frame footer}{custom}[1]{ #1 }
+\defbeamertemplate{frame numbering}{none}{}
+\defbeamertemplate{frame numbering}{counter}{\insertframenumber}
+\defbeamertemplate{frame numbering}{fraction}{
+  \insertframenumber/\inserttotalframenumber
+}
+\setbeamertemplate{frame numbering}[counter] %change in the document if needed
+\setbeamertemplate{headline}{}
+\setbeamertemplate{footline}{%
+  \begin{beamercolorbox}[wd=\textwidth, sep=3ex]{footline}%
+    \usebeamerfont{page number in head/foot}%
+    \usebeamertemplate*{frame footer}
+    \hfill%
+    \usebeamertemplate*{frame numbering}
+  \end{beamercolorbox}%
+}
+
+
+%%% Frame title
+\newlength{\remedian@frametitle@padding}
+\setlength{\remedian@frametitle@padding}{1.98em}
+\setbeamertemplate{frametitle}{%
+  \vspace{0.05\paperheight}
+  \begin{beamercolorbox}[%
+      wd=\paperwidth,%
+      sep=0pt,%
+      leftskip=\remedian@frametitle@padding,%
+      rightskip=\remedian@frametitle@padding,%
+    ]{frametitle}%
+  \insertframetitle%
+  \nolinebreak%
+  
+  \vspace{-0.5ex}
+  \hspace{-5cm}
+  \begin{tikzpicture}
+      \fill[color=box1] (0,0) rectangle(4.85cm,0.3cm);
+      \fill[color=box2] (4.93cm,0) rectangle(2\paperwidth, 0.3cm); % I don't know why 2 is needed here, too short without it
+  \end{tikzpicture}
+  \end{beamercolorbox}%
+}
+

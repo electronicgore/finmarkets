@@ -1,0 +1,19 @@
+\ProvidesPackage{beamerfontthemereMedian}
+
+% Only a minor rearrangement of font sizes
+
+\DeclareOption{beteckna}{
+	\setsansfont[Ligatures=TeX, 
+				 Extension=.ttf,
+				 BoldFont=*Bold,
+				 ItalicFont=*Italic
+				 ]{BetecknaLowerCase}
+}
+\ProcessOptions
+
+\setbeamerfont{section page}{size=\LARGE}
+\setbeamerfont{title}{size=\LARGE}
+
+\setbeamerfont{itemize/enumerate subbody}{size=\footnotesize}
+\setbeamerfont{itemize/enumerate subitem}{size=\footnotesize}
+

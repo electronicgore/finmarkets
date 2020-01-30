@@ -1,0 +1,10 @@
+\ProvidesPackage{beamerinnerthemereMedian}
+\useinnertheme{rectangles}
+
+\def\maketitle{%
+  \ifbeamer@inframe
+    \titlepage
+  \else
+    \frame[plain,noframenumbering]{\titlepage}
+  \fi
+}
