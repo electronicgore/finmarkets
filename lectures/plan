@@ -15,6 +15,7 @@ W6b		problems: Kyle, Glosten
 assign PS1
 W7		Fragmentation costs and benefits
 	-- read: economist on algorithm competition
+	-- read: dark markets (maybe in liq instead)
 W8		Transparency (expand?)
 	-- read: economist on mifid 2
 W8b		solve PS1
@@ -28,6 +29,6 @@ W12b	solve PS2
 W13		Bubbles 1 (herding)
 W14		Bubbles 2 (Abreu-Brunnermeier)
 W15		Bitcoin and digital markets
-			latency, transparency, transaction costs
+			latency, transparency, transaction costs, clearing and settlement
 W16		review
 
