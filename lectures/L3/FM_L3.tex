@@ -402,27 +402,45 @@ Two counterparts to these views
 \end{frame}
 
 
+%\begin{frame}{Analysis. D: Prices}
+%	\begin{itemize}
+%		\item Let $\mu_t \equiv \mathbb{E}[v | \Omega_t]$ be the expectation of $v$ \textit{after} the time-$t$ trade order is observed
+%		\item Price efficient: $p_t = \mu_t$
+%		\item let $s^a_t = a_t - p_t$ and $s^b_t = b_t - p_t$ denote the `half-spreads'.
+%	\end{itemize}
+%\end{frame}
+
+
 \begin{frame}{Example (as in book)}
 \begin{itemize}
 	\item \textbf{Single period}: Suppose only one period (drop $t$ subscript, drop $\Omega$)
 	\item \textbf{Binary outcome}: $v \in \{ v^H, v^L\}$, with prior $\theta=\mathbb{P}(v^H) $ 
 	\item \textbf{Prior value}: What is the prior value of the asset before trading?
 	\[
-	p=\theta v^H+(1-\theta) v^L.
+	\mu=\theta v^H+(1-\theta) v^L.
 	\]
-	%TODO: check book, p should be mu?
-	\item How do we solve? Look for equilibrium with trade. Suppose $v^L < b < a < v^H$. Then speculator buys if $v=v^H$, sells if $v=v^L$
-	\item That is, $\sigma(1|v^H)=1$ and $\sigma(-1|v^L)=1$
-	\item The procedure is then the following
-	\begin{enumerate}
-		\item Use the equilibrium conditions from before to calculate prices given the above speculator strategy
-		\item Check that these prices satisfy $v^L < b < a < v^H$
-	\end{enumerate}
 \end{itemize}
 \end{frame}
 
 
 \begin{frame}{Example (2)}
+	\begin{itemize}
+		\item How do we solve the model? Look for equilibrium with trade. 
+		\item Suppose $v^L < b < a < v^H$.
+		\item Then speculator buys if $v=v^H$, sells if $v=v^L$. 
+		\begin{itemize}
+			\item That is, $\sigma(1|v^H)=1$ and $\sigma(-1|v^L)=1$
+		\end{itemize}
+		\item The procedure is then the following
+		\begin{enumerate}
+			\item Use the equilibrium conditions from before to calculate prices given the above speculator strategy
+			\item Check that these prices satisfy $v^L < b < a < v^H$
+		\end{enumerate}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Example (3)}
 \begin{itemize}
 	\item Let's solve for the ask price. First:
 	\begin{align*}
@@ -439,25 +457,25 @@ Two counterparts to these views
 \end{frame}
 
 
-\begin{frame}{Example (3)}
+\begin{frame}{Example (4)}
 \begin{itemize}
 	\item The ask price is the expected value, given a buy order:
 	\begin{align*}
 		a 
 		& = \mathbb{P}(v^H| Buy) v^H + [1-\mathbb{P}(v^H| Buy)] v^L \\
 		& = \left[ \theta + \frac{\theta(1-\theta) \pi}{(1-\pi)\beta_B+\pi\theta} \right] v^H + \left[ 1 - \left( \theta + \frac{\theta(1-\theta) \pi}{(1-\pi)\beta_B+\pi\theta} \right) \right] v^L\\
-		& = p + \frac{\theta(1-\theta) \pi}{(1-\pi)\beta_B+\pi\theta} (v^H -v^L).
+		& = \mu + \frac{\theta(1-\theta) \pi}{(1-\pi)\beta_B+\pi\theta} (v^H -v^L).
 	\end{align*}
 	\item Doing a similar exercise for $b$ we find
 	\begin{align*}
-		a - p 		&= \frac{\theta(1-\theta) \pi}{(1-\pi)\beta_B+\pi\theta}(v^H-v^L) \\
-		p - b 		&= \frac{\theta(1-\theta) \pi}{(1-\pi)\beta_S+\pi(1-\theta)}(v^H-v^L)
+		a - \mu 		&= \frac{\theta(1-\theta) \pi}{(1-\pi)\beta_B+\pi\theta}(v^H-v^L) \\
+		\mu - b 		&= \frac{\theta(1-\theta) \pi}{(1-\pi)\beta_S+\pi(1-\theta)}(v^H-v^L)
 	\end{align*}
 \end{itemize}
 \end{frame}
 
 
-\begin{frame}[label=example]{Example (4)}
+\begin{frame}[label=example]{Example (5)}
 \begin{itemize}
 	\item Notice: $a$ rises in $\pi$, falls with $\beta_B$ (book considers $\beta_B=1/2$)
 	\item Add the two expressions to get bid-ask spread $S = a-b$
