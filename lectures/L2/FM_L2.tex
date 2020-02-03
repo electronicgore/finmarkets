@@ -101,7 +101,7 @@ Chapter 2 of FPR}
 		\item Illiquidity \textit{may} be a sign of structural problems in the market
 		\item Illiquid markets also seem to be more prone to medium-run price deviations from fundamentals
 	\end{enumerate}
-	\item Relation to depth: depth measures how much must be traded to move price by certain amount
+	\item Relation to \structure{depth}: depth measures how much must be traded to move price by certain amount
 \end{itemize}
 \end{frame}
 
@@ -428,11 +428,11 @@ Chapter 2 of FPR}
 	|\Delta m_t | = \gamma Vol_t + \epsilon_t.
 	\]
 	In our example: $\gamma = 0.01$ ($Vol_t$ in 100,000EUR)
-	\item \alert{Amihud measure} ($I_t$): take ratio btw return $r_t$ and volume to get \textit{illiquidity ratio}: 
+	\item \alert{Amihud measure} ($I_t$): take ratio btw return $\Delta m_t$ and volume to get \textit{illiquidity ratio}: 
 	\center
-	$I_t = \frac{|r_t|}{Vol_t}$.
+	$I_t = \frac{|\Delta m_t|}{Vol_t}$.
+	%$I_t = \frac{|r_t|}{Vol_t}$.
 \end{itemize}
-%TODO: look up (e.g., how are returns measured)
 \end{frame}
 
 
@@ -502,6 +502,7 @@ Chapter 2 of FPR}
 \begin{frame}{Exercises for next week}
 	\begin{itemize}
 		%\item In Absalon, I have attached a commission and fee schedule from Robinhood Financial. More information on \url{www.robinhood.io/}. Discuss the potential effect on other brokerage services.
+		\item In this course we mostly imply equity markets. Read the article (on Absalon) about corporate bond markets. Discuss how differences in market structures of stock and bond markets affect liquidity in these markets.
 		\item Recreate the graphs and figures I presented today using the KrispyKreme dataset
 		\item Solve exercise 8 regarding implementation shortfall, on page 75 in the textbook.
 		Discuss the meaning of $m_t$ in this analysis.

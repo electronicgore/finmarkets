@@ -1,8 +1,8 @@
 (W1=w6)
 W1		broad intro and institutions
-	-- read: economist on corp bonds liquidity
 	-- read: LME
 W2		measuring liquidity
+	-- read: economist on corp bonds liquidity
 W2b		problems: liquidity, spreads
 W3		intro to info&prices, Glosten-Milgrom (fixed trade size)
 W4		GM cleanup; order-processing costs, inventory risk
