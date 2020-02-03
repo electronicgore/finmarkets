@@ -1,19 +1,26 @@
 (W1=w6)
 W1		broad intro and institutions
+	-- read: economist on corp bonds liquidity
+	-- read: LME
 W2		measuring liquidity
 W2b		problems: liquidity, spreads
 W3		intro to info&prices, Glosten-Milgrom (fixed trade size)
 W4		GM cleanup; order-processing costs, inventory risk
+	-- read: (inv risk) nordic power whale
 W4b		problems: GM
 W5		Kyle (trade size), empirics of liquidity?
-W6		LOB (Glosten) -- SEE Foucault slides (deck 5)
+W6		LOB (Glosten) 
+	-- SEE Foucault slides (deck 5)
 W6b		problems: Kyle, Glosten
 assign PS1
 W7		Fragmentation costs and benefits
+	-- read: economist on algorithm competition
 W8		Transparency (expand?)
+	-- read: economist on mifid 2
 W8b		solve PS1
 W9		Value of liquidity
 W10		Liquidity and corporate policy
+	alt:Bargaining, OTC markets
 assign PS2
 W11		HFT
 W12		Public information (Kondor)
