@@ -1,0 +1,226 @@
+%%% License: Creative Commons Attribution Share Alike 4.0 (see https://creativecommons.org/licenses/by-sa/4.0/)
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass{article}
+
+\usepackage{amssymb}
+\usepackage{enumerate}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{extramarks} % Required for headers and footers
+\usepackage[usenames,dvipsnames]{color} % Required for custom colors
+\usepackage{graphicx} % Required to insert images
+\usepackage{listings} % Required for insertion of code
+\usepackage{courier} % Required for the courier font
+\usepackage[table]{xcolor}
+\usepackage{amsfonts,amsmath,amsthm,parskip,setspace,url}
+\usepackage[section]{placeins}
+\usepackage[a4paper]{geometry}
+\usepackage[USenglish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+
+
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.6in
+
+\linespread{1.1} % Line spacing
+
+%----------------------------------------------------------------------------------------
+%	DOCUMENT STRUCTURE COMMANDS
+%	Skip this unless you know what you're doing
+%----------------------------------------------------------------------------------------
+
+% Header and footer for when a page split occurs within a problem environment
+\newcommand{\enterProblemHeader}[1]{
+\nobreak\extramarks{#1}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+}
+
+% Header and footer for when a page split occurs between problem environments
+\newcommand{\exitProblemHeader}[1]{
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1}{}\nobreak
+}
+
+\setcounter{secnumdepth}{0} % Removes default section numbers
+\newcounter{homeworkProblemCounter} % Creates a counter to keep track of the number of problems
+
+\newcommand{\homeworkProblemName}{}
+\newenvironment{ex}[1][Problem \arabic{homeworkProblemCounter}]{ % Makes a new environment called homeworkProblem which takes 1 argument (custom name) but the default is "Problem #"
+\stepcounter{homeworkProblemCounter} % Increase counter for number of problems
+\renewcommand{\homeworkProblemName}{#1} % Assign \homeworkProblemName the name of the problem
+\section{\homeworkProblemName} % Make a section in the document with the custom problem count
+\enterProblemHeader{\homeworkProblemName} % Header and footer within the environment
+}{
+\exitProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+
+\newcommand{\problemAnswer}[1]{ % Defines the problem answer command with the content as the only argument
+\noindent\framebox[\columnwidth][c]{\begin{minipage}{0.98\columnwidth}#1\end{minipage}} % Makes the box around the problem answer and puts the content inside
+}
+
+\newcommand{\homeworkSectionName}{}
+\newenvironment{homeworkSection}[1]{ % New environment for sections within homework problems, takes 1 argument - the name of the section
+\renewcommand{\homeworkSectionName}{#1} % Assign \homeworkSectionName to the name of the section from the environment argument
+\subsection{\homeworkSectionName} % Make a subsection with the custom name of the subsection
+\enterProblemHeader{\homeworkProblemName\ [\homeworkSectionName]} % Header and footer within the environment
+}{
+\enterProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+
+
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+% Set up the header and footer
+\pagestyle{fancy}
+\lhead[c]{\textbf{{\color[rgb]{.5,0,0} K{\o}benhavns\\Universitet }} \firstxmark} % Top left header
+\chead{\textbf{{\color[rgb]{.5,0,0} \Class }}\\ \hmwkTitle  } % Top center head
+\rhead{\instructor \\ \theprofessor} % Top right header
+\lfoot{\lastxmark} % Bottom left footer
+\cfoot{} % Bottom center footer
+\rfoot{Page\ \thepage\ of\ \protect\pageref{LastPage}} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+
+
+
+
+
+
+
+%----------------------------------------------------------------------------------------
+%	NAME AND CLASS SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\hmwkTitle}{Course Plan} % Assignment title
+\newcommand{\Class}{Financial Markets Microstructure} % Course/class
+\newcommand{\instructor}{Spring 2020} % TA
+\newcommand{\theprofessor}{Prof. Egor Starkov} % Professor
+
+%\theoremstyle{definition} \newtheorem{ex}{\textbf{\Large{Exercise & #}\\}}
+\setlength{\parskip}{0 pt}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+
+\begin{center}
+	{\huge Financial Markets Microstructure: Course Plan}
+\end{center}
+\bigskip
+
+This list outlines the plan for the course together with main readings for each topic. Additional readings will be assigned during lectures, whenever needed. The plan is subject to change.
+\medskip
+
+\paragraph{Part 0}: Overview
+\begin{itemize}
+	\item \textit{Week 1}: Introduction
+	\begin{itemize}
+		\item FPR chapters 0, 1
+	\end{itemize}
+	\item \textit{Week 2}: Liquidity
+	\begin{itemize}
+		\item FPR chapters 0, 2
+	\end{itemize}
+\end{itemize}
+
+\medskip 
+\paragraph{Part 1}: Setting up the models
+\begin{itemize}
+	\item \textit{Weeks 3 and 4}: Dealer models 1; {Glosten-Milgrom}, fixed trade size; Bayes' Rule; adverse selection, order costs and inventory risk ({Stoll})
+	\begin{itemize}
+		\item FPR chapter 3
+	\end{itemize}
+	\item \textit{Week 5}: Dealer models 2; {Kyle}, variable trade size; market depth; estimating liquidity determinants
+	\begin{itemize}
+		\item FPR chapters 4, 5
+	\end{itemize}
+	\item \textit{Week 6}: Limit order book; {Glosten}: static, random market order demand; market design; {Parlour}: dynamic, endogenous market order demand
+	\begin{itemize}
+		\item FPR chapter 6
+	\end{itemize}
+	\item \textit{Week 6}: Problem set 1
+\end{itemize}
+
+\medskip
+\paragraph{Part 2}: Applying the models; topics
+\begin{itemize}
+	\item \textit{Week 7}: Fragmentation costs, {modified Kyle model}; fragmentation benefits, {modified Glosten LOB model}
+	\begin{itemize}
+		\item FPR chapter 7
+	\end{itemize}
+	\item \textit{Week 8}: Transparency: search costs, {modified GM model} for order flow transparency
+	\begin{itemize}
+		\item FPR chapters 8
+	\end{itemize}
+	\item \textit{Week 9}: Liquidity risk and Illiquidity premia
+	\begin{itemize}
+		\item FPR chapter 9
+	\end{itemize}
+	\item \textit{Week 10}: Liquidity and corporate policy
+	\begin{itemize}
+		\item FPR chapter 10
+	\end{itemize}
+	\item \textit{Week 10}: Problem set 2
+	\item \textit{Week 11}: High-frequency trading
+	\begin{itemize}
+		\item Biais, B., Foucault, T., \& Moinas, S. (2015). Equilibrium fast trading. Journal of Financial economics, 116(2), 292-313. \url{https://doi.org/10.1016/j.jfineco.2015.03.004}
+	\end{itemize}
+	\item \textit{Week 12}: Public information; optimal disclosure policies; public announcements and trade volumes
+	\begin{itemize}
+		\item Kondor, P. (2012). The more we know about the fundamental, the less we agree on the price. The Review of Economic Studies, 79(3), 1175-1207. \url{https://doi.org/10.1093/restud/rdr051}
+	\end{itemize}
+	\item \textit{Weeks 13-14}: Bubbles; herding; common knowledge
+	\begin{itemize}
+		\item Smith, L., \& Sørensen, P. (2000). Pathological outcomes of observational learning. Econometrica, 68(2), 371-398. \url{https://doi.org/10.1111/1468-0262.00113}
+		\item Abreu, D., \& Brunnermeier, M. K. (2003). Bubbles and crashes. Econometrica, 71(1), 173-204. \url{https://doi.org/10.1111/1468-0262.00393}
+	\end{itemize}
+	\item \textit{Week 15}: Digital markets
+	\begin{itemize}
+		\item TBD
+	\end{itemize}
+\end{itemize}
+
+%\bigskip
+%The list will be expanded and updated as we progress through the course.
+
+
+%%-----------------------------------------------------------------------------------------------------
+
+\end{document}
