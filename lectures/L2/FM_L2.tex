@@ -51,7 +51,7 @@ Chapter 2 of FPR}
 		%NOTE: FB listed on NASDAQ, BMV Mexico, and Xetra (Frankfurt); Microsoft on NASDAQ, SIX Swiss Ex, and Vienna
 		\item Read the article (on Absalon) about London Metal Exchange. What is the value of keeping the ``open outcry'' trading floor in the age of digital trading?
 		%NOTE: can also trade more sophisticated contracts, these trades also generate daily prices for other traders; repeated game reputation concerns enter in any way?
-		\item Exercises 1-3 on pages 44-45 in the textbook - Friday
+		\item \textcolor{gray}{Exercises 1-3 on pages 44-45 in the textbook} - Friday
 	\end{itemize}
 \end{frame}
 
@@ -73,7 +73,7 @@ Chapter 2 of FPR}
 \end{frame}
 
 
-\begin{frame}{Liquidity}
+\begin{frame}{What is liquidity?}
 \begin{itemize}
 	\item \alert{Market liquidity} = ``market's ability to facilitate an asset being sold quickly without having to reduce its price very much (or even at all)''
 	\item Do not confuse with (related notions of):
@@ -89,20 +89,41 @@ Chapter 2 of FPR}
 		\item Assets in the order of decreasing liquidity: cash, checking deposits, long-term deposits, housing, ...
 	\end{itemize}
 \end{enumerate}
-%\end{itemize}
 \end{frame}
 
 
-\begin{frame}{Importance of Liquidity}
+\begin{frame}{Why do we care about liquidity?}
+	\begin{itemize}
+		\item In \structure{perfect markets}:
+		\begin{itemize}
+			\item There is one price = valuation cutoff
+			\item Agents who value asset above the cutoff end up with it (keep or buy)
+			\item Agents who value asset less end up without it (sell or do not buy)
+			\item This is the \alert{efficient} allocation that we want
+		\end{itemize}
+	\pause
+		\item In \structure{real markets}:
+		\begin{itemize}
+			\item Bid/ask prices different from that ideal cutoff
+			\item (due to limited liquidity)
+			\item Allocation \alert{inefficient}
+		\end{itemize}
+	% liq = distance from perfect market / degree of perfection
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Why do we care about liquidity? (2)}
 \begin{itemize}
 	\item Traders: liquidity provides a measure of trading costs
-	\item Why important to the rest of us?
+	\item Regulators:
 	\begin{enumerate}
 		\item Efficiency is tricky to measure in financial markets: liquidity provides a proxy
-		\item Illiquidity \textit{may} be a sign of structural problems in the market
 		\item Illiquid markets also seem to be more prone to medium-run price deviations from fundamentals
+		\item Illiquidity \textit{may} be a sign of structural problems in the market
 	\end{enumerate}
 	\item Relation to \structure{depth}: depth measures how much must be traded to move price by certain amount
+	%TODO: del depth?
 \end{itemize}
 \end{frame}
 
@@ -115,26 +136,26 @@ Chapter 2 of FPR}
 \end{frame}
 
 
-\begin{frame}{Liquidity measures}
-	There is not a unique measure of liquidity -- today we will consider several:
-	\begin{enumerate}
-		\item \textbf{Spread measures}: quoted spread, effective spread, realized spread
-		\item \textbf{Volume-weighted average price}: simply using average prices
-		\item \textbf{Price impact}: How much does the price move after a trade
-		\item \textbf{Non-trading measures}: trading volumes
-	\end{enumerate}
-
-	When trade direction is not available: estimate via \structure{Lee-Ready algorithm}. 
-	
-	When quote data are not available: estimate them using \structure{Roll's measure}
-\end{frame}
-
-
 
 \section{Measures of Liquidity}
 
 \begin{frame}{Today on FMM:}
 	\tableofcontents[currentsection]
+\end{frame}
+
+
+\begin{frame}{Liquidity measures}
+There is not a unique measure of liquidity -- today we will consider several:
+\begin{enumerate}
+	\item \textbf{Spread measures}: quoted spread, effective spread, realized spread
+	\item \textbf{Volume-weighted average price}: simply using average prices
+	\item \textbf{Price impact}: How much does the price move after a trade
+	\item \textbf{Non-trading measures}: trading volumes
+\end{enumerate}
+
+When trade direction is not available: estimate via \structure{Lee-Ready algorithm}. 
+
+When quote data are not available: estimate them using \structure{Roll's measure}
 \end{frame}
 
 
@@ -168,7 +189,7 @@ Chapter 2 of FPR}
 		\[
 		S_t = a_t -b_t
 		\]
-		\item Normalize to get \structure{normalized quoted spread}
+		\item Normalize to get \alert{normalized quoted spread}
 		\[
 		s_t = \frac{S_t}{m_t},
 		\]
@@ -204,7 +225,7 @@ Chapter 2 of FPR}
 			\item $d_t$: trade direction (1: buyer-initiated, -1: seller initiated)
 			\item $p_t$:  price
 		\end{itemize}
-		\item \alert{Effective spread}: 
+		\item \alert{Effective (half-)spread}: 
 		\begin{align*}
 		S^e_t & = d_t(p_t-m_{t}), \\
 		s^e_t & = \frac{S^e_t}{m_{t}}
@@ -222,19 +243,28 @@ Chapter 2 of FPR}
 		\end{center}
 		\item Effective spread is often lower (since it captures price improvements)
 	\end{itemize}
+	% effective and quoted spreads measure cost of trading for the trader
 \end{frame}
 
 
 \begin{frame}{Realized spread}
 	\begin{itemize}
-		\item \textbf{Forward looking}: spread realized by somebody who holds the asset for $\Delta$ periods
+		\item Spread realized by somebody who holds the asset for $\Delta$ periods
+		% ...like a dealer
 		\item \alert{Realized spread}:
 		\begin{align*}
 		S^r_t & = d_t(p_t - m_{t+\Delta}) \\
 		& = d_t(p_t-m_t) - d_t(m_{t+\Delta}-m_t)
 		\end{align*}
 		\item Idea: measure the spread after prices have adjusted to new information
-		\item Typically smaller than effective spreads: why?
+		\item As a forward-looking measure:
+		\begin{itemize}
+			\item $\mathbb{E}_t S_t^r = d_t(p_t - m_t) = S_t^e$ if $\mathbb{E}_t m_{t+\Delta} = m_t$
+		\end{itemize}
+		\item As a backward-looking measure:
+		\begin{itemize}
+			\item Typically smaller than effective spread: why?
+		\end{itemize}
 	\end{itemize}
 \end{frame}
 
@@ -312,7 +342,7 @@ Chapter 2 of FPR}
 	Finally, we classify the trades that were just on the midprice
 	\center
 	\includegraphics[scale=0.39]{pics/L2_leereadyest}
-	%TODO: look up whether this is done at random or somehow else
+	% the second tie is ambiguous. look at m_{t+1} vs m_t?
 \end{frame}
 
 
@@ -324,7 +354,7 @@ Chapter 2 of FPR}
 
 
 
-\section{Estimating quotes}
+\section{Estimating Quotes}
 
 \begin{frame}{Today on FMM:}
 	\tableofcontents[currentsection]
@@ -350,10 +380,11 @@ Chapter 2 of FPR}
 	\begin{enumerate}
 		\item All trades have the same size. $d=1$: buy, $d=-1$: sell
 		\item Arriving orders are i.i.d. with $\mathbb{P}(d_t =1)=\frac{1}{2}$
-		\item Midquote is random walk: $m_t -m_{t-1} = \epsilon_t$  , where $\epsilon_t$ are i.i.d. shocks
+		\item Midquote is random walk: $m_t = m_{t-1} + \epsilon_t$  , where $\epsilon_t$ are i.i.d. shocks
 		\item Market orders are not informative: $\mathbb{E}(d_t \epsilon_t)=\mathbb{E}(d_t \epsilon_{t+1})=0$
+		\item Spread $S = a_t-b_t$ is constant.
 	\end{enumerate}
-	Let $S = a_t-b_t$. Then
+	Then
 	\[
 	p_t = m_t + \frac{d_t S}{2}.
 	\]
@@ -363,7 +394,7 @@ Chapter 2 of FPR}
 
 \begin{frame}{Roll's model}
 	\begin{itemize}
-		\item Roll's observed that although $\epsilon_t$ and $d_t$ are i.i.d., $\Delta d_t$ is mean-reverting:
+		\item Roll's observed that although $\epsilon_t$ and $d_t$ are i.i.d., $\Delta d_t = d_t - d_{t-1}$ is mean-reverting:
 		\begin{align*}
 		Cov(\Delta d_t, \Delta d_{t-1})	= -1
 		\\
@@ -389,7 +420,7 @@ Chapter 2 of FPR}
 		\]
 		\item Recall the assumptions of the model. We (the book) can work out extensions to treat each of them
 		\item In our example: $S^R_t = 0.01$
-		\item Which of the previous spreads is Roll's estimator most affine to?
+		%\item Which of the previous spreads is Roll's estimator closest to? % ???
 	\end{itemize}
 \end{frame}
 
@@ -404,12 +435,14 @@ Chapter 2 of FPR}
 \begin{frame}{Volume based measure}
 \begin{itemize}
 	\item Let $q_t$ be the order imbalance (net market purchase)
+	% volumes or imbalances?
 	\item \alert{Volume-Weighted Average Price} (VWAP):
 	\[
 	VWAP = \sum  w_t p_t,
 	\]
-	where $w_t = |q_t|/\sum |q_t|$ is the order weight
+	where $w_t = |q_t|/\sum_t |q_t|$ is the order weight
 	\item  This equals the amount of dollars traded over the number of shares traded: average price
+	\item Trader can compare the price he got with VWAP to evaluate how good was his deal relative to market.
 	\item This measure may depend excessively on few orders (if they are large) and therefore be subject to manipulation
 	\item For our example, $VWAP=3.02$
 \end{itemize}
@@ -467,7 +500,7 @@ Chapter 2 of FPR}
 	In the example... 
 	\begin{itemize}
 		\item Suppose you want to buy 3,500 shares
-		\item And suppose all the buy orders in the data came from you
+		\item And suppose all the buy orders in the data (3,400 shares) came from you
 	\end{itemize}
 	\center
 	\includegraphics[scale=0.39]{pics/L2_is}
@@ -484,7 +517,11 @@ Chapter 2 of FPR}
 \begin{frame}{Other measures}
 \begin{itemize}
 	\item Measures such as trading volume, turnover rate, trade frequency are also used
-	\item Problem: trading volume and spreads are both positively correlated with information releases (think about why this is?)
+	\item Some measures may contradict each other, e.g.:
+	\begin{itemize}
+		\item trading volume and spreads are both positively correlated with information releases (why?)
+		\item price volatility is low in very liquid -- but also very illiquid markets
+	\end{itemize}
 	\item Frequency of trading or related measures may be more relevant in `thin' markets, for instance in emerging economies
 \end{itemize}
 \end{frame}
@@ -504,7 +541,7 @@ Chapter 2 of FPR}
 	\begin{itemize}
 		%\item In Absalon, I have attached a commission and fee schedule from Robinhood Financial. More information on \url{www.robinhood.io/}. Discuss the potential effect on other brokerage services.
 		\item In this course we mostly imply equity markets. Read the article (on Absalon) about corporate bond markets. Discuss how differences in market structures of stock and bond markets affect liquidity in these markets.
-		\item Recreate the graphs and figures I presented today using the KrispyKreme dataset
+		\item Recreate the graphs and figures and numbers I presented today using the KrispyKreme dataset
 		\item Solve exercise 8 regarding implementation shortfall, on page 75 in the textbook.
 		Discuss the meaning of $m_t$ in this analysis.
 	\end{itemize}
