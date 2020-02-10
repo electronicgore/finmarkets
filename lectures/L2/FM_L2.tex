@@ -123,7 +123,9 @@ Chapter 2 of FPR}
 		\item Illiquidity \textit{may} be a sign of structural problems in the market
 	\end{enumerate}
 	\item Relation to \structure{depth}: depth measures how much must be traded to move price by certain amount
-	%TODO: del depth?
+	\begin{itemize}
+		\item $\approx$ sensitivity of liquidity to trade size
+	\end{itemize}
 \end{itemize}
 \end{frame}
 
@@ -309,7 +311,7 @@ When quote data are not available: estimate them using \structure{Roll's measure
 		\item We often only observe quotes and realized prices: not the direction of trade
 		\item Thus, we need to develop methods to classify trades
 		\item Complication: trading may be `within the quotes': harder to guess direction
-		\item \alert{Lee-Ready algorithm}:
+		\item \alert{Lee-Ready algorithm}: (\citet{lee_inferring_1991})
 		\[
 		d_t = \left\{
 		\begin{aligned}
@@ -353,6 +355,21 @@ When quote data are not available: estimate them using \structure{Roll's measure
 \end{frame}
 
 
+\begin{frame}{Lee-Ready precision}
+	\begin{itemize}
+		\item \citet{odders-white_occurrence_2000}: large-scale ($>400$k transactions) test of Lee-Ready algorithm with NYSE data
+		\item 85\% correct
+		\item Most mistakes with:
+		\begin{itemize}
+			\item trades at the midpoint
+			\item small transactions
+			\item transactions in large-cap / frequently traded stocks
+			\item (why?)
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
 
 \section{Estimating Quotes}
 
@@ -364,7 +381,7 @@ When quote data are not available: estimate them using \structure{Roll's measure
 \begin{frame}{Quote data}
 	\begin{itemize}
 		\item We often lack information to compute the spread
-		\item Roll: use transaction prices to estimate it
+		\item \citet{roll_simple_1984}: use transaction prices to estimate it
 		\begin{enumerate}
 			\item Construct a simple model of trading and calculate spread
 			\item Estimate it
@@ -457,12 +474,12 @@ When quote data are not available: estimate them using \structure{Roll's measure
 	\]
 	In our example: $\lambda = 0.15 $ ($q_t$ in 100,000EUR)
 	\item  $\lambda$ captures price impact;  $1/\lambda$ captures market \textit{depth}
-	\item \alert{Hasbrouck measure} ($\gamma$): sensitivity of returns to trading volume
+	\item \alert{Hasbrouck measure} ($\gamma$): sensitivity of returns to trading volume (\citet{hasbrouck_empirical_2007})
 	\[
 	|\Delta m_t | = \gamma Vol_t + \epsilon_t.
 	\]
 	In our example: $\gamma = 0.01$ ($Vol_t$ in 100,000EUR)
-	\item \alert{Amihud measure} ($I_t$): take ratio btw return $\Delta m_t$ and volume to get \textit{illiquidity ratio}: 
+	\item \alert{Amihud measure} ($I_t$): take ratio btw return $\Delta m_t$ and volume to get \textit{illiquidity ratio}: (\citet{amihud_illiquidity_2002})
 	\center
 	$I_t = \frac{|\Delta m_t|}{Vol_t}$.
 	%$I_t = \frac{|r_t|}{Vol_t}$.
@@ -545,6 +562,15 @@ When quote data are not available: estimate them using \structure{Roll's measure
 		\item Solve exercise 8 regarding implementation shortfall, on page 75 in the textbook.
 		Discuss the meaning of $m_t$ in this analysis.
 	\end{itemize}
+\end{frame}
+
+
+
+
+\appendix
+\begin{frame}[allowframebreaks]{References}
+	\bibliography{../teaching}
+	\bibliographystyle{abbrvnat}
 \end{frame}
 
 
