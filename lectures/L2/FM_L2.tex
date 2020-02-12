@@ -56,6 +56,12 @@ Chapter 2 of FPR}
 \end{frame}
 
 
+\begin{frame}{London Metal Exchange}
+	\centering
+	\includegraphics[scale=0.6]{pics/lme}
+\end{frame}
+
+
 \begin{frame}{Today}
 	\begin{itemize}
 		\item Liquidity: why do we care?
@@ -133,7 +139,7 @@ Chapter 2 of FPR}
 \begin{frame}{Liquidity dry ups}
 	Liquidity can dry up in the face of adverse events
 	\begin{center}
-		\includegraphics[scale=0.4]{pics/L2_liquiditylehman}
+		\includegraphics[scale=0.5]{pics/L2_liquiditylehman}
 	\end{center}
 \end{frame}
 
@@ -163,24 +169,26 @@ When quote data are not available: estimate them using \structure{Roll's measure
 
 \begin{frame}{Example}
 	\begin{itemize}
-		\item Consider the following bid/ask/realized prices on KrispyKreme stock
+		\item We will play around with the following dataset on KrispyKreme stock
 		\begin{center}
-			\includegraphics[scale=0.34]{pics/L2_bidask}
+			%\includegraphics[scale=0.34]{pics/L2_bidask}
+			\includegraphics[scale=0.34]{pics/L2_directions}
 		\end{center}
+		\pause
 		\item Notice that price is sometimes inside spread: price improvements (either hidden limits orders or price improvement given by dealer)
 		\item Also a price outside spread (recall bid/ask only valid for x units)
 	\end{itemize}
 \end{frame}
 
 
-\begin{frame}{Example (2)}
-	\begin{itemize}
-		\item Add \textit{trade direction}, i.e. whether trade was initiated by buyer/seller
-		\begin{center}
-			\includegraphics[scale=0.39]{pics/L2_directions}
-		\end{center}
-	\end{itemize}
-\end{frame}
+%\begin{frame}{Example (2)}
+%	\begin{itemize}
+%		\item Add \textit{trade direction}, i.e. whether trade was initiated by buyer/seller
+%		\begin{center}
+%			\includegraphics[scale=0.39]{pics/L2_directions}
+%		\end{center}
+%	\end{itemize}
+%\end{frame}
 
 
 \begin{frame}{Quoted spread}
@@ -188,19 +196,22 @@ When quote data are not available: estimate them using \structure{Roll's measure
 		\item \textbf{Contemporaneous}: spread facing trader at time $t$
 		\item Let $a_t$ ($b_t$) be the best ask (bid) price at time $t$
 		\item \alert{Quoted spread}:
-		\[
-		S_t = a_t -b_t
-		\]
-		\item Normalize to get \alert{normalized quoted spread}
-		\[
-		s_t = \frac{S_t}{m_t},
-		\]
+		\begin{equation*}
+			S_t = a_t -b_t
+		\end{equation*}
+		\item \pause Normalize to get \alert{normalized quoted spread}
+		\begin{center}
+			$
+			s_t = \frac{S_t}{m_t},
+			$
+		\end{center}
 		where $m_t$ is the midprice:
 		\begin{center}
 			$
 			m_t = \frac{a_t+b_t}{2}.
 			$
 		\end{center}
+		\pause
 		\item We can generalize it to consider average spread for trade size $q$: 
 		\begin{center}$S_t(q)=\overline{a}_t(q)-\overline{b}_t(q)$\end{center}
 		where $\overline{a}_t(q)$ and $\overline{b}_t(q)$ are average execution prices
