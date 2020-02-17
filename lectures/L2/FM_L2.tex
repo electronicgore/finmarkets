@@ -461,29 +461,14 @@ When quote data are not available: estimate them using \structure{Roll's measure
 \end{frame}
 
 
-\begin{frame}{Volume based measure}
-\begin{itemize}
-	\item Let $q_t$ be the order imbalance (net market purchase)
-	% volumes or imbalances?
-	\item \alert{Volume-Weighted Average Price} (VWAP):
-	\[
-	VWAP = \sum  w_t p_t,
-	\]
-	where $w_t = |q_t|/\sum_t |q_t|$ is the order weight
-	\item  This equals the amount of dollars traded over the number of shares traded: average price
-	\item Trader can compare the price he got with VWAP to evaluate how good was his deal relative to market.
-	\item This measure may depend excessively on few orders (if they are large) and therefore be subject to manipulation
-	\item For our example, $VWAP=3.02$
-\end{itemize}
-\end{frame}
-
-
 \begin{frame}{Price impact}
 \begin{itemize}
 	\item How much do trades affect prices? \alert{Price impact} ($\lambda$)
 	\[
 	\Delta m_t = \lambda q_t + \epsilon_t.
 	\]
+	Here $q_t$ is the \structure{order imbalance} in period $t$
+	
 	In our example: $\lambda = 0.15 $ ($q_t$ in 100,000EUR)
 	\item  $\lambda$ captures price impact;  $1/\lambda$ captures market \textit{depth}
 	\item \alert{Hasbrouck measure} ($\gamma$): sensitivity of returns to trading volume (\citet{hasbrouck_empirical_2007})
@@ -500,8 +485,27 @@ When quote data are not available: estimate them using \structure{Roll's measure
 
 
 \begin{frame}{Amihud's Illiquidity Ratio}
-\center
-\includegraphics[scale=0.39]{pics/L2_Amihud}
+\begin{center}
+	\includegraphics[scale=0.39]{pics/L2_Amihud}
+\end{center}
+Somewhat volatile on high-frequency data, usually taken as an average over longer intervals (month)
+\end{frame}
+
+
+\begin{frame}{Volume based measure}
+\begin{itemize}
+	%\item Let $q_t$ be the order imbalance (net market purchase)
+	% volumes or imbalances?
+	\item \alert{Volume-Weighted Average Price} (VWAP):
+	\[
+	VWAP = \sum  w_i p_i,
+	\]
+	where $w_t = |q_i|/\sum_i |q_i|$ is the order weight, $q_i$ is the size of order $i$
+	\item This equals the amount of dollars traded over the number of shares traded: average price
+	\item Trader can compare the price he got with VWAP to evaluate how good was his deal relative to market.
+	\item This measure may depend excessively on few orders (if they are large) and therefore be subject to manipulation
+	\item For our example, $VWAP=3.02$
+\end{itemize}
 \end{frame}
 
 

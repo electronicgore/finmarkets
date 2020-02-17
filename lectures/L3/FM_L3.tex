@@ -1,9 +1,9 @@
 %%% License: Creative Commons Attribution Share Alike 4.0 (see https://creativecommons.org/licenses/by-sa/4.0/)
 %%% Slides are based heavily on earlier versions of this course taught by Jesper Rudiger.
 
-\documentclass[english,10pt]{beamer}
+%\documentclass[english,10pt]{beamer}
+\documentclass[english,10pt,handout]{beamer}
 \input{../FM_preamble.tex}
-
 
 
 \title{Financial Markets Microstructure \\ Lecture 3}
@@ -27,27 +27,26 @@
 \begin{frame}{What did we do last week?}
 \begin{enumerate}
 	\item Discuss liquidity
-	\item Talk about different measures of spreads
+	\item Talk about different measures of:
 	\begin{itemize}
-		\item Quoted
-		\item Effective
-		\item Realized
+		\item spreads (quoted, effective, realized)
+		\item depth and price impact
+		\item execution costs
 	\end{itemize}
-	\item Other measures of liqudity(volume etc.)
 	\item Estimators for missing data
 	\begin{itemize}
 		\item Lee-Ready's algorithm for estimating trade direction
-		\item Roll's estimator requiring only price data
+		\item Roll's spread estimator requiring only price data
 	\end{itemize}
 \end{enumerate}
 \end{frame}
 
 
-\begin{frame}{Exercises}
+\begin{frame}{Exercises from last week}
 	\begin{itemize}
 		%\item In Absalon, I have attached a commission and fee schedule from Robinhood Financial. More information on \url{www.robinhood.io/}. Discuss the potential effect on other brokerage services.
 		\item In this course we mostly imply equity markets. Read the article (on Absalon) about corporate bond markets. Discuss how differences in market structures of stock and bond markets affect liquidity in these markets.
-		\item \textcolor{gray}{Recreate the graphs and figures I presented today using the KrispyKreme dataset}
+		\item \textcolor{gray}{Recreate the graphs and figures and numbers I presented [last week] using the KrispyKreme dataset}
 		\item \textcolor{gray}{Solve exercise 8 regarding implementation shortfall, on page 75 in the textbook.
 		Discuss the meaning of $m_t$ in this analysis.}
 	\end{itemize}
@@ -138,7 +137,7 @@
 	\begin{itemize}
 		\item \textbf{Weak form}: Prices reflect historic (price) information
 		\item \textbf{Semi-strong form}: Prices reflect all public information
-		\item \textbf{Strong form}: Prices reflect all public and private information
+		\item \textbf{Strong form}: Prices reflect all public and private information (this is the kind of efficiency we had in mind in the previous lectures)
 	\end{itemize}
 \end{frame}
 
@@ -224,7 +223,7 @@ Two counterparts to these views
 
 \begin{frame}{GM85: Overview}
 	\begin{itemize}
-		\item The simplest model explaining \structure{spread}.
+		\item The simplest model explaining \structure{spread} through private information.
 		\item Spread is driven by adverse selection
 		\item Dynamic model, periods $t = 1,2,...$
 		\item Two players in every period:
@@ -269,10 +268,10 @@ Two counterparts to these views
 	\begin{itemize}
 		\item Risk neutral
 		\item Willing to trade \alert{exactly one unit} (buy/sell/no trade) each period
+		\item Sets \alert{bid and ask prices} (for a single unit)
 		\item Quote price before seing trade (limit order)
 		\item Does not know whether trader is speculator or noise trader
-		\item Sets \alert{bid and ask prices} (for a single unit)
-		\item Competitive: prices=expected asset value conditional on information
+		\item \structure{Competitive}: prices=expected asset value conditional on information
 		\item Trading is sequential: market orders served one by one
 	\end{itemize}
 \end{frame}
@@ -302,6 +301,7 @@ Two counterparts to these views
 	\begin{itemize}
 		\item Random asset value $v$ drawn from distribution
 		\item Assume $v$ is terminal value (fundamental value)
+		\item Speculators know $v$ perfectly (not much changes if they don't -- see homework)
 	\end{itemize}
 	\item \textbf{Equilibrium}:
 	\begin{itemize}
@@ -353,7 +353,7 @@ Two counterparts to these views
 		\end{aligned}
 		\right.
 	\end{equation*}
-	\item Speculator is risk-neutral, so his best response to $(a_t,b_t)$ is
+	\item Speculator is risk-neutral, so his best response to $(a_t,b_t)$ is (assume $a_t \geq b_t$)
 	\begin{itemize}
 		\item Buy when $v > a_t$, i.e. when $v$ is large enough
 		\item Sell when $v<b_t$, i.e. when $v$ is small enough
@@ -363,54 +363,86 @@ Two counterparts to these views
 \end{frame}
 
 
-\begin{frame}{Analysis. B: Informed trading (2)}
+\begin{frame}{Analysis. C: Equilibrium definition}
+Dealer must make zero profit ({competition}), traders must trade optimally.
+This gives us two \structure{equilibrium conditions}.
+\begin{itemize}
+	\item Let $\sigma_t$ denote the speculator's strategy, where $\sigma_t(d_t|v)$ is the probability that the speculator places order $d_t$ if value is $v$
+	\item \alert{An equilibrium} consists of \structure{prices $(a_t,b_t)$} and \structure{strategy $\sigma_t$} such that:
+	\begin{enumerate}
+		\item the ask and bid prices  solve 
+		\begin{align*}
+		a_t & = \mathbb{E}[v| \Omega_{t-1}, Buy]; \\
+		b_t & = \mathbb{E}[v| \Omega_{t-1}, Sell],
+		\end{align*}
+		given $\sigma_t$
+		\item for each $v$, $\sigma_t$ solves 
+		\[
+		\max_{\sigma_t } \, \{\sigma_t(1|v) [v-a_t] + \sigma_t(-1|v)[b_t-1] \},
+		\]
+		given $(a_t,b_t)$.
+	\end{enumerate} 
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Analysis. D: Solving for equilibrium (1)}
 	\begin{itemize}
-		\item The orders reveal information about $v$:
-		\begin{align*}
-			\mathbb{P}(Buy|\Omega_{t-1}, v) & = (1-\pi) \beta_B + \pi \mathbb{I}(v>a_t) \\
-			\mathbb{P}(Sell|\Omega_{t-1}, v)  & = (1-\pi) \beta_S + \pi \mathbb{I}(v<b_t)
-		\end{align*}
-		In particular, $\mathbb{P}(Buy|\Omega_{t-1}, v)$ is increasing in $v$ (second term is increasing) and $\mathbb{P}(Sell|\Omega_{t-1}, v)$ is decreasing in $v$. Thus:
-		\begin{align*}
-			a_t & = \mathbb{E}[v|\Omega_{t-1}, Buy] > \mathbb{E}[v|\Omega_{t-1}] = p_{t-1} \\
-			b_t & = \mathbb{E}[v|\Omega_{t-1}, Sell] < \mathbb{E}[v|\Omega_{t-1}] = p_{t-1}.
-		\end{align*}
-		\item Bid-ask spread: $a_t - b_t >0$: this is due to \alert{adverse selection}
+		\item The orders reveal information about $v$. E.g., a \alert{buy order} is submitted:
+		\begin{itemize}
+			\item either by a noise trader (probability $(1-\pi)\beta_B$) -- no new information, $\mu_t = \mu_{t-1} = \mathbb{E}[v|\Omega_{t-1}]$;
+			\item or by a speculator (probability $\pi \mathbb{P}(v \geq a_t | \Omega_{t-1})$) -- then learn that $v \geq a_t$, so $\mu_t = \mathbb{E} [v | \Omega_{t-1}, v \geq a_t]$.
+		\end{itemize}
+		\item Then $a_t$ is given by:
+		$$ a_t = \mathbb{E}[v|\Omega_{t-1}, Buy] $$
+		$$ = \frac{(1-\pi)\beta_B}{\mathbb{P}(Buy|\Omega_{t-1}, v)} \cdot \mathbb{E}[v|\Omega_{t-1}] + \frac{\pi \mathbb{P}(v \geq a_t | \Omega_{t-1})}{\mathbb{P}(Buy|\Omega_{t-1}, v)} \cdot \mathbb{E} [v | \Omega_{t-1}, v \geq a_t] $$
+		\begin{itemize}
+			\item where $\mathbb{P}(Buy|\Omega_{t-1}, v) = (1-\pi) \beta_B + \pi \mathbb{P}(v \geq a_t)$,
+			\item meaning in the end $a_t \geq \mu_{t-1}$.
+		\end{itemize}
 	\end{itemize}
 \end{frame}
 
 
-\begin{frame}{Analysis. C: Equilibrium}
-	Dealer must make zero profit ({competition}), traders must trade optimally.
-	This gives us two \structure{equilibrium conditions}.
+\begin{frame}{Analysis. D: Solving for equilibrium (2)}
 	\begin{itemize}
-		\item Let $\sigma_t$ denote the speculator's strategy, where $\sigma_t(d_t|v)$ is the probability that the speculator places order $d_t$ if value is $v$
-		\item \alert{An equilibrium} consists of \structure{prices $(a_t,b_t)$} and \structure{strategy $\sigma_t$} such that:
-		\begin{enumerate}
-			\item the ask and bid prices  solve 
-			\begin{align*}
-			a_t & = \mathbb{E}[v| \Omega_{t-1}, Buy]; \\
-			b_t & = \mathbb{E}[v| \Omega_{t-1}, Sell],
-			\end{align*}
-			given $\sigma_t$
-			\item for each $v$, $\sigma_t$ solves 
-			\[
-			\max_{\sigma_t } \, \{\sigma_t(1|v) [v-a_t] + \sigma_t(-1|v)[b_t-1] \},
-			\]
-			given $(a_t,b_t)$.
-		\end{enumerate} 
+		\item Similarly for \alert{sell orders}:
+		\begin{itemize}
+			\item sell order from a noise trader arrives with [unconditional] probability $(1-\pi)\beta_S$ -- no new information, $\mu_t = \mu_{t-1}$;
+			\item sell order from a speculator arrives with probability $\pi \mathbb{P}(v \leq b_t | \Omega_{t-1})$ -- then learn that $v \leq b_t$, so $\mu_t = \mathbb{E} [v | \Omega_{t-1}, v \leq b_t]$.
+		\end{itemize}
+		\item Then $b_t$ is given by:
+		$$ b_t = \mathbb{E}[v|\Omega_{t-1}, Sell] $$
+		$$ = \frac{(1-\pi)\beta_S}{\mathbb{P}(Sell|\Omega_{t-1}, v)} \cdot \mathbb{E}[v|\Omega_{t-1}] + \frac{\pi \mathbb{P}(v \leq b_t | \Omega_{t-1})}{\mathbb{P}(Sell|\Omega_{t-1}, v)} \cdot \mathbb{E} [v | \Omega_{t-1}, v \leq b_t] $$
+		\begin{itemize}
+			\item where $\mathbb{P}(Sell|\Omega_{t-1}, v) = (1-\pi) \beta_S + \pi \mathbb{P}(v\leq b_t)$,
+			\item so $b_t \leq \mu_{t-1}$, and we have confirmed that indeed $a_t \geq b_t$.
+		\end{itemize}
 	\end{itemize}
 \end{frame}
 
 
-%\begin{frame}{Analysis. D: Prices}
-%	\begin{itemize}
-%		\item Let $\mu_t \equiv \mathbb{E}[v | \Omega_t]$ be the expectation of $v$ \textit{after} the time-$t$ trade order is observed
-%		\item Price efficient: $p_t = \mu_t$
-%		\item let $s^a_t = a_t - p_t$ and $s^b_t = b_t - p_t$ denote the `half-spreads'.
-%	\end{itemize}
-%\end{frame}
+\begin{frame}{Analysis. D: Prices}
+	\begin{itemize}
+		\item $\mu_t \equiv \mathbb{E}[v | \Omega_t]$ is the expectation of $v$ \textit{after} the time-$t$ trade order is observed. Note that in our model:
+		$$\mu_t = \begin{cases}
+			a_t & \text{ if buy order at } t;
+			\\
+			b_t & \text{ if sell order at } t.
+		\end{cases} $$
+		\item Meaning market price is efficient: $p_t = \mu_t$
+		\begin{itemize}
+			\item in \alert{semi-strong} form,
+			\item not in the \alert{strong} form
+		\end{itemize}
+		\item This is because dealers are \structure{competitive}
+		%\item let $s^a_t = a_t - p_t$ and $s^b_t = b_t - p_t$ denote the `half-spreads'.
+	\end{itemize}
+\end{frame}
 
+
+
+\section{GM example}
 
 \begin{frame}{Example (as in book)}
 \begin{itemize}
@@ -420,6 +452,7 @@ Two counterparts to these views
 	\[
 	\mu=\theta v^H+(1-\theta) v^L.
 	\]
+	\hyperlink{overview}{\beamerbutton{Skip example}}
 \end{itemize}
 \end{frame}
 
@@ -501,7 +534,7 @@ Two counterparts to these views
 \end{frame}
 
 
-\begin{frame}{Model overview: Glosten and Milgrom}
+\begin{frame}[label=overview]{Model overview: Glosten and Milgrom}
 	\structure{Model}
 	\begin{itemize}
 		\item \textbf{Dealer model}: Prices are set each period, discriminative, normally competitive (zero profits)
@@ -512,7 +545,7 @@ Two counterparts to these views
 	\begin{itemize}
 		\item \textbf{Insights}: Adverse selection as a driver of the spread
 		\item \textbf{Shortcomings}: Trade fixed amount, trade once, no resale
-		\item \textbf{Advantages}: (Relatively) simple analysis, flexible, trader is not price-taker (realizes price-impact)
+		\item \textbf{Advantages}: (Relatively) simple analysis, flexible %, trader is not price-taker (realizes price-impact)
 	\end{itemize}
 \end{frame}
 
@@ -538,9 +571,9 @@ Two counterparts to these views
 \end{frame}
 
 
-\begin{frame}{Questions for next week}
+\begin{frame}{Questions for next Friday}
 	\begin{itemize}
-		%\item See next page for a text from The Securities and Exchange Commission on insider trading, from its homepage \url{http://www.sec.gov/answers/insider.htm}. Discuss potential restrictions in the definition.
+		%\item See a text from The Securities and Exchange Commission on insider trading, from its homepage \url{http://www.sec.gov/answers/insider.htm}. Discuss potential restrictions in the definition.
 		\item FPR chapter 3 exercises (p. 124-125):
 		\begin{itemize}
 			\item exercise 2 -- solve GM model with numbers instead of letters
@@ -550,13 +583,7 @@ Two counterparts to these views
 \end{frame}
 
 
-%\begin{frame}{Questions for next week (2)}
-%	\includegraphics[width=1\linewidth]{pics/InsiderTrading_Text}
-%\end{frame}
-
-
-\begin{frame}<handout:0>[label=dynamics]
-	\frametitle{Dynamics}
+\begin{frame}<handout:0>[label=dynamics]{Dynamics}
 	Suppose we are in the simple binary model with the following parameters
 	\begin{itemize}
 		\item Probability of informed speculators: $\pi = 0.3$
@@ -570,104 +597,91 @@ Two counterparts to these views
 \end{frame}
 
 
-\begin{frame}
-	\frametitle{Dynamics}
+\begin{frame}<handout:0>{Dynamics}
 	First period: sell
 	\center
 	\includegraphics[width=0.9\linewidth]{pics/P1_Image.pdf}
 \end{frame}
 
 
-\begin{frame} [noframenumbering]
-	\frametitle{Dynamics}
+\begin{frame}<handout:0>{Dynamics}
 	Second period: sell
 	\center
 	\includegraphics[width=0.9\linewidth]{pics/P2_Image.pdf}
 \end{frame}
 
 
-\begin{frame} [noframenumbering]
-	\frametitle{Dynamics}
+\begin{frame}<handout:0>{Dynamics}
 	Third period: buy
 	\center
 	\includegraphics[width=0.9\linewidth]{pics/P3_Image.pdf}
 \end{frame}
 
 
-\begin{frame} [noframenumbering]
-	\frametitle{Dynamics}
+\begin{frame}<handout:0>{Dynamics}
 	Fourth period: sell
 	\center
 	\includegraphics[width=0.9\linewidth]{pics/P4_Image.pdf}
 \end{frame}
 
 
-\begin{frame} [noframenumbering]
-	\frametitle{Dynamics}
+\begin{frame}<handout:0>{Dynamics}
 	Fifth period: sell
 	\center
 	\includegraphics[width=0.9\linewidth]{pics/P5_Image.pdf}
 \end{frame}
 
 
-\begin{frame} [noframenumbering]
-	\frametitle{Dynamics}
+\begin{frame}<handout:0>{Dynamics}
 	Sixth period: sell
 	\center
 	\includegraphics[width=0.9\linewidth]{pics/P6_Image.pdf}
 \end{frame}
 
 
-\begin{frame} [noframenumbering]
-	\frametitle{Dynamics}
+\begin{frame}<handout:0>{Dynamics}
 	Seventh period: sell
 	\center
 	\includegraphics[width=0.9\linewidth]{pics/P7_Image.pdf}
 \end{frame}
 
 
-\begin{frame} [noframenumbering]
-	\frametitle{Dynamics}
+\begin{frame}<handout:0>{Dynamics}
 	Eigth period: sell
 	\center
 	\includegraphics[width=0.9\linewidth]{pics/P8_Image.pdf}
 \end{frame}
 
 
-\begin{frame} [noframenumbering]
-	\frametitle{Dynamics}
+\begin{frame}<handout:0>{Dynamics}
 	Ninth period: sell
 	\center
 	\includegraphics[width=0.9\linewidth]{pics/P9_Image.pdf}
 \end{frame}
 
 
-\begin{frame} [noframenumbering]
-	\frametitle{Dynamics}
+\begin{frame}<handout:0>{Dynamics}
 	Tenth period: sell
 	\center
 	\includegraphics[width=0.9\linewidth]{pics/P10_Image.pdf}
 \end{frame}
 
 
-\begin{frame} [noframenumbering]
-	\frametitle{Dynamics}
+\begin{frame}<handout:0>{Dynamics}
 	Eleventh period: sell
 	\center
 	\includegraphics[width=0.9\linewidth]{pics/P11_Image.pdf}
 \end{frame}
 
 
-\begin{frame} [noframenumbering]
-	\frametitle{Dynamics}
+\begin{frame}<handout:0>{Dynamics}
 	Twelfth period: sell
 	\center
 	\includegraphics[width=0.9\linewidth]{pics/P12_Image.pdf}
 \end{frame}
 
 
-\begin{frame} [noframenumbering]
-	\frametitle{Dynamics}
+\begin{frame}<handout:0>{Dynamics}
 	Let's consider an alternative case:
 	\[
 	bbbsssssssss
@@ -676,8 +690,7 @@ Two counterparts to these views
 \end{frame}
 
 
-\begin{frame} [noframenumbering]
-	\frametitle{Dynamics}
+\begin{frame}<handout:0>{Dynamics}
 	\includegraphics[width=1\linewidth]{pics/Bubble_Image.pdf}
 	\hyperlink{example}{\beamerbutton{back}}
 \end{frame}
