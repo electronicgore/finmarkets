@@ -1,8 +1,8 @@
 %%% License: Creative Commons Attribution Share Alike 4.0 (see https://creativecommons.org/licenses/by-sa/4.0/)
 %%% Slides are based heavily on earlier versions of this course taught by Jesper Rudiger.
 
-%\documentclass[english,10pt]{beamer}
-\documentclass[english,10pt,handout]{beamer}
+\documentclass[english,10pt]{beamer}
+%\documentclass[english,10pt,handout]{beamer}
 \input{../FM_preamble.tex}
 
 
@@ -137,13 +137,14 @@
 	\begin{itemize}
 		\item \textbf{Weak form}: Prices reflect historic (price) information
 		\item \textbf{Semi-strong form}: Prices reflect all public information
-		\item \textbf{Strong form}: Prices reflect all public and private information (this is the kind of efficiency we had in mind in the previous lectures)
+		\item \textbf{Strong form}: Prices reflect all public and private information
 	\end{itemize}
+	Strong is the kind of efficiency we had in mind in the previous lectures. It arises in classical models in Economics (see General Equilibrium theory)
 \end{frame}
 
 
 \begin{frame}{Information and prices}
-Two counterparts to these views
+Issues with EMH:
 \begin{itemize}
 	\item \textbf{No-trade theorem}: If traders have private information and care only about fundamentals, nobody should ever trade
 	\item \textbf{Grossman-Stiglitz (GS) paradox}: 
@@ -151,24 +152,31 @@ Two counterparts to these views
 		\item Suppose markets were informationally efficient, then prices would reflect traders' private information
 		\item Thus: no incentive to acquire information (if this is costly)
 	\end{itemize} 
+	\item \textbf{Volatility}: prices move a lot, such volatility cannot be justified by public news alone
+	\item \textbf{Process}: \alert{how} does information get incorporated into prices?
 \end{itemize}
+So we will not take EMH for granted, but rather see whether it arises in models endogenously.
 \end{frame}
 
 
 \begin{frame}{Asset value}
-	Information: $\Omega_t$ captures the market's (public) knowledge at time $t$ -- ever more is known: 
-	\structure{$\Omega_{t+1}=(\Omega_t, I_{t+1})$}. Two approaches:
-	\begin{enumerate}
-		\item \textbf{Discounted cashflows}: Value at time $t$  = expectation of future cashflows:
-		\[
-		\mu_t = \mathbb{E}\left[\sum_{s=t}^{\infty} \delta^{t-s} c_s | \Omega_t \right]
-		\]
-		\item \textbf{Fundamental value}: Value at time $t$ = expectation of underlying fundamental value $v$:
-		\[
-		\mu_t = \mathbb{E} \left[ v | \Omega_t \right]
-		\]
-	\end{enumerate}
-	Here: use the \structure{fundamental value approach}
+	\begin{itemize}
+		\item Let's try to figure out how price efficiency looks like in math.
+		\item \structure{Information}: $\Omega_t$ captures the market's (public) knowledge at time $t$ -- ever more is known: 
+		\structure{$\Omega_{t+1}=(\Omega_t, I_{t+1})$}. 
+		\item Two approaches to defining \structure{market value} ($\neq$ price) of an asset:
+		\begin{enumerate}
+			\item \textbf{Discounted cashflows}: Value at time $t$  = expectation of future cashflows:
+			\[
+			\mu_t = \mathbb{E}\left[\sum_{s=t}^{\infty} \delta^{s-t} c_s | \Omega_t \right]
+			\]
+			\item \textbf{Fundamental value}: Value at time $t$ = expectation of underlying fundamental value $v$:
+			\[
+			\mu_t = \mathbb{E} \left[ v | \Omega_t \right]
+			\]
+		\end{enumerate}
+		\item This course: use the \structure{fundamental value approach}
+	\end{itemize}
 \end{frame}
 
 
@@ -353,7 +361,7 @@ Two counterparts to these views
 		\end{aligned}
 		\right.
 	\end{equation*}
-	\item Speculator is risk-neutral, so his best response to $(a_t,b_t)$ is (assume $a_t \geq b_t$)
+	\item Speculator's best response to $(a_t,b_t)$ is: (assume $a_t \geq b_t$)
 	\begin{itemize}
 		\item Buy when $v > a_t$, i.e. when $v$ is large enough
 		\item Sell when $v<b_t$, i.e. when $v$ is small enough
@@ -378,7 +386,7 @@ This gives us two \structure{equilibrium conditions}.
 		given $\sigma_t$
 		\item for each $v$, $\sigma_t$ solves 
 		\[
-		\max_{\sigma_t } \, \{\sigma_t(1|v) [v-a_t] + \sigma_t(-1|v)[b_t-1] \},
+		\max_{\sigma_t } \, \{\sigma_t(1|v) [v-a_t] + \sigma_t(-1|v)[b_t-v] \},
 		\]
 		given $(a_t,b_t)$.
 	\end{enumerate} 
