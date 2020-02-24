@@ -2,6 +2,7 @@
 %%% Slides are based heavily on earlier versions of this course taught by Jesper Rudiger.
 
 \documentclass[english,10pt]{beamer}
+%\documentclass[english,10pt,handout]{beamer}
 \input{../FM_preamble.tex}
 
 
@@ -44,10 +45,8 @@
 
 \begin{frame}{Exercises from last time}
 	\begin{itemize}
-		\item In Absalon, I have attached an article from the Economist, December 14 2013, on the Volcker rule. Discuss the claim that ``In practice banks will probably respond by making markets for a narrow range of securities that already trade frequently, and thus might reasonably be expected to do so in the future. Meanwhile, the securities that now change hands less frequently are likely to be shunned, making them even harder to trade.''
-		\item Two other Bloomberg articles are on Einar Aas and his exclusion from Nasdaq. What was the reason and what would be the effect of his ejection?
-		\item {\color{gray} Exercise 9 on page 128 considers the bid-ask spread in the mean-SD model. Solve this exercise}
-		\item {\color{gray} If you feel like a challenge, solve exercise 10 on page 128}
+		\item In Absalon, I have attached an article from the Economist, December 14 2013, on the Volcker rule. Discuss the claim that \emph{``In practice banks will probably respond by making markets for a narrow range of securities that already trade frequently, and thus might reasonably be expected to do so in the future. Meanwhile, the securities that now change hands less frequently are likely to be shunned, making them even harder to trade.''}
+		\item Two other Bloomberg articles are on Einar Aas and his exclusion from Nasdaq. Use this case to discuss how inventory costs can stem from regulation.
 	\end{itemize}
 \end{frame}
 
@@ -56,7 +55,7 @@
 	\begin{itemize}
 		\item \textbf{Trade size}: Relax assumption that trade size is unitary
 		\begin{itemize}
-			\item Look at Kyle's model
+			\item Look at \cite{kyle_continuous_1985} model
 			\item Why another model? 
 			\begin{itemize}
 				\item We want to check whether our previous predictions are `robust' to allowing arbitrary trade sizes
@@ -373,7 +372,7 @@
 
 \begin{frame}[label=base]{Base model}
 	\begin{itemize}
-		\item Glosten and Harris (1988) propose
+		\item \cite{glosten_estimating_1988} propose
 		\begin{equation} \tag{5.7}
 		\Delta p_t = \gamma_0 \Delta d_t+ \gamma_1 \Delta q_t + \lambda_0 d_t + \lambda_1 q_t + \epsilon_t%
 		\end{equation}%
@@ -396,8 +395,8 @@
 	\begin{itemize}
 		\item Figure 3.9: look at price impact over longer periods
 		\begin{itemize}
-			\item \textbf{Hasbrouck (1988)}: order flow is auto-correlated, so part of the order is not `news' but only moves inventory
-			\item \textbf{Huang and Stoll (1997)}: suggest
+			\item \textbf{\cite{hasbrouck_trades_1988}}: order flow is auto-correlated, so part of the order is not `news' but only moves inventory
+			\item \textbf{\cite{huang_components_1997}}: suggest
 			\begin{equation}\tag{5.17}
 			q_t = \phi q_{t-1} + \eta_t
 			\end{equation}
@@ -416,10 +415,12 @@
 	\begin{itemize}
 		\item Continued...
 		\begin{itemize}
-			\item Madhavan, Richardson and Roomans (1997) find that $\lambda$ is higher in the morning, and $\gamma$ higher in the afternoon
-			\item Lyons (1995) had data on a FOREX dealer's inventory, and found $\beta$ very large -- more on this in the course on International Finance
+			\item \citet*{madhavan_why_1997} find that $\lambda$ is higher in the morning, and $\gamma$ higher in the afternoon
+			\item \cite{lyons_tests_1995} had data on a FOREX dealer's inventory, and found $\beta$ very large -- more on this in the course on International Finance
+			%TODO: check course references
 		\end{itemize}
-		\item Different dynamic approach: Hasbrouck (1991) uses the long-run impact of an order $q_{t+1}$ on prices $p_{t+T}-p_t$ to identify the informational part of the trade
+		%TODO: not 100% sure this is the right Hasbrouck-91, check
+		\item Different dynamic approach: \cite{hasbrouck_measuring_1991} uses the long-run impact of an order $q_{t+1}$ on prices $p_{t+T}-p_t$ to identify the informational part of the trade
 		\begin{itemize}
 			\item The `impulse response' of prices to orders
 			\item Opens door to richer time series analysis of transactions data
@@ -431,7 +432,7 @@
 
 \begin{frame}{Informed trading}
 	\begin{itemize}
-		\item Easlery, Kiefer, O'Hara and Paperman (1996): use GM type model to estimate the prob. of informed trading
+		\item \citet*{easley_liquidity_1996}: use GM type model to estimate the prob. of informed trading
 		\item Traders of a particular type arrive as Poisson process over time, with intensity $\epsilon$
 		\begin{itemize}
 			\item Probability of observing $n$ traders of a particular type over the trading day is
@@ -455,13 +456,13 @@
 		\end{itemize}
 		\item Data for the number of buys and sells allow for estimation of these parameters with \structure{maximum likelihood}
 		\begin{itemize}
-			\item Easley, Hvidkjaer and O'Hara (2002) estimate the `probability of informed trading' associated with any given order
+			\item \citet*{easley_is_2002} estimate the `probability of informed trading' associated with any given order
 			\begin{equation} \tag{5.27}
 			PIN = \frac{\alpha \epsilon_i}{\epsilon_b + \epsilon_s + \alpha \epsilon_i}
 			\end{equation}
 			\item With NYSE data from 1983 to 1998 they estimate a median PIN of 19\%, greater for small-cap stocks
 			\item PIN is positively correlated with  spread and price volatility
-			\item Grammig, Schiereck and Thiessen (2001) suggest that PIN is higher when markets are more anonymous
+			\item \citet*{grammig_knowing_2001} suggest that PIN is higher when markets are more anonymous
 		\end{itemize}
 	\end{itemize}
 \end{frame}
@@ -498,9 +499,18 @@
 \end{frame}
 
 
+
+
+\appendix
+\begin{frame}[allowframebreaks]{References}
+\bibliography{../teaching}
+\bibliographystyle{abbrvnat}
+\end{frame}
+
+
 \begin{frame}<handout:0>[label=example, noframenumbering]
 \frametitle{Example}
-Data from Lyons (1995). Deutsche mark trading for one week for one dealer in 1992
+Data from \cite{lyons_tests_1995}. Deutsche mark trading for one week for one dealer in 1992
 \center
 \includegraphics[scale=0.3]{pics/trading}
 \end{frame}
