@@ -2,6 +2,7 @@
 %%% Slides are based heavily on earlier versions of this course taught by Jesper Rudiger.
 
 \documentclass[english,10pt]{beamer}
+%\documentclass[english,10pt,handout]{beamer}
 \input{../FM_preamble.tex}
 
 
@@ -193,7 +194,7 @@
 			&= \pi (2\rho - 1) (v^H - v^L)
 		}
 	\end{align*}
-	\visible<2->{Higher $\rho$ -- larger $S$ -- less liquid market because of larger adverse selection costs.}
+	\visible<2->{Higher $\rho$ $\Leftrightarrow$ larger $S$ $\Leftrightarrow$ less liquid market because of larger adverse selection costs (same as larger $\pi$).}
 \end{frame}
 
 
@@ -229,7 +230,7 @@
 \begin{frame}{GM with Uniform value}
 	\begin{itemize}
 		\item \textbf{Uniform outcome}: Suppose $v$ is uniformly distributed on [0,1]
-		\item \textbf{Prior value}: Prior density $f(v) = 1$, and $p = \mathbb{E}[v] = \int_0^1 v f(v) dv= 1/2$
+		\item \textbf{Prior value}: Prior density $f(v) = 1$, and $\mu = \mathbb{E}[v] = \int_0^1 v f(v) dv= 1/2$
 		\item Look for an ask price $a < 1$:
 		\begin{itemize}
 			\item Speculator buys if  $v>a$ and sells if $v<b$ ($v=a$ has zero prob.). Thus:
@@ -269,100 +270,6 @@
 \end{frame}
 
 
-\begin{frame}[label=insights]{Insights}
-	\begin{itemize}
-		\item Are prices efficient here? What kind of efficiency?
-		\hyperlink{efficiency}{\beamerbutton{Efficiency}}
-		\item What is the effect of speculators (insider traders)?
-		\hyperlink{insiders}{\beamerbutton{Insiders}}
-		\item The effect of price volatility ($v^H - v^L$)
-		\hyperlink{volatility}{\beamerbutton{Volatility}}
-		\item What's the effect of trading frequency? (How can we think about it here?)
-		\hyperlink{frequency}{\beamerbutton{Frequency}}
-		\item What is the dealer's profits? What about the speculators?
-		\hyperlink{profits}{\beamerbutton{Profits}}
-	\end{itemize}
-\end{frame}
-
-
-\begin{frame}<handout:0>[label=efficiency]
-	\frametitle{Efficiency}
-	Go back to binary example and introduce $t$ subscripts. The price is 
-	\[
-	p_{t} = \theta_{t} v^H + (1-\theta_{t} ) v^L = \mathbb{E}[v|\Omega_{t}]
-	\]
-	So the price is a martingale: it incorporates all public information
-	\pause
-	Does it also incorporate all private information?
-	\pause
-	No, since each speculator knows $v$. Thus, 
-	\[
-	\mathbb{E}[v|\text{private info.}]=v.
-	\]
-	So price is semi-strong form efficient. But strong-form efficient in long run: $p_t \rightarrow v$\quad 
-	\hyperlink{insights}{\beamerbutton{back}}
-\end{frame}
-
-
-\begin{frame}<handout:0>[label=insiders]
-	\frametitle{Insiders}
-	Go back to binary example. The spread is 
-	\[
-	\left[ \frac{\theta(1-\theta) \pi}{(1-\pi)\beta_B+\theta\pi}+\frac{\theta(1-\theta) \pi}{(1-\pi)\beta_S+(1-\theta)\pi}\right](v^H-v^L)
-	\]
-	Set $\theta=1/2$. Derivative w.r.t. $\pi$ is positive: the spread is increasing in the proportion of informed speculators
-	\quad
-	Why?
-	\hyperlink{insights}{\beamerbutton{back}}
-\end{frame}
-
-
-\begin{frame}<handout:0>[label=volatility]
-	\frametitle{Volatility}
-	Go back to binary example. We can use $v^H-v^L$ as a measure of value volatility. The spread is 
-	\[
-	\left[ \frac{\theta(1-\theta) \pi}{(1-\pi)\beta_B+\theta\pi}+\frac{\theta(1-\theta) \pi}{(1-\pi)\beta_S+(1-\theta)\pi}\right](v^H-v^L)
-	\]
-	Derivative w.r.t. $(v^H-v^L)$ is positive: the spread is increasing in the volatility of the fundamental value
-	\quad
-	Why?
-	\hyperlink{insights}{\beamerbutton{back}}
-\end{frame}
-
-
-\begin{frame}<handout:0>[label=frequency]
-	\frametitle{Frequency}
-	Go back to binary example. The spread is 
-	\[
-	\left[ \frac{\theta(1-\theta) \pi}{(1-\pi)\beta_B+\theta\pi}+\frac{\theta(1-\theta) \pi}{(1-\pi)\beta_S+(1-\theta)\pi}\right](v^H-v^L)
-	\]
-	Think about $\beta=\beta_{B}+\beta_{S}$ as the (noise) trading frequency. Suppose $\beta_{B}=\gamma \beta$ and $\beta_{S}= (1-\gamma) \beta$, and set $\theta=1/2$
-	\quad
-	Then the spread is decreasing in the (noise) trading frequency
-	\quad
-	Why?
-	\hyperlink{insights}{\beamerbutton{back}}
-\end{frame}
-
-
-\begin{frame}<handout:0>[label=profits]
-	\frametitle{Profits}
-	Go back to binary example. A speculator's expected gain is
-	\[
-	G_{S} = \theta (v^{H} - a) + (1-\theta) (b-v^{L})
-	\]
-	The expected loss of the dealer against speculators is... \pause $L_{D} = \pi G_{S}$
-	The dealer's gain on noise traders, on the other hand, is (suppose $\beta_B=\beta_S=1/2$)
-	\begin{align*}
-	G_{D} 
-	& = (1-\pi) [ \frac{1}{2} (a-\mathbb{E}(v)) + \frac{1}{2}(\mathbb{E}(v) - b)] \\
-	& = (1-\pi) \frac{1}{2} (a-b)
-	\end{align*}
-	In equilibrium: $L_{D} = G_{D}$
-	\hyperlink{insights}{\beamerbutton{back}}
-\end{frame}
-
-
 
 
 \section{Trading costs and Inventory risk}
@@ -370,13 +277,13 @@
 
 \begin{frame}{Lecture 4}
 	\begin{itemize}
-		\item \hyperlink{ex9}{Exercise 9} on page 128 considers the bid-ask spread in the mean-SD model. Solve this exercise
-		\item If you feel like a challenge, solve exercise 10 on page 128
+		\item If you are bored, solve \hyperlink{ex9}{Exercise 9} on page 128 about the bid-ask spread in the mean-SD model
+		\item If you feel like a challenge, solve \hyperlink{ex10}{Exercise 10} on page 128
 	\end{itemize}
 \end{frame}
 
 
-\begin{frame}{Exercise 9}[label=ex9]
+\begin{frame}[label=ex9]{Exercise 9}
 	\begin{itemize}
 		\item Two-period model with inventory risk;
 		\item dealer's utility: $U = \mathbb{E}_t [w_{t+1}] - \rho \sqrt{\mathbb{V}(w_{t+1})}$;
@@ -438,9 +345,9 @@
 	\begin{align*}
 		S_t = 
 		\begin{cases}
-		0 & \text{ if } |y_t| \leq |z_t|;
+		0 & \text{ if } y_t \leq |z_t|;
 		\\
-		2\rho\sigma_{\epsilon} & \text{ if } |y_t| \geq |z_t|;
+		2\rho\sigma_{\epsilon} & \text{ if } y_t \geq |z_t|;
 		\end{cases}
 	\end{align*}
 \end{itemize}
@@ -473,7 +380,7 @@
 
 \subsection{ex 10}
 
-\begin{frame}{Exercise 10: inventory cost and order flow risk}
+\begin{frame}[label=ex10]{Exercise 10: inventory cost and order flow risk}
 	\begin{itemize}
 		\item Take inventory cost model from lecture;
 		\item dealer's utility: $\mathbb{E}U(w_{t+1}) = \mathbb{E}_t [w_{t+1}] - \rho \sqrt{\mathbb{V}(w_{t+1})}$;

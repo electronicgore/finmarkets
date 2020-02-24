@@ -35,7 +35,7 @@
 	\end{itemize}
 	\item Estimators for missing data
 	\begin{itemize}
-		\item Lee-Ready's algorithm for estimating trade direction
+		\item Lee-Ready algorithm for estimating trade direction
 		\item Roll's spread estimator requiring only price data
 	\end{itemize}
 \end{enumerate}
@@ -441,7 +441,7 @@ This gives us two \structure{equilibrium conditions}.
 		\item Meaning market price is efficient: $p_t = \mu_t$
 		\begin{itemize}
 			\item in \alert{semi-strong} form,
-			\item not in the \alert{strong} form
+			\item not in the \alert{strong} form (equivalent to $p_t = v$)
 		\end{itemize}
 		\item This is because dealers are \structure{competitive}
 		%\item let $s^a_t = a_t - p_t$ and $s^b_t = b_t - p_t$ denote the `half-spreads'.
@@ -509,32 +509,61 @@ This gives us two \structure{equilibrium conditions}.
 		& = \mu + \frac{\theta(1-\theta) \pi}{(1-\pi)\beta_B+\pi\theta} (v^H -v^L).
 	\end{align*}
 	\item Doing a similar exercise for $b$ we find
-	\begin{align*}
-		a - \mu 		&= \frac{\theta(1-\theta) \pi}{(1-\pi)\beta_B+\pi\theta}(v^H-v^L) \\
-		\mu - b 		&= \frac{\theta(1-\theta) \pi}{(1-\pi)\beta_S+\pi(1-\theta)}(v^H-v^L)
-	\end{align*}
-\end{itemize}
-\end{frame}
-
-
-\begin{frame}[label=example]{Example (5)}
-\begin{itemize}
-	\item Notice: $a$ rises in $\pi$, falls with $\beta_B$ (book considers $\beta_B=1/2$)
-	\item Add the two expressions to get bid-ask spread $S = a-b$
-	\begin{itemize}
-		\item If $\beta_B=\beta_S=1/2$, spread is increasing in $\theta(1-\theta)$
-		\item i.e. spread higher when dealer faces greater initial uncertainty about $v$
-	\end{itemize}
 	\item Finally, we must check that our assumption holds: easy to check that $v^H > a > b > v^L$. Hence, \alert{this is an equilibrium}
-	\item \structure{Price discovery}: Return to multiperiod setting. Each order conveys information, dealers learn, and 
-	\center
-	$p_t \rightarrow v$
-	\hyperlink{dynamics}{\beamerbutton{Dynamics}}
 \end{itemize}
 \end{frame}
 
 
-\begin{frame}{Simulation}
+\begin{frame}{Example: Lessons}
+	\begin{align*}
+	a - \mu 		&= \frac{\theta(1-\theta) \pi}{(1-\pi)\beta_B+\pi\theta}(v^H-v^L) \\
+	\mu - b 		&= \frac{\theta(1-\theta) \pi}{(1-\pi)\beta_S+\pi(1-\theta)}(v^H-v^L)
+	\end{align*}
+	\begin{itemize}
+		\item Add the two expressions to get bid-ask \structure{spread} $S = a-b$
+		\begin{itemize}
+			\item $S$ \alert{increases in $\pi$}: more informed trading exacerbates adverse selection. Opposite for $(\beta_B+\beta_S)$.
+			%NOTE: monotonicity in pi verified, difficult to compute
+			\item If $\beta_B=\beta_S=1/2$, $S$ is \alert{increasing in $\theta(1-\theta)$}, i.e. spread higher when dealer faces greater initial uncertainty about $v$. Same for $(v^H-v^L)$.
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+%\begin{frame}[label=insights]{Insights}
+%	\begin{itemize}
+%		\item Are prices efficient here? What kind of efficiency?
+%		\hyperlink{efficiency}{\beamerbutton{Efficiency}}
+%		\item What is the effect of speculators (insider traders)?
+%		\hyperlink{insiders}{\beamerbutton{Insiders}}
+%		\item The effect of price volatility ($v^H - v^L$)
+%		\hyperlink{volatility}{\beamerbutton{Volatility}}
+%		\item What's the effect of trading frequency? (How can we think about it here?)
+%		\hyperlink{frequency}{\beamerbutton{Frequency}}
+%		\item What is the dealer's profits? What about the speculators?
+%		\hyperlink{profits}{\beamerbutton{Profits}}
+%	\end{itemize}
+%\end{frame}
+
+
+\begin{frame}[label=example]{Example: Price discovery}
+\begin{itemize}
+	\item Return to multiperiod setting. One unit traded every period, $v$ persistent.
+	\item Trade flow is \alert{informative} -- trades have long-lasting effect on prices
+	\item Each order conveys information, dealers learn, and 
+	$$p_t \rightarrow v \quad
+	\hyperlink{dynamics}{\beamerbutton{Dynamics}} $$
+	prices \alert{strong-form efficient} in the long run
+	\pause
+	\item Speed of price discovery increasing in $\pi$
+	\begin{itemize}
+		\item Trade-off between \structure{price discovery} and \structure{liquidity}
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Example: Simulation}
 	Dealer beliefs: Each curve shows the evolution of dealer's beliefs in each run (10 runs of 100 orders)
 	\quad
 	\center
@@ -589,6 +618,84 @@ This gives us two \structure{equilibrium conditions}.
 		\end{itemize}
 	\end{itemize}
 \end{frame}
+
+
+%\begin{frame}<handout:0>[label=efficiency]
+%	\frametitle{Efficiency}
+%	Introduce $t$ subscripts. The price is 
+%	\[
+%	p_{t} = \theta_{t} v^H + (1-\theta_{t} ) v^L = \mathbb{E}[v|\Omega_{t}]
+%	\]
+%	So the price is a martingale: it incorporates all public information
+%	\pause
+%	Does it also incorporate all private information?
+%	\pause
+%	No, since each speculator knows $v$. Thus, 
+%	\[
+%	\mathbb{E}[v|\text{private info.}]=v.
+%	\]
+%	So price is semi-strong form efficient. But strong-form efficient in long run: $p_t \rightarrow v$\quad 
+%	\hyperlink{insights}{\beamerbutton{back}}
+%\end{frame}
+%
+%
+%\begin{frame}<handout:0>[label=insiders]
+%	\frametitle{Insiders}
+%	The spread is 
+%	\[
+%	\left[ \frac{\theta(1-\theta) \pi}{(1-\pi)\beta_B+\theta\pi}+\frac{\theta(1-\theta) \pi}{(1-\pi)\beta_S+(1-\theta)\pi}\right](v^H-v^L)
+%	\]
+%	Set $\theta=1/2$. Derivative w.r.t. $\pi$ is positive: the spread is increasing in the proportion of informed speculators
+%	\quad
+%	Why?
+%	\hyperlink{insights}{\beamerbutton{back}}
+%\end{frame}
+%
+%
+%\begin{frame}<handout:0>[label=volatility]
+%	\frametitle{Volatility}
+%	We can use $v^H-v^L$ as a measure of value volatility. The spread is 
+%	\[
+%	\left[ \frac{\theta(1-\theta) \pi}{(1-\pi)\beta_B+\theta\pi}+\frac{\theta(1-\theta) \pi}{(1-\pi)\beta_S+(1-\theta)\pi}\right](v^H-v^L)
+%	\]
+%	Derivative w.r.t. $(v^H-v^L)$ is positive: the spread is increasing in the volatility of the fundamental value
+%	\quad
+%	Why?
+%	\hyperlink{insights}{\beamerbutton{back}}
+%\end{frame}
+%
+%
+%\begin{frame}<handout:0>[label=frequency]
+%	\frametitle{Frequency}
+%	The spread is 
+%	\[
+%	\left[ \frac{\theta(1-\theta) \pi}{(1-\pi)\beta_B+\theta\pi}+\frac{\theta(1-\theta) \pi}{(1-\pi)\beta_S+(1-\theta)\pi}\right](v^H-v^L)
+%	\]
+%	Think about $\beta=\beta_{B}+\beta_{S}$ as the (noise) trading frequency. Suppose $\beta_{B}=\gamma \beta$ and $\beta_{S}= (1-\gamma) \beta$, and set $\theta=1/2$
+%	\quad
+%	Then the spread is decreasing in the (noise) trading frequency
+%	\quad
+%	Why?
+%	\hyperlink{insights}{\beamerbutton{back}}
+%\end{frame}
+%
+%
+%\begin{frame}<handout:0>[label=profits]
+%	\frametitle{Profits}
+%	A speculator's expected gain is
+%	\[
+%	G_{S} = \theta (v^{H} - a) + (1-\theta) (b-v^{L})
+%	\]
+%	The expected loss of the dealer against speculators is... \pause $L_{D} = \pi G_{S}$
+%	The dealer's gain on noise traders, on the other hand, is (suppose $\beta_B=\beta_S=1/2$)
+%	\begin{align*}
+%	G_{D} 
+%	& = (1-\pi) [ \frac{1}{2} (a-\mathbb{E}(v)) + \frac{1}{2}(\mathbb{E}(v) - b)] \\
+%	& = (1-\pi) \frac{1}{2} (a-b)
+%	\end{align*}
+%	In equilibrium: $L_{D} = G_{D}$
+%	\hyperlink{insights}{\beamerbutton{back}}
+%\end{frame}
 
 
 \begin{frame}<handout:0>[label=dynamics]{Dynamics}

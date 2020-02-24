@@ -2,6 +2,7 @@
 %%% Slides are based heavily on earlier versions of this course taught by Jesper Rudiger.
 
 \documentclass[english,10pt]{beamer}
+%\documentclass[english,10pt,handout]{beamer}
 \input{../FM_preamble.tex}
 
 
@@ -109,8 +110,11 @@ Chapter 3.4-3.7 of FPR}
 		S_{t} = a_{t} - b_{t} = 2\gamma +s^{a}_{t}  + s^{b}_{t}
 		\]
 		\item The spread is now made up of order costs ($2\gamma$) and adverse selection costs ($s^{a}_{t}  + s^{b}_{t}$)
-		\item The instantaneous effect of order costs is similar to that of adverse selection costs
-		\item But we shall see that the dynamic effect is different
+		\item Suppose we want to determine whether spread in a given market is due to adverse selection or order costs
+		\begin{itemize}
+			\item The instantaneous effect of order costs is similar to that of adverse selection costs
+			\item But we shall see that the dynamic effect is different
+		\end{itemize}
 	\end{itemize}
 \end{frame}
 
@@ -118,7 +122,7 @@ Chapter 3.4-3.7 of FPR}
 \begin{frame}{The dynamics of the spread}
 	\begin{itemize}
 		\item As before, let $d_{t}=1$ denote a buyer-initiated trade, and $d_{t} = -1$ a seller-initiated trade
-		\item Also, let $s(d_{t})$ be the half-spread depending on the trade: $s(1)=s^{a}_{t}$ and $s(-1)=s^{b}_{t}$
+		\item Also, let $s(d_{t})$ be the adverse-selection-related half-spread depending on the trade: $s(1)=s^{a}_{t}$ and $s(-1)=s^{b}_{t}$
 		\item Then the realized price can be written as
 		\[
 		p_{t} = \mu_{t-1} + (s(d_{t}) + \gamma) d_{t}
@@ -131,72 +135,92 @@ Chapter 3.4-3.7 of FPR}
 \end{frame}
 
 
-\begin{frame}{The dynamics of the spread (2)}
+\begin{frame}{The dynamics of the spread}
+	Then the effect of time-$t$ trade on prices:
 	\begin{itemize}
-		\item The resulting deviation from the midprice $|p_{t}-\mu_{t}|=\gamma$ is \textit{transient}: it is unrelated to fundamentals
-		\item In the GM model, the price is a 'martingale': the expectation of tomorrow's price is today's price
-		\item What about here? 
-		\item \textbf{Short-run impact}: Suppose a 'buy' order at time $t$. Compare realized price to ideal 'liquid' price $\mu_{t-1}$:
-		\[
-		p_{t}  - \mu_{t-1} = a_{t} - \mu_{t-1} = s^{a}_{t} + \gamma
-		\]
-		This is the short-run impact on prices
-	\end{itemize}
-\end{frame}
-
-
-\begin{frame}{Dynamics: textbook version}
-	\begin{itemize}
-		\item \textbf{Long-run impact}. Say we look at the effect $T$ periods ahead:
+		\item \textbf{short-run}: $$p_t - \mu_{t-1} = (s(d_{t}) + \gamma) d_{t}$$
+		\item \textbf{long-run}:
 		\begin{align*}
-		\mathbb{E}[p_{t+T}|\Omega_{t-1}, d_{t}=1]
-		& = \mathbb{E}[\mu_{t+T}+ \gamma d_{t+T}|\Omega_{t-1}, d_{t}=1] \\
-		& = \mu_{t} + \gamma \mathbb{E}[d_{t+T}|\Omega_{t-1}, d_{t}=1] \\
-		& = \mu_{t-1} + s^{a}_{t}+ \gamma \mathbb{E}[d_{t+T}|\Omega_{t-1}, d_{t}=1] 
+			\mathbb{E}_t [p_{t+s}] - \mu_{t-1} &= \mathbb{E}_t [\mu_{t+s-1} + (s(d_{t+s}) + \gamma) d_{t+s}] - \mu_{t-1}
+			\\
+			&\approx \mathbb{E}_t [\mu_{t+s-1}] - \mu_{t-1}
+			\\
+			&= \mu_t - \mu_{t-1}
+			\\
+			&= s(d_t) d_t
 		\end{align*}
-		\item Suppose $T$ is large. Then today's trade doesn't say much about trades at $T$:
-		\[
-		\mathbb{E}[d_{t+T}|\Omega_{t-1}, d_{t}=1]  \simeq 0
-		\]
-		{\small (Note: this is ``common sense'' statement, not from GM model -- there, conditional on $v$, $\mathbb{E}[d_t]$ is the same for all $t$ and is not zero in general.)}
-		\item So long-run effect is close to zero:
-		\[
-		\mathbb{E}[p_{t+T}|\Omega_{t-1}, d_{t}=1] - \mu_{t-1} \simeq s^{a}_{t}
-		\]
+		\item so order cost effect on prices is \emph{transient} and is reversed by future trades;
+		\item effect of adverse selection term is \emph{permanent}
 	\end{itemize}
 \end{frame}
 
 
-\begin{frame}{Dynamics: textbook version (2)}
-	\begin{block}{}
-		\[
-		SR \, Impact - LR \, Impact = \gamma
-		\]
-	\end{block}
-	\begin{itemize}
-		\item Thus, the buy at time $t$ will increase prices, but afterwards there will be a \textit{price reversal}
-		\item If we are smart investors and know this, we will know that the price is above its long-run level
-		\item Can we make money off that? \pause \structure{No. In long run we expect price to fall by $\gamma$ after a buy, and rise by $\gamma$ after sale. No profit opportunity}
-	\end{itemize}
-\end{frame}
-
-
-\begin{frame}{Dynamics: alternative version}
-	\begin{itemize}
-		\item Think about how a buy affects next period's ask price. 
-		\item To do this, suppose $a^*_{t+1}$ is the ask price after a buy, and $a^0_{t+1}$ is the ask price if there is no trading at $t$. Recall that 
-		\begin{align*}
-		a_{t+1} & = \mu_t + s^a_{t+1} + \gamma \\
-		\mu_t & = \mu_{t-1} + s(d_t) d_t
-		\end{align*}
-		\item Thus:
-		\[
-		a^*_{t+1} - a^0_{t+1} = s^a_{t}
-		\]
-		Adverse selection is incorporated into future prices, order-processing costs are not
-	\end{itemize}
-% draw a graph on the board?
-\end{frame}
+%\begin{frame}{The dynamics of the spread (2)}
+%	\begin{itemize}
+%		\item The resulting deviation from the midprice $|p_{t}-\mu_{t}|=\gamma$ is \textit{transient}: it is unrelated to fundamentals
+%		\item In the GM model, the price is a martingale: the expectation of tomorrow's price is today's price
+%		\item What about here? 
+%		\item \textbf{Short-run impact}: Suppose a 'buy' order at time $t$. Compare realized price to ideal 'liquid' price $\mu_{t-1}$:
+%		\[
+%		p_{t}  - \mu_{t-1} = a_{t} - \mu_{t-1} = s^{a}_{t} + \gamma
+%		\]
+%		This is the short-run impact on prices
+%	\end{itemize}
+%\end{frame}
+%
+%
+%\begin{frame}{Dynamics: textbook version}
+%	\begin{itemize}
+%		\item \textbf{Long-run impact}. Say we look at the effect $T$ periods ahead:
+%		\begin{align*}
+%		\mathbb{E}[p_{t+T}|\Omega_{t-1}, d_{t}=1]
+%		& = \mathbb{E}[\mu_{t+T}+ \gamma d_{t+T}|\Omega_{t-1}, d_{t}=1] \\
+%		& = \mu_{t} + \gamma \mathbb{E}[d_{t+T}|\Omega_{t-1}, d_{t}=1] \\
+%		& = \mu_{t-1} + s^{a}_{t}+ \gamma \mathbb{E}[d_{t+T}|\Omega_{t-1}, d_{t}=1] 
+%		\end{align*}
+%		\item Suppose $T$ is large. Then today's trade doesn't say much about trades at $T$:
+%		\[
+%		\mathbb{E}[d_{t+T}|\Omega_{t-1}, d_{t}=1]  \simeq 0
+%		\]
+%		{\small (Note: this is ``common sense'' statement, not from GM model -- there, conditional on $v$, $\mathbb{E}[d_t]$ is the same for all $t$ and is not zero in general.)}
+%		\item So long-run effect is close to zero:
+%		\[
+%		\mathbb{E}[p_{t+T}|\Omega_{t-1}, d_{t}=1] - \mu_{t-1} \simeq s^{a}_{t}
+%		\]
+%	\end{itemize}
+%\end{frame}
+%
+%
+%\begin{frame}{Dynamics: textbook version (2)}
+%	\begin{block}{}
+%		\[
+%		SR \, Impact - LR \, Impact = \gamma
+%		\]
+%	\end{block}
+%	\begin{itemize}
+%		\item Thus, the buy at time $t$ will increase prices, but afterwards there will be a \textit{price reversal}
+%		\item If we are smart investors and know this, we will know that the price is above its long-run level
+%		\item Can we make money off that? \pause \structure{No. In long run we expect price to fall by $\gamma$ after a buy, and rise by $\gamma$ after sale. No profit opportunity}
+%	\end{itemize}
+%\end{frame}
+%
+%
+%\begin{frame}{Dynamics: alternative version}
+%	\begin{itemize}
+%		\item Think about how a buy affects next period's ask price. 
+%		\item To do this, suppose $a^*_{t+1}$ is the ask price after a buy, and $a^0_{t+1}$ is the ask price if there is no trading at $t$. Recall that 
+%		\begin{align*}
+%		a_{t+1} & = \mu_t + s^a_{t+1} + \gamma \\
+%		\mu_t & = \mu_{t-1} + s(d_t) d_t
+%		\end{align*}
+%		\item Thus:
+%		\[
+%		a^*_{t+1} - a^0_{t+1} = s^a_{t}
+%		\]
+%		Adverse selection is incorporated into future prices, order-processing costs are not
+%	\end{itemize}
+%% draw a graph on the board?
+%\end{frame}
 
 
 
@@ -326,6 +350,7 @@ Chapter 3.4-3.7 of FPR}
 		\[
 		m_t - \mu_t = \rho \sigma^2_\epsilon z_t
 		\]
+		To emphasize: prices in Stoll model are \structure{not efficient}
 		\item The difference can be interpreted as a risk premium to the  dealers
 		\item Can you benefit from this as a trader? \pause \structure{Yes, in the sense that you can buy cheaper if you happen to look for a trade that reduces dealer risk exposure}
 	\end{itemize}
@@ -387,10 +412,16 @@ Chapter 3.4-3.7 of FPR}
 
 \begin{frame}{Exercises}
 	\begin{itemize}
-		\item In Absalon, I have attached an article from the Economist, December 14 2013, on the Volcker rule. Discuss the claim that ``In practice banks will probably respond by making markets for a narrow range of securities that already trade frequently, and thus might reasonably be expected to do so in the future. Meanwhile, the securities that now change hands less frequently are likely to be shunned, making them even harder to trade.''
-		\item Two other Bloomberg articles are on Einar Aas and his exclusion from Nasdaq. What was the reason and what would be the effect of his ejection?
-		\item Exercise 9 on page 128 considers the bid-ask spread in the mean-SD model. Solve this exercise
-		\item If you feel like a challenge, solve exercise 10 on page 128
+		\item for next Wednesday:
+		\begin{itemize}
+			\item In Absalon, I have attached an article from the Economist, December 14 2013, on the Volcker rule. Discuss the claim that \emph{``In practice banks will probably respond by making markets for a narrow range of securities that already trade frequently, and thus might reasonably be expected to do so in the future. Meanwhile, the securities that now change hands less frequently are likely to be shunned, making them even harder to trade.''}
+			\item Two other Bloomberg articles are on Einar Aas and his exclusion from Nasdaq. Use this case to discuss how inventory costs can stem from regulation.
+		\end{itemize}
+		\item for this Friday:
+		\begin{itemize}
+			\item If you are bored, solve Exercise 9 on page 128 about the bid-ask spread in the mean-SD model
+			\item If you feel like a challenge, solve exercise 10 on page 128
+		\end{itemize}
 	\end{itemize}
 \end{frame}
 
