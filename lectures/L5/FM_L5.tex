@@ -9,7 +9,7 @@
 
 \title{Financial Markets Microstructure \\ Lecture 5}
 
-\subtitle{Trade size and market depth, \\ Determinants of illiquidity\\
+\subtitle{Depth determinants, \\ Empirics of illiquidity\\
 	Chapters 4 and 5 of FPR}
 
 \author{Egor Starkov}
@@ -46,21 +46,25 @@
 \begin{frame}{Exercises from last time}
 	\begin{itemize}
 		\item In Absalon, I have attached an article from the Economist, December 14 2013, on the Volcker rule. Discuss the claim that \emph{``In practice banks will probably respond by making markets for a narrow range of securities that already trade frequently, and thus might reasonably be expected to do so in the future. Meanwhile, the securities that now change hands less frequently are likely to be shunned, making them even harder to trade.''}
-		\item Two other Bloomberg articles are on Einar Aas and his exclusion from Nasdaq. Use this case to discuss how inventory costs can stem from regulation.
+		\item Two other Bloomberg articles are on Einar Aas and his exclusion from Nasdaq. Use this case to discuss how risk aversion can stem from regulation.
 	\end{itemize}
 \end{frame}
 
 
 \begin{frame}{Today}
 	\begin{itemize}
-		\item \textbf{Trade size}: Relax assumption that trade size is unitary
+		\item \textbf{Trade size}
 		\begin{itemize}
-			\item Look at \cite{kyle_continuous_1985} model
-			\item Why another model? 
-			\begin{itemize}
-				\item We want to check whether our previous predictions are `robust' to allowing arbitrary trade sizes
-				\item We want to analyze `depth' and `price impact'
-			\end{itemize}
+			\item How does trade size affect prices? 
+			\item I.e., what determines market \structure{depth}?
+			\item (Spoiler: mostly the same factors as with liquidity)
+			\item Will look at \cite{kyle_continuous_1985} model -- an extension of GM that allows flexible trade size
+			%\item Look at \cite{kyle_continuous_1985} model
+			%\item Why another model? 
+			%\begin{itemize}
+			%	\item We want to check whether our previous predictions are `robust' to allowing arbitrary trade sizes
+			%	\item We want to analyze `depth' and `price impact'
+			%\end{itemize}
 		\end{itemize}
 		\item \textbf{Empirical estimation}
 		\begin{itemize}
@@ -77,9 +81,40 @@
 
 
 
-\section{Trade Size (Kyle model)}
+\section{Depth determinants and Kyle model}
 
-\begin{frame}{Introduction}
+\begin{frame}{Prices and trade size}
+	\begin{itemize}
+		\item How does trade size affect prices? 
+		\begin{itemize}
+			\item Spread larger for large trades, price moves further from efficient level
+			\item I.e., market has limited depth
+		\end{itemize}
+		\item Why?
+		\pause
+		\begin{itemize}
+			\item \alert{Adverse selection}: larger trades indicate more/stronger news
+			\item \alert{Inventory risk}: large positions are risky and take dealers longer to unwind, hence require larger premiums
+			\item \alert{Imperfectly competitive dealers}: market power allows dealers to set wider spread and steeper pricing schedules
+			\pause
+			\item \structure{Order processing costs}: may increase or decrease (per stock) in total order size
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Kyle model}
+	\begin{itemize}
+		\item We will look at \cite{kyle_continuous_1985} model which links market depth to adverse selection
+		\item It can be extended to accomodate imperfect competition among dealers (see 4.2.4) and inventory risk (4.3)
+		\begin{itemize}
+			\item although Stoll model from last week already linked depth and inventory risk
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Kyle model}
 	Previously:
 	\begin{itemize}
 		\item Adverse selection: uncertain whether trader is speculator or noise
@@ -98,7 +133,7 @@
 \end{frame}
 
 
-\begin{frame}{Preview}
+\begin{frame}{Setup}
 	\begin{itemize}
 		\item \structure{Speculator}: has private information
 		\begin{itemize}
@@ -116,7 +151,7 @@
 \end{frame}
 
 
-\begin{frame}{Static model of Kyle (1985)}
+\begin{frame}{Setup}
 \begin{itemize}
 	\item \structure{Asset}: Trade in one risky asset with value  $v \sim N(\mu, \sigma^2_v)$
 	% if v is binary we are pretty much back to GM
@@ -124,7 +159,7 @@
 	\begin{itemize}
 		\item Places market order $x$
 		\item If the order clears at price $p$: gain is $x(v-p)$
-		\item $p$ is \alert{unobserved}: maximizes expected gain (risk neutral)
+		\item $p$ is \alert{not observed} when choosing $x$: speculator maximizes expected gain (risk neutral), has expectations about $p$
 	\end{itemize}
 	\item \structure{Noise trader}: Has random demand $u \sim N(0, \sigma^2_u)$
 	\item \structure{MM}: Submits a supply schedule of $(q,p)$ combinations:
@@ -140,15 +175,15 @@
 
 \begin{frame}{Linear equilibrium}
 \begin{itemize}
-	\item Look for equilibrium where speculator strategy is linear: \alert{$x=\beta(v-\mu)$}
+	\item Look for equilibrium where speculator's strategy is linear: \alert{$x=\beta(v-\mu)$}
 	\begin{itemize}
 		\item Note: $\beta$ is endogenously determined by the equilibrium
 		\item $\beta>0$ measures speculator \textit{aggression}
 	\end{itemize}
 	\item MM knows the speculator's strategy:
 	\begin{itemize}
-		\item They observe $q=x+u=\beta(v-\mu)+u$, and want to \alert{estimate $v$}
-		\item Intuitively, \alert{$\mathbb{E}[v|q] = \mu + \lambda  q$}, where $\lambda $ is the regression coefficient $\mathbb{C}(v,q)/\mathbb{V}(q)$, and recall that $\mu=\mathbb{E}[v]$. We'll show this in a minute.
+		\item Observes $q=x+u=\beta(v-\mu)+u$, and want to \alert{estimate $v$}
+		\item Intuitively, \alert{$\mathbb{E}[v|q] = \mu + \lambda  q$}, where $\lambda $ is the regression coefficient $\mathbb{C}(v,q)/\mathbb{V}(q)$, and recall that $\mu=\mathbb{E}[v]$.
 	\end{itemize}
 	\item Since $p=\mathbb{E}[v|q]$, we can use the conditional expectation to get a price impact equation 
 	\[
@@ -202,18 +237,36 @@
 		\setcounter{enumi}{3}
 		\item Rewriting, this gives us
 		\[
-		f(v|q) = K_4 e^{-\frac{\structure{\frac{1}{\sigma^2_v}+\frac{\beta^2}{\sigma^2_u}}}{2} \left(v-\alert{\mu-\frac{\beta \sigma^2_v}{\beta^2 \sigma^2_v + \sigma^2_u}q }\right)^2},
+			f(v|q) = K_4 e^{-\frac{\structure{\frac{1}{\sigma^2_v}+\frac{\beta^2}{\sigma^2_u}}}{2} \left(v-\alert{\mu-\frac{\beta \sigma^2_v}{\beta^2 \sigma^2_v + \sigma^2_u}q }\right)^2},
 		\]
 		where $K_4=\frac{K_1 K_2}{K_3}e^{ \frac{q^2}{2(\beta^2 \sigma^2_v + \sigma^2_u)}-k}$ is again a normalizing constant.
-		This is  a normal distribution with $\mathbb{E}[v|q] = \mu + \frac{\mathbb{C}(v,q)}{\mathbb{V}(q)} q=\alert{\mu+\frac{\beta \sigma^2_v}{\beta^2 \sigma^2_v + \sigma^2_u}q}$ and $\mathbb{V}[v|q]=\structure{\frac{1}{\sigma^2_v}+\frac{\beta^2}{\sigma^2_u}}$, as claimed. Hence,
-		\[
-		\lambda = \frac{\beta \sigma^2_v}{\beta^2 \sigma^2_v + \sigma^2_u}.
-		\]
+		This is  a normal distribution with $\mathbb{E}[v|q] = \mu + \frac{\mathbb{C}(v,q)}{\mathbb{V}(q)} q=\alert{\mu+\frac{\beta \sigma^2_v}{\beta^2 \sigma^2_v + \sigma^2_u}q}$ and $\mathbb{V}[v|q]=\structure{\frac{1}{\sigma^2_v}+\frac{\beta^2}{\sigma^2_u}}$, as claimed. 
+		%Hence,
+		%\[
+		%	\lambda = \frac{\beta \sigma^2_v}{\beta^2 \sigma^2_v + \sigma^2_u}.
+		%\]
 	\end{enumerate}
 \end{frame}
 
 
-\begin{frame}{Analysis continued: speculator's strategy}
+\begin{frame}{Dealer's strategy}
+	\[
+		\mathbb{E}[v|q] = \mu + \frac{\mathbb{C}(v,q)}{\mathbb{V}(q)} q,
+	\]
+	\begin{itemize}
+		\item From zero profit condition: $p = \mathbb{E}[v|q]$, hence
+		\[
+			p = \mu + \lambda q
+		\]
+		\item Recalling that $q = \beta(v-\mu) + u$, compute the price impact coefficient: 
+		\[
+			\lambda \equiv \frac{\mathbb{C}(v,q)}{\mathbb{V}(q)} = \frac{\beta \sigma^2_v}{\beta^2 \sigma^2_v + \sigma^2_u}	
+		\]
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Speculator's strategy}
 	\begin{itemize}
 		\item The speculator takes for granted the pricing rule $p=\mu+\lambda q$
 		\begin{itemize}
@@ -227,41 +280,53 @@
 			\item Note analogy to monopoly problem
 		\end{itemize}
 		\item Comment: speculator expects a positive profit (could abstain). Competitive risk-neutral MM earns zero profits. Noise traders lose.
+		\begin{itemize}
+			\item same as in GM
+		\end{itemize}
 	\end{itemize}
 \end{frame}
 
 
-\begin{frame}{Kyle's static equilibrium}
+\begin{frame}{Closing the equilibrium}
 	\begin{itemize}
 		\item Finally, `match' the coefficients:
 		\[
-		\frac{1}{2\beta}=\lambda = \frac{\beta \sigma^2_v}{\beta^2 \sigma^2_v + \sigma^2_u}
+			\frac{1}{2\beta}=\lambda = \frac{\beta \sigma^2_v}{\beta^2 \sigma^2_v + \sigma^2_u}
 		\]
 		i.e. $\beta^2 \sigma^2_v + \sigma^2_u = 2 \beta^2 \sigma^2_v$ which yields
 		\[
-		\alert{ \beta = \frac{\sigma_u}{\sigma_v}}\text{ and } \alert{ \lambda = \frac{\sigma_v}{2\sigma_u}}.
+				\alert{ \beta = \frac{\sigma_u}{\sigma_v}}\text{ and } \alert{ \lambda = \frac{\sigma_v}{2\sigma_u}}.
 		\]
 		\item Thus: the strategies are optimal given the prices, and the prices optimal given the strategies $\rightarrow $ \textbf{equilibrium}
-		\item Speculator is more \textbf{aggressive} when 
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Equilibrium properties}
+	\[
+		\alert{ \beta = \frac{\sigma_u}{\sigma_v}}\text{ and } \alert{ \lambda = \frac{\sigma_v}{2\sigma_u}}.
+	\]
+	\begin{itemize}
+		\item Speculator is more \textbf{aggressive} ($\beta$ higher) when:
 		\begin{enumerate}
 			\item The informational advantage $\sigma_v$ is smaller (why?)
 			\item There's more noise $\sigma_u$ to hide behind (why?)
 		\end{enumerate}
+		\item \textbf{Market depth}:
+		\[
+			\frac{1}{\lambda} = 2\beta = 2 \frac{\sigma_u}{\sigma_v}
+		\]
+		The market is deeper when there is less insider trading and more noise trading
 	\end{itemize}
 \end{frame}
 
 
-\begin{frame}{}
+\begin{frame}{Equilibrium properties}
 	\begin{itemize}
-		\item \textbf{Market depth}:
-		\[
-		\frac{1}{\lambda} = 2\beta = 2 \frac{\sigma_u}{\sigma_v}
-		\]
-		The market is deeper when there is less insider trading
-		\item Insider's a priori (before observing $q$) \textbf{expected gain}:
+		\item Insider's a priori (before observing $q$ and $v$) \textbf{expected gain}:
 		\begin{align*}
 		\mathbb{E}[x(v-\mu-\lambda x)] 
-		& =\mathbb{E}[\beta(v-\mu)\left(v-\mu-\frac{v-\mu}{2}\right)] \\
+		& =\mathbb{E} \left[ \beta(v-\mu)\left(v-\mu-\frac{v-\mu}{2}\right) \right] \\
 		&=\beta\frac{ \sigma^2_v}{2}=\frac{\sigma_v \sigma_u}{2}
 		\end{align*}
 		\item Market maker's posterior (after observing $q$) \textbf{variance} for $v$ is
@@ -330,7 +395,7 @@
 
 
 
-\section{Determinants of Illiquidity}
+\section{Empirics of illiquidity}
 
 \begin{frame}{Introduction}
 	\begin{itemize}
@@ -353,7 +418,7 @@
 \end{frame}
 
 
-\begin{frame}[label=theory]{Measured price impact and the theories}
+\begin{frame}{Measured price impact and the theories}
 	\begin{itemize}
 		\item Parameters of interest:
 		\begin{itemize}
@@ -366,126 +431,181 @@
 			\item Transaction prices $p_t$, net market order flow $q_t$, order sign $d_t$
 		\end{itemize}
 	\end{itemize}
-	\hyperlink{example}{\beamerbutton{Example}}
 \end{frame}
 
 
-\begin{frame}[label=base]{Base model}
+\begin{frame}{How to estimate?}
 	\begin{itemize}
-		\item \cite{glosten_estimating_1988} propose
+		\item Take GM model with inventory costs. There have:
+		\begin{align*}
+			p_t &= \mu_t + \gamma d_t
+			\\
+			\Rightarrow \varDelta p_t &= \mu_t - \mu_{t-1} + \gamma \varDelta d_t
+		\end{align*}
+		\item Further,
+		\begin{align*}
+			\mu_t = \mu_{t-1} + \lambda d_t + \varepsilon_t
+		\end{align*}
+		order flow is informative; also let $\varepsilon_t$ include all other kinds of public news
+		\item Then
+		\begin{align*}
+			\varDelta p_t &= \lambda d_t + \gamma \varDelta d_t + \varepsilon_t
+		\end{align*}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{\cite{glosten_estimating_1988}}
+	\begin{itemize}
+		\item \cite{glosten_estimating_1988} estimate
 		\begin{equation} \tag{5.7}
-		\Delta p_t = \gamma_0 \Delta d_t+ \gamma_1 \Delta q_t + \lambda_0 d_t + \lambda_1 q_t + \epsilon_t%
-		\end{equation}%
-		Accumulated order flow affects price level via $\lambda$, cyclical order flow gives $\gamma$ in the style of Roll's measure (2.15)
+			\Delta p_t = \gamma_0 \Delta d_t+ \gamma_1 \Delta q_t + \lambda_0 d_t + \lambda_1 q_t + \epsilon_t
+		\end{equation}
+		jointly with trade directions $d_t$. 
+		\item Accumulated order flow affects price level via $\lambda$, cyclical order flow gives $\gamma$ in the style of Roll's measure (2.15)
+		\item On NYSE data from early 80s, they find $\gamma_1=\lambda_0=0$ and estimate $\gamma_0=.0465$, $\lambda_1=.0102$
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Issues}
+	\begin{itemize}
+		\item Apart from the usual concerns with old empirical papers...
 		\begin{itemize}
-			\item On NYSE data from early 80s, they find $\gamma_1=\lambda_0=0$ and estimate $\gamma_0=.0465$, $\lambda_1=.0102$
+			\item not much data
+			\item questionable specification
+			\item questionable estimation procedures
 		\end{itemize}
-		\item But in the short run, the effect of MM risk aversion would be similar
+		\item ...there is the issue of ignoring inventory costs.
+		\item In the short run, the effect of MM risk aversion would be similar
 		\begin{equation} \tag{5.14}
 		\Delta p_t = \gamma \Delta d_t + (\lambda + \beta) q_t + \epsilon_t
 		\end{equation}
 		\begin{itemize}
-			\item Then $\lambda$ and $\beta$ are not separately identified. \hyperlink{example2}{\beamerbutton{Example}}
+			\item $\lambda$ and $\beta$ are not separately identified.
 		\end{itemize}
 	\end{itemize}
 \end{frame}
 
 
-\begin{frame}[label=extending]{Extending time horizon}
+\begin{frame}[label=extending]{Including inventory costs}
 	\begin{itemize}
-		\item Figure 3.9: look at price impact over longer periods
-		\begin{itemize}
-			\item \textbf{\cite{hasbrouck_trades_1988}}: order flow is auto-correlated, so part of the order is not `news' but only moves inventory
-			\item \textbf{\cite{huang_components_1997}}: suggest
-			\begin{equation}\tag{5.17}
-			q_t = \phi q_{t-1} + \eta_t
-			\end{equation}
-			\item Then (5.14) is modified to \hyperlink{derivation}{\beamerbutton{Derivation}}
-			\begin{equation} \tag{5.21}
-			\Delta p_t = \gamma \Delta d_t + (\lambda+\beta)q_t - \lambda \phi q_{t-1} + \epsilon_t
-			\end{equation}
-			\item They estimate the model for 20 major NYSE stocks: $\phi = -.74$ and $ \lambda : \beta :\gamma = 9.59 : 28.65 : 61.76$ percent
-			\item Also: larger transactions, greater $\beta$  \hyperlink{example3}{\beamerbutton{Example}}
-		\end{itemize}
+		\item \textbf{\cite{hasbrouck_trades_1988}}: order flow is auto-correlated, so part of the order is not `news' but only moves inventory
+		\item \textbf{\cite{huang_components_1997}}: suggest
+		\begin{equation}\tag{5.17}
+		q_t = \phi q_{t-1} + \eta_t
+		\end{equation}
+		\item Then (5.14) is modified to \hyperlink{derivation}{\beamerbutton{Derivation}}
+		\begin{equation} \tag{5.21}
+		\Delta p_t = \gamma \Delta d_t + (\lambda+\beta)q_t - \lambda \phi q_{t-1} + \epsilon_t
+		\end{equation}
+		\item They estimate the model for 20 major NYSE stocks: 
+		\begin{align*}
+			\phi &= -0.74	& \lambda &= 9.59\% S
+			\\
+			\beta &= 28.65\% S	& \gamma &= 61.76\% S
+		\end{align*}
+		%NOTE: negative phi makes sense with inventory costs
+		\item Also: greater $\beta$ for larger transactions
 	\end{itemize}
 \end{frame}
 
 
-\begin{frame}{Extending time horizon (2)}
-	\begin{itemize}
-		\item Continued...
+\begin{frame}{Including inventory costs (2)}
 		\begin{itemize}
 			\item \citet*{madhavan_why_1997} find that $\lambda$ is higher in the morning, and $\gamma$ higher in the afternoon
-			\item \cite{lyons_tests_1995} had data on a FOREX dealer's inventory, and found $\beta$ very large -- more on this in the course on International Finance
-			%TODO: check course references
+			% more adverse selection in the morning; higher bargaining power for dealers at closing (traders want to unwind positions)
+			\item \cite{lyons_tests_1995} had data on a FOREX dealer's inventory, and found $\beta$ very large
 		\end{itemize}
-		%TODO: not 100% sure this is the right Hasbrouck-91, check
+\end{frame}
+
+
+\begin{frame}{Long-run impact}
+	\begin{itemize}
 		\item Different dynamic approach: \cite{hasbrouck_measuring_1991} uses the long-run impact of an order $q_{t+1}$ on prices $p_{t+T}-p_t$ to identify the informational part of the trade
 		\begin{itemize}
 			\item The `impulse response' of prices to orders
 			\item Opens door to richer time series analysis of transactions data
-			\item Our course on Financial Econometrics
+		\end{itemize}
+		\item Findings: short-run effect of a trade $\approx 2\%$
+		\item long-run effect of a trade ($T=5$ trades) $\approx 1\%$
+		\begin{itemize}
+			\item greater LR impact for stocks with lower capitalization
 		\end{itemize}
 	\end{itemize}
 \end{frame}
 
 
-\begin{frame}{Informed trading}
+\begin{frame}{Probability of Informed Trading}
 	\begin{itemize}
 		\item \citet*{easley_liquidity_1996}: use GM type model to estimate the prob. of informed trading
-		\item Traders of a particular type arrive as Poisson process over time, with intensity $\epsilon$
+		\item On any given trading day, w.p. $\alpha$ there is some information event
+		\begin{itemize}
+			\item good or bad
+			\item observed by informed traders, not by dealer
+		\end{itemize}
+		\item Within the day, \{informed traders, uninformed sellers, uninformed buyers\} arrive as Poisson process with intensity $\{\epsilon_i, \epsilon_s, \epsilon_b \}$
 		\begin{itemize}
 			\item Probability of observing $n$ traders of a particular type over the trading day is
 			\[
 			e^{-\epsilon} \frac{\epsilon^n}{n!}
 			\]
-			\item With probability $\alpha$ there is some information
-			\item When there is information, conditional probability $\theta$ that this shows asset value to be high
-			\item When there is information, informed traders arrive with intensity $\epsilon_i$; trade as suggested by information
 		\end{itemize}
 	\end{itemize}
 \end{frame}
 
 
-\begin{frame}{}
+\begin{frame}{Probability of Informed Trading}
 	\begin{itemize}
-		\item Noise trading
-		\begin{itemize}
-			\item On all days: uninformed buyers arrive with intensity $\epsilon_b$
-			\item On all days: uninformed sellers arrive with intensity $\epsilon_s$
-		\end{itemize}
 		\item Data for the number of buys and sells allow for estimation of these parameters with \structure{maximum likelihood}
+		\item \citet*{easley_is_2002} estimate the `probability of informed trading' associated with any given order
+		\begin{equation} \tag{5.27}
+		PIN = \frac{\alpha \epsilon_i}{\epsilon_b + \epsilon_s + \alpha \epsilon_i}
+		\end{equation}
+		\item In NYSE data from 1983 to 1998:
 		\begin{itemize}
-			\item \citet*{easley_is_2002} estimate the `probability of informed trading' associated with any given order
-			\begin{equation} \tag{5.27}
-			PIN = \frac{\alpha \epsilon_i}{\epsilon_b + \epsilon_s + \alpha \epsilon_i}
-			\end{equation}
-			\item With NYSE data from 1983 to 1998 they estimate a median PIN of 19\%, greater for small-cap stocks
-			\item PIN is positively correlated with  spread and price volatility
-			\item \citet*{grammig_knowing_2001} suggest that PIN is higher when markets are more anonymous
+			\item median PIN $=19\%$
+			\item for $90\%$ of stocks, PIN is between $10\%$ and $30\%$
+			\item greater for small-cap stocks
+			\item positively correlated with spread and price volatility
 		\end{itemize}
+		\item \citet*{grammig_knowing_2001} show that PIN is higher when markets are more anonymous
 	\end{itemize}
 \end{frame}
 
 
 \begin{frame}{Conclusion}
 	\begin{itemize}
-		\item Kyle model helps us analyze market depth: i.e. it tells us something about how adverse selection causes spread to vary with trade size
-		\item The model has batch clearing instead of the single-unit market of GM
+		\item Depth of a market is closely tied to liquidity and is determined by most of the same factors
+		\begin{itemize}
+			\item Kyle model helps us analyze market depth, can accomodate all factors simultaneously 
+			\item (except order costs)
+			\item (we looked at version with only adverse selection -- see textbook for other versions)
+		\end{itemize}
 		\item Using the insights from last lecture we can estimate the importance of different components of the spread
-		\item Perhaps surprisingly, order costs are by far the largest cost (but estimated on major stocks)
-		\item Easley et al.: around 19\% of trading is informed
+		\begin{itemize}
+			\item Perhaps surprisingly, order costs are by far the largest cost (but estimated on major stocks)
+			\item Adverse selection is more of an issue in small-cap stocks
+			\item \cite{easley_is_2002}: around 19\% of trading is informed
+		\end{itemize}
 	\end{itemize}
 \end{frame}
 
 
 \begin{frame}{Exercise}
 \begin{itemize}
-	\item I uploaded two articles from the Economist, March 7, 2014, both on potential manipulation of prices
-	\item Consider these two issues:
+	\item for next Wednesday:
 	\begin{itemize}
-		\item What motivates a trader to manipulate an asset's price? 
-		\item Is manipulation easier in a very liquid or a very illiquid market?
+		\item I uploaded two articles from the Economist, March 7, 2014, both on potential manipulation of prices
+		\item Consider these two issues:
+		\begin{itemize}
+			\item What motivates a trader to manipulate an asset's price? 
+			\item Is manipulation easier in a very liquid or a very illiquid market?
+		\end{itemize}
+	\end{itemize}
+	\item for next Friday:
+	\begin{itemize}
+		\item solve exercise 3 in chapter 4 (p.159) which explores competition among speculators
 	\end{itemize}
 \end{itemize}
 \end{frame}
@@ -508,90 +628,41 @@
 \end{frame}
 
 
-\begin{frame}<handout:0>[label=example, noframenumbering]
-\frametitle{Example}
-Data from \cite{lyons_tests_1995}. Deutsche mark trading for one week for one dealer in 1992
-\center
-\includegraphics[scale=0.3]{pics/trading}
+
+\begin{frame}[label=derivation, noframenumbering]{Derivation of (5.21)}
+	Suppose $q_t=\phi q_{t-1}+\eta_{t}$. 
+	\begin{itemize}
+		\item \textbf{Adverse selection.} Notice that value equation is now
+		\[
+		\mu_t=\mu_{t-1}+\lambda[q_t-\mathbb{E}[q_t|\Omega_{t-1}]]+\epsilon_t.
+		\]
+		Only non-expected part of order flow carries information. 
+		\item \textbf{Price.} The price equation then becomes
+		\[
+		p_t=m_t+\beta q_t+\lambda[q_t-\mathbb{E}[q_t|\Omega_{t-1}]]+\gamma d_t,
+		\]
+		where $m_t=\mu_t-\beta z_t$ is the `mid-price' from the Stoll model 
+	\end{itemize}
 \end{frame}
 
 
-\begin{frame}<handout:0>[noframenumbering]
-We have inventory data for this particular dealer
-\center
-\includegraphics[scale=0.3]{pics/inventory}
-\hyperlink{theory}{\beamerbutton{Back}}
-\end{frame}
-
-
-\begin{frame}<handout:0>[label=example2, noframenumbering]
-\frametitle{Example}
-Estimating equation (5.7) by OLS for our data ($q$ is in million USD)
-\quad
-\begin{center}
-\includegraphics[scale=0.5]{pics/eq57}
-\end{center}
-We get almost the same restriction.
-\end{frame}
-
-
-\begin{frame}<handout:0>[noframenumbering]
-Estimating (5.14) we get
-\quad
-\begin{center}
-\includegraphics[scale=0.5]{pics/eq514}
-\end{center}
-\hyperlink{base}{\beamerbutton{Back}}
-\end{frame}
-
-
-\begin{frame}<handout:0>[label=example3, noframenumbering]
-\frametitle{Example}
-Estimating equations (5.17) and (5.21) `quick and dirty' with GMM, we get
-\begin{center}
-\includegraphics[scale=0.42]{pics/eqgmm}
-\end{center}
-Unfortunately, these results do not make much sense. We have $\gamma<0$ and $\beta<0$. But both $\beta$, $\gamma$ and $\lambda$ are insignificant.
- \hyperlink{extending}{\beamerbutton{Back}}
-\end{frame}
-
-
-\begin{frame}<handout:0>[label=derivation, noframenumbering]
-\frametitle{Derivation of (5.21)}
-Suppose $q_t=\phi q_{t-1}+\eta_{t}$. 
-\begin{itemize}
-\item \textbf{Adverse selection.} Notice that value equation is now
-\[
-\mu_t=\mu_{t-1}+\lambda[q_t-\mathbb{E}[q_t|\Omega_{t-1}]+\epsilon_t.
-\]
-Only non-expected part of order flow carries information. 
-\item \textbf{Price.} The price equation then becomes
-\[
-p_t=m_t+\beta q_t+\lambda[q_t-\mathbb{E}[q_t|\Omega_{t-1}]+\gamma d_t,
-\]
-where $m_t=\mu_t-\beta z_t$ is the `mid-price' from the Stoll model 
-\end{itemize}
-\end{frame}
-
-
-\begin{frame}<handout:0>[noframenumbering]
-\frametitle{Derivation of (5.21)}
-\begin{itemize}
-\item Use $q_t=\phi q_{t-1}+\eta_{t}$ to get $\mathbb{E}[q_t|\Omega_{t-1}]=\phi q_{t-1}$.
-\item Take first differences of price equation
-\[
-\Delta p_t = \Delta m_t + \lambda [ \Delta q_t-\phi\Delta q_{t-1}]+\beta \Delta q_t+\gamma \Delta d_t
-\]
-\item Notice that $\Delta z_t=-q_{t-1}$ from market clearing condition. Then
-\[
-\Delta m_t = \Delta \mu_t-\beta \Delta z_t = (\lambda+\beta)q_{t-1}-\lambda \phi q_{t-2}+\epsilon_t.
-\]
-\item Substitute in to get
-\[
-\Delta p_t =(\lambda+\beta)q_{t-1} - \lambda\phi  q_{t-1}+\gamma \Delta d_t+\epsilon_t.
-\]
-\hyperlink{extending}{\beamerbutton{Back}}
-\end{itemize}
+\begin{frame}[noframenumbering]{Derivation of (5.21)}
+	\begin{itemize}
+		\item Use $q_t=\phi q_{t-1}+\eta_{t}$ to get $\mathbb{E}[q_t|\Omega_{t-1}]=\phi q_{t-1}$.
+		\item Take first differences of price equation
+		\[
+		\Delta p_t = \Delta m_t + \lambda [ \Delta q_t-\phi\Delta q_{t-1}]+\beta \Delta q_t+\gamma \Delta d_t
+		\]
+		\item Notice that $\Delta z_t=-q_{t-1}$ from market clearing condition. Then
+		\[
+		\Delta m_t = \Delta \mu_t-\beta \Delta z_t = (\lambda+\beta)q_{t-1}-\lambda \phi q_{t-2}+\epsilon_t.
+		\]
+		\item Substitute in to get
+		\[
+		\Delta p_t =(\lambda+\beta)q_{t-1} - \lambda\phi  q_{t-1}+\gamma \Delta d_t+\epsilon_t.
+		\]
+		\hyperlink{extending}{\beamerbutton{Back}}
+	\end{itemize}
 \end{frame}
 
 
