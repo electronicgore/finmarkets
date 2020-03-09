@@ -318,13 +318,33 @@
 \subsection{continuous tick}
 
 \begin{frame}{Tick size and time priority}
+	\begin{exampleblock}{}
+		Suppose that there is no tick; quotes can  be placed in a continuous price space. Suppose that there is price priority. What is then the role of time priority, so that first-come quotes at identical prices are served first?
+	\end{exampleblock}
+	
+	\centering
+	\emph{``...The size of the trading increment is a
+	powerful level that is underappreciated by
+	regulators. The \alert{finer the trading increment},
+	\structure{the more important price priority becomes
+	relative to time priority}. In other words, if the
+	market was designed to trade at continuous
+	(vs discrete) non‐penny increments you could
+	always win a trade by quoting the best price
+	and the \structure{speed game would be non existent}''}
+	
+	\begin{flushright}
+		--Narang, Manoj ``HFT 101 with Tradeworx'',
+		May 20, 2014
+	\end{flushright}
+\end{frame}
+
+
+\begin{frame}{Tick size and time priority}
 	\begin{itemize}
 		\item The role of the tick is essentially \textit{to balance price priority and time priority}
-		\pause
 		\item Larger tick gives more time priority, smaller tick gives more price priority
-		\pause
 		\item When there is no tick, there is essentially no time priority...
-		\pause
 		\item However, there is some evidence that ticks may arise \textit{endogenously}. In that case, time priority takes importance again
 	\end{itemize}
 \end{frame}
@@ -334,15 +354,15 @@
 \subsection{choice: LOB or trade size} 
 
 \begin{frame}{Choosing between LOB and revealing order size}
+	\begin{exampleblock}{}
+		If you could choose between trading at discriminatory prices in a limit order book, or to reveal your order size to a dealer, what would influence your choice?
+	\end{exampleblock}
 	\begin{itemize}
 		\item Recall the basic tensions between the two frameworks: 
-		\pause
 		\begin{itemize}
 			\item When order size revealed, can trade all units at single (low-moderate) price
-			\pause
 			\item When trading in the limit book, marginal price is higher, but not the prices paid on the first units
 		\end{itemize}
-		\pause
 		\item Thus, the answer will depend on (i) the size of your order and (ii) where it is located with respect to the ticks
 	\end{itemize}
 \end{frame}
