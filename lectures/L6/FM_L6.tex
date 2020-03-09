@@ -394,6 +394,20 @@
 
 \section{Market design}
 
+\begin{frame}{Market design}
+	\begin{itemize}
+		\item Now let us turn to the issue of \alert{market design}
+		\item There was not much scope for design in dealer markets, but in LOB markets the platform can influence a few important aspects of the market, such as:
+		\begin{itemize}
+			\item tick size
+			\item priority rules
+			\item putting a dealer in there
+		\end{itemize}
+		\item These all have non-trivial repercussions for limit traders' behavior
+	\end{itemize}
+\end{frame}
+
+
 \begin{frame}{Tick size}
 	\begin{itemize}
 		\item Assume \structure{time priority} is the second order after price priority
@@ -525,41 +539,11 @@
 
 \appendix
 \begin{frame}[allowframebreaks]{References}
-\bibliography{../teaching}
-\bibliographystyle{abbrvnat}
+	\bibliography{../teaching}
+	\bibliographystyle{abbrvnat}
 \end{frame}
 
 
-\begin{frame}[label=adverse]{Dynamic model with adverse selection}
-	\begin{itemize}
-		\item Now, let us try to derive the time-$t$ prices $A_t$ and $B_t$ endogenously. 
-		\item Suppose $v_t=v_{t-1}+\epsilon_t$ where $\epsilon_t \in \{-\sigma, \sigma \}$ with equal probability. $v_t$ is observed in period $t$. The period-$t$ trader has valuation $v_t+y_t$. 
-		\item Again, we look for a stationary equilibrium. In particular:
-		\begin{itemize}
-			\item Suppose that $A_t-v_{t-1}=v_{t-1}-B_t=S$ is constant.
-			\item Suppose there exist $\underline{y}(\epsilon_t),\overline{y}(\epsilon_t),\hat{y}(\epsilon_t)$  that describe the trader's strategy in \textit{each} period  as a function of the value innovation $\epsilon_t$ 
-			\item Thus there exist time-invariant $P^S_M$ and $P^B_M$ that characterize the probability of a next-period market sell/buy order 
-		\end{itemize}
-	\end{itemize}
-\end{frame}
-
-
-\begin{frame}{Dynamic model with adverse selection (2)}
-	\begin{itemize}
-		\item We can write the equilibrium conditions as
-		\begin{align*}
-		B_t-(v_t+\underline{y}(\epsilon_t)) 					& = (A_{t+1}-\mathbb{E}_t[v_{t+1}|buy]-\underline{y}(\epsilon_t) 	)P^B_M \\
-		(A_{t+1}-\mathbb{E}_t[v_{t+1}|buy]-\hat{y}(\epsilon_t))P^B_M 			& = (\mathbb{E}_t[v_{t+1}|sell]+\hat{y}(\epsilon_t)-B_{t+1})P^S_M  \\
-		(\mathbb{E}_t[v_{t+1}|sell]+\overline{y}(\epsilon_t)-B_{t+1}) P^S_M  	& = v_t+\overline{y}(\epsilon_t)-A_t 
-		\end{align*}
-		\item Focus on the first and last equation. Use definition of $S$:
-		\begin{align*}
-		-S-\epsilon_t-\underline{y}(\epsilon_t) 					& = (S-\mathbb{E}_t[\epsilon_{t+1}|buy]-\underline{y}(\epsilon_t) 	)P^B_M \\
-		(S+\mathbb{E}[\epsilon_{t+1}|sell]+\overline{y}(\epsilon_t)) P^S_M  	& =-S+\epsilon_t+\overline{y}(\epsilon_t)
-		\end{align*}
-		\item Solve for $\underline{y}(\epsilon_t)$ and $\overline{y}(\epsilon_t)$. Determine $S$ from $A_t=\mathbb{E}_t[v_t|buy]$ and $B_t= \mathbb{E}_t[v_t|sell]$. Notice adv. sel. affects only limit orders. \hyperlink{adverseorg}{\beamerbutton{Back}}
-	\end{itemize}
-\end{frame}
 
 
 \end{document} 
