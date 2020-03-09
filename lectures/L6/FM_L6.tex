@@ -28,7 +28,7 @@
 }}
 \frame[plain]{\titlepage}
 
-\section{Revision, exercises and introduction}
+\section{Revision and readings}
 
 \begin{frame}{Last time}
 	\begin{itemize}
@@ -40,49 +40,111 @@
 		\item We can use insights from theory to estimate the importance of different components of the spread
 		\begin{itemize}
 			\item Perhaps surprisingly, order costs are by far the largest cost (but estimated on major stocks)
-			\item Easley et al.: around 19\% of trading is informed
+			\item Around 19\% of trading is informed
+			\item Adverse selection is stronger for less liquid/small-cap stocks
 		\end{itemize}
 	\end{itemize}
 \end{frame}
 
 
 \begin{frame}{Exercise}
+	% the conclusions from last time may lead us into thinking that informed trading is no big deal. These articles aim to argue the converse
 	\begin{itemize}
 		\item I uploaded two articles from the Economist, March 7, 2014, both on potential manipulation of prices
 		\item Consider these two issues:
 		\begin{itemize}
 			\item What motivates a trader to manipulate an asset's price? 
 			\item Is manipulation easier in a very liquid or a very illiquid market?
+			% less liquid requires less effort to manipulate the price, but it looks less credible
 		\end{itemize}
 	\end{itemize}
+\end{frame}
+
+
+
+\section{LOB Markets}
+
+\begin{frame}{Introduction}
+	\begin{itemize}
+		\item There's a reason that first models of financial markets (GM and Kyle) explored dealer markets...
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+	\centering
+	\includegraphics[scale=0.5]{pics/mkt20}
+	
+	Financial market in 1985
+\end{frame}
+
+
+\begin{frame}
+	\centering
+	\includegraphics[scale=0.23]{pics/mkt21b}
+	
+	Financial market today
 \end{frame}
 
 
 \begin{frame}{Introduction}
 	\begin{itemize}
-		\item \structure{Price discrimination}:  LOB has discriminatory pricing of larger orders
+		\item Most markets are order-driven these days
 		\begin{itemize}
-			\item Difference to Kyle's (auction) model: in LOB, total order size is not observed, you only know that your limit order has been `hit'
-			\item Glosten (1994) provides a Glosten-Milgrom style model of the price schedule offered (i.e., how much volume supplied at the limit prices)
+			\item Some exchanges combine LOBs and dealers
 		\end{itemize}
-		\item \structure{Ticks}: Often prices are discrete and must lie at a tick (e.g. at NYSE, ticks are multiples of 1 cent) --  tick size is the increment btw prices:
+		\item How do \alert{LOB markets} differ from pure \alert{dealer markets}?
 		\begin{itemize}
-			\item Prioritized limit orders become profitable when there are ticks 
-			(since no `marginal undercutting')
-			\item We will analyze the effects of changing ticks, priority rules
+			\item Not much changes for those who submit market orders
+			\item Limit traders are like dealers, face adverse selection risk, but now also \structure{non-execution risk}
+			% the two latter risks can represent the fundamentals moving in two different direction
 		\end{itemize}
-		\item \structure{Interpretation}: One way of thinking of an LOB is that dealers post limit orders, as in the GM model
+		\item \structure{No exogenous separation} between liquidity providers and demanders in LOB mkts -- any trader can choose between limit and market orders
+		\begin{itemize}
+			\item Limit traders can get better prices compared to market orders, but at the cost of delay
+			\item Self-balancing mechanism (e.g., thin LOB -- market orders are costly while limit orders are exec-d quickly -- high incentives to submit limit order)
+		\end{itemize}
 	\end{itemize}
 \end{frame}
 
 
+%\begin{frame}{Introduction}
+%	\begin{itemize}
+%		\item \structure{Price discrimination}:  LOB has discriminatory pricing of larger orders
+%		\begin{itemize}
+%			\item Difference to Kyle's (auction) model: in LOB, total order size is not observed, you only know that your limit order has been `hit'
+%			\item \cite{glosten_is_1994} provides a Glosten-Milgrom style model of the price schedule offered (i.e., how much volume supplied at the limit prices)
+%		\end{itemize}
+%		\item \structure{Ticks}: Often prices are discrete and must lie at a tick (e.g. at NYSE, ticks are multiples of 1 cent) --  tick size is the increment btw prices:
+%		\begin{itemize}
+%			\item Prioritized limit orders become profitable when there are ticks 
+%			(since no `marginal undercutting')
+%			\item We will analyze the effects of changing ticks, priority rules
+%		\end{itemize}
+%		\item \structure{Interpretation}: One way of thinking of an LOB is that dealers post limit orders, as in the GM model
+%	\end{itemize}
+%\end{frame}
 
-\section{Static analysis: \cite{glosten_is_1994}}
+
+
+\section{Static analysis}
+
+\begin{frame}{\cite{glosten_is_1994} model}
+	\begin{itemize}
+		\item (Probably) first model of LOB markets
+		\item Questions simple:
+		\begin{itemize}
+			\item What drives the prices? Are they efficient?
+			\item How is LOB depth determined?
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
 
 \begin{frame}{Continuous model: Limit order book}
-	\textbf{Single asset}: Unknown value $v$ with cumulative distribution  $G(v)$
-	\\
-	\textbf{Limit order book}: 
+\begin{itemize}
+	\item \textbf{Single asset}: Unknown value $v$ with cumulative distribution  $G(v)$
+	\item \textbf{Limit order book} (composed by competitive limit traders): 
 	\begin{itemize}
 		\item Prices vary with volume $q$. Posted limit orders: $P'(q)$
 		\item A market buy order of size $q$ will `walk up the book' until the final bit of it is cleared at a limit price $P'(q)$
@@ -95,12 +157,14 @@
 		p(q) = \frac{P(q)}{q}.
 		\]
 	\end{itemize}
+\end{itemize}
 \end{frame}
 
 
 \begin{frame}{Continuous model: Marginal rate of substitution}
 	\begin{itemize}
-		\item Suppose trader $i$ has  marginal rate of substitution $\theta_i(q)$
+		\item \textbf{Single market trader} $i$ per period (as in GM/Kyle)
+		\item $\theta_i(q)$ is trader $i$'s marginal rate of substitution (marginal valuation for $q$th unit of the asset)
 		\item If an incoming trader $i$ chooses a market buy order $q$ and parts with cash $P(q)$, we should have: \[\theta_i(q) = P'(q).\]
 		\item If incoming traders are to some extent informed, it's reasonable to suppose that for a given $q$, higher $\theta_i(q)$ indicates higher asset value $v$
 		\item Thus, we assume that 
@@ -114,7 +178,8 @@
 
 \begin{frame}{Continuous model: Market makers}
 	\begin{itemize}	
-		\item Competitive limit orders posted by uninformed, risk-neutral market makers
+		\item Competitive limit orders posted by uninformed, risk-neutral market makers/limit traders
+		\item Focus on the ask side of the market (limit orders to sell vs market order to buy)
 		\item Limit price $P'(q)$ quoted for the $q$-th unit is relevant only if the trader places a market order of $q$ or larger, i.e. $\theta_i(q) \geq P'(q)$
 		\item Hence, if supply is competitive then
 		\[
@@ -135,9 +200,26 @@
 			\item Thus, market makers (ex post) profit on the sale of the last units
 			\item At small realized trades, $q \simeq 0$, MM always profit
 			\item Even with continuous prices, there is a non-zero \structure{inside spread} between ask and bid prices as the order size goes to zero (contrast with Kyle)
+			% The reason is that in the limit order market, liquidity suppliers cannot make their quotes contingent on the total size of market orders. As a result, the limit orders at the top of the book are more exposed to adverse selection.
 			\item After a trade of size $q$, new expected asset value is below $P'(q)$. \pause \structure{New expected value = $\mathbb{E}[v|\theta_i(q)=P'(q)]<\mathbb{E}[v|\theta_i(q) \ge P'(q)]=P'(q)$}. Often new limit orders will be posted below $P'(q)$
 		\end{itemize}
 	\end{block}
+\end{frame}
+
+
+\begin{frame}{Intermission}
+	\begin{itemize}
+		\item The general model above outlines some basic differences between LOB and dealer markets
+		\begin{itemize}
+			\item Adverse selection affects prices differently
+		\end{itemize}
+		\item It neglects the \structure{discreteness of prices}:
+		\begin{itemize}
+			\item Often prices are discrete and must lie at a tick --  tick size is the increment b/w prices
+			\item E.g. at NYSE it was \$1/8 for stocks with prices over one dollar until June 1997, when, under regulatory pressure, it was reduced to \$1/16 and finally, in 2000, to one cent.
+			\item Prioritized limit orders become profitable when there are ticks (since no `marginal undercutting')
+		\end{itemize}
+	\end{itemize}
 \end{frame}
 
 
@@ -147,7 +229,7 @@
 		\item \textbf{Market order $q$}
 		\begin{itemize}
 			\item Cumulative distribution function $F(q)$
-			\item Focus on the ask side of the book, $q>0$
+			\item Again, focus on the ask side of the book, $q>0$
 		\end{itemize}
 		\item \textbf{Discrete price grid}
 		\begin{itemize}
@@ -158,8 +240,10 @@
 		\begin{itemize}
 			\item \textit{Time prioritized}: first posted, first executed
 			\item \textit{Display cost}: $C$ per unit (paid regardless of whether order executes)
+			% This display cost is here for the model to work even without adverse selection
 			\item Let $y_k$ denote the amount supplied at price $A_k$
-			\item Let $Y_k=\sum^k_{j=1} y_j$ be cumulative volume (depth) supplied at or below $A_k$
+			\item Let $Y_k=\sum_{j=1}^k y_j$ be cumulative volume (depth) supplied at or below $A_k$
+			% Y_k(A_k) is the inverse of P(q)
 		\end{itemize}
 	\end{itemize}
 \end{frame}
@@ -180,6 +264,9 @@
 			\]
 		\end{block}
 		\item \textbf{Adverse selection}: Captured by  $\mathbb{E}[v| q \geq Y_k] $
+		\begin{itemize}
+			\item Unlike most of what we had before, this model works even without adverse selection
+		\end{itemize}
 	\end{itemize}
 \end{frame}
 
@@ -230,11 +317,30 @@
 \end{frame}
 
 
+\begin{frame}{Example 1: Comment}
+	\begin{itemize}
+		\item Bad example for discreteness:
+		\begin{itemize}
+			\item The example does \emph{not} assume fixed ticks...
+			\item But they arise endogenously in equilibrium...
+			\item Due to discreteness of noise traders' strategy
+			\item (A very artificial assumption)
+		\end{itemize}
+		\item Focus on adverse selection:
+		\begin{itemize}
+			\item Price increases in order size
+			\item Not due to informed trader having stronger info, as in Kyle model
+			\item But due to noise traders' order becoming less likely
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
 \begin{frame}{Example 2: Model}
 	\begin{itemize}
 		\item \textbf{Market orders}: Exponential distribution, $f(q)=\frac{\theta}{2} e^{-\theta|q|}$
-		\item \textbf{Asset}.  Assume `price impact' equation $\mathbb{E}[v|q=x] = \mu + \lambda x$ where $\lambda >0$ is a constant measuring informativeness of order flow
-		\item Thus,  we are taking a short-cut and modeling adverse selection in a `reduced form': rather than modeling the informed traders, we model their price impact
+		\item \textbf{Asset}. Assume `price impact' equation $\mathbb{E}[v|q=x] = \mu + \lambda x$ where $\lambda >0$ is a constant measuring informativeness of order flow
+		\item Thus, we are taking a short-cut and modeling adverse selection in a `reduced form': rather than modeling the informed traders, we model their price impact
 	\end{itemize}
 \end{frame}
 
@@ -280,6 +386,7 @@
 			A_k=\mu + \lambda \left( \frac{1}{\theta }+ Y_{k}\right) + \frac{2C}{e^{-\theta Y_{k}}}.
 			\]
 		\end{block}
+		\item (We actually need the opposite -- find $Y_k$ for a given tick $A_k$.)
 	\end{itemize}
 \end{frame}
 
@@ -287,26 +394,58 @@
 
 \section{Market design}
 
-\begin{frame}{Market design: Tick size and priority rules}
+\begin{frame}{Tick size}
 	\begin{itemize}
-		\item With \structure{time priority} (first limit order posted at tick executes first)
+		\item Assume \structure{time priority} is the second order after price priority
 		\begin{itemize}
-			\item The marginal order at price $A_{k}$ earns zero profit under `time priority'
-			\item The order at the front of the queue executes with greater  probability than the order at the end of the queue: $\mathbb{P}(q > Y_{k-1}) \ge \mathbb{P}(q \geq Y_{k})$
-			\item So inframarginal orders may earn strictly positive profits
-			\item Note that this profit is reduced with smaller tick sizes
+			\item I.e., first limit order posted at tick executes first
 		\end{itemize}
-		\item With \structure{pro-rata} (limit orders at given tick executed proportionally to their size):
+		\item Profit of the limit trader at price $A_k$ is:
 		\begin{itemize}
-			\item The expected profit of all orders at price $A_k$ must be zero
-			\item Since profits are decreasing in the number of orders (lower execution probability), this implies that more orders are posted under pro-rata
-			% not sure about this last part
+			\item Zero for the marginal (last) limit order at $A_k$
+			\item Strictly positive for inframarginal orders (if $C>0$) because order executes with higher probability
+		\end{itemize}
+		\item This profit is reduced with \alert{smaller tick sizes}
+		\begin{itemize}
+			\item Hence decreasing tick size drives away limit traders and reduces depth
+			\item But it will also reduce spread (by design) and reduce trading costs for the opposite side of the market (liquidity demanders)
 		\end{itemize}
 	\end{itemize}
 \end{frame}
 
 
-\begin{frame}[label=hybridorg]{Market design: Hybrid market}
+\begin{frame}{Tick size}
+	\begin{itemize}
+		\item Driving away limit traders intuitively also has dynamic repercussions
+		\begin{itemize}
+			\item LOB is replenished more slowly after trades -- so market orders traded more frequently against non-competitive prices
+		\end{itemize}
+		\item \cite{goldstein_eighths_2000} explored the NYSE 1997 case (tick size from $\$1/8$ to $\$1/16$)
+		\begin{itemize}
+			\item Trading costs decreased for small orders
+			\item Unclear for large orders
+			\item Aligns with our predictions (smaller spread, smaller depth)
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Priority rules}
+	\begin{itemize}
+		\item With \structure{pro-rata} allocation (limit orders at given tick executed proportionally to their size), as opposed to \alert{time priority}:
+		\begin{itemize}
+			\item The expected profit of all orders at price $A_k$ must be zero (as opposed to strictly positive)
+			\item So execution probabilities must be lower for all orders
+			\item Meaning more orders are posted under pro-rata.
+			% not sure about this last part
+		\end{itemize}
+		\item Lower profits lead to same dynamic consequences as with reducing tick size
+		\item Pro-rata allocation rule used in the electronic futures markets for the leading short-term interest rate and for the two-year U.S. Treasuries.
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Hybrid market}
 	Hybrid market
 	\begin{itemize}
 		\item Suppose a dealer can compete with the limit order book, as follows
@@ -316,147 +455,10 @@
 		\item But the existence of such a dealer invalidates our analysis of the LOB
 		\item Profitable limit orders are being picked off
 	\end{itemize}
-	\hyperlink{hybrid}{\beamerbutton{Example}}
 \end{frame}
 
 
-\begin{frame}{\cite{glosten_is_1994}: Conclusion}
-	\begin{itemize}
-		\item Ordinary traders can  use limit orders to compete with market makers
-		\begin{itemize}
-			\item Our model of market orders?
-		\end{itemize}
-		\item Limit order book is actually dynamic
-		\begin{itemize}
-			\item Consequences of priority rules?
-		\end{itemize}
-	\end{itemize}
-	Glosten argued that if orders can be freely split between competing trading platforms (which need not have limit order books), then the aggregate pricing schedule must be that from the competitive order market
-\end{frame}
-
-
-
-\section{Dynamic analysis: the choice between limit and market orders}
-
-\begin{frame}{Dynamic analysis}
-	\begin{itemize}
-		\item \cite{glosten_is_1994} models the static price schedule under adverse selection (with quote display costs)
-		\item Traders must choose: place limit/market orders = make/take liquidity
-		\begin{itemize}
-			\item \cite{parlour_price_1998}: time priority of limit orders means it's more attractive to add limit orders when there's currently few of them
-			\item \cite{foucault_order_1999}: limit order placed by traders whose private valuation makes current prices unattractive
-			\item \citet*{foucault_limit_2005}: patient traders place limit orders inside the spread
-		\end{itemize}
-	\end{itemize}
-\end{frame}
-
-
-\begin{frame}{Model based on Parlour (1998)}
-	\begin{itemize}
-		\item \textbf{Exogenous prices}. Bid and ask prices exogenously given as $A>v>B$
-		\item \textbf{Traders}. Arriving trader chooses btw limit or market order (one unit)
-		\begin{itemize}
-			\item Limit order valid one period. Choice depends on prob. of limit order being executed, i.e. `hit' by a market order from the next trader
-			\item Valuation: $v+y$. $y$ is uniformly distributed on $(-Y,Y)$, unobserved and independent across traders. $v$ is known and common to all.
-		\end{itemize}
-		\item \textbf{Profits}. Let $P^B_M (P^S_M)$ be prop. of next-period market buy (sell) order 
-		\begin{align*}
-		\text{Market sell: } & B-(v+y) \\
-		\text{Limit sell: } & (A-v-y)P^B_M \\
-		\text{Limit buy: } &(v+y-B)P^S_M \\
-		\text{Market buy: } &v+y-A
-		\end{align*}
-	\end{itemize}
-\end{frame}
-
-
-\begin{frame}{Analysis}
-	\begin{itemize}
-		\item Look for stationary eq. where  $A$, $B$, $P^B_M$, $P^S_M$ are constant 
-		\item From the trader profits, we see that there must exist $\overline{y}$,  $\underline{y}$ and $\hat{y}$ such that the best response (optimal order) of the trader is
-		\begin{equation*}
-		BR=\left\{ \begin{aligned}
-		&MSell		&& 	\text{ if } 	&&	-Y\le y \le \underline{y} \\
-		&LSell 		&&	\text{ if } 	&&	\underline{y} \le y \le \hat{y} \\
-		&LBuy		&&	\text{ if } 	&&	\hat{y} \le y \le \overline{y} \\
-		&MBuy	&&	\text{ if } 	&&	\overline{y} \le y \le Y
-		\end{aligned}
-		\right.
-		\end{equation*}
-		\item Traders with greater urgency to trade (extreme $y$) use market orders
-		\item Limit order more attractive when more likely to execute:  automatic tendency for the limit order book to be replenished (resiliency)
-	\end{itemize}
-\end{frame}
-
-
-\begin{frame}{Equilibrium}
-	\begin{itemize}
-		\item From trader's BR:
-		\begin{align*}
-		P^S_M 	&=\mathbb{P}(-Y\le y \le \underline{y})=\frac{\underline{y}+Y}{2Y} \\
-		P^B_M 	&=\mathbb{P}(\overline{y} \le y \le Y)=\frac{Y-\overline{y}}{2Y}
-		\end{align*}
-		\item At $\underline{y}$, indifferent btw $MSell$ and $LSell$. At $\hat{y}$, indifferent btw $LSell$ and $LBuy$. At $\overline{y}$, indifferent btw $LBuy$ and $MBuy$. Thus:
-		\begin{align}
-		B-(v+\underline{y}) 					& = (A-v-\underline{y})\frac{Y-\overline{y}}{2Y} \label{eq1}\\
-		(A-v-\hat{y}) \frac{Y-\overline{y}}{2Y} 			& = (v+\hat{y}-B)\frac{\underline{y}+Y}{2Y} \label{eq2}\\
-		(v+\overline{y}-B) \frac{\underline{y}+Y}{2Y}  	& = v+\overline{y}-A \label{eq3}
-		\end{align}
-	\end{itemize}
-\end{frame}
-
-
-\begin{frame}[label=adverseorg]{Equilibrium (2)}
-	\begin{itemize}
-		\item Solving \eqref{eq1}-\eqref{eq3} we obtain the thresholds. If we set $v=0$, $Y=2$, $A=1$ and $B=-1$ they become
-		\begin{align*}
-		\underline{p} 	& = \frac{1}{2}(3-\sqrt{33}) \simeq 1.4 \\
-		\hat{p} 	& = 0 \\
-		\overline{p} 		& = \frac{1}{2}(\sqrt{33}-3) \simeq -1.4 
-		\end{align*}
-		\item Thus, in equilibrium the probability of a market buy/sell order next period is $\frac{2-1.4}{2\cdot 2}=\frac{-1.4+2}{2 \cdot 2}=0.15$
-		\item Given  large spread ($A-B=2$), limit order traders are willing to accept a low execution probability ($15\%$) in order to obtain better price
-	\end{itemize}
-	\hyperlink{adverse}{\beamerbutton{Adverse selection}}
-\end{frame}
-
-
-\begin{frame}{Conclusion}
-	\begin{itemize}
-		\item Trade occurs when seller and buyer meet and agree on terms
-		\begin{itemize}
-			\item Exchange brings sellers and buyers together
-			\item Impatient traders search more actively (use market orders)
-			\item Patient traders are more passive, offer liquidity (use limit orders)
-		\end{itemize}
-		\item Ordinary traders can use limit orders to compete with market makers
-		\item Limit order book is dynamic: influence the choice of order
-		\item In reality, many features to think about when placing orders
-	\end{itemize}
-\end{frame}
-
-
-\begin{frame}{Exercise for next week}
-	\begin{itemize}
-		\item Solve exercise 1 on pages 232-233 in the textbook. Note that you need to use Bayes' rule to assess the conditional distribution over $v$ given a market order of size $q$
-		\item Solve exercise 5 on page 235 in the textbook on the effect of fees charged for limit orders and market orders
-		\item Suppose that there is no tick; quotes can  be placed in a continuous price space. Suppose that there is price priority. What is then the role of time priority, so that first-come quotes at identical prices are served first?
-		\item If you could choose between trading at discriminatory prices in a limit order book, or to reveal your order size to a dealer, what would influence your choice?
-	\end{itemize}
-\end{frame}
-
-
-
-
-
-\appendix
-\begin{frame}[allowframebreaks]{References}
-\bibliography{../teaching}
-\bibliographystyle{abbrvnat}
-\end{frame}
-
-
-\begin{frame}[label=hybrid]{Example of hybrid market}
+\begin{frame}{Hybrid market: Example}
 	\begin{itemize}
 		\item Example 1 continued. Assume an uninformed dealer receives order $q$. Can either send order to LOB or execute himself (at better price) 
 		\item Focus on ask side. Let $A^H_k$ be the hybrid ask price. When dealer observes $q=q_S$, he knows trader is noise trader and thus $\mathbb{E}[v|\structure{N}]=\mu$. 
@@ -470,7 +472,61 @@
 		and thus $A^H_1=A^H_2=\mu+\frac{2\pi}{1+\pi} \sigma$.
 		\item $A^H_1>A_1$ and $A^H_2=A_2$: hybrid market less liquid than normal market
 	\end{itemize}
-	\hyperlink{hybridorg}{\beamerbutton{Back}}
+\end{frame}
+
+
+%\begin{frame}{\cite{glosten_is_1994}: Conclusion}
+%	\begin{itemize}
+%		\item Ordinary traders can  use limit orders to compete with market makers
+%		\begin{itemize}
+%			\item Our model of market orders?
+%		\end{itemize}
+%		\item Limit order book is actually dynamic
+%		\begin{itemize}
+%			\item Consequences of priority rules?
+%		\end{itemize}
+%	\end{itemize}
+%	Glosten argued that if orders can be freely split between competing trading platforms (which need not have limit order books), then the aggregate pricing schedule must be that from the competitive order market
+%\end{frame}
+
+
+\begin{frame}{Conclusion}
+	\begin{itemize}
+		\item First look into LOB markets using \cite{glosten_is_1994}.
+		\item Limit traders act in the same capacity as the dealer did before
+		\begin{itemize}
+			\item but face different incentives
+			\item so act differently
+			\item which leads to different market outcomes
+		\end{itemize}
+		\item Many aspects of market design (tick size, priority rules) are all double-edged swords, swing them carefully
+		\item The interesting part: traders can choose between limit and market orders
+		\begin{itemize}
+			\item Will do this next week
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Exercise for next week}
+	\begin{itemize}
+		\item Suppose that there is no tick; quotes can  be placed in a continuous price space. Suppose that there is price priority. What is then the role of time priority, so that first-come quotes at identical prices are served first?
+		\item If you could choose between trading at discriminatory prices in a limit order book, or to reveal your order size to a dealer, what would influence your choice?
+		% ex1 is on informed trading
+		% ex5 is on make-or-take choice 
+		\item Solve exercise 1 on pages 232-233 (ch.6) in the textbook. Note that you need to use Bayes' rule to assess the conditional distribution over $v$ given a market order of size $q$
+		%\item Solve exercise 5 on page 235 in the textbook on the effect of fees charged for limit orders and market orders
+	\end{itemize}
+\end{frame}
+
+
+
+
+
+\appendix
+\begin{frame}[allowframebreaks]{References}
+\bibliography{../teaching}
+\bibliographystyle{abbrvnat}
 \end{frame}
 
 
