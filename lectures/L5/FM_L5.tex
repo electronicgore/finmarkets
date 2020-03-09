@@ -173,6 +173,23 @@
 \end{frame}
 
 
+\begin{frame}{Setup: Timing}
+	\begin{itemize}
+		\item To be explicit, the timing is as follows:
+	\end{itemize}
+	\begin{enumerate}
+		\item at the beginning of the period:
+		\begin{itemize}
+			\item speculator chooses order size $x$
+			\item noise traders submit their order $u$
+			\item dealer submits price schedule $(q,p)$
+		\end{itemize}
+		\item then market price $p(q)$ is determined given total order $q=x+u$
+		\item at the end of the period payoffs are realized
+	\end{enumerate}
+\end{frame}
+
+
 \begin{frame}{Linear equilibrium}
 \begin{itemize}
 	\item Look for equilibrium where speculator's strategy is linear: \alert{$x=\beta(v-\mu)$}
