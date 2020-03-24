@@ -103,7 +103,7 @@
 	Apart from violating priority rules, fragmentation can lead to:
 	\begin{itemize}
 		\item \alert{Higher trading costs} (due to search costs or not finding best price)
-		\item \alert{Worse price discovery}
+		\item \alert{Worse price discovery} (information is more dispersed)
 		\item \alert{Less total liquidity} (network effects)
 	\end{itemize}
 	\pause
@@ -118,31 +118,73 @@
 
 
 
-\section{Fragmentation costs}
+\section{Fragmentation and trading costs}
 
-\begin{frame}{Costs: A. Adverse selection in standard Kyle}
-	First, let us look at the effect of fragmentation on adverse selection
+\begin{frame}{Platform competition reduces trading costs}
 	\begin{itemize}
-		\item Section 7.2.1 analysis draws on Kyle's model
-		\item Recall the baseline model from our lecture:
+		\item Competition among exchanges is a significant driver of trading fees and commissions
+		\item Sometimes just the threat of entry is enough
+		\item E.g. case of Dutch stocks:
+		\begin{exampleblock}{}
+			\begin{itemize}
+				\item before 2003, most of Dutch stocks were traded on Euronext's NSC
+				\item in May 2003, Deutsche B{\"o}rse and LSE separately announced they wanted to enter this market
+				\item Euronext's \alert{order entry fee} was $0.3$ EUR in Jan 2004...
+				\item ...halved to $0.15$ for limit orders on Apr 4, 2004...
+				\item ...suspended for market orders on May 24, 2004 (LSE's EuroSETS launch day)...
+				\item ...and finally waived completely for market and limit orders on Jan 31, 2005 together with reducing execution fees.
+				\item (EuroSETS never really gained much traction)
+			\end{itemize}
+		\end{exampleblock}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Brokers' agency}
+	\begin{itemize}
+		\item Traders rarely place their orders directly -- they usually go to a broker (bank)
+		\item When market is fragmented, brokers should ideally search all markets for the best price
 		\begin{itemize}
-			\item Risky asset value $v \sim N(\mu,\sigma^{2}_{v})$
-			\item Insider observes $v$
-			\begin{itemize}
-				\item Places market order $x$; maximizes $\mathbb{E}[x(v-p)|x]$
-			\end{itemize}
-			\item Noise trader demand $u \sim N(0, \sigma^{2}_{u})$
-			\item Market maker observes aggregate order flow $q = x + u$
-			\begin{itemize}
-				\item Competitively prices asset at $p = \mathbb{E}[v|q]$
-				(Recall the difference here to what we did in the LOB model)
-			\end{itemize}
+			\item (Not a trivial problem, given the existence of dark pools, crossing networks of unknown depth, and hidden orders on standard exchanges)
+		\end{itemize}
+		\item But \alert{cost} of this search is incurred by \alert{broker}, while \structure{gains} are transmitted to \structure{trader}.
+		\begin{itemize}
+			\item So there is an agency problem
+			\item Exacerbated by payments brokers can receive from exchanges for routing all or some orders through this exchange
+		\end{itemize}
+		\item Regulation (US) aims to solve this via
+		\begin{itemize}
+			\item ``best execution rules'' imposed on brokers
+			\item no-trade-through/order-protection rules which say order must be routed automatically to trade at NBBO
 		\end{itemize}
 	\end{itemize}
 \end{frame}
 
 
-\begin{frame}{Adverse selection in standard Kyle (2)}
+
+\section{Fragmentation in Kyle model}
+
+\begin{frame}{Kyle model: refresher}
+	To talk about liquidity and price impact, let us look at the effects of fragmentation within Kyle model.
+	
+	Recall the baseline model from past lectures:
+	\begin{itemize}
+		\item Risky asset value $v \sim N(\mu,\sigma^{2}_{v})$
+		\item Insider observes $v$
+		\begin{itemize}
+			\item Places market order $x$; maximizes $\mathbb{E}[x(v-p)|x]$
+		\end{itemize}
+		\item Noise trader demand $u \sim N(0, \sigma^{2}_{u})$
+		\item Market maker observes aggregate order flow $q = x + u$
+		\begin{itemize}
+			\item Competitively prices asset at $p = \mathbb{E}[v|q]$
+			(Recall the difference here to what we did in the LOB model)
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Kyle model: refresher (2)}
 	\begin{itemize}
 		\item The insider uses a linear strategy $x=\beta(v-\mu)$
 		\item Market makers observe $q=x+u=\beta(v-\mu) + u$. Then
@@ -162,7 +204,7 @@
 \end{frame}
 
 
-\begin{frame}{Adverse selection in standard Kyle (3)}
+\begin{frame}{Kyle model: refresher (3)}
 	\begin{itemize}
 		\item `Match the coefficients' $\frac{1}{2\beta} = \lambda = \frac{\beta \sigma^{2}_{v}}{\beta^{2} \sigma^{2}_{v}+\sigma^{2}_{u}}$ to get the equilibrium
 		\[
@@ -174,23 +216,23 @@
 		\]
 		\item MM makes zero profit:  insider's gain is noise traders' loss
 		\[
-		\underbrace{\mathbb{E}[x(p-v)]}_{\textcolor{blue}{\text{Insider gain}}} = \underbrace{\mathbb{E}[u(\lambda u)]}_{\textcolor{blue}{\text{Noise loss}}} = \lambda \sigma^{2}_{u} = \frac{\sigma_{v}\sigma_{u}}{2}
+		\underbrace{\mathbb{E}[x(p-v)]}_{\structure{\text{Insider gain}}} = \underbrace{\mathbb{E}[u(\lambda u)]}_{\structure{\text{Noise loss}}} = \lambda \sigma^{2}_{u} = \frac{\sigma_{v}\sigma_{u}}{2}
 		\]
 	\end{itemize}
 \end{frame}
 
 
-\begin{frame}{Adverse selection in a fragmented market}
+\begin{frame}{Kyle model with a fragmented market}
 	Now fragment the market in this Kyle model. Suppose:
 	\begin{enumerate}
 		\item Two noise trader groups: $u=u_{1}+u_{2}$, $u_i$ independent and $u_{i} \sim N(0, \sigma^{2}_{ui})$
-		\item Noise traders trade in separate markets; MMs and informed traders present in both markets
-		\item Agents cannot choose their market (does not matter)
+		\item Noise traders trade in separate markets; MMs and informed traders present in both markets (MM competitive; speculators one per market)
+		\item Agents cannot choose their market
 	\end{enumerate}
 \end{frame}
 
 
-\begin{frame}{Adverse selection in a fragmented market (2)}
+\begin{frame}{Fragmented Kyle model: prices}
 	\begin{itemize}
 		\item \textbf{Prices}.  Since on each market $i=1,2$ we must have $p_i=\mathbb{E}[v|q]$,
 			\begin{align*}
@@ -202,36 +244,36 @@
 				\\
 				&= \mu + \frac{1}{2}(v-\mu)+\frac{\sigma_v}{2\sigma_{ui}}u_i
 			\end{align*}
-		\structure{On average, price is the same} in both markets. But in very short run prices may differ across markets
+		
+		\item \structure{On average, price is the same} in both markets. But in very short run prices may differ across markets
 	\end{itemize}
 \end{frame}
 
 
-\begin{frame}{Adverse selection in a fragmented market (3)}
+\begin{frame}{Fragmented Kyle model: volumes}
 	\begin{itemize}
 		\item \textbf{Trading}. Informed trading is given by $x_i= \beta_i (v-\mu)$ with $\beta_i= \frac{\sigma_{ui}}{\sigma_{v}}$:
-		\begin{center}
-			$
+		\[
 			x_1+x_2=(v-\mu)\frac{\sigma_{u1}+\sigma_{u2}}{\sigma_v}>x
-			$
-		\end{center}
-		\textcolor{red}{Agg. informed trading greater than in consolidated case}
+		\]
+		
+		\item \alert{Agg. informed trading greater than in consolidated case}
 		
 		\item To see this, note: 
 		\begin{align*}
-		\mathbb{V}(u) = \sigma_u^2 &= \sigma_{u1}^2 + \sigma_{u2}^2 = \mathbb{V}(u_1+u_2)
-		\\
-		\Rightarrow
-		\sigma_u^2 &< (\sigma_{u1} + \sigma_{u2})^2
-		\\
-		\Rightarrow
-		\sigma_u &< \sigma_{u1} + \sigma_{u2}
+			\mathbb{V}(u) = \sigma_u^2 &= \sigma_{u1}^2 + \sigma_{u2}^2 = \mathbb{V}(u_1+u_2)
+			\\
+			\Rightarrow
+			\sigma_u^2 &< (\sigma_{u1} + \sigma_{u2})^2
+			\\
+			\Rightarrow
+			\sigma_u &< \sigma_{u1} + \sigma_{u2}
 		\end{align*}
 	\end{itemize}
 \end{frame}
 
 
-\begin{frame}{Adverse selection in a fragmented market (4)}
+\begin{frame}{Fragmented Kyle model: profits}
 	\begin{itemize}
 		\item \textbf{Adverse selection costs}. Measure by loss of noise traders:
 		\begin{itemize}
@@ -241,31 +283,83 @@
 			\]
 			\item If two separate markets, \textit{greater adverse selection loss}
 		\end{itemize}
-		\textcolor{red}{More informed trading gives greater adverse selection loss}
+		
+		\item \alert{More informed trading gives greater adverse selection loss}
+		
+		\item Of course, greater profits for informed traders
+		
+		\item In the above, we assume one speculator per market. If two speculators would compete in the consolidated mkt, the effect is even stronger.
 	\end{itemize}
 \end{frame}
 
 
-\begin{frame}{Adverse selection in a fragmented market (4)}
+\begin{frame}{Fragmented Kyle model: depth}
 	\begin{itemize}
-		\item \textbf{Market depth}. The textbook says depth decreases in aggregate from fragmentation:
-		\begin{align*}
+		\item \textbf{Market depth}. \alert{Depth in each market lower than in consolidated market}:
+		\[
 		\lambda = \frac{\sigma_v}{2 \sigma_u} < \min \{ \lambda_1, \lambda_2 \}
-		\end{align*}
-		%This is \alert{wrong}.
+		\]
+		
+		\pause
+		\item What about \structure{aggregate}? Say you want to trade $X$ total.
+		\begin{itemize}
+			\item When splitting optimally across two markets $X=x_1+x_2$, will equalize marginal prices: $p_1 = \mu + \lambda_1 x_1 = \mu + \lambda_2 x_2 = p_2$.
+			\item So $x_i = \frac{\lambda_1}{\lambda_1+\lambda_2} X$ and trading moves prices in each market to $p_i = \mu + \frac{\lambda_1 \lambda_2}{\lambda_1 + \lambda_2} X$ compared to $p = \mu + \lambda X$ in consolidated market. Can verify that $\frac{\lambda_1 \lambda_2}{\lambda_1 + \lambda_2} < \lambda$
+			\item \structure{Fragmented market is deeper in aggregate}
+		\end{itemize}
 	\end{itemize}
 \end{frame}
 
 
-\begin{frame}{Conclusion: Adverse selection in a fragmented market}
+\begin{frame}{Fragmented Kyle model: price discovery}
+	\begin{itemize}
+		\item \textbf{Price discovery}. We used the fact that since everything is normal, we have
+		$$
+			\mathbb{E}[v|q] = \mu +\frac{\mathbb{C}(v,q)}{\mathbb{V}(q)} q
+		$$
+		\begin{itemize}
+			\item This still works in vector form with $\vec{q}=(q_1,q_2)$
+			\item ...or with $\vec{p}=(p_1,p_2)$, since $p_i = \mu + \lambda_i q_i$
+		\end{itemize}
+		\pause
+		\item Doing the magic, get $\mathbb{E}[v|\vec{p}] = \mu + \frac{2}{3}(p_1 - \mu) + \frac{2}{3}(p_2 - \mu)$. With more magic can find $\mathbb{V}(v|\vec{p}) = \frac{\sigma^2_v}{3}$, while in consolidated market $\mathbb{V}(v|p) = \frac{\sigma^2_v}{2}$
+		\item \structure{Better price discovery in fragmented market}
+		\item Because have more signals from which to learn about $v$ 
+		\pause 
+		\begin{itemize}
+			\item although comparing ``two speculators in two mkts'' vs ``one speculator in one mkt''. Two competing insiders in one market would yield \alert{same price discovery}
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Fragmented Kyle model: liquidity provision}
+	\begin{itemize}
+		\item In the analysis above, traders were chain-bound to their markets
+		\item If speculators could choose, they would split across different markets to avoid competing with each other.
+		\begin{itemize}
+			\item If cannot commit to stay away from each other's market then fragmentation has little effect.
+		\end{itemize}
+		\item What if noise traders can choose?
+		\begin{itemize}
+			\item They would go to a deeper market. Depth $\frac{1}{\lambda_i} = \frac{2 \sigma_{ui}}{\sigma_v}$.
+			\item Larger markets would get larger. \structure{Liquidity begets liquidity.}
+			\item This is a natural barrier to entry for new trading platforms and source of ``payments for order flow'' we mentioned
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Conclusion: fragmented Kyle model}
 	\textbf{Adverse selection costs}
 	\begin{itemize}
-		\item Presence of other noise traders reduce adverse selection costs: fragmentation is bad for noise traders (welfare)
+		\item Fragmentation is bad for noise traders (welfare)
 		\item If noise traders coordinate, it can be stable that they gather around a less efficient platform
-		\item Such a coordination failure can be a barrier to entry for new trading platforms; Section 7.3
+		\item Fragmentation may create extra depth
 	\end{itemize}
 	\textbf{Aside}
 	\begin{itemize}
+		\item Note that ``fragmentation'' may also mean time
 		\item Above observations may explain why trade volume is often concentrated at specific times of day (early and late)
 		\item Also an argument for batch trading versus continuous trading
 	\end{itemize}
@@ -273,311 +367,252 @@
 
 
 
-\begin{frame}{B. Less risk sharing}
-We now turn to the effect fragmentation on market makers' risk sharing
-\begin{itemize}
-\item Section 7.2.2: Analysis drawn on Stoll's model
-\item Risky asset value $v \sim N(\mu, \sigma^{2}_{v})$
-\item Risk averse dealer with mean-variance preference
-\begin{itemize}
-\item Initial asset position $z$; risk aversion $\rho$
-\item Asset supply is
-\[
-y = z + \frac{p-\mu}{\rho \sigma^{2}_{v}}
-\]
-\item Invert to get pricing schedule $p=m+\lambda q$ where $m=\mu-\lambda z$ and $\lambda = \rho \sigma^{2}_{v}$
-\end{itemize}
-\item \textbf{Trading cost}. Trading cost of order of size $q$ is $\lambda q^{2}$
-\end{itemize}
+\section{Fragmentation in other models}
+
+\begin{frame}{Stoll model and risk sharing}
+	We now turn to the effect fragmentation on market makers' risk sharing
+	\begin{itemize}
+		\item Section 7.2.2: Analysis drawn on Stoll's model
+		\item Risky asset value $v \sim N(\mu, \sigma^{2}_{v})$
+		\item Risk averse dealer with mean-variance preference
+		\begin{itemize}
+			\item Initial asset position $z$; risk aversion $\rho$
+			\item Asset supply is
+			\[
+			y = z + \frac{p-\mu}{\rho \sigma^{2}_{v}}
+			\]
+			\item Invert to get pricing schedule $p=m+\lambda q$ where $m=\mu-\lambda z$ and $\lambda = \rho \sigma^{2}_{v}$
+		\end{itemize}
+		\item \textbf{Trading cost}. Trading cost of order of size $q$ is $\lambda q^{2}$
+	\end{itemize}
 \end{frame}
 
 
-\begin{frame}{}
-\begin{itemize}
-\item Suppose there are two dealers: risk aversions $\rho_{1}$ and $\rho_{2}$
-\begin{itemize}
-\item If consolidated trading, dealers' aggregate supply curve is
-\[
-y_{1}+y_{2} = z_{1}+z_{2}+\frac{p-\mu}{\rho_{1}\sigma^{2}_{v}}+\frac{p-\mu}{\rho_{2} \sigma^{2}_{v}} =  z_{1}+z_{2}+\left(\frac{1}{\rho_1}+\frac{1}{\rho_2}\right)\frac{p-\mu}{\sigma^{2}_{v}}
-\]
-\item This is as if trading with one dealer with risk aversion $\bar{\rho}$:
-\[
-\frac{1}{\bar{\rho}}= \frac{1}{\rho_{1}} + \frac{1}{\rho_{2}}
-\]
-\end{itemize}
-\end{itemize}
-\begin{block}{}
-\begin{itemize}
-\item Risk averse dealers share risks in the consolidated market: $\bar{\rho}<\rho_{i}$
-\item Trading cost $\bar{\rho}\sigma^{2}_{v}q^{2}$ is lower than either of $\rho_{i}\sigma^{2}_{v}q^{2}$
-\end{itemize}
-\end{block}
-\end{frame}
-
-%TODO
-% all of the above assumes noone can choose which market to participate in.
-% If a trader can split order across mkts in Kyle model, the AGGREGATE depth of the fragmented mkt is larger than that of a consolidated mkt
-% If same in Stoll model, fragmentation has no effect (trader will equalize marginal prices = share risks among traders)
-% If noise traders can flow between mkts in Kyle model, they will flow towards the deeper one (liqty begets liqty)
-
-
-\begin{frame}{C. Less competition}
-Finally, let's think about the effect of fragmentation on competition
-\begin{itemize}
-\item Section 7.2.3
-\item Previously: imperfect competition tends to give lower depth in batch markets, as dealers strategically withhold supply of inframarginal units
-\item Fragmentation tends to reduce order flow competition, and may therefore induce lower depth in markets
-\item Just think of the `Cournot' model of competition presented in the book: fewer dealers imply lower market depth \textcolor{blue}{within a platform}
-\end{itemize}
+\begin{frame}{Stoll model and risk sharing (2)}
+	\begin{itemize}
+		\item Suppose there are two dealers: risk aversions $\rho_{1}$ and $\rho_{2}$
+		\begin{itemize}
+			\item If consolidated trading, dealers' aggregate supply curve is
+			\[
+			y_{1}+y_{2} = z_{1}+z_{2}+\frac{p-\mu}{\rho_{1}\sigma^{2}_{v}}+\frac{p-\mu}{\rho_{2} \sigma^{2}_{v}} =  z_{1}+z_{2}+\left(\frac{1}{\rho_1}+\frac{1}{\rho_2}\right)\frac{p-\mu}{\sigma^{2}_{v}}
+			\]
+			\item This is as if trading with one dealer with risk aversion $\bar{\rho}$:
+			\[
+			\frac{1}{\bar{\rho}}= \frac{1}{\rho_{1}} + \frac{1}{\rho_{2}}
+			\]
+		\end{itemize}
+	\end{itemize}
+	\begin{block}{}
+		\begin{itemize}
+			\item Risk averse dealers share risks in the consolidated market: $\bar{\rho}<\rho_{i}$
+			\item Trading cost $\bar{\rho}\sigma^{2}_{v}q^{2}$ is lower than either of $\rho_{i}\sigma^{2}_{v}q^{2}$
+		\end{itemize}
+	\end{block}
 \end{frame}
 
 
-
-\section{Fragmentation benefits}
-
-\begin{frame}{Fragmentation benefits}
-\begin{itemize}
-\item Competition among trading platforms may reduce fees (section 7.4.1)
-\item Also encourages technological innovation --  may benefit traders
-\item Section 7.4.2: Competing limit order books may provide better aggregate liquidity
-\begin{itemize}
-\item To show this, use LOB model of section 6.2 with display cost $C>0$, tick size $\Delta >0$, no adverse selection (asset value is $\mu$)
-\item Recall: incoming order $q$, limit sell orders posted at cumulative quantity $Y$ and price $A$ satisfy the zero-profit condition
-\[
-0 = \mathbb{P}(q \geq Y)[A-\mu]-C,
-\]
-solved by 
-\begin{equation} \tag{6.7}
-A= \mu + \frac{C}{\mathbb{P}(q \geq Y)}.
-\end{equation}
-\end{itemize}
-\end{itemize}
+\begin{frame}{Stoll model and risk sharing (3)}
+	\begin{itemize}
+		\item The above assumes again that both dealers and traders are constrained to one market.
+		\item Otherwise perfect insurance is possible across dealers and fragmentation has no effect.
+	\end{itemize}
 \end{frame}
 
 
-\begin{frame}{Fragmentation benefits (2)}
-Now we make the following assumptions:
-\begin{itemize}
-\item \textbf{Fragmentation}. Limit orders are supplied in two markets, $I$ and $E$
-\begin{itemize}
-\item At ask price $A$, denote cumulative limit sell orders by $Y^I$ and $Y^E$
-\end{itemize}
-\item \textbf{Market orders}. 
-\begin{itemize}
-\item Market order is $Buy$ with chance 1/2, and of size $q \sim F(q)$
-\item With probability $1-\gamma$, the entire order goes to $I$
-\item With probability $\gamma$, the incoming order is split:
-\begin{itemize}
-\item With prob. 1/2, order first goes to $I$, whatever remains goes to $E$
-\item With prob. 1/2, order first goes to $E$, whatever remains goes to $I$
-\end{itemize}
-\end{itemize}
-\item  \textbf{Trade probability}. We need to model $\mathbb{P}(q_i \geq Y^i)$ for each market
-\end{itemize}
+\begin{frame}{Glosten model}
+	Competing limit order books may provide better aggregate depth
+	\begin{itemize}
+		\item To show this, use LOB model of section 6.2 with display cost $C>0$, tick size $\Delta >0$, no adverse selection (asset value is $\mu$)
+		\item Recall: incoming order $q$, limit sell orders posted at cumulative quantity $Y$ and price $A$ satisfy the zero-profit condition
+		\[
+		0 = \mathbb{P}(q \geq Y)[A-\mu]-C,
+		\]
+		solved by 
+		\begin{equation} \tag{6.7}
+		A= \mu + \frac{C}{\mathbb{P}(q \geq Y)}.
+		\end{equation}
+	\end{itemize}
 \end{frame}
 
 
-\begin{frame}{Fragmentation benefits: trading probabilities}
-\begin{itemize}
-\item This results in the following execution probabilities
-\begin{align}
-\mathbb{P}(q_I \geq Y^I) & = \frac{1}{2} \left[\underbrace{\left(1-\gamma+\frac{\gamma}{2} \right) (1-F(Y^I))}_{\textcolor{blue}{\text{$I$ is executed first}}} + \underbrace{\frac{\gamma}{2}(1-F(\bar{Y}))}_{\textcolor{blue}{\text{$I$ is executed second}}}\right] \tag{7.11} \\
-\mathbb{P}(q_E \geq Y^E) & = \frac{1}{2} \left[\underbrace{\frac{\gamma}{2} (1-F(Y^E))}_{\textcolor{blue}{\text{$E$ is executed first}}} + \underbrace{\frac{\gamma}{2}(1-F(\bar{Y}))}_{\textcolor{blue}{\text{$E$ is executed second}}}\right] \tag{7.12}
-\end{align}
-where $\bar{Y}=Y^I+Y^E$
-\end{itemize}
+\begin{frame}{Glosten model (2)}
+	Now we make the following assumptions:
+	\begin{itemize}
+		\item \textbf{Fragmentation}. Limit orders are supplied in two markets, $I$ and $E$
+		\begin{itemize}
+			\item At single available ask price $A$, denote cumulative limit sell orders by $Y^I$ and $Y^E$
+		\end{itemize}
+		\item \textbf{Market orders}. 
+		\begin{itemize}
+			\item Market order is $Buy$ with chance 1/2, and of size $q \sim F(q)$
+			\item With probability $1-\gamma$, the entire order goes to $I$
+			\item With probability $\gamma$, the incoming order is split:
+			\begin{itemize}
+				\item With prob. 1/2, order first goes to $I$, whatever remains goes to $E$
+				\item With prob. 1/2, order first goes to $E$, whatever remains goes to $I$
+			\end{itemize}
+		\end{itemize}
+		\item  \textbf{Trade probability}. We need to model $\mathbb{P}(q_i \geq Y^i)$ for each market
+	\end{itemize}
 \end{frame}
 
 
-\begin{frame}{Fragmentation benefits: equilibrium}
-\begin{itemize}
-\item If both markets active ($Y^I>0$ and $Y^E>0$) then (6.7) holds for both
-\begin{itemize}
-\item Then the probabilities in (7.11) and (7.12) must be identical, implying
-\[
-\left(1-\gamma + \frac{\gamma}{2}\right)(1-F(Y^I)) = \frac{\gamma}{2}(1-F(Y^E))
-\]
-\item When $\gamma >0$, this implies $F(Y^I) > F(Y^E)$, so $Y^I > Y^E$
-\item More orders and greater execution probability in market $I$
-\item Why? 
-\pause
-\textcolor{blue}{Market $I$ has an `routing advantage', meaning it is more attractive $\rightarrow$ more orders}
-\end{itemize}
-\end{itemize}
+\begin{frame}{Glosten model: trading probabilities}
+	\begin{itemize}
+		\item This results in the following execution probabilities
+		\begin{align}
+		\mathbb{P}(q_I \geq Y^I) & = \frac{1}{2} \left[\underbrace{\left(1-\gamma+\frac{\gamma}{2} \right) (1-F(Y^I))}_{\structure{\text{$I$ is executed first}}} + \underbrace{\frac{\gamma}{2}(1-F(\bar{Y}))}_{\structure{\text{$I$ is executed second}}}\right] \tag{7.11} \\
+		\mathbb{P}(q_E \geq Y^E) & = \frac{1}{2} \left[\underbrace{\frac{\gamma}{2} (1-F(Y^E))}_{\structure{\text{$E$ is executed first}}} + \underbrace{\frac{\gamma}{2}(1-F(\bar{Y}))}_{\structure{\text{$E$ is executed second}}}\right] \tag{7.12}
+		\end{align}
+		where $\bar{Y}=Y^I+Y^E$
+	\end{itemize}
 \end{frame}
 
 
-\begin{frame}{Fragmentation benefits: comparing volumes}
-We can relate $Y^I, Y^E$ and $Y$ as follows. (Recall $\bar{Y}=Y^I+Y^E$).
-\begin{itemize}
-\item  Equation (6.7) also holds with single platform. This implies $\mathbb{P}(q_I \geq Y^I) = \mathbb{P}(q \geq Y)$ 
-\item By (7.11): $2\times \mathbb{P}(q_I \geq Y^I) =$ weighted avg. of $1-F(Y^I)$ and $1-F(\bar{Y})$
-\item But with a single platform: $2 \times \mathbb{P}(q \geq Y)=1-F(Y)$
-\item Hence:
-\[
-Y^I<Y<Y^I+Y^E = \bar{Y}.
-\]
-\begin{block}{}
-\begin{center}
-Fragmentation leads to greater aggregate volume $\bar{Y}$
-\end{center}
-\end{block}
-\item Fragmented market is deeper than consolidated market
-\end{itemize}
+\begin{frame}{Glosten model: equilibrium}
+	\begin{itemize}
+		\item If both markets active ($Y^I>0$ and $Y^E>0$) then (6.7) holds for both
+		\item Then the probabilities in (7.11) and (7.12) must be identical, implying
+		\[
+		\left(1-\gamma + \frac{\gamma}{2}\right)(1-F(Y^I)) = \frac{\gamma}{2}(1-F(Y^E))
+		\]
+		\item When $\gamma >0$, this implies $F(Y^I) > F(Y^E)$, so $Y^I > Y^E$
+		\item More orders and greater execution probability in market $I$
+		\item Why? 
+		\pause
+		\structure{Market $I$ has a `routing advantage', meaning it is more attractive $\rightarrow$ more orders}
+	\end{itemize}
 \end{frame}
 
 
-\begin{frame}{Fragmentation benefits: conclusion}
-\begin{itemize}
-\item Previous slide: fragmentation has positive effect on market depth
-\item Why? \textcolor{blue}{Fragmentation allows for more competition.} Fragmentation essentially allows limit orders to \textit{partially} sidestep time priority:
-\begin{itemize}
-\item When market is consolidated, first limit orders always get executed first
-\item But in fragmented market, you can post limit order on another market at same price, and (maybe) get executed first
-\end{itemize}
-\item As argued when analyzing the pro-rata rule, removing time priority may lead to more orders, but these orders may appear more slowly
-\item Result relies on $\Delta>0$ -- otherwise at $E$ you can undercut price at $I$ 
-\item Section 7.4.3: there is a critical value of $\gamma$, below which $Y^E=0$
-\begin{itemize}
-\item Once again, a barrier to entry
-\end{itemize}
-\end{itemize}
+\begin{frame}{Glosten model: comparing volumes}
+	We can relate $Y^I, Y^E$ and $Y$ as follows. (Recall $\bar{Y}=Y^I+Y^E$).
+	\begin{itemize}
+		\item  Equation (6.7) also holds with single platform. This implies $\mathbb{P}(q_I \geq Y^I) = \mathbb{P}(q \geq Y)$ 
+		\item By (7.11): $2\times \mathbb{P}(q_I \geq Y^I) =$ weighted avg. of $1-F(Y^I)$ and $1-F(\bar{Y})$
+		\item But with a single platform: $2 \times \mathbb{P}(q \geq Y)=1-F(Y)$
+		\item Hence:
+		\[
+		Y^I<Y<Y^I+Y^E = \bar{Y}.
+		\]
+		\begin{block}{}
+			\begin{center}
+				Fragmentation leads to greater aggregate volume $\bar{Y}$
+			\end{center}
+		\end{block}
+		\item Fragmented market is deeper than consolidated market
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Glosten model: conclusion}
+	\begin{itemize}
+		\item Previous slide: fragmentation has positive effect on market depth
+		\item Why? \structure{Fragmentation allows for more competition.} Fragmentation essentially allows limit orders to \textit{partially} sidestep time priority:
+		\begin{itemize}
+			\item When market is consolidated, first limit orders always get executed first
+			\item But in fragmented market, you can post limit order on another market at same price, and (maybe) get executed first
+		\end{itemize}
+		\item As argued when analyzing the pro-rata rule, removing time priority may lead to more orders, but these orders may appear more slowly
+		\item Result relies on $\Delta>0$ -- otherwise at $E$ you can undercut price at $I$ 
+		\item Section 7.4.3: there is a critical value of $\gamma$, below which $Y^E=0$
+		\begin{itemize}
+			\item Once again, a barrier to entry
+		\end{itemize}
+	\end{itemize}
 \end{frame}
 
 
 
-\section{Regulation}
-
-\begin{frame}{Regulation: Introduction}
-\begin{itemize}
-\item Section 7.5 discusses two main regulatory regimes which seek to strike a balance among the costs and benefits of fragmentation
-\item The two regimes are:
-\begin{itemize}
-\item \textbf{NMS}: `National Market System' for US equities
-\item \textbf{MiFID}: `Market in Financial Instruments Directive' for EU equities
-\end{itemize}
-\item We focus here on NMS
-\end{itemize}
-\end{frame}
-
-
-\begin{frame} \label{regulation}
-\frametitle{Regulation: NMS}
- National Market System (NMS) for U.S. equities
-\begin{itemize}
-\item Overseen by the Securities and Exchage Comission (SEC) according to the regulation \textit{RegNMS}
-\item Main elements:
-\begin{itemize}
-\item \textbf{Order protection}: Intermarket price priority to prevent trade-throughs (see next slides for definition)
-\item \textbf{Access rule}: Access to data such as price quotations
-\item \textbf{Sub-Penny Rule}: Minimum price increments of \$0.01 ($>\$1$) and \$0.0001($<\$1$)
-\end{itemize}
-\item Protects the best orders in each \textit{market center} from `trade-throughs' -- but definitions are subtle: Large orders need not get the best price
-\end{itemize}
-\end{frame}
-
-
-\begin{frame}[label=protection]
-\frametitle{NMS: Computing NBBO}
-\begin{itemize}	
-\item First, let's try to compute the National Best Bid and Offer (NBBO)
-\includegraphics[trim= 0 150 0 170, width=0.7\paperwidth]{pics/NBBO3}
-\item The  left-hand side records a series of quotes. On the right-hand side, we have updated the current quote 
-\pause
-\item At 9.35: best national bid is 70.00 and best national offer (ask) is 70.10
-\end{itemize}
-\end{frame}
-
-
-\begin{frame}
-\frametitle{NMS: Trade-through}
-\begin{itemize}	
-\item Recall NBBO:
-\includegraphics[trim= 0 150 0 170, width=0.7\paperwidth]{pics/NBBO3}
-\item If at 9.35 somebody executed a market sell order at exchange C at 69.90, this would constitute a \textit{trade through}
-\pause
-\item They could have gotten a better price at exchanges A or B
-\end{itemize}
-\end{frame}
-
-
-\begin{frame}
-\frametitle{NMS: Order protection}
-\begin{itemize}	
-\item RegNMS prevents trade-throughs of protected orders
-\item \textcolor{blue}{Protected orders} must satisfy these criteria:
-\begin{itemize}
-\item Visible 
-\item Best bid/offer of \textit{market center} (not necessarily NBBO)
-\item Accessible (available for automatic execution)
-\end{itemize}
-\item Consider the following \textbf{bid books} 
-\includegraphics[width=0.65\paperwidth]{pics/TwoMarket}
-\item National best bid: 50.39 (bid of 50.40 not visible)
-\item Both Alan, Beth and Ben's offers are protected
-\end{itemize}
-\end{frame}
-
-
-\begin{frame}
-\frametitle{NMS: Order protection (2)}
-\begin{itemize}	
-\item Consider the following \textbf{bid books} 
-\includegraphics[width=0.7\paperwidth]{pics/TwoMarket}
-\item Thus, market B cannot execute a market sell order of 100 shares against Beth's order - it would trade through Alan's protected order
-\item In this case, market B might eigher (i) cancel the market order, (ii) enter it as a limit order, or (iii) redirect it to market A
-\end{itemize}
-\end{frame}
-
-
-\begin{frame}
-\frametitle{NMS: Sweep orders}
-\begin{itemize}
-\item Consider another example (protected orders in \textbf{bold})
-\quad
-\includegraphics[width=0.7\paperwidth]{pics/TwoMarket2}
-\item RegNMS would allow the following order (a so-called \textit{sweep} order)
-\begin{itemize}
-\item Sell 400 shares to exchange A
-\item Sell 100 shares to exchange B
-\end{itemize}
-\item This order respects all protected bids. But...
-\end{itemize}
-\end{frame}
-
-
-\begin{frame}{Regulation: MiFID}
-Market in Financial Instruments Directive (MiFID) for EU securities
-\begin{itemize}
-\item Broke national monopolies on trading
-\item Main elements:
-\begin{itemize}
-\item \textbf{Best execution}: similar to order protection, but considers not only price, but also size, costs, speed/chance of execution
-\item \textbf{Pre-trade transparency}: make price information (e.g. quotes) available
-\item \textbf{Post-trade transparency}: publish price, volume and time of trades
-\end{itemize}
-\item Focus on `maximum harmonization'
-\item $[$Read Fidessa on fragmentation in Europe$]$
-\end{itemize}
-\end{frame}
+%\section{Regulation}
+%
+%\begin{frame}{Regulation: Introduction}
+%\begin{itemize}
+%\item Section 7.5 discusses two main regulatory regimes which seek to strike a balance among the costs and benefits of fragmentation
+%\item The two regimes are:
+%\begin{itemize}
+%\item \textbf{NMS}: `National Market System' for US equities
+%\item \textbf{MiFID}: `Market in Financial Instruments Directive' for EU equities
+%\end{itemize}
+%\item We focus here on NMS
+%\end{itemize}
+%\end{frame}
+%
+%
+%\begin{frame} \label{regulation}
+%\frametitle{Regulation: NMS}
+% National Market System (NMS) for U.S. equities
+%\begin{itemize}
+%\item Overseen by the Securities and Exchage Comission (SEC) according to the regulation \textit{RegNMS}
+%\item Main elements:
+%\begin{itemize}
+%\item \textbf{Order protection}: Intermarket price priority to prevent trade-throughs (see next slides for definition)
+%\item \textbf{Access rule}: Access to data such as price quotations
+%\item \textbf{Sub-Penny Rule}: Minimum price increments of \$0.01 ($>\$1$) and \$0.0001($<\$1$)
+%\end{itemize}
+%\item Protects the best orders in each \textit{market center} from `trade-throughs' -- but definitions are subtle: Large orders need not get the best price
+%\end{itemize}
+%\end{frame}
+%
+%%\item \structure{Protected orders} must satisfy these criteria:
+%%\begin{itemize}
+%%	\item Visible 
+%%	\item Best bid/offer of \textit{market center} (not necessarily NBBO)
+%%	\item Accessible (available for automatic execution)
+%%\end{itemize}
+%
+%
+%
+%
+%
+%\begin{frame}
+%\frametitle{NMS: Sweep orders}
+%\begin{itemize}
+%\item Consider another example (protected orders in \textbf{bold})
+%\quad
+%\includegraphics[width=0.7\paperwidth]{pics/TwoMarket2}
+%\item RegNMS would allow the following order (a so-called \textit{sweep} order)
+%\begin{itemize}
+%\item Sell 400 shares to exchange A
+%\item Sell 100 shares to exchange B
+%\end{itemize}
+%\item This order respects all protected bids. But...
+%\end{itemize}
+%\end{frame}
+%
+%
+%\begin{frame}{Regulation: MiFID}
+%	Market in Financial Instruments Directive (MiFID) for EU securities
+%	\begin{itemize}
+%		\item Broke national monopolies on trading
+%		\item Main elements:
+%		\begin{itemize}
+%			\item \textbf{Best execution}: similar to order protection, but considers not only price, but also size, costs, speed/chance of execution
+%			\item \textbf{Pre-trade transparency}: make price information (e.g. quotes) available
+%			\item \textbf{Post-trade transparency}: publish price, volume and time of trades
+%		\end{itemize}
+%		\item Focus on `maximum harmonization'
+%		\item $[$Read Fidessa on fragmentation in Europe$]$
+%	\end{itemize}
+%\end{frame}
 
 
 \begin{frame}{Conclusion}
-\begin{itemize}
-\item Fragmentation is ubiquitous 
-\item Costs may include more adverse selection, less risk sharing and less competition
-\item But there may also be benefits: depends on setting and trading format
-\item Regulation targets price priority in particular, by trying to prevent trade throughs
-\item But this is most effective for small order sizes
-\end{itemize}
+	\begin{itemize}
+		\item Fragmentation is ubiquitous 
+		\item Costs may include more adverse selection, less risk sharing and less competition among traders
+		\item But there may also be benefits, depends on setting and trading format
+		\item Regulation targets price priority in particular, by trying to prevent trade throughs 
+		\item But this is only really effective for small order sizes
+	\end{itemize}
 \end{frame}
 
 
-\begin{frame}{Exercise for next week}
-\begin{itemize}
-\item In Absalon I have uploaded an article from the Economist December 7, 2013, on the Paris Bourse. Consider the passage ``Politicians in France routinely hit the roof when symbols of national virility risk falling into foreign hands, and Euronext is no exception.'' What could be the valid concerns of the politicians? Can it connect to chapter 7 in our textbook?
-\item Solve exercise 3 on page 276 on brokers receiving payments for order flow
-\end{itemize}
+\begin{frame}{Exercises}
+	\begin{itemize}
+		\item Read two articles on absalon related to today's topics (Economist on algortihms and Reuters on dark markets)
+		\item Solve exercise 3 on page 276 (ch.7) on brokers receiving payments for order flow
+	\end{itemize}
 \end{frame}
 
 
