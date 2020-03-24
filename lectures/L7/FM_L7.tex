@@ -1,0 +1,411 @@
+%%% License: Creative Commons Attribution Share Alike 4.0 (see https://creativecommons.org/licenses/by-sa/4.0/)
+%%% Slides are based heavily on earlier versions of this course taught by Jesper Rudiger.
+
+\documentclass[english,10pt
+%,handout
+,aspectratio=169
+]{beamer}
+\input{../FM_preamble.tex}
+
+
+
+\title{Financial Markets Microstructure \\ Lecture 7}
+
+\subtitle{Limit order book\\
+	Chapter 6.3-6.5 of FPR}
+
+\author{Egor Starkov}
+
+\date{K{\o}benhavns Unversitet \\
+	Spring 2020}
+
+
+
+
+\begin{document}
+\AtBeginSection[]{
+\frame<beamer>{
+\frametitle{This lecture:}
+\tableofcontents[currentsection,currentsubsection]
+}}
+\frame[plain]{\titlepage}
+
+%\section{Revision and readings}
+
+\begin{frame}{Last time}
+	\begin{itemize}
+		\item First look into LOB markets using \cite{glosten_is_1994}.
+		\item Limit traders act in the same capacity as the dealer did before
+		\begin{itemize}
+			\item but face different incentives
+			\item so act differently
+			\item which leads to different market outcomes
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Today}
+	\begin{itemize}
+		\item Market design:
+		\begin{itemize}
+			\item We have discussed how dealer markets differ from LOB markets for different market participants
+			\item What if we put a dealer in a LOB market?
+			\item What about other dimensions of market design? Tick size, priority rules? How does this affect market outcomes?
+		\end{itemize}
+		\item Dynamic analysis of LOB markets:
+		\begin{itemize}
+			\item How do traders choose between limit and market orders?
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+
+
+
+
+
+\section{Market design}
+
+\begin{frame}{Market design}
+	\begin{itemize}
+		\item There are many dimensions in which legislation or exhange rules can regulate trade
+		\item Today's phrase of the day: ``\structure{unintended consequences}''
+		\begin{itemize}
+			\item Attempts to mitigate a particular inefficiency may have far-fetching consequences
+			\item We will look at a few examples
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Tick size}
+	\begin{itemize}
+		\item Assume \structure{time priority} is the second order after price priority
+		\begin{itemize}
+			\item I.e., first limit order posted at tick executes first
+		\end{itemize}
+		\item Profit of the limit trader at price $A_k$ is:
+		\begin{itemize}
+			\item Zero for the marginal (last) limit order at $A_k$
+			\item Strictly positive for inframarginal orders (if $C>0$) because order executes with higher probability
+		\end{itemize}
+		\item This profit is reduced with \alert{smaller tick sizes}
+		\begin{itemize}
+			\item Hence decreasing tick size drives away limit traders and reduces depth
+			\item But it will also reduce spread (by design) and reduce trading costs for the opposite side of the market (liquidity demanders)
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Tick size}
+	\begin{itemize}
+		\item Driving away limit traders intuitively also has dynamic repercussions
+		\begin{itemize}
+			\item LOB is replenished more slowly after trades -- so market orders traded more frequently against non-competitive prices
+		\end{itemize}
+		\item \cite{goldstein_eighths_2000} explored the NYSE 1997 case (tick size from $\$1/8$ to $\$1/16$)
+		\begin{itemize}
+			\item Trading costs decreased for small orders
+			\item Unclear for large orders
+			\item Aligns with our predictions (smaller spread, smaller depth)
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Tick size and time priority}
+	\begin{exampleblock}{}
+		Suppose that there is no tick; quotes can  be placed in a continuous price space. Suppose that there is price priority. What is then the role of time priority, so that first-come quotes at identical prices are served first?
+	\end{exampleblock}
+	
+	\centering
+	\emph{``...The size of the trading increment is a
+	powerful level that is underappreciated by
+	regulators. The \alert{finer the trading increment},
+	\structure{the more important price priority becomes
+	relative to time priority}. In other words, if the
+	market was designed to trade at continuous
+	(vs discrete) non‐penny increments you could
+	always win a trade by quoting the best price
+	and the \structure{speed game would be non existent}''}
+	
+	\begin{flushright}
+		--Narang, Manoj ``HFT 101 with Tradeworx'',
+		May 20, 2014
+	\end{flushright}
+\end{frame}
+
+
+\begin{frame}{Tick size and time priority}
+	\begin{itemize}
+		\item The role of the tick is essentially \textit{to balance price priority and time priority}
+		\item Larger tick gives more time priority, smaller tick gives more price priority
+		\item When there is no tick, there is essentially no time priority...
+		\item However, there is some evidence that ticks may arise \textit{endogenously}. In that case, time priority takes importance again
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Priority rules}
+	\begin{itemize}
+		\item With \structure{pro-rata} allocation (limit orders at given tick executed proportionally to their size), as opposed to \alert{time priority}:
+		\begin{itemize}
+			\item The expected profit of all orders at price $A_k$ must be zero (as opposed to strictly positive)
+			\item So execution probabilities must be lower for all orders
+			\item Meaning more orders are posted under pro-rata.
+			% not sure about this last part
+		\end{itemize}
+		\item Lower profits lead to same dynamic consequences as with reducing tick size
+		\item Pro-rata allocation rule used in the electronic futures markets for the leading short-term interest rate and for the two-year U.S. Treasuries.
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Hybrid market}
+	Hybrid market
+	\begin{itemize}
+		\item Suppose a dealer can compete with the limit order book, as follows
+		\item The dealer may observe the size $q$ before serving the order (last-mover advantage)
+		\item Can profit by pricing at $\mathbb{E}[v|q=x]$ rather than an average of $\mathbb{E}[v|q \geq y]$ for $y \leq x$ which is used by the LOB
+		\item Especially profitable on small trades
+		\item But the existence of such a dealer invalidates our analysis of the LOB
+		\item Profitable limit orders are being picked off
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Example with hybrid market}
+	\begin{itemize}
+		\item Example 1 previous lecture continued. Assume an uninformed dealer receives order $q$. Can either send order to LOB or execute himself (at better price) 
+		\item Focus on ask side. Let $A^H_k$ be the hybrid ask price. When dealer observes $q=q_S$, he knows trader is noise trader and thus $\mathbb{E}[v|\structure{N}]=\mu$. 
+		\begin{itemize}
+			\item Can execute order at just below $A^H_1$ and earn profit $A^H_1-\mu$.
+		\end{itemize}
+		\item Hence, only large orders $q=q_L$ are sent to LOB. LOB traders will expect this, and will price as if any order arriving to the LOB is large:
+		\begin{align*}
+		\mathbb{E}[v|q \ge q_S]=\mathbb{E}[v|q \ge q_L]=\mu+\frac{2\pi}{1+\pi} \sigma,
+		\end{align*}
+		and thus $A^H_1=A^H_2=\mu+\frac{2\pi}{1+\pi} \sigma$.
+		\item $A^H_1>A_1$ and $A^H_2=A_2$: hybrid market less liquid than normal market
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Hybrid market}
+	\begin{itemize}
+		\item To be fair:
+		\item Addind a dealer to LOB market decreases liquidity...
+		\begin{itemize}
+			\item ...in ``good times'', when there would've been a thick LOB
+		\end{itemize}
+		\item But this can help in bad times
+		\begin{itemize}
+			\item if LOB is empty then adding a dealer has no adverse effects and will actually increase liquidity
+		\end{itemize}
+		\item So in the end, adding a dealer is like a \structure{liquidity insurance} for the market
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Market Design: conclusion}
+	\begin{itemize}
+		\item Regulation aimed at improving market liquidity can backfire by distorting agents' incentives
+		\item Shameless plug:
+		\begin{itemize}
+			\item If you want to know more about market design, I teach a course on \structure{Mechanism Design} in Fall
+			\item Explore how to design environments in which agents operate (i.e., distort their incentives) in order to generate desired behavior
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+
+\section{Dynamic analysis: take or make liquidity}
+
+\begin{frame}{Dynamic analysis}
+	\begin{itemize}
+		\item \cite{glosten_is_1994} models the static price schedule under adverse selection (with quote display costs)
+		\item Traders must choose: place limit/market orders = make/take liquidity
+		\begin{itemize}
+			\item Limit order can yield price improvement compared to market order
+			\item ...but at the cost of (best case) delay or (worst case) non-execution
+			\item Plus there's always adverse selection (winner's curse)
+		\end{itemize}
+		\item Models of such choice:
+		\begin{itemize}
+			\item \cite{parlour_price_1998}: time priority of limit orders means it's more attractive to add limit orders when there's currently few of them
+			\item \cite{foucault_order_1999}: limit order placed by traders whose private valuation makes current prices unattractive
+			\item \citet*{foucault_limit_2005}: patient traders place limit orders inside the spread
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Take or make}
+	\begin{itemize}
+		\item Proper dynamic analysis is quite difficult
+		\item E.g., my choice between market/limit order today depends on:
+		\begin{itemize}
+			\item Execution probability of a limit order
+			\begin{itemize}
+				\item ...which depends on the current state of LOB
+				\item But also depends on next trader's choice between market/limit order
+				\item ...which depends on execution probability etc
+			\end{itemize}
+			\item Adverse selection I face by submitting limit order
+			\begin{itemize}
+				\item ...which depends on \emph{who} will trade against my limit order
+				\item ...which depends on next trader's choice between market/limit order depending on their pvt info ...
+			\end{itemize}
+		\end{itemize}
+		\item So we will look at a very simple model, loosely based on \cite{parlour_price_1998}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Model based on Parlour (1998)}
+	\begin{itemize}
+		\item \textbf{Exogenous prices}. Bid and ask prices exogenously given as $A>v>B$
+		\item \textbf{Traders}. Arriving trader chooses btw limit or market order (one unit)
+		\begin{itemize}
+			\item Limit order valid one period. Choice depends on prob. of limit order being executed, i.e. `hit' by a market order from the next trader
+			\item Valuation: $v+y$. $y$ is uniformly distributed on $(-Y,Y)$, unobserved and independent across traders. $v$ is known and common to all.
+		\end{itemize}
+		\item \textbf{Profits}. Let $P^B_M (P^S_M)$ be prop. of next-period market buy (sell) order 
+		\begin{align*}
+		\text{Market sell: } & B-(v+y) \\
+		\text{Limit sell: } & (A-v-y)P^B_M \\
+		\text{Limit buy: } &(v+y-B)P^S_M \\
+		\text{Market buy: } &v+y-A
+		\end{align*}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Analysis}
+	\begin{itemize}
+		\item Look for stationary eq. where  $A$, $B$, $P^B_M$, $P^S_M$ are constant 
+		\item From the trader profits, we see that there must exist $\overline{y}$,  $\underline{y}$ and $\hat{y}$ such that the best response (optimal order) of the trader is
+		\begin{equation*}
+		BR=\left\{ \begin{aligned}
+		&MSell		&& 	\text{ if } 	&&	-Y\le y \le \underline{y} \\
+		&LSell 		&&	\text{ if } 	&&	\underline{y} \le y \le \hat{y} \\
+		&LBuy		&&	\text{ if } 	&&	\hat{y} \le y \le \overline{y} \\
+		&MBuy	&&	\text{ if } 	&&	\overline{y} \le y \le Y
+		\end{aligned}
+		\right.
+		\end{equation*}
+		\item Traders with greater urgency to trade (extreme $y$) use market orders
+		\item Limit order more attractive when more likely to execute:  automatic tendency for the limit order book to be replenished (resiliency)
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Equilibrium}
+	\begin{itemize}
+		\item From trader's BR:
+		\begin{align*}
+		P^S_M 	&=\mathbb{P}(-Y\le y \le \underline{y})=\frac{\underline{y}+Y}{2Y} \\
+		P^B_M 	&=\mathbb{P}(\overline{y} \le y \le Y)=\frac{Y-\overline{y}}{2Y}
+		\end{align*}
+		\item At $\underline{y}$, indifferent btw $MSell$ and $LSell$. At $\hat{y}$, indifferent btw $LSell$ and $LBuy$. At $\overline{y}$, indifferent btw $LBuy$ and $MBuy$. Thus:
+		\begin{align}
+		B-(v+\underline{y}) 					& = (A-v-\underline{y})\frac{Y-\overline{y}}{2Y} \label{eq1}\\
+		(A-v-\hat{y}) \frac{Y-\overline{y}}{2Y} 			& = (v+\hat{y}-B)\frac{\underline{y}+Y}{2Y} \label{eq2}\\
+		(v+\overline{y}-B) \frac{\underline{y}+Y}{2Y}  	& = v+\overline{y}-A \label{eq3}
+		\end{align}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Equilibrium (2)}
+	\begin{itemize}
+		\item Solving \eqref{eq1}-\eqref{eq3} we obtain the thresholds. If we set $v=0$, $Y=2$, $A=1$ and $B=-1$ they become
+		\begin{align*}
+		\underline{y} 	& = \frac{1}{2}(3-\sqrt{33}) \simeq 1.4 \\
+		\hat{y} 	& = 0 \\
+		\overline{y} 		& = \frac{1}{2}(\sqrt{33}-3) \simeq -1.4 
+		\end{align*}
+		\item Thus, in equilibrium the probability of a market buy/sell order next period is $\frac{2-1.4}{2\cdot 2}=\frac{-1.4+2}{2 \cdot 2}=0.15$
+		\item Given  large spread ($A-B=2$), limit order traders are willing to accept a low execution probability ($15\%$) in order to obtain better price
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Dynamics with adverse selection}
+	\begin{itemize}
+		\item Our analysis above focuses on non-execution risk, ignoring adverse selection.
+		\item The two can be combined in one model -- see \cite{foucault_order_1999} (also ch. 6.5 of the textbook). Also: \hyperlink{adverse}{\beamerbutton{Want to know more?}}
+		\item There is no real interaction between the two though, so we will not get any new insights compared to Glosten and Parlour models.
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}[label=parlourmain]{Conclusion}
+	\begin{itemize}
+		\item Trade occurs when seller and buyer meet and agree on terms
+		\begin{itemize}
+			\item Exchange brings sellers and buyers together
+			\item Impatient traders search more actively (use market orders)
+			\item Patient traders are more passive, offer liquidity (use limit orders)
+		\end{itemize}
+		\item Ordinary traders can use limit orders to compete with market makers
+		\item Limit order book is dynamic: influence the choice of order
+		\item In reality, many features to think about when placing orders
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Exercise for next week}
+	\begin{itemize}
+		\item Solve exercise 5 on page 235 in the textbook on the effect of fees charged for limit orders and market orders
+	\end{itemize}
+\end{frame}
+
+
+
+
+
+\appendix
+\begin{frame}[allowframebreaks]{References}
+\bibliography{../teaching}
+\bibliographystyle{abbrvnat}
+\end{frame}
+
+
+\begin{frame}[label=adverse]{Dynamic model with adverse selection}
+	\begin{itemize}
+		\item Now, let us try to derive the time-$t$ prices $A_t$ and $B_t$ endogenously. 
+		\item Suppose $v_t=v_{t-1}+\epsilon_t$ where $\epsilon_t \in \{-\sigma, \sigma \}$ with equal probability. $v_t$ is observed in period $t$. The period-$t$ trader has valuation $v_t+y_t$. 
+		\item Again, we look for a stationary equilibrium. In particular:
+		\begin{itemize}
+			\item Suppose that $A_t-v_{t-1}=v_{t-1}-B_t=S$ is constant.
+			\item Suppose there exist $\underline{y}(\epsilon_t),\overline{y}(\epsilon_t),\hat{y}(\epsilon_t)$  that describe the trader's strategy in \textit{each} period  as a function of the value innovation $\epsilon_t$ 
+			\item Thus there exist time-invariant $P^S_M$ and $P^B_M$ that characterize the probability of a next-period market sell/buy order 
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Dynamic model with adverse selection (2)}
+	\begin{itemize}
+		\item We can write the equilibrium conditions as
+		\begin{align*}
+		B_t-(v_t+\underline{y}(\epsilon_t)) 					& = (A_{t+1}-\mathbb{E}_t[v_{t+1}|buy]-\underline{y}(\epsilon_t) 	)P^B_M \\
+		(A_{t+1}-\mathbb{E}_t[v_{t+1}|buy]-\hat{y}(\epsilon_t))P^B_M 			& = (\mathbb{E}_t[v_{t+1}|sell]+\hat{y}(\epsilon_t)-B_{t+1})P^S_M  \\
+		(\mathbb{E}_t[v_{t+1}|sell]+\overline{y}(\epsilon_t)-B_{t+1}) P^S_M  	& = v_t+\overline{y}(\epsilon_t)-A_t 
+		\end{align*}
+		\item Focus on the first and last equation. Use definition of $S$:
+		\begin{align*}
+		-S-\epsilon_t-\underline{y}(\epsilon_t) 					& = (S-\mathbb{E}_t[\epsilon_{t+1}|buy]-\underline{y}(\epsilon_t) 	)P^B_M \\
+		(S+\mathbb{E}[\epsilon_{t+1}|sell]+\overline{y}(\epsilon_t)) P^S_M  	& =-S+\epsilon_t+\overline{y}(\epsilon_t)
+		\end{align*}
+		\item Solve for $\underline{y}(\epsilon_t)$ and $\overline{y}(\epsilon_t)$. Determine $S$ from $A_t=\mathbb{E}_t[v_t|buy]$ and $B_t= \mathbb{E}_t[v_t|sell]$. Notice adv. sel. affects only limit orders. \hyperlink{parlourmain}{\beamerbutton{Back}}
+	\end{itemize}
+\end{frame}
+
+
+\end{document} 
