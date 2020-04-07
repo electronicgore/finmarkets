@@ -1,9 +1,10 @@
 %%% License: Creative Commons Attribution Share Alike 4.0 (see https://creativecommons.org/licenses/by-sa/4.0/)
 %%% Slides are based heavily on earlier versions of this course taught by Jesper Rudiger.
 
-%\documentclass[english,10pt]{beamer}
-\documentclass[english,10pt,aspectratio=169]{beamer}
-%\documentclass[english,10pt,handout]{beamer}
+\documentclass[english,10pt
+%,aspectratio=169
+,handout
+]{beamer}
 \input{../FM_preamble.tex}
 
 
@@ -258,7 +259,7 @@
 			f(v|q) = K_4 e^{-\frac{\structure{\frac{1}{\sigma^2_v}+\frac{\beta^2}{\sigma^2_u}}}{2} \left(v-\alert{\mu-\frac{\beta \sigma^2_v}{\beta^2 \sigma^2_v + \sigma^2_u}q }\right)^2},
 		\]
 		where $K_4=\frac{K_1 K_2}{K_3}e^{ \frac{q^2}{2(\beta^2 \sigma^2_v + \sigma^2_u)}-k}$ is again a normalizing constant.
-		This is  a normal distribution with $\mathbb{E}[v|q] = \mu + \frac{\mathbb{C}(v,q)}{\mathbb{V}(q)} q=\alert{\mu+\frac{\beta \sigma^2_v}{\beta^2 \sigma^2_v + \sigma^2_u}q}$ and $\mathbb{V}[v|q]=\structure{\frac{1}{\sigma^2_v}+\frac{\beta^2}{\sigma^2_u}}$, as claimed. 
+		This is  a normal distribution with $\mathbb{E}[v|q] = \mu + \frac{\mathbb{C}(v,q)}{\mathbb{V}(q)} q=\alert{\mu+\frac{\beta \sigma^2_v}{\beta^2 \sigma^2_v + \sigma^2_u}q}$ and $\mathbb{V}[v|q]=\structure{ \left( \frac{1}{\sigma^2_v}+\frac{\beta^2}{\sigma^2_u} \right)^{-1}}$, as claimed. 
 		%Hence,
 		%\[
 		%	\lambda = \frac{\beta \sigma^2_v}{\beta^2 \sigma^2_v + \sigma^2_u}.
