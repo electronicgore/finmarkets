@@ -1,7 +1,7 @@
 %%% License: Creative Commons Attribution Share Alike 4.0 (see https://creativecommons.org/licenses/by-sa/4.0/)
 
 \documentclass[11pt
-%, answers
+, answers
 ]{exam}
 \usepackage[top=2.5cm,bottom=3cm,left=2.5cm,right=2.5cm]{geometry}
 \usepackage{amsfonts}
@@ -189,7 +189,11 @@ Inspecting the expression, we can make the following observations about equilibr
 \item Characterize the equilibrium in terms of the ranges of values for $c$. 
 
 \begin{solution}
-  \textit{Case 1:} $c > \frac{v^H-v^L}{2}$. Trader never acquires information ($\sigma^*=0$) and dealer sets prices $a_0$ and $b_0$. \textit{Case 2:} $(1-\pi) \frac{v^H-v^L}{2} \le c \le \frac{v^H-v^L}{2}$. Trader acquires information with probability $\sigma^*=\frac{1-\pi}{\pi} \left(\frac{v^H-v^L}{2c} -1 \right)$ and dealer sets prices $a_{\sigma^*}$ and $b_{\sigma^*}$. \textit{Case 3:} $c<(1-\pi) \frac{v^H-v^L}{2}$. Trader always acquires information ($\sigma^*=1$) and dealer sets prices $a_1$ and $b_1$.
+  \textit{Case 1:} $c > \frac{v^H-v^L}{2}$. Trader never acquires information ($\sigma^*=0$) and dealer sets prices $a_0$ and $b_0$. 
+  
+  \textit{Case 2:} $(1-\pi) \frac{v^H-v^L}{2} \le c \le \frac{v^H-v^L}{2}$. Trader acquires information with probability $\sigma^*=\frac{1-\pi}{\pi} \left(\frac{v^H-v^L}{2c} -1 \right)$ and dealer sets prices $a_{\sigma^*}$ and $b_{\sigma^*}$. 
+  
+  \textit{Case 3:} $c<(1-\pi) \frac{v^H-v^L}{2}$. Trader always acquires information ($\sigma^*=1$) and dealer sets prices $a_1$ and $b_1$.
 \end{solution}
 
 \end{enumerate}
@@ -374,7 +378,7 @@ Be concise and to the point. Please try to keep your answer no longer than one p
 		
 		\item As we have seen in the models, less uninformed trading leads to less liquidity in the market: spread increases, market depth decreases. Trading volumes also decrease, both due to less uninformed trading, and due to informed traders acting less aggressively on their information (see Kyle's model).
 		
-		\item Retails traders are fully prohibited from trading binary options, while their trade in CFDs becomes restricted but still possible as a result of regulation. Therefore, the effects outlined in (2) will be smaller for the CFD market. 
+		\item Retails traders are fully prohibited from trading binary options, while their trade in CFDs becomes restricted but still possible as a result of regulation. Therefore, the effects outlined in part 2 of this question will be smaller for the CFD market. 
 		
 		More interestingly, the restrictions may affect risk-aversion of retail traders. For example, tighter margin close out rule increases effective risk aversion, since it increases the cost of holding large positions (as in Einar Aas' story in one of the previous readings). Negative balance protection cuts both ways: on the one hand, traders can be more aggressive if they know the system will automatically close their positions once the balance hits the threshold -- otherwise they would have to monitor their balance manually. On the other hand, the investors will no longer be able to trade with negative balances in the hopes to bounce back -- eliminating this option may make them more cautious. In the end, these risk aversion effects may increase or decrease retail traders' aggressiveness, thus mitigating or exacerbating the decrease of liquidity compared to pure adverse selection case.
 	\end{enumerate}
