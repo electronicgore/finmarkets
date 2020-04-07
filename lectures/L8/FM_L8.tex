@@ -165,17 +165,17 @@
 \section{Fragmentation in Kyle model}
 
 \begin{frame}{Kyle model: refresher}
-	To talk about liquidity and price impact, let us look at the effects of fragmentation within Kyle model.
+	To talk about liquidity and price impact, let us look at the effects of fragmentation within \alert{Kyle model}.
 	
 	Recall the baseline model from past lectures:
 	\begin{itemize}
 		\item Risky asset value $v \sim N(\mu,\sigma^{2}_{v})$
-		\item Insider observes $v$
+		\item \structure{Insider} observes $v$
 		\begin{itemize}
 			\item Places market order $x$; maximizes $\mathbb{E}[x(v-p)|x]$
 		\end{itemize}
-		\item Noise trader demand $u \sim N(0, \sigma^{2}_{u})$
-		\item Market maker observes aggregate order flow $q = x + u$
+		\item \structure{Noise trader} demand $u \sim N(0, \sigma^{2}_{u})$
+		\item \structure{Market maker} observes aggregate order flow $q = x + u$
 		\begin{itemize}
 			\item Competitively prices asset at $p = \mathbb{E}[v|q]$
 			(Recall the difference here to what we did in the LOB model)
@@ -236,11 +236,11 @@
 	\begin{itemize}
 		\item \textbf{Prices}.  Since on each market $i=1,2$ we must have $p_i=\mathbb{E}[v|q]$,
 			\begin{align*}
-				p_i &= \mu + \lambda_i q = \mu + \lambda (x_i + u_i)
+				p_i &= \mu + \lambda_i q_i = \mu + \lambda_i (x_i + u_i)
 				\\
 				&= \mu + \lambda_i (\beta_i(v-\mu) + u_i)
 				\\
-				&= \mu + \frac{\sigma_v}{2 \sigma_{ui}} \left( \frac{\sigma_{ui}}{\sigma_v} (v-\mu) + u \right)
+				&= \mu + \frac{\sigma_v}{2 \sigma_{ui}} \left( \frac{\sigma_{ui}}{\sigma_v} (v-\mu) + u_i \right)
 				\\
 				&= \mu + \frac{1}{2}(v-\mu)+\frac{\sigma_v}{2\sigma_{ui}}u_i
 			\end{align*}
@@ -304,7 +304,7 @@
 		\item What about \structure{aggregate}? Say you want to trade $X$ total.
 		\begin{itemize}
 			\item When splitting optimally across two markets $X=x_1+x_2$, will equalize marginal prices: $p_1 = \mu + \lambda_1 x_1 = \mu + \lambda_2 x_2 = p_2$.
-			\item So $x_i = \frac{\lambda_1}{\lambda_1+\lambda_2} X$ and trading moves prices in each market to $p_i = \mu + \frac{\lambda_1 \lambda_2}{\lambda_1 + \lambda_2} X$ compared to $p = \mu + \lambda X$ in consolidated market. Can verify that $\frac{\lambda_1 \lambda_2}{\lambda_1 + \lambda_2} < \lambda$
+			\item So $x_1 = \frac{\lambda_2}{\lambda_1+\lambda_2} X$ and $x_2 = \frac{\lambda_1}{\lambda_1+\lambda_2} X$ and trading moves prices in each market to $p_i = \mu + \frac{\lambda_1 \lambda_2}{\lambda_1 + \lambda_2} X$ compared to $p = \mu + \lambda X$ in consolidated market. Can verify that $\frac{\lambda_1 \lambda_2}{\lambda_1 + \lambda_2} < \lambda$
 			\item \structure{Fragmented market is deeper in aggregate}
 		\end{itemize}
 	\end{itemize}
@@ -313,7 +313,7 @@
 
 \begin{frame}{Fragmented Kyle model: price discovery}
 	\begin{itemize}
-		\item \textbf{Price discovery}. We used the fact that since everything is normal, we have
+		\item \textbf{Price discovery}. We used the fact that everything is normal and $\mathbb{E}[q]=0$ to obtain (see L5)
 		$$
 			\mathbb{E}[v|q] = \mu +\frac{\mathbb{C}(v,q)}{\mathbb{V}(q)} q
 		$$
@@ -330,6 +330,50 @@
 			\item although comparing ``two speculators in two mkts'' vs ``one speculator in one mkt''. Two competing insiders in one market would yield \alert{same price discovery}
 		\end{itemize}
 	\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+	More details for the previous slide:
+	\begin{align*}
+		\mathbb{E}[v|p] &= \mathbb{E}[v] + (\mathbb{C}(v,p_1), \mathbb{C}(v,p_2)) \cdot \mathbb{V}^{-1}(p) \cdot \left(\vec{p} - \mathbb{E}[\vec{p}] \right)^T;
+		\\
+		\mathbb{V}(v|p) &= \mathbb{V}(v) - \mathbb{C}(v,p) \cdot \mathbb{V}^{-1}(p) \cdot \mathbb{C}^T(v,p)
+		\\
+		p_i &= \mu + \lambda_i \beta_i (v-\mu) + \lambda_i u_i; \qquad \beta_i = \frac{1}{2\lambda_i} = \frac{\sigma_{ui}}{\sigma_v};
+		\\
+		\mathbb{C}(v,p_i) &= \lambda_i \beta_i \sigma_v^2 = \frac{\sigma_v^2}{2}
+		\\
+		\mathbb{V}(p) &= \left(
+			\begin{array}{c c}
+				\mathbb{V}(p_1)		& \mathbb{C}(p_1,p_2)
+				\\
+				\mathbb{C}(p_1,p_2)	& \mathbb{V}(p_2)	
+			\end{array}
+		\right) = \left(
+			\begin{array}{c c}
+				\lambda_1^2 (\beta_1^2\sigma_v^2 + \sigma_{u1}^2)	& \lambda_1 \lambda_2 \beta_1 \beta_2 \sigma_v^2
+				\\
+				\lambda_1 \lambda_2 \beta_1 \beta_2 \sigma_v^2	& \lambda_2^2 (\beta_2^2\sigma_v^2 + \sigma_{u2}^2)
+			\end{array}
+		\right)
+		\\
+		&= \frac{\sigma_v^2}{4} \left(
+			\begin{array}{c c}
+				2	& 1
+				\\
+				1	& 2
+			\end{array}
+		\right)
+		\\
+		\Rightarrow \mathbb{V}^{-1}(p) &= \frac{4}{3 \sigma_v^2} \left(
+			\begin{array}{c c}
+				2	& -1
+				\\
+				-1	& 2
+			\end{array}
+		\right)
+	\end{align*}
 \end{frame}
 
 
@@ -476,7 +520,7 @@
 		\[
 		\left(1-\gamma + \frac{\gamma}{2}\right)(1-F(Y^I)) = \frac{\gamma}{2}(1-F(Y^E))
 		\]
-		\item When $\gamma >0$, this implies $F(Y^I) > F(Y^E)$, so $Y^I > Y^E$
+		\item When $\gamma < 1$, this implies $F(Y^I) > F(Y^E)$, so $Y^I > Y^E$
 		\item More orders and greater execution probability in market $I$
 		\item Why? 
 		\pause
