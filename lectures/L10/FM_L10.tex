@@ -1,0 +1,510 @@
+%%% License: Creative Commons Attribution Share Alike 4.0 (see https://creativecommons.org/licenses/by-sa/4.0/)
+%%% Slides are based heavily on earlier versions of this course taught by Jesper Rudiger.
+
+\documentclass[english,10pt
+%,handout
+,aspectratio=169
+]{beamer}
+\input{../FM_preamble.tex}
+
+
+\title{Financial Markets Microstructure \\ Lecture 10}
+
+\subtitle{Value of Liquidity\\
+	Chapter 9 of FPR}
+
+\author{Egor Starkov}
+
+\date{K{\o}benhavns Unversitet \\
+	Spring 2020}
+
+
+\begin{document}
+\AtBeginSection[]{
+\frame<beamer>{
+\frametitle{This lecture:}
+\tableofcontents[currentsection,currentsubsection]
+}}
+\frame[plain]{\titlepage}
+
+
+\begin{frame}{Previously on FMM}
+	\begin{itemize}
+		\item \structure{Transparency} mostly reallocates welfare across market participants 
+		\begin{itemize}
+			\item Uninformed traders benefit, so T {helps liquidity}
+			\item Insiders may lose, so T {worsens price discovery}
+			\item Dealers may win or lose
+		\end{itemize}
+		\item But transparency may also impede risk sharing, and have adverse effects when it is asymmetrically distributed
+		\item Opaqueness can be good in limit books
+		\begin{itemize}
+			\item Hidden limit orders help uninformed traders hedge their positions where making these orders visible would by itself create adverse price movements
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Today: value of liquidity}
+	\begin{itemize}
+		\item So far we looked at how illiquidity makes asset's trade price deviate from its fundamental value
+		\item But illiquidity may itself affect the asset \emph{value}
+		\item Case study -- \structure{U.S. Treasury Notes and Bills}: (\cite{amihud_liquidity_1991})
+		\begin{itemize}
+			\item notes are long-term (2-10y), bills are short-term ($<12$m) US govt loans
+			\item differ only in terms -- so soon-to-mature notes are equivalent to bills
+			\only<2-3>{
+				\item \alert{Bliz Quiz}: which is cheaper? (given same face values)
+				\begin{enumerate}
+					\item \structure<3>{note with 6m to maturity}
+					\item bill with 6m to maturity
+					\item neither
+				\end{enumerate}
+			}
+			\pause[4]
+			\item but notes trade at a discount relative to bills (i.e., offer higher returns) (as of 1991)
+			\item why? Notes are less liquid (larger spread and brokerage fees). Why less liquid though?
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Value of liquidity}
+	\begin{itemize}
+		\item Why does liquidity affect asset value?
+		\item Intuitively, an illiquid asset is costlier to transact
+		\begin{itemize}
+			\item Traders take into account transactions costs
+			\item Require a return that compensates for the cost
+			\item Liquidity premium: less liquid assets trade at lower prices
+		\end{itemize}
+		%\item Over-the-counter market model
+		%\begin{itemize}
+		%	\item The asset is worth less because it is inefficiently allocated in an illiquid market
+		%\end{itemize}
+		\item Liquidity need not be constant over time
+		\begin{itemize}
+			\item If illiquidity rises, asset price falls
+			\item If future liquidity is random, this is a risk factor
+			\item Liquidity risk may be priced
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+
+\section{Toy model}
+
+\begin{frame}{Liquidity premium (\cite{amihud_asset_1986})}
+	\begin{itemize}
+		\item Before, traders cared only about fundamental value. In this model they care about \structure{resale value} (speculation).
+		\item Consider an asset with \emph{constant} relative spread, $s=(a_t-b_t)/m_t$, where $m_t=(a_t+b_t)/2$
+		\begin{itemize}
+			\item Note that
+			\[
+			a_t=m_t \left(1+\frac{s}{2}\right) \text{ and } b_t=m_t\left(1-\frac{s}{2}\right)
+			\]
+		\end{itemize}
+		\item Buy at today's ask price $a_t$
+		\begin{itemize}
+			\item Hold the asset for $h$ periods, sell at $b_{t+h}$
+			\item To simplify, suppose zero dividend over this period
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Deriving the premium: risk-adjusted return}
+	\begin{itemize}
+		\item If the market's required risk-adjusted return per period is denoted by $r$, then
+		\begin{equation}\tag{9.3}
+		a_t = \frac{\mathbb{E}(b_{t+h})}{(1+r)^h},
+		\end{equation}
+		i.e.,
+		\begin{equation}\tag{9.4}
+		m_t=\frac{\mathbb{E}(m_{t+h})}{(1+r)^h} \times \frac{1-\frac{s}{2}}{1+\frac{s}{2}}
+		\end{equation}
+		\item If we estimate the required return $r$ using mid-quotes, there is a bias due to illiquidity. Let $R$ be the return rate using only mid-quotes
+		\begin{itemize}
+			\item Estimate $R$ where
+			\[
+			m_t = \frac{\mathbb{E}(m_{t+h})}{(1+R)^h}
+			\]
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Deriving the premium: approximation}
+	\begin{itemize}
+		\item Thus, we have
+		\begin{equation}\tag{9.5}
+		(1+R)^h = (1+r)^h \times \frac{1+\frac{s}{2}}{1-\frac{s}{2}}
+		\end{equation}
+		\begin{block}{}
+			Thus:
+			\[
+			R \simeq r+\frac{s}{h}
+			\]
+		\end{block}
+		\item Essentially, the asset's return needs to be higher by $s/h$ in order to compensate for the liquidity cost
+		\begin{itemize}
+			\item The difference $R-r$ is a \structure{liquidity premium}
+			\item Take $h$ as representative trader's holding period for asset
+			%\item Trade in high-spread assets is less frequent, so $R-r$ may be concave in measured relative spread $s$
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Appendix on the approximation}
+	\begin{itemize}
+		\item To get the approximation of the previous slide, we must use the approximation $\ln (1+x) \simeq x$ for small $x$
+		\item Recall that $\ln x^h = h \ln x$
+		\item So taking logs of (9.5) we get
+		\[
+		h \ln (1+R) = h\ln (1+r) + \ln(1+\frac{s}{2}) - \ln(1-\frac{s}{2}) 
+		\]
+		and assuming $r, R,$ and $s$ are small we apply the approximation
+		\[
+		hR \simeq hr+\frac{s}{2}- \left(-\frac{s}{2}\right)
+		\]
+		\item Rearranging we get the result
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Discussion}
+	\begin{itemize}
+		\item Note: what about a round-trip from a sale?
+		\begin{itemize}
+			\item From $b_t=\mathbb{E}(a_{t+h})/(1+r)^h$ we get $R \simeq r-s/h$
+		\end{itemize}
+		\pause
+		\only<2-3>{
+			\item \alert{Bliz quiz}: say we know $R$ from market data. What is the right way to find $r$?
+			\begin{enumerate}
+				\item $R = r + s/h$ \only<3>{\structure{$\leftarrow$ OK answer for vast majority of assets}}
+				\item $R = r - s/h$
+				\item \structure<3>{$\#1$ when asset is in positive aggregate supply, $\#2$ when in negative}
+				\item $\#2$ when asset is in positive aggregate supply, $\#1$ when in negative
+				\item $R = r$
+			\end{enumerate}
+		}
+		\pause[4]
+		\item Can expect positive liquidity premium from assets 
+		\item Refer to more general model and empirics in \citet*{bongaerts_derivative_2011}
+		\item Empirical evidence confirms positive liquidity premium for stocks, bonds
+	\end{itemize}
+\end{frame}
+
+
+
+\section{Clientelle effects}
+
+\begin{frame}{Clientelle effects}
+	\begin{itemize}
+		\item We obtained $R = r + s/h$ in our toy model
+		\item In reality investors differ in $h$, expected holding period
+		\item Toy extension of toy model:
+		\begin{itemize}
+			\item Two types of investors with $h_1 < h_2$
+			\item Two assets with $s_1 < s_2$
+		\end{itemize}
+		\only<2-3>{
+			\item \alert{Bliz quiz:} what do you think will happen in equilibrium?
+			\begin{enumerate}
+				\item \structure<3>{$h_1$-investors will only trade in $s_1$-asset and vice versa}
+				\item $h_1$-investors will only trade in $s_2$-asset and vice versa
+				\item returns will be such as to equalize assets' worth for all investors
+			\end{enumerate}
+		}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Clientelle effects}
+	\begin{itemize}
+		\item Suppose in eqm $h_1$-investors trade in $s_1$-asset and $h_2$-investors trade in $s_2$-asset
+		%\item then $R_1 = r + s_1/h_1$; $R_2 = r + s_2/h_2$.
+		\item For this to be an eqm, need $R_1 - s_1/h_1 \geq R_2 - s_2/h_1$ and $R_2 - s_2/h_2 \geq R_1 - s_1/h_2$
+		\item The two conditions are equivalent to
+		\begin{equation}\tag{9.10}
+			\frac{1}{h_2} \leq \frac{R_2 - R_1}{s_2 - s_1} \leq \frac{1}{h_1}
+		\end{equation}
+		\pause 
+		\item There exist $R_1,R_2$ (and resp. $r_1,r_2$) which solve this so all ok
+		\begin{itemize}
+			\item There would not be a solution if we assumed the opposite kind of segregation
+			\item We also cannot have both groups indifferent between both assets (would need two equalities in 9.10)
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Clientelle effects: discussion}
+	\begin{itemize}
+		\item Some investors specialize in illiquid assets / hope to earn the liquidity premium
+		\begin{itemize}
+			\item Should in equilibrium be those who trade less frequently
+		\end{itemize}
+		\item (would this explain the case of Treasury Bills vs Bonds?) 
+		\item Note: more adverse selection implies larger spread, hence attracts traders with large $h$
+	\end{itemize}
+\end{frame}
+
+
+\section{Liquidity risk}
+
+\begin{frame}{Liquidity risk}
+	\begin{itemize}
+		\item Spread $s$ randomly fluctuates over time
+		\item Further, liquidity of any given asset may be arbitrarily correlated with that of other assets or the whole market
+		\item These are risk factors which can also be priced
+		\item Use the Liquidity CAPM model of \cite{acharya_asset_2005}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{reminder: regular CAPM}
+	\begin{itemize}
+		\item The standard CAPM postulates that return on asset $j$ is governed by the correlation of its returns with market returns:
+		\begin{equation*}
+			\mathbb{E}[r_j] = r_f + \beta_j \left[ \mathbb{E}[r_M] - r_f \right]
+		\end{equation*}
+		\begin{equation*}
+			\text{with } \beta_j = \frac{\mathbb{C}(r_j, r_M)}{\mathbb{V}(r_M)}
+		\end{equation*}
+		\item In particular, only \emph{systematic} risk enters asset price
+		\item \emph{Idiosyncratic} risk of the asset can be diversified away
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Liquidity CAPM}
+	\begin{itemize}
+		\item Investors care for net return $r=R-s$ where $s$ now denotes the liquidity premium
+		\begin{itemize}
+			\item Let $f$ denote risk-free, $M$ the market
+		\end{itemize}
+		\item Plugging these into the CAPM equation, we get
+		\[
+		\mathbb{E}[R_j-s_j]=r_f + \lambda_M \beta_j
+		\]
+		where $\lambda_M = \mathbb{E}[R_M-s_M]-r_f$ is the risk premium and
+		\[
+		\beta_j=\frac{\mathbb{C}(R_j-s_j, R_M-s_M)}{\mathbb{V}(R_M-s_M)}
+		\]
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{}
+	\begin{itemize}
+		\item Expand $\mathbb{C}(R_j-s_j, R_M-s_M)$:
+		\[
+		=\mathbb{C}(R_j, R_M)+\mathbb{C}(s_j, s_M)-\mathbb{C}(R_j, s_M)-\mathbb{C}(s_j, R_M)
+		\]
+		to get $\beta_j=\beta_{1j}+\beta^{liq}_j=\beta_{1j}+\beta_{2j}-\beta_{3j}-\beta_{4j}$ with
+		\begin{align*}
+		\beta_{1j} 	& = \frac{\mathbb{C}(R_j, R_M)}{\mathbb{V}(R_M-s_M)} 	&& \text{: ordinary $\beta$} \\
+		\beta_{2j}	& = \frac{\mathbb{C}(s_j, s_M)}{\mathbb{V}(R_M-s_M)}	&& \text{: hedge liquidity with liquidity}\\
+		\beta_{3j}	& = \frac{\mathbb{C}(R_j, s_M)}{\mathbb{V}(R_M-s_M)} 	&& \text{: hedge liquidity with returns} \\
+		\beta_{4j}	& = \frac{\mathbb{C}(s_j, R_M)}{\mathbb{V}(R_M-s_M)}	&& \text{: hedge returns with liquidity}
+		\end{align*}
+	\end{itemize}
+\end{frame}
+
+
+%\begin{frame}{Interpretations}
+%	\begin{itemize}
+%		\item [for high respective betas:]
+%		\item $\beta_{2j} \propto \mathbb{C}(s_j, s_M)$: stock is valuable because it stays liquid when 
+%	\end{itemize}
+%\end{frame}
+
+
+
+\section{Arbitrage}
+
+\begin{frame}{Arbitrage}
+	\begin{itemize}
+		\item Main tenet of economics and finance: \structure{no arbitrage}
+		\begin{itemize}
+			\item Assets that generate same cash flows must cost the same
+			\item If arbitrage is possible, it is immediately exploited and then there is no more arbitrage.
+		\end{itemize}
+		\only<2-3>{
+			\item \alert{Bliz quiz:} how does this relate to our situation? (think bills-vs-bonds)
+			\begin{enumerate}
+				\item Arbitrage opportunities exist because arbitrage is costly to exercise \only<3>{\alert{$\leftarrow$ textbook answer}}
+				\item Arbitrage opportunities exist because all of economics (except our course) is wrong
+				\item No arbitrage opportunities exist \only<3>{\structure{$\leftarrow$ my answer}}
+			\end{enumerate}
+		}
+		\pause[4]
+		\item Textbook spends an obscene amount of paper arguing \alert{why arbitrage is impossible} in our case (assets with same cash flows but different liquidity)
+		\begin{itemize}
+			\item Gist: arbitraging is itself a costly activity (due to leverage and short-selling constraints)
+		\end{itemize}
+		\item But in what we saw, \alert{there are no arbitrage opportunities}
+		\begin{itemize}
+			\item Arbitrageurs are subject to all the same trading costs
+			\item So in the toy model we saw, it looks as if there is arbitrage, but there are no actual opportunities
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+
+\section{More general model (OTC markets)}
+
+\begin{frame}{Liquidity premium and OTC markets}
+	\begin{itemize}
+		\item Earlier we derived the midprice keeping the spread fixed
+		\item Now let's do both simultaneously.
+		\item Use model of \citet*{duffie_over--counter_2005,duffie_valuation_2007}:
+		\begin{itemize}
+			\item Consider `over-the-counter' (OTC) market, where trade is \textit{decentralized}
+			\item Instead of a centralized exchange, traders must search for dealers, and search is costly.
+			\item Search costs give market power to dealers and thus produce spread
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Model}
+	\begin{itemize}
+		\item One asset: pays dividends to its holders each period
+		\begin{itemize}
+			\item Some traders value the dividend at 1 (high value traders), some at $1-c$ (low value traders), where $c \in (0,1)$
+			\item Traders can hold \alert{one} or \alert{zero units} of the asset
+			\item The alternative is a bank which pays interest $r$
+			\item Assume the asset is supplied to fraction $q<1/2$ of the population
+		\end{itemize}
+		\item Continuum of traders randomly switch between high and low value: $j=h,l$
+		\begin{itemize}
+			\item This happens each period to a fraction $\psi$ of traders
+			\item (In the long run, half the traders have high value)
+			\item Switchers would like to trade the asset
+			\item Search for a dealer, and find one with chance $\phi$
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Model (2)}
+	\begin{itemize}
+		\item Exact \structure{timing} within a period:
+		\begin{enumerate}
+			\item investor receives dividend payoff ($\$1$ or $\$(1-c)$)
+			\item valuation changes w.p. $\psi$
+			\item search ensues; match with a dealer happens w.p. $\phi$
+		\end{enumerate}
+		\item Dealers have some \structure{bargaining power} because they are hard to find
+		\begin{itemize}
+			\item Dealers quote ask $a$ and bid $b$; spread $S=a-b$
+			\item Bargaining power is measured by a parameter $z \in (0,1)$
+			\item Suppose $\bar{a}$ is maximum that buyer will pay,  and $\bar{b}$ is minimum seller will accept
+			\item Define midprice $\mu=(\bar{a}+\bar{b})/2$ to be the asset value for the dealers
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}[label=solve]
+	\frametitle{Solving the OTC search model: setup}
+	\begin{itemize}
+		\item Recall
+		\begin{enumerate}
+			\item Since $q<1/2$, buy side of market is restrained (dealers have all market power)
+			\item $\bar{a}$ is maximum that buyer will pay,  and $\bar{b}$ is minimum seller will accept
+		\end{enumerate}
+		\item \alert{Buy side:} restrained $\rightarrow$ mixed equilibrium. Set \structure{$a=\bar{a}$} and set buy probability conditional on finding dealer (can choose this since buyers are indifferent) to
+		\[
+		p^B = \phi \cdot \frac{\pi_S}{\pi_B},
+		\]
+		\alert{$\pi_S$}: fraction willing to sell; \alert{$\pi_B$}: fraction willing to buy
+		\item \alert{Sell side:} no restraint, sell with prob. 1, bargain over surplus: 
+		\[
+		\structure{b=z\bar{b}+(1-z)\mu}.
+		\]
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Solving the OTC search model: setup (2)}
+	\begin{itemize}
+		\item Method: identify $\bar{a}$ and $\bar{b}$, and then solve for $a$ and $b$
+		\item Denote the present discounted cash-flow value (as of beginning of the period) of an asset owner with private valuation $j$ by $V^0_j$ and that of a non-owner by $V^{no}_j$
+		\item Since non-owner buys if $V^o_h-a \geq V^{no}_h$ and owner sells if $V^{no}_l+b \geq V^o_l$, we get
+		\begin{align}
+		\bar{a} 	&= V^o_h-V^{no}_h, \\
+		\bar{b}	&= V^o_l-V^{no}_l 
+		\end{align}
+		\item So $a=V^o_h-V^{no}_h$ and $b=z(V^o_l-V^{no}_l ) + (1-z)\mu$.
+		\item Finally, we must calculate the value functions
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Solving the OTC search model: setup (3)}
+	\begin{itemize}
+		\item We will just look at two functions, the rest are similar
+		\begin{align*}
+		V^o_h 	& = \frac{1}{1+r} + \frac{(1-\psi)V^o_h}{1+r} + \frac{\psi(1-\phi)V^o_l}{1+r}+\frac{\psi\phi(V^{no}_l+b)}{1+r} \\
+		V^{no}_h 	& = \frac{\psi V^{no}_l}{1+r} + \frac{(1-\psi)(1-p^B)V^{no}_h}{1+r}+\frac{(1-\psi)p^B (V^o_h-\bar{a})}{1+r}
+		\end{align*}
+		\item Calculate $V^o_l$ and $V^{no}_l$. Plug back into (1)-(2) to solve for $\bar{a}$ and $\bar{b}$
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Conclusion (DGP)}
+	\begin{itemize}
+		\item Ask price is then
+		\[
+		a=\frac{1}{r}-\frac{2\psi}{r(1+z)}\left(1-\phi\frac{1-z}{2}\right)S,
+		\]
+		where $S$ is the spread
+		\[
+		S=a-b=\frac{(1+z)c}{2(r+2\psi)+(1-2\psi)\phi(1-z)}
+		\]
+		\item If $\psi>0$ the ask price is less than the $1/r$ which would arise if it were always (efficiently) held by high-value traders
+		\item This is due to liquidity costs: buyers anticipate that they will sell in the future and incur the spread cost
+	\end{itemize}
+\end{frame}
+
+
+
+
+
+\begin{frame}{Conclusion}
+	\begin{itemize}
+		\item Empirically the authors find evidence on both a \structure{liquidity premium} and a \structure{liquidity risk premium} on stocks
+		\item Further, overall market liquidity may vanish at crisis times when asset prices drop rapidly
+		\begin{itemize}
+			\item Important risk for investors, especially speculators
+			\item Financial institutions are required to hold robustly liquid assets
+			\item In general, risky positions require costly collateral, margins
+			%\item Section 9.4 considers the optimal allocation over time of capital devoted to costly arbitrage; one prediction is that mis-pricing can persist over time, and that unexpectedly large shocks may trigger `fire sales'
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Exercise}
+	Ex.1 from ch.9 (p.347)
+\end{frame}
+
+
+\appendix
+\begin{frame}[allowframebreaks]{References}
+	\bibliography{../teaching}
+	\bibliographystyle{abbrvnat}
+\end{frame}
+
+
+\end{document}
