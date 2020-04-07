@@ -10,25 +10,27 @@ W4		GM cleanup; order-processing costs, inventory risk
 W4b		problems: GM
 W5		Kyle (trade size), empirics of liquidity?
 W6		LOB (Glosten) 
-	-- SEE Foucault slides (deck 5)
 W6b		problems: Kyle, Glosten
 assign PS1
-W7		Fragmentation costs and benefits
-	-- read: economist on algorithm competition
-	-- read: dark markets (maybe in liq instead)
-W8		Transparency (expand?)
-	-- read: economist on mifid 2
+W7		LOB (Parlour) and market design
+W8		Fragmentation costs and benefits
+	-- read: economist on algorithm competition (move to "transparency" instead)
+	-- read: dark markets
 W8b		solve PS1
-W9		Value of liquidity
-W10		Liquidity and corporate policy
+W9		Transparency
+	-- read: economist on mifid 2
+W10		Value of liquidity
+W11		Liquidity and corporate policy
 	alt:Bargaining, OTC markets
 assign PS2
-W11		HFT
-W12		Public information (Kondor)
+W12		HFT
 W12b	solve PS2
-W13		Bubbles 1 (herding)
-W14		Bubbles 2 (Abreu-Brunnermeier)
+W13		Public information (Kondor)
+W14		Bubbles (Smith-Sorensen, Abreu-Brunnermeier)
 W15		Bitcoin and digital markets
 			latency, transparency, transaction costs, clearing and settlement
+			limited capacity and transaction cost cycles (google bitcoin transaction price - sawtooth - traders attracted by low fees - congestion arises - traders leave)
+		and Auction models
+			common value FPA; double auction
 W16		review
 
