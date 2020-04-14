@@ -21,7 +21,6 @@ W9		Transparency
 	-- read: economist on mifid 2
 W10		Value of liquidity
 W11		Liquidity and corporate policy
-	alt:Bargaining, OTC markets
 assign PS2
 W12		HFT
 W12b	solve PS2
