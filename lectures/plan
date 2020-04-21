@@ -21,15 +21,16 @@ W9		Transparency
 	-- read: economist on mifid 2
 W10		Value of liquidity
 W11		Liquidity and corporate policy
+			and
+		Bitcoin and digital markets
+			latency, transparency, transaction costs, clearing and settlement
+			limited capacity and transaction cost cycles (google bitcoin transaction price - sawtooth - traders attracted by low fees - congestion arises - traders leave)
 assign PS2
 W12		HFT
 W12b	solve PS2
 W13		Public information (Kondor)
 W14		Bubbles (Smith-Sorensen, Abreu-Brunnermeier)
-W15		Bitcoin and digital markets
-			latency, transparency, transaction costs, clearing and settlement
-			limited capacity and transaction cost cycles (google bitcoin transaction price - sawtooth - traders attracted by low fees - congestion arises - traders leave)
-		and Auction models
+W15		Auction models
 			common value FPA; double auction
 W16		review
 
