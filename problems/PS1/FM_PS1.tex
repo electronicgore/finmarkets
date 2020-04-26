@@ -1,7 +1,7 @@
 %%% License: Creative Commons Attribution Share Alike 4.0 (see https://creativecommons.org/licenses/by-sa/4.0/)
 
 \documentclass[11pt
-, answers
+%, answers
 ]{exam}
 \usepackage[top=2.5cm,bottom=3cm,left=2.5cm,right=2.5cm]{geometry}
 \usepackage{amsfonts}
@@ -313,7 +313,7 @@ p_{0} =  \frac{\lambda}{\alpha+\rho \mathbb{V}[v|p]}((\mu + \alpha x_{0} - \alph
 Equations \eqref{lambdaMM} and \eqref{pzeroMM} give us the optimal strategy of the dealer, conditional on the strategy of the traders.
 \end{solution}
 
-\item Go back to the informed trader's problem. Assuming that $p=p_{0}+q$, argue that the insider chooses $x$ to maximize $x (v-p_{0} - \lambda x)$. Show that the relation is of the form $x =\beta v - x_{0}$ and try to relate parameters $\beta, \lambda, x_{0}, p_{0}$ to each other. Is there a solution for all four parameters? If the algebra is impossible, try a numerical solution.
+\item Go back to the informed trader's problem. Assuming that $p=p_{0}+ \lambda q$, argue that the insider chooses $x$ to maximize $x (v-p_{0} - \lambda x)$. Show that the relation is of the form $x =\beta v - x_{0}$ and try to relate parameters $\beta, \lambda, x_{0}, p_{0}$ to each other. Is there a solution for all four parameters? If the algebra is impossible, try a numerical solution.
 
 \begin{solution}
 The trader is a risk-neutral expected-utility maximizer. Conditional on the dealer's strategy $p=p_{0}+\lambda q=p_{0}+\lambda(x+u)$. Thus, he will maximize $\mathbb{E}[x(v-p)|x] = x(v-p_{0}-\lambda x)$. This quadratic can be solved to give $x=(v-p_{0})/(2\lambda)$, so in order for our conjecture about the strategy to be right, we must have
