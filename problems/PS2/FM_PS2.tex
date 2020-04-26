@@ -1,0 +1,243 @@
+%%% License: Creative Commons Attribution Share Alike 4.0 (see https://creativecommons.org/licenses/by-sa/4.0/)
+
+\documentclass[11pt
+, answers
+]{exam}
+\usepackage[top=2.5cm,bottom=3cm,left=2.5cm,right=2.5cm]{geometry}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage[onehalfspacing]{setspace}
+\usepackage{url}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, urlcolor=black}
+\usepackage[round]{natbib}
+
+\begin{document}
+	
+	
+\title{\textsc{Financial Markets Microstructure: Problem Set 2}}
+\date{K{\o}benhavns Universitet, Spring 2020}
+\author{Egor Starkov}
+
+
+\maketitle
+
+
+Please email your answer to me by midnight Thursday April 23 if you want feedback. This is voluntary, but at any rate I encourage you to spend time on these exercises to make sure you understand the models. Feel free to write me with any questions you might have.
+
+NEW: feel free to approach this problem set in groups and/or discuss your solutions with other students.
+
+\quad
+
+
+\subsection*{Problem 1}
+
+Trading at exchanges sometimes breaks down due to technical problems. The Economist thus reported on August 31, 2013: ``On August 26th trading on Eurex, the main German derivatives exchange, opened as usual; 20 minutes later it shut down for about an hour. Four days earlier the shares of every company listed on NASDAQ, an American stock exchange, ceased trading for three hours''. What are the implications of such breakdowns for liquidity risk? How do they affect asset prices? How does competition among exchanges affect breakdown frequency?
+
+
+\begin{solution}
+	Think about this in terms of the model of liquidity risk that we saw in class. Suppose you were planning a trade that should execute at some time $h$. Suppose you have borrowed money/stocks to carry out the trade. Trading breakdown causes delay, and delay is costly for you, because you have to return the money/stock. This is a liquidity risk as well. The traders will thus require a liquidity risk premium if breakdowns are recognized as possible or probable, which will depress stock prices.
+	
+	Competition between exchanges, to the extent that they trade in the same stocks, should alleviate this: if one exchange breaks down, chances are you can trade on the other. Competition may also induce exchanges to invest in better equipment to prevent trade breakdowns. Thus, competition between exchanges should lower the liquidity premium.
+\end{solution}
+
+
+
+
+\quad
+\subsection*{Problem 2 [Ch.9, ex.6]}
+
+In lecture 10 we saw a model of over-the-counter trading (DGP). Spread in that model is given by
+\[
+S=a-b=\frac{(1+z)c}{2(r+2\psi)+(1-2\psi)\phi(1-z)}
+\]
+\begin{enumerate}[label=(\alph*). ]
+	\item Assuming $z<1$, how does the bid-ask spread respond to changes in the probability $\phi$ of finding a dealer? How does the answer depend on the value of the probability $\psi$ that the investor's valuation will change in the future?
+	
+	\begin{solution}
+		\begin{align*}
+			\frac{\partial S}{\partial \phi} & = -\frac{(1+z)c(1-z)(1-2\psi)}{[2(r+2\psi)+(1-2\psi)\phi(1-z)]^2}
+		\end{align*}
+		This fraction is positive if $\psi>1/2$, negative if $\psi<1/2$.
+	\end{solution}
+	
+	
+	\item What is the intuitive explanation for this result?
+	
+	\begin{solution}
+		 The model has no adverse selection, so the spread is driven by the \textit{bargaining} between dealers and traders. Increasing $\phi$ implies that traders trade with higher probability in the future. There are two effects of this:
+		\begin{itemize}
+			\item It increases traders' willingness to pay (higher $S$) since they have less risk of getting `stuck' with the asset if their preferences change
+			\item It increases traders' bargaining power (lower $S$) since they have higher probability of finding a dealer next period if they do not trade today
+		\end{itemize}
+		When $\psi$ is high, first effect dominates, since trader is worried about future trades. When $\psi$ is low, second effect dominates, since trader is more worried about current trade
+	\end{solution}
+\end{enumerate}
+
+
+
+\quad
+\subsection*{Problem 3 [Ch.7, ex.4]}
+
+This problem deals with competition between limit order markets with uniformly distributed market orders. Consider the model of section 7.4.2 (``Glosten model with fragmented market'' from Lecture 8) and assume that the size of the market order ($\tilde{X}$) has a uniform distribution $[0,\bar{X}]$. That is, $F(x)=x/{\bar{X}}$. We denote by $Y^{*}_{jk}(\gamma)$ the cumulative depth posted at the ask price $A_{k}=\mu+k\Delta$ in market $j \in \{I,E\}$ when the fraction of investors submitting market orders in both markets $I$ and $E$ is $\gamma$, and by $c_{j}$ be the submission cost in market $j$.
+
+\begin{solution}
+	\noindent \textbf{General comment}. In this question, we are investigating the exact same model as in 7.4.2, but just making a specific assumption about $F(\cdot)$. When you get questions like these that build directly on a model in the book, the best way to proceed is to follow closely the steps of the book (or the slides). In the hints I posted, I gave you relevant equations. Thus, it is a question of updating these equations and then using the results to answer the questions.
+\end{solution}
+
+
+\begin{enumerate}[label=(\alph*). ]
+	\item Assume that $2c_{I} \leq \Delta$ and that $\gamma=0$. Show that the equilibrium cumulative depth at price $A_{1}$ is\footnote{The $A_{1}$ was misprinted as $A_{k}$ in the book.}  
+	\[
+	Y^{*}_{I1}(0)=\bar{X}\left( 1-\frac{2c_{I}}{\Delta}\right).
+	\]
+	
+	\textbf{Hint:} Use (7.13).
+	
+	\begin{solution}
+		With $\gamma=0$ there is effectively only one market, $I$. Let $Y_{I}=Y^{*}_{I1}(0)$, which is the volume supplied at $A_{1}$. This is given by equation (7.13). (Notice parallel to (6.6).) Here, the display cost is $c_{I}$. The assumption $2c_{I} \leq \Delta$ assures that $Y_{I} \leq \bar{X}$, and hence $1-F(Y_{I}) \leq 1$. I.e. the assumption assures that the probability is well-defined. Thus, (7.13) yields
+		\[
+		\frac{1}{2}\left(1-\frac{Y_{I}}{\bar{X}}\right) (A_{1}-\mu) = c_{I}.
+		\]
+		Solve for $Y_{I}$ and substitute $\Delta=A_1-\mu$ to get the result.
+	\end{solution}
+	
+	
+	\item Now suppose that $\gamma$ is high enough and that the other parameters are such that $Y^{*}_{I1}(\gamma)>0$, $Y^{*}_{E1}(\gamma)>0$, but $Y^{*}_{I1}(\gamma)+Y^{*}_{E1}(\gamma)<\bar{X}$. Compute $Y^{*}_{I1}(\gamma)$ and $Y^{*}_{E1}(\gamma)$ as a function of $\gamma$. Deduce further from the result that the conditions  $Y^{*}_{I1}(\gamma)>0$ and $Y^{*}_{E1}(\gamma)>0$ are satisfied if $\frac{4c_{I}}{\Delta(2-\gamma)+2c_{E}}<1$ and $\frac{4c_{E}}{\Delta+2c_{I}}<\gamma$. Moreover, deduce that the condition $Y^{*}_{I1}(\gamma)+Y^{*}_{E1}(\gamma)<\bar{X}$ is satisfied if $4(\gamma c_{I}+(2-\gamma)c_{E})>(2-\gamma)\gamma \Delta$.
+	
+	\textbf{Hint:} You need the equations (7.11), (7.12), (7.14) and (7.15) to get the system of equations that pins down $Y_I$ and $Y_E$. You can then either solve the algebra by muscle (or use some computer algebra system\footnote{A popular choice is Wolfram Alpha available at \url{https://www.wolframalpha.com}. I personally prefer open-source alternatives like (wx)Maxima (\url{https://wxmaxima-developers.github.io/wxmaxima/}) or SageMath (\url{https://www.sagemath.org/}).} to provide that muscle for you) or try to rewrite the two equilibrium conditions so as to eliminate either $Y_I$ or $Y_E$. 
+	
+	\begin{solution}
+		Simplify notation by denoting the depths by $Y_{I}$ and $Y_{E}$. We use equations (7.14) and (7.15) to describe the equilibrium, and refer to (7.11) and (7.12) to get the execution probabilities. In particular, (7.14) becomes
+		\begin{equation} \label{one}
+			\frac{1}{2} \left[ \left( 1-\gamma+\frac{\gamma}{2}\right)\left(1-\frac{Y_{I}}{\bar{X}}\right)+\frac{\gamma}{2}\left(1-\frac{Y_{I}}{\bar{X}}-\frac{Y_{E}}{\bar{X}}\right)\right] = \frac{c_{I}}{\Delta}.
+		\end{equation}
+		This is linear in $Y_{I}$ and $Y_{E}$, thanks to the uniform distribution. Notice that the assumption that $Y^{*}_{I1}(\gamma)+Y^{*}_{E1}(\gamma)<\bar{X}$ implies that $1-F(Y^{*}_{I1}(\gamma)+Y^{*}_{E1}(\gamma))>0$, that is to say, since the supply at the first tick $A_1$ is smaller than the largest possible order ($\overline{X}$), then there is always a probability that the marginal order at $A_1$ executes, even if the market is the second to get served. If $Y^{*}_{I1}(\gamma)+Y^{*}_{E1}(\gamma) \ge \bar{X}$, then the marginal order at $A_1$ is only executed if the market is the first to get served (i.e. $1-F(Y^{*}_{I1}(\gamma)+Y^{*}_{E1}(\gamma))=0$ and the second term in the square brackets in \eqref{one} drops out).
+		
+		Rewrite \eqref{one} to get
+		\begin{equation} \label{two}
+			\bar{X} \left(1-\frac{2c_{I}}{\Delta} \right) = Y_{I} + \frac{\gamma}{2} Y_{E}.
+		\end{equation}
+		You can already from this deduce that $Y_{I}$ will be lower than in (a). We now repeat the exercise with $E$'s equilibrium condition. Now, (7.15) becomes
+		\begin{equation} \label{three}
+			\frac{\gamma}{4} \left[ \left(1-\frac{Y_{E}}{\bar{X}} \right) + \left(1-\frac{Y_{I}}{\bar{X}}-\frac{Y_{E}}{\bar{X}}\right)\right] = \frac{c_{E}}{\Delta},
+		\end{equation}
+		rewritten as
+		\begin{equation} \label{four}
+			\bar{X}\left(1-\frac{2c_{E}}{\gamma \Delta}\right) = \frac{1}{2} Y_{I}+Y_{E}.
+		\end{equation}
+		This leaves us with two conditions, \eqref{two} and \eqref{four}, which have a unique solution for any $\gamma \in (0,1)$.\footnote{To solve, use one equation to eliminate $Y_I$ or $Y_E$ in the other equation, and solve by hand or plug into solver such as wolfram alpha.} This solution is given by
+		\[
+		Y_{I} = \frac{2 \bar{X}}{4-\gamma} \left(2-\gamma+\frac{2c_{E}-4c_{I}}{\Delta} \right) \text{ and } Y_{E}=\frac{2\bar{X}}{4-\gamma}\left(1+\frac{2\gamma c_{I}-4c_{E}}{\gamma \Delta} \right).
+		\]
+		We can then check that that the necessary conditions given in the question are true: The conditions for $Y_{I}>0$ and $Y_{E}>0$ are straightforward. The third condition, $Y_{I}+Y_{E}<\bar{X}$, is equivalent to
+		\[
+		\frac{2}{4-\gamma} \left(3-\gamma + \frac{(2\gamma-4)c_{E}-3\gamma c_{I}}{\gamma \Delta} \right) < 1,
+		\]
+		which can be reduced to
+		\[
+		(4\gamma-8)c_{E} - 4\gamma c_{I} < (\gamma-2) \gamma \Delta.
+		\]
+	\end{solution}
+	
+	
+	
+	\item Deduce from question (b) that the two markets can coexist even if their order submission costs differ and $\gamma=1$. 
+	
+	\textbf{Hint:} first think about the case where $c_{I}=c_{E}=c$. This will give you an interval for $\Delta$ in which the markets can coexist. Then argue that there exist some $c_{I} \ne c_{E}$ such that this is true as well.
+	
+	\begin{solution}
+		When $\gamma=1$, market $I$ no longer has 'priority'. The three conditions from (b) correspond to $4c_{I} < \Delta + 2c_{E}$, $4c_{E}<\Delta+2c_{I}$, and $4(c_{I}+c_{E})>\Delta$. If $c_{I}=c_{E}=c$ they are all satisfied when $2c < \Delta < 8c$. If $\Delta$ is an interior point of the interval $(2c, 8c)$, continuity allows us to vary $c_{E}$ and $c_{I}$ around $c$ whilst satisfying all the conditions.
+		
+		NOTE: the third condition ($Y_I+Y_E > \bar{X}$) is per se not necessary for such coexistence, but it is necessary for the first two conditions to look the way they do. As we shall see in part (e), if the third condition does not hold, the conditions for $Y_I > 0$ and $Y_E > 0$ look differently.
+	\end{solution}
+	
+	
+	
+	\item Why does the cumulative depth at price $A_{1}$ in one market decrease with the order submission cost in this market but increase with the cost in the competing market?
+	
+	\begin{solution}
+		In equilibrium, the expected profit from the marginal limit order must be zero in both markets. Thus, the higher the cost of posting orders in a market, the higher the execution probability must be to 'compensate' traders. Higher execution probability requires fewer orders. 
+		
+		Furthermore, the two markets are connected in that whenever an order is coming in, even if one market initially 'wins' the order, the other market will fill the remaining part of the order if the first market is not deep enough. Therefore, increasing the posting cost of the first market makes it shallower. The shallower the first market is, the more attractive the second market is, because the execution probability is higher. The equilibrium response to this is to post more limit orders on the second market. 
+	\end{solution}
+	
+	
+	
+	\item Consider the case $\gamma=1$ and suppose that $4(c_{I}+c_{E})<\Delta$ and $4c_{I}<\Delta$. Compute $Y^{*}_{I1}(1)$ and $Y^{*}_{E1}(1)$.
+	
+	\textbf{Hint:} Notice that now we are violating one of the conditions given in (b). What effect does this have on $F(Y_{I}+Y_{E})$? Take account of this when writing up (7.14) and (7.15).
+	
+	\begin{solution}
+		Now the condition $Y_{I}+Y_{E}<\bar{X}$ is no longer satisfied, implying that $1-F(Y_{I}+Y_{E})=0$. I.e., the marginal limit order never executes if the competing market gets the first part of the order.  Substituting this and $\gamma=1$ into (7.14) and (7.15) we get
+		\[
+		\frac{1}{2} \left[\frac{1}{2} \left(1-\frac{Y_{I}}{\bar{X}}\right)\right]=\frac{c_{I}}{\Delta} \text{ and } \frac{1}{4} \left[\left(1-\frac{Y_{E}}{\bar{X}}\right)\right]=\frac{c_{E}}{\Delta}.
+		\]
+		Thus, 
+		\[
+		Y_{I} = \bar{X}\left(1-\frac{4c_{I}}{\Delta}\right) \text{ and } Y_{E} = \bar{X}\left(1-\frac{4c_{E}}{\Delta}\right).
+		\]
+		Since the execution probability of the marginal order is independent of the competing market, the posting cost of the competing platform now has no effect on market depth. In fact, the market depth is almost the same as in the 'monopoly' case in (a), except it takes account for the fact that traders initially make a choice of platform. Notice however that in general, the expected profits of limit orders are not independent across the two platforms: the execution probability of earlier orders (i.e. those that are not marginal) may still depend on the competing market.
+	\end{solution}
+	
+	
+	
+	\item Under the assumptions in question (e), what is the number of shares offered at price $A_{k}>A_{1}$? Is the result different when $\gamma=0$?
+	
+	\textbf{Hint:} Look at the values of $Y^{*}_{I1}$ in the two cases.
+	
+	\begin{solution}
+		In $(e)$, the assumptions made imply  $Y_{I}+Y_{E} \geq \bar{X}$. Recall that here, $Y_I$ and $Y_E$ are shorthand for $Y^*_{I1}(1)$ and $Y^*_{E1}(1)$, the orders posted at ask price $A_1$. Thus the total number of orders posted at $A_1$ is $Y^*_{I1}(1)+Y^*_{E1}(1) \geq \bar{X}$, implying that even the largest possible order ($\bar{X}$) will be filled at price $A_1$. So there can be no (profitable) orders at higher ask prices. 
+		
+		If $\gamma=0$, then our result from (a) tells us that $Y^{*}_{I1}<\bar{X}$, and thus we can still have profitable orders at higher ask prices.
+	\end{solution}
+
+\end{enumerate}
+
+
+
+
+\quad
+\subsection*{Problem 4}
+
+MiFID II, the recent European financial market regulation, requires that firms shall disclose to the client information on the payment or benefit concerned, in a manner that is comprehensive, accurate and understandable (in accordance with the second paragraph of Article 24(9) of MiFID II). Evaluate the possible effects of this regulation.
+
+In particular, suppose that some asset is traded at multiple exchanges. One of the exchanges offers one of the banks a payment for directing order flow originating from bank's clients towards this exchange. This relates either to all order flow, or to order flow from retail investors. How would the bank's obligation to be transparent about this fee towards its clients affect market outcomes?
+
+There are many effects you can think of. Try to describe comprehensively as many as you can in less than one page. You do not need to set up and analyze a full-blown model, but defining some minimal framework (such as identifying all participating agents and their order of moves) can help you.
+
+
+\begin{solution}
+	There are obviously many ways you can answer this question. To identify some of them, let us set up an informal model with some explicit timing:
+	\begin{enumerate}[nolistsep,noitemsep]
+		\item investor selects which bank to use as a broker;
+		\item bank may (has to under the regulation) disclose to its clients the forwarding fee it receives from the exchange;
+		\item liquidity providers (dealers or limit traders) select into markets and set quotes without knowing any of the above;
+		\item investor submits a market order (he may or may not be aware of market quotes when doing so);
+		\item the bank chooses which exchange to forward this market order to;
+		\item the bank and the investor split gains from trade.
+	\end{enumerate}
+	
+	Now proceed by backward induction and look at what can change at each step.
+	\begin{itemize}[nolistsep,noitemsep]
+		\item At step 6 if the investor knows that the bank has received a rebate from the exchange, he realizes that the gains from trade was higher than if the bank concealed this information. The investor can then bargain more aggressively and obtain better terms, while the bank's profit-per-trade declines on paid-to-forward orders.
+		
+		\item At step 5 the bank will then be more reluctant (under transparency) to forward the orders to exchanges that pay for it. Therefore, payment for order flow will be less effective as an instrument for attracting trading volume, which will make it harder for new trading platforms to enter the market and may thus give more market power to existing platforms, potentially increasing order processing fees.
+		
+		\item At step 4 investors will be more eager to trade due to higher anticipated profits.
+		
+		\item At step 3 more liquidity will be supplied (if we assume that investors from step 4 are mostly uninformed) in markets that pay for order flow.
+		
+		\item At step 2 in the absence of regulation the bank has a choice of whether to disclose forwarding fees to its clients. The trade-off is non-trivial, since disclosure reduces profit-per-trade (step 6) but increases the clients' desire to trade (step 4). In principle, the bank may disclose its fees even in the absence of regulation -- in which case it has no effect. A formal model could tell you whether, e.g., voluntary disclosure is more likely from banks with high or low bargaining power.
+		
+		\item At step 1 the effect is not immediate. If you think that banks are heterogeneous and some were more likely than others to reveal forwarding fees to its clients in the absence of regulation, then regulation would likely shift market demand towards banks that were known to be secretive before the regulation. Welfare implications of this shift are not obvious without a more careful analysis.
+	\end{itemize}
+	As you can see, even a very surface-level analysis identifies a lot of potential effects of such regulation, giving arguments to both supporters and opponents of such regulation. A proper welfare analysis, however, would require a more careful approach, which at the ex ante stage (before the regulation is implemented) is only really possible via teoretical modeling.
+\end{solution}
+
+
+\end{document} 
