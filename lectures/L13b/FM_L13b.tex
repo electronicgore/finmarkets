@@ -1,0 +1,294 @@
+%%% License: Creative Commons Attribution Share Alike 4.0 (see https://creativecommons.org/licenses/by-sa/4.0/)
+%%% Slides are based heavily on earlier versions of this course taught by Jesper Rudiger.
+
+\documentclass[english,10pt
+%,handout
+,aspectratio=169
+]{beamer}
+\input{../FM_preamble.tex}
+
+
+
+\title{Financial Markets Microstructure \\ Exercise class 5}
+
+\author{Egor Starkov}
+
+\date{K{\o}benhavns Unversitet \\
+	Spring 2020}
+
+
+
+\begin{document}
+	\AtBeginSection[]{
+		\frame<beamer>{
+			\frametitle{This class:}
+			\tableofcontents[currentsection,currentsubsection]
+	}}
+	
+\frame[plain]{\titlepage}
+\addtocounter{framenumber}{-1}
+
+
+%\begin{frame}{Plan}
+%	\begin{itemize}
+%		\item L9: Ch 8, ex 2 (p 303)
+%		\item L10: Ch 9, ex 1 (p 347)
+%		\item PS2: ex 2
+%	\end{itemize}
+%\end{frame}
+
+
+
+\section{L9: Ch 8, ex 2}
+
+\begin{frame}{L9: Ch 8, ex 2}
+	\textbf{Price discovery and transparency. }Consider the model of
+	\structure{post-trade transparency} described in section 8.2. Consider the time-averaged
+	expected squared deviation between the transaction price and the true value
+	of the security, that is
+	
+	\begin{equation*}
+	\frac{E\left[ (p_{1}^{k}-v)^{2}\right] }{2}+\frac{E\left[ (p_{2}^{k}-v)^{2}%
+		\right] }{2},
+	\end{equation*}%
+	where $p_{t}^{k}$ is the transaction price in period $t=1,2$ in regime $%
+	k=T,O $ (transparent, opaque). Show that price discovery is more efficient
+	in the transparent market. You may limit your analysis to the case $\pi >%
+	\frac{1}{2} $ in which the equilibrium first-period spread is positive.
+\end{frame}
+
+
+\begin{frame}{Post-trade transparency}
+	\begin{itemize}
+		\item If orders arrive sequentially, how does information about past orders affect
+		\item \textbf{Value}: high $v^H$ or low $v^L$ with equal probability
+		\begin{itemize}
+			\item Mean: $\mu=(v^H+v^L)/2$
+			\item \alert{Denote} $\sigma = (v^H-v^L)/2$
+		\end{itemize}
+		\item \textbf{Dealers}: set quotes, competitive, risk neutral
+		\item \textbf{Traders}: two traders arrive, submit unit market orders
+		\begin{itemize}
+			\item With prob. $\pi$: both are informed
+			\item With prob. $(1-\pi)/2$: both liquidity traders;  first  seller, then buyer
+			\item With prob. $(1-\pi)/2$: both liquidity traders;  first  buyer, then seller
+		\end{itemize}
+		\item \textbf{Transparent market}: All dealers observe the first order $y_1$
+		\begin{itemize}
+			\item Set $a_1=\mu+\pi(v^{H}-\mu)$ and $a_{2y_1}=\mathbb{E}[v|y_1,buy]$
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Post-trade transparency: Period 2}
+	\textbf{Opaque market}: First dealer gains informational advantage. Focus on \alert{ask side}
+	\begin{itemize}
+		\item \structure{Period 2}. Denote the dealer who observed period-1 trade by \alert{$I$}, and the other dealer by \alert{$U$}.
+		\begin{itemize}
+			\item For technical reasons, suppose $I$ sets price after observing $U$'s quote
+			\item \structure{Dealer $U$}: How to quote if you didn't see the first trade and second trade is buy? 
+			\begin{itemize}
+				\item If you set ask $a^U_2<v^{H}$ you will be undercut by $I$  if first order was a sell
+				\item You only get to trade if first order was buy: lose $v^{H}-a^U_2$
+				\item Thus, uninformed dealers need to quote $a^U_2=v^{H}$
+			\end{itemize}
+			\item \structure{Dealer $I$}: Suppose you saw the first trade, and second trade is a buy:
+			\begin{itemize}
+				\item Set price at $a^I_{2s}=v^{H}$ if first trade was a sell, and $a^I_{2b} = v^H - \epsilon$ if buy
+				\item  $I$ wins period-2 buy order if $y_1$ was a sell (otherwise can undercut $U$)
+				\item  $U$ wins period-2 buy order if $y_1$ was a buy, since $I$ knows that asset value is high
+			\end{itemize}
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Post-trade transparency: Period 1}
+	\begin{itemize}
+		\item \structure{Period 1.} The sequential information advantage uncovered in the previous slide can make dealers bid keenly for the first order
+		(Forex dealers often said to quote negative spread to large traders)
+		\begin{itemize}
+			\item In second period, $I$'s profit is $(1-\pi)(v^{H}-v^{L})/2$. $U$'s profit is zero
+			\item Competition leads the first period half-spread to be reduced by this amount, to $(2\pi-1)(v^{H}-v^{L})/2$ (dealers undercut each other to obtain information contained in first order)
+			\item The uninformed's aggregate trading cost is $\pi(v^{H}-v^{L})$ - double the cost under transparency. Why is this?
+		\end{itemize}
+		\item Would dealers commit to transparency?
+		\begin{itemize}
+			\item No, there is always an incentive to hide your orders (section 8.4.2)
+			\item May explain the rise of less transparent trading venues
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{L9: Ch 8, ex 2}
+	\begin{itemize}
+		\item \structure{Transparency}, $t=1$: 
+		\begin{align*}
+			a_1^T &= \mu + \pi \sigma
+			&
+			b_1^T &= \mu - \pi \sigma
+		\end{align*}
+		\begin{align*}
+			E\left[ (p_{1}^{T}-v)^{2}\right] =& \frac{1}{2} \left[ \pi(a_1^T-v^H)^2 + (1-\pi)\frac{1}{2}(a_1^T-v^H)^2 + (1-\pi)\frac{1}{2}(b_1^T-v^H)^2 \right] +
+			\\
+			&+ \frac{1}{2} \left[ \pi(b_1^T-v^L)^2 + (1-\pi)\frac{1}{2}(b_1^T-v^L)^2 + (1-\pi)\frac{1}{2}(a_1^T-v^L)^2 \right]
+			\\
+			=& (1-\pi^2) \sigma^2
+		\end{align*}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{L9: Ch 8, ex 2}
+	\begin{itemize}
+		\item $t=2$:
+		\begin{itemize}
+			\item $p_2 = v$ if informed at $t=1$,
+			\item $p_2 = \mu$ if uninformed at $t=1$;
+		\end{itemize}
+		\[ \Rightarrow E\left[ (p_{2}^{T}-v)^{2}\right] = \pi \cdot 0 + (1-\pi) \sigma^2 \]
+		\item Averaging over time:
+		\[ \left[\frac{1}{2}(1-\pi^2)+\frac{1}{2}(1-\pi) \right] \sigma^2 = (1-\pi)\left(1+\frac{\pi}{2}\right) \sigma^2 \]
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{L9: Ch 8, ex 2}
+	\begin{itemize}
+		\item \structure{Opaqueness}, $t=1$ (assuming $\pi > 1/2$ to avoid crossed quotes):
+		\begin{align*}
+			a_1^O &= \mu + (2\pi-1)\sigma & b_1^O &= \mu - (2\pi-1)\sigma
+		\end{align*}
+		\[ E\left[ (p_{1}^{O}-v)^{2}\right] = 2(1-\pi)\sigma^2 \]
+		\pause
+		\item $t=2$:
+		\[ E\left[ (p_{2}^{O}-v)^{2}\right] = 2(1-\pi)\sigma^2 \]
+		\item so the average is also $2(1-\pi)\sigma^2$
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{L9: Ch 8, ex 2}
+	Comparison:
+	\begin{align*}
+		\frac{E\left[ (p_{1}^{T}-v)^{2} \right]}{2} + \frac{E\left[ (p_{2}^{T}-v)^{2} \right]}{2} &< \frac{E\left[ (p_{1}^{O}-v)^{2} \right]}{2} + \frac{E\left[ (p_{2}^{O}-v)^{2} \right]}{2}
+		\\
+		(1-\pi)\left(1+\frac{\pi}{2}\right) \sigma^2 &< 2(1-\pi)\sigma^2
+		\\
+		1+\frac{\pi}{2} &< 2
+	\end{align*}
+	Transparency yields better price discovery
+\end{frame}
+
+
+\section{L10: Ch 9, ex 1}
+
+\begin{frame}{L10: Ch 9, ex 1}
+	\textbf{Liquidity premium in the presence of dividend income.}
+	Consider a stock with a dividend yield $d$ per period and with fundamental
+	value $\mu _{t}$ at date $t$ (equal to its midprice $m_{t}$ at that date).
+	Investors hold the stock for one period and can trade it at a constant
+	percentage bid-ask spread $s$ in each period. Their required rate of return
+	on the stock is given, equal to $r$.
+\end{frame}
+
+
+\begin{frame}{L10: Ch 9, ex 1, part a}
+	\begin{exampleblock}{}
+		(a) Define the gross-of-transaction-cost return $1+R$ in terms of $\mu _{t}$, $\mu _{t+1}$, and $d$.
+	\end{exampleblock}
+	
+	\pause
+	
+	\[ 1+R = \frac{\mu_{t+1}}{\mu_t} + d \]
+	
+	Note that ``gross-of-transaction-cost return'' interpretation of $R$ differs from how we interpreted $R$ in lectures (which was ``rate of price growth'').
+\end{frame}
+
+
+\begin{frame}{L10: Ch 9, ex 1, part b}
+	\begin{exampleblock}{}
+		(b) Determine the equilibrium gross return $1+R$ as a function of $r$, $s$, and $d$ alone.
+	\end{exampleblock}
+	
+	\pause
+	
+	\begin{itemize}
+		\item Asset bought at $t$ at price $a_t = (1 + s/2) \mu_t$,
+		\item sold at $t+1$ at $b_{t+1} = (1 - s/2) \mu_{t+1}$,
+		\item yields $d$ in the interim.
+		\item Required return is $1 + r = \frac{b_{t+1} + d \mu_t}{a_t}$.
+		\item Plugging in and rearranging:
+		\[ 1+R = \frac{1}{1-\frac{s}{2}} \left[ (1+r)\left(1+\frac{s}{2}\right) - \frac{s}{2} d \right] \]
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{L10: Ch 9, ex 1, part c}
+	\begin{exampleblock}{}
+		(c) How does the liquidity premium respond to an increase in the
+		dividend yield $d$? What is the intuitive reason for this result?
+	\end{exampleblock}
+	
+	\pause
+	
+	\begin{itemize}
+		\item Liquidity premium is 
+		\[ R-r = \left(1+r-\frac{d}{2}\right) \frac{s}{1-\frac{s}{2}} \]
+		\item Decreasing in $d$
+		\begin{itemize}
+			\item dividends do not suffer from stock illiquidity
+			\item if larger share of the return is generated by the dividend, investors lose less from illiquidity and require smaller liquidity premium.
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+
+
+
+
+\section{PS2: ex 2}
+
+\begin{frame}{PS2: ex 2 [Ch.9, ex.6]}
+	In Lecture 10 we saw a model of over-the-counter trading (DGP). Spread in that model is given by
+	\[
+	S=a-b=\frac{(1+z)c}{2(r+2\psi)+(1-2\psi)\phi(1-z)}
+	\]
+\end{frame}
+
+
+\begin{frame}{PS2: ex 2 part a}
+	\begin{exampleblock}{}
+		(a) Assuming $z<1$, how does the bid-ask spread respond to changes in the probability $\phi$ of finding a dealer? How does the answer depend on the value of the probability $\psi$ that the investor's valuation will change in the future?
+	\end{exampleblock}
+	
+	\pause
+	\begin{align*}
+		\frac{\partial S}{\partial \phi} & = -\frac{(1+z)c(1-z)(1-2\psi)}{[2(r+2\psi)+(1-2\psi)\phi(1-z)]^2}
+	\end{align*}
+	This fraction is positive if $\psi>1/2$, negative if $\psi<1/2$.	
+\end{frame}
+
+
+\begin{frame}{PS2: ex 2 part b}
+	\begin{exampleblock}{}
+		(b) What is the intuitive explanation for this result?
+	\end{exampleblock}
+	
+	\pause
+	
+	The model has no adverse selection, so the spread is driven by the \textit{bargaining} between dealers and traders. Increasing $\phi$ implies that traders trade with higher probability in the future. There are two effects of this:
+	\begin{itemize}
+		\item It increases traders' \alert{willingness to pay} (higher $S$) since they have less risk of getting `stuck' with the asset if their preferences change
+		\item It increases traders' \structure{bargaining power} (lower $S$) since they have higher probability of finding a dealer next period if they do not trade today
+	\end{itemize}
+	When $\psi$ is high, first effect dominates, since trader is worried about future trades. When $\psi$ is low, second effect dominates, since trader is more worried about current trade
+\end{frame}
+
+
+
+
+\end{document} 
