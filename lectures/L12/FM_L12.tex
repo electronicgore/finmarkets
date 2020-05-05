@@ -504,7 +504,7 @@
 	\structure{Market maker}
 	\begin{itemize}
 		\item \textbf{Quotes}: Suppose signal is  $y$. Set $a=y+\frac{s}{2}$ and $b=y-\frac{s}{2}$ where $s$ is the spread.
-		\item \textbf{News}: If news arrive and the new signal is $y'$, send message to cancel quotes $a$ and $b$ and post new ones: $a'=y'+\frac{s}{2}$ and $b'=y'+\frac{s}{2}$. Noise traders are slower at receiving news.
+		\item \textbf{News}: If news arrive and the new signal is $y'$, send message to cancel quotes $a$ and $b$ and post new ones: $a'=y'+\frac{s}{2}$ and $b'=y'-\frac{s}{2}$. Noise traders are slower at receiving news.
 	\end{itemize}
 	\structure{Snipers}
 	\begin{itemize}
@@ -515,17 +515,17 @@
 
 \begin{frame}{Equilibrium (2)}
 	\begin{itemize}
-		\item \textbf{Market maker profits}: The MM profits are
+		\item \textbf{Market maker profits}: The MM \structure{flow profits} (per $dt$ period, normalized by $dt$) are
 		\[
-		\lambda_{invest}\cdot \frac{s}{2}-\lambda_{jump}\cdot \mathbb{P}\left(J>\frac{s}{2}\right) \cdot \mathbb{E} \left[J-\frac{s}{2}|J>\frac{s}{2}\right] \cdot \frac{N-1}{N}.
+		\lambda_{invest}\cdot \frac{s}{2}-\lambda_{jump}\cdot \mathbb{P}\left(J>\frac{s}{2}\right) \cdot \mathbb{E} \left[J-\frac{s}{2} \mid J>\frac{s}{2}\right] \cdot \frac{N-1}{N}.
 		\]
 		\item \textbf{Sniper profits}: The profits to stale-quote snipers are
 		\[
-		\lambda_{jump}\cdot \mathbb{P} \left(J>\frac{s}{2} \right) \cdot \mathbb{E} \left[J-\frac{s}{2}|J>\frac{s}{2}\right] \cdot \frac{1}{N}.
+		\lambda_{jump}\cdot \mathbb{P} \left(J>\frac{s}{2} \right) \cdot \mathbb{E} \left[J-\frac{s}{2} \mid J>\frac{s}{2}\right] \cdot \frac{1}{N}.
 		\]
 		\item \textbf{Equilibrium condition}: Make HFT indifferent btw MM and sniper:
 		\[
-		\lambda_{invest} \cdot \frac{s}{2} = \lambda_{jump}\cdot \mathbb{P} \left(J>\frac{s}{2} \right) \cdot \mathbb{E} \left[J-\frac{s}{2}|J>\frac{s}{2}\right] .
+		\lambda_{invest} \cdot \frac{s}{2} = \lambda_{jump}\cdot \mathbb{P} \left(J>\frac{s}{2} \right) \cdot \mathbb{E} \left[J-\frac{s}{2} \mid J>\frac{s}{2}\right] .
 		\]
 		\item \textbf{Lack of competition}: Spread $s$ does not depend on $N$.
 	\end{itemize}
