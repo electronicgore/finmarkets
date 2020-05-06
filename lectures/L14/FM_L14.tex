@@ -1,0 +1,649 @@
+%%% License: Creative Commons Attribution Share Alike 4.0 (see https://creativecommons.org/licenses/by-sa/4.0/)
+%%% Slides are based heavily on earlier versions of this course taught by Jesper Rudiger.
+
+\documentclass[english,10pt
+%,handout
+,aspectratio=169
+]{beamer}
+\input{../FM_preamble.tex}
+
+
+\title{Financial Markets Microstructure \\ Lecture 14}
+
+\subtitle{Asset Price Bubbles}
+
+\author{Egor Starkov}
+
+\date{K{\o}benhavns Unversitet \\
+	Spring 2020}
+
+
+\begin{document}
+	\AtBeginSection[]{
+		\frame<beamer>{
+			\frametitle{This lecture:}
+			\tableofcontents[currentsection,currentsubsection]
+	}}
+	\frame[plain]{\titlepage}
+
+
+
+\begin{frame}{Previously on FMM}
+	\begin{itemize}
+		\item Wrapped up \textbf{HFT}
+		\item \textbf{Kondor}: effects of public information
+		\begin{itemize}
+			\item Trading volumes increase around public announcements
+			\item Possible explanation through second-order beliefs
+		\end{itemize}
+	\end{itemize}
+\end{frame}	
+
+
+\begin{frame}{Today}
+	Two stories for why bubbles may occur
+	\begin{itemize}
+		\item Rational herding
+		\begin{itemize}
+			\item Herding: following the actions of others, even when this goes against one's own private information
+			\item We will look at different explanations for why this may be rational
+		\end{itemize}
+		\item Lack of common knowledge/coordination (\cite{abreu_bubbles_2003})
+		\begin{itemize}
+			\item There is a difference between everybody knowing that an asset is overpriced, and everybody knowing that everybody knows...
+			\item Again, speculation depends on these \emph{higher-order beliefs}
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Bubbles}
+	\begin{itemize}
+		\item \textbf{Wikipedia}: ``Trade in high volumes at prices that are considerably at variance with intrinsic values''
+		\item \textbf{Investopedia}: ``A surge in equity prices, often more than warranted by the fundamentals and usually in a particular sector, followed by a drastic drop in prices as a massive sell-off occurs''
+		\item \textbf{Chicago Fed}: ``...a bubble exists when the market price of an asset exceeds its price determined by fundamental factors by a significant amount for a prolonged period''
+	\end{itemize}
+	%Here are some \hyperlink{examples}{\beamerbutton{examples}}
+\end{frame}
+
+
+\begin{frame}{Examples of bubbles}
+	\begin{columns}
+		\begin{column}{0.45\linewidth}
+			\center
+			\includegraphics[width=0.95\linewidth]{pics/Enron}
+		\end{column}
+		\begin{column}{0.55\linewidth}
+			\begin{itemize}
+				\item \textbf{Enron} was an energy company that grew spectacularly throughout the nineties; named America's most innovative company
+				\item But in October 2001 it was revealed that the company had hid billions of dollars of debts; stock price plummeted
+				\item Looks like a bubble -- but could market have done better?
+			\end{itemize}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+
+\begin{frame}{Examples of bubbles}
+	\begin{columns}
+		\begin{column}{0.55\linewidth}
+			\center
+			\includegraphics[width=0.95\linewidth]{pics/housing}
+		\end{column}
+		\begin{column}{0.45\linewidth}
+			\begin{itemize}
+				\item US \textbf{housing} market had a bubble in mid-2000s
+				\item Its burst was a significant contributor to the Great Recession
+			\end{itemize}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+
+\begin{frame}{Examples of bubbles}
+	\begin{columns}
+		\begin{column}{0.55\linewidth}
+			\center
+			\includegraphics[width=\linewidth]{pics/bitcoin}
+		\end{column}
+		\begin{column}{0.45\linewidth}
+			\begin{itemize}
+				\item And we will not even talk about \textbf{bitcoin} (and cryptocurrencies in general)...
+			\end{itemize}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+
+\begin{frame}{Examples of bubbles}
+	\begin{columns}
+		\begin{column}{0.55\linewidth}
+			\center
+			\includegraphics[width=\linewidth]{pics/Uranium}
+		\end{column}
+		\begin{column}{0.45\linewidth}
+			\begin{itemize}
+				\item In the early noughties, the price of \textbf{uranium} was upward trending
+				\item In late 2006 the Cigar Lake Mine in Canada containing the largest known undeveloped reserves was flooded
+				\item This seemingly set off an uncontrolled increase in price followed by a crash: classic bubble behavior
+			\end{itemize}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+
+
+
+
+
+\section{Herd Behavior in Financial Markets}
+
+\begin{frame}{\cite{smith_pathological_2000}: Introduction}
+	\begin{itemize}
+		\item \textbf{Herding}: ignoring private information in favor of ``wisdom of the crowd''
+		\begin{enumerate}
+			\item Herding may be the efficient response to new information or similarity between agents...
+			\item ...but it may also be the inefficient result of a certain decision making process. Here: focus on the latter
+		\end{enumerate}
+		\item In \textbf{financial markets}: momentum trading, positive-feedback trading
+		\item In 1992, a wave (a herd?) of articles showing that  herding could be result of rational \structure{informational cascade}
+		\item Today we look at this and other `rational' explanations
+		\item Note: the original article may be a bit heavy for our purposes. I will follow the retelling in \cite{smith_observational_2011}.
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Preview}
+	\begin{itemize}
+		\item Agents arrive at the market sequentially and need to make a decision
+		\item Every agent has a private signal and observes decisions of previous agents (but not their signals!)
+		\item Ideally: pool private information to find best decision
+		\item But here: \structure{sequential decision making}
+		\begin{itemize}
+			\item First-comers: make decisions based on information
+			\item But as time goes by, people may start disregarding their own information and just choose the most popular
+			\item They herd. However, this is \emph{fully rational}: public information swamps private information
+		\end{itemize}
+		\item \structure{Informational cascade}: a few pieces of information may determine everyone's choice
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Model}
+	\begin{itemize}
+		\item \textbf{State} (fundamental) $v \in \{L,H\}$;
+		\item In each period $t \in \{1,2, ...\}$ an individual arrives and needs to make a \textbf{decision} $d_t \in \{0,1\}$ (invest or not);
+		\item \textbf{Payoffs} $u(d_t,v)$:
+		\begin{itemize}
+			\item $u(0,v) = 0$,
+			\item $u(1,L) = L-m < 0$,
+			\item $u(1,H) = H-m > 0$,
+			\item (say for now that price (midquote) $m$ is fixed)
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Model: Beliefs}
+	\begin{itemize}
+		\item The big unknown is $v$. There are many beliefs about $v$ we can look at. Represent all beliefs as probabilities of $v=H$ conditional on relevant info.
+		\item Arriving agent's \structure{prior belief} is $p_t \sim F(p|v)$
+		\begin{itemize}
+			\item Composed of the initial public prior -- e.g., $1/2$
+			\item and private signal (informative of $v$, so relevant to other traders)
+		\end{itemize}
+		\item \structure{``Market belief''} $q_t$
+		\begin{itemize}
+			\item Based on the public prior
+			\item and decisions at $t = 1,2,...,t-1$
+		\end{itemize}
+		\item Agent's decision is then based on his \structure{posterior belief} $r_t$
+		\begin{itemize}
+			\item Composed from $p_t$ and $q_t$
+		\end{itemize}
+		\item All beliefs calculated using Bayes' rule
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Decisions}
+	\begin{itemize}
+		\item Agent behaves optimally $\Rightarrow$ chooses $d_t=1$ iff $r_t \geq \bar{r}$
+		\begin{itemize}
+			\item where $\bar{r} = \frac{m-L}{H-L}$
+		\end{itemize}
+		\item Use Bayes' rule to compute $r_t$: 
+		\[r_t = \frac{p_t q_t}{p_t q_t + (1-p_t) (1-q_t)}\]
+		\item Meaning that $d_t = 1$ iff $p_t \geq \bar{p}_t$, where
+		\[ \frac{\bar{p}_t}{1-\bar{p}_t} = \frac{q_t}{1-q_t} \cdot \frac{1-\bar{r}}{\bar{r}} \]
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Herds and cascades}
+	\[ \frac{\bar{p}_t}{1-\bar{p}_t} = \frac{q_t}{1-q_t} \cdot \frac{1-\bar{r}}{\bar{r}} \]
+	\vspace{-1em}
+	\begin{itemize}
+		\item Note $\bar{p}_t$ depends on $q_t$
+		\item If distribution of $p_t$ is bounded ($p_t \in [\underline{p},\bar{p}]$), then can arrive to such $q_t$ that $\bar{p}_t > \bar{p}$ or $\bar{p}_t < \underline{p}$
+		\begin{itemize}
+			\item Then agent at $t$ ignores his private info altogether and his behavior is fully determined by public information ($q_t$)
+			\item $\Rightarrow$ agent at $t+1$ faces same public info as agent at $t$ $\Rightarrow$ it overpowers private info $\Rightarrow$ decision at $t+1$ is also uninformative etc
+			\item a \alert{herd} begins due to cascade
+		\end{itemize}
+		\item Such $q_t$ will be based on finite number of private signals $\Rightarrow$ \alert{may be incorrect}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{What triggers the herd?} \label{HERD}
+	\begin{itemize}
+		\item A few incorrect signals can be enough enough to set off a herd
+		\item A small piece of information `cascades' through the system
+		\item Each agent is rational, but together they may seem stupid: their information taken together is very precise, but there is no information aggregation
+		\item Here's a particular example of how a herd may arise: \hyperlink{EXP}{\beamerbutton{YEAH!}}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Herds and cascades: comments}
+	\begin{itemize}
+		\item Incorrect herds only occur if distribution of $p_t$ is bounded -- otherwise there will always exist private signals that can overpower the public info
+		\item In a slightly richer model, the opposite outcome is also possibe -- state of permanent uncertainty in which everyone acts solely on their private signal, ignoring public information
+		\item Terminology:
+		\begin{itemize}
+			\item \structure{Herd} = action convergence ($d_{t+1} = d_t$ from some point onwards)
+			\item \structure{Cascade} = public belief convergence ($q_{t+1} = q_t$ from some point onwards)
+			\item Distinction is not super important for our purposes
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{What if we introduce a price?}
+	\begin{itemize}
+		\item Remaining discussion of herds follows \cite{bikhchandani_herd_2000}
+		\item As before: asset value $v$, and each trader starts with prior $p_t$
+		\item With probability $\pi$ the trader is a noise trader, who buys/sells/abstains with equal probability, w.p. $1-\pi$ rational as above
+		\item A risk-neutral market maker sets competitive bid-ask
+		\item What will happen?
+		\only<2|handout:0>{
+			\item \alert{Bliz quiz}: will there be herding in such model (with positive probability)? y/n
+		}
+		\pause[3]
+		\item This is standard Glosten-Milgrom
+		\item no herds
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{More layered model}
+	\begin{itemize}
+		\item However, previous result in part due to model simplicity
+		\item \cite{avery_multidimensional_1998} expand on this analysis
+		\begin{itemize}
+			\item Suppose $v \in \{0,\frac{1}{2},1\}$
+			\item If $v=\frac{1}{2}$, this is perfectly revealed by the private signal: $S_{t}=\frac{1}{2}$
+			\item If $v \in \{0,1\}$, trader $t$ receives a signal: $\mathbb{P}(S_{t}=v)=p_{t}$
+			\item Furthermore, a proportion $\mu \in \{\mu^{H}, \mu^{L}\}$ of traders have perfect information: $p_{t}=1$ after a good signal
+			\item The remaining traders have noisy info: $p_{t} \in (\frac{1}{2},1)$ after a good signal
+		\end{itemize}
+		\pause
+		\item Three levels of uncertainty (for MM): 
+		\begin{itemize}
+			\item Event uncertainty: $v=1/2$ (\alert{no event}) or $v \in \{0,1\}$ (\structure{event})
+			\item Value uncertainty: if event, $v=1$ or $v=0$
+			\item Composition uncertainty: many informed traders ($\mu^{H}$: \structure{well-informed economy}) or few ($\mu^{L}$: \alert{poorly-informed economy})
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}[label=az]
+	\frametitle{Herding can occur with pricing and multi-layered uncertainty}
+	\begin{itemize}
+		\item Before, price mechanism worked as a screening device: made sure that high types bought and low types sold
+		\item But now, it is possible to `misprice' such that herding occurs, at least temporarily
+		\begin{itemize}
+			\item Can be because $\mu = \mu_H$ so all traders know $v$, but MM does not (non-speculative bubble)
+			\item Can be because $\mu = \mu_L$ but traders do not know that and perceive past order flow as more informative than it is (speculative bubble)
+		\end{itemize}
+		\item This allows bubbles to occur
+	\end{itemize}
+	See numerical example here: \hyperlink{layers}{\beamerbutton{Appendix}}
+\end{frame}
+
+
+\begin{frame}{Other types of herding: Reputational herding}
+	A brief example.
+	\begin{itemize}
+		\item \textbf{Two  managers}: Invest or not in project of unknown value (gets imperfect signal $s \in \{1,0\}$)
+		\item \textbf{Type}: Manager is smart or dumb (doesn't know). If both managers smart, observe same $s$; if one or both dumb, observe independent $s$ %(also uncorrelated with $v$)
+		\item \textbf{Payoffs}:  Manager \structure{maximizes his expected reputation}
+		\item \textbf{Herding}: Manager 1 moves first, then manager 2 
+		\begin{itemize}
+			\item If manager 1 invests, manager 2 can deduce that $s_1=1$. Suppose $s_2=0$. Then one of the two (or both) must be dumb. 
+			\item If manager 2 does not invest, he reveals this. If player 1's  investment then succeeds, people will assume that manager 2 is the dumb manager
+			\item Investing might be better: even if the investment fails, people might think that both managers are smart, but got an `unlucky' signal
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Herding: Conclusion}
+	\begin{itemize}
+		\item \textbf{Herding}: may occur when private information cannot be easily aggregated
+		\item \textbf{Price mechanism}: alleviates problem by providing private incentives to trade and thus reveal information, which is then incorporated into prices
+		\item \textbf{Multi-layered uncertainty}: Implies that herds may still occur 
+		\item \textbf{Aside}: \emph{Momentum trading} often assumed to be a `behavioral feature': but it may be perfectly rational
+		\item \textbf{Empirical estimation of herding}: some conclusions can be tested in the data but to a very limited extent; see \cite{bikhchandani_herd_2000} for details.
+	\end{itemize}
+\end{frame}
+
+
+
+
+\section{Abreu and Brunnermeier: Bubbles and Crashes}
+
+\begin{frame}{\cite{abreu_bubbles_2003}: Introduction}
+	\begin{itemize}
+		\item Efficient market hypothesis: bubbles are impossible
+		\begin{itemize}
+			\item In finite model, use backward induction argument: no mispricing in last period, which should be foreseen in second-last period, etc. $\rightarrow$ unravelling
+		\end{itemize}
+		\item This requires that all traders agree on when the bubble will collapse (at least on the distribution of times)
+		\item Here: a model in which coordination is needed to cause a crash
+		\item Coordination, in turn, depends on beliefs about others
+		\begin{itemize}
+			\item Back to higher order beliefs
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Model}
+	\begin{itemize}
+		\item \textbf{Single asset traded}: value at $t$ is $v_t$
+		\item \textbf{Progress}: At $t=0$, technological progress  makes $v_t$ grow at rate $g$
+		\item \textbf{Slowdown}: at some random time $t_0$, there is a slowdown and $v_t$ growth slows to $r<g$
+		\item \textbf{Price}: Price grows at rate $g$ until either
+		\begin{itemize}
+			\item At least a fraction $\kappa$ of rational traders sell the asset ($\kappa$ is the \emph{absorption capacity} of the economy), or
+			\item The market is exogenously corrected at time $t_0+\overline{\tau}$
+		\end{itemize}
+		\item \textbf{Gradual learning}: Each period, a fraction $1/\eta$ of rational traders become aware of the mispricing
+		\begin{itemize}
+			\item But they don't know $t_0$, and hence don't know how many others know of the mispricing
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Interpretation}
+	\begin{itemize}
+		\item Behavioral traders think progress will last forever
+		\begin{itemize}
+			\item When enough rational traders sell, absorption capacity of behavioral traders is reached and  price must drop
+			\item At this point, everybody becomes aware of the mispricing
+			\item If this doesn't happen, then market exogenously collapses when mispricing is too big
+		\end{itemize}
+		\item Rational traders know progress is temporary, but not when it stops
+		\begin{itemize}
+			\item Implication: when you learned that progress has stopped, you are not sure what other people believe
+			\item Suppose you learn at $t'$. At $t' + \eta$ you know that everybody knows
+			\item But somebody else might learn that progress stopped at $t''>t'$; he will not know that everybody knows until $t''+\eta>t'+\eta$
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Graphically}
+	\center
+	\includegraphics[width=0.57 \paperwidth]{pics/AbreuBrun}
+	
+	(Note: graph is from the paper and it has a mistake)
+\end{frame}
+
+
+\begin{frame}{Why bubbles then?}
+	\begin{itemize}
+		\item In this model there is never \emph{common knowledge}: you are never sure what the others know. This prevents usual backward induction
+		\item At least $\kappa$ traders must sell to burst bubble: coordination important
+		\item But it is hard to coordinate without common knowledge
+		\item Therefore, mispricing can go on for a long time
+		\begin{block}{}
+			Even if traders realize the market will crash, they don't know exactly when, incentivizing them to ride the bubble
+		\end{block}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Definition of a bubble}
+	\begin{itemize}
+		\item In this setting, let's use a very strict definition of a bubble
+		\item In particular, notice that after $t_0+\eta\kappa$, the mispricing is known by enough traders to correct it
+		\begin{block}{Definition}
+			A bubble is persistent mispricing \emph{beyond $t_0+\eta \kappa$}
+		\end{block}
+		\item Thus, in this definition it is not enough that the asset is priced over its value for there to be a bubble
+		\item The mispricing must be well-known to traders
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Some observations}
+	The following is shown in the paper:
+	\begin{itemize}
+		\item Traders either take the maximum long (buy) or short (sell) position
+		\item When a rational trader `goes short', all traders who learned of the mispricing before him will already have gone short
+		\item Once a rational trader goes short, he never re-enters the market: he waits for the bubble to burst
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Bubbles and crashes}
+	Generally, in the model, there are two possible types of equilibria
+	\begin{itemize}
+		\item Exogenous crash
+		\begin{itemize}
+			\item When the growth rate $g$ under the bubble is high, dispersion $\eta$ and absorption capacity $\kappa$ are high,  informed traders sell out very slowly
+			\item In effect, they take a chance on `riding the bubble'
+			\item As a result, selling will never be sufficient to burst the bubble, which will burst at the exogenous date $t_0+\overline{\tau}$
+		\end{itemize}
+		\item Endogenous crash
+		\begin{itemize}
+			\item When traders have incentives to sell quick, this leads to unraveling: enough traders will sell to make the bubble burst
+			\item However, `bubble incentives' remain: the sooner the price crashes, the smaller the cost of riding the bubble
+			\item Therefore, the bubble will be smaller but still exist
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{The role of `sunspots'}
+	\begin{itemize}
+		\item \textbf{Sunspot equilibria}: refers to equilibria where \emph{economically irrelevant information} has an influence
+		\item In our case: suppose an uninformative event is observed with a certain probability 
+		\item If informed traders decide to coordinate their actions around this event (eg. use the strategy `sell when event occurs'), it can become pivotal
+		\item Example from article: in 1980s trade data had big market impact in the US; in 1990s Alan Greenspan's statements were more influential
+		\begin{itemize}
+			\item If sufficiently many people react to an event you must too - even if the event carries little/no information by itself
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Abreu and Brunnermeier: Conclusion}
+	\begin{itemize}
+		\item Standard arguments against bubbles rely a lot on common knowledge between agents
+		\item When we dispense with common knowledge, belief dispersion among agents can cause mispricings to persist even after everyone has observed the mispricing
+		\item Thus, bubbles may not be fixed by the market
+		\item As a side-effect, seemingly insignificant events can serve to coordinate actions and cause crashes
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Next time: auctions}
+	\begin{itemize}
+		\item Look at models of how traders bid for the asset under imperfect competition from other bidders
+		\item Extracurricular
+	\end{itemize}
+\end{frame}
+
+
+
+
+\appendix
+\begin{frame}[allowframebreaks]{References}
+	\bibliography{../teaching}
+	\bibliographystyle{abbrvnat}
+\end{frame}
+
+
+\begin{frame}{Herding example: Setup} \label{EXP}
+	\begin{itemize}
+		\item This example follows that in \cite{bikhchandani_herd_2000}
+		\item \textbf{Payoffs}: Let $L-m = -1$; $H-m = 1$
+		\begin{itemize}
+			\item Then $\bar{r} = 1/2$
+			\item Suppose that agents flip a $50/50$ coin whenever indifferent
+		\end{itemize}
+		\item \textbf{Private signals}: $S_t \in \{-1,1\}$, correct w.p. $p$, i.e. $\mathbb{P}(S_t=1|v=H) = \mathbb{P}(S_t=-1|v=L) = p$ and $\mathbb{P}(S_t=1|v=L) = \mathbb{P}(S_t=-1|v=H) = 1-p$.
+		
+		Then private priors are $p_t = p$ if $S_t = 1$ and $p_t = 1-p$ if $S_t = -1$
+		\item For our example, suppose the following signal sequence realized:
+		\vspace{-1em}
+		\begin{align*}
+			S_1	& = +1 \\
+			S_i	& = -1 \, \text{ for all } i \geq 2,
+		\end{align*}
+		\vspace{-2.5em}
+		
+		i.e., the stream of signals is $\{\structure{+1},\alert{ -1, -1, -1, -1, ...}\}$
+		\item Denote by $\mathbb{I}_i$ agent $i$'s information set
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Herding example: Analysis}
+	\textbf{First agent}
+	\begin{itemize}
+		\item Information set $\mathbb{I}_1=\{S_1=1\}$
+		\item Notice
+		\[
+			r_1 = \mathbb{P}(v=H|\mathbb{I}_1) = p_1 = \frac{\frac{1}{2} p}{\frac{1}{2} p+\frac{1}{2} (1-p)} = p 
+		\]
+		\item Since $p>1/2$: invest.
+		\item \textbf{Thus}, given $S_1=1$, first agent invests: $d_1=1$
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Herding example: Analysis (2)}
+	\textbf{Second agent}
+	\begin{itemize}
+		\item Second agent can perfectly deduce first agent's signal: $S_1=1$ if $d_1=1$, $S_1=-1$ otherwise.
+		\begin{itemize}
+			\item In other words, $q_2 = r_1$, no information is lost.
+			\item Therefore, his information set is $\mathbb{I}_2=\{S_1=1,S_2=-1\}$
+		\end{itemize}
+		\item Signals are \emph{symmetric}, so
+		\[ r_2 = \mathbb{P}(v=H|\mathbb{I}_2)	 = \frac{\frac{1}{2} p(1-p)}{\frac{1}{2} p(1-p)+\frac{1}{2} (1-p)p} = 1/2 \]
+		\item Thus, second agent is indifferent
+		\item Suppose coin-toss decides invest: $d_2=1$
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Herding example: Analysis (3)}
+	\textbf{Third agent}
+	\begin{itemize}
+		\item Third agent can also perfectly deduce the first agent's signal
+		\item Information set is $\mathbb{I}_3=\{S_1=1, d_2=1, S_3=-1\}$. Furthermore,  
+		\begin{align*}
+		\mathbb{P}(d_2=1|v=H)	&=p +(1-p) (1/2)=(1+p)/2\\
+		\mathbb{P}(d_2=1|v=L)	& =p(1/2) +(1-p)=1-p/2
+		\end{align*}
+		\item Thus
+		\[
+			\mathbb{P}(v=H|\mathbb{I}_3) 	
+			 = \frac{\frac{1}{2}p \frac{1+p}{2}(1-p)}{\frac{1}{2}p\frac{1+p}{2}(1-p)+\frac{1}{2}(1-p)(1-\frac{p}{2})p} 
+			=\frac{1}{3} + \frac{p}{3}>\frac{1}{2}
+		\]
+		\item Hence, $d_3=1$
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Herding example: Analysis (4)}
+	\textbf{Fourth agent}
+	\begin{itemize}
+		\item Information set   $\mathbb{I}_4=\{S_1=1,d_2=d_3=1, S_4=-1\}$
+		\item Agent four knows that agent three would have invested regardless of his signal
+		\item So he doesn't learn anything from $d_3$. In consequence:
+		\[
+		\mathbb{P}(v=H|\mathbb{I}_4) =\mathbb{P}(v=H|\mathbb{I}_3) 	=\frac{1}{3} + \frac{p}{3}		
+		\]
+		\item Hence $d_4=1$
+		\item Same for all subsequent agents: $d_i=I$ for all $i$
+		\item We have a herd! -- and a very inefficient one at that! (Look at signals) \hyperlink{HERD}{\beamerbutton{back}}
+	\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}{Herding with prices example} \label{layers}
+	Take an extreme case of Avery and Zemsky's model: suppose the following parameter values
+	\begin{itemize}
+		\item $\mathbb{P}(V=1/2)=0.9999$: very small prior probability of an `event'; $\mathbb{P}(V=1)=\mathbb{P}(V=0)=0.00005$
+		\item $\frac{\mathbb{P}(\mu=\mu^{H})}{\mathbb{P}(\mu=\mu^{L})}=99$: high prior probability of a well-informed economy
+		\item If economy is poorly informed: all traders have $p_{i}=0.51$, i.e. very poor signal about value
+	\end{itemize}
+	Suppose we're in an unlikely state of the world
+	\begin{enumerate}
+		\item Value is low ($V=0$) implying that there is an event
+		\item The economy is poorly informed ($\mu=\mu^L$)
+	\end{enumerate}
+	How will  market learn state of the world? Let's look at a  simulation
+\end{frame}
+
+
+\begin{frame}{Herding with prices example (2)}
+	\includegraphics[width=0.10\paperwidth]{pics/PriceBubble1} \hfill
+	\includegraphics[width=0.12\paperwidth]{pics/Trade1} \hfill \hfill
+	
+	Three of first five traders buy  
+	\begin{itemize}
+		\item Since economy poorly informed: herd buying starts
+		\item Market thinks it's likely that economy is well informed: price goes up
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Herding with prices example (3)}
+	\includegraphics[width=0.17\paperwidth]{pics/Price2} \hfill
+	\includegraphics[width=0.17\paperwidth]{pics/Trade2} \hfill \hfill
+	
+	As the price goes up, the herd is broken: trading volume diminishes as rational traders drop out
+\end{frame}
+
+
+\begin{frame}{Herding with prices example (4)}
+	\includegraphics[width=0.4\paperwidth]{pics/PriceBubble}
+	\includegraphics[width=0.4\paperwidth]{pics/TradeInBubble}
+	
+	As herd becomes apparent, MM realizes that only a few informative trades have been made $\rightarrow$ price toward 1/2
+\end{frame}
+
+
+\begin{frame}{Herding with prices example (5)}
+	\includegraphics[width=0.4\paperwidth]{pics/PriceBubble}
+	\includegraphics[width=0.4\paperwidth]{pics/TradeInBubble}
+	
+	Rational traders only re-enter in period 220: trade based on information (buy if high/sell if low)
+	
+	In the example, the price is persistently above the level that would ensue if traders pooled their information \hfill \hyperlink{az}{\beamerbutton{Back}}
+\end{frame}
+
+
+\end{document} 
