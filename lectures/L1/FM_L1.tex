@@ -1,7 +1,10 @@
 %%% License: Creative Commons Attribution Share Alike 4.0 (see https://creativecommons.org/licenses/by-sa/4.0/)
 %%% Slides are based heavily on earlier versions of this course taught by Jesper Rudiger.
 
-\documentclass[english,10pt]{beamer}
+\documentclass[english,10pt
+%,handout
+,aspectratio=169
+]{beamer}
 \input{../FM_preamble.tex}
 
 
@@ -13,7 +16,7 @@ Chapters 0 and 1 of FPR}
 
 \author{Egor Starkov}
 
-\date{K{\o}benhavns Unversitet \\
+\date{K{\o}benhavns Universitet \\
 	Spring 2020}
 
 
@@ -26,30 +29,46 @@ Chapters 0 and 1 of FPR}
 
 \section{Practicalities}
 
-\begin{frame}{Today's plan}
-\tableofcontents[]
+%\begin{frame}{Today's plan}
+%\tableofcontents[]
+%\end{frame}
+
+
+%\begin{frame}{Contact Information}
+%Lecturer: Egor Starkov
+%\begin{itemize}
+%	\item Email: \href{mailto:egor.starkov@econ.ku.dk}{\texttt{egor.starkov@econ.ku.dk}}
+%	\item Office: 26.1.13
+%	\item Office hours: by appointment
+%\end{itemize}
+%\end{frame}
+%
+%
+%\begin{frame}{Course Information}
+%\begin{itemize}
+%	\item 2 hours of lectures once or twice a week
+%	\item \alert{Lectures}: Wednesdays 13.00-15.00, CSS 35-01-05 (week 6-21); 
+%		\\ \structure{Sections}: Fridays 10.00-12.00, CSS 25-01-53 (weeks 7,9,11,13,17).
+%	\item Everything (lectures, problem sets for exercise classes, etc.) is on Absalon -- check regularly or subscribe for updates.
+%	\item I will upload the slides before the lectures for you to print out.
+%\end{itemize}
+%\end{frame}
+
+
+%\begin{frame}
+%	\centering
+%	\includegraphics[scale=0.3]{pics/timetable}
+%\end{frame}
+
+
+\begin{frame}{Course information}
+	\begin{itemize}
+		\item Lecturer: Egor Starkov
+		\item 16 lectures, 5 exercise classes
+		\item course materials (slides, problem sets) available at \url{https://starkov.site}
+	\end{itemize}
 \end{frame}
 
-
-\begin{frame}{Contact Information}
-Lecturer: Egor Starkov
-\begin{itemize}
-	\item Email: \href{mailto:egor.starkov@econ.ku.dk}{\texttt{egor.starkov@econ.ku.dk}}
-	\item Office: 26.1.13
-	\item Office hours: by appointment
-\end{itemize}
-\end{frame}
-
-
-\begin{frame}{Course Information}
-\begin{itemize}
-	\item 2 hours of lectures once or twice a week
-	\item \alert{Lectures}: Wednesdays 13.00-15.00, CSS 35-01-05 (week 6-21); 
-		\\ \structure{Sections}: Fridays 10.00-12.00, CSS 25-01-53 (weeks 7,9,11,13,17).
-	\item Everything (lectures, problem sets for exercise classes, etc.) is on Absalon -- check regularly or subscribe for updates.
-	\item I will upload the slides before the lectures for you to print out.
-\end{itemize}
-\end{frame}
 
 
 \begin{frame}{Problem sets and Exam}
@@ -67,13 +86,13 @@ Lecturer: Egor Starkov
 \end{frame}
 
 
-\begin{frame}{Course Materials}
+\begin{frame}{Course materials}
 \begin{itemize}
 	\item We will be following the textbook for the most part (exercises included),
 	\begin{itemize}
 		\item Thierry Foucault, Marco Pagano and Ailsa R{\"o}ell: “Market Liquidity: Theory Evidence and Policy,” Oxford University Press, 2013. 439 pages.
 	\end{itemize}
-	\item Switch to research articles towards the end of the course.
+	\item Switch to research articles towards the end of the course (L11).
 \end{itemize}
 \end{frame}
 
@@ -87,16 +106,79 @@ Lecturer: Egor Starkov
 \end{frame}
 
 
-\begin{frame}{Today's plan}
-\begin{itemize}
-	\item Get a grasp of what we mean, broadly speaking, when we talk about financial markets
-	\item Motivate why we want to study financial markets, and why they are different from the markets you have seen until now
-	\item Introduce some of the key concepts and language
-	\item Look at some basic examples of how markets work
-	\item Categorize the most important types of institutions
-	\item Think about what policy issues might be relevant
-\end{itemize}
+%\begin{frame}{Today's plan}
+%\begin{itemize}
+%	\item Get a grasp of what we mean, broadly speaking, when we talk about financial markets
+%	\item Motivate why we want to study financial markets, and why they are different from the markets you have seen until now
+%	\item Introduce some of the key concepts and language
+%	\item Look at some basic examples of how markets work
+%	\item Categorize the most important types of institutions
+%	\item Think about what policy issues might be relevant
+%\end{itemize}
+%\end{frame}
+
+
+\begin{frame}{Why study markets?}
+	\begin{enumerate}
+		\item What is a market?
+		\begin{itemize}
+			\item Institution for property rights exchange
+		\end{itemize}
+		\pause
+		\item Why do we study markets?
+		\begin{itemize}
+			\item Want property rights to be allocated \structure{efficiently} in the society
+			\item Smooth functioning of markets is essential for this
+		\end{itemize}
+	\end{enumerate}
 \end{frame}
+
+
+\begin{frame}{Why study Financial Markets?}
+	\begin{itemize}
+		\item \textbf{Financial assets}: move wealth across time and contingencies: 
+		\begin{itemize}
+			\item Financial assets provide `contingent cash flows'
+			\item Stocks, bonds, derivatives...
+		\end{itemize}
+		\item \textbf{Financial markets}: markets for financial assets
+		\pause
+		\item \textbf{Purposes} of financial markets:
+		\begin{itemize}
+			\item Forum for trade in the stock (\alert{consolidation});
+			\item Each trader can compare his private valuation against the current price (\alert{transparency});
+			\item Guarantee of getting what is paid for (\alert{security})
+		\end{itemize}
+		\item \textbf{Specifics} of financial markets:
+		\begin{itemize}
+			\item Usually organized in a specific way
+			\item Feature to a lot of asymmetric information
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Types of Financial Markets}
+	\begin{itemize} 
+		\item \textbf{Primary markets}: ``Allocate savings to investment''
+		\begin{itemize}
+			\item Issues of new assets (typically by investment bank)
+		\end{itemize}
+		\item \textbf{Secondary markets}: ``Reallocate investments over savers''
+		\begin{itemize}
+			\item Trade in existing assets on exchange
+		\end{itemize}	
+		\item This course: focus on secondary markets 
+		\begin{itemize}
+			\item Stock and bond markets
+			\item Derivative markets
+			\item Currency (FX) markets
+			\item Most insights will apply to commodity markets that deal in futures (oil, metals...) 
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
 
 
 \begin{frame}{Motivating questions}
@@ -116,117 +198,88 @@ Lecturer: Egor Starkov
 \end{frame}
 
 
-\begin{frame}{Many things happening now}
-\begin{figure}
-	\includegraphics[width=.8\linewidth]{pics/markets2020}
-	\caption{The Guardian, January 6}
-	%NOTE: photo: Kuwait exchange trading floor.
-	%NOTE: Stock exchanges dropped on Jan 7 after Trump's attack on Iran and the retaliation that followed. Oil prices surged. A rebound followed after both sides announced easing out.
-\end{figure}
-\end{frame}
-
-
-\begin{frame}{Approach}
+\begin{frame}{Course overview}
 \begin{itemize}
-	\item Institutional details, policy issues, applications:
-	\begin{itemize}
-		\item Chapters 1, 6-10; articles
-		\item Topics outside book: public information, bubbles
-	\end{itemize}
-	\item Theories to understand and to analyze policy:
-	\begin{itemize}
-		\item Chapters 3-4, 6-10; articles
-	\end{itemize}
-	\item Some empirical issues:
-	\begin{itemize}
-		\item Chapters 2 and 5; articles
-	\end{itemize}
-	\item Prerequisites:
-	\begin{itemize}
-		\item Finance, micro, games, (math)
-	\end{itemize}
+	\item Institutional details, policy issues, applications (ch.1, 6-10, articles)
+	\item Theories to understand and to analyze policy (ch.3-4, 6-10, articles)
+	\item Some empirical issues (ch.2, 5, articles)
 \end{itemize}
-\end{frame}
 
+\textbf{Prerequisites}: Finance, micro, games, (math)
 
-\begin{frame}{Main goals}
-\begin{enumerate}
-	\item Explain, discuss and interpret concepts and results from textbook and articles
-	\item Derive and analyze results in models
-	\item Discuss possible applications of theoretical concepts to problems
-\end{enumerate}
-Method: Carefully read texts, combine with facts, discuss, try problems
-\pause
-\quad
 \textbf{Disclaimer}: We focus on `rational' models in this course.
 Behavioral finance is a complementary and exciting topic. See
 Alexander Sebald's course.
 \end{frame}
 
 
-\begin{frame}{Role of Financial Markets}
-\begin{itemize}
-	\item \textbf{Financial assets}: move wealth across time and contingencies: 
-	\begin{itemize}
-		\item Financial assets provide `contingent cash flows'
-		\item Stocks, bonds, derivatives...
-	\end{itemize}
-	\item \textbf{Financial markets}: markets for financial assets
-	\item Purposes of financial markets:
-	\begin{itemize}
-		\item Forum for trade in the stock (\alert{consolidation});
-		\item Each trader can compare his private valuation against the current price (\alert{transparency});
-		\item Guarantee of getting what is paid for (\alert{security})
-	\end{itemize}
-\end{itemize}
+%\begin{frame}{Many things happening now}
+%	\begin{figure}
+%		\includegraphics[width=.78\linewidth]{pics/markets2020}
+%		\caption{The Guardian, January 6}
+%		%NOTE: photo: Kuwait exchange trading floor.
+%		%NOTE: Stock exchanges dropped on Jan 7 after Trump's attack on Iran and the retaliation that followed. Oil prices surged. A rebound followed after both sides announced easing out.
+%	\end{figure}
+%\end{frame}
+
+
+%\begin{frame}{Main goals}
+%\begin{enumerate}
+%	\item Explain, discuss and interpret concepts and results from textbook and articles
+%	\item Derive and analyze results in models
+%	\item Discuss possible applications of theoretical concepts to problems
+%\end{enumerate}
+%Method: Carefully read texts, combine with facts, discuss, try problems
+%\pause
+%
+%\textbf{Disclaimer}: We focus on `rational' models in this course.
+%Behavioral finance is a complementary and exciting topic. See
+%Alexander Sebald's course.
+%\end{frame}
+
+
+\section{Core concepts}
+
+\begin{frame}{Today's plan}
+	\tableofcontents[currentsection]
 \end{frame}
 
-
-\begin{frame}{Types of Financial Markets}
-\begin{itemize} 
-	\item \textbf{Primary markets}: ``Allocate savings to investment''
-	\begin{itemize}
-		\item Issues of new assets (typically by investment bank)
-	\end{itemize}
-	\item \textbf{Secondary markets}: ``Reallocate investments over savers''
-	\begin{itemize}
-		\item Trade in existing assets on exchange
-	\end{itemize}	
-	\item This course: focus on secondary markets 
-\end{itemize}
-\end{frame}
-
-
-\begin{frame}[label=main2]{Trade and Prices}
+\begin{frame}{Trade and Prices}
 \begin{itemize}
 	\item Price theory is fundamental to economics
 	\begin{itemize}
 		\item Law of one price; no arbitrage
-		%TODO: SMBC here?
 	\end{itemize}
-	\item In financial markets: often a \textit{bid} and an \textit{ask} price. The difference between the two is called the `bid-ask spread' \hyperlink{bidask}{\beamerbutton{bid-ask}}
+	\item In financial markets: often a \textit{bid} and an \textit{ask} price. The difference between the two is called the `\textbf{bid-ask spread}'
 	\begin{itemize}
 		\item We will spend time analyzing what drives this spread
 	\end{itemize}
-	\item Important question: How are prices formed?
-	\begin{itemize}
-		\item Shed light on the invisible hand
-		\item Difference to standard market theory: assume that agents are strategic ($\rightarrow$ game theory) 
-	\end{itemize}
-	\item Do markets result in efficient allocations?
+%	\item Important question: How are prices formed?
+%	\begin{itemize}
+%		\item Shed light on the invisible hand
+%		%\item Difference to standard market theory: assume that agents are strategic ($\rightarrow$ game theory) 
+%	\end{itemize}
+	%\item Do markets result in efficient allocations?
 \end{itemize}
 \end{frame}
 
 
-\begin{frame}{Example: Google Stock}
-\includegraphics[width=1\linewidth]{pics/StockSummary_Google}
+\begin{frame}
+	\centering
+	\includegraphics[width=.3\paperwidth]{pics/Image_XRates}
+\end{frame}
+
+
+\begin{frame}
+	\centering
+	\includegraphics[width=1\linewidth]{pics/StockSummary_Google}
 \end{frame}
 
 
 \begin{frame}[label=main4]{Fundamental Value}
 \begin{itemize}
 	\item Consider Google Stock
-	\item What is the fundamental value of its stock? Where does it come from?
+	\item What is the \textbf{fundamental value} of its stock? Where does it come from?
 	\begin{enumerate}
 		\item R+D
 		\item Governance
@@ -235,6 +288,8 @@ Alexander Sebald's course.
 		\item ...
 	\end{enumerate}
 	\item In this course: take the `fundamental value' as given and analyze how it translates into prices
+	
+	\item \textbf{Price discovery}: how much information about the fundamental value can be extracted from market prices?
 	
 	\hyperlink{quote}{\beamerbutton{Quote}}
 \end{itemize}
@@ -246,10 +301,12 @@ Alexander Sebald's course.
 	\item So far, you have been used to analyzing (long-run) equilibrium allocations and prices
 	\item In practice, prices adjust to temporary imbalances
 	\begin{itemize}
+		\item Not everyone who wants to trade in a given asset is present in the market at the same time
 		\item Example: too many sellers $\rightarrow$ prices lower in short run
 		\item Example: costly to execute large order quickly
 	\end{itemize}
-	\item These effects are related to the \structure{liquidity} of the asset
+	\pause
+	\item These effects are related to the \textbf{liquidity} of the asset
 	\begin{itemize}
 		\item Wikipedia: `market liquidity' is a market's ability to facilitate an asset being sold quickly without having to reduce its price very much
 		\item Easy to sell a Google stock (many potential buyers), but maybe hard for a stock of a small Danish company
@@ -267,32 +324,32 @@ Alexander Sebald's course.
 		\item You may observe previous trading prices, but nothing assures that future trading prices will be the same
 		\item You may observe quotes from sellers/buyers, but quotes are normally only valid for a specific amount of stocks
 	\end{itemize}
-	\item A useful concept is \structure{market depth}: it measures how big an order is required to change the price of an asset by, say, 10 cents
+	\item A useful concept is \textbf{market depth}: it measures how big an order is required to change the price of an asset by, say, 10 cents
 \end{itemize}
 \end{frame}
 
 
-\begin{frame}{Finally... The Big Issue}
-\begin{itemize}
-	\item Since this is a course on financial markets, we will also try to speak (a bit) about recent big events.
-	For instance...
-	
-	\begin{minipage}{.4\textwidth}
-		\begin{figure}
-		\includegraphics[width=1\linewidth]{pics/Graph_HousePrices}
-		\caption{Housing bubble}
-		\end{figure}
-	\end{minipage}
-	\quad
-	\begin{minipage}{.4\textwidth}
-		\begin{figure}
-		\includegraphics[width=1.3\linewidth]{pics/Graph_Nasdaq}
-		\caption{Tech bubble (Nasdaq index)}
-		\end{figure}
-	\end{minipage}
-	\item The last lectures of the course will be about this
-\end{itemize}
-\end{frame}
+%\begin{frame}{Finally... The Big Issue}
+%\begin{itemize}
+%	\item Since this is a course on financial markets, we will also try to speak (a bit) about recent big events.
+%	For instance...
+%	
+%	\begin{minipage}{.4\textwidth}
+%		\begin{figure}
+%		\includegraphics[width=1\linewidth]{pics/Graph_HousePrices}
+%		\caption{Housing bubble}
+%		\end{figure}
+%	\end{minipage}
+%	\quad
+%	\begin{minipage}{.4\textwidth}
+%		\begin{figure}
+%		\includegraphics[width=1.3\linewidth]{pics/Graph_Nasdaq}
+%		\caption{Tech bubble (Nasdaq index)}
+%		\end{figure}
+%	\end{minipage}
+%	\item The last lectures of the course will be about this
+%\end{itemize}
+%\end{frame}
 
 
 
@@ -339,6 +396,7 @@ Two rough categories of market setups
 		\item Frequency of trading: how often?
 		\item Order precedence: price/time/public
 		\item Pricing rule: uniform/discriminatory price, determined from orders/taken from other exchange
+		\item Opening/closing: are there any special trading rules?
 	\end{itemize}
 \end{itemize}
 \end{frame}
@@ -435,6 +493,19 @@ Two rough categories of market setups
 	\begin{itemize}
 		\item \textbf{Welfare planner}: Competition - efficiency 
 		\item \textbf{Trader}: Liquidity - transparency - information
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Players}
+	\begin{itemize}
+		\item \textbf{Traders/investors}: the end-``consumers'' or suppliers of the asset
+		\begin{itemize}
+			\item \structure{Retail investors} vs \structure{institutional investors}
+			\item \alert{Informed} vs \alert{uninformed} investors
+		\end{itemize}
+		\item \textbf{Brokers}: the intermediaries who relay investors' orders to the market (investment banks)
+		\item \textbf{Dealers/market-makers}: match orders from different sides of the market
 	\end{itemize}
 \end{frame}
 
