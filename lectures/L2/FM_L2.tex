@@ -1,8 +1,10 @@
 %%% License: Creative Commons Attribution Share Alike 4.0 (see https://creativecommons.org/licenses/by-sa/4.0/)
 %%% Slides are based heavily on earlier versions of this course taught by Jesper Rudiger.
 
-\documentclass[english,10pt]{beamer}
-%\documentclass[english,10pt,handout]{beamer}
+\documentclass[english,10pt
+%,handout
+,aspectratio=169
+]{beamer}
 \input{../FM_preamble.tex}
 
 
@@ -20,52 +22,53 @@ Chapter 2 of FPR}
 
 
 \begin{document}
+	\AtBeginSection[]{
+		\frame<beamer>{
+			\frametitle{This lecture:}
+			\tableofcontents[currentsection,currentsubsection]
+	}}
 \frame[plain]{\titlepage}
-\addtocounter{framenumber}{-1}
+%\addtocounter{framenumber}{-1}
 
 
-\section{Revision}
-
-\begin{frame}{Today on FMM:}
-	\tableofcontents[currentsection]
-\end{frame}
+%\section{Revision}
 
 
 \begin{frame}{What did we do last week?}
 	\begin{enumerate}
-		\item Introduce financial markets broadly speaking and motivate why we wanted to talk about it
-		\item Compare to classic `Walrasian' markets
-		\begin{itemize}
-			\item In financial markets, traders are normally strategic (i.e. not price takers) and timing matters
-			\item Thus, markets may not be efficient: enter policy
-		\end{itemize}
-		\item Introduce some of the key concepts and language: dealer sets bid/ask price, market/limit order
-		\item Categorize the most important types of institutions:  order-driven markets (auctions)/dealer markets
-		\item Think about issues: bubbles, role of public/private information, policy
+		\item Introduced \structure{financial markets} broadly speaking and motivate why we wanted to talk about it
+		%\item Compared to classic `Walrasian' markets
+		%\begin{itemize}
+		%	\item In financial markets, traders are normally strategic (i.e. not price takers) and timing matters
+		%	\item Thus, markets may not be efficient: enter policy
+		%\end{itemize}
+		\item Introduced some of the key \structure{concepts and language}: dealer sets bid/ask price, market/limit order
+		\item Categorizde the most important types of \structure{institutions}:  order-driven markets (auctions)/dealer markets
+		%\item Thought about issues: bubbles, role of public/private information, policy
 	\end{enumerate}
 \end{frame}
 
 
-\begin{frame}{Problems from last time}
-	\begin{itemize}
-		\item Find bid and ask prices for Facebook shares and for Microsoft. Which stock exchange do they come from? 
-		%NOTE: FB listed on NASDAQ, BMV Mexico, and Xetra (Frankfurt); Microsoft on NASDAQ, SIX Swiss Ex, and Vienna
-		\item Read the article (on Absalon) about London Metal Exchange. What is the value of keeping the ``open outcry'' trading floor in the age of digital trading?
-		%NOTE: can also trade more sophisticated contracts, these trades also generate daily prices for other traders; repeated game reputation concerns enter in any way?
-		\item \textcolor{gray}{Exercises 1-3 on pages 44-45 in the textbook} - Friday
-	\end{itemize}
-\end{frame}
-
-
-\begin{frame}{London Metal Exchange}
-	\centering
-	\includegraphics[scale=0.6]{pics/lme}
-\end{frame}
+%\begin{frame}{Problems from last time}
+%	\begin{itemize}
+%		\item Find bid and ask prices for Facebook shares and for Microsoft. Which stock exchange do they come from? 
+%		%NOTE: FB listed on NASDAQ, BMV Mexico, and Xetra (Frankfurt); Microsoft on NASDAQ, SIX Swiss Ex, and Vienna
+%		\item Read the article (on Absalon) about London Metal Exchange. What is the value of keeping the ``open outcry'' trading floor in the age of digital trading?
+%		%NOTE: can also trade more sophisticated contracts, these trades also generate daily prices for other traders; repeated game reputation concerns enter in any way?
+%		\item \textcolor{gray}{Exercises 1-3 on pages 44-45 in the textbook} - Friday
+%	\end{itemize}
+%\end{frame}
+%
+%
+%\begin{frame}{London Metal Exchange}
+%	\centering
+%	\includegraphics[scale=0.6]{pics/lme}
+%\end{frame}
 
 
 \begin{frame}{Today}
 	\begin{itemize}
-		\item Liquidity: why do we care?
+		\item \structure{Liquidity}: why do we care?
 		\item How can we measure it?
 		\item What data problems are there? How can we get around these to measure liquidity?
 		\item What do we typically find?
@@ -74,10 +77,6 @@ Chapter 2 of FPR}
 
 
 \section{Liquidity}
-
-\begin{frame}{Today on FMM:}
-	\tableofcontents[currentsection]
-\end{frame}
 
 
 \begin{frame}{What is liquidity?}
@@ -148,10 +147,6 @@ Chapter 2 of FPR}
 
 \section{Measures of Liquidity}
 
-\begin{frame}{Today on FMM:}
-	\tableofcontents[currentsection]
-\end{frame}
-
 
 \begin{frame}{Liquidity measures}
 There is not a unique measure of liquidity -- today we will consider several:
@@ -176,7 +171,7 @@ When quote data are not available: estimate them using \structure{Roll's measure
 			\includegraphics[scale=0.34]{pics/L2_directions}
 		\end{center}
 		\pause
-		\item Notice that price is sometimes inside spread: price improvements (either hidden limits orders or price improvement given by dealer)
+		\item Notice that price is sometimes inside spread: price improvements (either hidden limit orders or price improvement given by dealer)
 		\item Also a price outside spread (recall bid/ask only valid for x units)
 	\end{itemize}
 \end{frame}
@@ -313,10 +308,6 @@ When quote data are not available: estimate them using \structure{Roll's measure
 
 \section{Estimating Direction of Trade}
 
-\begin{frame}{Today on FMM:}
-\tableofcontents[currentsection]
-\end{frame}
-
 
 \begin{frame}{Estimating direction of trade}
 	\begin{itemize}
@@ -385,10 +376,6 @@ When quote data are not available: estimate them using \structure{Roll's measure
 
 \section{Estimating Quotes}
 
-\begin{frame}{Today on FMM:}
-	\tableofcontents[currentsection]
-\end{frame}
-
 
 \begin{frame}{Quote data}
 	\begin{itemize}
@@ -456,21 +443,15 @@ When quote data are not available: estimate them using \structure{Roll's measure
 
 \section{Other Measures of Liquidity}
 
-\begin{frame}{Today on FMM:}
-	\tableofcontents[currentsection]
-\end{frame}
-
 
 \begin{frame}{Price impact}
 \begin{itemize}
-	\item How much do trades affect prices? \alert{Price impact} ($\lambda$)
+	\item How much do trades affect prices? \alert{Price impact} $\lambda$;  $1/\lambda$ captures market \textit{depth}
 	\[
 	\Delta m_t = \lambda q_t + \epsilon_t.
 	\]
-	Here $q_t$ is the \structure{order imbalance} in period $t$
-	
+	Here $q_t$ is the \structure{order imbalance} in period $t$. 	
 	In our example: $\lambda = 0.15 $ ($q_t$ in 100,000EUR)
-	\item  $\lambda$ captures price impact;  $1/\lambda$ captures market \textit{depth}
 	\item \alert{Hasbrouck measure} ($\gamma$): sensitivity of returns to trading volume (\citet{hasbrouck_empirical_2007})
 	\[
 	|\Delta m_t | = \gamma Vol_t + \epsilon_t.
