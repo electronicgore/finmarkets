@@ -1,8 +1,10 @@
 %%% License: Creative Commons Attribution Share Alike 4.0 (see https://creativecommons.org/licenses/by-sa/4.0/)
 %%% Slides are based heavily on earlier versions of this course taught by Jesper Rudiger.
 
-\documentclass[english,10pt]{beamer}
-%\documentclass[english,10pt,handout]{beamer}
+\documentclass[english,10pt
+%,handout
+,aspectratio=169
+]{beamer}
 \input{../FM_preamble.tex}
 
 
@@ -19,10 +21,14 @@
 
 
 \begin{document}
+	\AtBeginSection[]{
+		\frame<beamer>{
+			\frametitle{This lecture:}
+			\tableofcontents[currentsection,currentsubsection]
+	}}
 	\frame[plain]{\titlepage}
-	\addtocounter{framenumber}{-1}
 
-\section{Revision and problems}
+%\section{Revision}
 
 \begin{frame}{What did we do last week?}
 \begin{enumerate}
@@ -42,15 +48,15 @@
 \end{frame}
 
 
-\begin{frame}{Exercises from last week}
-	\begin{itemize}
-		%\item In Absalon, I have attached a commission and fee schedule from Robinhood Financial. More information on \url{www.robinhood.io/}. Discuss the potential effect on other brokerage services.
-		\item In this course we mostly imply equity markets. Read the article (on Absalon) about corporate bond markets. Discuss how differences in market structures of stock and bond markets affect liquidity in these markets.
-		\item \textcolor{gray}{Recreate the graphs and figures and numbers I presented [last week] using the KrispyKreme dataset}
-		\item \textcolor{gray}{Solve exercise 8 regarding implementation shortfall, on page 75 in the textbook.
-		Discuss the meaning of $m_t$ in this analysis.}
-	\end{itemize}
-\end{frame}
+%\begin{frame}{Exercises from last week}
+%	\begin{itemize}
+%		%\item In Absalon, I have attached a commission and fee schedule from Robinhood Financial. More information on \url{www.robinhood.io/}. Discuss the potential effect on other brokerage services.
+%		\item In this course we mostly imply equity markets. Read the article (on Absalon) about corporate bond markets. Discuss how differences in market structures of stock and bond markets affect liquidity in these markets.
+%		\item \textcolor{gray}{Recreate the graphs and figures and numbers I presented [last week] using the KrispyKreme dataset}
+%		\item \textcolor{gray}{Solve exercise 8 regarding implementation shortfall, on page 75 in the textbook.
+%		Discuss the meaning of $m_t$ in this analysis.}
+%	\end{itemize}
+%\end{frame}
 
 
 \begin{frame}{Overview}
@@ -58,25 +64,34 @@
 	
 	\textbf{Part 1}: Setting up the models
 	\begin{itemize}
-	\item \textit{Weeks 3 and 4}: Dealer models 1; \structure{Glosten-Milgrom}, fixed trade size; Bayes' Rule; adverse selection, order costs and inventory risk (\structure{Stoll})
-	\item \textit{Week 5}: Dealer models 2; \structure{Kyle}, variable trade size; market depth; estimating liquidity determinants
-	\item \textit{Week 6}: Limit order book; \structure{Glosten}: static, random market order demand; market design; \structure{Parlour}: dynamic, endogenous market order demand
-	\item \textit{Week 6}: Problem set 1
+	\item \textit{Lectures 3-4}: Dealer models 1; \structure{Glosten-Milgrom}, fixed trade size; Bayes' Rule; adverse selection, order costs and inventory risk (\structure{Stoll})
+	\item \textit{Lecture 5}: Dealer models 2; \structure{Kyle}, variable trade size; market depth; estimating liquidity determinants
+	\item \textit{Lectures 6-7}: Limit order book; \structure{Glosten}: static, random market order demand; market design; \structure{Parlour}: dynamic, endogenous market order demand
+	\item \textit{Lecture 6}: Problem set 1 assigned
 	\end{itemize}
 \end{frame}
 
 
 \begin{frame}{Overview}
-\textbf{Part 2}: Applying the models; topics
+\textbf{Part 2}: Applying the models
 \begin{itemize}
-	\item \textit{Week 7}: Fragmentation costs, \structure{modified Kyle model}; fragmentation benefits, \structure{modified Glosten LOB model}
-	\item \textit{Week 8}: Transparency: search costs, \structure{modified GM model} for order flow transparency
-	\item \textit{Weeks 9-10}: Illiquidity premia; liquidity and corporate policy
-	\item \textit{Week 10}: Problem set 2
-	\item \textit{Week 11}: High-frequency trading; \structure{Biais et al.} 
-	\item \textit{Week 12}: Public information; optimal disclosure policies; public announcements and trade volumes
-	\item \textit{Weeks 13-14}: Bubbles; herding; common knowledge
-	\item \textit{Week 15}: Digital markets
+	\item \textit{Lecture 8}: Fragmentation: costs and benefits
+	\item \textit{Lecture 9}: Transparency: search costs and order flow transparency
+	\item \textit{Lecture 10}: Value of liquidity
+	\item \textit{Lecture 11}: Liquidity and corporate policy
+	\item \textit{Lecture 10}: Problem set 2 assigned
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Overview}
+\textbf{Part 3}: Topics and specialized models
+\begin{itemize}
+	\item \textit{Lecture 11}: Digital markets
+	\item \textit{Lecture 12}: High-frequency trading (\structure{Biais et al.}, \structure{Budish et al.})
+	\item \textit{Lecture 13}: Public information; optimal disclosure policies; public announcements and trade volumes (\structure{Kondor})
+	\item \textit{Lecture 14}: Bubbles; herding; common knowledge (\structure{Smith and S{\o}rensen}, \structure{Abreu and Brunnermeier})
+	\item \textit{Lecture 15}: Auctions (bonus class)
 \end{itemize}
 \end{frame}
 
@@ -94,21 +109,40 @@
 
 \section{Information and Prices}
 
-\begin{frame}{Motivation}
+\begin{frame}{Price determinants}
 	Stock prices move around all the time
 	\begin{itemize}
 		\item Media reports are full of ex post rationalizations 
 		\item Look at CNN Money reports (on absalon)
+		\item But these can be pretty arbitrary (great example: \href{https://twitter.com/stonksgoingUP1}{@stonksgoingUP1} on twitter)
 	\end{itemize}
-	In this course: everybody agrees on assets' future cash flows ($\approx$value), \textit{conditional} on fundamentals. Broadly speaking two reasons for trading
+	What actually determines stock prices?
+\end{frame}
+
+
+\begin{frame}{Price determinants}
+	In this course: everybody agrees on assets' future cash flows ($\approx$value), \textit{conditional} on fundamentals. Broadly speaking, three reasons for trading:
 	\begin{itemize}
-		\item \textbf{Risk}: Getting the right risk profile
-		\item \textbf{Speculation}: Different expectations of fundamentals because different information
+		\item \textbf{Risk}: Getting the right risk profile (relevant to trader)
+		\item (Funding) \textbf{Liquidity}: Trader needs liquid funds or has excess funds to invest (relevant to trader)
+		\item \textbf{Speculation}: Different expectations of fundamentals because different \alert{information} (relevant to everyone)
 	\end{itemize}
-	Different types of information
+\end{frame}
+
+
+\begin{frame}{Types of information}
 	\begin{itemize}
-		\item \textbf{Public information}:  asset price may move \textit{without} trade
-		\item \textbf{Private information} possessed by some traders  $\rightarrow$ reveal this information through their trading
+		\item Different types of information
+		\begin{itemize}
+			\item \textbf{Public information}:  asset price may move \textit{without} trade
+			\item \textbf{Private information} possessed by some traders  $\rightarrow$ reveal this information through their trading
+		\end{itemize}
+		\pause
+		\item Draw a wedge between \alert{legal} and \structure{academic} ($\leftarrow$ \structure{our}) definitions of \textbf{private information}
+		\begin{itemize}
+			\item \alert{Legal}: insider info is that which is only available to a restricted number of people. Trading based on insider info is illegal in most jurisdictions.
+			\item \structure{Academic}: some agents may be better at analyzing publicly available info, thus have better info about fundamentals.
+		\end{itemize}
 	\end{itemize}
 \end{frame}
 
@@ -166,11 +200,11 @@ So we will not take EMH for granted, but rather see whether it arises in models 
 		\structure{$\Omega_{t+1}=(\Omega_t, I_{t+1})$}. 
 		\item Two approaches to defining \structure{market value} ($\neq$ price) of an asset:
 		\begin{enumerate}
-			\item \textbf{Discounted cashflows}: Value at time $t$  = expectation of future cashflows:
+			\item \textbf{Discounted cashflows}: Market value at time $t$  = expectation of future cashflows:
 			\[
 			\mu_t = \mathbb{E}\left[\sum_{s=t}^{\infty} \delta^{s-t} c_s | \Omega_t \right]
 			\]
-			\item \textbf{Fundamental value}: Value at time $t$ = expectation of underlying fundamental value $v$:
+			\item \textbf{Fundamental value}: Market value at time $t$ = expectation of underlying fundamental value $v$:
 			\[
 			\mu_t = \mathbb{E} \left[ v | \Omega_t \right]
 			\]
@@ -308,7 +342,7 @@ So we will not take EMH for granted, but rather see whether it arises in models 
 	\item \textbf{Asset value}:
 	\begin{itemize}
 		\item Random asset value $v$ drawn from distribution
-		\item Assume $v$ is terminal value (fundamental value)
+		\item Assume $v$ is the fundamental (terminal) value
 		\item Speculators know $v$ perfectly (not much changes if they don't -- see homework)
 	\end{itemize}
 	\item \textbf{Equilibrium}:
@@ -401,13 +435,15 @@ This gives us two \structure{equilibrium conditions}.
 			\item either by a noise trader (probability $(1-\pi)\beta_B$) -- no new information, $\mu_t = \mu_{t-1} = \mathbb{E}[v|\Omega_{t-1}]$;
 			\item or by a speculator (probability $\pi \mathbb{P}(v \geq a_t | \Omega_{t-1})$) -- then learn that $v \geq a_t$, so $\mu_t = \mathbb{E} [v | \Omega_{t-1}, v \geq a_t]$.
 		\end{itemize}
-		\item Then $a_t$ is given by:
-		$$ a_t = \mathbb{E}[v|\Omega_{t-1}, Buy] $$
-		$$ = \frac{(1-\pi)\beta_B}{\mathbb{P}(Buy|\Omega_{t-1}, v)} \cdot \mathbb{E}[v|\Omega_{t-1}] + \frac{\pi \mathbb{P}(v \geq a_t | \Omega_{t-1})}{\mathbb{P}(Buy|\Omega_{t-1}, v)} \cdot \mathbb{E} [v | \Omega_{t-1}, v \geq a_t] $$
-		\begin{itemize}
-			\item where $\mathbb{P}(Buy|\Omega_{t-1}, v) = (1-\pi) \beta_B + \pi \mathbb{P}(v \geq a_t)$,
-			\item meaning in the end $a_t \geq \mu_{t-1}$.
-		\end{itemize}
+		\item Then $a_t$ is given by (using Bayes' rule and law of total probability):
+		\begin{align*}
+			a_t &= \mathbb{E}[v|\Omega_{t-1}, Buy]
+			\\
+			= \frac{\mathbb{P}(Buy,Noise|\Omega_{t-1}, v)}{\mathbb{P}(Buy|\Omega_{t-1}, v)} \cdot \mathbb{E}[v|\Omega_{t-1}] &+ \frac{\mathbb{P}(Buy,Informed|\Omega_{t-1}, v)}{\mathbb{P}(Buy|\Omega_{t-1}, v)} \cdot \mathbb{E} [v | \Omega_{t-1}, v \geq a_t]
+			\\
+			= \frac{(1-\pi)\beta_B}{(1-\pi) \beta_B + \pi \mathbb{P}(v \geq a_t)} \cdot \mu_{t-1} &+ \frac{\pi \mathbb{P}(v \geq a_t | \Omega_{t-1})}{(1-\pi) \beta_B + \pi \mathbb{P}(v \geq a_t)} \cdot \mathbb{E} [v | \Omega_{t-1}, v \geq a_t],
+		\end{align*}
+		meaning that in the end, $a_t \geq \mu_{t-1}$.
 	\end{itemize}
 \end{frame}
 
@@ -430,7 +466,7 @@ This gives us two \structure{equilibrium conditions}.
 \end{frame}
 
 
-\begin{frame}{Analysis. D: Prices}
+\begin{frame}{Analysis. E: Prices}
 	\begin{itemize}
 		\item $\mu_t \equiv \mathbb{E}[v | \Omega_t]$ is the expectation of $v$ \textit{after} the time-$t$ trade order is observed. Note that in our model:
 		$$\mu_t = \begin{cases}
@@ -570,7 +606,7 @@ This gives us two \structure{equilibrium conditions}.
 	Dealer beliefs: Each curve shows the evolution of dealer's beliefs in each run (10 runs of 100 orders)
 	\quad
 	\center
-	\includegraphics[width=1\linewidth]{pics/DealerBeliefs_Image.pdf}
+	\includegraphics[width=0.95\linewidth]{pics/DealerBeliefs_Image.pdf}
 \end{frame}
 
 
