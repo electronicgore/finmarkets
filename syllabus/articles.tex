@@ -1,0 +1,203 @@
+%%% License: Creative Commons Attribution Share Alike 4.0 (see https://creativecommons.org/licenses/by-sa/4.0/)
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass{article}
+
+\usepackage{amssymb}
+\usepackage{enumerate}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{extramarks} % Required for headers and footers
+\usepackage[usenames,dvipsnames]{color} % Required for custom colors
+\usepackage{graphicx} % Required to insert images
+\usepackage{listings} % Required for insertion of code
+\usepackage{courier} % Required for the courier font
+\usepackage[table]{xcolor}
+\usepackage{amsfonts,amsmath,amsthm,parskip,setspace}
+\usepackage[section]{placeins}
+\usepackage[a4paper]{geometry}
+\usepackage[USenglish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage[hyphenbreaks]{breakurl}
+\usepackage[]{url}
+
+
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.6in
+
+\linespread{1.1} % Line spacing
+
+%----------------------------------------------------------------------------------------
+%	DOCUMENT STRUCTURE COMMANDS
+%	Skip this unless you know what you're doing
+%----------------------------------------------------------------------------------------
+
+% Header and footer for when a page split occurs within a problem environment
+\newcommand{\enterProblemHeader}[1]{
+\nobreak\extramarks{#1}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+}
+
+% Header and footer for when a page split occurs between problem environments
+\newcommand{\exitProblemHeader}[1]{
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1}{}\nobreak
+}
+
+\setcounter{secnumdepth}{0} % Removes default section numbers
+\newcounter{homeworkProblemCounter} % Creates a counter to keep track of the number of problems
+
+\newcommand{\homeworkProblemName}{}
+\newenvironment{ex}[1][Problem \arabic{homeworkProblemCounter}]{ % Makes a new environment called homeworkProblem which takes 1 argument (custom name) but the default is "Problem #"
+\stepcounter{homeworkProblemCounter} % Increase counter for number of problems
+\renewcommand{\homeworkProblemName}{#1} % Assign \homeworkProblemName the name of the problem
+\section{\homeworkProblemName} % Make a section in the document with the custom problem count
+\enterProblemHeader{\homeworkProblemName} % Header and footer within the environment
+}{
+\exitProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+
+\newcommand{\problemAnswer}[1]{ % Defines the problem answer command with the content as the only argument
+\noindent\framebox[\columnwidth][c]{\begin{minipage}{0.98\columnwidth}#1\end{minipage}} % Makes the box around the problem answer and puts the content inside
+}
+
+\newcommand{\homeworkSectionName}{}
+\newenvironment{homeworkSection}[1]{ % New environment for sections within homework problems, takes 1 argument - the name of the section
+\renewcommand{\homeworkSectionName}{#1} % Assign \homeworkSectionName to the name of the section from the environment argument
+\subsection{\homeworkSectionName} % Make a subsection with the custom name of the subsection
+\enterProblemHeader{\homeworkProblemName\ [\homeworkSectionName]} % Header and footer within the environment
+}{
+\enterProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+
+
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+% Set up the header and footer
+\pagestyle{fancy}
+\lhead[c]{\textbf{{\color[rgb]{.5,0,0} K{\o}benhavns\\Universitet }} \firstxmark} % Top left header
+\chead{\textbf{{\color[rgb]{.5,0,0} \Class }}\\ \hmwkTitle  } % Top center head
+\rhead{\instructor \\ \theprofessor} % Top right header
+\lfoot{\lastxmark} % Bottom left footer
+\cfoot{} % Bottom center footer
+\rfoot{Page\ \thepage\ of\ \protect\pageref{LastPage}} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+
+
+
+
+
+
+
+%----------------------------------------------------------------------------------------
+%	NAME AND CLASS SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\hmwkTitle}{News Articles} % Assignment title
+\newcommand{\Class}{Financial Markets Microstructure} % Course/class
+\newcommand{\instructor}{Spring 2020} % TA
+\newcommand{\theprofessor}{Prof. Egor Starkov} % Professor
+
+%\theoremstyle{definition} \newtheorem{ex}{\textbf{\Large{Exercise & #}\\}}
+\setlength{\parskip}{0 pt}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+
+\begin{center}
+	{\huge Financial Markets Microstructure: list of used news articles}
+\end{center}
+\bigskip
+
+Below is the list of news articles that were assigned as readings after corresponding lectures. They are typically (at least vaguely) related to the material of that lecture.
+%This list outlines the plan for the course together with main readings for each topic. Additional readings will be assigned during lectures, whenever needed. The plan is subject to change.
+%\medskip
+
+\begin{itemize}
+	\item \textbf{L1: Introduction}
+	\begin{itemize}
+		\item \raggedright The LME is Europe’s only surviving ``open outcry'' venue -- The Economist, Aug 01, 2019, \url{https://www.economist.com/finance-and-economics/2019/08/01/the-lme-is-europes-only-surviving-open-outcry-venue}
+	\end{itemize}
+	
+	\item \textbf{L2: Liquidity}
+	\begin{itemize}
+		\item \raggedright Digitisation shakes up corporate-bond markets -- The Economist, Apr 22, 2017, \url{https://www.economist.com/finance-and-economics/2017/04/22/digitisation-shakes-up-corporate-bond-markets}
+	\end{itemize}
+	
+	\item \textbf{L3: Dealer markets 1, Glosten-Milgrom model}
+	\begin{itemize}
+		\item \raggedright Candy Crush vs. Words with Friends: Wall Street's choice is clear -- CNN Money, Feb 13, 2015, \url{https://money.cnn.com/2015/02/13/investing/candy-crush-king-zynga-stocks/index.html}
+	\end{itemize}
+	
+	\item \textbf{L4: Dealer markets 2, Factors of Illiquidity}
+	\begin{itemize}
+		\item \raggedright More questions than answers -- The Economist, Dec 14, 2013,  \url{https://www.economist.com/finance-and-economics/2013/12/14/more-questions-than-answers}
+		\item \raggedright Nordic Power Whale Booted Off Exchange After \$117 Million Loss -- Bloomberg, Sep 13, 2018, \url{https://www.bloomberg.com/news/articles/2018-09-13/trader-gets-expelled-from-nasdaq-power-market-after-defaulting}
+		\item \raggedright Aas Lost Millions Trading Power, But Others Had Similar Bets -- Bloomberg, Sep 26, 2018, \url{https://www.bloomberg.com/news/articles/2018-09-26/aas-lost-millions-on-nordic-power-but-others-had-similar-bets}
+	\end{itemize}
+	
+	\item \textbf{L5: Dealer markets 3, Kyle Model, Empirics of Illiquidity}
+	\begin{itemize}
+		\item \raggedright In a fix, Mr Bond -- The Economist, Mar 07, 2014, \url{https://www.economist.com/finance-and-economics/2014/03/07/in-a-fix-mr-bond}
+		\item \raggedright Bank, fix thyself -- The Economist, Mar 08, 2014, \url{https://www.economist.com/finance-and-economics/2014/03/08/bank-fix-thyself}
+	\end{itemize}
+	
+	\item \textbf{L8: Market Fragmentation}
+	\begin{itemize}
+		\item \raggedright Price-bots can collude against consumers -- The Economist, May 06, 2017, \url{https://www.economist.com/finance-and-economics/2017/05/06/price-bots-can-collude-against-consumers}
+		\item \raggedright Dark markets may be more harmful than high-frequency trading -- Reuters, Apr 06, 2014, \url{https://www.reuters.com/article/us-dark-markets-analysis-idUSBREA3508V20140406}
+	\end{itemize}
+	
+	\item \textbf{L9: Market Transparency}
+	\begin{itemize}
+		\item \raggedright Europe’s capital markets face a big shake-up and are not ready -- The Economist, Sep 30, 2017, \url{https://www.economist.com/finance-and-economics/2017/09/30/europes-capital-markets-face-a-big-shake-up-and-are-not-ready}
+	\end{itemize}
+	
+	\item \textbf{L11: Financial markets and Corporate governance, Digital markets}
+	\begin{itemize}
+		\item \raggedright Anything you can do, Icahn do better -- Feb 15, 2014, \url{https://www.economist.com/business/2014/02/15/anything-you-can-do-icahn-do-better}
+	\end{itemize}	
+\end{itemize}
+
+
+%%-----------------------------------------------------------------------------------------------------
+
+\end{document}
