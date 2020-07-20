@@ -1,10 +1,11 @@
 %%% License: Creative Commons Attribution Share Alike 4.0 (see https://creativecommons.org/licenses/by-sa/4.0/)
 %%% Slides are based heavily on earlier versions of this course taught by Jesper Rudiger.
 
-\documentclass[english,10pt]{beamer}
-%\documentclass[english,10pt,handout]{beamer}
+\documentclass[english,10pt
+%,handout
+,aspectratio=169
+]{beamer}
 \input{../FM_preamble.tex}
-
 
 
 \title{Financial Markets Microstructure \\ Lecture 4}
@@ -20,16 +21,16 @@ Chapter 3.4-3.7 of FPR}
 
 \begin{document}
 	
-\AtBeginSection[]{
-\frame<beamer>{
-\frametitle{This lecture:}
-\tableofcontents[currentsection,currentsubsection]
-}}
+	\AtBeginSection[]{
+	\frame<beamer>{
+	\frametitle{This lecture:}
+	\tableofcontents[currentsection,currentsubsection]
+	}}
 
 \frame[plain]{\titlepage}
 
 
-\section{Revision and problems}
+%\section{Revision and problems}
 
 \begin{frame}{What did we do last week?}
 \begin{enumerate}
@@ -45,17 +46,17 @@ Chapter 3.4-3.7 of FPR}
 \end{frame}
 
 
-\begin{frame}[label=exercises]
-\frametitle{Exercises from last time}
-\begin{itemize}
-	\item FPR chapter 3 exercises (p. 124-125):
-	\begin{itemize}
-		\item exercise 2 -- solve GM model with numbers instead of letters
-		\item exercise 3 about the GM model where speculators are not perfectly informed, but instead receive a signal about the value of the asset
-	\end{itemize}
-	\item Will do this Friday.
-\end{itemize}
-\end{frame}
+%\begin{frame}[label=exercises]
+%\frametitle{Exercises from last time}
+%\begin{itemize}
+%	\item FPR chapter 3 exercises (p. 124-125):
+%	\begin{itemize}
+%		\item exercise 2 -- solve GM model with numbers instead of letters
+%		\item exercise 3 about the GM model where speculators are not perfectly informed, but instead receive a signal about the value of the asset
+%	\end{itemize}
+%	\item Will do this Friday.
+%\end{itemize}
+%\end{frame}
 
 
 \begin{frame}{Today}
@@ -155,6 +156,15 @@ Chapter 3.4-3.7 of FPR}
 \end{frame}
 
 
+\begin{frame}%{The dynamics of the spread}
+\centering
+\only<1>{\includegraphics[scale=0.29]{pics/oc1}\\}
+\only<2>{\includegraphics[scale=0.29]{pics/oc2}\\}
+\only<3>{\includegraphics[scale=0.29]{pics/oc3}\\}
+\only<4>{\includegraphics[scale=0.29]{pics/oc4}\\}
+\end{frame}
+
+
 %\begin{frame}{The dynamics of the spread (2)}
 %	\begin{itemize}
 %		\item The resulting deviation from the midprice $|p_{t}-\mu_{t}|=\gamma$ is \textit{transient}: it is unrelated to fundamentals
@@ -249,10 +259,10 @@ Chapter 3.4-3.7 of FPR}
 		\item \textbf{Asset}. Single risky asset
 		\begin{itemize}
 			\item Current fundamental value $\mu_t$
-			\item Held for one period by dealers, final value $v=\mu_t + \epsilon_t$
+			\item Held for one period by dealers, then unwound at value $\mu_{t+1}=\mu_t + \epsilon_t$
 			\item Here $\mathbb{E}[\epsilon_t] = 0$ and $\mathbb{V}(\epsilon_{t})=\sigma^2_\epsilon > 0$
 		\end{itemize}
-		\item \textbf{Dealer}. Representative dealer
+		\item \textbf{Dealer}. Representative competitive dealer
 		\begin{itemize}
 			\item Endowed with $z_t$ units of the risky asset
 			\item Has cash holding $c_t$
@@ -262,9 +272,19 @@ Chapter 3.4-3.7 of FPR}
 			\item Given asset price $p_t$, supply $y_t$ units of asset
 			\item Has utility defined over (random) next period wealth
 			\[
-			w_{t+1} = v(z_t - y_t) + c_t + p_t y_t
+			w_{t+1} = \mu_{t+1}(z_t - y_t) + c_t + p_t y_t
 			\]
 		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Solution algorithm}
+	\begin{itemize}
+		\item The algorithm may appear slightly schizophrenic, so watch carefully.
+		\item Dealers are competitive, so act as price-takers.
+		\item So the dealer \structure{decides} how much to \structure{supply $y_t$} \alert{given price $p_t$}.
+		\item We then invert the resulting supply function $y(p)$ to obtain the equilibrium price schedule $p(y)$.
 	\end{itemize}
 \end{frame}
 
@@ -357,25 +377,25 @@ Chapter 3.4-3.7 of FPR}
 \end{frame}
 
 
-\begin{frame}{Liquidity risk in practice: \\Saxo Bank and the Swiss Franc}
-	\begin{itemize}
-		\item Saxo Bank had a  large and profitable brokering business, offering customers (leveraged) trading in Swiss Francs
-		\item When the Franc abandoned its peg to the euro on 15 Jan 2015, many of these customers were facing huge losses and sought to get out of their positions fast
-		\item The forex market is an \textit{over-the-counter} market: brokers quote prices and then try to fill those orders
-	\end{itemize}
-\end{frame}
-
-
-\begin{frame}{Saxo Bank and the Swiss Franc}
-	\begin{center}
-		\includegraphics[width=0.6\linewidth]{pics/Francageddon_Image}
-	\end{center}
-	\begin{itemize}
-		\item Liquidity dropped: Saxo found it hard to fill orders at quoted prices
-		\item Saxo revised prices on trades \textit{after} the market had closed (legal?)
-		\item Conclusion: Brokers face a substantial risk in illiquid markets - their quotes might go `stale'
-	\end{itemize}
-\end{frame}
+%\begin{frame}{Liquidity risk in practice: \\Saxo Bank and the Swiss Franc}
+%	\begin{itemize}
+%		\item Saxo Bank had a  large and profitable brokering business, offering customers (leveraged) trading in Swiss Francs
+%		\item When the Franc abandoned its peg to the euro on 15 Jan 2015, many of these customers were facing huge losses and sought to get out of their positions fast
+%		\item The forex market is an \textit{over-the-counter} market: brokers quote prices and then try to fill those orders
+%	\end{itemize}
+%\end{frame}
+%
+%
+%\begin{frame}{Saxo Bank and the Swiss Franc}
+%	\begin{center}
+%		\includegraphics[width=0.6\linewidth]{pics/Francageddon_Image}
+%	\end{center}
+%	\begin{itemize}
+%		\item Liquidity dropped: Saxo found it hard to fill orders at quoted prices
+%		\item Saxo revised prices on trades \textit{after} the market had closed (legal?)
+%		\item Conclusion: Brokers face a substantial risk in illiquid markets - their quotes might go `stale'
+%	\end{itemize}
+%\end{frame}
 
 
 \begin{frame}{Price dynamics with illiquidity}
@@ -415,7 +435,7 @@ Chapter 3.4-3.7 of FPR}
 		\item for next Wednesday:
 		\begin{itemize}
 			\item In Absalon, I have attached an article from the Economist, December 14 2013, on the Volcker rule. Discuss the claim that \emph{``In practice banks will probably respond by making markets for a narrow range of securities that already trade frequently, and thus might reasonably be expected to do so in the future. Meanwhile, the securities that now change hands less frequently are likely to be shunned, making them even harder to trade.''}
-			\item Two other Bloomberg articles are on Einar Aas and his exclusion from Nasdaq. Use this case to discuss how risk aversion can stem from regulation.
+			\item Two other Bloomberg articles are on Einar Aas and his exclusion from Nasdaq. Use this case to discuss how risk aversion (and so inventory risk) can stem from regulation.
 		\end{itemize}
 		\item for this Friday:
 		\begin{itemize}
