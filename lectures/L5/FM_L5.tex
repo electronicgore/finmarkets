@@ -96,8 +96,8 @@
 		\pause
 		\begin{itemize}
 			\item \alert{Adverse selection}: larger trades indicate more/stronger news
-			\item \alert{Inventory risk}: large positions are risky and take dealers longer to unwind, hence require larger premiums
-			\item \alert{Imperfectly competitive dealers}: market power allows dealers to set wider spread and steeper pricing schedules
+			\item \alert{Inventory risk}: large positions are risky and take dealers longer to unwind, hence require larger premiums (saw that in Stoll model)
+			\item \structure{Imperfectly competitive dealers}: market power allows dealers to set wider spread and steeper or flatter pricing schedules
 			\pause
 			\item \structure{Order processing costs}: may increase or decrease (per stock) in total order size
 		\end{itemize}
@@ -126,11 +126,7 @@
 	\begin{itemize}
 		\item Allow traders to make any size order
 		\item Dealer/market makers (MM) submit continuous supply curve 
-		\item Model looks much like Stoll's from last class. But:
-		\begin{itemize}
-			\item Stoll: analyze inventory risk (risk averse MM), no adverse selection (no informed trading), price taking MM
-			\item Kyle: analyze adverse selection (informed trading), no inventory risk (risk neutral MM), MM not price taker
-		\end{itemize}
+		\item Model looks much like Stoll's from last class. But the issues explored and the analysis approaches are different.
 	\end{itemize}
 \end{frame}
 
@@ -170,7 +166,7 @@
 		\item Competitive (zero profit): $p = \mathbb{E}[v|q]$
 	\end{itemize}
 	\item \structure{Assumption}: $u$ and $v$ are jointly normal and independent
-	\item \structure{Method}: Postulate linear strategy-- then check that this is equilibrium
+	%\item \structure{Method}: Postulate linear strategy-- then check that this is equilibrium
 \end{itemize}
 \end{frame}
 
@@ -215,9 +211,9 @@
 
 \begin{frame}{Aside: Normal information model}
 \begin{itemize}
-	\item \structure{Result}: $v|q$ is normally distributed, with
+	\item \structure{Claim}: if $q=\beta(v-\mu) + u$ and $v,u$ are joint normal then $v|q$ is normal, with
 	\[
-	\mathbb{E}[v|q] = \mu + \frac{\mathbb{C}(v,q)}{\mathbb{V}(q)} q,
+	\mathbb{E}[v|q] = \mathbb{E}[v] + \frac{\mathbb{C}(v,q)}{\mathbb{V}(q)} (q-\mathbb{E}[q]),
 	\]
 	and variance $1/(1/\sigma^2_v + \beta^2 / \sigma^2_u)$
 	\item \structure{Proof}:
@@ -259,7 +255,7 @@
 			f(v|q) = K_4 e^{-\frac{\structure{\frac{1}{\sigma^2_v}+\frac{\beta^2}{\sigma^2_u}}}{2} \left(v-\alert{\mu-\frac{\beta \sigma^2_v}{\beta^2 \sigma^2_v + \sigma^2_u}q }\right)^2},
 		\]
 		where $K_4=\frac{K_1 K_2}{K_3}e^{ \frac{q^2}{2(\beta^2 \sigma^2_v + \sigma^2_u)}-k}$ is again a normalizing constant.
-		This is  a normal distribution with $\mathbb{E}[v|q] = \mu + \frac{\mathbb{C}(v,q)}{\mathbb{V}(q)} q=\alert{\mu+\frac{\beta \sigma^2_v}{\beta^2 \sigma^2_v + \sigma^2_u}q}$ and $\mathbb{V}[v|q]=\structure{ \left( \frac{1}{\sigma^2_v}+\frac{\beta^2}{\sigma^2_u} \right)^{-1}}$, as claimed. 
+		This is  a normal distribution with $\mathbb{E}[v|q] = \mathbb{E}[v] + \frac{\mathbb{C}(v,q)}{\mathbb{V}(q)} (q-\mathbb{E}[q]) = \alert{\mu+\frac{\beta \sigma^2_v}{\beta^2 \sigma^2_v + \sigma^2_u}q}$ and $\mathbb{V}[v|q]=\structure{ \left( \frac{1}{\sigma^2_v}+\frac{\beta^2}{\sigma^2_u} \right)^{-1}}$, as claimed. 
 		%Hence,
 		%\[
 		%	\lambda = \frac{\beta \sigma^2_v}{\beta^2 \sigma^2_v + \sigma^2_u}.
@@ -270,7 +266,7 @@
 
 \begin{frame}{Dealer's strategy}
 	\[
-		\mathbb{E}[v|q] = \mu + \frac{\mathbb{C}(v,q)}{\mathbb{V}(q)} q,
+		\mathbb{E}[v|q] = \mathbb{E}[v] + \frac{\mathbb{C}(v,q)}{\mathbb{V}(q)} (q-\mathbb{E}[q]) = \mu + \frac{\mathbb{C}(v,q)}{\mathbb{V}(q)} q,
 	\]
 	\begin{itemize}
 		\item From zero profit condition: $p = \mathbb{E}[v|q]$, hence
@@ -360,10 +356,10 @@
 \begin{frame}{Kyle's model: summary}
 	\begin{itemize}
 		\item \textbf{Dealer/market maker model}: Competitive, risk-neutral (zero profit) dealer chooses a supply schedule
-		\item \textbf{Informed trader}: Risk averse, observes signal about asset value and places market order
+		\item \textbf{Informed trader}: Observes signal about asset value and places market order
 		\item \textbf{Market clearing}: \structure{Auction}, dealer observes only total demand (informed + noise), total demand clears
-		\item \textbf{Insights}: Market depth is decreasing in insider trading, insider always reveals half his information
-		\item \textbf{Advantage}: Allow for unlimited insider trade, trader not price-taker
+		\item \textbf{Insights}: informed trading is a factor generating limited market depth, insider always reveals half his information
+		\item \textbf{Advantage}: Richer trading opportunities, trader not price-taker
 		\item \textbf{Shortcomings}: Still no resale
 	\end{itemize}
 \end{frame}
@@ -455,7 +451,7 @@
 
 \begin{frame}{How to estimate?}
 	\begin{itemize}
-		\item Take GM model with inventory costs. There have:
+		\item Take GM model with order costs. There have:
 		\begin{align*}
 			p_t &= \mu_t + \gamma d_t
 			\\
@@ -476,7 +472,7 @@
 
 \begin{frame}{\cite{glosten_estimating_1988}}
 	\begin{itemize}
-		\item \cite{glosten_estimating_1988} estimate
+		\item \textbf{\cite{glosten_estimating_1988}} estimate
 		\begin{equation} \tag{5.7}
 			\Delta p_t = \gamma_0 \Delta d_t+ \gamma_1 \Delta q_t + \lambda_0 d_t + \lambda_1 q_t + \epsilon_t
 		\end{equation}
@@ -532,16 +528,20 @@
 
 \begin{frame}{Including inventory costs (2)}
 		\begin{itemize}
-			\item \citet*{madhavan_why_1997} find that $\lambda$ is higher in the morning, and $\gamma$ higher in the afternoon
+			\item \textbf{\citet*{madhavan_why_1997}} find that $\lambda$ is higher in the morning, and $\gamma$ higher in the afternoon
 			% more adverse selection in the morning; higher bargaining power for dealers at closing (traders want to unwind positions)
-			\item \cite{lyons_tests_1995} had data on a FOREX dealer's inventory, and found $\beta$ very large
+			\begin{itemize}
+				\item Morning trading reveals all the information accumulated during off-market hours. Evening trading driven by traders' desire to close open positions
+				\item \textbf{\cite{bogousslavsky_should_2020}}: closing auctions account for $7.3\%$ of daily trading volume, but contribute nothing to price discovery. Closing prices deviate a lot from midquotes, but revert back quickly.
+			\end{itemize}
+			\item \textbf{\cite{lyons_tests_1995}} had data on a FOREX dealer's inventory, and found $\beta$ very large
 		\end{itemize}
 \end{frame}
 
 
 \begin{frame}{Long-run impact}
 	\begin{itemize}
-		\item Different dynamic approach: \cite{hasbrouck_measuring_1991} uses the long-run impact of an order $q_{t+1}$ on prices $p_{t+T}-p_t$ to identify the informational part of the trade
+		\item Different dynamic approach: \textbf{\cite{hasbrouck_measuring_1991}} uses the long-run impact of an order $q_{t+1}$ on prices $p_{t+T}-p_t$ to identify the informational part of the trade
 		\begin{itemize}
 			\item The `impulse response' of prices to orders
 			\item Opens door to richer time series analysis of transactions data
@@ -557,7 +557,7 @@
 
 \begin{frame}{Probability of Informed Trading}
 	\begin{itemize}
-		\item \citet*{easley_liquidity_1996}: use GM type model to estimate the prob. of informed trading
+		\item \textbf{\citet*{easley_liquidity_1996}}: use GM type model to estimate the prob. of informed trading
 		\item On any given trading day, w.p. $\alpha$ there is some information event
 		\begin{itemize}
 			\item good or bad
@@ -577,7 +577,7 @@
 \begin{frame}{Probability of Informed Trading}
 	\begin{itemize}
 		\item Data for the number of buys and sells allow for estimation of these parameters with \structure{maximum likelihood}
-		\item \citet*{easley_is_2002} estimate the `probability of informed trading' associated with any given order
+		\item \textbf{\citet*{easley_is_2002}} estimate the `probability of informed trading' associated with any given order
 		\begin{equation} \tag{5.27}
 		PIN = \frac{\alpha \epsilon_i}{\epsilon_b + \epsilon_s + \alpha \epsilon_i}
 		\end{equation}
@@ -585,10 +585,9 @@
 		\begin{itemize}
 			\item median PIN $=19\%$
 			\item for $90\%$ of stocks, PIN is between $10\%$ and $30\%$
-			\item greater for small-cap stocks
-			\item positively correlated with spread and price volatility
+			\item greater for small-cap stocks, positively correlated with spread and price volatility
 		\end{itemize}
-		\item \citet*{grammig_knowing_2001} show that PIN is higher when markets are more anonymous
+		\item \textbf{\citet*{grammig_knowing_2001}} show that PIN is higher when markets are more anonymous
 	\end{itemize}
 \end{frame}
 
@@ -615,12 +614,13 @@
 \begin{itemize}
 	\item for next Wednesday:
 	\begin{itemize}
-		\item I uploaded two articles from the Economist, March 7, 2014, both on potential manipulation of prices
-		\item Consider these two issues:
-		\begin{itemize}
-			\item What motivates a trader to manipulate an asset's price? 
-			\item Is manipulation easier in a very liquid or a very illiquid market?
-		\end{itemize}
+%		\item I uploaded two articles from the Economist, March 7, 2014, both on potential manipulation of prices
+%		\item Consider these two issues:
+%		\begin{itemize}
+%			\item What motivates a trader to manipulate an asset's price? 
+%			\item Is manipulation easier in a very liquid or a very illiquid market?
+%		\end{itemize}
+		\item Read the blog post on the story of how oil price came to be negative on April 20, 2020: \url{https://streetwiseprofessor.com/wti-wtf/}
 	\end{itemize}
 	\item for next Friday:
 	\begin{itemize}
