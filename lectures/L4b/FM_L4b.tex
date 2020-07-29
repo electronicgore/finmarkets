@@ -1,8 +1,10 @@
 %%% License: Creative Commons Attribution Share Alike 4.0 (see https://creativecommons.org/licenses/by-sa/4.0/)
 %%% Slides are based heavily on earlier versions of this course taught by Jesper Rudiger.
 
-\documentclass[english,10pt]{beamer}
-%\documentclass[english,10pt,handout]{beamer}
+\documentclass[english,10pt
+%,handout
+,aspectratio=169
+]{beamer}
 \input{../FM_preamble.tex}
 
 
@@ -17,6 +19,11 @@
 
 
 \begin{document}
+	\AtBeginSection[]{
+		\frame<beamer>{
+			\frametitle{This lecture:}
+			\tableofcontents[currentsection,currentsubsection]
+	}}
 \frame[plain]{\titlepage}
 \addtocounter{framenumber}{-1}
 
@@ -437,13 +444,14 @@
 	\begin{exampleblock}{}
 		(b) Solve for the equilibrium pricing policy.
 	\end{exampleblock}
-
+	\vspace{-2.5em}
 	\begin{align*}
 		U(y_t) = \mathbb{E}_t [p_{t+1}] (z_t - y_t) + c_t + p_t y_t - \rho \sqrt{\mathbb{V}(p_{t+1})} \cdot | z_t - y_t |
 		% first three elements: Ew_{t+1}, namely current cash ct, revenue from today's sales pt*yt, and expected liquidation cost of remaining holdings
 	\end{align*}
 	Dealer chooses how much to sell given some fixed price $p_t$, so schedule $p_t(y_t)$ must satisfy $\frac{\partial U}{\partial y_t} = 0$. Inverse supply function is then given by:
 	\pause
+	\vspace{-1em}
 	\begin{align*}
 		p_t &= 
 		\begin{cases}
