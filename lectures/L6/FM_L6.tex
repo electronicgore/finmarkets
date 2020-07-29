@@ -30,7 +30,7 @@
 }}
 \frame[plain]{\titlepage}
 
-\section{Revision and readings}
+%\section{Revision and readings}
 
 \begin{frame}{Last time}
 	\begin{itemize}
@@ -49,18 +49,18 @@
 \end{frame}
 
 
-\begin{frame}{Exercise}
-	% the conclusions from last time may lead us into thinking that informed trading is no big deal. These articles aim to argue the converse
-	\begin{itemize}
-		\item I uploaded two articles from the Economist, March 7, 2014, both on potential manipulation of prices
-		\item Consider these two issues:
-		\begin{itemize}
-			\item What motivates a trader to manipulate an asset's price? 
-			\item Is manipulation easier in a very liquid or a very illiquid market?
-			% less liquid requires less effort to manipulate the price, but it looks less credible
-		\end{itemize}
-	\end{itemize}
-\end{frame}
+%\begin{frame}{Exercise}
+%	% the conclusions from last time may lead us into thinking that informed trading is no big deal. These articles aim to argue the converse
+%	\begin{itemize}
+%		\item I uploaded two articles from the Economist, March 7, 2014, both on potential manipulation of prices
+%		\item Consider these two issues:
+%		\begin{itemize}
+%			\item What motivates a trader to manipulate an asset's price? 
+%			\item Is manipulation easier in a very liquid or a very illiquid market?
+%			% less liquid requires less effort to manipulate the price, but it looks less credible
+%		\end{itemize}
+%	\end{itemize}
+%\end{frame}
 
 
 
@@ -129,7 +129,7 @@
 
 
 
-\section{Static analysis}
+\section{Static Analysis: Glosten Model}
 
 \begin{frame}{\cite{glosten_is_1994} model}
 	\begin{itemize}
@@ -148,6 +148,7 @@
 	\item \textbf{Single asset}: Unknown value $v$ with cumulative distribution  $G(v)$
 	\item \textbf{Limit order book} (composed by competitive limit traders): 
 	\begin{itemize}
+		\item Focus on the ask side of the market (limit orders to sell vs market order to buy)
 		\item Prices vary with volume $q$. Posted limit orders: $P'(q)$
 		\item A market buy order of size $q$ will `walk up the book' until the final bit of it is cleared at a limit price $P'(q)$
 		\item The entire payment for buying volume $q$ is then
@@ -180,14 +181,13 @@
 
 \begin{frame}{Continuous model: Market makers}
 	\begin{itemize}	
-		\item Competitive limit orders posted by uninformed, risk-neutral market makers/limit traders
-		\item Focus on the ask side of the market (limit orders to sell vs market order to buy)
+		\item \textbf{Limit traders} are competitive, post limit orders
 		\item Limit price $P'(q)$ quoted for the $q$-th unit is relevant only if the trader places a market order of $q$ or larger, i.e. $\theta_i(q) \geq P'(q)$
 		\item Hence, if supply is competitive then
 		\[
 		\structure{P'(q) = \mathbb{E}[v|\theta_i(q) \geq P'(q)]}
 		\]
-		\item Notice that all we know if limit price $P'(q)$ is `hit' is that the trader's MRS was \textit{at least} $P'(q)$
+		%\item Notice that all we know if limit price $P'(q)$ is `hit' is that the trader's marginal valuation was \textit{at least} $P'(q)$
 	\end{itemize}
 \end{frame}
 
@@ -203,7 +203,9 @@
 			\item At small realized trades, $q \simeq 0$, MM always profit
 			\item Even with continuous prices, there is a non-zero \structure{inside spread} between ask and bid prices as the order size goes to zero (contrast with Kyle)
 			% The reason is that in the limit order market, liquidity suppliers cannot make their quotes contingent on the total size of market orders. As a result, the limit orders at the top of the book are more exposed to adverse selection.
-			\item After a trade of size $q$, new expected asset value is below $P'(q)$. \pause \structure{New expected value = $\mathbb{E}[v|\theta_i(q)=P'(q)]<\mathbb{E}[v|\theta_i(q) \ge P'(q)]=P'(q)$}. Often new limit orders will be posted below $P'(q)$
+			\item After a trade of size $q$, new expected asset value is below $P'(q)$. \pause 
+			
+			\structure{New expected value = $\mathbb{E}[v|\theta_i(q)=P'(q)]<\mathbb{E}[v|\theta_i(q) \ge P'(q)]=P'(q)$}. Often new limit orders will be posted below $P'(q)$ -- price reversal.
 		\end{itemize}
 	\end{block}
 \end{frame}
@@ -295,6 +297,7 @@
 			$$
 		\end{itemize}
 		\item \textbf{No display cost}. Let $C=0$
+		\item \textbf{Continuous prices}.
 	\end{itemize}
 \end{frame}
 
@@ -514,15 +517,18 @@
 		\item First look into LOB markets using \cite{glosten_is_1994}.
 		\item Limit traders act in the same capacity as the dealer did before
 		\begin{itemize}
-			\item but face different incentives
+			\item but face different informational environment
 			\item so act differently
 			\item which leads to different market outcomes
 		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Next week}
+	\begin{itemize}
 		\item Many aspects of market design (tick size, priority rules) are all double-edged swords, swing them carefully
-		\item The interesting part: traders can choose between limit and market orders
-		\begin{itemize}
-			\item Will do this next week
-		\end{itemize}
+		\item Dynamic analysis: traders can choose between limit and market orders
 	\end{itemize}
 \end{frame}
 
