@@ -2,11 +2,13 @@
 %%% Slides are based heavily on earlier versions of this course taught by Jesper Rudiger.
 
 \documentclass[english,10pt
-%,handout
 ,aspectratio=169
+%,handout
+%,notes
 ]{beamer}
 \input{../FM_preamble.tex}
 
+\usepackage{setspace}
 
 
 \title{Financial Markets Microstructure \\ Lecture 1}
@@ -17,7 +19,7 @@ Chapters 0 and 1 of FPR}
 \author{Egor Starkov}
 
 \date{K{\o}benhavns Universitet \\
-	Spring 2020}
+	Spring 2021}
 
 
 
@@ -26,115 +28,183 @@ Chapters 0 and 1 of FPR}
 \addtocounter{framenumber}{-1}
 
 
-
-\section{Practicalities}
-
-%\begin{frame}{Today's plan}
-%\tableofcontents[]
-%\end{frame}
-
-
-%\begin{frame}{Contact Information}
-%Lecturer: Egor Starkov
-%\begin{itemize}
-%	\item Email: \href{mailto:egor.starkov@econ.ku.dk}{\texttt{egor.starkov@econ.ku.dk}}
-%	\item Office: 26.1.13
-%	\item Office hours: by appointment
-%\end{itemize}
-%\end{frame}
-%
-%
-%\begin{frame}{Course Information}
-%\begin{itemize}
-%	\item 2 hours of lectures once or twice a week
-%	\item \alert{Lectures}: Wednesdays 13.00-15.00, CSS 35-01-05 (week 6-21); 
-%		\\ \structure{Sections}: Fridays 10.00-12.00, CSS 25-01-53 (weeks 7,9,11,13,17).
-%	\item Everything (lectures, problem sets for exercise classes, etc.) is on Absalon -- check regularly or subscribe for updates.
-%	\item I will upload the slides before the lectures for you to print out.
-%\end{itemize}
-%\end{frame}
-
-
-%\begin{frame}
-%	\centering
-%	\includegraphics[scale=0.3]{pics/timetable}
-%\end{frame}
-
-
-\begin{frame}{Course information}
-	\begin{itemize}
-		\item Lecturer: Egor Starkov
-		\item 16 lectures, 5 exercise classes
-		\item course materials (slides, problem sets) available at \url{https://starkov.site}
-	\end{itemize}
+\begin{frame}
+	Cameras on! (please?)
+	
+	for your sake as much as mine
 \end{frame}
 
+
+\section{Logistics}
+
+\begin{frame}{Today's plan}
+\begin{enumerate}
+	\item Course logistics
+	\item Why do we need financial markets?
+	\item What types of financial markets are out there?
+	\item What kinds of economic agents use financial markets?
+\end{enumerate}
+\end{frame}
+
+
+\begin{frame}{Contact Information}
+Lecturer: Egor Starkov
+\begin{itemize}
+	\item Contact: absalon or email (\href{mailto:egor.starkov@econ.ku.dk}{\texttt{egor.starkov@econ.ku.dk}})
+	%\item Office: 26.1.13
+	\item Office hours: by appointment (or after lectures)
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Schedule}
+\begin{columns}
+	\begin{column}{0.6\linewidth}
+		2 hours of lectures once or twice a week
+		\begin{itemize}
+			\item \structure{Wednesdays 13.00-15.00} (weeks 6-21); %
+			\item \structure{Fridays 10.00-12.00} (weeks 7,9,11,15,17,19).
+			\item (That's 22 lectures when we are only supposed to have 21. May skip one or use for office hours/exercise class/...)
+			\item on Zoom, until April 1 and/or further notice.
+		\end{itemize}
+	\end{column}
+	\begin{column}{0.4\linewidth}
+		\pause[1]
+		\includegraphics<handout:0>[scale=0.14]{pics/schedule}
+	\end{column}
+\end{columns}
+\end{frame}
+
+
+\begin{frame}{Resources}
+\begin{columns}
+	\begin{column}{0.7\linewidth}
+		{\setstretch{1.3}
+		\begin{itemize}
+			\item Get the book by Foucault, Pagano, and R{\"o}ell.
+			\begin{itemize}
+				\item We'll be using it a lot (incl. exercises).
+				\item Will switch to research articles towards the end of the course.
+			\end{itemize}
+			\item Everything else (lectures, problem sets for exercise classes, etc.) is on \alert{Absalon} -- check regularly.
+			% walkthrough of absalon (pages, calendar, syllabus, zoom)
+			\item I will upload the \alert{slides} before the lectures for you to print out.%
+			\begin{itemize}
+				\item Those may contain omissions! % if i'm not lazy
+			\end{itemize}
+			\pause 
+			\item \alert{Recordings} will be uploaded to absalon files
+			\begin{itemize}
+				\item \structure{Limited space} $\rightarrow$ deleted after 3-5 weeks
+				\item \structure{GDPR} $\rightarrow$ you must delete the recordings after the course has concluded
+				\item \structure{Last year's lectures} are \href{https://www.youtube.com/playlist?list=PL4pUs4P_j1Wa2_P1lw44kFWWjKDTGUY7S}{\uline{on youtube}}.
+			\end{itemize}
+		\end{itemize}
+		}
+	\end{column}
+	\begin{column}{0.3\linewidth}
+		\pause[1]
+		\includegraphics<handout:0>[scale=1]{pics/resources}
+	\end{column}
+\end{columns}
+\end{frame}
 
 
 \begin{frame}{Problem sets and Exam}
-\begin{itemize}
-	\item Will give exercises after lectures (esp. in earlier part of the course).
-	\begin{itemize}
-		\item These are voluntary. We will solve some in sections
-	\end{itemize}
-	\item Will assign 2 problem sets (larger, cumulative, more open-ended?).
-	\begin{itemize}
-		\item Voluntary too. Take them as an opportunity to check your progress
-	\end{itemize}
-	\item The final exam will be a 12-hours take-home exam.
-\end{itemize}
+\begin{columns}
+	\begin{column}{0.6\linewidth}
+		{\setstretch{1.3}
+			\begin{itemize}
+				\item \alert{readings and exercises} after lectures (esp. in earlier part of the course)
+				\begin{itemize}
+					\item voluntary; will go through some in class
+					\item readings not always immediately related to theory, but always related to the course
+				\end{itemize}
+				\item 2 problem sets (larger, cumulative, more open-ended?)
+				\begin{itemize}
+					\item Voluntary too. Take them as an opportunity to check your progress
+				\end{itemize}
+				\item \alert{final exam}: 12-hr take-home exam.
+			\end{itemize}
+		}
+	\end{column}
+	\begin{column}{0.4\linewidth}
+		\pause[1]
+		\includegraphics<handout:0>[scale=0.08]{pics/exam}
+	\end{column}
+\end{columns}
 \end{frame}
 
 
-\begin{frame}{Course materials}
-\begin{itemize}
-	\item We will be following the textbook for the most part (exercises included),
-	\begin{itemize}
-		\item Thierry Foucault, Marco Pagano and Ailsa R{\"o}ell: “Market Liquidity: Theory Evidence and Policy,” Oxford University Press, 2013. 439 pages.
-	\end{itemize}
-	\item Switch to research articles towards the end of the course (L11).
-\end{itemize}
+\begin{frame}{Covid reality}
+	\begin{columns}
+		\begin{column}{0.6\linewidth}
+			{\setstretch{1.3}
+				\begin{itemize}
+					\item Everything is online-only until further notice.
+					\item It's difficult to make things work, but let's try.
+					\pause
+					\item \alert{Group work}!
+					\begin{itemize}
+						\item Organize into groups and work on homeworks together!
+						\item Message me before EoD Friday if you are looking for a group or group members.
+					\end{itemize}
+					\pause
+					\item \structure{Group activities}
+					\begin{itemize}
+						\item I will try to organize more discussions in class.
+					\end{itemize}
+				\end{itemize}
+			}
+		\end{column}
+		\begin{column}{0.4\linewidth}
+			\pause[1]
+			\includegraphics<handout:0>[scale=0.2]{pics/covid}
+		\end{column}
+	\end{columns}
 \end{frame}
 
 
 
 
-\section{Introduction}
+\section{Why do we need financial markets?}
 
 \begin{frame}{Today's plan}
 \tableofcontents[currentsection]
 \end{frame}
 
 
-%\begin{frame}{Today's plan}
-%\begin{itemize}
-%	\item Get a grasp of what we mean, broadly speaking, when we talk about financial markets
-%	\item Motivate why we want to study financial markets, and why they are different from the markets you have seen until now
-%	\item Introduce some of the key concepts and language
-%	\item Look at some basic examples of how markets work
-%	\item Categorize the most important types of institutions
-%	\item Think about what policy issues might be relevant
-%\end{itemize}
-%\end{frame}
-
-
-\begin{frame}{Why study markets?}
-	\begin{enumerate}
-		\item What is a market?
-		\begin{itemize}
-			\item Institution for property rights exchange
-		\end{itemize}
-		\pause
-		\item Why do we study markets?
-		\begin{itemize}
-			\item Want property rights to be allocated \structure{efficiently} in the society
-			\item Smooth functioning of markets is essential for this
-		\end{itemize}
-	\end{enumerate}
+\begin{frame}{Why do we need markets?}
+\begin{columns}
+	\begin{column}{0.6\linewidth}
+		\begin{enumerate}
+			\item What is a market?%
+			\visible<handout:0|2->{
+				\begin{itemize}
+					\item Institution for property rights exchange
+				\end{itemize}
+			}
+			\medskip
+			\pause[1]
+			\item Why do we need markets?
+			\pause[2]
+			\visible<handout:0|3->{
+				\begin{itemize}
+					\item Want property rights to be allocated \structure{efficiently} in the society
+					\item Smooth functioning of markets is essential for this
+				\end{itemize}
+			}
+		\end{enumerate}
+	\end{column}
+	\begin{column}{0.4\linewidth}
+		\pause[1]
+		\includegraphics<handout:0>[scale=0.11]{pics/market}
+	\end{column}
+\end{columns}
 \end{frame}
 
 
-\begin{frame}{Why study Financial Markets?}
+\begin{frame}{Why do we need Financial Markets?}
 	\begin{itemize}
 		\item \textbf{Financial assets}: move wealth across time and contingencies: 
 		\begin{itemize}
@@ -557,48 +627,6 @@ Largest stock exchanges worldwide in 2018, by value of electronic order book sha
 	\item Read the article (on Absalon) about London Metal Exchange. What is the value of keeping the ``open outcry'' trading floor in the age of digital trading?
 	\item Exercises 1-3 on pages 44-45 in the textbook
 \end{itemize}
-\end{frame}
-
-\appendix
-\begin{frame}<handout:0>
-	To finish up: a parable on financial markets 
-\end{frame}
-
-\begin{frame}<handout:0>
-	\centering \includegraphics[width=0.55\paperwidth]{pics/yy1}
-\end{frame}
-
-
-\begin{frame}<handout:0>
-	\centering \includegraphics[width=0.55\paperwidth]{pics/yy2}
-\end{frame}
-
-
-\begin{frame}<handout:0>
-	\centering \includegraphics[width=0.55\paperwidth]{pics/yy3}
-\end{frame}
-
-
-\begin{frame}<handout:0>
-	\centering \includegraphics[width=0.55\paperwidth]{pics/yy4}
-\end{frame}
-
-
-\begin{frame}<handout:0>[label=bidask, noframenumbering]{Bid-ask}
-	\centering
-	\includegraphics[width=.3\paperwidth]{pics/Image_XRates}
-	\hyperlink{main2}{\beamerbutton{back}}
-\end{frame}
-
-
-\begin{frame}<handout:0>[label=quote, noframenumbering]{Quote on fundamental value}
-	John Maynard Keynes:
-	``Certain classes of investment are governed by the average expectation of those who deal on the Stock Exchange as revealed in the price of shares, rather than by the genuine expectations of the professional entrepreneur.... 
-	
-	\quad
-	
-	In practice, we have tacitly agreed, as a rule, to fall back on what is, in truth, a convention. The essence of this convention -- though it does not, of course, work out so simply -- lies in assuming that the existing state of affairs will continue indefinitely, except in so far as we have specific reasons to expect a change.''
-	\hyperlink{main4}{\beamerbutton{back}}
 \end{frame}
 
 \end{document} 
