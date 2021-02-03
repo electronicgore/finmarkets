@@ -24,6 +24,11 @@ Chapters 0 and 1 of FPR}
 
 
 \begin{document}
+\AtBeginSection[]{
+\frame{
+	\frametitle{This slide deck:}
+	\tableofcontents[currentsection,currentsubsection]
+}}
 \frame[plain]{\titlepage}
 \addtocounter{framenumber}{-1}
 
@@ -36,16 +41,6 @@ Chapters 0 and 1 of FPR}
 
 
 \section{Logistics}
-
-\begin{frame}{Today's plan}
-\begin{enumerate}
-	\item Course logistics
-	\item Why do we need financial markets?
-	\item What types of financial markets are out there?
-	\item What kinds of economic agents use financial markets?
-\end{enumerate}
-\end{frame}
-
 
 \begin{frame}{Contact Information}
 Lecturer: Egor Starkov
@@ -159,7 +154,7 @@ Lecturer: Egor Starkov
 		\end{column}
 		\begin{column}{0.4\linewidth}
 			\pause[1]
-			\includegraphics<handout:0>[scale=0.2]{pics/covid}
+			\includegraphics<handout:0>[scale=0.27]{pics/covid}
 		\end{column}
 	\end{columns}
 \end{frame}
@@ -169,16 +164,11 @@ Lecturer: Egor Starkov
 
 \section{Why do we need financial markets?}
 
-\begin{frame}{Today's plan}
-\tableofcontents[currentsection]
-\end{frame}
-
-
 \begin{frame}{Why do we need markets?}
 \begin{columns}
 	\begin{column}{0.6\linewidth}
 		\begin{enumerate}
-			\item What is a market?%
+			\item \alert{What} is a market?%
 			\visible<handout:0|2->{
 				\begin{itemize}
 					\item Institution for property rights exchange
@@ -186,7 +176,7 @@ Lecturer: Egor Starkov
 			}
 			\medskip
 			\pause[1]
-			\item Why do we need markets?
+			\item \alert{Why} do we need markets?
 			\pause[2]
 			\visible<handout:0|3->{
 				\begin{itemize}
@@ -205,28 +195,39 @@ Lecturer: Egor Starkov
 
 
 \begin{frame}{Why do we need Financial Markets?}
-	\begin{itemize}
-		\item \textbf{Financial assets}: move wealth across time and contingencies: 
+\begin{columns}
+	\begin{column}{0.6\linewidth}
 		\begin{itemize}
-			\item Financial assets provide `contingent cash flows'
-			\item Stocks, bonds, derivatives...
+			\item \textbf{Financial markets}: markets for financial assets
+			\item \textbf{Financial assets}: move wealth across time and contingencies: 
+			\begin{itemize}
+				\item Financial assets provide `contingent cash flows'
+				\item Stocks, bonds, derivatives...
+			\end{itemize}
+			\pause
+			\item \textbf{Purposes} of financial markets:
+			\begin{itemize}
+				\item Forum for trade in the stock (\alert{consolidation});
+				\item Each trader can compare his private valuation against the current price (\alert{transparency});
+				\item Guarantee of getting what is paid for (\alert{security})
+			\end{itemize}
+			\item \textbf{Specifics} of financial markets:
+			\begin{itemize}
+				\item Usually organized in a specific way
+				\item Feature to a lot of asymmetric information
+			\end{itemize}
 		\end{itemize}
-		\item \textbf{Financial markets}: markets for financial assets
-		\pause
-		\item \textbf{Purposes} of financial markets:
-		\begin{itemize}
-			\item Forum for trade in the stock (\alert{consolidation});
-			\item Each trader can compare his private valuation against the current price (\alert{transparency});
-			\item Guarantee of getting what is paid for (\alert{security})
-		\end{itemize}
-		\item \textbf{Specifics} of financial markets:
-		\begin{itemize}
-			\item Usually organized in a specific way
-			\item Feature to a lot of asymmetric information
-		\end{itemize}
-	\end{itemize}
+	\end{column}
+	\begin{column}{0.4\linewidth}
+		\pause[1]
+		\includegraphics<handout:0>[scale=0.17]{pics/exchange}
+	\end{column}
+\end{columns}
 \end{frame}
 
+
+
+\section{Types of financial markets}
 
 \begin{frame}{Types of Financial Markets}
 	\begin{itemize} 
@@ -249,234 +250,98 @@ Lecturer: Egor Starkov
 \end{frame}
 
 
-
-
-\begin{frame}{Motivating questions}
-\begin{itemize}
-	\item How are market prices created? How are they influenced by traders?
-	\item How should traders act on their information?
-	\item Do the market rules matter? And which rules are good for whom?
-	\item How do we measure if markets are working well?
-	\begin{itemize}
-		\item Liquidity/depth (a lot more on that later)
-		\item Volume
-		\item Efficiency
-		\item Stability
-	\end{itemize}
-\end{itemize}
-%NOTE: talk here about how this course departs from walrasian markets and dwelves into how it's composed from individual trades
-\end{frame}
-
-
-\begin{frame}{Course overview}
-\begin{itemize}
-	\item Institutional details, policy issues, applications (ch.1, 6-10, articles)
-	\item Theories to understand and to analyze policy (ch.3-4, 6-10, articles)
-	\item Some empirical issues (ch.2, 5, articles)
-\end{itemize}
-
-\textbf{Prerequisites}: Finance, micro, games, (math)
-
-\textbf{Disclaimer}: We focus on `rational' models in this course.
-Behavioral finance is a complementary and exciting topic. See
-Alexander Sebald's course.
-\end{frame}
-
-
-%\begin{frame}{Many things happening now}
-%	\begin{figure}
-%		\includegraphics[width=.78\linewidth]{pics/markets2020}
-%		\caption{The Guardian, January 6}
-%		%NOTE: photo: Kuwait exchange trading floor.
-%		%NOTE: Stock exchanges dropped on Jan 7 after Trump's attack on Iran and the retaliation that followed. Oil prices surged. A rebound followed after both sides announced easing out.
-%	\end{figure}
-%\end{frame}
-
-
-%\begin{frame}{Main goals}
-%\begin{enumerate}
-%	\item Explain, discuss and interpret concepts and results from textbook and articles
-%	\item Derive and analyze results in models
-%	\item Discuss possible applications of theoretical concepts to problems
-%\end{enumerate}
-%Method: Carefully read texts, combine with facts, discuss, try problems
-%\pause
-%
-%\textbf{Disclaimer}: We focus on `rational' models in this course.
-%Behavioral finance is a complementary and exciting topic. See
-%Alexander Sebald's course.
-%\end{frame}
-
-
-\section{Core concepts}
-
-\begin{frame}{Today's plan}
-	\tableofcontents[currentsection]
-\end{frame}
-
-\begin{frame}{Trade and Prices}
-\begin{itemize}
-	\item Price theory is fundamental to economics
-	\begin{itemize}
-		\item Law of one price; no arbitrage
-	\end{itemize}
-	\item In financial markets: often a \textit{bid} and an \textit{ask} price. The difference between the two is called the `\textbf{bid-ask spread}'
-	\begin{itemize}
-		\item We will spend time analyzing what drives this spread
-	\end{itemize}
-%	\item Important question: How are prices formed?
-%	\begin{itemize}
-%		\item Shed light on the invisible hand
-%		%\item Difference to standard market theory: assume that agents are strategic ($\rightarrow$ game theory) 
-%	\end{itemize}
-	%\item Do markets result in efficient allocations?
-\end{itemize}
-\end{frame}
-
-
-\begin{frame}
-	\centering
-	\includegraphics[width=.3\paperwidth]{pics/Image_XRates}
-\end{frame}
-
-
-\begin{frame}
-	\centering
-	\includegraphics[width=1\linewidth]{pics/StockSummary_Google}
-\end{frame}
-
-
-\begin{frame}[label=main4]{Fundamental Value}
-\begin{itemize}
-	\item Consider Google Stock
-	\item What is the \textbf{fundamental value} of its stock? Where does it come from?
-	\begin{enumerate}
-		\item R+D
-		\item Governance
-		\item Marketing
-		\item Competition
-		\item ...
-	\end{enumerate}
-	\item In this course: take the `fundamental value' as given and analyze how it translates into prices
-	
-	\item \textbf{Price discovery}: how much information about the fundamental value can be extracted from market prices?
-	
-	\hyperlink{quote}{\beamerbutton{Quote}}
-\end{itemize}
-\end{frame}
-
-
-\begin{frame}{Market Liquidity}
-\begin{itemize}
-	\item So far, you have been used to analyzing (long-run) equilibrium allocations and prices
-	\item In practice, prices adjust to temporary imbalances
-	\begin{itemize}
-		\item Not everyone who wants to trade in a given asset is present in the market at the same time
-		\item Example: too many sellers $\rightarrow$ prices lower in short run
-		\item Example: costly to execute large order quickly
-	\end{itemize}
-	\pause
-	\item These effects are related to the \textbf{liquidity} of the asset
-	\begin{itemize}
-		\item Wikipedia: `market liquidity' is a market's ability to facilitate an asset being sold quickly without having to reduce its price very much
-		\item Easy to sell a Google stock (many potential buyers), but maybe hard for a stock of a small Danish company
-	\end{itemize}
-	\item We will develop measures of liquidity in this course
-	\item More liquid assets may be more valuable
-\end{itemize}
-\end{frame}
-
-
-\begin{frame}{Market depth}
-\begin{itemize}
-	\item Prices are not always immediately available, even at an exchange
-	\begin{itemize}
-		\item You may observe previous trading prices, but nothing assures that future trading prices will be the same
-		\item You may observe quotes from sellers/buyers, but quotes are normally only valid for a specific amount of stocks
-	\end{itemize}
-	\item A useful concept is \textbf{market depth}: it measures how big an order is required to change the price of an asset by, say, 10 cents
-\end{itemize}
-\end{frame}
-
-
-%\begin{frame}{Finally... The Big Issue}
-%\begin{itemize}
-%	\item Since this is a course on financial markets, we will also try to speak (a bit) about recent big events.
-%	For instance...
-%	
-%	\begin{minipage}{.4\textwidth}
-%		\begin{figure}
-%		\includegraphics[width=1\linewidth]{pics/Graph_HousePrices}
-%		\caption{Housing bubble}
-%		\end{figure}
-%	\end{minipage}
-%	\quad
-%	\begin{minipage}{.4\textwidth}
-%		\begin{figure}
-%		\includegraphics[width=1.3\linewidth]{pics/Graph_Nasdaq}
-%		\caption{Tech bubble (Nasdaq index)}
-%		\end{figure}
-%	\end{minipage}
-%	\item The last lectures of the course will be about this
-%\end{itemize}
-%\end{frame}
-
-
-
-\section{Institutions}
-
-\begin{frame}{Today's plan}
-\tableofcontents[currentsection]
-\end{frame}
-
-
-%\begin{frame}{Asset Markets}
-%\begin{itemize}
-%	%TODO: cut this slide?
-%	\item \textbf{Markets}: facilitate trade between investors and savers
-%	\item \textbf{Speculators}: interact with markets
-%	\item \textbf{Intermediation}: done by dealers/brokers or automated systems
-%	\item \textbf{Matching}: thus, the market matches buyers with sellers - important to attract both types of traders
-%\end{itemize}
-%\end{frame}
-
-
 \begin{frame}{Market Setups}
-Two rough categories of market setups
-\begin{itemize}
-	\item (i) Order-driven markets
+Two (three?) rough categories of market setups
+\begin{enumerate}
+	\item Decentralized ``markets''
+	\item Dealer markets
+	\item Order-driven markets
 	\begin{itemize}
 		\item Continuous
 		\item Call
 	\end{itemize}
-	\item (ii) Dealer markets
-\end{itemize}
+\end{enumerate}
+\end{frame}
+
+
+\begin{frame}{Direct trading}
+\begin{columns}
+	\begin{column}{0.6\linewidth}
+		\begin{itemize}
+			\item Buyers and sellers could interact \structure{directly}.
+			\item A useful benchmark, but not a very interesting case.
+		\end{itemize}
+	\end{column}
+	\begin{column}{0.4\linewidth}
+		\pause[1]
+		\includegraphics<handout:0>[scale=0.27]{pics/ag_direct}
+	\end{column}
+\end{columns}
+\end{frame}
+
+
+\begin{frame}{Dealer Markets}
+\begin{columns}
+	\begin{column}{0.6\linewidth}
+		\begin{itemize}
+			%\item Unlike order-driven markets, prices are fixed by a dealer
+			\item A \structure{dealer} quotes a bid and an ask price (valid up to certain number of shares)
+			\item Bid-ask spread:
+			\begin{itemize}
+				\item Narrow to fend off competitors
+				\item Wide to generate trading profits
+			\end{itemize}
+			%\item How competitive are the prices?
+			%\item Dealer costs:
+			%\begin{itemize}
+			%	\item Transactions and operations costs
+			%	\item Inventory costs
+			%	\item Adverse selection costs
+			%\end{itemize}
+			\item Dealer exchanges: Nasdaq
+		\end{itemize}
+	\end{column}
+	\begin{column}{0.4\linewidth}
+		\pause[1]
+		\includegraphics<handout:0>[scale=0.27]{pics/ag_dealer}
+	\end{column}
+\end{columns}
+	
 \end{frame}
 
 
 \begin{frame}{Order-driven markets}
-\begin{itemize}
-	\item Timing
-	\begin{enumerate}
-		\item Orders are submitted
-		\item Trades are arranged
-	\end{enumerate}
-	\item The markets can vary in different ways
-	\begin{itemize}
-		\item Frequency of trading: how often?
-		\item Order precedence: price/time/public
-		\item Pricing rule: uniform/discriminatory price, determined from orders/taken from other exchange
-		\item Opening/closing: are there any special trading rules?
-	\end{itemize}
-\end{itemize}
+\begin{columns}
+	\begin{column}{0.6\linewidth}
+		\begin{itemize}
+			\item Timing
+			\begin{enumerate}
+				\item Orders are submitted
+				\item Trades are arranged
+			\end{enumerate}
+			\item The markets can vary in different ways
+			\begin{itemize}
+				\item Frequency of trading: how often?
+				\item Order precedence: price/time/public
+				\item Pricing rule: uniform/discriminatory price, determined from orders/taken from other exchange
+				\item Opening/closing: are there any special trading rules?
+			\end{itemize}
+		\end{itemize}
+	\end{column}
+	\begin{column}{0.4\linewidth}
+		\pause[1]
+		\includegraphics<handout:0>[scale=0.27]{pics/ag_exch}
+	\end{column}
+\end{columns}
+
 \end{frame}
 
 
 \begin{frame}{Order types}
 \begin{itemize}
-	\item There's a tremendous amount of different order types: we focus on 'limit orders' and 'market orders'
-	\item \textbf{Limit order}. Specify a quantity and a price. E.g. ``will buy 500 shares at below price 40''
-	\item \textbf{Market order}. Specify quantity; to execute immediately at best available price
+	\item There's a tremendous amount of different order types. We focus on two main ones:
+	\item \textbf{Market order} specifies quantity: ``buy 500 shares at best available price''.
+	\item \textbf{Limit order} specifies a quantity and a price: ``will buy 500 shares at below price 40''
 	\item Trades occur either through 
 	\begin{enumerate}
 		\item a limit order 'match' (somebody posts a bid price above the lowest ask price), or
@@ -486,12 +351,17 @@ Two rough categories of market setups
 \end{frame}
 
 
-\begin{frame}{Order-driven markets: Limit order markets}
+\begin{frame}{Order-driven markets: Continuous auctions}
 \begin{itemize}
-	\item Relation to liquidity:
+	\item LOs together compose a \structure{Limit Order Book}.
 	\begin{itemize}
-		\item Patient traders are more passive: use limit orders (provide liquidity)
-		\item Impatient traders are more aggressive: use market orders (take liquidity)
+		\item Any given LO can be \textbf{marketable} or not.
+		\item A marketable LO is expected to execute immediately given other orders in the LOB.
+	\end{itemize}
+	\item Traders can choose orders best for them:
+	\begin{itemize}
+		\item Patient traders are more passive: use limit orders (fill LOB)
+		\item Impatient traders are more aggressive: use market orders (deplete LOB)
 	\end{itemize}
 	\item \alert{Discriminatory price}: depends on how your order is matched
 	\item Continuous LOB exchanges: NYSE (both electronic and `outcry'), LSE, BATS, Euronext
@@ -499,7 +369,7 @@ Two rough categories of market setups
 \end{frame}
 
 
-\begin{frame}{Order-driven markets: Call auctions (batch)}
+\begin{frame}{Order-driven markets: Call (batch) auctions}
 \begin{itemize}
 	\item Orders are collected (in a `batch') and cleared at a certain frequency
 	\item The price is chosen so as to maximize the number of executed orders
@@ -507,27 +377,6 @@ Two rough categories of market setups
 	\item In theory,  very good efficiency properties: all profitable trades are carried out
 	\item But... slower than the continuous market
 	\item Call auction exchanges: most of the major exchanges (e.g. Nasdaq, LSE, Euronext) operate call auctions together with other trading methods
-\end{itemize}
-\end{frame}
-
-
-\begin{frame}{Dealer Markets}
-\begin{itemize}
-	\item Unlike order-driven markets, prices are fixed by a dealer
-	\item He quotes a bid and an ask price (valid up to certain number of shares)
-	\item Bid-ask spread:
-	\begin{itemize}
-		\item Narrow to fend off competitors
-		\item Wide to generate trading profits
-	\end{itemize}
-	\item How competitive are the prices?
-	\item Dealer costs:
-	\begin{itemize}
-		\item Transactions and operations costs
-		\item Inventory costs
-		\item Adverse selection costs
-	\end{itemize}
-	\item Dealer exchanges: Nasdaq
 \end{itemize}
 \end{frame}
 
@@ -558,26 +407,284 @@ Two rough categories of market setups
 \end{frame}
 
 
-\begin{frame}{Comparison}
-	What to consider when looking at these markets?
+\begin{frame}{Other dimensions}
 	\begin{itemize}
-		\item \textbf{Welfare planner}: Competition - efficiency 
-		\item \textbf{Trader}: Liquidity - transparency - information
+		\item Many other aspects in which markets can differ:
+		\begin{itemize}
+			\item Transparency about current orders
+			\item Transparency about past trades
+			\item Fragmentation
+			\item Listing requirements
+			\item ...
+		\end{itemize}
+		\item Who benefits from markets organized in a particular way? Who loses? 
 	\end{itemize}
 \end{frame}
 
+
+%\begin{frame}{Comparison}
+%	What to consider when comparing these markets?
+%	\begin{itemize}
+%		\item \textbf{Welfare planner}: Competition - efficiency 
+%		\item \textbf{Trader}: Liquidity - transparency - information
+%	\end{itemize}
+%\end{frame}
+
+
+\section{Types of agents in financial markets}
 
 \begin{frame}{Players}
-	\begin{itemize}
-		\item \textbf{Traders/investors}: the end-``consumers'' or suppliers of the asset
+\begin{columns}
+	\begin{column}{0.4\linewidth}
 		\begin{itemize}
-			\item \structure{Retail investors} vs \structure{institutional investors}
-			\item \alert{Informed} vs \alert{uninformed} investors
+			\item \textbf{Traders/investors}: the end-``consumers'' or suppliers of the asset
+			\item \textbf{Brokers}: the intermediaries who relay investors' orders to the market (investment banks)
+			\item \textbf{Dealers/market-makers}: match orders from different sides of the market
 		\end{itemize}
-		\item \textbf{Brokers}: the intermediaries who relay investors' orders to the market (investment banks)
-		\item \textbf{Dealers/market-makers}: match orders from different sides of the market
+	\end{column}
+	\begin{column}{0.6\linewidth}
+		\pause[1]
+		\includegraphics<handout:0>[scale=0.23]{pics/ag_brokers}
+	\end{column}
+\end{columns}
+\end{frame}
+
+
+\begin{frame}{Types of traders}
+Traders can be classified:
+\begin{itemize}
+	\item \structure{Retail investors} vs \structure{institutional investors}
+	\begin{itemize}
+		\item Retail: regular people, individuals with money.
+		\item Institutional: pension funds, mutual funds, hedge funds, private equity funds...
+	\end{itemize}
+	\item \alert{Informed} vs \alert{uninformed} investors
+	\begin{itemize}
+		\item Retail investors and pension funds usually have little ``private information''.
+		\item Hedge funds and short-selling funds have good analytics and can react fast.
+		\item ``Private information''$\neq$``insider information''! Insider trading is banned in most jurisdictions.
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+
+
+
+
+\section{Next on...}
+
+\begin{frame}{Motivating questions}
+	\begin{enumerate}
+		\item How are market prices created? How are they influenced by traders?
+		\item How should traders act on their information?
+		\item Do the market rules matter? And which rules are good for whom?
+		\item How do we measure if markets are working well?
+		%\begin{itemize}
+		%	\item Liquidity/depth (a lot more on that later)
+		%	\item Volume
+		%	\item Efficiency
+		%	\item Stability
+		%\end{itemize}
+	\end{enumerate}
+\end{frame}
+
+
+\begin{frame}{Course overview}
+	\begin{itemize}
+		\item Institutional details, policy issues, applications (ch.1, 6-10, articles)
+		\item Theories to understand and to analyze policy (ch.3-4, 6-10, articles)
+		\item Some empirical issues (ch.2, 5, articles)
+	\end{itemize}
+	
+	\textbf{Prerequisites}: Finance, micro, games, (math)
+	
+	\textbf{Disclaimer}: We focus on `rational' models in this course.
+	Behavioral finance is a complementary and exciting topic. See
+	Alexander Sebald's course.
+\end{frame}
+
+
+\begin{frame}{For next class}
+\begin{enumerate}
+	%\item Find bid and ask prices for Facebook shares and for Microsoft. Which stock exchange do they come from? 
+	\item Match into groups / message me if you are looking for a group or group members.
+	\item Read the article about GameStop (on Absalon) and any follow-ups you can (be bothered to) find. Discuss in your newly formed groups:
+	\begin{itemize}
+		\item Sentiment aside, would now be a good time to buy GameStop stock? Why/why not?
+		\item Robinhood (trading app) halted trading in GameStop stocks at some point. Is there a scope for some regulatory intervention to prevent this kind of exclusion of retail traders?
+	\end{itemize} 
+	\item Do exercises 1-3 after Chapter 1 (pages 44-45) in the textbook
+\end{enumerate}
+\end{frame}
+
+\end{document} 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%\begin{frame}{Many things happening now}
+%	\begin{figure}
+%		\includegraphics[width=.78\linewidth]{pics/markets2020}
+%		\caption{The Guardian, January 6}
+%		%NOTE: photo: Kuwait exchange trading floor.
+%		%NOTE: Stock exchanges dropped on Jan 7 after Trump's attack on Iran and the retaliation that followed. Oil prices surged. A rebound followed after both sides announced easing out.
+%	\end{figure}
+%\end{frame}
+
+
+%\begin{frame}{Main goals}
+%\begin{enumerate}
+%	\item Explain, discuss and interpret concepts and results from textbook and articles
+%	\item Derive and analyze results in models
+%	\item Discuss possible applications of theoretical concepts to problems
+%\end{enumerate}
+%Method: Carefully read texts, combine with facts, discuss, try problems
+%\pause
+%
+%\textbf{Disclaimer}: We focus on `rational' models in this course.
+%Behavioral finance is a complementary and exciting topic. See
+%Alexander Sebald's course.
+%\end{frame}
+
+
+
+%\section{Core concepts}
+
+\begin{frame}{Today's plan}
+	\tableofcontents[currentsection]
+\end{frame}
+
+\begin{frame}{Trade and Prices}
+	\begin{itemize}
+		\item Price theory is fundamental to economics
+		\begin{itemize}
+			\item Law of one price; no arbitrage
+		\end{itemize}
+		\item In financial markets: often a \textit{bid} and an \textit{ask} price. The difference between the two is called the `\textbf{bid-ask spread}'
+		\begin{itemize}
+			\item We will spend time analyzing what drives this spread
+		\end{itemize}
+		%	\item Important question: How are prices formed?
+		%	\begin{itemize}
+		%		\item Shed light on the invisible hand
+		%		%\item Difference to standard market theory: assume that agents are strategic ($\rightarrow$ game theory) 
+		%	\end{itemize}
+		%\item Do markets result in efficient allocations?
 	\end{itemize}
 \end{frame}
+
+
+\begin{frame}
+	\centering
+	\includegraphics[width=.3\paperwidth]{pics/Image_XRates}
+\end{frame}
+
+
+\begin{frame}
+	\centering
+	\includegraphics[width=1\linewidth]{pics/StockSummary_Google}
+\end{frame}
+
+
+\begin{frame}[label=main4]{Fundamental Value}
+	\begin{itemize}
+		\item Consider Google Stock
+		\item What is the \textbf{fundamental value} of its stock? Where does it come from?
+		\begin{enumerate}
+			\item R+D
+			\item Governance
+			\item Marketing
+			\item Competition
+			\item ...
+		\end{enumerate}
+		\item In this course: take the `fundamental value' as given and analyze how it translates into prices
+		
+		\item \textbf{Price discovery}: how much information about the fundamental value can be extracted from market prices?
+		
+		\hyperlink{quote}{\beamerbutton{Quote}}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Market Liquidity}
+	\begin{itemize}
+		\item So far, you have been used to analyzing (long-run) equilibrium allocations and prices
+		\item In practice, prices adjust to temporary imbalances
+		\begin{itemize}
+			\item Not everyone who wants to trade in a given asset is present in the market at the same time
+			\item Example: too many sellers $\rightarrow$ prices lower in short run
+			\item Example: costly to execute large order quickly
+		\end{itemize}
+		\pause
+		\item These effects are related to the \textbf{liquidity} of the asset
+		\begin{itemize}
+			\item Wikipedia: `market liquidity' is a market's ability to facilitate an asset being sold quickly without having to reduce its price very much
+			\item Easy to sell a Google stock (many potential buyers), but maybe hard for a stock of a small Danish company
+		\end{itemize}
+		\item We will develop measures of liquidity in this course
+		\item More liquid assets may be more valuable
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Market depth}
+	\begin{itemize}
+		\item Prices are not always immediately available, even at an exchange
+		\begin{itemize}
+			\item You may observe previous trading prices, but nothing assures that future trading prices will be the same
+			\item You may observe quotes from sellers/buyers, but quotes are normally only valid for a specific amount of stocks
+		\end{itemize}
+		\item A useful concept is \textbf{market depth}: it measures how big an order is required to change the price of an asset by, say, 10 cents
+	\end{itemize}
+\end{frame}
+
+
+%\begin{frame}{Finally... The Big Issue}
+%\begin{itemize}
+%	\item Since this is a course on financial markets, we will also try to speak (a bit) about recent big events.
+%	For instance...
+%	
+%	\begin{minipage}{.4\textwidth}
+%		\begin{figure}
+%		\includegraphics[width=1\linewidth]{pics/Graph_HousePrices}
+%		\caption{Housing bubble}
+%		\end{figure}
+%	\end{minipage}
+%	\quad
+%	\begin{minipage}{.4\textwidth}
+%		\begin{figure}
+%		\includegraphics[width=1.3\linewidth]{pics/Graph_Nasdaq}
+%		\caption{Tech bubble (Nasdaq index)}
+%		\end{figure}
+%	\end{minipage}
+%	\item The last lectures of the course will be about this
+%\end{itemize}
+%\end{frame}
+
+
+
+
+%\begin{frame}{Asset Markets}
+%\begin{itemize}
+%	%TODO: cut this slide?
+%	\item \textbf{Markets}: facilitate trade between investors and savers
+%	\item \textbf{Speculators}: interact with markets
+%	\item \textbf{Intermediation}: done by dealers/brokers or automated systems
+%	\item \textbf{Matching}: thus, the market matches buyers with sellers - important to attract both types of traders
+%\end{itemize}
+%\end{frame}
+
 
 
 \begin{frame}{Regulation}
@@ -600,33 +707,21 @@ Two rough categories of market setups
 
 
 \begin{frame}{Competition}
-\begin{itemize}
-	\item Network externalities in trading may favor a single market place (natural monopoly)
-	\item Competition may improve the terms offered to traders
 	\begin{itemize}
-		\item Should regulators require price transparency?
-		\item Order routing
-		\item Foster competitive market making?
+		\item Network externalities in trading may favor a single market place (natural monopoly)
+		\item Competition may improve the terms offered to traders
+		\begin{itemize}
+			\item Should regulators require price transparency?
+			\item Order routing
+			\item Foster competitive market making?
+		\end{itemize}
 	\end{itemize}
-\end{itemize}
 \end{frame}
 
 
 \begin{frame}{Volumes of trade}
-\begin{figure}
-	\includegraphics[width=.75\paperwidth]{pics/volumes2018}
-\end{figure}
-Largest stock exchanges worldwide in 2018, by value of electronic order book share trading, in billion USD (Statista)
+	\begin{figure}
+		\includegraphics[width=.75\paperwidth]{pics/volumes2018}
+	\end{figure}
+	Largest stock exchanges worldwide in 2018, by value of electronic order book share trading, in billion USD (Statista)
 \end{frame}
-
-
-\begin{frame}{Problems for next class}
-\begin{itemize}
-	%\item In Absalon, I have attached a press release on short selling from the EU Court of Justice, January 22, 2014. Debate the relation among traders, exchanges and regulators, in light of this story.
-	\item Find bid and ask prices for Facebook shares and for Microsoft. Which stock exchange do they come from? 
-	\item Read the article (on Absalon) about London Metal Exchange. What is the value of keeping the ``open outcry'' trading floor in the age of digital trading?
-	\item Exercises 1-3 on pages 44-45 in the textbook
-\end{itemize}
-\end{frame}
-
-\end{document} 
