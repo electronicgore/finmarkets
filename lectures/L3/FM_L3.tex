@@ -8,7 +8,7 @@
 \input{../FM_preamble.tex}
 
 
-\title{Financial Markets Microstructure \\ Lecture 3}
+\title{Financial Markets Microstructure \\ Lecture 4}
 
 \subtitle{Informative Order Flow\\
 	Chapter 3.1-3.3 of FPR}
@@ -16,7 +16,7 @@
 \author{Egor Starkov}
 
 \date{K{\o}benhavns Unversitet \\
-	Spring 2020}
+	Spring 2021}
 
 
 
@@ -59,41 +59,41 @@
 %\end{frame}
 
 
-\begin{frame}{Overview}
-	Before we start, let's look at an overview of what we'll do in the rest of the course (weeks = weeks of the course, not calendar weeks)
-	
-	\textbf{Part 1}: Setting up the models
-	\begin{itemize}
-	\item \textit{Lectures 3-4}: Dealer models 1; \structure{Glosten-Milgrom}, fixed trade size; Bayes' Rule; adverse selection, order costs and inventory risk (\structure{Stoll})
-	\item \textit{Lecture 5}: Dealer models 2; \structure{Kyle}, variable trade size; market depth; estimating liquidity determinants
-	\item \textit{Lectures 6-7}: Limit order book; \structure{Glosten}: static, random market order demand; market design; \structure{Parlour}: dynamic, endogenous market order demand
-	\item \textit{Lecture 6}: Problem set 1 assigned
-	\end{itemize}
-\end{frame}
-
-
-\begin{frame}{Overview}
-\textbf{Part 2}: Applying the models
-\begin{itemize}
-	\item \textit{Lecture 8}: Fragmentation: costs and benefits
-	\item \textit{Lecture 9}: Transparency: search costs and order flow transparency
-	\item \textit{Lecture 10}: Value of liquidity
-	\item \textit{Lecture 11}: Liquidity and corporate policy
-	\item \textit{Lecture 10}: Problem set 2 assigned
-\end{itemize}
-\end{frame}
-
-
-\begin{frame}{Overview}
-\textbf{Part 3}: Topics and specialized models
-\begin{itemize}
-	\item \textit{Lecture 11}: Digital markets
-	\item \textit{Lecture 12}: High-frequency trading (\structure{Biais et al.}, \structure{Budish et al.})
-	\item \textit{Lecture 13}: Public information; optimal disclosure policies; public announcements and trade volumes (\structure{Kondor})
-	\item \textit{Lecture 14}: Bubbles; herding; common knowledge (\structure{Smith and S{\o}rensen}, \structure{Abreu and Brunnermeier})
-	\item \textit{Lecture 15}: Auctions (bonus class)
-\end{itemize}
-\end{frame}
+%\begin{frame}{Overview}
+%	Before we start, let's look at an overview of what we'll do in the rest of the course (weeks = weeks of the course, not calendar weeks)
+%	
+%	\textbf{Part 1}: Setting up the models
+%	\begin{itemize}
+%	\item \textit{Lectures 3-4}: Dealer models 1; \structure{Glosten-Milgrom}, fixed trade size; Bayes' Rule; adverse selection, order costs and inventory risk (\structure{Stoll})
+%	\item \textit{Lecture 5}: Dealer models 2; \structure{Kyle}, variable trade size; market depth; estimating liquidity determinants
+%	\item \textit{Lectures 6-7}: Limit order book; \structure{Glosten}: static, random market order demand; market design; \structure{Parlour}: dynamic, endogenous market order demand
+%	\item \textit{Lecture 6}: Problem set 1 assigned
+%	\end{itemize}
+%\end{frame}
+%
+%
+%\begin{frame}{Overview}
+%\textbf{Part 2}: Applying the models
+%\begin{itemize}
+%	\item \textit{Lecture 8}: Fragmentation: costs and benefits
+%	\item \textit{Lecture 9}: Transparency: search costs and order flow transparency
+%	\item \textit{Lecture 10}: Value of liquidity
+%	\item \textit{Lecture 11}: Liquidity and corporate policy
+%	\item \textit{Lecture 10}: Problem set 2 assigned
+%\end{itemize}
+%\end{frame}
+%
+%
+%\begin{frame}{Overview}
+%\textbf{Part 3}: Topics and specialized models
+%\begin{itemize}
+%	\item \textit{Lecture 11}: Digital markets
+%	\item \textit{Lecture 12}: High-frequency trading (\structure{Biais et al.}, \structure{Budish et al.})
+%	\item \textit{Lecture 13}: Public information; optimal disclosure policies; public announcements and trade volumes (\structure{Kondor})
+%	\item \textit{Lecture 14}: Bubbles; herding; common knowledge (\structure{Smith and S{\o}rensen}, \structure{Abreu and Brunnermeier})
+%	\item \textit{Lecture 15}: Auctions (bonus class)
+%\end{itemize}
+%\end{frame}
 
 
 \begin{frame}{Today}
@@ -101,7 +101,7 @@
 	\item Go in-depth with the relation between information and prices
 	\item What is informational efficiency?
 	\item Discuss Glosten and Milgrom's model of information-based trading
-	\item Analyze through the model what drives the spread 
+	%\item Analyze through the model what drives the spread 
 \end{enumerate}
 \end{frame}
 
@@ -113,10 +113,10 @@
 	Stock prices move around all the time
 	\begin{itemize}
 		\item Media reports are full of ex post rationalizations 
-		\item Look at CNN Money reports (on absalon)
-		\item But these can be pretty arbitrary (great example: \href{https://twitter.com/stonksgoingUP1}{@stonksgoingUP1} on twitter)
+		%\item Look at CNN Money reports (on absalon)
+		\item But these can be pretty arbitrary (see \href{https://www.smbc-comics.com/comic/markets}{\uline{this SMBC comic}} and \href{https://twitter.com/stonksgoingUP1}{@stonksgoingUP1} on twitter)
 	\end{itemize}
-	What actually determines stock prices?
+	What actually determines stock prices and their movement?
 \end{frame}
 
 
@@ -180,7 +180,7 @@
 \begin{frame}{Information and prices}
 Issues with EMH:
 \begin{itemize}
-	\item \textbf{No-trade theorem}: If traders have private information and care only about fundamentals, nobody should ever trade
+	\item \textbf{No-trade theorem}: If traders have private information and care only about fundamentals, nobody should ever trade (Milgrom \& Stokey, 1982)
 	\item \textbf{Grossman-Stiglitz (GS) paradox}: 
 	\begin{itemize}
 		\item Suppose markets were informationally efficient, then prices would reflect traders' private information
@@ -252,6 +252,8 @@ So we will not take EMH for granted, but rather see whether it arises in models 
 
 
 \section{Glosten and Milgrom (1985)}
+
+\end{document}
 
 \begin{frame}{Glosten and Milgrom (1985)}
 	\begin{quotation}
