@@ -98,6 +98,7 @@
 
 \begin{frame}{Today}
 \begin{enumerate}
+	\item Beginning of a long discussion about determinants of the spread
 	\item Go in-depth with the relation between information and prices
 	\item What is informational efficiency?
 	\item Discuss Glosten and Milgrom's model of information-based trading
@@ -108,6 +109,22 @@
 
 
 \section{Information and Prices}
+
+\begin{frame}{Determinants of liquidity}
+	\begin{itemize}[<+->]
+		\item Last week: \alert{illiquidity} $\Rightarrow$ deviation of realized prices from the asset's fundamental value.
+		\item Source of illiquidity: \visible<handout:0>{\alert{market thinness}}. Or so I told you...
+		\item If that was the only reason, trivial solution for efficiency: \visible<handout:0>{add many dealers}.
+		\begin{itemize}
+			\item Unsurprisingly, this does not close the spread.
+		\end{itemize}
+		\item So \structure{what drives the spread}?
+		\begin{itemize}
+			\item To answer that, first talk about \structure{what drives the prices}.
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
 
 \begin{frame}{Price determinants}
 	Stock prices move around all the time
@@ -147,11 +164,12 @@
 \end{frame}
 
 
-\begin{frame}{Information and prices}
+\begin{frame}<handout:0>{Information and prices}
 	\begin{quotation}
 		``Fundamentally, in a system in which the knowledge of the relevant facts is dispersed among many people, prices can act to coordinate the separate actions of different people.'' -- \structure{Von Hayek}
 	\end{quotation}
-
+	\pause
+	
 	\structure{Fama}'s \textbf{efficient markets hypothesis}: {prices} must be {efficient}.
 	\\
 	I.e., they must reflect all available information.
@@ -198,18 +216,12 @@ So we will not take EMH for granted, but rather see whether it arises in models 
 		\item Let's try to figure out how price efficiency looks like in math.
 		\item \structure{Information}: $\Omega_t$ captures the market's (public) knowledge at time $t$ -- ever more is known: 
 		\structure{$\Omega_{t+1}=(\Omega_t, I_{t+1})$}. 
-		\item Two approaches to defining \structure{market value} ($\neq$ price) of an asset:
-		\begin{enumerate}
-			\item \textbf{Discounted cashflows}: Market value at time $t$  = expectation of future cashflows:
-			\[
-			\mu_t = \mathbb{E}\left[\sum_{s=t}^{\infty} \delta^{s-t} c_s | \Omega_t \right]
-			\]
-			\item \textbf{Fundamental value}: Market value at time $t$ = expectation of underlying fundamental value $v$:
-			\[
-			\mu_t = \mathbb{E} \left[ v | \Omega_t \right]
-			\]
-		\end{enumerate}
-		\item This course: use the \structure{fundamental value approach}
+		
+		\item \structure{Market valuation} ($\neq$ price) of an asset = expectation of underlying \structure{fundamental value} $v$ given information $\Omega_{t}$:
+		\begin{align*}
+			\mu_t &= \mathbb{E} \left[ v | \Omega_t \right].
+		\end{align*}
+		Think of $v$ as the sum of discounted cash flows: $v = \sum_{s=t}^{\infty} \delta^{s-t} c_s$ (uncertain at $t$).
 	\end{itemize}
 \end{frame}
 
@@ -253,8 +265,6 @@ So we will not take EMH for granted, but rather see whether it arises in models 
 
 \section{Glosten and Milgrom (1985)}
 
-\end{document}
-
 \begin{frame}{Glosten and Milgrom (1985)}
 	\begin{quotation}
 		All models are wrong; some models are useful.
@@ -273,8 +283,8 @@ So we will not take EMH for granted, but rather see whether it arises in models 
 		\item Two players in every period:
 		\begin{itemize}
 			\item trader and dealer
-			\item dealer long-lived; trader new every period
-			\item trader can be informed or not
+			\item \alert{dealer} long-lived; trader new every period
+			\item \alert{trader} can be informed or not
 		\end{itemize}
 	\end{itemize}
 \end{frame}
@@ -321,11 +331,11 @@ So we will not take EMH for granted, but rather see whether it arises in models 
 \end{frame}
 
 
-\begin{frame}{Aside on Dealers}
+\begin{frame}<handout:0>{Aside on Dealers}
 	\begin{quotation}
 		\small ``For each security in which a member is registered as a Market Maker, the member shall be willing to buy and sell such security for its own account on a continuous basis during regular market hours and shall enter and maintain a two-sided trading interest (``Two-Sided Obligation'') that is identified to the Exchange as the interest meeting the obligation and is displayed in the Exchange's quotation montage at all times.''
 		\begin{flushright}
-			-- Nasdaq Rule 4613 (see Absalon)
+			-- Nasdaq Rule 4613
 		\end{flushright}
 	\end{quotation}
 	\vspace{3ex}
@@ -333,7 +343,7 @@ So we will not take EMH for granted, but rather see whether it arises in models 
 		\small ``Minimum requirements: at least 85\% of the time, at most 4\% bid-offer
 		spread, order size at least worth 4,000 euros''
 		\begin{flushright}
-			-- Nasdaq OMX Helsinki (see Absalon)
+			-- Nasdaq OMX Helsinki
 		\end{flushright}
 	\end{quotation}
 \end{frame}
@@ -357,16 +367,16 @@ So we will not take EMH for granted, but rather see whether it arises in models 
 
 
 \begin{frame}{Some questions}
-\begin{itemize}
+\begin{itemize}[<+->]
 	\item Why are there no uninformed speculators?
-	\item What is the role of the dealer?
+	\item What is the role of the dealer? What functions does he fulfill?
 	\item Why is the dealer willing to trade with better-informed speculators?
 \end{itemize}
 \end{frame}
 
 
 \begin{frame}{Analysis. A: Market making}
-\begin{itemize}
+\begin{itemize}[<+->]
 	\item Dealer quotes bid and ask prices on \textit{one unit}
 	\begin{itemize}
 		\item Can revise prices between each incoming trade
@@ -397,6 +407,7 @@ So we will not take EMH for granted, but rather see whether it arises in models 
 		\end{aligned}
 		\right.
 	\end{equation*}
+	\pause
 	\item Speculator's best response to $(a_t,b_t)$ is: (assume $a_t \geq b_t$)
 	\begin{itemize}
 		\item Buy when $v > a_t$, i.e. when $v$ is large enough
@@ -428,6 +439,34 @@ This gives us two \structure{equilibrium conditions}.
 	\end{enumerate} 
 \end{itemize}
 \end{frame}
+
+
+\begin{frame}{To be continued...}
+	\begin{itemize}
+		\item We will finish the derivation of the general case next time.
+		\item But the knowledge so far should be sufficient to solve the example:
+	\end{itemize}
+	\begin{exampleblock}{GM Example}
+		\begin{itemize}
+			\item \textbf{Single period}: Suppose only one period (drop $t$ subscript, drop $\Omega$)
+			\item \textbf{Binary outcome}: $v \in \{ 0, 1\}$, equally likely ex ante: $\mathbb{P}(v=1) = 0.5$.
+			\item Suppose $0 < b < a < 1$. 
+		\end{itemize}
+		Questions:
+		\begin{enumerate}
+			\item What is the speculator's trading strategy?
+			\item Can you derive dealer's \alert{prices $a$ and $b$}, as a function of $\pi$?
+			\begin{itemize}
+				\item If not, refresh your knowledge of conditional expectations and try again.
+				\item If you already read the solution in the book, try to replicate it without looking back at the book.
+			\end{itemize}
+			\item Are the resulting prices efficient? (Check all three forms)
+		\end{enumerate}
+	\end{exampleblock}
+\end{frame}
+
+\end{document}
+
 
 
 \begin{frame}{Analysis. D: Solving for equilibrium (1)}
