@@ -8,10 +8,10 @@
 \input{../FM_preamble.tex}
 
 
-\title{Financial Markets Microstructure \\ Lecture 4}
+\title{Financial Markets Microstructure \\ Lecture 5}
 
-\subtitle{Informative Order Flow\\
-	Chapter 3.1-3.3 of FPR}
+\subtitle{Glosten-Milgrom Model\\
+	Chapter 3.3 of FPR}
 
 \author{Egor Starkov}
 
@@ -28,257 +28,28 @@
 	}}
 	\frame[plain]{\titlepage}
 
-%\section{Revision}
 
 \begin{frame}{What did we do last week?}
 \begin{enumerate}
-	\item Discuss liquidity
-	\item Talk about different measures of:
-	\begin{itemize}
-		\item spreads (quoted, effective, realized)
-		\item depth and price impact
-		\item execution costs
-	\end{itemize}
-	\item Estimators for missing data
-	\begin{itemize}
-		\item Lee-Ready algorithm for estimating trade direction
-		\item Roll's spread estimator requiring only price data
-	\end{itemize}
+	\item Argued that market thinness is not the only source of illiquidity
+	\item Poked holes in the Efficient Market Hypothesis
+	\item Defined price efficiency in many ways
+	\item Began talking about the GM model
 \end{enumerate}
 \end{frame}
-
-
-%\begin{frame}{Exercises from last week}
-%	\begin{itemize}
-%		%\item In Absalon, I have attached a commission and fee schedule from Robinhood Financial. More information on \url{www.robinhood.io/}. Discuss the potential effect on other brokerage services.
-%		\item In this course we mostly imply equity markets. Read the article (on Absalon) about corporate bond markets. Discuss how differences in market structures of stock and bond markets affect liquidity in these markets.
-%		\item \textcolor{gray}{Recreate the graphs and figures and numbers I presented [last week] using the KrispyKreme dataset}
-%		\item \textcolor{gray}{Solve exercise 8 regarding implementation shortfall, on page 75 in the textbook.
-%		Discuss the meaning of $m_t$ in this analysis.}
-%	\end{itemize}
-%\end{frame}
-
-
-%\begin{frame}{Overview}
-%	Before we start, let's look at an overview of what we'll do in the rest of the course (weeks = weeks of the course, not calendar weeks)
-%	
-%	\textbf{Part 1}: Setting up the models
-%	\begin{itemize}
-%	\item \textit{Lectures 3-4}: Dealer models 1; \structure{Glosten-Milgrom}, fixed trade size; Bayes' Rule; adverse selection, order costs and inventory risk (\structure{Stoll})
-%	\item \textit{Lecture 5}: Dealer models 2; \structure{Kyle}, variable trade size; market depth; estimating liquidity determinants
-%	\item \textit{Lectures 6-7}: Limit order book; \structure{Glosten}: static, random market order demand; market design; \structure{Parlour}: dynamic, endogenous market order demand
-%	\item \textit{Lecture 6}: Problem set 1 assigned
-%	\end{itemize}
-%\end{frame}
-%
-%
-%\begin{frame}{Overview}
-%\textbf{Part 2}: Applying the models
-%\begin{itemize}
-%	\item \textit{Lecture 8}: Fragmentation: costs and benefits
-%	\item \textit{Lecture 9}: Transparency: search costs and order flow transparency
-%	\item \textit{Lecture 10}: Value of liquidity
-%	\item \textit{Lecture 11}: Liquidity and corporate policy
-%	\item \textit{Lecture 10}: Problem set 2 assigned
-%\end{itemize}
-%\end{frame}
-%
-%
-%\begin{frame}{Overview}
-%\textbf{Part 3}: Topics and specialized models
-%\begin{itemize}
-%	\item \textit{Lecture 11}: Digital markets
-%	\item \textit{Lecture 12}: High-frequency trading (\structure{Biais et al.}, \structure{Budish et al.})
-%	\item \textit{Lecture 13}: Public information; optimal disclosure policies; public announcements and trade volumes (\structure{Kondor})
-%	\item \textit{Lecture 14}: Bubbles; herding; common knowledge (\structure{Smith and S{\o}rensen}, \structure{Abreu and Brunnermeier})
-%	\item \textit{Lecture 15}: Auctions (bonus class)
-%\end{itemize}
-%\end{frame}
 
 
 \begin{frame}{Today}
 \begin{enumerate}
-	\item Beginning of a long discussion about determinants of the spread
-	\item Go in-depth with the relation between information and prices
-	\item What is informational efficiency?
-	\item Discuss Glosten and Milgrom's model of information-based trading
-	%\item Analyze through the model what drives the spread 
+	\item more Glosten-Milgrom!
 \end{enumerate}
 \end{frame}
 
 
-
-\section{Information and Prices}
-
-\begin{frame}{Determinants of liquidity}
-	\begin{itemize}[<+->]
-		\item Last week: \alert{illiquidity} $\Rightarrow$ deviation of realized prices from the asset's fundamental value.
-		\item Source of illiquidity: \visible<handout:0>{\alert{market thinness}}. Or so I told you...
-		\item If that was the only reason, trivial solution for efficiency: \visible<handout:0>{add many dealers}.
-		\begin{itemize}
-			\item Unsurprisingly, this does not close the spread.
-		\end{itemize}
-		\item So \structure{what drives the spread}?
-		\begin{itemize}
-			\item To answer that, first talk about \structure{what drives the prices}.
-		\end{itemize}
-	\end{itemize}
-\end{frame}
-
-
-\begin{frame}{Price determinants}
-	Stock prices move around all the time
-	\begin{itemize}
-		\item Media reports are full of ex post rationalizations 
-		%\item Look at CNN Money reports (on absalon)
-		\item But these can be pretty arbitrary (see \href{https://www.smbc-comics.com/comic/markets}{\uline{this SMBC comic}} and \href{https://twitter.com/stonksgoingUP1}{@stonksgoingUP1} on twitter)
-	\end{itemize}
-	What actually determines stock prices and their movement?
-\end{frame}
-
-
-\begin{frame}{Price determinants}
-	In this course: everybody agrees on assets' future cash flows ($\approx$value), \textit{conditional} on fundamentals. Broadly speaking, three reasons for trading:
-	\begin{itemize}
-		\item \textbf{Risk}: Getting the right risk profile (relevant to trader)
-		\item (Funding) \textbf{Liquidity}: Trader needs liquid funds or has excess funds to invest (relevant to trader)
-		\item \textbf{Speculation}: Different expectations of fundamentals because different \alert{information} (relevant to everyone)
-	\end{itemize}
-\end{frame}
-
-
-\begin{frame}{Types of information}
-	\begin{itemize}
-		\item Different types of information
-		\begin{itemize}
-			\item \textbf{Public information}:  asset price may move \textit{without} trade
-			\item \textbf{Private information} possessed by some traders  $\rightarrow$ reveal this information through their trading
-		\end{itemize}
-		\pause
-		\item Draw a wedge between \alert{legal} and \structure{academic} ($\leftarrow$ \structure{our}) definitions of \textbf{private information}
-		\begin{itemize}
-			\item \alert{Legal}: insider info is that which is only available to a restricted number of people. Trading based on insider info is illegal in most jurisdictions.
-			\item \structure{Academic}: some agents may be better at analyzing publicly available info, thus have better info about fundamentals.
-		\end{itemize}
-	\end{itemize}
-\end{frame}
-
-
-\begin{frame}<handout:0>{Information and prices}
-	\begin{quotation}
-		``Fundamentally, in a system in which the knowledge of the relevant facts is dispersed among many people, prices can act to coordinate the separate actions of different people.'' -- \structure{Von Hayek}
-	\end{quotation}
-	\pause
-	
-	\structure{Fama}'s \textbf{efficient markets hypothesis}: {prices} must be {efficient}.
-	\\
-	I.e., they must reflect all available information.
-\end{frame}
-
-
-%\begin{frame}{Information and prices}
-%	\centering
-%	\includegraphics[scale=0.25]{pics/20140603.png}
-%	
-%	\url{https://smbc-comics.com}
-%\end{frame}
-
-
-\begin{frame}{Information and prices}
-	There are different kinds of price efficiency:
-	\begin{itemize}
-		\item \textbf{Weak form}: Prices reflect historic (price) information
-		\item \textbf{Semi-strong form}: Prices reflect all public information
-		\item \textbf{Strong form}: Prices reflect all public and private information
-	\end{itemize}
-	Strong is the kind of efficiency we had in mind in the previous lectures. It arises in classical models in Economics (see General Equilibrium theory)
-\end{frame}
-
-
-\begin{frame}{Information and prices}
-Issues with EMH:
-\begin{itemize}[<+->]
-	\item \textbf{No-trade theorem}: If traders have private information and care only about fundamentals, nobody should ever trade (Milgrom \& Stokey, 1982)
-	\item \textbf{Grossman-Stiglitz (GS) paradox}: 
-	\begin{itemize}
-		\item Suppose markets were informationally efficient, then prices would reflect traders' private information
-		\item Thus: no incentive to acquire information (if this is costly)
-	\end{itemize} 
-	\item \textbf{Volatility}: prices move a lot, such volatility cannot be justified by public news alone
-	\item \textbf{Process}: \alert{how} does information get incorporated into prices?
-\end{itemize}
-\pause[6]
-So we will not take EMH for granted, but rather see whether it arises in models endogenously.
-\end{frame}
-
-
-\begin{frame}{Asset value}
-	\begin{itemize}
-		\item Let's try to figure out how price efficiency looks like in math.
-		\item \structure{Information}: $\Omega_t$ captures the market's (public) knowledge at time $t$ -- ever more is known: 
-		\structure{$\Omega_{t+1}=(\Omega_t, I_{t+1})$}. 
-		
-		\item \structure{Market valuation} ($\neq$ price) of an asset = expectation of underlying \structure{fundamental value} $v$ given information $\Omega_{t}$:
-		\begin{align*}
-			\mu_t &= \mathbb{E} \left[ v | \Omega_t \right].
-		\end{align*}
-		Think of $v$ as the sum of discounted cash flows: $v = \sum_{s=t}^{\infty} \delta^{s-t} c_s$ (uncertain at $t$).
-	\end{itemize}
-\end{frame}
-
-
-\begin{frame}{Informational efficiency (1)}
-\begin{itemize}
-	\item Informational efficiency then corresponds to: \structure{$p_t = \mu_t = \mathbb{E}[v|\Omega_t]$}
-	\\
-	($\Omega_t$ is ``market's knowledge'', so efficiency understood as semi-strong)
-	\item Valuation only changes if new information arrives: `innovation in value' is a random variable: \structure{$\epsilon_{t+1} = \mu_{t+1} - \mu_t$}. Then
-	\begin{align*}
-		\mathbb{E}[\epsilon_{t+1}|\Omega_t] 
-		& = \mathbb{E}[\mu_{t+1} - \mu_t|\Omega_t]\\
-		& = \mathbb{E}[\mu_{t+1}|\Omega_t] - \mathbb{E}[\mu_t|\Omega_t]\\  
-		& = \mathbb{E}[ \mathbb{E}[v|\Omega_{t+1}]|\Omega_t] - \mu_t\\  
-		& = \mathbb{E}[v|\Omega_t] - \mu_t\\  
-		& = \mu_t- \mu_t\\  
-		& = 0.
-	\end{align*}
-\end{itemize}
-\end{frame}
-
-
-\begin{frame}{Informational efficiency (2)}
-	\begin{itemize}
-	 \item Also, $\mathbb{E}[\epsilon_{s}\epsilon_t]=0$, $\forall s \ne t$.
-	\item Price innovation is equal to the valuation innovation:
-	\[
-	p_{t+1} - p_t = \mu_{t+1} - \mu_t = \epsilon_{t+1}
-	\]
-	\item Thus
-	\[
-	\mathbb{E}[p_{t+1}|\Omega_{t}] = p_t
-	\]
-	\item When we have informational efficiency, the price is a \alert{martingale}
-\end{itemize}
-\end{frame}
-
-
-
-\section{Glosten and Milgrom (1985)}
-
-\begin{frame}{Glosten and Milgrom (1985)}
-	\begin{quotation}
-		All models are wrong; some models are useful.
-		\begin{flushright}
-			-- \structure{George Box}
-		\end{flushright}
-	\end{quotation}
-\end{frame}
-
+\section{Glosten-Milgrom}
 
 \begin{frame}{GM85: Overview}
 	\begin{itemize}
-		\item The simplest model explaining \structure{spread} through private information.
-		\item Spread is driven by adverse selection
 		\item Dynamic model, periods $t = 1,2,...$
 		\item Two players in every period:
 		\begin{itemize}
@@ -288,7 +59,6 @@ So we will not take EMH for granted, but rather see whether it arises in models 
 		\end{itemize}
 	\end{itemize}
 \end{frame}
-
 
 
 \begin{frame}{GM85: Model (1)}
@@ -331,24 +101,6 @@ So we will not take EMH for granted, but rather see whether it arises in models 
 \end{frame}
 
 
-\begin{frame}<handout:0>{Aside on Dealers}
-	\begin{quotation}
-		\small ``For each security in which a member is registered as a Market Maker, the member shall be willing to buy and sell such security for its own account on a continuous basis during regular market hours and shall enter and maintain a two-sided trading interest (``Two-Sided Obligation'') that is identified to the Exchange as the interest meeting the obligation and is displayed in the Exchange's quotation montage at all times.''
-		\begin{flushright}
-			-- Nasdaq Rule 4613
-		\end{flushright}
-	\end{quotation}
-	\vspace{3ex}
-	\begin{quotation}
-		\small ``Minimum requirements: at least 85\% of the time, at most 4\% bid-offer
-		spread, order size at least worth 4,000 euros''
-		\begin{flushright}
-			-- Nasdaq OMX Helsinki
-		\end{flushright}
-	\end{quotation}
-\end{frame}
-
-
 \begin{frame}{GM85: Model (3)}
 \begin{itemize}
 	\item \textbf{Asset value}:
@@ -367,7 +119,7 @@ So we will not take EMH for granted, but rather see whether it arises in models 
 
 
 \begin{frame}{Some questions}
-\begin{itemize}[<+->]
+\begin{itemize}%[<+->]
 	\item Why are there no uninformed speculators?
 	\item What is the role of the dealer? What functions does he fulfill?
 	\item Why is the dealer willing to trade with better-informed speculators?
@@ -376,7 +128,7 @@ So we will not take EMH for granted, but rather see whether it arises in models 
 
 
 \begin{frame}{Analysis. A: Market making}
-\begin{itemize}[<+->]
+\begin{itemize}%[<+->]
 	\item Dealer quotes bid and ask prices on \textit{one unit}
 	\begin{itemize}
 		\item Can revise prices between each incoming trade
@@ -441,11 +193,7 @@ This gives us two \structure{equilibrium conditions}.
 \end{frame}
 
 
-\begin{frame}{To be continued...}
-	\begin{itemize}
-		\item We will finish the derivation of the general case next time.
-		\item But the knowledge so far should be sufficient to solve the example:
-	\end{itemize}
+\begin{frame}{Back to homework}
 	\begin{exampleblock}{GM Example}
 		\begin{itemize}
 			\item \textbf{Single period}: Suppose only one period (drop $t$ subscript, drop $\Omega$)
@@ -465,9 +213,6 @@ This gives us two \structure{equilibrium conditions}.
 	\end{exampleblock}
 \end{frame}
 
-\end{document}
-
-
 
 \begin{frame}{Analysis. D: Solving for equilibrium (1)}
 	\begin{itemize}
@@ -477,6 +222,7 @@ This gives us two \structure{equilibrium conditions}.
 			\item or by a speculator (probability $\pi \mathbb{P}(v \geq a_t | \Omega_{t-1})$) -- then learn that $v \geq a_t$, so $\mu_t = \mathbb{E} [v | \Omega_{t-1}, v \geq a_t]$.
 		\end{itemize}
 		\item Then $a_t$ is given by (using Bayes' rule and law of total probability):
+		\visible<handout:0|2->{
 		\begin{align*}
 			a_t &= \mathbb{E}[v|\Omega_{t-1}, Buy]
 			\\
@@ -484,6 +230,7 @@ This gives us two \structure{equilibrium conditions}.
 			\\
 			= \frac{(1-\pi)\beta_B}{(1-\pi) \beta_B + \pi \mathbb{P}(v \geq a_t)} \cdot \mu_{t-1} &+ \frac{\pi \mathbb{P}(v \geq a_t | \Omega_{t-1})}{(1-\pi) \beta_B + \pi \mathbb{P}(v \geq a_t)} \cdot \mathbb{E} [v | \Omega_{t-1}, v \geq a_t],
 		\end{align*}
+		}
 		meaning that in the end, $a_t \geq \mu_{t-1}$.
 	\end{itemize}
 \end{frame}
@@ -497,17 +244,20 @@ This gives us two \structure{equilibrium conditions}.
 			\item sell order from a speculator arrives with probability $\pi \mathbb{P}(v \leq b_t | \Omega_{t-1})$ -- then learn that $v \leq b_t$, so $\mu_t = \mathbb{E} [v | \Omega_{t-1}, v \leq b_t]$.
 		\end{itemize}
 		\item Then $b_t$ is given by:
+		\visible<handout:0|2->{
 		$$ b_t = \mathbb{E}[v|\Omega_{t-1}, Sell] $$
-		$$ = \frac{(1-\pi)\beta_S}{\mathbb{P}(Sell|\Omega_{t-1}, v)} \cdot \mathbb{E}[v|\Omega_{t-1}] + \frac{\pi \mathbb{P}(v \leq b_t | \Omega_{t-1})}{\mathbb{P}(Sell|\Omega_{t-1}, v)} \cdot \mathbb{E} [v | \Omega_{t-1}, v \leq b_t] $$
+		$$ = \frac{(1-\pi)\beta_S}{\mathbb{P}(Sell|\Omega_{t-1}, v)} \cdot \mathbb{E}[v|\Omega_{t-1}] + \frac{\pi \mathbb{P}(v \leq b_t | \Omega_{t-1})}{\mathbb{P}(Sell|\Omega_{t-1}, v)} \cdot \mathbb{E} [v | \Omega_{t-1}, v \leq b_t] $$}
 		\begin{itemize}
+			\visible<handout:0|2->{
 			\item where $\mathbb{P}(Sell|\Omega_{t-1}, v) = (1-\pi) \beta_S + \pi \mathbb{P}(v\leq b_t)$,
+			}
 			\item so $b_t \leq \mu_{t-1}$, and we have confirmed that indeed $a_t \geq b_t$.
 		\end{itemize}
 	\end{itemize}
 \end{frame}
 
 
-\begin{frame}{Analysis. E: Prices}
+\begin{frame}{Analysis. E: Price efficiency}
 	\begin{itemize}
 		\item $\mu_t \equiv \mathbb{E}[v | \Omega_t]$ is the expectation of $v$ \textit{after} the time-$t$ trade order is observed. Note that in our model:
 		$$\mu_t = \begin{cases}
@@ -526,6 +276,8 @@ This gives us two \structure{equilibrium conditions}.
 \end{frame}
 
 
+
+%\iffalse 
 
 \section{GM example}
 
@@ -651,6 +403,8 @@ This gives us two \structure{equilibrium conditions}.
 \end{frame}
 
 
+\section{GM: conclusions}
+
 \begin{frame}[label=overview]{Model overview: Glosten and Milgrom}
 	\structure{Model}
 	\begin{itemize}
@@ -688,95 +442,25 @@ This gives us two \structure{equilibrium conditions}.
 \end{frame}
 
 
-\begin{frame}{Questions for next Friday}
+\begin{frame}{Homework}
 	\begin{itemize}
 		%\item See a text from The Securities and Exchange Commission on insider trading, from its homepage \url{http://www.sec.gov/answers/insider.htm}. Discuss potential restrictions in the definition.
-		\item FPR chapter 3 exercises (p. 124-125):
+		\item For this Friday:
 		\begin{itemize}
-			\item exercise 2 -- solve GM model with numbers instead of letters
-			\item exercise 3 about the GM model where speculators are not perfectly informed, but instead receive a signal about the value of the asset
+			\item Read two articles on absalon on how ESMA restricted trading and binary options and SEC restricted trading in certain stocks.
+			\item What is the difference between the underlying assets in the two cases?
+			\item Explain ESMA's decision using GM model.
+		\end{itemize}
+		\item For next Wednesday: solve one of two problems below and post your solution in a discussion topic on absalon.
+		\begin{itemize}
+			\item FPR chapter 3, exercise 3 (GM model where speculators are not perfectly informed, but instead receive a signal about the value of the asset)
+			\item GM example with $v \sim U[0,1]$ (rest as in the problem assigned before today; goal: derive the equilibrium bid and ask prices)
 		\end{itemize}
 	\end{itemize}
 \end{frame}
 
 
-%\begin{frame}<handout:0>[label=efficiency]
-%	\frametitle{Efficiency}
-%	Introduce $t$ subscripts. The price is 
-%	\[
-%	p_{t} = \theta_{t} v^H + (1-\theta_{t} ) v^L = \mathbb{E}[v|\Omega_{t}]
-%	\]
-%	So the price is a martingale: it incorporates all public information
-%	\pause
-%	Does it also incorporate all private information?
-%	\pause
-%	No, since each speculator knows $v$. Thus, 
-%	\[
-%	\mathbb{E}[v|\text{private info.}]=v.
-%	\]
-%	So price is semi-strong form efficient. But strong-form efficient in long run: $p_t \rightarrow v$\quad 
-%	\hyperlink{insights}{\beamerbutton{back}}
-%\end{frame}
-%
-%
-%\begin{frame}<handout:0>[label=insiders]
-%	\frametitle{Insiders}
-%	The spread is 
-%	\[
-%	\left[ \frac{\theta(1-\theta) \pi}{(1-\pi)\beta_B+\theta\pi}+\frac{\theta(1-\theta) \pi}{(1-\pi)\beta_S+(1-\theta)\pi}\right](v^H-v^L)
-%	\]
-%	Set $\theta=1/2$. Derivative w.r.t. $\pi$ is positive: the spread is increasing in the proportion of informed speculators
-%	\quad
-%	Why?
-%	\hyperlink{insights}{\beamerbutton{back}}
-%\end{frame}
-%
-%
-%\begin{frame}<handout:0>[label=volatility]
-%	\frametitle{Volatility}
-%	We can use $v^H-v^L$ as a measure of value volatility. The spread is 
-%	\[
-%	\left[ \frac{\theta(1-\theta) \pi}{(1-\pi)\beta_B+\theta\pi}+\frac{\theta(1-\theta) \pi}{(1-\pi)\beta_S+(1-\theta)\pi}\right](v^H-v^L)
-%	\]
-%	Derivative w.r.t. $(v^H-v^L)$ is positive: the spread is increasing in the volatility of the fundamental value
-%	\quad
-%	Why?
-%	\hyperlink{insights}{\beamerbutton{back}}
-%\end{frame}
-%
-%
-%\begin{frame}<handout:0>[label=frequency]
-%	\frametitle{Frequency}
-%	The spread is 
-%	\[
-%	\left[ \frac{\theta(1-\theta) \pi}{(1-\pi)\beta_B+\theta\pi}+\frac{\theta(1-\theta) \pi}{(1-\pi)\beta_S+(1-\theta)\pi}\right](v^H-v^L)
-%	\]
-%	Think about $\beta=\beta_{B}+\beta_{S}$ as the (noise) trading frequency. Suppose $\beta_{B}=\gamma \beta$ and $\beta_{S}= (1-\gamma) \beta$, and set $\theta=1/2$
-%	\quad
-%	Then the spread is decreasing in the (noise) trading frequency
-%	\quad
-%	Why?
-%	\hyperlink{insights}{\beamerbutton{back}}
-%\end{frame}
-%
-%
-%\begin{frame}<handout:0>[label=profits]
-%	\frametitle{Profits}
-%	A speculator's expected gain is
-%	\[
-%	G_{S} = \theta (v^{H} - a) + (1-\theta) (b-v^{L})
-%	\]
-%	The expected loss of the dealer against speculators is... \pause $L_{D} = \pi G_{S}$
-%	The dealer's gain on noise traders, on the other hand, is (suppose $\beta_B=\beta_S=1/2$)
-%	\begin{align*}
-%	G_{D} 
-%	& = (1-\pi) [ \frac{1}{2} (a-\mathbb{E}(v)) + \frac{1}{2}(\mathbb{E}(v) - b)] \\
-%	& = (1-\pi) \frac{1}{2} (a-b)
-%	\end{align*}
-%	In equilibrium: $L_{D} = G_{D}$
-%	\hyperlink{insights}{\beamerbutton{back}}
-%\end{frame}
-
+\section{extras}
 
 \begin{frame}[label=dynamics]{Dynamics}
 	Suppose we are in the simple binary model with the following parameters
@@ -876,19 +560,19 @@ This gives us two \structure{equilibrium conditions}.
 \end{frame}
 
 
-\begin{frame}{Dynamics}
-	Let's consider an alternative case:
-	\[
-	bbbsssssssss
-	\]
-	Here we have a spell of buying in the beginning, before a long series of selling
-\end{frame}
-
-
-\begin{frame}{Dynamics}
-	\includegraphics[width=1\linewidth]{pics/Bubble_Image.pdf}
-	\hyperlink{example}{\beamerbutton{back}}
-\end{frame}
+%\begin{frame}{Dynamics}
+%	Let's consider an alternative case:
+%	\[
+%	bbbsssssssss
+%	\]
+%	Here we have a spell of buying in the beginning, before a long series of selling
+%\end{frame}
+%
+%
+%\begin{frame}{Dynamics}
+%	\includegraphics[width=1\linewidth]{pics/Bubble_Image.pdf}
+%	\hyperlink{example}{\beamerbutton{back}}
+%\end{frame}
 
 
 \end{document} 
