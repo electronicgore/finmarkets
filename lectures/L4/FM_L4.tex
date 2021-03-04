@@ -8,7 +8,7 @@
 \input{../FM_preamble.tex}
 
 
-\title{Financial Markets Microstructure \\ Lecture 4}
+\title{Financial Markets Microstructure \\ Lecture 6}
 
 \subtitle{Liquidity and Price Dynamics\\
 Chapter 3.4-3.7 of FPR}
@@ -16,7 +16,7 @@ Chapter 3.4-3.7 of FPR}
 \author{Egor Starkov}
 
 \date{K{\o}benhavns Unversitet \\
-	Spring 2020}
+	Spring 2021}
 
 
 \begin{document}
@@ -158,10 +158,10 @@ Chapter 3.4-3.7 of FPR}
 
 \begin{frame}%{The dynamics of the spread}
 \centering
-\only<1>{\includegraphics[scale=0.29]{pics/oc1}\\}
-\only<2>{\includegraphics[scale=0.29]{pics/oc2}\\}
-\only<3>{\includegraphics[scale=0.29]{pics/oc3}\\}
-\only<4>{\includegraphics[scale=0.29]{pics/oc4}\\}
+\only<handout:0|1>{\includegraphics[scale=0.29]{pics/oc1}\\}
+\only<handout:0|2>{\includegraphics[scale=0.29]{pics/oc2}\\}
+\only<handout:0|3>{\includegraphics[scale=0.29]{pics/oc3}\\}
+\only<handout:1|4>{\includegraphics[scale=0.29]{pics/oc4}\\}
 \end{frame}
 
 
@@ -236,147 +236,236 @@ Chapter 3.4-3.7 of FPR}
 
 \section{Inventory risk}
 
-\begin{frame}{Introduction: Stoll (1978)}
+\begin{frame}{Inventory risk}
 	\begin{itemize}
-		\item Model of illiquidity due to dealers' asset inventory cost
-		\item Competitive market makers/dealers (price takers)
+		\item Illiquidity can arise due to dealers' asset \alert{inventory cost}
 		\begin{itemize}
-			\item Risk averse, have an optimal portfolio of risky assets
-			\item Submit their competitive demand schedule (limit orders)
+			\item Holding inventory is \alert{risky}, so dealers adjust their quotes to unwind any accumulated inventory.
 		\end{itemize}
-		\item Noise traders place market orders (no speculation)
+		\pause
+		\item Textbook illustrates this using Stoll (1978) model
 		\begin{itemize}
-			\item Orders contain no information about $v$
-			\item Dealers are the counterparty, must be willing to change their portfolio
+			\item But this model is from pre-game theory times and has a strange solution method
+			\item So we will instead \structure{extend the Glosten-Milgrom model} (extension not in the book)
 		\end{itemize}
-		\item We model risk aversion. This may be due to the dealer's preferences, or due to regulation
 	\end{itemize}
 \end{frame}
 
 
-\begin{frame}{Model}
+\begin{frame}{Glosten-Milgrom model: Inventory risk edition}
 	\begin{itemize}
-		\item \textbf{Asset}. Single risky asset
+		\item Suppose for simplicity there are \structure{no speculators} ($\pi=0$)
+		\item Noise traders behave as usual
+		\item \structure{Dealer} has some \alert{inventory} $z_t$ of the stock
+		\item Dealer is \alert{risk averse}
 		\begin{itemize}
-			\item Current fundamental value $\mu_t$
-			\item Held for one period by dealers, then unwound at value $\mu_{t+1}=\mu_t + \epsilon_t$
-			\item Here $\mathbb{E}[\epsilon_t] = 0$ and $\mathbb{V}(\epsilon_{t})=\sigma^2_\epsilon > 0$
-		\end{itemize}
-		\item \textbf{Dealer}. Representative competitive dealer
-		\begin{itemize}
-			\item Endowed with $z_t$ units of the risky asset
-			\item Has cash holding $c_t$
-		\end{itemize}
-		\item \textbf{Competitive asset demand/supply}. Dealer acts as price taker.
-		\begin{itemize}
-			\item Given asset price $p_t$, supply $y_t$ units of asset
-			\item Has utility defined over (random) next period wealth
+			\item For concreteness, assume mean-variance preferences:
 			\[
-			w_{t+1} = \mu_{t+1}(z_t - y_t) + c_t + p_t y_t
+			U(w_{t+1})=\mathbb{E}[w_{t+1}] - \frac{\rho}{2} \mathbb{V}(w_{t+1}),
 			\]
+			where $\rho>0$ measures risk aversion
+			\item (equivalent to CARA expected utility preferences)
 		\end{itemize}
 	\end{itemize}
 \end{frame}
 
 
-\begin{frame}{Solution algorithm}
+\begin{frame}{GM-IRE: Dealer's utility}
 	\begin{itemize}
-		\item The algorithm may appear slightly schizophrenic, so watch carefully.
-		\item Dealers are competitive, so act as price-takers.
-		\item So the dealer \structure{decides} how much to \structure{supply $y_t$} \alert{given price $p_t$}.
-		\item We then invert the resulting supply function $y(p)$ to obtain the equilibrium price schedule $p(y)$.
+		\item As usual, let $\mu = \mathbb{E}[v]$.
+		\item Let also $\sigma^2 = \mathbb{V}(v)$.
+		\item Dealer's utility is
+		\begin{align*}
+			\text{if no orders:}\quad & U(w_{t+1}|N) = \visible<handout:0>{ z_t \mu - \frac{\rho}{2}z_t^2 \sigma^2 }
+			\\
+			\text{if Buy order:}\quad & U(w_{t+1}|B) = \visible<handout:0>{ \left[(z_t-1)\mu + a_t\right] - \frac{\rho}{2}(z_t-1)^2 \sigma^2 }
+			\\
+			\text{if Sell order:}\quad & U(w_{t+1}|S) = \visible<handout:0>{ \left[(z_t+1)\mu - b_t\right] - \frac{\rho}{2}(z_t+1)^2 \sigma^2 }
+		\end{align*}
 	\end{itemize}
 \end{frame}
 
 
-\begin{frame}{Case 1: Mean-variance preferences}
+\begin{frame}{GM-IRE: Quotes}
+	To derive equilibrium \alert{quotes}, use \structure{zero-profit condition}
 	\begin{itemize}
-		\item Suppose the dealer has mean-variance preferences:
-		\[
-		U(w_{t+1})=\mathbb{E}[w_{t+1}] - \frac{\rho}{2} \mathbb{V}(w_{t+1}),
-		\]
-		where $\rho>0$ measures risk aversion
-		\item Dealer chooses $y_t$ to maximize
-		\[
-		\underbrace{\mu_t(z_t-y_t) + c_t + p_t y_t}_{\mathbb{E}[w_{t+1}] } - \frac{\rho}{2} \underbrace{(z_t -y_t)^2 \sigma^2_\epsilon}_{ \mathbb{V}(w_{t+1})}
-		\]
-		\item Solved by \structure{asset supply function}
-			\[
-			y_t = z_t + \frac{p_t-\mu_t}{\rho \sigma^2_\epsilon}
-			\]
+		\item i.e., ensure that the dealer's expected utility does not change after trading
+		\item (assume all competing dealers have same inventory $z_t$)
 	\end{itemize}
+		\begin{align*}
+			U(w_{t+1}|B)=U(w_{t+1}|N) \quad & \Rightarrow \quad a_t = \visible<handout:0>{ \mu -\frac{\rho}{2} \sigma^2 (2z_t - 1) }
+			\\
+			U(w_{t+1}|S)=U(w_{t+1}|N) \quad & \Rightarrow \quad b_t = \visible<handout:0>{ \mu -\frac{\rho}{2} \sigma^2 (2z_t + 1) }
+		\end{align*}
 \end{frame}
 
 
-\begin{frame}{Case 1: Mean-variance preferences (2)}
+\begin{frame}{GM-IRE: Quotes (2)}
 	\begin{itemize}
-		\item Define the midquote $m_t$ as the price where $y_t=0$,
-		\[
-		0 = z_t + \frac{m_t-\mu_t}{\rho \sigma^2_\epsilon}.
-		\]
-		Then the supply schedule (limit order book) is 
-		\[
-		y_t = \frac{p_t - m_t}{\rho \sigma^2_\epsilon}
-		\]
-		\item Equivalently, $p_t-m_t=\rho \sigma^2_\epsilon y_t$. We can think of this as a price impact equation where $\lambda=\rho \sigma^2_\epsilon$ (recall that $\lambda$ measures inverse depth)
-		\item Greater depth $1/\lambda$ when dealers are more risk-tolerant ($\rho$ lower)
-	\end{itemize}
-\end{frame}
-
-
-\begin{frame}{Case 2: Mean-SD preferences}
-	\begin{itemize}
-		\item Suppose the dealer dislikes standard deviation:
-		\[
-		U(w_{t+1})=\mathbb{E}[w_{t+1}] - \rho \sqrt{\mathbb{V}(w_{t+1})}.
-		\]
-		\item Dealer chooses $y_t$ to maximize
-		\[
-		\mu_t (z_t - y_t) + c_t + p_t y_t - \rho |z_t - y_t|\sigma_\epsilon
-		\]
-		\item This utility is linear in $y_t$. In particular,
-		\[
-		\frac{\partial U(w_{t+1})}{\partial y_t}= \left\{
-		\begin{aligned}
-		p_t-\mu_t+\rho\sigma_{\epsilon}	& \text{ if } z_t>y_t \\
-		p_t-\mu_t-\rho\sigma_{\epsilon}	& \text{ if } z_t<y_t 
-		\end{aligned}
-		\right.
-		\]
-	\end{itemize}
-\end{frame}
-
-
-\begin{frame}{Case 2: Mean-SD preferences (2)}
-	\begin{itemize}
-		\item Given $\frac{\partial U(w_{t+1})}{\partial y_t}$, the dealer's optimal supply is
+		\item \alert{Spread} is $S_t = \rho \sigma^2 $
 		\begin{itemize}
-			\item Supply any $y_t \leq z_t$ if $p_t = \mu_t - \rho\sigma_{\epsilon}$,
-			\item Supply any $y_t \geq z_t$ if $p_t = \mu_t + \rho\sigma_{\epsilon}$
+			\item Positive due to dealer's risk-aversion
+			\item Increasing in risk-aversion coeff $\rho$ and asset value volatility $\sigma^2$
 		\end{itemize}
-		\item There is a discountinuos `jump' in the price at $y_t=z_t$
+		\pause
+		\item \alert{Midquote} is $m_t = \mu - \rho \sigma^2 z_t$
 		\begin{itemize}
-			\item But otherwise supply perfectly elastic
+			\item Depends on dealer's inventory $z_t$. Dealer demands risk premium for taking a position in the asset.
+			\item Effects depend on risk paratements $\rho$ and $\sigma^2$
+			\item To emphasize: prices here are \alert{not efficient}
+			\item Can you benefit from this as a trader? \pause \structure{Yes, in the sense that you can buy cheaper if you happen to look for a trade that reduces dealer risk exposure}
 		\end{itemize}
-		\item A natural measure of the bid-ask spread is $2\rho\sigma_{\epsilon}$ if $z_t \simeq 0$
 	\end{itemize}
 \end{frame}
 
 
-\begin{frame}{Conclusion: Stoll}
-	\begin{itemize}
-		\item In the Glosten-Milgrom model, the transactions price is always the expected asset value given trade history
-		\item In the Stoll model, the price is moved by incoming random noise trades, and the midprice deviates from expected value in proportion to the inventory $z$, e.g.
-		\[
-		m_t - \mu_t = \rho \sigma^2_\epsilon z_t
-		\]
-		To emphasize: prices in Stoll model are \structure{not efficient}
-		\item The difference can be interpreted as a risk premium to the  dealers
-		\item Can you benefit from this as a trader? \pause \structure{Yes, in the sense that you can buy cheaper if you happen to look for a trade that reduces dealer risk exposure}
-	\end{itemize}
-\end{frame}
 
 
+
+
+%\section{Inventory risk (Stoll model)}
+%
+%\begin{frame}{Introduction: Stoll (1978)}
+%	\begin{itemize}
+%		\item Model of illiquidity due to dealers' asset inventory cost
+%		\item Competitive market makers/dealers (price takers)
+%		\begin{itemize}
+%			\item Risk averse, have an optimal portfolio of risky assets
+%			\item Submit their competitive demand schedule (limit orders)
+%		\end{itemize}
+%		\item Noise traders place market orders (no speculation)
+%		\begin{itemize}
+%			\item Orders contain no information about $v$
+%			\item Dealers are the counterparty, must be willing to change their portfolio
+%		\end{itemize}
+%		\item We model risk aversion. This may be due to the dealer's preferences, or due to regulation
+%	\end{itemize}
+%\end{frame}
+%
+%
+%\begin{frame}{Model}
+%	\begin{itemize}
+%		\item \textbf{Asset}. Single risky asset
+%		\begin{itemize}
+%			\item Current fundamental value $\mu_t$
+%			\item Held for one period by dealers, then unwound at value $\mu_{t+1}=\mu_t + \epsilon_t$
+%			\item Here $\mathbb{E}[\epsilon_t] = 0$ and $\mathbb{V}(\epsilon_{t})=\sigma^2_\epsilon > 0$
+%		\end{itemize}
+%		\item \textbf{Dealer}. Representative competitive dealer
+%		\begin{itemize}
+%			\item Endowed with $z_t$ units of the risky asset
+%			\item Has cash holding $c_t$
+%		\end{itemize}
+%		\item \textbf{Competitive asset demand/supply}. Dealer acts as price taker.
+%		\begin{itemize}
+%			\item Given asset price $p_t$, supply $y_t$ units of asset
+%			\item Has utility defined over (random) next period wealth
+%			\[
+%			w_{t+1} = \mu_{t+1}(z_t - y_t) + c_t + p_t y_t
+%			\]
+%		\end{itemize}
+%	\end{itemize}
+%\end{frame}
+%
+%
+%\begin{frame}{Solution algorithm}
+%	\begin{itemize}
+%		\item The algorithm may appear slightly schizophrenic, so watch carefully.
+%		\item Dealers are competitive, so act as price-takers.
+%		\item So the dealer \structure{decides} how much to \structure{supply $y_t$} \alert{given price $p_t$}.
+%		\item We then invert the resulting supply function $y(p)$ to obtain the equilibrium price schedule $p(y)$.
+%	\end{itemize}
+%\end{frame}
+%
+%
+%\begin{frame}{Case 1: Mean-variance preferences}
+%	\begin{itemize}
+%		\item Suppose the dealer has mean-variance preferences:
+%		\[
+%		U(w_{t+1})=\mathbb{E}[w_{t+1}] - \frac{\rho}{2} \mathbb{V}(w_{t+1}),
+%		\]
+%		where $\rho>0$ measures risk aversion
+%		\item Dealer chooses $y_t$ to maximize
+%		\[
+%		\underbrace{\mu_t(z_t-y_t) + c_t + p_t y_t}_{\mathbb{E}[w_{t+1}] } - \frac{\rho}{2} \underbrace{(z_t -y_t)^2 \sigma^2_\epsilon}_{ \mathbb{V}(w_{t+1})}
+%		\]
+%		\item Solved by \structure{asset supply function}
+%			\[
+%			y_t = z_t + \frac{p_t-\mu_t}{\rho \sigma^2_\epsilon}
+%			\]
+%	\end{itemize}
+%\end{frame}
+%
+%
+%\begin{frame}{Case 1: Mean-variance preferences (2)}
+%	\begin{itemize}
+%		\item Define the midquote $m_t$ as the price where $y_t=0$,
+%		\[
+%		0 = z_t + \frac{m_t-\mu_t}{\rho \sigma^2_\epsilon}.
+%		\]
+%		Then the supply schedule (limit order book) is 
+%		\[
+%		y_t = \frac{p_t - m_t}{\rho \sigma^2_\epsilon}
+%		\]
+%		\item Equivalently, $p_t-m_t=\rho \sigma^2_\epsilon y_t$. We can think of this as a price impact equation where $\lambda=\rho \sigma^2_\epsilon$ (recall that $\lambda$ measures inverse depth)
+%		\item Greater depth $1/\lambda$ when dealers are more risk-tolerant ($\rho$ lower)
+%	\end{itemize}
+%\end{frame}
+%
+%
+%\begin{frame}{Case 2: Mean-SD preferences}
+%	\begin{itemize}
+%		\item Suppose the dealer dislikes standard deviation:
+%		\[
+%		U(w_{t+1})=\mathbb{E}[w_{t+1}] - \rho \sqrt{\mathbb{V}(w_{t+1})}.
+%		\]
+%		\item Dealer chooses $y_t$ to maximize
+%		\[
+%		\mu_t (z_t - y_t) + c_t + p_t y_t - \rho |z_t - y_t|\sigma_\epsilon
+%		\]
+%		\item This utility is linear in $y_t$. In particular,
+%		\[
+%		\frac{\partial U(w_{t+1})}{\partial y_t}= \left\{
+%		\begin{aligned}
+%		p_t-\mu_t+\rho\sigma_{\epsilon}	& \text{ if } z_t>y_t \\
+%		p_t-\mu_t-\rho\sigma_{\epsilon}	& \text{ if } z_t<y_t 
+%		\end{aligned}
+%		\right.
+%		\]
+%	\end{itemize}
+%\end{frame}
+%
+%
+%\begin{frame}{Case 2: Mean-SD preferences (2)}
+%	\begin{itemize}
+%		\item Given $\frac{\partial U(w_{t+1})}{\partial y_t}$, the dealer's optimal supply is
+%		\begin{itemize}
+%			\item Supply any $y_t \leq z_t$ if $p_t = \mu_t - \rho\sigma_{\epsilon}$,
+%			\item Supply any $y_t \geq z_t$ if $p_t = \mu_t + \rho\sigma_{\epsilon}$
+%		\end{itemize}
+%		\item There is a discountinuos `jump' in the price at $y_t=z_t$
+%		\begin{itemize}
+%			\item But otherwise supply perfectly elastic
+%		\end{itemize}
+%		\item A natural measure of the bid-ask spread is $2\rho\sigma_{\epsilon}$ if $z_t \simeq 0$
+%	\end{itemize}
+%\end{frame}
+%
+%
+%\begin{frame}{Conclusion: Stoll}
+%	\begin{itemize}
+%		\item In the Glosten-Milgrom model, the transactions price is always the expected asset value given trade history
+%		\item In the Stoll model, the price is moved by incoming random noise trades, and the midprice deviates from expected value in proportion to the inventory $z$, e.g.
+%		\[
+%		m_t - \mu_t = \rho \sigma^2_\epsilon z_t
+%		\]
+%		To emphasize: prices in Stoll model are \structure{not efficient}
+%		\item The difference can be interpreted as a risk premium to the  dealers
+%		\item Can you benefit from this as a trader? \pause \structure{Yes, in the sense that you can buy cheaper if you happen to look for a trade that reduces dealer risk exposure}
+%	\end{itemize}
+%\end{frame}
+%
+%
 %\begin{frame}{Liquidity risk in practice: \\Saxo Bank and the Swiss Franc}
 %	\begin{itemize}
 %		\item Saxo Bank had a  large and profitable brokering business, offering customers (leveraged) trading in Swiss Francs
@@ -398,6 +487,9 @@ Chapter 3.4-3.7 of FPR}
 %\end{frame}
 
 
+
+\section{Price dynamics with illiquidity}
+
 \begin{frame}{Price dynamics with illiquidity}
 	\begin{itemize}
 		\item In practice, incoming market orders may, in the short run, move the transaction price beyond the update in expected value
@@ -412,7 +504,7 @@ Chapter 3.4-3.7 of FPR}
 
 
 \begin{frame}{Price dynamics}
-	\includegraphics[width=0.9\linewidth]{pics/PriceDiscovery_Image}
+	\includegraphics[width=0.85\linewidth]{pics/PriceDiscovery_Image}
 \end{frame}
 
 
@@ -431,18 +523,25 @@ Chapter 3.4-3.7 of FPR}
 
 
 \begin{frame}{Exercises}
+	Negative oil futures prices were registered last year. Read a blog post about this case (on absalon).
 	\begin{itemize}
-		\item for next Wednesday:
-		\begin{itemize}
-			\item In Absalon, I have attached an article from the Economist, December 14 2013, on the Volcker rule. Discuss the claim that \emph{``In practice banks will probably respond by making markets for a narrow range of securities that already trade frequently, and thus might reasonably be expected to do so in the future. Meanwhile, the securities that now change hands less frequently are likely to be shunned, making them even harder to trade.''}
-			\item Two other Bloomberg articles are on Einar Aas and his exclusion from Nasdaq. Use this case to discuss how risk aversion (and so inventory risk) can stem from regulation.
-		\end{itemize}
-		\item for this Friday:
-		\begin{itemize}
-			\item If you are bored, solve Exercise 9 on page 128 about the bid-ask spread in the mean-SD model
-			\item If you feel like a challenge, solve exercise 10 on page 128
-		\end{itemize}
+		\item Why did it happen? How do negative prices make sense?
+		%\item Explain why this 
 	\end{itemize}
+	(Also remember about the GM problems.)
+
+	%\begin{itemize}
+	%	\item for next Wednesday:
+	%	\begin{itemize}
+	%		\item In Absalon, I have attached an article from the Economist, December 14 2013, on the Volcker rule. Discuss the claim that \emph{``In practice banks will probably respond by making markets for a narrow range of securities that already trade frequently, and thus might reasonably be expected to do so in the future. Meanwhile, the securities that now change hands less frequently are likely to be shunned, making them even harder to trade.''}
+	%		\item Two other Bloomberg articles are on Einar Aas and his exclusion from Nasdaq. Use this case to discuss how risk aversion (and so inventory risk) can stem from regulation.
+	%	\end{itemize}
+	%	\item for this Friday:
+	%	\begin{itemize}
+	%		\item If you are bored, solve Exercise 9 on page 128 about the bid-ask spread in the mean-SD model
+	%		\item If you feel like a challenge, solve exercise 10 on page 128
+	%	\end{itemize}
+	%\end{itemize}
 \end{frame}
 
 
