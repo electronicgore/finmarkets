@@ -34,50 +34,51 @@
 
 \begin{frame}{What did we do last week?}
 	\begin{enumerate}
-		\item The spread is not only driven by adverse selection: order costs and inventory risk have an effect as well
-		\item However, we would expect the dynamic effect of these three different mechanisms to be different
+		\item Depth is driven by mostly same factors as liquidity: adverse selection and inventory risk
 		\begin{itemize}
-			\item Order costs: only short-run effect 
-			\item Inventory risk: medium-run effect, but should be zero in the long run
-			\item Adverse selection: long-run effect 
+			\item Although the effect is, in general, less obvious with order costs and imperfectly competitive dealers
+		\end{itemize}
+		\item Kyle model demonstrates how adverse selection can drive limited depth
+		\begin{itemize}
+			\item Call auction market where dealer has to cover the order imbalance
+			\item Informed traders face a trade-off: trade more vs trade at better price
+			\item see textbook for Kyle model with inventory risk.
 		\end{itemize}
 	\end{enumerate}
 \end{frame}
 
 
 \begin{frame}{Today}
+	\textbf{Empirical estimation of liquidity}
 	\begin{itemize}
-		\item \textbf{Empirical estimation}
+		\item Earlier we looked at how to estimate the spread, but without a theory for what drives it
+		\item Today: talk about estimating drivers of the spread
+		\item Furthermore:
 		\begin{itemize}
-			\item Before we looked at how to estimate the spread, but without a theory for what drives it
-			\item Thus: talk about estimating drivers of the spread
-			\item Furthermore:
-			\begin{itemize}
-				\item Look at estimating price impact/depth
-				\item Look at estimating proportion of informed trading
-			\end{itemize}
+			\item Look at estimating price impact/depth
+			\item Look at estimating proportion of informed trading
 		\end{itemize}
 	\end{itemize}
 \end{frame}
 
 
 
-\section{Empirics of illiquidity}
+%\section{Empirics of illiquidity}
 
-\begin{frame}{Introduction}
-	\begin{itemize}
-		\item What determines illiquidity?
-		\begin{itemize}
-			\item Chapter 2 discussed empirical measures of illiquidity
-			\item Chapters 3 and 4 developed some theories
-			\item Can we detect the relative importance of theoretical effects on the measures?
-		\end{itemize}
-		\item The end of chapter 3 discussed the various price impacts of transaction costs, informed trading, market maker risk aversion (figure 3.9)
-		\begin{itemize}
-			\item Chapter 4: greater price change when transaction is larger
-		\end{itemize}
-	\end{itemize}
-\end{frame}
+%\begin{frame}{Introduction}
+%	\begin{itemize}
+%		\item What determines illiquidity?
+%		\begin{itemize}
+%			\item Chapter 2 discussed empirical measures of illiquidity
+%			\item Chapters 3 and 4 developed some theories
+%			\item Can we detect the relative importance of theoretical effects on the measures?
+%		\end{itemize}
+%		\item The end of chapter 3 discussed the various price impacts of transaction costs, informed trading, market maker risk aversion (figure 3.9)
+%		\begin{itemize}
+%			\item Chapter 4: greater price change when transaction is larger
+%		\end{itemize}
+%	\end{itemize}
+%\end{frame}
 
 
 \begin{frame}{}
@@ -89,9 +90,9 @@
 	\begin{itemize}
 		\item Parameters of interest:
 		\begin{itemize}
-			\item $\gamma$: order-processing cost
 			\item $\lambda$: price impact related to information
 			\item $\beta$: price impact related to MM risk aversion
+			\item $\gamma$: order-processing cost
 		\end{itemize}
 		\item Data:
 		\begin{itemize}
@@ -109,14 +110,15 @@
 			\\
 			\Rightarrow \varDelta p_t &= \mu_t - \mu_{t-1} + \gamma \varDelta d_t
 		\end{align*}
+		\pause
 		\item Further,
 		\begin{align*}
-			\mu_t = \mu_{t-1} + \lambda d_t + \varepsilon_t
+			\mu_t = \mu_{t-1} + \lambda q_t + \varepsilon_t
 		\end{align*}
 		order flow is informative; also let $\varepsilon_t$ include all other kinds of public news
 		\item Then
 		\begin{align*}
-			\varDelta p_t &= \lambda d_t + \gamma \varDelta d_t + \varepsilon_t
+			\varDelta p_t &= \lambda q_t + \gamma \varDelta d_t + \varepsilon_t
 		\end{align*}
 	\end{itemize}
 \end{frame}
@@ -130,7 +132,8 @@
 		\end{equation}
 		jointly with trade directions $d_t$. 
 		\item Accumulated order flow affects price level via $\lambda$, cyclical order flow gives $\gamma$ in the style of Roll's measure (2.15)
-		\item On NYSE data from early 80s, they find $\gamma_1=\lambda_0=0$ and estimate $\gamma_0=.0465$, $\lambda_1=.0102$
+		\item On NYSE data from early 80s, they find $\gamma_1=\lambda_0=0$ and estimate $\gamma_0=.0465$, $\lambda_1=.0102$ for average stock in sample
+		(so a $\$1000$ trade pays $\$56.7$ total in trading costs and permanently shifts the price by $\$10.2$)
 	\end{itemize}
 \end{frame}
 
@@ -184,7 +187,7 @@
 			% more adverse selection in the morning; higher bargaining power for dealers at closing (traders want to unwind positions)
 			\begin{itemize}
 				\item Morning trading reveals all the information accumulated during off-market hours. Evening trading driven by traders' desire to close open positions
-				\item \textbf{\cite{bogousslavsky_should_2020}}: closing auctions account for $7.3\%$ of daily trading volume, but contribute nothing to price discovery. Closing prices deviate a lot from midquotes, but revert back quickly.
+				\item \textbf{\cite{bogousslavsky_should_2020}}: closing auctions account for $7.3\%$ of daily trading volume, but contribute nothing to price discovery. Closing prices deviate a lot from midquotes, but revert back quickly. Why? \visible<handout:0>{\pause\structure{Probably because traders rush to close their positions before EoD.} \pause But also in part because closing auctions are more closed and are of lower quality, see \textbf{\cite{hu_vestigial_2020}}.}
 			\end{itemize}
 			\item \textbf{\cite{lyons_tests_1995}} had data on a FOREX dealer's inventory, and found $\beta$ very large
 		\end{itemize}
@@ -198,10 +201,29 @@
 			\item The `impulse response' of prices to orders
 			\item Opens door to richer time series analysis of transactions data
 		\end{itemize}
-		\item Findings: short-run effect of a trade $\approx 2\%$
-		\item long-run effect of a trade ($T=5$ trades) $\approx 1\%$
+		%NOTE: it seems that 1-2% are not volume effects, but just effects of trade sign
+		\item Findings: short-run effect of a trade $\approx 2\%$ of the price
+		\item long-run effect of a trade ($T=5$ trades is ``long enough'') $\approx 1\%$
 		\begin{itemize}
 			\item greater LR impact for stocks with lower capitalization
+			\item related: \textbf{\cite{ellul_financial_2018}} find that stocks with lower analyst coverage are less liquid
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Depth impact}
+	\begin{itemize}
+		\item \textbf{\cite*{de_jong_price_1996}} do analysis similar to \cite{hasbrouck_measuring_1991} with data from Paris Bourse, and taking trade quantities into account
+		\item Find that LR price impact is between $25\%$ and $115\%$ of the spread (depending on estimation method)
+		\item Find that \structure{adverse selection costs} \alert{increase with trade size}...
+		\begin{itemize}
+			\item aligns with Kyle model
+		\end{itemize}
+		\item ...while the \alert{converse} is true for \structure{order processing costs}. Possible reasons:
+		\begin{itemize}
+			\item costs are per-transaction rather than per-unit
+			\item large orders come from institutional traders that get better terms of trade? (Note: Paris Bourse was a pure-LOB market, no dealers)
 		\end{itemize}
 	\end{itemize}
 \end{frame}
@@ -245,18 +267,12 @@
 
 
 \begin{frame}{Conclusion}
+	Using the insights from previous lectures we can estimate the importance of different components of the spread
 	\begin{itemize}
-		\item Depth of a market is closely tied to liquidity and is determined by most of the same factors
+		\item Perhaps surprisingly, order costs are by far the largest cost (but estimated on major stocks)
+		\item Adverse selection is a smaller, yet significant factor 
 		\begin{itemize}
-			\item Kyle model helps us analyze market depth, can accomodate all factors simultaneously 
-			\item (except order costs)
-			\item (we looked at version with only adverse selection -- see textbook for other versions)
-		\end{itemize}
-		\item Using the insights from last lecture we can estimate the importance of different components of the spread
-		\begin{itemize}
-			\item Perhaps surprisingly, order costs are by far the largest cost (but estimated on major stocks)
-			\item Adverse selection is more of an issue in small-cap stocks
-			\item \cite{easley_is_2002}: around 19\% of trading is informed
+			\item is more of an issue in small-cap stocks
 		\end{itemize}
 	\end{itemize}
 \end{frame}
@@ -264,7 +280,13 @@
 
 \begin{frame}{Homework}
 \begin{itemize}
-	\item ...
+	\item Read the Economist article on the corporate bond market. Discuss the following questions:
+	\begin{enumerate}
+		\item How does corporate bond market liquidity differ from the stock market liquidity? Why?
+		\item Why do investors' liquidity expectations matter?
+		\item How do investors form their expectations of liquidity?
+		\item Can we \emph{measure investors' expectations} of liquidity?
+	\end{enumerate}
 \end{itemize}
 \end{frame}
 
@@ -280,7 +302,7 @@
 
 
 \appendix
-\begin{frame}[allowframebreaks]{References}
+\begin{frame}<handout:0>[allowframebreaks]{References}
 \bibliography{../teaching}
 \bibliographystyle{abbrvnat}
 \end{frame}
