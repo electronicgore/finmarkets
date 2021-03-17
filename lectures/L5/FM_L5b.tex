@@ -167,7 +167,7 @@
 		\end{equation}
 		\item Then (5.14) is modified to \hyperlink{derivation}{\beamerbutton{Derivation}}
 		\begin{equation} \tag{5.21}
-		\Delta p_t = \gamma \Delta d_t + (\lambda+\beta)q_t - \lambda \phi q_{t-1} + \epsilon_t
+		\Delta p_t = \gamma \Delta d_t + \lambda (q_t - \phi q_{t-1}) + \beta q_t + \epsilon_t
 		\end{equation}
 		\item They estimate the model for 20 major NYSE stocks: 
 		\begin{align*}
@@ -187,7 +187,9 @@
 			% more adverse selection in the morning; higher bargaining power for dealers at closing (traders want to unwind positions)
 			\begin{itemize}
 				\item Morning trading reveals all the information accumulated during off-market hours. Evening trading driven by traders' desire to close open positions
-				\item \textbf{\cite{bogousslavsky_should_2020}}: closing auctions account for $7.3\%$ of daily trading volume, but contribute nothing to price discovery. Closing prices deviate a lot from midquotes, but revert back quickly. Why? \visible<handout:0>{\pause\structure{Probably because traders rush to close their positions before EoD.} \pause But also in part because closing auctions are more closed and are of lower quality, see \textbf{\cite{hu_vestigial_2020}}.}
+				\item \textbf{\cite{bogousslavsky_should_2020}}: closing auctions account for $7.3\%$ of daily trading volume, but contribute nothing to price discovery. Closing prices deviate a lot from midquotes, but revert back quickly. Why? 
+				\pause 
+				Probably because traders rush to close their positions before EoD. But also in part because closing auctions are more closed and are of lower quality, see \textbf{\cite{hu_vestigial_2020}}.
 			\end{itemize}
 			\item \textbf{\cite{lyons_tests_1995}} had data on a FOREX dealer's inventory, and found $\beta$ very large
 		\end{itemize}
