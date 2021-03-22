@@ -9,15 +9,15 @@
 
 
 
-\title{Financial Markets Microstructure \\ Lecture 7}
+\title{Financial Markets Microstructure \\ Lecture 10}
 
-\subtitle{Limit order book\\
+\subtitle{Limit order book (part 2)\\
 	Chapter 6.3-6.5 of FPR}
 
 \author{Egor Starkov}
 
 \date{K{\o}benhavns Unversitet \\
-	Spring 2020}
+	Spring 2021}
 
 
 
@@ -91,11 +91,14 @@
 			\item Zero for the marginal (last) limit order at $A_k$
 			\item Strictly positive for inframarginal orders (if $C>0$) because order executes with higher probability
 		\end{itemize}
-		\item This profit is reduced with \alert{smaller tick sizes}
-		\begin{itemize}
-			\item Hence decreasing tick size drives away limit traders and reduces depth
-			\item But it will also reduce spread (by design) and reduce trading costs for the opposite side of the market (liquidity demanders)
-		\end{itemize}
+		\item Q: what happens if we \alert{change the tick size}?
+		\visible<handout:0|1->{
+			\item This profit is reduced with \alert{smaller tick sizes}
+			\begin{itemize}
+				\item Hence decreasing tick size drives away limit traders and reduces depth
+				\item But it will also reduce spread (by design) and reduce trading costs for the opposite side of the market (liquidity demanders)
+			\end{itemize}
+		}
 	\end{itemize}
 \end{frame}
 
@@ -103,9 +106,11 @@
 \begin{frame}{Tick size}
 	\begin{itemize}
 		\item Driving away limit traders intuitively also has dynamic repercussions
-		\begin{itemize}
-			\item LOB is replenished more slowly after trades -- so market orders traded more frequently against non-competitive prices
-		\end{itemize}
+		\visible<handout:0|>{
+			\begin{itemize}
+				\item LOB is replenished more slowly after trades -- so market orders traded more frequently against non-competitive prices
+			\end{itemize}
+		}
 		\item \cite{goldstein_eighths_2000} explored the NYSE 1997 case (tick size from $\$1/8$ to $\$1/16$)
 		\begin{itemize}
 			\item Trading costs decreased for small orders
