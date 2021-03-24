@@ -358,8 +358,10 @@
 		\pause
 		\item \textbf{Speculator}: 
 		\begin{itemize}
-			\item If $q \notin \{q_S,q_L\}$, speculator reveals himself
-			\item Suppose when observing $v=v^{H}$ speculator buys $q_{L}$ units, when $v=v^L$ don't buy (maybe sell)
+			%\item If $q \notin \{q_S,q_L\}$, speculator reveals himself
+			\item Since $v^H > A_1,A_2$, when observing $v=v^{H}$ speculator buys $q_{L}$ units. 
+			\item When $v=v^L$ buys none since $v^L < A_1,A_2$ (but maybe sells)
+			\item (Shading order (strategically restricting trade size) is not optimal because buying more does not worsen the price of the previous units, unlike in dealer mkt)
 		\end{itemize}
 		\item \textbf{Price}. In equilibrium, price must equal $\mathbb{E}[v|q\geq y_k]$:
 		\begin{align*}
@@ -367,7 +369,6 @@
 			\\
 			A_2 & = \mathbb{E}[v|q \geq q_{L}] = \mu + \frac{2\pi}{1+\pi} \sigma
 		\end{align*}
-		\item Q: can it be better for the speculator to shade order (buy $q_S$ instead of $q_L$)? \pause \\ \visible<handout:0>{No, buying more does not worsen the price of the first units!}
 		\item Straightforward that $v^L<A_1<A_2<v^H$. Thus: equilibrium.
 	\end{itemize}
 \end{frame}

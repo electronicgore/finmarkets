@@ -12,7 +12,7 @@
 \title{Financial Markets Microstructure \\ Lecture 10}
 
 \subtitle{Limit order book (part 2)\\
-	Chapter 6.3-6.5 of FPR}
+	Chapter 6.3-6.4 of FPR}
 
 \author{Egor Starkov}
 
@@ -92,6 +92,7 @@
 			\item Strictly positive for inframarginal orders (if $C>0$) because order executes with higher probability
 		\end{itemize}
 		\item Q: what happens if we \alert{change the tick size}?
+		\pause
 		\visible<handout:0|1->{
 			\item This profit is reduced with \alert{smaller tick sizes}
 			\begin{itemize}
@@ -106,7 +107,7 @@
 \begin{frame}{Tick size}
 	\begin{itemize}
 		\item Driving away limit traders intuitively also has dynamic repercussions
-		\visible<handout:0|>{
+		\visible<handout:0>{
 			\begin{itemize}
 				\item LOB is replenished more slowly after trades -- so market orders traded more frequently against non-competitive prices
 			\end{itemize}
@@ -126,7 +127,7 @@
 		Suppose that there is no tick; quotes can  be placed in a continuous price space. Suppose that there is price priority. What is then the role of time priority, so that first-come quotes at identical prices are served first?
 	\end{exampleblock}
 	
-	\centering
+	\centering\pause
 	\emph{``...The size of the trading increment is a
 	powerful level that is underappreciated by
 	regulators. The \alert{finer the trading increment},
@@ -173,11 +174,14 @@
 	Hybrid market
 	\begin{itemize}
 		\item Suppose a dealer can compete with the limit order book, as follows
-		\item The dealer may observe the size $q$ before serving the order (last-mover advantage)
+		\item The dealer may observe trade size $q$ before serving the order (and can fulfill the order before it is matched against LOB)
 		\item Can profit by pricing at $\mathbb{E}[v|q=x]$ rather than an average of $\mathbb{E}[v|q \geq y]$ for $y \leq x$ which is used by the LOB
 		\item Especially profitable on small trades
 		\item But the existence of such a dealer invalidates our analysis of the LOB
-		\item Profitable limit orders are being picked off
+		\begin{itemize}
+			\item Profitable limit orders are being picked off
+			\item So limit traders would gain negative profits if they follow the old strategy
+		\end{itemize}
 	\end{itemize}
 \end{frame}
 
@@ -231,55 +235,68 @@
 \section{Dynamic analysis: take or make liquidity}
 
 \begin{frame}{Dynamic analysis}
-	\begin{itemize}
-		\item \cite{glosten_is_1994} models the static price schedule under adverse selection (with quote display costs)
-		\item Traders must choose: place limit/market orders = make/take liquidity
-		\begin{itemize}
-			\item Limit order can yield price improvement compared to market order
-			\item ...but at the cost of (best case) delay or (worst case) non-execution
-			\item Plus there's always adverse selection (winner's curse)
-		\end{itemize}
-		\item Models of such choice:
-		\begin{itemize}
-			\item \cite{parlour_price_1998}: time priority of limit orders means it's more attractive to add limit orders when there's currently few of them
-			\item \cite{foucault_order_1999}: limit order placed by traders whose private valuation makes current prices unattractive
-			\item \citet*{foucault_limit_2005}: patient traders place limit orders inside the spread
-		\end{itemize}
-	\end{itemize}
+	\begin{columns}
+		\begin{column}{0.7\linewidth}
+			\begin{itemize}
+				\item \cite{glosten_is_1994} shows how price schedule is formed under adverse selection
+				\begin{itemize}
+					\item But this analysis is \structure<1>{static} -- traders have no choice between limit/market orders = making/taking liquidity
+				\end{itemize}
+				\item Proper \structure<1>{dynamic} analysis is quite difficult
+				\pause
+				\item Choice between \alert{MO/LO} depends on:
+				\begin{enumerate}
+					\item \structure{Price differential} (=bid-ask spread)
+					\item \structure{Execution probability} of a limit order
+					\begin{itemize}
+						\item ...which depends on the current state of LOB
+						\item But also on next trader's choice between MO/LO
+						\item ...which depends on execution probability ...
+					\end{itemize}
+					\item \structure{Adverse selection} faced by limit orders
+					\begin{itemize}
+						\item ...which depends on \emph{who} will trade against my limit order
+						\item ...which depends on next trader's choice between market/limit order depending on their pvt info ...
+					\end{itemize}
+				\end{enumerate}
+			\end{itemize}
+		\end{column}
+		\begin{column}{0.3\linewidth}
+			\visible<handout:0|1->{
+				\includegraphics[scale=0.15]{pics/thonk}
+				\vspace{7em}
+			}
+		\end{column}
+	\end{columns}
 \end{frame}
 
 
-\begin{frame}{Take or make}
+\begin{frame}{Literature}
 	\begin{itemize}
-		\item Proper dynamic analysis is quite difficult
-		\item E.g., my choice between market/limit order today depends on:
+		\item We will look at a very simple model, loosely based on \cite{parlour_price_1998}
 		\begin{itemize}
-			\item Execution probability of a limit order
-			\begin{itemize}
-				\item ...which depends on the current state of LOB
-				\item But also depends on next trader's choice between market/limit order
-				\item ...which depends on execution probability etc
-			\end{itemize}
-			\item Adverse selection I face by submitting limit order
-			\begin{itemize}
-				\item ...which depends on \emph{who} will trade against my limit order
-				\item ...which depends on next trader's choice between market/limit order depending on their pvt info ...
-			\end{itemize}
+			\item fixed ask/bid prices, endogenous choice between MO and LO
 		\end{itemize}
-		\item So we will look at a very simple model, loosely based on \cite{parlour_price_1998}
+		\item Other models:
+		\begin{itemize}
+			\item \cite{foucault_order_1999}: choice of both quotes and order type; adds public info between periods (leading to winner's curse)
+			\item \citet*{foucault_limit_2005}: model with heterogeneous discount factors; patient traders choose LO, impatient choose MO
+			\item \cite{bhattacharya_limit_2020}: full LOB analysis with asymmetric information
+		\end{itemize}
 	\end{itemize}
 \end{frame}
 
 
 \begin{frame}{Model based on Parlour (1998)}
 	\begin{itemize}
-		\item \textbf{Exogenous prices}. Bid and ask prices exogenously given as $A>v>B$
-		\item \textbf{Traders}. Arriving trader chooses btw limit or market order (one unit)
+		\item \textbf{Exogenous prices}. Bid and ask prices \alert{exogenously} given as $A>v>B$
+		\item \textbf{Strategic traders}. Arriving trader chooses btw limit or market order (one unit)
 		\begin{itemize}
 			\item Limit order valid one period. Choice depends on prob. of limit order being executed, i.e. `hit' by a market order from the next trader
-			\item Valuation: $v+y$. $y$ is uniformly distributed on $(-Y,Y)$, unobserved and independent across traders. $v$ is known and common to all.
+			\item Valuation: $v+\alert{y}$. $y$ is uniformly distributed on $(-Y,Y)$, unobserved and independent across traders. $v$ is known and common to all.
 		\end{itemize}
-		\item \textbf{Profits}. Let $P^B_M (P^S_M)$ be prop. of next-period market buy (sell) order 
+		\item \textbf{Noise traders}. Numerous and patient. Always submit limit orders at $A$ (LSell) and/or $B$ (LBuy). Prioritised \emph{after} the strategic trader.
+		\item \textbf{Profits}. Let $P^B_M (P^S_M)$ be prob. of next-period market buy (sell) order 
 		\begin{align*}
 		\text{Market sell: } & B-(v+y) \\
 		\text{Limit sell: } & (A-v-y)P^B_M \\
@@ -303,8 +320,8 @@
 		\end{aligned}
 		\right.
 		\end{equation*}
-		\item Traders with greater urgency to trade (extreme $y$) use market orders
-		\item Limit order more attractive when more likely to execute:  automatic tendency for the limit order book to be replenished (resiliency)
+		NOTE: Traders with greater urgency to trade (extreme $y$) use market orders
+		%\item Limit order more attractive when more likely to execute:  automatic tendency for the limit order book to be replenished (resiliency)
 	\end{itemize}
 \end{frame}
 
@@ -328,7 +345,9 @@
 
 \begin{frame}{Equilibrium (2)}
 	\begin{itemize}
-		\item Solving \eqref{eq1}-\eqref{eq3} we obtain the thresholds. If we set $v=0$, $Y=2$, $A=1$ and $B=-1$ they become
+		\item Solving \eqref{eq1}-\eqref{eq3} we obtain the thresholds. 
+		\\
+		If we set $v=0$, $Y=2$, $A=1$ and $B=-1$ they become
 		\begin{align*}
 		\underline{y} 	& = \frac{1}{2}(3-\sqrt{33}) \simeq 1.4 \\
 		\hat{y} 	& = 0 \\
@@ -343,10 +362,11 @@
 \begin{frame}{Dynamics with adverse selection}
 	\begin{itemize}
 		\item Our analysis above focuses on non-execution risk, ignoring adverse selection.
-		\item The two can be combined in one model -- see \cite{foucault_order_1999} (also ch. 6.5 of the textbook). Also: \hyperlink{adverse}{\beamerbutton{Want to know more?}}
-		\item There is no real interaction between the two though, so we will not get any new insights compared to Glosten and Parlour models.
+		\item The two can be combined in one model -- see \cite{foucault_order_1999} (also ch. 6.6 of the textbook). Also: \hyperlink{adverse}{\beamerbutton{Want to know more?}}
+		\item There is little interaction between the two though, so we will not get any new insights compared to Glosten and Parlour models.
 	\end{itemize}
 \end{frame}
+%TODO: 6.4.4 has many good points worth covering
 
 
 \begin{frame}[label=parlourmain]{Conclusion}
@@ -366,7 +386,7 @@
 
 \begin{frame}{Exercise for next week}
 	\begin{itemize}
-		\item Solve exercise 5 on page 235 in the textbook on the effect of fees charged for limit orders and market orders
+		\item Solve exercise 5 after chapter 6 (page 235) in the textbook on the effect of fees charged for limit orders and market orders in Parlour model
 	\end{itemize}
 \end{frame}
 
