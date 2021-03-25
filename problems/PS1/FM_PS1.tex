@@ -1,7 +1,7 @@
 %%% License: Creative Commons Attribution Share Alike 4.0 (see https://creativecommons.org/licenses/by-sa/4.0/)
 
 \documentclass[11pt
-%, answers
+, answers
 ]{exam}
 \usepackage[top=2.5cm,bottom=3cm,left=2.5cm,right=2.5cm]{geometry}
 \usepackage{amsfonts}
@@ -55,36 +55,36 @@
 
 
 \title{\textsc{Financial Markets Microstructure: Problem Set 1}}
-\date{K{\o}benhavns Universitet, Spring 2020}
+\date{K{\o}benhavns Universitet, Spring 2021}
 \author{Egor Starkov}
 
 
 \maketitle
 
 
-Please email your answer to me before midnight of Thursday March 26 if you want feedback. This is voluntary, but at any rate I encourage you to spend time on these exercises to make sure you understand the models. Feel free to write me with any questions you might have.
+%Please email your answer to me before midnight of Thursday March 26 if you want feedback. This is voluntary, but at any rate I encourage you to spend time on these exercises to make sure you understand the models. Feel free to write me with any questions you might have.
 
 
 
-\subsection*{Problem 1}
-
-Recall that with order processing costs (see resp. lecture), we wrote bid and ask prices set by a dealer as
-\begin{align*}
-	a_t &= \mu_{t-1} + \gamma + s^a_t
-	\\
-	b_t &= \mu_{t-1} - \gamma - s^b_t,
-\end{align*}
-where $s^a_t$ and $s^b_t$ are half-spreads from the Glosten \& Milgrom model. Do you think that increased order costs might affect the willingness to trade the asset from the informed and uninformed traders? Is this accounted for in the expressions above? Focus on the ask side of the market for simplicity.
-
-
-\begin{solution}
-	In this formulation, order-processing costs will just increase the ask price. The effect on willingness to trade is not taken into account, unless it is somehow incorporated into $s^a_t$. E.g., in the simplest example (binary $v$, $\frac{1}{2}-\frac{1}{2}$ noise trading) we had
-	\[
-	s^a_t = \frac{\pi \theta_{t-1}(1-\theta_{t-1})}{\pi\theta_{t-1}+(1-\pi)\frac{1}{2}}(v^H-v^L),
-	\] 
-	which does not feature $\gamma$.
-	Increased order costs should make traders of all types less willing to trade. To take this into account, a risk-neutral competitive dealer has to wonder whether the effect is the same for informed and uninformed traders: if not, the mix will change. For instance, in the simple binary model where liquidity traders have inelastic demand (they're not price sensitive), if $\gamma \geq v^H-v^L$, then informed traders will always be priced out of the market. Thus, dealers would in some sense do better in this example by having higher costs. But of course, in a competitive equilibrium, the dealers cannot invent costs - they would be outpriced by competitors.
-\end{solution}
+%\subsection*{Problem 1}
+%
+%Recall that with order processing costs (see resp. lecture), we wrote bid and ask prices set by a dealer as
+%\begin{align*}
+%	a_t &= \mu_{t-1} + \gamma + s^a_t
+%	\\
+%	b_t &= \mu_{t-1} - \gamma - s^b_t,
+%\end{align*}
+%where $s^a_t$ and $s^b_t$ are half-spreads from the Glosten \& Milgrom model. Do you think that increased order costs might affect the willingness to trade the asset from the informed and uninformed traders? Is this accounted for in the expressions above? Focus on the ask side of the market for simplicity.
+%
+%
+%\begin{solution}
+%	In this formulation, order-processing costs will just increase the ask price. The effect on willingness to trade is not taken into account, unless it is somehow incorporated into $s^a_t$. E.g., in the simplest example (binary $v$, $\frac{1}{2}-\frac{1}{2}$ noise trading) we had
+%	\[
+%	s^a_t = \frac{\pi \theta_{t-1}(1-\theta_{t-1})}{\pi\theta_{t-1}+(1-\pi)\frac{1}{2}}(v^H-v^L),
+%	\] 
+%	which does not feature $\gamma$.
+%	Increased order costs should make traders of all types less willing to trade. To take this into account, a risk-neutral competitive dealer has to wonder whether the effect is the same for informed and uninformed traders: if not, the mix will change. For instance, in the simple binary model where liquidity traders have inelastic demand (they're not price sensitive), if $\gamma \geq v^H-v^L$, then informed traders will always be priced out of the market. Thus, dealers would in some sense do better in this example by having higher costs. But of course, in a competitive equilibrium, the dealers cannot invent costs - they would be outpriced by competitors.
+%\end{solution}
 
 
 %%TODO: i do not like this second part, del?
@@ -147,14 +147,14 @@ That is, the ask price is the probability that the trader is an (informed) insid
 \item Given these prices, determine the trading profit of an insider who has decided to acquire information.
 
 \begin{solution}
-The trader's profit from acquiring information depends on the belief of the dealer, i.e. the probability that the dealer attaches to the trader acquiring information. Suppose the dealer's belief attaches probability $\varphi$ to the trader being an informed insider. A trader who acquires information then has the following expected profits:
+The trader's profit from acquiring information depends on the belief of the dealer, i.e. the probability that the dealer attaches to the trader acquiring information. Suppose the dealer's belief attaches probability $\varphi$ to the trader being an informed insider. A trader who acquires information then has the following expected profit:
 \[
 u(\varphi) = \frac{1}{2}(v^H - a_\varphi) + \frac{1}{2}(b_\varphi - v^L) - c = (1-\alpha_\varphi) \frac{v^H-v^L}{2}-c.
 \]
 Notice that the dealer's beliefs enters only through the prices.
 \end{solution}
 
-\item Determine the condition on $c$ such that the potential insider never acquires information.
+\item Determine the condition on $c$ such that the potential insider never acquires information (i.e., $\phi=0$ is an equilibrium).
 
 \begin{solution}
 Notice that $u'(\cdot)<0$, i.e. the trader's potential profits are decreasing in the dealer's belief of the probability that he is informed. Thus, the best potential case for acquiring information is when $\varphi=0$, that is, when the market does not expect the trader to be an informed insider. As a consequence, the trader will never acquire information when $u(0) < 0$, which corresponds to
@@ -186,7 +186,7 @@ Inspecting the expression, we can make the following observations about equilibr
 \end{solution}
 
 
-\item Characterize the equilibrium in terms of the ranges of values for $c$. 
+\item Describe fully the market equilibrium that will arise for a given $c$. 
 
 \begin{solution}
   \textit{Case 1:} $c > \frac{v^H-v^L}{2}$. Trader never acquires information ($\sigma^*=0$) and dealer sets prices $a_0$ and $b_0$. 
@@ -206,12 +206,15 @@ Inspecting the expression, we can make the following observations about equilibr
 
 This problem considers an issue left open in Section 4.3 in the textbook, which explores inventory risk within the Kyle's model. At the outset of this section, it is assumed that there is no informed trading, i.e., $x = 0$ and $q = u$. Let us now relax this assumption and try to analyze the effects of dealer's risk aversion in Kyle's model in the presence of adverse selection.
 
-So, consider the model laid out in Section 4.2 -- which is \emph{the} Kyle's model we worked with in Lecture 5, -- with one informed trader, and competitive dealers. However, dealers are not risk neutral. Suppose that there is a representative dealer with mean-variance preferences, risk aversion $\rho$, initial asset holding $z_{0}$, and initial cash holding $c_{0}$ (as in Stoll's model in Lecture 4).
+So, consider the model laid out in Section 4.2 -- which is \emph{the} Kyle's model we worked with in class, -- with one informed trader, and competitive dealers. However, dealers are not risk neutral. Suppose that there is a representative dealer with mean-variance preferences, risk aversion $\rho$, initial asset holding $z_{0}$, and initial cash holding $c_{0}$. I.e., the dealer's utility from a [random] next period's wealth $w_{t+1} = z_{t+1}p_{t+1} + c_{t+1}$ is $U(w_{t+1}) = \mathbb{E}[w_{t+1}] - \frac{\rho}{2} \mathbb{V}(w_{t+1})$.
 
 We seek again an equilibrium on a linear form, where the insider trades an amount $x =	\beta v - x_{0}$, and the price satisfies $p = p_{0}+\lambda q$. Now, there are four endogenous parameters, $\beta$, $x_{0}$, $p_{0}$, $\lambda$, with $\beta>0$ and $\lambda>0$.
 
 \begin{enumerate}[label=(\alph*). ]
-\item Take for granted some arbitrary parameters $\beta$, $x_{0}$. The dealer will observe $q=x+u$. Note that $q+x_{0}-\beta \mu = \beta(v-\mu)+u$. Use a result from Section 4.2 or lecture slides to find $\mathbb{E}[v|q]$ and $\mathbb{V}[v|q]$ as functions of $\beta$ and the model parameters.
+\item Take for granted some arbitrary parameters $\beta$, $x_{0}$. The dealer will observe $q=x+u$. 
+Use the result from Section 4.2 or lecture slides to find $\mathbb{E}[v|q]$ and $\mathbb{V}[v|q]$ as functions of $\beta$ and the model parameters.
+
+\emph{(Note that it is no longer the case that $q = \beta(v-\mu)+u$, but rather $q+x_{0}-\beta \mu = \beta(v-\mu)+u$.)}
 
 \begin{solution}
 The dealer wealth at the end of the trading day is
@@ -255,17 +258,19 @@ and
 \]
 \end{solution}
 
-\item Considering how many units $y$ of the risky asset to supply to the market, the dealer takes $p$ as given. Argue, in line with Stoll's model, that the dealer's supply curve satisfies
+\item Calculate the dealer's asset supply curve and show that the amount supplied at price $p$ is
 \[
 y(p) =z_{0} +  \frac{p - \mathbb{E}[v|p]}{\rho \mathbb{V}[v|p]} 
 \]
 
+NOTE: To solve this problem, instead of the zero-profit condition we will invoke another feature of competitive agents: they are \emph{price-takers}. Use the following algorithm to obtain the dealer's price schedule: (1) fix some arbitrary price $p$; (2) find supply amount $y(p)$ that maximizes the dealer's profit given this $p$. 
+
 \begin{solution}
-Mean-variance preferences: Conditional on $p$, maximize with respect to $q$ the following
+Conditional on $p$, choose supply $q$ to maximize utility
 \begin{align*}
 U(w|p) 
 & = \mathbb{E}[w] - \frac{\rho}{2} \mathbb{V}[w] \\
-& = \mathbb{E}[v|p](z_{0}-q) + c_{0}+pq - \frac{\rho}{2} \mathbb{V}[v|p](z_{0}-q)^{2} \\
+& = \mathbb{E}[v|p](z_{0}-q) + c_{0}+pq - \frac{\rho}{2} \mathbb{V}[v|p](z_{0}-q)^{2}.
 \end{align*}
 Take the FOC wrt. $q$
 \[
@@ -275,14 +280,14 @@ Solving this for $q$ gives the desired result.
 \end{solution}
 
 
-\item When the market clears at price $p$, then $y(p)=q$. Can you see if there exists a $\lambda>0$ and a number $p_{0}$, such that market clearing fits with our conjecture that $p=p_{0}+\lambda q$? I.e. try to solve
+\item When the market clears at price $p$, then $y(p)=q$. Can you see if there exists a $\lambda>0$ and a number $p_{0}$, such that market clearing fits with our conjecture that $p=p_{0}+\lambda q$? I.e. try to solve the following equation
 \[
-z_{0} +  \frac{p - \mathbb{E}[v|p]}{\rho \mathbb{V}[v|p]} = \frac{p-p_{0}}{\lambda}.
+z_{0} +  \frac{p - \mathbb{E}[v|p]}{\rho \mathbb{V}[v|p]} = \frac{p-p_{0}}{\lambda}
 \]
+w.r.t. $\lambda$ and $p_0$. Note that they must be such that the equality holds for all $p$.
 
 \begin{solution}
-Here, we are using the method of `matching coefficients' that we have used in class as well. We know that market clearing implies $y(p)=q$. We have an expression from $y(p)$ which comes from the dealer's optimization problem, and an expression for $q$ which comes from our assumption that the dealer uses a linear pricing strategy which also gives a linear supply function. We now have to see if we can choose the coefficients $\lambda$ and $p_0$ such that the optimal supply is indeed linear. This will prove that the strategy we suggested for the dealer is indeed optimal. 
-
+%Here, we are using the method of `matching coefficients' that we have used in class as well. We know that market clearing implies $y(p)=q$. We have an expression from $y(p)$ which comes from the dealer's optimization problem, and an expression for $q$ which comes from our assumption that the dealer uses a linear pricing strategy which also gives a linear supply function. We now have to see if we can choose the coefficients $\lambda$ and $p_0$ such that the optimal supply is indeed linear. This will prove that the strategy we suggested for the dealer is indeed optimal. 
 First, notice that
 \[
 z_{0}+ \frac{p-\mathbb{E}[v|p]}{\rho \mathbb{V}[v|p]}=z_{0}+\frac{p(\lambda-\alpha) +\alpha p_{0}-\lambda (\mu + \alpha x_{0} - \alpha \beta \mu) }{\lambda \rho \mathbb{V}[v|p]}.
@@ -306,9 +311,13 @@ Matching the constants
 z_{0}+\frac{\alpha p_{0}-\lambda(\mu + \alpha x_{0} - \alpha \beta \mu) }{\lambda \rho \mathbb{V}[v|p]} = -\frac{p_{0}}{\lambda},
 \]
 which can be solved for 
-\begin{equation} \label{pzeroMM}
-p_{0} =  \frac{\lambda}{\alpha+\rho \mathbb{V}[v|p]}((\mu + \alpha x_{0} - \alpha \beta \mu) - \rho \mathbb{V}[v|p] z_{0}) =(\mu + \alpha x_{0} - \alpha \beta \mu) - \rho \mathbb{V}[v|p] z_{0}.
-\end{equation}
+\begin{align}
+	p_{0} &=  \frac{\lambda}{\alpha+\rho \mathbb{V}[v|p]}((\mu + \alpha x_{0} - \alpha \beta \mu) - \rho \mathbb{V}[v|p] z_{0}) 
+	\nonumber
+	\\
+	&=(\mu + \alpha x_{0} - \alpha \beta \mu) - \rho \mathbb{V}[v|p] z_{0}.
+	\label{pzeroMM}
+\end{align}
 
 Equations \eqref{lambdaMM} and \eqref{pzeroMM} give us the optimal strategy of the dealer, conditional on the strategy of the traders.
 \end{solution}
@@ -320,14 +329,20 @@ The trader is a risk-neutral expected-utility maximizer. Conditional on the deal
 \begin{equation} \label{lambdatrader}
 \beta=\frac{1}{2\lambda}
 \end{equation}
- and $x_{0}=\beta p_{0}$. Using this latter condition in \eqref{pzeroMM} we get
- \[
- p_{0} = (\mu + \alpha \beta p_0 - \alpha \beta \mu) - \rho \mathbb{V}[v|p] z_{0}
- \]
- which is solved for
- \[
- p_{0} = \mu- \frac{\rho \mathbb{V}[v|p] z_0}{1-\alpha\beta}
- \]
+and 
+\begin{equation}
+	x_{0}=\beta p_{0}.
+	\label{eq:x0}
+\end{equation} 
+Using this latter condition in \eqref{pzeroMM} we get
+\begin{equation}
+	p_{0} = (\mu + \alpha \beta p_0 - \alpha \beta \mu) - \rho \mathbb{V}[v|p] z_{0},
+\end{equation}
+which is solved for
+\begin{equation}
+	p_{0} = \mu- \frac{\rho \mathbb{V}[v|p] z_0}{1-\alpha\beta}.
+	\label{eq:p0}
+\end{equation}
  
 We also have two conditions on $\lambda$, one coming from the dealer's optimality \eqref{lambdaMM} and one from the trader's optimality \eqref{lambdatrader}. Use them together to get
 \[
@@ -341,6 +356,7 @@ Plugging into \eqref{lambdatrader} this yields
 \begin{equation} \label{eq:eqbeta}
 \beta = \frac{1}{\rho \sigma^{2}_{v} + \sqrt{\rho^{2} \sigma^{4}_{v} + \sigma^{2}_{v}/ \sigma^{2}_{u}}}.
 \end{equation}
+Together, equations \eqref{eq:x0}, \eqref{eq:p0}, \eqref{eq:eqlambda}, and \eqref{eq:eqbeta} pin down the four parameters.
 
 \end{solution}
 
@@ -355,34 +371,34 @@ When $\rho=0$, this becomes the book's solution for $\lambda$, and we also recov
 
 
 \qquad
-\subsection*{Problem 4}
-
-
-Posted on absalon is a press release from the European Securities and Markets Authoriy regarding its decision to prohibit sales of binary options to retail investors.\footnote{You can also find it here: \url{https://www.esma.europa.eu/press-news/esma-news/esma-agrees-prohibit-binary-options-and-restrict-cfds-protect-retail-investors}} Read the article and answer the following questions:
-\begin{enumerate}
-	\item What is the motivation behind this decision? How does this relate to the models we have seen in class?
-	\item What effect will this decision have on liquidity in the binary options market?
-	\item Measures announced in the press release differ between the binary option and CFD markets. How will the effects of the regulation be different across the two markets?
-\end{enumerate}
-Be concise and to the point. Please try to keep your answer no longer than one page.
-
-\begin{solution}
-	There are of course many ways to answer this question. Below is my version with the core points I had in mind.
-	
-	\begin{enumerate}
-		\item As we have seen in the models of Glosten \& Milgrom and Kyle, the uninformed traders are trading at a loss on average. While retail investors likely consider themselves informed and are trading on information rather than for any other reason (e.g., for liquidity reasons), it is also likely that they have worse information compared to professional investors. 
-		
-		In the models, the uninformed traders anticipate they will make a loss on average, hence regulation is not really necessary. In reality, however, overconfidence may not allow the retail investors to correctly evaluate their expected profits from trading. This misalignment of expectations and reality is typically considered a just cause for intervention.
-		
-		The press release also mentions conflict of interest between clients and providers, but this is not an issue we have explored in class.
-		
-		\item As we have seen in the models, less uninformed trading leads to less liquidity in the market: spread increases, market depth decreases. Trading volumes also decrease, both due to less uninformed trading, and due to informed traders acting less aggressively on their information (see Kyle's model).
-		
-		\item Retails traders are fully prohibited from trading binary options, while their trade in CFDs becomes restricted but still possible as a result of regulation. Therefore, the effects outlined in part 2 of this question will be smaller for the CFD market. 
-		
-		More interestingly, the restrictions may affect risk-aversion of retail traders. For example, tighter margin close out rule increases effective risk aversion, since it increases the cost of holding large positions (as in Einar Aas' story in one of the previous readings). Negative balance protection cuts both ways: on the one hand, traders can be more aggressive if they know the system will automatically close their positions once the balance hits the threshold -- otherwise they would have to monitor their balance manually. On the other hand, the investors will no longer be able to trade with negative balances in the hopes to bounce back -- eliminating this option may make them more cautious. In the end, these risk aversion effects may increase or decrease retail traders' aggressiveness, thus mitigating or exacerbating the decrease of liquidity compared to pure adverse selection case.
-	\end{enumerate}
-\end{solution}
+%\subsection*{Problem 4}
+%
+%
+%Posted on absalon is a press release from the European Securities and Markets Authoriy regarding its decision to prohibit sales of binary options to retail investors.\footnote{You can also find it here: \url{https://www.esma.europa.eu/press-news/esma-news/esma-agrees-prohibit-binary-options-and-restrict-cfds-protect-retail-investors}} Read the article and answer the following questions:
+%\begin{enumerate}
+%	\item What is the motivation behind this decision? How does this relate to the models we have seen in class?
+%	\item What effect will this decision have on liquidity in the binary options market?
+%	\item Measures announced in the press release differ between the binary option and CFD markets. How will the effects of the regulation be different across the two markets?
+%\end{enumerate}
+%Be concise and to the point. Please try to keep your answer no longer than one page.
+%
+%\begin{solution}
+%	There are of course many ways to answer this question. Below is my version with the core points I had in mind.
+%	
+%	\begin{enumerate}
+%		\item As we have seen in the models of Glosten \& Milgrom and Kyle, the uninformed traders are trading at a loss on average. While retail investors likely consider themselves informed and are trading on information rather than for any other reason (e.g., for liquidity reasons), it is also likely that they have worse information compared to professional investors. 
+%		
+%		In the models, the uninformed traders anticipate they will make a loss on average, hence regulation is not really necessary. In reality, however, overconfidence may not allow the retail investors to correctly evaluate their expected profits from trading. This misalignment of expectations and reality is typically considered a just cause for intervention.
+%		
+%		The press release also mentions conflict of interest between clients and providers, but this is not an issue we have explored in class.
+%		
+%		\item As we have seen in the models, less uninformed trading leads to less liquidity in the market: spread increases, market depth decreases. Trading volumes also decrease, both due to less uninformed trading, and due to informed traders acting less aggressively on their information (see Kyle's model).
+%		
+%		\item Retails traders are fully prohibited from trading binary options, while their trade in CFDs becomes restricted but still possible as a result of regulation. Therefore, the effects outlined in part 2 of this question will be smaller for the CFD market. 
+%		
+%		More interestingly, the restrictions may affect risk-aversion of retail traders. For example, tighter margin close out rule increases effective risk aversion, since it increases the cost of holding large positions (as in Einar Aas' story in one of the previous readings). Negative balance protection cuts both ways: on the one hand, traders can be more aggressive if they know the system will automatically close their positions once the balance hits the threshold -- otherwise they would have to monitor their balance manually. On the other hand, the investors will no longer be able to trade with negative balances in the hopes to bounce back -- eliminating this option may make them more cautious. In the end, these risk aversion effects may increase or decrease retail traders' aggressiveness, thus mitigating or exacerbating the decrease of liquidity compared to pure adverse selection case.
+%	\end{enumerate}
+%\end{solution}
 
 
 \end{document} 
