@@ -1,7 +1,7 @@
 %%% License: Creative Commons Attribution Share Alike 4.0 (see https://creativecommons.org/licenses/by-sa/4.0/)
 
 \documentclass[11pt
-, answers
+%, answers
 ]{exam}
 \usepackage[top=2.5cm,bottom=3cm,left=2.5cm,right=2.5cm]{geometry}
 \usepackage{amsfonts}
@@ -119,7 +119,7 @@
 
 
 \qquad
-\subsection*{Problem 2}
+\subsection*{Problem 1}
 
 Exercise 4 in chapter 3 (pp. 125-126):
 
@@ -201,7 +201,7 @@ Inspecting the expression, we can make the following observations about equilibr
 
 
 \qquad
-\subsection*{Problem 3}
+\subsection*{Problem 2}
 
 
 This problem considers an issue left open in Section 4.3 in the textbook, which explores inventory risk within the Kyle's model. At the outset of this section, it is assumed that there is no informed trading, i.e., $x = 0$ and $q = u$. Let us now relax this assumption and try to analyze the effects of dealer's risk aversion in Kyle's model in the presence of adverse selection.
@@ -371,6 +371,21 @@ When $\rho=0$, this becomes the book's solution for $\lambda$, and we also recov
 
 
 \qquad
+\subsection*{Problem 3}
+
+One of the news articles assigned earlier in the course argued that corporate bond markets are significantly less liquid than stock markets. This is partly due to a more opaque trading tradition: instead of the dealers posting their quotes openly, the bond markets operate via Requests For Quotes (RFQ). In particular, an interested trader must contact the dealer with an RFQ, and then the dealer would respond with a quote. This process is somewhat time-consuming. However, the costs of this opaqueness can be far greater than just these costs.
+
+Your goal is to build a model of search costs and to examine how they affect market outcomes: prices, spread and/or market depth, volume of trade if applicable. In particular, take any dealer model we considered (I suggest Glosten-Milgrom, but Kyle can probably work as well). Assume that instead of the dealers posting quotes openly, any arriving trader must approach dealers individually, paying cost $c$ per dealer to learn that dealer's quotes. Solve your model as best you can and answer the following questions based on your results:
+\begin{itemize}
+	\item How do prices (and thus liquidity/depth) in your model compare to the baseline model, in which dealers post quotes openly?
+	\item How do prices depend on $c$? 
+	\item How do prices depend on the number of dealers in the market?
+\end{itemize}
+
+
+
+
+
 %\subsection*{Problem 4}
 %
 %
