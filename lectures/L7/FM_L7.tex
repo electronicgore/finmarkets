@@ -112,6 +112,7 @@
 				\item LOB is replenished more slowly after trades -- so market orders traded more frequently against non-competitive prices
 			\end{itemize}
 		}
+		\pause
 		\item \cite{goldstein_eighths_2000} explored the NYSE 1997 case (tick size from $\$1/8$ to $\$1/16$)
 		\begin{itemize}
 			\item Trading costs decreased for small orders
@@ -189,10 +190,12 @@
 \begin{frame}{Example with hybrid market}
 	\begin{itemize}
 		\item Example 1 previous lecture continued. Assume an uninformed dealer receives order $q$. Can either send order to LOB or execute himself (at better price) 
+		\pause
 		\item Focus on ask side. Let $A^H_k$ be the hybrid ask price. When dealer observes $q=q_S$, he knows trader is noise trader and thus $\mathbb{E}[v|\structure{N}]=\mu$. 
 		\begin{itemize}
 			\item Can execute order at just below $A^H_1$ and earn profit $A^H_1-\mu$.
 		\end{itemize}
+		\pause
 		\item Hence, only large orders $q=q_L$ are sent to LOB. LOB traders will expect this, and will price as if any order arriving to the LOB is large:
 		\begin{align*}
 		\mathbb{E}[v|q \ge q_S]=\mathbb{E}[v|q \ge q_L]=\mu+\frac{2\pi}{1+\pi} \sigma,
@@ -206,7 +209,7 @@
 \begin{frame}{Hybrid market}
 	\begin{itemize}
 		\item To be fair:
-		\item Addind a dealer to LOB market decreases liquidity...
+		\item Adding a dealer to LOB market decreases liquidity...
 		\begin{itemize}
 			\item ...in ``good times'', when there would've been a thick LOB
 		\end{itemize}
@@ -247,12 +250,14 @@
 				\item Choice between \alert{MO/LO} depends on:
 				\begin{enumerate}
 					\item \structure{Price differential} (=bid-ask spread)
+					\pause
 					\item \structure{Execution probability} of a limit order
 					\begin{itemize}
 						\item ...which depends on the current state of LOB
 						\item But also on next trader's choice between MO/LO
 						\item ...which depends on execution probability ...
 					\end{itemize}
+					\pause
 					\item \structure{Adverse selection} faced by limit orders
 					\begin{itemize}
 						\item ...which depends on \emph{who} will trade against my limit order
@@ -262,7 +267,8 @@
 			\end{itemize}
 		\end{column}
 		\begin{column}{0.3\linewidth}
-			\visible<handout:0|1->{
+			\pause[2]
+			\visible<handout:0>{
 				\includegraphics[scale=0.15]{pics/thonk}
 				\vspace{7em}
 			}
@@ -281,7 +287,7 @@
 		\begin{itemize}
 			\item \cite{foucault_order_1999}: choice of both quotes and order type; adds public info between periods (leading to winner's curse)
 			\item \citet*{foucault_limit_2005}: model with heterogeneous discount factors; patient traders choose LO, impatient choose MO
-			\item \cite{bhattacharya_limit_2020}: full LOB analysis with asymmetric information
+			\item \cite{bhattacharya_limit_2020}: combine all of the above in a single tractable model
 		\end{itemize}
 	\end{itemize}
 \end{frame}
@@ -296,6 +302,7 @@
 			\item Valuation: $v+\alert{y}$. $y$ is uniformly distributed on $(-Y,Y)$, unobserved and independent across traders. $v$ is known and common to all.
 		\end{itemize}
 		\item \textbf{Noise traders}. Numerous and patient. Always submit limit orders at $A$ (LSell) and/or $B$ (LBuy). Prioritised \emph{after} the strategic trader.
+		\pause
 		\item \textbf{Profits}. Let $P^B_M (P^S_M)$ be prob. of next-period market buy (sell) order 
 		\begin{align*}
 		\text{Market sell: } & B-(v+y) \\
@@ -320,7 +327,7 @@
 		\end{aligned}
 		\right.
 		\end{equation*}
-		NOTE: Traders with greater urgency to trade (extreme $y$) use market orders
+		NOTE: Traders with greater urgency/need to trade (extreme $y$) use market orders
 		%\item Limit order more attractive when more likely to execute:  automatic tendency for the limit order book to be replenished (resiliency)
 	\end{itemize}
 \end{frame}
@@ -333,6 +340,7 @@
 		P^S_M 	&=\mathbb{P}(-Y\le y \le \underline{y})=\frac{\underline{y}+Y}{2Y} \\
 		P^B_M 	&=\mathbb{P}(\overline{y} \le y \le Y)=\frac{Y-\overline{y}}{2Y}
 		\end{align*}
+		\pause
 		\item At $\underline{y}$, indifferent btw $MSell$ and $LSell$. At $\hat{y}$, indifferent btw $LSell$ and $LBuy$. At $\overline{y}$, indifferent btw $LBuy$ and $MBuy$. Thus:
 		\begin{align}
 		B-(v+\underline{y}) 					& = (A-v-\underline{y})\frac{Y-\overline{y}}{2Y} \label{eq1}\\
@@ -359,27 +367,42 @@
 \end{frame}
 
 
+\begin{frame}[label=parlourmain]{Dynamic analysis: Conclusion}
+\begin{itemize}
+	\item Trade occurs when seller and buyer meet and agree on terms
+	\begin{itemize}
+		\item Exchange brings sellers and buyers together
+		\item Impatient traders search more actively (use market orders)
+		\item Patient traders are more passive, offer liquidity (use limit orders)
+	\end{itemize}
+	\item Ordinary traders can use limit orders to compete with market makers
+	\item Limit order book is dynamic: influence the choice of order
+	\item In reality, many features to think about when placing orders
+\end{itemize}
+\end{frame}
+
+
+\section{Dynamics with public news}
+
 \begin{frame}{Dynamics with adverse selection}
 	\begin{itemize}
-		\item Our analysis above focuses on non-execution risk, ignoring adverse selection.
-		\item The two can be combined in one model -- see \cite{foucault_order_1999} (also ch. 6.6 of the textbook). Also: \hyperlink{adverse}{\beamerbutton{Want to know more?}}
-		\item There is little interaction between the two though, so we will not get any new insights compared to Glosten and Parlour models.
+		\item Our analysis above focuses on non-execution risk, ignoring \structure{adverse selection}
+		\begin{itemize}
+			\item Can be due to privately informed investors picking off the limit orders
+			\item or \alert{public news} arriving over time -- then all future traders are more informed!
+		\end{itemize}
+		\item The two can be combined in one model -- see \cite{foucault_order_1999} (also ch. 6.4.3 \& 6.6 of the textbook). Also: \hyperlink{adverse}{\beamerbutton{Want to know more?}}
+		\item There is not too much interaction between the two, but there's an interesting dynamics of spread w.r.t. volatility of $\mu_t$ ($=v_t$ in the book)
+		\item Read this at home.
 	\end{itemize}
 \end{frame}
-%TODO: 6.4.4 has many good points worth covering
 
 
-\begin{frame}[label=parlourmain]{Conclusion}
-	\begin{itemize}
-		\item Trade occurs when seller and buyer meet and agree on terms
-		\begin{itemize}
-			\item Exchange brings sellers and buyers together
-			\item Impatient traders search more actively (use market orders)
-			\item Patient traders are more passive, offer liquidity (use limit orders)
-		\end{itemize}
-		\item Ordinary traders can use limit orders to compete with market makers
-		\item Limit order book is dynamic: influence the choice of order
-		\item In reality, many features to think about when placing orders
+\begin{frame}{Public information: issues}
+	\begin{itemize}[<+->]
+		\item \textbf{Monitoring costs}: if limit traders do not monitor the news constantly, their orders will get picked off. Monitoring reduces adverse selection, but is costly.
+		\item \textbf{Pegged limit orders}: tied to another security or another market, automatically repriced when that price changes. Another insurance device, available on selected exchanges.
+		\item \textbf{Algorithmic trading}: allows to automatically monitor relevant variables and reprice limit orders as needed. But at the same time increases the speed at which orders can be picked off, so cuts both ways.
 	\end{itemize}
 \end{frame}
 
@@ -395,7 +418,7 @@
 
 
 \appendix
-\begin{frame}[allowframebreaks]{References}
+\begin{frame}<handout:0>[allowframebreaks]{References}
 \bibliography{../teaching}
 \bibliographystyle{abbrvnat}
 \end{frame}
