@@ -8,7 +8,7 @@
 \input{../FM_preamble.tex}
 
 
-\title{Financial Markets Microstructure \\ Lecture 8}
+\title{Financial Markets Microstructure \\ Lecture 12}
 
 \subtitle{Market Fragmentation\\
 	Chapter 7 of FPR}
@@ -16,7 +16,7 @@
 \author{Egor Starkov}
 
 \date{K{\o}benhavns Unversitet \\
-	Spring 2020}
+	Spring 2021}
 
 
 \begin{document}
@@ -33,7 +33,7 @@
 	\begin{itemize}
 		\item Models of order-driven markets
 		\item (Glosten's model): limit traders provide liquidity in a way similar but not same to dealers
-		\item (Parlour's model): LOB is resilient / self-replenishing
+		\item (Parlour's model): needier traders more likely to use MOs. Also LOB is resilient / self-replenishing
 		\item Market design: measures directed at improving liquidity can backfire by distorting incentives
 	\end{itemize}
 \end{frame}
@@ -61,6 +61,7 @@
 			\item Until 1999, most stock options were only traded on the exchange where they were listed
 		\end{itemize}
 		\item Many European countries used to require that stocks of their companies are only traded on local exchanges
+		\pause
 		\item All of that has changed in the past 20 years
 		\begin{itemize}
 			\item Today, many (at least high-cap) stocks are \structure{cross-listed} on many exchanges
@@ -73,12 +74,13 @@
 \begin{frame}{Fragmentation and consolidation}
 	\begin{itemize}
 		\item Refer to markets with multiple venues trading the same stock as \textit{fragmentated} (as opposed to consolidated)
-		\item Regulation often tries to create `virtual consolidation': make fragmented markets act \textit{as if} they were consolidated
+		\item Regulation often tries to create `\structure{virtual consolidation}': make fragmented markets act \textit{as if} they were consolidated
 		\begin{itemize}
 			\item A central concept in the US is the \textit{National Best Bid and Offer} (NBBO): the highest bid and lowest ask price in (any exchange within) the market at a given time
 			\item US regulation requires that trade always takes place at the NBBO
 		\end{itemize}
-		\item EU's ban of countries' ``concentration rules'' aims for a different kind of consolidation -- one where all stocks can be traded on same exchange rather than spread around local exchanges.
+		\pause
+		\item EU's \alert{ban} of countries' ``\alert{concentration rules}'' aims for a different kind of consolidation -- one where all stocks can be traded on same exchange rather than spread around local exchanges.
 		\begin{itemize}
 			\item We're not going to talk much about this dimension.
 		\end{itemize}
@@ -100,6 +102,8 @@
 
 
 \begin{frame}{Other consequences}
+	\visible<handout:0>{
+	\pause
 	Apart from violating priority rules, fragmentation can lead to:
 	\begin{itemize}
 		\item \alert{Higher trading costs} (due to search costs or not finding best price)
@@ -114,6 +118,7 @@
 		\item \structure{More total liquidity} (liq providers face less competition, so more willing to participate)
 	\end{itemize}
 	Will look at some of these and others in greater detail today
+	}
 \end{frame}
 
 
@@ -145,17 +150,21 @@
 		\item Traders rarely place their orders directly -- they usually go to a broker (bank)
 		\item When market is fragmented, brokers should ideally search all markets for the best price
 		\begin{itemize}
-			\item (Not a trivial problem, given the existence of dark pools, crossing networks of unknown depth, and hidden orders on standard exchanges)
+			\item (Not a trivial problem, given the existence of dark pools, crossing networks of unknown depth, and hidden orders and/or iceberg orders on standard exchanges)
+			% iceberg = part of a larger order; another part will be submitted once this order is executed
 		\end{itemize}
+		\pause
 		\item But \alert{cost} of this search is incurred by \alert{broker}, while \structure{gains} are transmitted to \structure{trader}.
 		\begin{itemize}
 			\item So there is an agency problem
 			\item Exacerbated by payments brokers can receive from exchanges for routing all or some orders through this exchange
 		\end{itemize}
+		\pause
 		\item Regulation (US) aims to solve this via
 		\begin{itemize}
 			\item ``best execution rules'' imposed on brokers
-			\item no-trade-through/order-protection rules which say order must be routed automatically to trade at NBBO
+			\item no-trade-through/order-protection rules which say \\
+			order must be routed automatically to trade at NBBO
 		\end{itemize}
 	\end{itemize}
 \end{frame}
@@ -288,7 +297,9 @@
 		
 		\item Of course, greater profits for informed traders
 		
-		\item In the above, we assume one speculator per market. If two speculators would compete in the consolidated mkt, the effect is even stronger.
+		\item In the above, we assume one speculator per market. \\
+		If two speculators were to compete in the consolidated mkt, \\
+		the effect is even stronger.
 	\end{itemize}
 \end{frame}
 
@@ -384,12 +395,16 @@
 		\begin{itemize}
 			\item If cannot commit to stay away from each other's market then fragmentation has little effect.
 		\end{itemize}
+		\pause
 		\item What if noise traders can choose?
+		\pause
+		\visible<handout:0>{
 		\begin{itemize}
 			\item They would go to a deeper market. Depth $\frac{1}{\lambda_i} = \frac{2 \sigma_{ui}}{\sigma_v}$.
 			\item Larger markets would get larger. \structure{Liquidity begets liquidity.}
 			\item This is a natural barrier to entry for new trading platforms and source of ``payments for order flow'' we mentioned
 		\end{itemize}
+		}
 	\end{itemize}
 \end{frame}
 
@@ -399,7 +414,7 @@
 	\begin{itemize}
 		\item Fragmentation is bad for noise traders (welfare)
 		\item If noise traders coordinate, it can be stable that they gather around a less efficient platform
-		\item Fragmentation may create extra depth
+		\item Fragmentation \emph{may} create extra depth
 	\end{itemize}
 	\textbf{Aside}
 	\begin{itemize}
@@ -411,62 +426,62 @@
 
 
 
-\section{Fragmentation in other models}
+\section{Fragmentation in Glosten model}
 
-\begin{frame}{Stoll model and risk sharing}
-	We now turn to the effect fragmentation on market makers' risk sharing
-	\begin{itemize}
-		\item Section 7.2.2: Analysis drawn on Stoll's model
-		\item Risky asset value $v \sim N(\mu, \sigma^{2}_{v})$
-		\item Risk averse dealer with mean-variance preference
-		\begin{itemize}
-			\item Initial asset position $z$; risk aversion $\rho$
-			\item Asset supply is
-			\[
-			y = z + \frac{p-\mu}{\rho \sigma^{2}_{v}}
-			\]
-			\item Invert to get pricing schedule $p=m+\lambda q$ where $m=\mu-\lambda z$ and $\lambda = \rho \sigma^{2}_{v}$
-		\end{itemize}
-		\item \textbf{Trading cost}. Trading cost of order of size $q$ is $\lambda q^{2}$
-	\end{itemize}
-\end{frame}
-
-
-\begin{frame}{Stoll model and risk sharing (2)}
-	\begin{itemize}
-		\item Suppose there are two dealers: risk aversions $\rho_{1}$ and $\rho_{2}$
-		\begin{itemize}
-			\item If consolidated trading, dealers' aggregate supply curve is
-			\[
-			y_{1}+y_{2} = z_{1}+z_{2}+\frac{p-\mu}{\rho_{1}\sigma^{2}_{v}}+\frac{p-\mu}{\rho_{2} \sigma^{2}_{v}} =  z_{1}+z_{2}+\left(\frac{1}{\rho_1}+\frac{1}{\rho_2}\right)\frac{p-\mu}{\sigma^{2}_{v}}
-			\]
-			\item This is as if trading with one dealer with risk aversion $\bar{\rho}$:
-			\[
-			\frac{1}{\bar{\rho}}= \frac{1}{\rho_{1}} + \frac{1}{\rho_{2}}
-			\]
-		\end{itemize}
-	\end{itemize}
-	\begin{block}{}
-		\begin{itemize}
-			\item Risk averse dealers share risks in the consolidated market: $\bar{\rho}<\rho_{i}$
-			\item Trading cost $\bar{\rho}\sigma^{2}_{v}q^{2}$ is lower than either of $\rho_{i}\sigma^{2}_{v}q^{2}$
-		\end{itemize}
-	\end{block}
-\end{frame}
-
-
-\begin{frame}{Stoll model and risk sharing (3)}
-	\begin{itemize}
-		\item The above assumes again that both dealers and traders are constrained to one market.
-		\item Otherwise perfect insurance is possible across dealers and fragmentation has no effect.
-	\end{itemize}
-\end{frame}
+%\begin{frame}{Stoll model and risk sharing}
+%	We now turn to the effect fragmentation on market makers' risk sharing
+%	\begin{itemize}
+%		\item Section 7.2.2: Analysis drawn on Stoll's model
+%		\item Risky asset value $v \sim N(\mu, \sigma^{2}_{v})$
+%		\item Risk averse dealer with mean-variance preference
+%		\begin{itemize}
+%			\item Initial asset position $z$; risk aversion $\rho$
+%			\item Asset supply is
+%			\[
+%			y = z + \frac{p-\mu}{\rho \sigma^{2}_{v}}
+%			\]
+%			\item Invert to get pricing schedule $p=m+\lambda q$ where $m=\mu-\lambda z$ and $\lambda = \rho \sigma^{2}_{v}$
+%		\end{itemize}
+%		\item \textbf{Trading cost}. Trading cost of order of size $q$ is $\lambda q^{2}$
+%	\end{itemize}
+%\end{frame}
+%
+%
+%\begin{frame}{Stoll model and risk sharing (2)}
+%	\begin{itemize}
+%		\item Suppose there are two dealers: risk aversions $\rho_{1}$ and $\rho_{2}$
+%		\begin{itemize}
+%			\item If consolidated trading, dealers' aggregate supply curve is
+%			\[
+%			y_{1}+y_{2} = z_{1}+z_{2}+\frac{p-\mu}{\rho_{1}\sigma^{2}_{v}}+\frac{p-\mu}{\rho_{2} \sigma^{2}_{v}} =  z_{1}+z_{2}+\left(\frac{1}{\rho_1}+\frac{1}{\rho_2}\right)\frac{p-\mu}{\sigma^{2}_{v}}
+%			\]
+%			\item This is as if trading with one dealer with risk aversion $\bar{\rho}$:
+%			\[
+%			\frac{1}{\bar{\rho}}= \frac{1}{\rho_{1}} + \frac{1}{\rho_{2}}
+%			\]
+%		\end{itemize}
+%	\end{itemize}
+%	\begin{block}{}
+%		\begin{itemize}
+%			\item Risk averse dealers share risks in the consolidated market: $\bar{\rho}<\rho_{i}$
+%			\item Trading cost $\bar{\rho}\sigma^{2}_{v}q^{2}$ is lower than either of $\rho_{i}\sigma^{2}_{v}q^{2}$
+%		\end{itemize}
+%	\end{block}
+%\end{frame}
+%
+%
+%\begin{frame}{Stoll model and risk sharing (3)}
+%	\begin{itemize}
+%		\item The above assumes again that both dealers and traders are constrained to one market.
+%		\item Otherwise perfect insurance is possible across dealers and fragmentation has no effect.
+%	\end{itemize}
+%\end{frame}
 
 
 \begin{frame}{Glosten model}
 	Competing limit order books may provide better aggregate depth
 	\begin{itemize}
-		\item To show this, use LOB model of section 6.2 with display cost $C>0$, tick size $\Delta >0$, no adverse selection (asset value is $\mu$)
+		\item To show this, use LOB model of section 6.2 with display cost $C>0$, tick size $\Delta >0$, \structure{no adverse selection} (asset value is $\mu$)
 		\item Recall: incoming order $q$, limit sell orders posted at cumulative quantity $Y$ and price $A$ satisfy the zero-profit condition
 		\[
 		0 = \mathbb{P}(q \geq Y)[A-\mu]-C,
@@ -482,7 +497,7 @@
 \begin{frame}{Glosten model (2)}
 	Now we make the following assumptions:
 	\begin{itemize}
-		\item \textbf{Fragmentation}. Limit orders are supplied in two markets, $I$ and $E$
+		\item \textbf{Fragmentation}. Limit orders are supplied in two markets, $I$ and $E$ (cost $C$ same in both)
 		\begin{itemize}
 			\item At single available ask price $A$, denote cumulative limit sell orders by $Y^I$ and $Y^E$
 		\end{itemize}
@@ -503,7 +518,7 @@
 
 \begin{frame}{Glosten model: trading probabilities}
 	\begin{itemize}
-		\item This results in the following execution probabilities
+		\item This results in the following execution probabilities for the marginal traders
 		\begin{align}
 		\mathbb{P}(q_I \geq Y^I) & = \frac{1}{2} \left[\underbrace{\left(1-\gamma+\frac{\gamma}{2} \right) (1-F(Y^I))}_{\structure{\text{$I$ is executed first}}} + \underbrace{\frac{\gamma}{2}(1-F(\bar{Y}))}_{\structure{\text{$I$ is executed second}}}\right] \tag{7.11} \\
 		\mathbb{P}(q_E \geq Y^E) & = \frac{1}{2} \left[\underbrace{\frac{\gamma}{2} (1-F(Y^E))}_{\structure{\text{$E$ is executed first}}} + \underbrace{\frac{\gamma}{2}(1-F(\bar{Y}))}_{\structure{\text{$E$ is executed second}}}\right] \tag{7.12}
@@ -524,7 +539,9 @@
 		\item More orders and greater execution probability in market $I$
 		\item Why? 
 		\pause
+		\visible<handout:0>{
 		\structure{Market $I$ has a `routing advantage', meaning it is more attractive $\rightarrow$ more orders}
+		}
 	\end{itemize}
 \end{frame}
 
@@ -535,7 +552,7 @@
 		\item  Equation (6.7) also holds with single platform. This implies $\mathbb{P}(q_I \geq Y^I) = \mathbb{P}(q \geq Y)$ 
 		\item By (7.11): $2\times \mathbb{P}(q_I \geq Y^I) =$ weighted avg. of $1-F(Y^I)$ and $1-F(\bar{Y})$
 		\item But with a single platform: $2 \times \mathbb{P}(q \geq Y)=1-F(Y)$
-		\item Hence:
+		\item Hence (since zero-profit cond implies these probabilities are equal):
 		\[
 		Y^I<Y<Y^I+Y^E = \bar{Y}.
 		\]
@@ -544,7 +561,7 @@
 				Fragmentation leads to greater aggregate volume $\bar{Y}$
 			\end{center}
 		\end{block}
-		\item Fragmented market is deeper than consolidated market
+		\item Fragmented LOB market is deeper than consolidated LOB market
 	\end{itemize}
 \end{frame}
 
@@ -557,8 +574,8 @@
 			\item When market is consolidated, first limit orders always get executed first
 			\item But in fragmented market, you can post limit order on another market at same price, and (maybe) get executed first
 		\end{itemize}
-		\item As argued when analyzing the pro-rata rule, removing time priority may lead to more orders, but these orders may appear more slowly
-		\item Result relies on $\Delta>0$ -- otherwise at $E$ you can undercut price at $I$ 
+		\item As argued when analyzing the pro-rata rule, removing time priority may lead to more orders, but these orders may appear more slowly (lower resiliency), or depth increase may be curbed by general eqm effects.
+		%\item Result relies on $\Delta>0$ -- otherwise at $E$ you can undercut price at $I$ 
 		\item Section 7.4.3: there is a critical value of $\gamma$, below which $Y^E=0$
 		\begin{itemize}
 			\item Once again, a barrier to entry
@@ -644,17 +661,18 @@
 \begin{frame}{Conclusion}
 	\begin{itemize}
 		\item Fragmentation is ubiquitous 
-		\item Costs may include more adverse selection, less risk sharing and less competition among traders
-		\item But there may also be benefits, depends on setting and trading format
-		\item Regulation targets price priority in particular, by trying to prevent trade throughs 
-		\item But this is only really effective for small order sizes
+		\item It is costly for uninformed traders, who would prefer to coordinate on a single market
+		\item Other costs may include less risk sharing and less competition among traders (see book)
+		\item Some benefits are possible (larger depth), depending on setting and trading format
+		%\item Regulation targets price priority in particular, by trying to prevent trade throughs 
+		%\item But this is only really effective for small order sizes
 	\end{itemize}
 \end{frame}
 
 
 \begin{frame}{Exercises}
 	\begin{itemize}
-		\item Read two articles on absalon related to today's topics (Economist on algortihms and Reuters on dark markets)
+		\item Read the Reuters article on dark markets (on absalon)
 		\item Solve exercise 3 on page 276 (ch.7) on brokers receiving payments for order flow
 	\end{itemize}
 \end{frame}
