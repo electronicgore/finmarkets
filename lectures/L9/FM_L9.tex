@@ -8,7 +8,7 @@
 \input{../FM_preamble.tex}
 
 
-\title{Financial Markets Microstructure \\ Lecture 9}
+\title{Financial Markets Microstructure \\ Lecture 14}
 
 \subtitle{Market Transparency\\
 	Chapter 8 of FPR}
@@ -16,7 +16,7 @@
 \author{Egor Starkov}
 
 \date{K{\o}benhavns Unversitet \\
-	Spring 2020}
+	Spring 2021}
 
 
 \begin{document}
@@ -32,17 +32,9 @@
 \begin{frame}{Previously on FMM}
 	\begin{itemize}
 		\item \structure{Fragmentation} is ubiquitous 
-		\item Costs may include:
-		\begin{itemize}
-			\item more adverse selection
-			\item less insider competition
-			\item less risk sharing
-		\end{itemize}
-		\item But there may also be benefits: 
-		\begin{itemize}
-			\item lower order processing costs
-			\item greater aggregate depth 
-		\end{itemize}
+		\item It is costly for uninformed traders, who would prefer to coordinate on a single market
+		\item Other costs may include less risk sharing and less competition among traders (see book)
+		\item Some benefits are possible (larger depth), depending on setting and trading format
 	\end{itemize}
 \end{frame}
 
@@ -57,7 +49,7 @@
 		\begin{itemize}
 			\item Often you do not know the price at which your trade will be executed.
 		\end{itemize}
-		\bigskip
+		\bigskip\pause
 		\item Today: discuss how transparency affects market outcomes
 		\item Related to last week's discussions
 		\item Different kinds of transparency have different effects
@@ -66,25 +58,50 @@
 
 
 \begin{frame}{Market transparency: introduction}
-	\begin{itemize}
-		\item Market transparency can refer to different information
-		\begin{itemize}
-			\item \textbf{Pre-trade information}: quotes and limit orders
-			\item \textbf{In-trade information}: trader identity
-			\item \textbf{Post-trade information}: realized trades and prices
-		\end{itemize}
-		\item Exchanges profit from selling this type of data
-		\begin{itemize}
-			\item Different traders end up with different information sets
-			\item Some types of traders may benefit from a lack of transparency
-		\end{itemize}
-		\item Transparency also regulated
-		\begin{itemize}
-			\item In both Europe and the US: rules to assure pre-trade information
-			\item Also, firms must disclose relevant information
-			\item The US has a centralized system for collecting post-trade information, but not Europe
-		\end{itemize}
-	\end{itemize}
+	\begin{columns}
+		\begin{column}{0.6\linewidth}
+			{\setstretch{1.3}
+			\begin{itemize}
+				\item Market transparency can refer to different information
+				\begin{itemize}
+					\item \textbf{Pre-trade information}: quotes and limit orders
+					\item \textbf{In-trade information}: trader identity
+					\item \textbf{Post-trade information}: realized trades and prices
+				\end{itemize}
+				\pause
+				\item Exchanges profit from selling this type of data
+				\begin{itemize}
+					\item Different traders end up with different information sets
+					\item Some types of traders may benefit from a lack of transparency
+				\end{itemize}
+			\end{itemize}
+			}
+		\end{column}
+		\begin{column}{0.4\linewidth}
+			\pause[1]
+			\includegraphics<handout:0>[width=\linewidth]{pics/transparency}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+
+\begin{frame}{Market transparency: regulation}
+	\begin{columns}
+		\begin{column}{0.6\linewidth}
+			{\setstretch{1.3}
+			Transparency also \structure{regulated}
+				\begin{itemize}
+					\item In both Europe and the US: rules to assure pre-trade information
+					\item Also, firms must disclose relevant information
+					\item The US has a centralized system for collecting post-trade information, but not Europe
+				\end{itemize}
+			}
+		\end{column}
+		\begin{column}{0.4\linewidth}
+			\pause[1]
+			\includegraphics<handout:0>[width=\linewidth]{pics/transreg}
+		\end{column}
+	\end{columns}
 \end{frame}
 
 
@@ -109,6 +126,7 @@
 		\begin{itemize}
 			\item or approach dealers in search of price improvements
 		\end{itemize}
+		\item (This was the problem 3 in PS1)
 	\end{itemize}
 \end{frame}
 
@@ -179,10 +197,25 @@
 
 
 \begin{frame}{Order flow transparency}
-	\begin{itemize}
-		\item In some markets (OTC, FX) an order may be filled simultaneously by different liquidity providers
-		\item What does it matter if they can or cannot observe the whole order flow?
-	\end{itemize}
+	\begin{columns}
+		\begin{column}{0.6\linewidth}
+			{\setstretch{1.3}
+				\begin{itemize}
+					\item In some markets (OTC, FX) an order may be filled simultaneously by different liquidity providers
+					\item What does it matter if they can or cannot observe the whole order flow?
+					\pause
+					\begin{itemize}
+						\item We saw one answer already (Glosten vs Kyle)
+						\item Will now look at another way to model this
+					\end{itemize}
+				\end{itemize}
+			}
+		\end{column}
+		\begin{column}{0.4\linewidth}
+			\pause[1]
+			\includegraphics<handout:0>[width=0.8\linewidth]{pics/cheating}
+		\end{column}
+	\end{columns}
 \end{frame}
 
 
@@ -234,7 +267,7 @@
 
 \begin{frame}{Post-trade transparency}
 	\begin{itemize}
-		\item If orders arrive sequentially, how does information about past orders affect
+		\item If orders arrive sequentially, what effect does information about past orders have?
 		\item \textbf{Value}: high $v^H$ or low $v^L$ with equal probability
 		\begin{itemize}
 			\item Mean: $\mu=(v^H+v^L)/2$
@@ -296,18 +329,29 @@
 
 
 \begin{frame}{Post-trade transparency: Collusion}
-	\begin{itemize}
-		\item If dealers are not perfectly competitive, they can try to \structure{collude} to increase their profits
-		\item Cartels are sustained via a threat of \alert{punishment} in case anyone \alert{deviates}
-		\begin{itemize}
-			\item Great illustration: OPEC, Russia, and oil prices earlier this month
-		\end{itemize}
-		\item Prerequisite for collusion: ability to detect deviations
-		\begin{itemize}
-			\item Transparency improves this ability
-			\item So may help collusion
-		\end{itemize}
-	\end{itemize}
+	\begin{columns}
+		\begin{column}{0.6\linewidth}
+			{\setstretch{1.3}
+				\begin{itemize}
+					\item If dealers are not perfectly competitive, they can try to \structure{collude} to increase their profits
+					\item Cartels are sustained via a threat of \alert{punishment} in case anyone \alert{deviates}
+					\begin{itemize}
+						\item Example: Russia went against OPEC last year, so OPEC flooded the market
+					\end{itemize}
+					\pause
+					\item Prerequisite for collusion: ability to detect deviations
+					\begin{itemize}
+						\item Transparency improves this ability
+						\item So may help collusion
+					\end{itemize}
+				\end{itemize}
+			}
+		\end{column}
+		\begin{column}{0.4\linewidth}
+			\pause[1]
+			\includegraphics<handout:0>[width=\linewidth]{pics/collusion}
+		\end{column}
+	\end{columns}
 \end{frame}
 
 
@@ -315,19 +359,31 @@
 \section{In-trade information}
 
 \begin{frame}{In-trade information}
-	\begin{itemize}
-		\item Transparency may relate not only to quote and order data, but also to \structure{trader identity}.
-		\begin{itemize}
-			\item LOB is very anonymous and thus opaque
-			\item dealer interactions can be personal
-		\end{itemize}
-		\item If trader's identity is visible, it may affect the prices he gets
-		\begin{itemize}
-			\item Institutional investors rarely engage in informed trading, so will get good price;
-			\item Insiders will get bad prices.
-		\end{itemize}
-		\item If identity is limited to some identifier in the system, trader can still build a reputation through history of actions
-	\end{itemize}
+	\begin{columns}
+		\begin{column}{0.7\linewidth}
+			{\setstretch{1.3}
+				\begin{itemize}
+					\item Transparency may relate not only to quote and order data, but also to \structure{trader identity}.
+					\begin{itemize}
+						\item LOB is very anonymous and thus opaque
+						\item dealer interactions can be personal
+					\end{itemize}
+					\pause
+					\item If trader's identity is visible, it may affect the prices he gets
+					\begin{itemize}
+						\item Institutional investors rarely engage in informed trading, so will get good price;
+						\item Insiders will get bad prices.
+					\end{itemize}
+					\pause
+					\item If identity is limited to some identifier in the system, trader can still build a reputation through history of actions
+				\end{itemize}
+			}
+		\end{column}
+		\begin{column}{0.3\linewidth}
+			\pause[1]
+			\includegraphics<handout:0>[width=\linewidth]{pics/incognito}
+		\end{column}
+	\end{columns}
 \end{frame}
 
 
@@ -382,21 +438,21 @@
 \end{frame}
 
 
-
-
-
-
 \begin{frame}{Exercise for next week}
 	\begin{itemize}
-		\item Economist article on Mifid-2 (on Absalon)
-		\item Exercise 2 in chapter 8, on page 303 in the textbook on price discovery
+		\item Read the article on Mifid-2 (on Absalon). Discuss the following questions:
+		\begin{itemize}
+			\item What did Mifid2 change in regards to market transparency? (There are many aspects to this.) How will these changes affect market outcomes?
+		\end{itemize}
+		\item Read the article on LSE acquiring Refinitiv. What implications can this have for market transparency (e.g. on LSE's own trading platform)?
+		\item Do ex.2 after ch.8 (p.303) on price discovery
 	\end{itemize}
 \end{frame}
 
 
 \begin{frame}[label=example]{Aspiro}
 	\begin{itemize}
-		\item  Two years ago, Jay-Z bought Swedish  music service Aspiro   
+		\item Some years ago, Jay-Z bought Swedish music service Aspiro   
 		\pause
 		\begin{center}
 			\includegraphics[width=.25\paperwidth]{pics/jayz}
@@ -405,7 +461,7 @@
 \end{frame}
 
 
-\begin{frame}{Aspiro}
+\begin{frame}<handout:0>{Aspiro}
 	\begin{itemize}
 		\item Shortly after they launched their new service `Tidal'
 		\pause
@@ -416,7 +472,7 @@
 \end{frame}
 
 
-\begin{frame}{Aspiro}
+\begin{frame}<handout:0>{Aspiro}
 	\begin{itemize}
 		\item There was one caveat though...
 		\begin{itemize}
@@ -431,28 +487,27 @@
 \end{frame}
 
 
-\begin{frame}{Aspiro}
+\begin{frame}<handout:0>{Aspiro}
 	First trading halt
 	
 	\includegraphics{pics/aspiro1}
 \end{frame}
 
 
-\begin{frame}{Aspiro}
+\begin{frame}<handout:0>{Aspiro}
 	Brokers are phoned and price is adjusted
 	
 	\includegraphics{pics/aspiro2}
 \end{frame}
 
 
-\begin{frame}{Aspiro}
+\begin{frame}<handout:0>{Aspiro}
 	Trading resumes...
 	
 	\includegraphics[width=0.85 \paperwidth]{pics/aspiro3}
 	\pause
-	The stock immediately started trading at 3 times tomorrow's forced bid price, and was closed down again
+	The stock immediately started trading at 3 times tomorrow's forced bid price, and was closed down again.
 	\pause 
-	\quad
 	Sometimes, even the most basic and readily available information can be opaque to some traders.
 	\hyperlink{ideas}{\beamerbutton{Back}}
 \end{frame}
