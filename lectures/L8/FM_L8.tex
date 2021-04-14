@@ -232,12 +232,22 @@
 
 
 \begin{frame}{Kyle model with a fragmented market}
-	Now fragment the market in this Kyle model. Suppose:
-	\begin{enumerate}
-		\item Two noise trader groups: $u=u_{1}+u_{2}$, $u_i$ independent and $u_{i} \sim N(0, \sigma^{2}_{ui})$
-		\item Noise traders trade in separate markets; MMs and informed traders present in both markets (MM competitive; speculators one per market)
-		\item Agents cannot choose their market
-	\end{enumerate}
+	\begin{columns}
+		\begin{column}{0.7\linewidth}
+			{\setstretch{1.3}
+				Now fragment the market in this Kyle model. Suppose:
+				\begin{enumerate}
+					\item Two noise trader groups: $u=u_{1}+u_{2}$, $u_i$ independent and $u_{i} \sim N(0, \sigma^{2}_{ui})$
+					\item Noise traders trade in separate markets; MMs and informed traders present in both markets (MM competitive; speculators one per market)
+					\item Agents cannot choose their market
+				\end{enumerate}
+			}
+		\end{column}
+		\begin{column}{0.3\linewidth}
+			\pause[1]
+			\includegraphics<handout:0>[width=\linewidth]{pics/fragkyle}
+		\end{column}
+	\end{columns}
 \end{frame}
 
 
@@ -263,7 +273,9 @@
 	\begin{itemize}
 		\item \textbf{Trading}. Informed trading is given by $x_i= \beta_i (v-\mu)$ with $\beta_i= \frac{\sigma_{ui}}{\sigma_{v}}$:
 		\[
-			x_1+x_2=(v-\mu)\frac{\sigma_{u1}+\sigma_{u2}}{\sigma_v}>x
+			x_1+x_2 = (v-\mu)\frac{\sigma_{u1}+\sigma_{u2}}{\sigma_v} 
+			> 
+			(v-\mu)\frac{\sigma_{u}}{\sigma_v} = x
 		\]
 		
 		\item \alert{Agg. informed trading greater than in consolidated case}
@@ -338,7 +350,7 @@
 		\item Because have more signals from which to learn about $v$ 
 		\pause 
 		\begin{itemize}
-			\item although comparing ``two speculators in two mkts'' vs ``one speculator in one mkt''. Two competing insiders in one market would yield \alert{same price discovery}
+			\item although comparing ``one speculator in two mkts'' vs ``one speculator in one mkt''. Two competing insiders would yield \alert{same price discovery} in consolidated market.
 		\end{itemize}
 	\end{itemize}
 \end{frame}
@@ -392,9 +404,9 @@
 	\begin{itemize}
 		\item In the analysis above, traders were chain-bound to their markets
 		\item If speculators could choose, they would split across different markets to avoid competing with each other.
-		\begin{itemize}
-			\item If cannot commit to stay away from each other's market then fragmentation has little effect.
-		\end{itemize}
+		%\begin{itemize}
+		%	\item If cannot commit to stay away from each other's market then fragmentation has little effect.
+		%\end{itemize}
 		\pause
 		\item What if noise traders can choose?
 		\pause
@@ -551,7 +563,7 @@
 	\begin{itemize}
 		\item  Equation (6.7) also holds with single platform. This implies $\mathbb{P}(q_I \geq Y^I) = \mathbb{P}(q \geq Y)$ 
 		\item By (7.11): $2\times \mathbb{P}(q_I \geq Y^I) =$ weighted avg. of $1-F(Y^I)$ and $1-F(\bar{Y})$
-		\item But with a single platform: $2 \times \mathbb{P}(q \geq Y)=1-F(Y)$
+		\item But with a single platform: $\mathbb{P}(q \geq Y)=\frac{1}{2} [1-F(Y)]$
 		\item Hence (since zero-profit cond implies these probabilities are equal):
 		\[
 		Y^I<Y<Y^I+Y^E = \bar{Y}.
