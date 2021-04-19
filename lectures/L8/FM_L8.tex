@@ -326,7 +326,7 @@
 		\pause
 		\item What about \structure{aggregate}? Say you want to trade $X$ total.
 		\begin{itemize}
-			\item When splitting optimally across two markets $X=x_1+x_2$, will equalize marginal prices: $p_1 = \mu + \lambda_1 x_1 = \mu + \lambda_2 x_2 = p_2$.
+			\item When splitting optimally across two markets $X=x_1+x_2$, will equalize expected marginal prices: $\mathbb{E} p_1 = \mu + \lambda_1 x_1 = \mu + \lambda_2 x_2 = \mathbb{E} p_2$.
 			\item So $x_1 = \frac{\lambda_2}{\lambda_1+\lambda_2} X$ and $x_2 = \frac{\lambda_1}{\lambda_1+\lambda_2} X$ and trading moves prices in each market to $p_i = \mu + \frac{\lambda_1 \lambda_2}{\lambda_1 + \lambda_2} X$ compared to $p = \mu + \lambda X$ in consolidated market. Can verify that $\frac{\lambda_1 \lambda_2}{\lambda_1 + \lambda_2} < \lambda$
 			\item \structure{Fragmented market is deeper in aggregate}
 		\end{itemize}
@@ -548,7 +548,7 @@
 		\left(1-\gamma + \frac{\gamma}{2}\right)(1-F(Y^I)) = \frac{\gamma}{2}(1-F(Y^E))
 		\]
 		\item When $\gamma < 1$, this implies $F(Y^I) > F(Y^E)$, so $Y^I > Y^E$
-		\item More orders and greater execution probability in market $I$
+		%\item More orders and greater execution probability in market $I$
 		\item Why? 
 		\pause
 		\visible<handout:0>{
