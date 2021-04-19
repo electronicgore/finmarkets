@@ -8,7 +8,7 @@
 \input{../FM_preamble.tex}
 
 
-\title{Financial Markets Microstructure \\ Lecture 10}
+\title{Financial Markets Microstructure \\ Lecture 15}
 
 \subtitle{Value of Liquidity\\
 	Chapter 9 of FPR}
@@ -16,7 +16,7 @@
 \author{Egor Starkov}
 
 \date{K{\o}benhavns Unversitet \\
-	Spring 2020}
+	Spring 2021}
 
 
 \begin{document}
@@ -34,12 +34,13 @@
 		\begin{itemize}
 			\item Uninformed traders benefit, so T {helps liquidity}
 			\item Insiders may lose, so T {worsens price discovery}
-			\item Dealers may win or lose
+			\item Dealers/exchanges may win or lose
 		\end{itemize}
-		\item But transparency may also impede risk sharing, and have adverse effects when it is asymmetrically distributed
+		\item But transparency may also impede risk sharing, foster collusion, and have adverse effects when it is asymmetrically distributed
 		\item Opaqueness can be good in limit books
 		\begin{itemize}
-			\item Hidden limit orders help uninformed traders hedge their positions where making these orders visible would by itself create adverse price movements
+			\item Hidden limit orders help uninformed traders hedge their positions 
+			\\where making these orders visible would by itself create adverse price movements
 		\end{itemize}
 	\end{itemize}
 \end{frame}
@@ -114,23 +115,29 @@
 \end{frame}
 
 
-\begin{frame}{Deriving the premium: risk-adjusted return}
+\begin{frame}{Deriving the premium: risk-adjusted return} \label{slide:Rr}
 	\begin{itemize}
-		\item If the market's required risk-adjusted return per period is denoted by $r$, then
-		\begin{equation}\tag{9.3}
-		a_t = \frac{\mathbb{E}(b_{t+h})}{(1+r)^h},
-		\end{equation}
-		i.e.,
-		\begin{equation}\tag{9.4}
-		m_t=\frac{\mathbb{E}(m_{t+h})}{(1+r)^h} \times \frac{1-\frac{s}{2}}{1+\frac{s}{2}}
-		\end{equation}
-		\item If we estimate the required return $r$ using mid-quotes, there is a bias due to illiquidity. Let $R$ be the return rate using only mid-quotes
-		\begin{itemize}
-			\item Estimate $R$ where
-			\[
+		%\item Denote the \alert{market's required} risk-adjusted \alert{return} per period as \alert{$r$}, then
+		%\begin{equation}\tag{9.3}
+		%a_t = \frac{\mathbb{E}(b_{t+h})}{(1+r)^h},
+		%\end{equation}
+		%i.e.,
+		%\begin{equation}\tag{9.4}
+		%m_t=\frac{\mathbb{E}(m_{t+h})}{(1+r)^h} \times \frac{1-\frac{s}{2}}{1+\frac{s}{2}}
+		%\end{equation}
+		\item Let \alert{$r$} denote the risk-adjusted \alert{real return} per period \alert{required by the market}. \hyperlink{slide:reqret}{\beamerbutton{What?}} Then
+		\begin{align*}
+			a_t &= \frac{\mathbb{E}(b_{t+h})}{(1+r)^h},
+			&
+			\Rightarrow m_t &= \frac{\mathbb{E}(m_{t+h})}{(1+r)^h} \times \frac{1-\frac{s}{2}}{1+\frac{s}{2}}
+		\end{align*}
+		\pause
+		\item If we estimate the required return $r$ using mid-quotes, there is a bias due to illiquidity. 
+		\item Let \structure{$R$} be the \structure{nominal return} rate, estimated from the midquotes:
+		\[
 			m_t = \frac{\mathbb{E}(m_{t+h})}{(1+R)^h}
-			\]
-		\end{itemize}
+		\]
+		The observed $R$ is different from $r$!
 	\end{itemize}
 \end{frame}
 
@@ -142,7 +149,7 @@
 		(1+R)^h = (1+r)^h \times \frac{1+\frac{s}{2}}{1-\frac{s}{2}}
 		\end{equation}
 		\begin{block}{}
-			Thus:
+			Thus: (see next slide for derivation)
 			\[
 			R \simeq r+\frac{s}{h}
 			\]
@@ -176,7 +183,7 @@
 
 \begin{frame}{Discussion}
 	\begin{itemize}
-		\item Note: what about a round-trip from a sale?
+		\item Note: what about a round-trip starting from a sale?
 		\begin{itemize}
 			\item From $b_t=\mathbb{E}(a_{t+h})/(1+r)^h$ we get $R \simeq r-s/h$
 		\end{itemize}
@@ -203,23 +210,34 @@
 \section{Clientelle effects}
 
 \begin{frame}{Clientelle effects}
-	\begin{itemize}
-		\item We obtained $R = r + s/h$ in our toy model
-		\item In reality investors differ in $h$, expected holding period
-		\item Toy extension of toy model:
-		\begin{itemize}
-			\item Two types of investors with $h_1 < h_2$
-			\item Two assets with $s_1 < s_2$
-		\end{itemize}
-		\only<2-3|handout:0>{
-			\item \alert{Bliz quiz:} what do you think will happen in equilibrium?
-			\begin{enumerate}
-				\item \structure<3>{$h_1$-investors will only trade in $s_1$-asset and vice versa}
-				\item $h_1$-investors will only trade in $s_2$-asset and vice versa
-				\item returns will be such as to equalize assets' worth for all investors
-			\end{enumerate}
-		}
-	\end{itemize}
+	\begin{columns}
+		\begin{column}{0.7\linewidth}
+			{\setstretch{1.3}
+				\begin{itemize}
+					\item We obtained $R = r + s/h$ in our toy model
+					\item In reality investors differ in $h$, expected holding period
+					\item Toy extension of toy model:
+					\begin{itemize}
+						\item Two types of investors with $h_1 < h_2$
+						\item Two assets with $s_1 < s_2$
+					\end{itemize}
+					\only<2-3|handout:0>{
+						\item \alert{Bliz quiz:} what do you think will happen in equilibrium?
+						\begin{enumerate}
+							\item \structure<3>{$h_1$-investors will only trade in $s_1$-asset and vice versa}
+							\item $h_1$-investors will only trade in $s_2$-asset and vice versa
+							\item returns will be such as to equalize assets' worth for all investors
+						\end{enumerate}
+					}
+				\end{itemize}
+			}
+		\end{column}
+		\begin{column}{0.3\linewidth}
+			\pause[1]
+			\includegraphics<handout:0>[width=0.5\linewidth]{pics/patience}
+		\end{column}
+	\end{columns}
+	
 \end{frame}
 
 
@@ -250,6 +268,7 @@
 		\end{itemize}
 		\item (would this explain the case of Treasury Bills vs Bonds?) 
 		\item Note: more adverse selection implies larger spread, hence attracts traders with large $h$
+		%NOTE: young are encourage to invest in stocks, old in bonds -- this is due to risk-preferences, but also possibly due to this
 	\end{itemize}
 \end{frame}
 
@@ -328,31 +347,43 @@
 \section{Arbitrage}
 
 \begin{frame}{Arbitrage}
-	\begin{itemize}
-		\item Main tenet of economics and finance: \structure{no arbitrage}
-		\begin{itemize}
-			\item Assets that generate same cash flows must cost the same
-			\item If arbitrage is possible, it is immediately exploited and then there is no more arbitrage.
-		\end{itemize}
-		\only<2-3|handout:0>{
-			\item \alert{Bliz quiz:} how does this relate to our situation? (think bills-vs-bonds)
-			\begin{enumerate}
-				\item Arbitrage opportunities exist because arbitrage is costly to exercise \only<3>{\alert{$\leftarrow$ textbook answer}}
-				\item Arbitrage opportunities exist because all of economics (except our course) is wrong
-				\item No arbitrage opportunities exist \only<3>{\structure{$\leftarrow$ my answer}}
-			\end{enumerate}
-		}
-		\pause[4]
-		\item Textbook spends an obscene amount of paper arguing \alert{why arbitrage is impossible} in our case (assets with same cash flows but different liquidity)
-		\begin{itemize}
-			\item Gist: arbitraging is itself a costly activity (due to leverage and short-selling constraints)
-		\end{itemize}
-		\item But in what we saw, \alert{there are no arbitrage opportunities}
-		\begin{itemize}
-			\item Arbitrageurs are subject to all the same trading costs
-			\item So in the toy model we saw, it looks as if there is arbitrage, but there are no actual opportunities
-		\end{itemize}
-	\end{itemize}
+	\begin{columns}
+		\begin{column}{0.7\linewidth}
+			{\setstretch{1.3}
+				\begin{itemize}
+					\item Main tenet of economics and finance: \structure{no arbitrage}
+					\begin{itemize}
+						\item Assets that generate same cash flows must cost the same
+						\item If arbitrage is possible, it is immediately exploited and then there is no more arbitrage.
+					\end{itemize}
+					\only<2-3|handout:0>{
+						\item \alert{Bliz quiz:} how does this relate to our situation? (think bills-vs-bonds)
+						\begin{enumerate}
+							\item Arbitrage opportunities exist because arbitrage is costly to exercise \only<3>{\alert{$\uparrow$ textbook answer}}
+							%NOTE: meant costs of short-selling and leverage (and the associated risks)
+							\item Arbitrage opportunities exist because all of economics (except our course) is wrong
+							\item No arbitrage opportunities exist \only<3>{\structure{$\leftarrow$ my answer}}
+						\end{enumerate}
+					}
+					\pause[4]
+					\item Textbook spends an obscene amount of paper arguing \alert{why arbitrage cannot be realized} in our case (assets with same cash flows but different liquidity)
+					\begin{itemize}
+						\item Gist: arbitraging is itself a costly activity (due to leverage and short-selling constraints)
+					\end{itemize}
+					\item But in what we saw, \alert{there are no arbitrage opportunities}
+					\begin{itemize}
+						\item Arbitrageurs are subject to all the same trading costs
+						\item So in the toy model we saw, it looks as if there is arbitrage, but there are no actual opportunities
+					\end{itemize}
+				\end{itemize}
+			}
+		\end{column}
+		\begin{column}{0.3\linewidth}
+			\pause[1]
+			\includegraphics<handout:0>[width=\linewidth]{pics/arbitrage}
+			\vspace{3em}
+		\end{column}
+	\end{columns}
 \end{frame}
 
 
@@ -507,5 +538,24 @@
 	\bibliographystyle{abbrvnat}
 \end{frame}
 
+
+\begin{frame}<handout:0>{Required return} \label{slide:reqret}
+	\begin{columns}
+		\begin{column}{0.6\linewidth}
+			{\setstretch{1.3}
+				\begin{itemize}
+					\item We have been living in a world with only one asset. In reality, assets ``compete'' for investors' attention.
+					\item In market equilibrium, risk-adjusted returns are equalized across assets.
+					\item The resulting \structure{``market'' return $r$} is what investors can get by investing in any asset, and any new asset must generate return (at least) $r$ to attract funds.
+				\end{itemize}
+				\hyperlink{slide:Rr}{\beamerbutton{Back}}
+			}
+		\end{column}
+		\begin{column}{0.4\linewidth}
+			\pause[1]
+			\includegraphics<handout:0>[width=\linewidth]{pics/portfolio}
+		\end{column}
+	\end{columns}
+\end{frame}
 
 \end{document}
