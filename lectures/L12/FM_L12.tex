@@ -8,14 +8,14 @@
 \input{../FM_preamble.tex}
 
 
-\title{Financial Markets Microstructure \\ Lecture 12}
+\title{Financial Markets Microstructure \\ Lecture 17}
 
 \subtitle{High-Frequency Trading}
 
 \author{Egor Starkov}
 
 \date{K{\o}benhavns Unversitet \\
-	Spring 2020}
+	Spring 2021}
 
 
 \begin{document}
@@ -28,52 +28,66 @@
 
 
 \begin{frame}{Previously on FMM}
+	\textbf{Corporate governance} has a lot of connection to company's financial market performance
 	\begin{itemize}
-		\item \textbf{Corporate governance} has a lot of connection to company's financial market performance
-		\begin{itemize}
-			\item access to capital affected by liq-ty
-			\item liq-ty and corporate control are somewhat antithetical
-			\item firm can use stock price as market's feedback on its decisions or as benchmark of CEO performance
-			\item firms have some ways in which they can improve the liquidity of their stocks
-		\end{itemize}
-		\item \textbf{Digital markets}:
-		\begin{itemize}
-			\item generally cool and good
-			\item crypto and blockchain have potential, but they are not a panacea
-		\end{itemize}
+		\item access to capital affected by liq-ty
+		\item liq-ty and corporate control are somewhat antithetical
+		\item firm can use stock price as market's feedback on its decisions or as benchmark of CEO performance
+		\item firms have some ways in which they can improve the liquidity of their stocks
 	\end{itemize}
 \end{frame}
 
 
-\section{Tales from the market}
-
-\begin{frame}{Mon, Apr 19}
-	\centering
-	\includegraphics[scale=0.2]{pics/oil}
+\begin{frame}{Today on FMM...}
+	\begin{itemize}
+		\item Algo-trading!
+		\item High-frequency trading!
+		\item Cryptocurrencies!
+		\item and more...
+	\end{itemize}
 \end{frame}
 
 
-\begin{frame}[handout:0]{Mon, Apr 19}
-	\alert{Bliz Quiz}: negative prices? What? How? Why?
+\begin{frame}{Going forward}
+	A method for reading research articles (esp. theoretical ones)
 	\begin{enumerate}
-		\item algorithms having fun
-		\item posted prices $\neq$ execution prices
-		\item \structure<2>{perfectly normal, no reason to panic}
+		\item Read abstract and introduction
+		\item Browse through the rest
+		\item Read model and results in detail
+		\item Read conclusion, and re-read abstract and introduction
 	\end{enumerate}
+	(Does not apply to surveys -- those are readable as usual.)
 \end{frame}
-	
 
-\begin{frame}{Mon, Apr 19}
+
+\begin{frame}{Digital Markets}
+	\begin{quotation}
+		``...It should come as no surprise then that the financial system exhibits a Moore's Law of its own -- from 1929 to 2009 the total \structure{market capitalization} of the US stock market has \structure{doubled every decade}. The total \alert{trading volume} of stocks in the Dow Jones Industrial Average \alert{doubled every 7.5 years} during this period, but in the most recent decade, the \alert{pace has accelerated}: now the doubling occurs every 2.9 years, growing almost as fast as the semiconductor industry.''
+		\begin{flushright}
+			\cite{kirilenko_moores_2013}
+		\end{flushright}
+	\end{quotation}
+\end{frame}
+
+
+\begin{frame}{Digital Markets}
 	\begin{itemize}
-		\item Negative price. Cool.
-		\item \alert{NOT} a consequence of algo-trading
-		\item I'll upload a summary review (blog post) of this event on absalon
+		\item The digital revolution of the past few decades has reshaped financial markets as much as (if not more than) any other aspect of our lives
+		\item The quote above mentions the ``extensive margin'' akin to the Moore's Law
+		\item But the ``intensive margin'' is also at work
+		\begin{itemize}
+			\item The nature of interactions in financial markets has been transformed
+		\end{itemize}
+		\item In addition to Moore's Law, Murphy's law does not fail either
+		\begin{itemize}
+			\item If something can go wrong it will, and the scope for failures is as big as ever these days
+		\end{itemize}
 	\end{itemize}
 \end{frame}
 
 
 
-\section{More on algo-trading}
+\section{Algo-trading}
 
 \begin{frame}{More on algo-trading}
 	\begin{itemize}
@@ -157,16 +171,6 @@
 
 
 \section{High-frequency trading (HFT)}
-
-\begin{frame}{Going forward}
-	A method for reading research articles (esp. theoretical ones)
-	\begin{enumerate}
-		\item Read abstract and introduction
-		\item Browse through the rest
-		\item Read model and results in detail
-		\item Read conclusion, and re-read abstract and introduction
-	\end{enumerate}
-\end{frame}
 
 
 \begin{frame}{High-frequency trading: introduction}
@@ -550,7 +554,7 @@
 \end{frame}
 
 
-\begin{frame}{Conclusion}
+\begin{frame}{HFT Conclusion}
 	\begin{itemize}
 		\item Fast trading is bad for other market participants
 		\item Equilibria may involve complete crowding out of all slow traders
@@ -560,10 +564,93 @@
 	\end{itemize}
 \end{frame}
 
+
+
+\section{Blockchain and cryptocurrencies}
+
+\begin{frame}{Blockchain and cryptocurrencies}
+	\begin{itemize}
+		\item Our discussion would be incomplete without mentioning \alert{blockchain} and \alert{cryptocurrencies}, the biggest trend of 2017
+		\begin{itemize}
+			\item blockchain is a ``distributed ledger'' technology
+			\item crypto uses blockchain to record transactions in some tokens
+		\end{itemize}
+		\item In addition to below, you can find some economic discussion of crypto in \citet*{nica_cryptocurrencies_2017}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{How should it work?}
+	\begin{itemize}
+		\item Cryptos (bitcoin, ethereum) are like distributed payment systems
+		\item You can translate that to a financial market:
+		\begin{itemize}
+			\item Say coins serve as shares of some company
+			\item Or there is a decentralized exchange that records stock ownership transactions in a blockchain
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Why the hype?}
+	%Perceived benefits of blockchain/crypto-based markets:
+	\begin{itemize}
+		\item \structure{Decentralization}: no exchange to profit from traders $\Rightarrow$ lower order costs
+		\item \structure{Transparency}: transaction history is visible, order flow is visible, counterparty's trading history visible
+		\begin{itemize}
+			\item note: there is very little anonymity, contrary to what some say!
+		\end{itemize}
+		\item \structure{Smart contracts}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}[label=problems]{Why not?}
+	\begin{itemize}
+		\item \alert{Limited processing capacity}: block size and frequency is $\approx$fixed, which leads to...
+		\item \alert{Order costs} and \alert{execution risk}: you have to bid for your transaction to be accepted into a block.
+		\begin{itemize}
+			\item This is on top of execution risk from other sources (for limit orders)
+			\item Average order costs fluctuate over time \hyperlink{problems}{\beamerbutton{graph}}
+		\end{itemize}
+		\item \alert{Delay}: blocks are only processed rarely (one per 10 min avg for bitcoin)
+		\item \alert{Clearing and settlement}: without a trusted mediator, counterparty risk instensifies
+		\item \alert{No transparency requirements}: it is more difficult to enforce disclosure of financial reports from firms
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Crypto: Conclusion}
+	\begin{itemize}
+		\item \textbf{Corporate governance} has a lot of connection to company's financial market performance
+		\begin{itemize}
+			\item access to capital affected by liq-ty
+			\item liq-ty and corporate control are somewhat antithetical
+			\item firm can use stock price as market's feedback on its decisions or as benchmark of CEO performance
+			\item firms have some ways in which they can improve the liquidity of their stocks
+		\end{itemize}
+		\item \textbf{Digital markets}:
+		\begin{itemize}
+			\item generally cool and good
+			\item crypto and blockchain have potential, but they are not a panacea
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+
 \appendix
 \begin{frame}[allowframebreaks]{References}
 	\bibliography{../teaching}
 	\bibliographystyle{abbrvnat}
+\end{frame}
+
+
+\begin{frame}[label=bcfee]
+	\centering
+	\includegraphics[width=.8\paperwidth]{pics/bitcoin_orderfee}
+	
+	Bitcoin avg daily order processing fee, USD per transaction \hyperlink{problems}{\beamerbutton{back}}
 \end{frame}
 
 \end{document} 
