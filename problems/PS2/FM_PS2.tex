@@ -1,7 +1,7 @@
 %%% License: Creative Commons Attribution Share Alike 4.0 (see https://creativecommons.org/licenses/by-sa/4.0/)
 
 \documentclass[11pt
-, answers
+%, answers
 ]{exam}
 \usepackage[top=2.5cm,bottom=3cm,left=2.5cm,right=2.5cm]{geometry}
 \usepackage{amsfonts}
@@ -20,29 +20,44 @@
 	
 	
 \title{\textsc{Financial Markets Microstructure: Problem Set 2}}
-\date{K{\o}benhavns Universitet, Spring 2020}
+\date{K{\o}benhavns Universitet, Spring 2021}
 \author{Egor Starkov}
 
 
 \maketitle
 
 
-Please email your answer to me by midnight Thursday April 23 if you want feedback. This is voluntary, but at any rate I encourage you to spend time on these exercises to make sure you understand the models. Feel free to write me with any questions you might have.
+%Please email your answer to me by midnight Thursday April 23 if you want feedback. This is voluntary, but at any rate I encourage you to spend time on these exercises to make sure you understand the models. Feel free to write me with any questions you might have.
 
-NEW: feel free to approach this problem set in groups and/or discuss your solutions with other students.
+%NEW: feel free to approach this problem set in groups and/or discuss your solutions with other students.
 
 \quad
 
 
 \subsection*{Problem 1}
 
-Trading at exchanges sometimes breaks down due to technical problems. The Economist thus reported on August 31, 2013: ``On August 26th trading on Eurex, the main German derivatives exchange, opened as usual; 20 minutes later it shut down for about an hour. Four days earlier the shares of every company listed on NASDAQ, an American stock exchange, ceased trading for three hours''. What are the implications of such breakdowns for liquidity risk? How do they affect asset prices? How does competition among exchanges affect breakdown frequency?
+Trading at exchanges sometimes breaks down due to technical problems. E.g., The Economist reported on August 31, 2013: ``On August 26th trading on Eurex, the main German derivatives exchange, opened as usual; 20 minutes later it shut down for about an hour. Four days earlier the shares of every company listed on NASDAQ, an American stock exchange, ceased trading for three hours''. 
+
+What are the implications of such breakdowns for liquidity risk? How do they affect asset prices? How does competition among exchanges affect breakdown frequency?
 
 
 \begin{solution}
-	Think about this in terms of the model of liquidity risk that we saw in class. Suppose you were planning a trade that should execute at some time $h$. Suppose you have borrowed money/stocks to carry out the trade. Trading breakdown causes delay, and delay is costly for you, because you have to return the money/stock. This is a liquidity risk as well. The traders will thus require a liquidity risk premium if breakdowns are recognized as possible or probable, which will depress stock prices.
+	Think about this in terms of the Liquidity CAPM model we saw in class. It relates the nominal return $R_j$ and (il)liquidity $s_j$ of asset $j$ to market return $R_M$ and market liquidity $s_M$ as
+	\begin{align*}
+		\mathbb{E} [R_j-s_j] &= r_f + \lambda_M \beta_j,
+		\\
+		\text{where } \lambda_M &= \mathbb{E} [R_M-s_M] - r_f
+		\\
+		\text{and } \beta_j &= \frac{\mathbb{C}(R_j-s_j, R_M-s_M)}{\mathbb{V}(R_M-s_M)}.
+	\end{align*}
 	
-	Competition between exchanges, to the extent that they trade in the same stocks, should alleviate this: if one exchange breaks down, chances are you can trade on the other. Competition may also induce exchanges to invest in better equipment to prevent trade breakdowns. Thus, competition between exchanges should lower the liquidity premium.
+	It is most natural to think of such market breakdowns as temporarily reducing liquidity to zero ($s=\infty$) -- i.e., increasing liquidity risk. You can take one of two interpretations here: either (1) most traders multi-home to different exchanges, so when one exchange breaks down, it affects $s_j$ for assets $j$ traded on that exchange only, or (2) most traders trade primarily on one exchange (not necessarily the same), so for them exchange breakdowns affect market liquidity $s_M$ \emph{and} liquidity $s_j$ of all individual assets.
+	
+	In the former interpretation, adding a small risk of $s_j = \infty$ implies that $R_j$ should increase correspondingly -- investors will require a larger nominal return on asset $j$ if it suffers from larger liquidity risk. (This implicity assumes that the breakdown risk is uncorrelated with $R_j,R_M,s_M$, which is reasonable -- contrary, for example, to the case of trading halts, when the trade in a given asset is stopped after when short-term $R_j$ become extreme.)
+	
+	In the latter interpretation, the final effect is ambiguous, since both asset $j$ and market as a whole become less appealing to invest in. Assuming exogenous $R_M$, it is not clear whether $R_j$ would increase or decrease. You are welcome to work this out with specific assumptions on distributions.
+	
+	To think about competition between exchanges, use the arguments we discussed when talking about trading costs in fragmented markets. To the extent that exchanges trade in the same stocks, they will be competing on quality of service in the same way as they do in trading fees. Competition may also induce exchanges to invest in better equipment to prevent trade breakdowns. Further, if one exchange breaks down, you can probably trade on the other -- i.e., the effective liquidity risk that traders face is lower under competition even in the absence of such investments. Thus, competition between exchanges should lower the liquidity premium.
 \end{solution}
 
 
@@ -51,7 +66,7 @@ Trading at exchanges sometimes breaks down due to technical problems. The Econom
 \quad
 \subsection*{Problem 2 [Ch.9, ex.6]}
 
-In lecture 10 we saw a model of over-the-counter trading (DGP). Spread in that model is given by
+I asked you to read on your own about a model of over-the-counter trading by Duffie, G{\^a}rleanu \& Pedersen (you did it, right?). Spread in that model is given by
 \[
 S=a-b=\frac{(1+z)c}{2(r+2\psi)+(1-2\psi)\phi(1-z)}
 \]
@@ -83,7 +98,7 @@ S=a-b=\frac{(1+z)c}{2(r+2\psi)+(1-2\psi)\phi(1-z)}
 \quad
 \subsection*{Problem 3 [Ch.7, ex.4]}
 
-This problem deals with competition between limit order markets with uniformly distributed market orders. Consider the model of section 7.4.2 (``Glosten model with fragmented market'' from Lecture 8) and assume that the size of the market order ($\tilde{X}$) has a uniform distribution $[0,\bar{X}]$. That is, $F(x)=x/{\bar{X}}$. We denote by $Y^{*}_{jk}(\gamma)$ the cumulative depth posted at the ask price $A_{k}=\mu+k\Delta$ in market $j \in \{I,E\}$ when the fraction of investors submitting market orders in both markets $I$ and $E$ is $\gamma$, and by $c_{j}$ be the submission cost in market $j$.
+This problem deals with competition between limit order markets with uniformly distributed market orders. Consider the model of section 7.4.2 (``Glosten model with fragmented market'' from Lectures) and assume that the size of the market order ($\tilde{X}$) has a uniform distribution $[0,\bar{X}]$. That is, $F(x)=x/{\bar{X}}$. We denote by $Y^{*}_{jk}(\gamma)$ the cumulative depth posted at the ask price $A_{k}=\mu+k\Delta$ in market $j \in \{I,E\}$ when the fraction of investors submitting market orders in both markets $I$ and $E$ is $\gamma$, and by $c_{j}$ be the submission cost in market $j$.
 
 \begin{solution}
 	\noindent \textbf{General comment}. In this question, we are investigating the exact same model as in 7.4.2, but just making a specific assumption about $F(\cdot)$. When you get questions like these that build directly on a model in the book, the best way to proceed is to follow closely the steps of the book (or the slides). In the hints I posted, I gave you relevant equations. Thus, it is a question of updating these equations and then using the results to answer the questions.
@@ -91,7 +106,7 @@ This problem deals with competition between limit order markets with uniformly d
 
 
 \begin{enumerate}[label=(\alph*). ]
-	\item Assume that $2c_{I} \leq \Delta$ and that $\gamma=0$. Show that the equilibrium cumulative depth at price $A_{1}$ is\footnote{The $A_{1}$ was misprinted as $A_{k}$ in the book.}  
+	\item Assume that $2c_{I} \leq \Delta$ and that $\gamma=0$. Show that the equilibrium cumulative depth at price $A_{1}$ is\footnote{The $A_{1}$ was misprinted as $A_{k}$ in the problem text in the book.}  
 	\[
 	Y^{*}_{I1}(0)=\bar{X}\left( 1-\frac{2c_{I}}{\Delta}\right).
 	\]
@@ -99,7 +114,7 @@ This problem deals with competition between limit order markets with uniformly d
 	\textbf{Hint:} Use (7.13).
 	
 	\begin{solution}
-		With $\gamma=0$ there is effectively only one market, $I$. Let $Y_{I}=Y^{*}_{I1}(0)$, which is the volume supplied at $A_{1}$. This is given by equation (7.13). (Notice parallel to (6.6).) Here, the display cost is $c_{I}$. The assumption $2c_{I} \leq \Delta$ assures that $Y_{I} \leq \bar{X}$, and hence $1-F(Y_{I}) \leq 1$. I.e. the assumption assures that the probability is well-defined. Thus, (7.13) yields
+		With $\gamma=0$ there is effectively only one market, $I$. Let $Y_{I}=Y^{*}_{I1}(0)$, which is the volume supplied at $A_{1}$. This is given by equation (7.13). (Notice parallels to (6.6).) Here, the display cost is $c_{I}$. The assumption $2c_{I} \leq \Delta$ assures that $Y_{I} \leq \bar{X}$, and hence $1-F(Y_{I}) \leq 1$. I.e. the assumption assures that the probability is well-defined. Thus, (7.13) yields
 		\[
 		\frac{1}{2}\left(1-\frac{Y_{I}}{\bar{X}}\right) (A_{1}-\mu) = c_{I}.
 		\]
@@ -212,7 +227,7 @@ There are many effects you can think of. Try to describe comprehensively as many
 
 
 \begin{solution}
-	There are obviously many ways you can answer this question. To identify some of them, let us set up an informal model with some explicit timing:
+	There are obviously many ways in which you can answer this question. I mention here some angles, from which you can look at this issue (but note that this is \emph{not} a benchmark solution). To impose some structure, let us set up an informal model with some explicit timing:
 	\begin{enumerate}[nolistsep,noitemsep]
 		\item investor selects which bank to use as a broker;
 		\item bank may (has to under the regulation) disclose to its clients the forwarding fee it receives from the exchange;
