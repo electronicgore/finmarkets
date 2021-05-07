@@ -1,0 +1,136 @@
+% too much kyle, too little of anything else
+
+% main:
+% Eaton et at -- why Robinhood decreases liquidity? (short, intuitive, very difficult)
+% do smth with HFT models? there's too much Kyle already
+% Lehar & Parlour's UniSwap exchange and ask to find an eqm there. Idea: liq providers buy into a liq pool (consists of both asset & cash), liq demanders trade against the pool according to a hardcoded formula (A+ΔA)*(C+ΔC)=const, where A=asset in pool, C=cash in pool. Idea is that all "limit orders" are automatically repriced after MOs. Entry determines depth ("const"). Find eqm depth. (Problem can be phrased s.t. pricing schedule is p_{t+1}=p_{t}+lambda(N)*q, with lambda depending on number of liq providers; then eqm will be the Kyle's model.)
+
+% reexam:
+% Goldstein's feedback loop -- short sell stocks -> firm invests less -> firm value drops -> buy back (simple but long, many steps, mechanical (will have to do a step-by-step guide))
+% fragmentation: Kyle model, take imperfectly competitive dealers, so that they have more market power in fragmented markets. Compare market outcomes in this scenario (e.g., would cumulative market depth of fragmented markets still be larger)? (Can set up as open-ended; moderate length)		OR 			Glosten/fragmentation: let exchanges compete in order entry cost C?
+% a few quick facts from O'Hara & Zhou?
+
+\ifexam
+
+\subsection*{Problem 1}
+	We have discussed throughout the class that larger presence of uninformed traders in the market improves market liquidity. However, some recent evidence shows that more active trading through Robinhood (trading app used by predominantly retail investors) leads to \emph{lower} liquidity in the exposed markets.
+	
+	Give a possible explanation, intuitive or via a model, to this empirical phenomenon. Use the knowledge you have obtained in the course and/or any external sources you can find (remember to give appropriate credit to your sources).
+
+
+
+\begin{solution}
+	The mentioned evidence is presented by Eaton et al. (2021)\footnote{Eaton, Gregory W., T. Clifton Green, Brian Roseman, and Yanbin Wu. ``Zero-Commission Individual Investors, High Frequency Traders, and Stock Market Quality.'' SSRN Scholarly Paper. Rochester, NY: Social Science Research Network, January 1, 2021. https://doi.org/10.2139/ssrn.3776874.}.
+	The explanation they provide is tied to the nature of Robinhood as not simply a trading platform, but also a social platform, on which individual traders can share trading tips and mention possible trading opportunities. This enables mob mentality and herding: many traders focus their trading on relatively few stocks. (Note that such herding can even be perfectly rational, as we saw when discussing the Smith \& S{\o}rensen model.) Importantly, what this herding implies for the liquidity providers is greater inventory risk because the order flow becomes more autocorrelated. Greater inventory risk is what leads to worse quotes supplied by the liquidity providers and lower overall market liquidity.
+\end{solution}
+
+
+
+
+\quad
+\subsection*{Problem 2}
+
+
+
+
+\begin{solution}
+	
+\end{solution}
+
+
+
+
+\quad
+\subsection*{Problem 3}
+	Blockchain markets attempt to experiment with novel ways to organize markets and provide liquidity. For example, Uniswap trading protocol on the Ethereum blockchain implements the ``liquidity pools'' scheme described below. You are asked to analyze the implications of (a modification of) this market design for liquidity provision.
+	
+	If a trader is willing to provide liquidity for a given asset, they must buy into a liquidity pool for that asset. If the liquidity pool consists of $A$ units of the stock and $C$ units of cash (or cryptocurrency), then to enter the trader needs to contribute $a$ units of asset and $c$ units of cash s.t. $a/c = A/C$. The trader would then own fraction $\frac{a}{A+a}$ of the liquidity pool indefinitely. If the trader wants to quit the pool, they can claim their share of the asset and the cash and withdraw them from the pool.
+	
+	Any market order must necessarily trade against the whole liquidity pool. I.e., you can think that every liquidity provider executes a part of every incoming market order equal to their share of the liquidity pool. The price per unit for an infinitesimally small trade is given by $p=C/A$, but trading any non-trivial amount would have a price impact. For this problem, assume that the average price at which a trade of size $q$ executes is given by $p = C/A + \lambda q$, where $q$ is trade size, and the price impact coefficient $\lambda$ is determined by the size of the pool (larger pool leads to lower $\lambda$).\footnote{The actual Uniswap protocol has a more sophisticated pricing algorithm, in which the price the trader gets is such that in the end, $\frac{A+\varDelta A}{C+\varDelta C} = \kappa$ for some exogenously fixed constant $\kappa$.}
+	
+	Answer the following questions.
+	\begin{enumerate}
+		\item Assume that all elements of the model except for liquidity providers are the same as in the (single-period) Kyle model: the fundamental value is $v \sim \mathcal{N}(\mu,\sigma^2)$, the midquote is $C/A=\mu$, the order flow is given by $q=x+u$, where $x$ comes from a profit-optimizing informed trader who knows $v$, and $u \sim \mathcal{N}(0,\sigma^2_u)$ comes from uninformed traders. Further, assume free entry into the liquidity pool -- i.e., the liquidity providers enter until the expected profit from entry is zero. 
+		
+		Derive the equilibrium pool depth $\lambda$. How does it compare to depth that would arise in the presence of a single dealer? How does it compare to depth that would be generated by a limit order book?
+		
+		\item What are the benefits and drawbacks of the liquidity pool as opposed to dealer markets? As opposed to limit order book? (In dimensions other than market depth.)
+	\end{enumerate}
+
+
+\begin{solution}
+	% based on ongoing work by Alfred Lehar and Christine Parlour
+	\paragraph{Part 1.}
+	Like in the basic Kyle model, given a linear pricing schedule $p = \mu + \lambda q$, the informed trader's optimal trading strategy is given by $x = \beta (v-\mu)$ with $\beta = \frac{1}{2\lambda}$.
+	
+	The condition that pins down $\lambda$ is mentioned in the text: the marginal entrant into the pool must get zero expected profit. However, the expected profits of all pool participants are proportional to their pool shares, meaning that in the presence of free entry the expected profit of the whole pool will be zero:
+	\begin{align*}
+		\mathbb{E}_{v,q} \left[ q (v - p) \right] = 0,
+	\end{align*}
+	where the subscripts at the expectation denote the variables, with respect to which the expectation is taken.
+	Note that this condition would be satisfied if $p = \mathbb{E}_v[v|q]$: in that case $\mathbb{E}_v[v-p \mid q]=0$, so $\mathbb{E}_v[q(v-p) \mid q] = 0$, and taking the expectation over $q$ we conclude that $\mathbb{E}_{v,q} \left[ q (v - p) \right] = 0$.
+	However, $p = \mathbb{E}_v[v|q]$ is exactly the schedule that competitive dealers offer in the Kyle model! Repeating the derivations we did for the Kyle model, we obtain that in equilibrium, $\lambda = \frac{\beta \sigma^2_v}{\beta^2 \sigma^2_v + \sigma^2_u}$, and solving that jointly with $\beta = \frac{1}{2\lambda}$, we get that $\beta = \frac{\sigma_u}{\sigma_v}$ and $\lambda = \frac{\sigma_v}{2\sigma_u}$.
+	
+	The depth of liquidity pool is trivially the same as the depth of a dealer market would have been given this liquidity demand. Invoking the comparisons between the Kyle and the Glosten models we made in class, we can then say that market traders can get better price on small orders from a dealer, and may get better price on large orders in a LOB market (where the marginal price of $y$th unit of the asset is given by $\mathbb{E}[v \mid q \geq y]$).
+	
+	\paragraph{Part 2.}
+	One benefit of liquidity pools is that the ``limit orders'' are priced and supplied automatically by the market algorithm, and liquidity providers do not need to do anything manually (or use any algorithm on their side). This reduces the direct costs of liquidity provision. On the other hand, liquidity demanders also have more guarantees on the prices they will receive, since liquidity providers cannot frontrun market orders and cancel their limit orders before what they think is an unfavorable market order. (They can still withdraw from the pool, but this will only affect the price impact, not the best quotes, so small market orders always execute at the advertised price.)
+	
+	As we saw above, quotes supplied by the liquidity pool (under linear pricing mechanism) are the same as quoted in a dealer market. The potential differences lie outside the model. Firstly, we assume in Kyle model that the dealers are competitive, which is not completely true in reality, with dealers having some market power and ability to extract profit from the market -- while the free entry into the liquidity pool is much more likely to lead to competitive outcomes and competitive quotes. Secondly, the liquidity pool is unable to offer price improvements to individual liquidity demanders like a dealer could. Together with the frontrunning argument above, this implies that whereas a dealer could discriminate based on trader identity, the liquidity pool treats all liquidity demanders equally, leading to worse outcomes for uninformed traders, but improvements for informed traders. (See the in-class discussion on in-trade transparency.)
+	
+	Comparing the liquidity pool to the limit order book, the main argument in favor of the pool is risk sharing. Namely, all liquidity providers in the pool participate in executing all market orders, as opposed to some providers in the limit order book having profitable opportunities at the cost of other limit traders being picked off. This implicit risk-sharing together with automatic repricing of limit orders based on pool composition should make liquidity provision more attractive to traders. However, the very same risk sharing eliminates any profits that liquidity providers could get in a LOB with time priority, thereby reducing incentives to participate in the market (similarly to how it happened in our discussion of time priority vs pro rata allocation rule in LOB markets).
+	
+	Finally, the pool eliminates the traders' choice between supplying and demanding liquidity: a patient trader who wants to buy the asset can no longer get a price improvement by using a limit order as opposed to a market order. Liquidity provision is now an activity in itself and can not be used as a part of active trading strategy. This can potentially reduce the number of traders who would be interested in providing liquidity compared to LOB markets.
+	
+	Comparing with dealer markets, we can say that 
+\end{solution}
+
+
+
+\fi
+
+
+
+
+
+%\newpage
+\ifreexam
+
+
+\subsection*{Problem 1}
+
+
+
+
+\begin{solution}
+	
+\end{solution}
+
+
+
+
+\quad
+\subsection*{Problem 2}
+
+
+
+
+\begin{solution}
+	
+\end{solution}
+
+
+
+
+\quad
+\subsection*{Problem 3}
+
+
+
+
+\begin{solution}
+	
+\end{solution}
+
+
+\fi
