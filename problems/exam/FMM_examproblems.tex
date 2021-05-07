@@ -20,21 +20,104 @@
 
 
 \begin{solution}
-	The mentioned evidence is presented by Eaton et al. (2021)\footnote{Eaton, Gregory W., T. Clifton Green, Brian Roseman, and Yanbin Wu. ``Zero-Commission Individual Investors, High Frequency Traders, and Stock Market Quality.'' SSRN Scholarly Paper. Rochester, NY: Social Science Research Network, January 1, 2021. https://doi.org/10.2139/ssrn.3776874.}.
+	The mentioned evidence is presented by Eaton et al (2021).\footnotemark
 	The explanation they provide is tied to the nature of Robinhood as not simply a trading platform, but also a social platform, on which individual traders can share trading tips and mention possible trading opportunities. This enables mob mentality and herding: many traders focus their trading on relatively few stocks. (Note that such herding can even be perfectly rational, as we saw when discussing the Smith \& S{\o}rensen model.) Importantly, what this herding implies for the liquidity providers is greater inventory risk because the order flow becomes more autocorrelated. Greater inventory risk is what leads to worse quotes supplied by the liquidity providers and lower overall market liquidity.
 \end{solution}
+\ifprintanswers
+	\footnotetext{Eaton, Gregory W., T. Clifton Green, Brian Roseman, and Yanbin Wu. ``Zero-Commission Individual Investors, High Frequency Traders, and Stock Market Quality.'' SSRN Scholarly Paper. Rochester, NY: Social Science Research Network, January 1, 2021. https://doi.org/10.2139/ssrn.3776874.}
+\fi
 
 
 
 
 \quad
 \subsection*{Problem 2}
-
+	Consider the Biais Foucault Moinas model of high-frequency trading we discussed in class, but assume now instead that adverse selection is mild: $\epsilon < \delta$. Answer the following questions, assuming $\alpha > 0$.
+	\begin{questions}
+		\question Equilibrium multiplicity is still an issue in this case. Focusing on the ask side of the market, what are the equilibria that can arise in such a market? Calculate the equilibrium ask price in each of these equilibria.
+		
+		\question When do each of these equilibria exist? Derive the exact existence conditions.
+		
+		\question Calculate the expected profits of slow and fast institutions in the Pareto-dominant equilibrium. How do they depend on $\alpha$? 
+		\\
+		\emph{HINT: Pareto-dominant is the equilibrium with the largest amount of trade.}
+		
+		\question (Conditional on the Pareto-dominant equilibrium:) How do incentives to invest in speed depend on $\alpha$? Do you think these incentives will result in efficient investment or will there be over-/underinvestment? Explain why (intuitively). Explain how this relates to the case of severe adverse selection ($\epsilon > \delta > \epsilon/2$) that we explored in class.
+	\end{questions}
 
 
 
 \begin{solution}
+	\paragraph{Parts 1 and 2.}
+	We now have that $\mu + \epsilon + \delta > \mu + \delta > \mu - \epsilon + \delta > \mu$, i.e., that $u^F_{GH} > u^S_H > u^F_{BH} > \mu$, with all other institution types' valuations being below $\mu$. We can now try to see whether the ask price being in every possible interval between these values is something that can be sustained in equilibrium.
+	\begin{enumerate}
+		\item $a < \mu - \epsilon + \delta$: in this case, the institutions buy with probabilities $\beta^F_{GH} = \beta^S_H = \beta^F_{BH} = 1$, hence the zero-profit condition for liquidity providers implies
+		\begin{align*}
+			a &= \mathbb{E}[v | \text{Buy}]
+			\\
+			&= \frac{\frac{\alpha}{4}}{\frac{\alpha}{2} + \rho \frac{1-\alpha}{2}} (\mu + \epsilon) 
+			+ \frac{\rho \frac{1-\alpha}{2}}{\frac{\alpha}{2} + \rho \frac{1-\alpha}{2}} \mu 
+			+ \frac{\frac{\alpha}{4}}{\frac{\alpha}{2} + \rho \frac{1-\alpha}{2}} (\mu - \epsilon)
+			\\
+			&= \mu.
+		\end{align*}
+		It does indeed hold that $\mu < \mu - \epsilon + \delta$, hence this equilibrium exists under no additional conditions.
+		
+		\item $a \in (\mu - \epsilon + \delta, \mu + \delta)$: then $\beta^F_{GH} = \beta^S_H = 1$ and $\beta^F_{BH} = 0$. From the zero-profit condition:
+		\begin{align*}
+			a &= \mathbb{E}[v | \text{Buy}]
+			\\
+			&= \frac{\frac{\alpha}{4}}{\frac{\alpha}{4} + \rho \frac{1-\alpha}{2}} (\mu + \epsilon) 
+			+ \frac{\rho \frac{1-\alpha}{2}}{\frac{\alpha}{4} + \rho \frac{1-\alpha}{2}} \mu
+			\\
+			&= \mu + \frac{\alpha}{\alpha + 2\rho (1-\alpha)} \epsilon.
+		\end{align*}
+		Check whether it belongs to the suggested interval: on the one hand, we need
+		\begin{align*}
+			\mu + \frac{\alpha}{\alpha + 2\rho (1-\alpha)} \epsilon &< \mu + \delta
+			\\
+			\iff
+			\alpha \epsilon &< \left( \alpha + 2\rho (1-\alpha) \right) \delta
+			\\
+			\iff
+			\alpha &< \frac{2\rho \delta}{2\rho \delta - (\delta - \epsilon)},
+		\end{align*}
+		which always holds because $\alpha \in (0,1)$, and the right-hand side is greater than one. The second condition is
+		\begin{align*}
+			\mu + \frac{\alpha}{\alpha + 2\rho (1-\alpha)} \epsilon &> \mu - \epsilon + \delta
+			\\
+			\iff
+			(2\alpha + 2\rho (1-\alpha)) \epsilon &> (\alpha + 2\rho (1-\alpha)) \delta
+			\\
+			\iff
+			\alpha > 1 - \frac{2 \epsilon - \delta}{(2\rho-1)(\delta-\epsilon) + \epsilon}
+		\end{align*}
+		(which is only possible if $\epsilon > \delta /2$).
+		
+		\item $\alpha > \mu + \delta$: then $\beta^F_{GH} = 1$ and $\beta^S_H = \beta^F_{BH} = 0$, hence $a = \mathbb{E}[v | \text{Buy}] = \mu + \epsilon$. This, however, violates the assumption $\alpha > \mu + \delta$ because $\delta > \epsilon$, hence an equilibrium like this can not exist.
+	\end{enumerate}
+
+	It is immediate that type-1 is the Pareto-dominant equilibrium: all institutions get to trade and they do so at best possible prices (liquidity providers get zero profit in all equilibria, so they are indifferent).
 	
+	
+	\paragraph{Part 3.}
+	The expected profits of Fast Institutions are
+	\begin{align*}
+		\phi &= \frac{1}{4} (\mu + \epsilon + \delta - \mu) + \frac{1}{4} (\mu - \epsilon + \delta - \mu) + \frac{1}{4} (\mu - (\mu - \epsilon - \delta)) + \frac{1}{4} (\mu - (\mu + \epsilon - \delta))
+		\\
+		&= \delta.
+	\end{align*}
+	The expected profits of Slow Institutions are
+	\begin{align*}
+		\psi &= \frac{1}{2} \rho (\mu+\delta - \mu) + \frac{1}{2} \rho (\mu - (\mu - \delta))
+		\\
+		&= \rho \delta.
+	\end{align*}
+	Both are positive and independent of $\alpha$.
+	
+	
+	\paragraph{Part 4.}
+	The incentives to invest in speed are given by the difference between the profits of fast and slow institutions: $\phi - \psi = (1-\rho) \delta$. In words, the only benefit of HFT technology is in finding trading opportunities, while having early access to information about $v$ does not entail any benefit, since trading decisions are driven by the idiosyncratic valuation $y_i$ in either case. Due to this, investment in HFT does not produce any externalities on other institutions (while in the basic model it resulted in worse prices offered to everyone), hence the equilibrium level of investment will be efficient.
 \end{solution}
 
 
@@ -49,13 +132,13 @@
 	Any market order must necessarily trade against the whole liquidity pool. I.e., you can think that every liquidity provider executes a part of every incoming market order equal to their share of the liquidity pool. The price per unit for an infinitesimally small trade is given by $p=C/A$, but trading any non-trivial amount would have a price impact. For this problem, assume that the average price at which a trade of size $q$ executes is given by $p = C/A + \lambda q$, where $q$ is trade size, and the price impact coefficient $\lambda$ is determined by the size of the pool (larger pool leads to lower $\lambda$).\footnote{The actual Uniswap protocol has a more sophisticated pricing algorithm, in which the price the trader gets is such that in the end, $\frac{A+\varDelta A}{C+\varDelta C} = \kappa$ for some exogenously fixed constant $\kappa$.}
 	
 	Answer the following questions.
-	\begin{enumerate}
-		\item Assume that all elements of the model except for liquidity providers are the same as in the (single-period) Kyle model: the fundamental value is $v \sim \mathcal{N}(\mu,\sigma^2)$, the midquote is $C/A=\mu$, the order flow is given by $q=x+u$, where $x$ comes from a profit-optimizing informed trader who knows $v$, and $u \sim \mathcal{N}(0,\sigma^2_u)$ comes from uninformed traders. Further, assume free entry into the liquidity pool -- i.e., the liquidity providers enter until the expected profit from entry is zero. 
+	\begin{questions}
+		\question Assume that all elements of the model except for liquidity providers are the same as in the (single-period) Kyle model: the fundamental value is $v \sim \mathcal{N}(\mu,\sigma^2)$, the midquote is $C/A=\mu$, the order flow is given by $q=x+u$, where $x$ comes from a profit-optimizing informed trader who knows $v$, and $u \sim \mathcal{N}(0,\sigma^2_u)$ comes from uninformed traders. Further, assume free entry into the liquidity pool -- i.e., the liquidity providers enter until the expected profit from entry is zero. 
 		
 		Derive the equilibrium pool depth $\lambda$. How does it compare to depth that would arise in the presence of a single dealer? How does it compare to depth that would be generated by a limit order book?
 		
-		\item What are the benefits and drawbacks of the liquidity pool as opposed to dealer markets? As opposed to limit order book? (In dimensions other than market depth.)
-	\end{enumerate}
+		\question What are the benefits and drawbacks of the liquidity pool as opposed to dealer markets? As opposed to the limit order book? (In dimensions other than market depth.)
+	\end{questions}
 
 
 \begin{solution}
