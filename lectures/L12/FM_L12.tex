@@ -401,6 +401,12 @@
 		\[
 		\alpha = \mathbb{P}(n \ge n(\alpha))=\frac{N-n(\alpha)}{N}
 		\]
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Endogenous acquisition of technology (3)}
+	\begin{itemize}
 		\item Authors find equilibrium with $\partial \alpha / \partial C<0$. Welfare result:
 		\begin{block}{}
 			\begin{center}
@@ -408,6 +414,19 @@
 			\end{center}
 		\end{block}
 		\item Hence: in 'well-functioning' markets, equilibrium has too much HFT
+		\item Because HFT effects are:
+		\begin{itemize}
+			\item \emph{more trading opportunities} -- personal benefit
+			\item \emph{pvt info about $v$} -- personal gain, social cost (worse prices for eveerybody)
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{BFM Conclusion}
+	\begin{itemize}
+		\item Fast trading exacerbates adverse selection, but is individually appealing
+		\item If the markets are already reasonably good at matching traders with opportunities, fast trading may be strictly bad for welfare
 	\end{itemize}
 \end{frame}
 
@@ -434,7 +453,7 @@
 		\item \textbf{Arbitrage}: This leads to arbitrage possibilities
 		\item \textbf{Perpetual situation}: These arbitrage possibilities do not vanish over time, suggesting that competition does not make them disappear
 	\end{enumerate}
-	Let's look at the simple model they construct to explain it.
+	%Let's look at the simple model they construct to explain it.
 \end{frame}
 
 
@@ -474,7 +493,7 @@
 
 
 \begin{frame}{\citet*{budish_high-frequency_2015}}
-	The figure below shows median arbitrage profits over time.
+	The figure below shows median arbitrage profits over time. Very stable, total $\sim \$75$m/yr
 	\center
 	\includegraphics[scale=0.7]{pics/HTF_ArbitrageProfitsTime}
 \end{frame}
@@ -497,7 +516,7 @@
 	\end{itemize}
 	\structure{Order processing}
 	\begin{itemize}
-		\item If multiple orders/messages at same time, uniform random draw to determine first to be processed
+		\item If multiple orders/messages at same time, uniform random \\ draw to determine first to be processed
 	\end{itemize}
 \end{frame}
 
@@ -557,12 +576,11 @@
 \end{frame}
 
 
-\begin{frame}{HFT Conclusion}
+\begin{frame}{BCS Conclusion}
 	\begin{itemize}
-		\item Fast trading is bad for other market participants
-		\item Equilibria may involve complete crowding out of all slow traders
-		\item If the markets are already reasonably good at matching traders with opportunities, fast trading may be strictly bad for welfare
-		\item This inefficiency may be a question of market design
+		\item By design, continuous trading generates arbitrage opportunities
+		\item Firms overinvest in speed in attempts to reap these arbitrage profits
+		\item Risk of being sniped contributes to the spread
 		\item Use better market design (frequent auctions) to improve this
 	\end{itemize}
 \end{frame}
@@ -603,7 +621,7 @@
 		\begin{itemize}
 			\item note: there is very little anonymity, contrary to what some say!
 		\end{itemize}
-		\item \structure{Smart contracts}
+		\item \structure{Smart contracts}: algotrading by design
 	\end{itemize}
 \end{frame}
 
@@ -614,29 +632,20 @@
 		\item \alert{Order costs} and \alert{execution risk}: you have to bid for your transaction to be accepted into a block.
 		\begin{itemize}
 			\item This is on top of execution risk from other sources (for limit orders)
-			\item Average order costs fluctuate over time \hyperlink{problems}{\beamerbutton{graph}}
+			\item Average order costs fluctuate over time \hyperlink{bcfee}{\beamerbutton{graph}}
+			\item There are concerns that miners inflate fees (\cite{lehar_miner_2020})
 		\end{itemize}
-		\item \alert{Delay}: blocks are only processed rarely (one per 10 min avg for bitcoin)
+		\item \alert{Delay}: blocks are only processed rarely (one per 10 min avg for bitcoin) \hyperlink{blocktime}{\beamerbutton{graph}}
 		\item \alert{Clearing and settlement}: without a trusted mediator, counterparty risk instensifies
-		\item \alert{No transparency requirements}: it is more difficult to enforce disclosure of financial reports from firms
+		\item \alert{No transparency requirements}: it is more difficult to enforce \\ disclosure of financial info from firms
 	\end{itemize}
 \end{frame}
 
 
 \begin{frame}{Crypto: Conclusion}
 	\begin{itemize}
-		\item \textbf{Corporate governance} has a lot of connection to company's financial market performance
-		\begin{itemize}
-			\item access to capital affected by liq-ty
-			\item liq-ty and corporate control are somewhat antithetical
-			\item firm can use stock price as market's feedback on its decisions or as benchmark of CEO performance
-			\item firms have some ways in which they can improve the liquidity of their stocks
-		\end{itemize}
-		\item \textbf{Digital markets}:
-		\begin{itemize}
-			\item generally cool and good
-			\item crypto and blockchain have potential, but they are not a panacea
-		\end{itemize}
+		\item generally cool and good
+		\item crypto and blockchain have potential, but they are not a panacea
 	\end{itemize}
 \end{frame}
 
@@ -649,11 +658,19 @@
 \end{frame}
 
 
-\begin{frame}[label=bcfee]
+\begin{frame}[handout:0,label=bcfee]
 	\centering
 	\includegraphics[width=.8\paperwidth]{pics/bitcoin_orderfee}
 	
 	Bitcoin avg daily order processing fee, USD per transaction \hyperlink{problems}{\beamerbutton{back}}
+\end{frame}
+
+
+\begin{frame}[handout:0,label=blocktime]
+	\centering
+	\includegraphics[width=.7\paperwidth]{pics/blocktime}
+	
+	Histogram of time between blocks (\cite{lehar_miner_2020}) \hyperlink{problems}{\beamerbutton{back}}
 \end{frame}
 
 \end{document} 
