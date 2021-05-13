@@ -8,14 +8,14 @@
 \input{../FM_preamble.tex}
 
 
-\title{Financial Markets Microstructure \\ Lecture 13}
+\title{Financial Markets Microstructure \\ Lecture 19}
 
 \subtitle{Markets and public information}
 
 \author{Egor Starkov}
 
 \date{K{\o}benhavns Unversitet \\
-	Spring 2020}
+	Spring 2021}
 
 
 \begin{document}
@@ -37,43 +37,37 @@
 \end{frame}
 
 
-\begin{frame}{Information}
+\begin{frame}{News}
 	\begin{itemize}
 		\item Incomplete information has been pivotal in many of the models we have considered
-		\item Roughly speaking, two types of model
+		\item Roughly speaking, two types of models
 		\begin{itemize}
-			\item Symmetric uncertainty: e.g. Stoll model
-			\item Asymmetric uncertainty: e.g. Glosten-Milgrom
+			\item \structure<1>{Symmetric uncertainty}: e.g. Parlour, DGP
+			\item \alert<1>{Asymmetric uncertainty}: e.g. Glosten-Milgrom
 		\end{itemize}
-		\item How does uncertainty affect prices/trade?
-		\item Who would gain from reducing uncertainty in different models?
+		%\item How does uncertainty affect prices/trade?
+		%\item Who would gain from reducing uncertainty in different models?
+		\pause
+		\item When \structure<2>{private news} arrive to insiders, they \structure<2>{trade}, everyone else learns from trades
+		\item When \structure<3>{public} news arrive: \only<2>{...?}
+		\pause
+		\begin{itemize}
+			\item (in the presence of HFTs, public news $\approx$ HFTs' private news)
+			\item all orders are repriced, but \structure<3>{no trade} \alert<4>{should} take place
+			\pause
+			\item in reality, a lot of trade after public announcements
+		\end{itemize}
 	\end{itemize}
 \end{frame}
 
 
-%\begin{frame}{Today}
-%	\begin{itemize}
-%		\item Kondor (2012)
-%		\begin{itemize}
-%			\item Public information can have surprising effects 
-%			\item One explanation for this is \structure{second-order beliefs} 
-%			\item As a consequence, public information may have ambiguous welfare effects 
-%		\end{itemize}
-%	\end{itemize}
-%\end{frame}
-
-
-
-%\section{Kondor: opinion divergence}
-
-\begin{frame}{\cite{kondor_more_2012}: Introduction}
+\begin{frame}{Trade after public news}
 	\begin{itemize}
-		\item \textbf{Observation}: public announcements often generate high trading volumes  
-		\item \textbf{Counterintuitive}: in standard models, public information may change prices, but shouldn't cause much trading (see example on next slide)
+		\item So why do public announcements generate high trading volumes?
 		\item \textbf{Potential explanations} include:
 		\begin{itemize}
-			\item Announcements are made up of \structure{public and private signals}
-			\item Traders have \structure{heterogeneous priors} and can therefore `agree to disagree'
+			\item Announcements are made up of public \structure{and private} signals
+			\item Or traders have \structure{heterogeneous priors} and can therefore `agree to disagree'; announcements then can amplify or mitigate these initial disagreements and so generate trade.
 		\end{itemize}
 		\item \textbf{\cite{kondor_more_2012}} provides a fresh look at this: focus on \structure{higher-order beliefs} 
 	\end{itemize}
@@ -89,71 +83,72 @@
 		\item Etc.
 	\end{itemize}
 	Higher-order beliefs are beliefs about the beliefs of others.
-
-	In most of the models we have seen so far, traders make decisions based on expectation of fundamental value: higher-order beliefs are irrelevant
-\end{frame}
-
-
-\begin{frame}
-	\frametitle{Public Information in a `standard model'}
-	Let's think about public information in a Glosten-Milgrom model
 	
-	\begin{itemize}
-		\item \textbf{Value}: $\theta=\theta_1 + \theta_2$, where $\theta_1, \theta_2 \in \{-1,0,1\}$ are distributed independently with equal probability
-		\item \textbf{Traders}:
-		\begin{itemize}
-			\item With prob. $\pi$: risk-neutral \structure{speculator} who observes $\theta_2$
-			\item With prob. $1-\pi$: \structure{noise trader}, buy/sell with equal probability
-		\end{itemize}
-		\item \textbf{Public signal}: $ y = \theta_1$
-		\only<2-3|handout:0>{
-			\item \alert{Bliz Quiz}: how does the public signal affect outcomes?
-			\begin{itemize}
-				\item nothing changes
-				\item \structure<3>{midprice changes, spread ($\approx$ volume) doesn't}
-				\item spread changes, midprice doesn't
-				\item both midprice and spread change
-			\end{itemize}
-		}
-	\end{itemize}
+	\pause\bigskip
+	In most models so far, traders make decisions based on expectation of fundamental value: \\ no resale $\rightarrow$ higher-order beliefs are irrelevant.
+	
+	Even with resale, they are often irrelevant: $\mathbb{E}(\mathbb{E}(\theta|x_{2})|x_{1}) = \mathbb{E}(\theta|x_{1})$.
 \end{frame}
 
 
-\begin{frame}{Public Information in a `standard model' (2)}
-	\begin{itemize}
-		\item \textbf{Equilibrium ask price}: 
-		\[
-		%a=\theta_1+\frac{\frac{1}{3}(\pi+(1-\pi)\frac{1}{2})}{\frac{1}{3}(\pi+(1-\pi)\frac{1}{2})+\frac{2}{3}(1-\pi)\frac{1}{2}}=\theta_1+\frac{1+\pi}{1+\pi+2(1-\pi)}.
-		a = \mathbb{E}[v|\theta_1,\text{buy}] = \theta_1 + \frac{ \pi/3 }{ \pi/3 + (1-\pi)/2}
-		\]
-		\item \textbf{Role of public information}: Whereas prices react to public information, trading probability is independent
-		\item \textbf{Beliefs}: Higher-order beliefs are of no importance in this model: market makers and speculators care only about $\mathbb{E}[\theta]$
-		\item \textbf{Why?} \pause This is a model without resale, so you only care about the fundamental value, not about a potential resale price
-	\end{itemize}
-\end{frame}
+%\begin{frame}{Public Information in a `standard model'}
+%	Let's think about public information in a Glosten-Milgrom model
+%	
+%	\begin{itemize}
+%		\item \textbf{Value}: $\theta=\theta_1 + \theta_2$, where $\theta_1, \theta_2 \in \{-1,0,1\}$ are distributed independently with equal probability
+%		\item \textbf{Traders}:
+%		\begin{itemize}
+%			\item With prob. $\pi$: risk-neutral \structure{speculator} who observes $\theta_2$
+%			\item With prob. $1-\pi$: \structure{noise trader}, buy/sell with equal probability
+%		\end{itemize}
+%		\item \textbf{Public signal}: $ y = \theta_1$
+%		\only<2-3|handout:0>{
+%			\item \alert{Bliz Quiz}: how does the public signal affect outcomes?
+%			\begin{itemize}
+%				\item nothing changes
+%				\item \structure<3>{midprice changes, spread ($\approx$ volume) doesn't}
+%				\item spread changes, midprice doesn't
+%				\item both midprice and spread change
+%			\end{itemize}
+%		}
+%	\end{itemize}
+%\end{frame}
+%
+%
+%\begin{frame}{Public Information in a `standard model' (2)}
+%	\begin{itemize}
+%		\item \textbf{Equilibrium ask price}: 
+%		\[
+%		%a=\theta_1+\frac{\frac{1}{3}(\pi+(1-\pi)\frac{1}{2})}{\frac{1}{3}(\pi+(1-\pi)\frac{1}{2})+\frac{2}{3}(1-\pi)\frac{1}{2}}=\theta_1+\frac{1+\pi}{1+\pi+2(1-\pi)}.
+%		a = \mathbb{E}[v|\theta_1,\text{buy}] = \theta_1 + \frac{ \pi/3 }{ \pi/3 + (1-\pi)/2}
+%		\]
+%		\item \textbf{Role of public information}: Whereas prices react to public information, trading probability is independent
+%		\item \textbf{Beliefs}: Higher-order beliefs are of no importance in this model: market makers and speculators care only about $\mathbb{E}[\theta]$
+%		\item \textbf{Why?} \pause This is a model without resale, so you only care about the fundamental value, not about a potential resale price
+%	\end{itemize}
+%\end{frame}
+%
+%
+%\begin{frame}{Kondor's contribution}
+%	\begin{itemize}
+%		\item \textbf{Idea} 
+%		\begin{itemize}
+%			\item Short-term traders with different trading times often interact
+%			\item Eg. currency traders often trade during the opening hours of their local exchange and then `close their positions' at the end of the day
+%			\item Example: London traders offload their position to NY traders 
+%			\item Thus, the London traders (only) care about the re-sale value, which depends on the NY traders' valuations: \structure{second-order beliefs} matter
+%		\end{itemize}
+%		\item \textbf{Public announcements}
+%		\begin{itemize}
+%			\item Cause traders to agree more on the fundamental value of assets
+%			\item But may cause them to disagree about the valuations of other traders
+%		\end{itemize}
+%		\item \textbf{Disagreement}: Diverging second-order beliefs lead traders to trade
+%	\end{itemize}
+%\end{frame}
 
 
-\begin{frame}{Kondor's contribution}
-	\begin{itemize}
-		\item \textbf{Idea} 
-		\begin{itemize}
-			\item Short-term traders with different trading times often interact
-			\item Eg. currency traders often trade during the opening hours of their local exchange and then `close their positions' at the end of the day
-			\item Example: London traders offload their position to NY traders 
-			\item Thus, the London traders (only) care about the re-sale value, which depends on the NY traders' valuations: \structure{second-order beliefs} matter
-		\end{itemize}
-		\item \textbf{Public announcements}
-		\begin{itemize}
-			\item Cause traders to agree more on the fundamental value of assets
-			\item But may cause them to disagree about the valuations of other traders
-		\end{itemize}
-		\item \textbf{Disagreement}: Diverging second-order beliefs lead traders to trade
-	\end{itemize}
-\end{frame}
-
-
-\begin{frame}{The example}
-	Consider the example of section 2
+\begin{frame}{\cite{kondor_more_2012}: Example}
 	\begin{itemize}
 		\item Two groups of traders, $I$ and $J$
 		\item Fundamental value has two components: $\theta=\theta_{I}+\theta_{J}$
@@ -162,48 +157,49 @@
 		\item Public signal: $y = \theta + \eta$
 		\item Suppose $\theta_{I},\theta_{J}, \epsilon^{i}, \epsilon^{j}, \eta$ are independent and normal with zero mean
 	\end{itemize}
+	Feature that generates disagreement: private signals about \\different aspects of the fundamentals, $\theta_I$ and $\theta_J$.
 \end{frame}
 
 
-\begin{frame}{The example (2)}
-	\textbf{Bayesian updating}
+\begin{frame}{Example: Before public announcement}
+	\textbf{No public news} ($y$ not observed)
 	\begin{itemize}
-		\item Before public announcement, traders have belief
+		\item Traders' beliefs about $\theta$ are
 		\begin{align*}
 			\mathbb{E}(\theta|z^{j}) & =\mathbb{E}(\theta_{J}|z^{j})+\mathbb{E}(\theta_{I}|z^{j})=a_J z^{j}+0, a_J>0 \\
 			\mathbb{E}(\theta|x^{i}) &=\mathbb{E}(\theta_{J}|x^{i})+\mathbb{E}(\theta_{I}|x^{i})=a_I x^{i}+0, a_I>0
 		\end{align*}
-		\item An I-trader's second-order belief is
+		\item $I$-trader's second-order belief is
 		\[
 		\mathbb{E}(\mathbb{E}(\theta|z^{j})|x^{i})=\mathbb{E}(\theta) = 0,
 		\]
-		where equality holds because $x^{i}$ and $z^{j}$ are independent
+		where the first equality holds because $x^{i}$ and $z^{j}$ are independent
 	\end{itemize}
 \end{frame}
 
 
-\begin{frame}{The example (3)}
-	\textbf{Bayesian updating}
+\begin{frame}{Example: With public announcement}
+	\textbf{Given public signal $y$}
 	\begin{itemize}
-		\item After public announcement, traders have belief
+		\item Traders' beliefs about $\theta$ are
 		\begin{align*}
 			\mathbb{E}(\theta|z^{j}, y) & =\mathbb{E}(\theta_{J}|z^{j},y)+\mathbb{E}(\theta_{I}|z^{j},y)=(b_J z^{j}+c_Jy)+d_J y,  \\
 			\mathbb{E}(\theta|x^{i}, y) & =\mathbb{E}(\theta_{J}|x^{i},y)+\mathbb{E}(\theta_{I}|x^{i},y)=(b_I x^{i}+c_I y)+d_I y,
 		\end{align*}
 		where $b_k,c_k,d_k>0$ and $b_k<a_k$. First-order beliefs \structure{converge}
-		\item But an I-agent's second-order belief  is
+		\item But $I$-agent's second-order belief  is
 		\begin{align*}
 			\mathbb{E}(\mathbb{E}(\theta|z^{j},y)|x^{i},y)
 			&=b_J\mathbb{E}(z^{j}|x^{i},y)+(c_J+d_J)y, \\
 			&=b_J(ey-fx^{i})+(c_J+d_J)y 
 		\end{align*}
 		where $e,f>0$. 
-		Decreasing in $x_i$ -- second-order beliefs \structure{diverge}
+		\alert{Decreasing in $x_i$} -- second-order beliefs \structure{diverge}
 	\end{itemize}
 \end{frame}
 
 
-\begin{frame}{The example (4)}
+\begin{frame}{Example: Conclusion}
 	\begin{itemize}
 		\item Claim: divergence leads to trade (will show later)
 		\item Further, the divergence grows the more precise public info is
@@ -214,7 +210,7 @@
 \end{frame}
 
 
-\begin{frame}{Model}
+\begin{frame}{\cite{kondor_more_2012}: Full(er) Model}
 	\begin{itemize}
 		\item \textbf{Timing}: 
 		\begin{enumerate}
@@ -222,12 +218,12 @@
 			\item I-traders liquidate all their positions and sell to J-traders
 			\item $\theta$ (distributed as before) is realized and J-traders consume asset
 		\end{enumerate}
-		\item \textbf{Traders}: Price takers, $i, j\sim u(0,1)$, demand $d_i$, $u(W_i)=-e^{-\gamma W_i}$ and   
+		\item \textbf{Traders}: Price takers, $i, j\sim u(0,1)$, demand $d_i$, util $u(W_i)=-e^{-\gamma W_i}$ and   
 		\begin{align*}
 			W_I & = {d_I}(p_2-p_1); &
 			W_J & = {d_J}(\theta-p_2).
 		\end{align*}
-		\item \textbf{Supply}: Time-$t$ asset supply  $u_t$: $u_1 \sim \mathcal{N}(0,1/\delta^2_1)$ and $u_2\sim \mathcal{N}(0,1/\delta^2_2)$ ($u_2 \equiv u_1 + \varDelta u_2$)
+		\item \textbf{Supply}: Time-$t$ asset supply  $u_t$: \\$u_1 \sim \mathcal{N}(0,1/\delta^2_1)$, $u_2\sim \mathcal{N}(0,1/\delta^2_2)$ ($u_2 \equiv u_1 + \varDelta u_2$)
 	\end{itemize}
 \end{frame}
 
@@ -275,7 +271,7 @@
 			p_2 & =\frac{1}{e_2}\left[ b_2 \theta_J + c_2 y +  g_2 q_1-u_2 \right], \label{price2}
 		\end{align}
 		for some $a_1,b_2,c_1,c_2,e_1,e_2,g_2$, 
-		where $q_1$ is the \structure{price signal} of period 1
+		where $q_1$ is the \structure{price signal} of $\theta_I$
 		\item \textbf{Price signal}: This tells us the information contained in prices:
 		\begin{align}
 			q_1 & = \mathbb{E}[\theta_I|p_1,y]= \frac{e_1 p_1-c_1 y}{a_1} = \theta_I - \frac{1}{a_1} u_1 ; \label{signal1} \\
