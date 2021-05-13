@@ -1,10 +1,3 @@
-% too much kyle, too little of anything else
-
-% main:
-% Eaton et at -- why Robinhood decreases liquidity? (short, intuitive, very difficult)
-% do smth with HFT models? there's too much Kyle already
-% Lehar & Parlour's UniSwap exchange and ask to find an eqm there. Idea: liq providers buy into a liq pool (consists of both asset & cash), liq demanders trade against the pool according to a hardcoded formula (A+ΔA)*(C+ΔC)=const, where A=asset in pool, C=cash in pool. Idea is that all "limit orders" are automatically repriced after MOs. Entry determines depth ("const"). Find eqm depth. (Problem can be phrased s.t. pricing schedule is p_{t+1}=p_{t}+lambda(N)*q, with lambda depending on number of liq providers; then eqm will be the Kyle's model.)
-
 \ifexam
 
 \subsection*{Problem 1}
@@ -15,7 +8,7 @@
 
 
 \begin{solution}
-	The mentioned evidence is presented by Eaton et al (2021).\footnotemark 
+	The mentioned evidence is presented by Eaton et al (2021).\ifprintanswers\footnotemark\fi 
 	The explanation they provide is tied to the nature of Robinhood as not simply a trading platform, but also a social platform, on which individual traders can share trading tips and mention possible trading opportunities. This enables mob mentality and herding: many traders focus their trading on relatively few stocks. (Note that such herding can even be perfectly rational, as we saw when discussing the Smith \& S{\o}rensen model.) Importantly, what this herding implies for the liquidity providers is greater inventory risk because the order flow becomes more autocorrelated. Greater inventory risk is what leads to worse quotes supplied by the liquidity providers and lower overall market liquidity.
 \end{solution}
 \ifprintanswers
@@ -29,7 +22,7 @@
 \subsection*{Problem 2}
 	Consider the Biais-Foucault-Moinas model of high-frequency trading we discussed in class, but assume now instead that adverse selection is mild: $\epsilon < \delta$. 
 	
-	In particular, suppose there is a unit continuum of profit-maximizing institutions $i \in [0,1]$, of which share $\alpha \in (0,1)$ has access to HFT technology (fast institutions). There is a single asset; institutions value the asset at $u_i = v+y_i$, where $v \in \{\mu-\epsilon, \mu+\epsilon\}$ with equal probabilities is the fundamental value, and $y_i \in \{-\delta, \delta\}$ with equal probabilities, independent across $i$, is the institution $i$'s idiosyncratic value for the asset. Given a trading opportunity, the institution can submit a market order to buy or sell one unit of the asset. At the time of trade, fast institution $i$ knows both $v$ and $y_i$, while slow institution $i$ only knows $y_i$. Further, trading opportunities arrive to fast institutions with probability 1, while slow institutions only receive a trading opportunity with probability $\rho$. Risk-neutral liquidity providers are competitive and provide bid and ask quotes for one unit of the asset so as to get zero expected profit on any trade.
+	In particular, suppose there is a unit continuum of profit-maximizing institutions $i \in [0,1]$, of which share $\alpha \in (0,1)$ has access to HFT technology (fast institutions). There is a single asset; institutions value the asset at $u_i = v+y_i$, where $v \in \{\mu-\epsilon, \mu+\epsilon\}$ with equal probabilities is the fundamental value, and $y_i \in \{-\delta, \delta\}$ with equal probabilities, independent across $i$, is the institution $i$'s idiosyncratic value for the asset. Given a trading opportunity, the institution can submit a market order to buy or sell one unit of the asset. At the time of trade, a fast institution knows both $v$ and $y_i$, while a slow institution only knows $y_i$. Further, trading opportunities arrive to fast institutions with probability 1, while slow institutions only receive a trading opportunity with probability $\rho$. Risk-neutral liquidity providers are competitive and provide bid and ask quotes for one unit of the asset so as to get zero expected profit on any trade.
 	
 	Answer the following questions given $\epsilon < \delta$ and $\alpha > 0$.
 	\begin{enumerate}
@@ -48,9 +41,9 @@
 
 \begin{solution}
 	\paragraph{Parts 1 and 2.}
-	We now have that $\mu + \epsilon + \delta > \mu + \delta > \mu - \epsilon + \delta > \mu$, i.e., that $u^F_{GH} > u^S_H > u^F_{BH} > \mu$, with all other institution types' valuations being below $\mu$. We can now try to see whether the ask price being in every possible interval between these values is something that can be sustained in equilibrium.
+	We now have that $\mu + \epsilon + \delta > \mu + \delta > \mu - \epsilon + \delta > \mu$, i.e., that $u^F_{GH} > u^S_H > u^F_{BH} > \mu$, with all other institution types' valuations being below $\mu$. Different possible equilibria would have the ask prices in different intervals relative to these values. Let us see whether we can construct an equilibrium for each such relation between $a$ and $\{u^F_{GH}, u^S_H, u^F_{BH}\}$.
 	\begin{enumerate}
-		\item $a < \mu - \epsilon + \delta$: in this case, the institutions buy with probabilities $\beta^F_{GH} = \beta^S_H = \beta^F_{BH} = 1$, hence the zero-profit condition for liquidity providers implies
+		\item $a \in [\mu, \mu - \epsilon + \delta]$: in this case, the institutions buy with probabilities $\beta^F_{GH} = \beta^S_H = \beta^F_{BH} = 1$, hence the zero-profit condition for liquidity providers implies
 		\begin{align*}
 			a &= \mathbb{E}[v | \text{Buy}]
 			\\
@@ -62,7 +55,7 @@
 		\end{align*}
 		It does indeed hold that $\mu < \mu - \epsilon + \delta$, hence this equilibrium exists under no additional conditions.
 		
-		\item $a \in (\mu - \epsilon + \delta, \mu + \delta)$: then $\beta^F_{GH} = \beta^S_H = 1$ and $\beta^F_{BH} = 0$. From the zero-profit condition:
+		\item $a \in [\mu - \epsilon + \delta, \mu + \delta]$: then $\beta^F_{GH} = \beta^S_H = 1$ and $\beta^F_{BH} = 0$. From the zero-profit condition:
 		\begin{align*}
 			a &= \mathbb{E}[v | \text{Buy}]
 			\\
@@ -73,40 +66,43 @@
 		\end{align*}
 		Check whether it belongs to the suggested interval: on the one hand, we need
 		\begin{align*}
-			\mu + \frac{\alpha}{\alpha + 2\rho (1-\alpha)} \epsilon &< \mu + \delta
+			\mu + \frac{\alpha}{\alpha + 2\rho (1-\alpha)} \epsilon &\leq \mu + \delta
 			\\
 			\iff
-			\alpha \epsilon &< \left( \alpha + 2\rho (1-\alpha) \right) \delta
+			\alpha \epsilon & \leq \left( \alpha + 2\rho (1-\alpha) \right) \delta
 			\\
 			\iff
-			\alpha &< \frac{2\rho \delta}{2\rho \delta - (\delta - \epsilon)},
+			\alpha & \leq \frac{2\rho \delta}{2\rho \delta - (\delta - \epsilon)},
 		\end{align*}
-		which always holds because $\alpha \in (0,1)$, and the right-hand side is greater than one. The second condition is
+		which always holds because $\alpha \in (0,1]$, and the right-hand side is greater than one. The second condition is
 		\begin{align*}
-			\mu + \frac{\alpha}{\alpha + 2\rho (1-\alpha)} \epsilon &> \mu - \epsilon + \delta
+			\mu + \frac{\alpha}{\alpha + 2\rho (1-\alpha)} \epsilon & \geq \mu - \epsilon + \delta
 			\\
 			\iff
-			(2\alpha + 2\rho (1-\alpha)) \epsilon &> (\alpha + 2\rho (1-\alpha)) \delta
+			(2\alpha + 2\rho (1-\alpha)) \epsilon & \geq (\alpha + 2\rho (1-\alpha)) \delta
 			\\
 			\iff
-			\alpha > 1 - \frac{2 \epsilon - \delta}{(2\rho-1)(\delta-\epsilon) + \epsilon}
+			\alpha \geq 1 - \frac{2 \epsilon - \delta}{(2\rho-1)(\delta-\epsilon) + \epsilon}
 		\end{align*}
-		(which is only possible if $\epsilon > \delta /2$).
+		(which is only possible if $\epsilon \geq \delta /2$).
 		
-		\item $\alpha > \mu + \delta$: then $\beta^F_{GH} = 1$ and $\beta^S_H = \beta^F_{BH} = 0$, hence $a = \mathbb{E}[v | \text{Buy}] = \mu + \epsilon$. This, however, violates the assumption $\alpha > \mu + \delta$ because $\delta > \epsilon$, hence an equilibrium like this can not exist.
+		\item $\alpha \in [\mu + \delta, \mu + \epsilon + \delta]$: then $\beta^F_{GH} = 1$ and $\beta^S_H = \beta^F_{BH} = 0$, hence $a = \mathbb{E}[v | \text{Buy}] = \mu + \epsilon$. This, however, violates the assumption $\alpha \geq \mu + \delta$ because $\delta > \epsilon$, hence an equilibrium like this can not exist.
 	\end{enumerate}
-
+	
+	Note: it can be showed $a < \mu$ is impossible in equilibrium as well. This argument is omitted from this solution.
+	
+	In the end, we have type-1 equilibrium which always exists, and type-2 equilibrium that only exists under particular conditions.
 	It is immediate that type-1 is the Pareto-dominant equilibrium: all institutions get to trade and they do so at best possible prices (liquidity providers get zero profit in all equilibria, so they are indifferent).
 	
 	
 	\paragraph{Part 3.}
-	The expected profits of Fast Institutions are
+	The expected profits of the Fast Institutions are
 	\begin{align*}
 		\phi &= \frac{1}{4} (\mu + \epsilon + \delta - \mu) + \frac{1}{4} (\mu - \epsilon + \delta - \mu) + \frac{1}{4} (\mu - (\mu - \epsilon - \delta)) + \frac{1}{4} (\mu - (\mu + \epsilon - \delta))
 		\\
 		&= \delta.
 	\end{align*}
-	The expected profits of Slow Institutions are
+	The expected profits of the Slow Institutions are
 	\begin{align*}
 		\psi &= \frac{1}{2} \rho (\mu+\delta - \mu) + \frac{1}{2} \rho (\mu - (\mu - \delta))
 		\\
@@ -124,11 +120,11 @@
 
 \quad
 \subsection*{Problem 3}
-	Blockchain markets attempt to experiment with novel ways to organize markets and provide liquidity. For example, Uniswap trading protocol on the Ethereum blockchain implements the ``liquidity pools'' scheme described below. You are asked to analyze the implications of (a modification of) this market design for liquidity provision.
+	Blockchain markets attempt to experiment with novel ways to organize markets and provide liquidity. For example, Uniswap trading protocol on the Ethereum blockchain implements the ``liquidity pools'' scheme described below. You are asked to analyze the implications of this market design for liquidity provision.\footnote{Note: this problem explores a modification of the Uniswap V2 protocol, not the just-released V3 protocol.}
 	
 	If a trader is willing to provide liquidity for a given asset, they must buy into a liquidity pool for that asset. If the liquidity pool consists of $A$ units of the stock and $C$ units of cash (or cryptocurrency), then to enter the trader needs to contribute $a$ units of asset and $c$ units of cash s.t. $a/c = A/C$. The trader would then own fraction $\frac{a}{A+a}$ of the liquidity pool indefinitely. If the trader wants to quit the pool, they can claim their share of the asset and the cash and withdraw from the pool.
 	
-	Any market order must necessarily trade against the whole liquidity pool. I.e., you can think that every liquidity provider executes a part of every incoming market order equal to their share of the liquidity pool. The price per unit for an infinitesimally small trade is given by $p=C/A$, but trading any non-trivial amount would have a price impact. For this problem, assume that the average price at which a trade of size $q$ executes is given by $p = C/A + \lambda q$, where $q$ is trade size, and the price impact coefficient $\lambda$ is determined by the size of the pool (larger pool leads to lower $\lambda$).\footnote{The actual Uniswap protocol has a more sophisticated pricing algorithm, in which the price the trader gets is such that in the end, $\frac{A+\varDelta A}{C+\varDelta C} = \kappa$ for some exogenously fixed constant $\kappa$.}
+	Any market order must necessarily trade against the whole liquidity pool. I.e., you can think that every liquidity provider executes a part of every incoming market order equal to their share of the liquidity pool. The price per unit for an infinitesimally small trade is given by $p=C/A$, but trading any non-trivial amount would have a price impact. For this problem, assume that the average price at which a trade of size $q$ executes is given by $p = C/A + \lambda q$, where $q$ is trade size, and the price impact coefficient $\lambda$ is determined by the size of the pool (larger pool leads to lower $\lambda$).\footnote{The actual Uniswap V2 protocol has a more sophisticated pricing algorithm, in which the price the trader gets is such that in the end, $\frac{A+\varDelta A}{C+\varDelta C} = \kappa$ for some exogenously fixed constant $\kappa$.}
 	
 	Answer the following questions.
 	\begin{enumerate}
@@ -156,15 +152,15 @@
 	Note that this condition would be satisfied if $p = \mathbb{E}_v[v|q]$: in that case $\mathbb{E}_v[v-p \mid q]=0$, so $\mathbb{E}_v[q(v-p) \mid q] = 0$, and taking the expectation over $q$ we conclude that $\mathbb{E}_{v,q} \left[ q (v - p) \right] = 0$.
 	However, $p = \mathbb{E}_v[v|q]$ is exactly the schedule that competitive dealers offer in the Kyle model! Repeating the derivations we did for the Kyle model, we obtain that in equilibrium, $\lambda = \frac{\beta \sigma^2_v}{\beta^2 \sigma^2_v + \sigma^2_u}$, and solving that jointly with $\beta = \frac{1}{2\lambda}$, we get that $\beta = \frac{\sigma_u}{\sigma_v}$ and $\lambda = \frac{\sigma_v}{2\sigma_u}$.
 	
-	The depth of liquidity pool is trivially the same as the depth of a dealer market would have been given this liquidity demand. Invoking the comparisons between the Kyle and the Glosten models we made in class, we can then say that market traders can get better price on small orders from a dealer, and may get better price on large orders in a LOB market (where the marginal price of $y$th unit of the asset is given by $\mathbb{E}[v \mid q \geq y]$).
+	The depth of liquidity pool is trivially the same as the depth of a dealer market would have been given this liquidity demand. Invoking the comparisons between the Kyle and the Glosten models we made in class, we can then say that market traders can get a better price on small orders from a dealer, and a better price on large orders in a LOB market (where the marginal price of $y$th unit of the asset is given by $\mathbb{E}[v \mid q \geq y]$).
 	
 	\paragraph{Part 2.}
-	One benefit of liquidity pools is that the ``limit orders'' are priced and supplied automatically by the market algorithm, and liquidity providers do not need to do anything manually (or use any algorithm on their side). This reduces the direct costs of liquidity provision. On the other hand, liquidity demanders also have more guarantees on the prices they will receive, since liquidity providers cannot frontrun market orders and cancel their limit orders before what they think is an unfavorable market order. (They can still withdraw from the pool, but this will only affect the price impact, not the best quotes, so small market orders always execute at the advertised price.)
+	One benefit of liquidity pools is that the ``limit orders'' are priced and supplied automatically by the market algorithm, and liquidity providers do not need to do anything manually (or use any algorithm on their side). This reduces the direct costs of liquidity provision -- albeit at the cost of liquidity pools tying up a lot more capital in order to provide the same amount of liquidity as regular markets.
+	On the other hand, liquidity demanders also have more guarantees on the prices they will receive, since liquidity providers cannot frontrun market orders and cancel their limit orders before what they think is an unfavorable market order. (They can still withdraw from the pool, but this will only affect the price impact, not the best quotes, so small market orders always execute at the advertised price.)
 	
-	As we saw above, quotes supplied by the liquidity pool (under linear pricing mechanism) are the same as quoted in a dealer market. The potential differences lie outside the model. Firstly, we assume in Kyle model that the dealers are competitive, which is not completely true in reality, with dealers having some market power and ability to extract profit from the market -- while the free entry into the liquidity pool is much more likely to lead to competitive outcomes and competitive quotes. Secondly, the liquidity pool is unable to offer price improvements to individual liquidity demanders like a dealer could. Together with the frontrunning argument above, this implies that whereas a dealer could discriminate based on trader identity, the liquidity pool treats all liquidity demanders equally, leading to worse outcomes for uninformed traders, but improvements for informed traders. (See the in-class discussion on in-trade transparency.)
+	Comparing the liquidity pool (under linear pricing mechanism) and a dealer market, the quotes supplied by the two, as we saw above, are the same. The potential differences thus lie outside the model. Firstly, we assume in Kyle model that the dealers are competitive, which is not completely true in reality, with dealers having some market power and ability to extract profit from the market -- while the free entry into the liquidity pool is much more likely to lead to competitive outcomes and competitive quotes. Secondly, the liquidity pool is unable to offer price improvements to individual liquidity demanders like a dealer could. Together with the frontrunning argument above, this implies that whereas a dealer could discriminate based on trader identity, the liquidity pool treats all liquidity demanders equally, leading to worse outcomes for uninformed traders, but improvements for informed traders. (See the in-class discussion on in-trade transparency.)
 	
 	Comparing the liquidity pool to the limit order book, the main argument in favor of the pool is risk sharing. Namely, all liquidity providers in the pool participate in executing all market orders, as opposed to some providers in the limit order book having profitable opportunities at the cost of other limit traders being picked off. This implicit risk-sharing together with automatic repricing of limit orders based on pool composition should make liquidity provision more attractive to traders. However, the very same risk sharing eliminates any profits that liquidity providers could get in a LOB with time priority, thereby reducing incentives to participate in the market (similarly to how it happened in our discussion of time priority vs pro rata allocation rule in LOB markets).
-	
 	Finally, the pool eliminates the traders' choice between supplying and demanding liquidity: a patient trader who wants to buy the asset can no longer get a price improvement by using a limit order as opposed to a market order. Liquidity provision is now an activity in itself and can not be used as a part of active trading strategy. This can potentially reduce the number of traders who would be interested in providing liquidity compared to LOB markets.
 \end{solution}
 
@@ -175,11 +171,6 @@
 
 
 
-
-% reexam:
-% Goldstein's feedback loop -- short sell stocks -> firm invests less -> firm value drops -> buy back (simple but long, many steps, mechanical (will have to do a step-by-step guide))
-% fragmentation: Kyle model, take imperfectly competitive dealers, so that they have more market power in fragmented markets. Compare market outcomes in this scenario (e.g., would cumulative market depth of fragmented markets still be larger)? (Can set up as open-ended; moderate length)		OR 			Glosten/fragmentation: let exchanges compete in order entry cost C?
-% a few quick facts from O'Hara & Zhou?
 
 %\newpage
 \ifreexam
@@ -222,15 +213,15 @@
 	\paragraph{Part 1.}
 	\begin{enumerate}[label=(\alph{enumi})]
 		\item 
-		The probability that all initially uninformed parties (the firm and the dealer) assign to state being $\omega = h$ after observing a Buy order is
+		The probability that all initially uninformed parties (the firm and the dealer) assign to the state being $\omega = h$ after observing a Buy order is
 		\begin{align*}
 			\mathbb{P}(h | \text{Buy}) = \frac{\frac{\pi}{2} + \frac{1-\pi}{4}}{\frac{\pi}{2} + \frac{1-\pi}{2}} = \frac{1 + \pi}{2}.
 		\end{align*}
 		The expected return on investment after observing a Buy order is then
 		\begin{align*}
-			\mathbb{E}(v_\omega | \text{Buy} ) = \frac{1+\pi}{2} v_h + \left(1 - \frac{1+\pi}{2} \right) vl = \frac{1+\pi}{2} v_h + \frac{1-\pi}{2} v_l.
+			\mathbb{E}(v_\omega | \text{Buy} ) = \frac{1+\pi}{2} v_h + \left(1 - \frac{1+\pi}{2} \right) v_l = \frac{1+\pi}{2} v_h + \frac{1-\pi}{2} v_l.
 		\end{align*}
-		For the sale order the two are, respectively:
+		For the sale order the two are equal to, respectively:
 		\begin{align*}
 			\mathbb{P}(h | \text{Sell}) &= \frac{\frac{1-\pi}{4}}{\frac{\pi}{2} + \frac{1-\pi}{2}} = \frac{1 - \pi}{2},
 			\\
@@ -247,10 +238,8 @@
 			\pi \geq \frac{-2 \bar{v}}{v_h - v_l},
 		\end{align*}
 		where $\bar{v} = \frac{v_h+v_l}{2}$. If $\bar{v} \geq 0$ then this condition always holds.
-		
-		Similarly, the latter inequality is equivalent to $\pi \geq \frac{2 \bar{v}}{v_h - v_l}$. This always holds if $\bar{v} \leq 0$. 
-		
-		Both conditions hold simultaneously if
+		Similarly, $\mathbb{E}(v_\omega | \text{Sell} ) \leq 0$ is equivalent to $\pi \geq \frac{2 \bar{v}}{v_h - v_l}$. This always holds if $\bar{v} \leq 0$. 
+		Both conditions are satisfied if
 		\begin{align}
 			\pi \geq \frac{2 |\bar{v}|}{v_h - v_l}.
 			\tag{$\star$}
@@ -273,43 +262,45 @@
 		\begin{align*}
 			\Pi_s(h) &= \begin{cases}
 				(\mu + v_h) - \left( \mu + \frac{1+\pi}{2} v_h + \frac{1-\pi}{2} v_l \right)
+				= \frac{1-\pi}{2} (v_h - v_l) > 0
 				& \text{ if Buy};
 				\\
 				0 & \text{ if Pass};
 				\\
-				(\mu) - (\mu) & \text{ if Sell}
+				(\mu) - (\mu) = 0 & \text{ if Sell}
 			\end{cases}
-			\\
-			&=\begin{cases}
-				\frac{1-\pi}{2} (v_h - v_l) > 0 & \text{ if Buy};
-				\\
-				0 & \text{ if Pass};
-				\\
-				0 & \text{ if Sell}.
-			\end{cases}
+			%\\
+			%&=\begin{cases}
+			%	\frac{1-\pi}{2} (v_h - v_l) > 0 & \text{ if Buy};
+			%	\\
+			%	0 & \text{ if Pass};
+			%	\\
+			%	0 & \text{ if Sell}.
+			%\end{cases}
 		\end{align*}
 		Buying is thus the optimal decision in state $\omega = h$. On the other hand, if $\omega = l$:
 		\begin{align*}
 			\Pi_s(l) &= \begin{cases}
 				(\mu + v_l) - \left( \mu + \frac{1+\pi}{2} v_h + \frac{1-\pi}{2} v_l \right)
+				= -\frac{1+\pi}{2} (v_h - v_l) < 0
 				& \text{ if Buy};
 				\\
 				0 & \text{ if Pass};
 				\\
-				(\mu) - (\mu) & \text{ if Sell}
+				(\mu) - (\mu) = 0 & \text{ if Sell}
 			\end{cases}
-			\\
-			&=\begin{cases}
-				-\frac{1+\pi}{2} (v_h - v_l) < 0 & \text{ if Buy};
-				\\
-				0 & \text{ if Pass};
-				\\
-				0 & \text{ if Sell},
-			\end{cases}
+			%\\
+			%&=\begin{cases}
+			%	-\frac{1+\pi}{2} (v_h - v_l) < 0 & \text{ if Buy};
+			%	\\
+			%	0 & \text{ if Pass};
+			%	\\
+			%	0 & \text{ if Sell},
+			%\end{cases}
 		\end{align*}
 		so selling is weakly optimal. 
 		
-		In the end if \eqref{eq:fbexist} holds, we have an equilibrium, in which the dealer quotes the ask and bid prices as given by \eqref{eq:fbask} and \eqref{eq:fbbid} respectively, the informed trader buys if $\omega=h$ and sells if $\omega=l$, and the firm invests if and only if it observes a buy order (equivalently, if the price of its stock goes up after the investment project is announced).
+		In the end, if \eqref{eq:fbexist} holds, we have an equilibrium, in which the dealer quotes the ask and bid prices as given by \eqref{eq:fbask} and \eqref{eq:fbbid} respectively, the informed trader buys if $\omega=h$ and sells if $\omega=l$, and the firm invests if and only if it observes a buy order (equivalently, if the price of its stock goes up after the investment project is announced).
 	\end{enumerate}
 	
 	
@@ -327,9 +318,9 @@
 	\end{align*}
 	Therefore, there exists an equilibrium, in which the dealer sets the prices as above, the insider buys if $\omega=h$ and sells if $\omega=l$, and the firm always invests in the project. 
 	
-	In this case the project is so ex ante appealing that the market can not dissuade the firm from pursuing it. The insider's trading thus does not affect the firm's investment decisions, and we are back to the standard Glosten-Milgrom model.
+	In this case the project is so appealing ex ante that the market can not dissuade the firm from pursuing it. The insider's trading thus does not affect the firm's investment decisions, and we are back to the standard Glosten-Milgrom model.
 	
-	As in part 1 above, in this case there may, in principle, exist mixed-strategy equilibria, in which the speculator is indifferent in one of the states.
+	As in part 1 above, there may, in principle, exist mixed-strategy equilibria in this case, in which the speculator is indifferent in one of the states and mixes between buying and passing or between selling and passing.
 \end{solution}
 
 
@@ -358,7 +349,7 @@
 	
 	\paragraph{Part 1.}
 	\begin{enumerate}[label=(\alph{enumi})]
-		\item This may be the result of a miscoordination (as we discussed when talking about market fragmentation): traders do not engage in electronic markets because dealers are not present there, and dealers do not enter electronic markets because there are no traders there.
+		\item This may be the result of a miscoordination (as we discussed when talking about market fragmentation): traders do not engage in electronic markets because dealers are not present there, and dealers do not enter the electronic markets because there are no traders there.
 		
 		\item Advertising a trade among many dealers on the electronic market may not be desirable to a trader if this trade is based on private information. Advertising the trade would thus reveal the trader's private information and limit the potential profits the trader could extract from this information. Voice trading, on the other hand, limits the disclosure of information to the particular dealer the trader is engaging with, and is thus more beneficial for such trades. As we discussed in relation to market transparency, the dealers also prefer having informational advantage relative to the rest of the market, and so they would be willing to offer low commissions on voice trading in order to acquire this private information about order flow.
 	\end{enumerate}
