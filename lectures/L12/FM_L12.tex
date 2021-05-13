@@ -628,7 +628,10 @@
 
 \begin{frame}[label=problems]{Why not?}
 	\begin{itemize}
-		\item \alert{Limited processing capacity}: block size and frequency is $\approx$fixed, which leads to...
+		\item \alert{Limited processing capacity}: block size and frequency is $\approx$fixed
+		\begin{itemize}
+			\item Visa: 150m tx/day; Bitcoin (15.02.21): 300k tx/day
+		\end{itemize}
 		\item \alert{Order costs} and \alert{execution risk}: you have to bid for your transaction to be accepted into a block.
 		\begin{itemize}
 			\item This is on top of execution risk from other sources (for limit orders)
@@ -652,23 +655,23 @@
 
 
 \appendix
-\begin{frame}[allowframebreaks]{References}
+\begin{frame}<handout:0>[allowframebreaks]{References}
 	\bibliography{../teaching}
 	\bibliographystyle{abbrvnat}
 \end{frame}
 
 
-\begin{frame}[handout:0,label=bcfee]
+\begin{frame}<handout:0>[label=bcfee]
 	\centering
-	\includegraphics[width=.8\paperwidth]{pics/bitcoin_orderfee}
+	\includegraphics[width=0.8\paperwidth]{pics/bitcoin_orderfee}
 	
 	Bitcoin avg daily order processing fee, USD per transaction \hyperlink{problems}{\beamerbutton{back}}
 \end{frame}
 
 
-\begin{frame}[handout:0,label=blocktime]
+\begin{frame}<handout:0>[label=blocktime]
 	\centering
-	\includegraphics[width=.7\paperwidth]{pics/blocktime}
+	\includegraphics[width=0.7\paperwidth]{pics/blocktime}
 	
 	Histogram of time between blocks (\cite{lehar_miner_2020}) \hyperlink{problems}{\beamerbutton{back}}
 \end{frame}
