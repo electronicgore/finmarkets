@@ -8,14 +8,14 @@
 \input{../FM_preamble.tex}
 
 
-\title{Financial Markets Microstructure \\ Lecture 14}
+\title{Financial Markets Microstructure \\ Lecture 20}
 
 \subtitle{Asset Price Bubbles}
 
 \author{Egor Starkov}
 
 \date{K{\o}benhavns Unversitet \\
-	Spring 2020}
+	Spring 2021}
 
 
 \begin{document}
@@ -41,7 +41,7 @@
 
 
 \begin{frame}{Today}
-	Two stories for why bubbles may occur
+	Two stories for why \structure{bubbles} may occur
 	\begin{itemize}
 		\item Rational herding
 		\begin{itemize}
@@ -67,24 +67,24 @@
 \end{frame}
 
 
-\begin{frame}{Examples of bubbles}
-	\begin{columns}
-		\begin{column}{0.45\linewidth}
-			\center
-			\includegraphics[width=0.95\linewidth]{pics/Enron}
-		\end{column}
-		\begin{column}{0.55\linewidth}
-			\begin{itemize}
-				\item \textbf{Enron} was an energy company that grew spectacularly throughout the nineties; named America's most innovative company
-				\item But in October 2001 it was revealed that the company had hid billions of dollars of debts; stock price plummeted
-				\item Looks like a bubble -- but could market have done better?
-			\end{itemize}
-		\end{column}
-	\end{columns}
-\end{frame}
+%\begin{frame}{Examples of bubbles}
+%	\begin{columns}
+%		\begin{column}{0.45\linewidth}
+%			\center
+%			\includegraphics[width=0.95\linewidth]{pics/Enron}
+%		\end{column}
+%		\begin{column}{0.55\linewidth}
+%			\begin{itemize}
+%				\item \textbf{Enron} was an energy company that grew spectacularly throughout the nineties; named America's most innovative company
+%				\item But in October 2001 it was revealed that the company had hid billions of dollars of debts; stock price plummeted
+%				\item Looks like a bubble -- but could market have done better?
+%			\end{itemize}
+%		\end{column}
+%	\end{columns}
+%\end{frame}
 
 
-\begin{frame}{Examples of bubbles}
+\begin{frame}[handout:0]{Examples of bubbles}
 	\begin{columns}
 		\begin{column}{0.55\linewidth}
 			\center
@@ -100,7 +100,7 @@
 \end{frame}
 
 
-\begin{frame}{Examples of bubbles}
+\begin{frame}[handout:0]{Examples of bubbles}
 	\begin{columns}
 		\begin{column}{0.55\linewidth}
 			\center
@@ -108,14 +108,31 @@
 		\end{column}
 		\begin{column}{0.45\linewidth}
 			\begin{itemize}
-				\item And we will not even talk about \textbf{bitcoin} (and cryptocurrencies in general)...
+				\item \textbf{Bitcoin} burst pretty badly at the end of 2017.
+				\item New iteration over the past year? (Look at where the graph ends and at the current price)
+				\item \textbf{Dogecoin} is a bubble that does not pretend to be anything else.
 			\end{itemize}
 		\end{column}
 	\end{columns}
 \end{frame}
 
 
-\begin{frame}{Examples of bubbles}
+\begin{frame}[handout:0]{Examples of bubbles}
+\begin{columns}
+	\begin{column}{0.7\linewidth}
+		\center
+		\includegraphics[width=\linewidth]{pics/gme}
+	\end{column}
+	\begin{column}{0.3\linewidth}
+		\begin{itemize}
+			\item we remember the \textbf{Gamestop} frenzy of January 2021...
+		\end{itemize}
+	\end{column}
+\end{columns}
+\end{frame}
+
+
+\begin{frame}[handout:0]{Examples of bubbles}
 	\begin{columns}
 		\begin{column}{0.55\linewidth}
 			\center
@@ -161,8 +178,9 @@
 		\item But here: \structure{sequential decision making}
 		\begin{itemize}
 			\item First-comers: make decisions based on information
-			\item But as time goes by, people may start disregarding their own information and just choose the most popular
-			\item They herd. However, this is \emph{fully rational}: public information swamps private information
+			\item But as time goes by, people may start disregarding their own
+			\\ information and just choose the most popular action
+			\item Herding ensues, but it is \emph{fully rational}: public information swamps private information
 		\end{itemize}
 		\item \structure{Informational cascade}: a few pieces of information may determine everyone's choice
 	\end{itemize}
@@ -241,7 +259,7 @@
 		\item A few incorrect signals can be enough enough to set off a herd
 		\item A small piece of information `cascades' through the system
 		\item Each agent is rational, but together they may seem stupid: their information taken together is very precise, but there is no information aggregation
-		\item Here's a particular example of how a herd may arise: \hyperlink{EXP}{\beamerbutton{YEAH!}}
+		\item A particular example of how a herd may arise: \hyperlink{EXP}{\beamerbutton{here}}
 	\end{itemize}
 \end{frame}
 
@@ -265,14 +283,15 @@
 		\item Remaining discussion of herds follows \cite{bikhchandani_herd_2000}
 		\item As before: asset value $v$, and each trader starts with prior $p_t$
 		\item With probability $\pi$ the trader is a noise trader, who buys/sells/abstains with equal probability, w.p. $1-\pi$ rational as above
-		\item A risk-neutral market maker sets competitive bid-ask
+		\item A risk-neutral market maker quotes competitive bid-ask prices
 		\item What will happen?
-		\only<2|handout:0>{
-			\item \alert{Bliz quiz}: will there be herding in such model (with positive probability)? y/n
-		}
-		\pause[3]
-		\item This is standard Glosten-Milgrom
-		\item no herds
+		\begin{itemize}
+			\only<2|handout:0>{
+				\item \alert{Bliz quiz}: will there be herding in such model (with positive probability)? y/n
+			}
+			\pause[3]
+			\item This is standard Glosten-Milgrom, no herds
+		\end{itemize}
 	\end{itemize}
 \end{frame}
 
@@ -284,7 +303,7 @@
 		\begin{itemize}
 			\item Suppose $v \in \{0,\frac{1}{2},1\}$
 			\item If $v=\frac{1}{2}$, this is perfectly revealed by the private signal: $S_{t}=\frac{1}{2}$
-			\item If $v \in \{0,1\}$, trader $t$ receives a signal: $\mathbb{P}(S_{t}=v)=p_{t}$
+			\item If $v \in \{0,1\}$, trader $t$ receives informative signal: $\mathbb{P}(S_{t}=v)=p_{t}$
 			\item Furthermore, a proportion $\mu \in \{\mu^{H}, \mu^{L}\}$ of traders have perfect information: $p_{t}=1$ after a good signal
 			\item The remaining traders have noisy info: $p_{t} \in (\frac{1}{2},1)$ after a good signal
 		\end{itemize}
@@ -302,7 +321,7 @@
 \begin{frame}[label=az]
 	\frametitle{Herding can occur with pricing and multi-layered uncertainty}
 	\begin{itemize}
-		\item Before, price mechanism worked as a screening device: made sure that high types bought and low types sold
+		\item In GM, price mechanism worked as a screening device: made sure that high types bought and low types sold
 		\item But now, it is possible to `misprice' such that herding occurs, at least temporarily
 		\begin{itemize}
 			\item Can be because $\mu = \mu_H$ so all traders know $v$, but MM does not (non-speculative bubble)
@@ -310,7 +329,7 @@
 		\end{itemize}
 		\item This allows bubbles to occur
 	\end{itemize}
-	See numerical example here: \hyperlink{layers}{\beamerbutton{Appendix}}
+	See numerical example \hyperlink{layers}{\beamerbutton{here}}
 \end{frame}
 
 
@@ -322,9 +341,12 @@
 		\item \textbf{Payoffs}:  Manager \structure{maximizes his expected reputation}
 		\item \textbf{Herding}: Manager 1 moves first, then manager 2 
 		\begin{itemize}
-			\item If manager 1 invests, manager 2 can deduce that $s_1=1$. Suppose $s_2=0$. Then one of the two (or both) must be dumb. 
-			\item If manager 2 does not invest, he reveals this. If player 1's  investment then succeeds, people will assume that manager 2 is the dumb manager
-			\item Investing might be better: even if the investment fails, people might think that both managers are smart, but got an `unlucky' signal
+			\item If manager 1 invests, manager 2 can deduce that $s_1=1$. Suppose $s_2=0$. 
+			\\ Then one of the two (or both) must be dumb. 
+			\item If manager 2 does not invest, he reveals this. If player 1's investment then 
+			\\succeeds, people will assume that manager 2 is the dumb manager
+			\item Investing might be better: even if the investment fails, people might think that 
+			\\both managers are smart, but got an `unlucky' signal
 		\end{itemize}
 	\end{itemize}
 \end{frame}
@@ -371,23 +393,25 @@
 			\item At least a fraction $\kappa$ of rational traders sell the asset ($\kappa$ is the \emph{absorption capacity} of the economy), or
 			\item The market is exogenously corrected at time $t_0+\overline{\tau}$
 		\end{itemize}
-		\item \textbf{Gradual learning}: Each period, a fraction $1/\eta$ of rational traders become aware of the mispricing
+		\item \textbf{Gradual learning}: Each period, a fraction $1/\eta$ of rational traders 
+		\\become aware of the mispricing
 		\begin{itemize}
-			\item But they don't know $t_0$, and hence don't know how many others know of the mispricing
+			\item But they don't know $t_0$, and hence don't know 
+			\\how many others know of the mispricing
 		\end{itemize}
 	\end{itemize}
 \end{frame}
 
 
-\begin{frame}{Interpretation}
+\begin{frame}{Traders}
 	\begin{itemize}
-		\item Behavioral traders think progress will last forever
+		\item \textbf{Behavioral traders} think progress will last forever
 		\begin{itemize}
 			\item When enough rational traders sell, absorption capacity of behavioral traders is reached and  price must drop
 			\item At this point, everybody becomes aware of the mispricing
 			\item If this doesn't happen, then market exogenously collapses when mispricing is too big
 		\end{itemize}
-		\item Rational traders know progress is temporary, but not when it stops
+		\item \textbf{Rational traders} know progress is temporary, but not when it stops
 		\begin{itemize}
 			\item Implication: when you learned that progress has stopped, you are not sure what other people believe
 			\item Suppose you learn at $t'$. At $t' + \eta$ you know that everybody knows
@@ -483,18 +507,18 @@
 \end{frame}
 
 
-\begin{frame}{Next time: auctions}
-	\begin{itemize}
-		\item Look at models of how traders bid for the asset under imperfect competition from other bidders
-		\item Extracurricular
-	\end{itemize}
-\end{frame}
+%\begin{frame}{Next time: auctions}
+%	\begin{itemize}
+%		\item Look at models of how traders bid for the asset under imperfect competition from other bidders
+%		\item Extracurricular
+%	\end{itemize}
+%\end{frame}
 
 
 
 
 \appendix
-\begin{frame}[allowframebreaks]{References}
+\begin{frame}<handout:0>[allowframebreaks]{References}
 	\bibliography{../teaching}
 	\bibliographystyle{abbrvnat}
 \end{frame}
@@ -511,15 +535,7 @@
 		\item \textbf{Private signals}: $S_t \in \{-1,1\}$, correct w.p. $p$, i.e. $\mathbb{P}(S_t=1|v=H) = \mathbb{P}(S_t=-1|v=L) = p$ and $\mathbb{P}(S_t=1|v=L) = \mathbb{P}(S_t=-1|v=H) = 1-p$.
 		
 		Then private priors are $p_t = p$ if $S_t = 1$ and $p_t = 1-p$ if $S_t = -1$
-		\item For our example, suppose the following signal sequence realized:
-		\vspace{-1em}
-		\begin{align*}
-			S_1	& = +1 \\
-			S_i	& = -1 \, \text{ for all } i \geq 2,
-		\end{align*}
-		\vspace{-2.5em}
-		
-		i.e., the stream of signals is $\{\structure{+1},\alert{ -1, -1, -1, -1, ...}\}$
+		\item For our example, suppose the following signal sequence realized: $\{\structure{+1},\alert{ -1, -1, -1, -1, ...}\}$
 		\item Denote by $\mathbb{I}_i$ agent $i$'s information set
 	\end{itemize}
 \end{frame}
