@@ -139,6 +139,7 @@ Lecturer: Egor Starkov
 			\visible<handout:0|3->{
 				\begin{itemize}
 					\item Want property rights to be allocated \structure{efficiently} in the society
+					\item In plain words: want to transfer stuff from those own but do not value it much to those who value it a lot, in exchange for other stuff.
 					\item Smooth functioning of markets is essential for this
 				\end{itemize}
 			}
@@ -167,14 +168,14 @@ Lecturer: Egor Starkov
 			\visible<handout:0>{
 				\begin{itemize}
 					\item Forum for trade in the stock (\alert{consolidation});
-					\item Each trader can compare his private valuation against the current price (\alert{transparency});
+					\item Each trader can compare their private valuation against the current price, which conveys some historical info (\alert{transparency});
 					\item Guarantee of getting what is paid for (\alert{security})
 				\end{itemize}
 			}
 			\item \textbf{Specifics} of financial markets:
 			\begin{itemize}
-				\item Usually organized in a specific way and heavily regulated.
 				\item Feature to a lot of asymmetric information
+				\item Because of this, usually organized in a specific way and heavily regulated.
 			\end{itemize}
 		\end{itemize}
 	\end{column}
@@ -200,19 +201,20 @@ Lecturer: Egor Starkov
 			\item Trade in existing assets on exchange
 		\end{itemize}	
 		\pause
-		\item This course: focus on secondary markets 
+		\item This course: focus on secondary markets, such as
 		\begin{itemize}
 			\item Stock and bond markets
 			\item Derivative markets
 			\item Currency (FX) markets
-			\item Most insights will apply to commodity markets that deal in futures (oil, metals...) 
+			\item Most insights will apply to commodity markets that deal in futures (oil/gas, metals, food...) 
+			\item \textcolor{gray}{(Corporate finance looks at primary markets)}
 		\end{itemize}
 	\end{itemize}
 \end{frame}
 
 
 \begin{frame}{Market Setups}
-Two (three?) rough categories of market setups
+Markets can be set up in different ways
 \begin{enumerate}
 	\item Decentralized ``markets''
 	\item Dealer markets
@@ -221,6 +223,7 @@ Two (three?) rough categories of market setups
 		\item Continuous
 		\item Call
 	\end{itemize}
+	\item Hybrid (dealer+order) markets
 \end{enumerate}
 \end{frame}
 
@@ -303,10 +306,13 @@ Two (three?) rough categories of market setups
 	\item There's a tremendous amount of different order types. We focus on two main ones:
 	\item \textbf{Market order} specifies quantity: ``buy 500 shares at best available price''.
 	\item \textbf{Limit order} specifies a quantity and a price: ``will buy 500 shares at below price 40''
+	\begin{itemize}
+		\item Limit orders sit in \alert{the Limit Order Book} until they can be executed
+	\end{itemize}
 	\item Trades occur either through 
 	\begin{enumerate}
 		\item a limit order 'match' (somebody posts a bid price above the lowest ask price), or
-		\item through market orders
+		\item through market orders against the LOB
 	\end{enumerate}
 \end{itemize}
 \end{frame}
@@ -337,7 +343,7 @@ Two (three?) rough categories of market setups
 	\item \alert{Uniform price}: all orders in a batch trades at same price
 	\item In theory,  very good efficiency properties: all profitable trades are carried out
 	\item But... slower than the continuous market
-	\item Call auction exchanges: most of the major exchanges (e.g. Nasdaq, LSE, Euronext) operate call auctions together with other trading methods
+	\item Call auction exchanges: most of the major exchanges (e.g. Nasdaq, LSE, Euronext) operate call auctions together with other trading methods. Danish electricity markets work via call auctions afaik.
 \end{itemize}
 \end{frame}
 
@@ -416,14 +422,15 @@ Traders can be classified:
 \begin{itemize}
 	\item \structure{Retail investors} vs \structure{institutional investors}
 	\begin{itemize}
-		\item Retail: regular people, individuals with money.
-		\item Institutional: pension funds, mutual funds, hedge funds, private equity funds...
+		\item \textbf{Retail:} regular people, individuals with money. \href{http://dx.doi.org/10.2139/ssrn.3776874}{\underline{Eaton et al. (2020)}}: retail accounts for about 20\% of market activity.
+		\item \textbf{Institutional:} pension funds, mutual funds, hedge funds, private equity funds...
 	\end{itemize}
 	\item \alert{Informed} vs \alert{uninformed} investors
 	\begin{itemize}
 		\item Retail investors and pension funds usually have little ``private information''.
 		\item Hedge funds and short-selling funds have good analytics and can react fast.
 		\item ``Private information''$\neq$``insider information''! Insider trading is banned in most jurisdictions.
+		\item Example: \href{https://arstechnica.com/cars/2020/09/nikola-stock-falls-25-as-the-company-faces-new-fraud-allegations/}{\underline{the Nikola story}} has been compiled by short-sellers from public sources -- informed, not insiders.
 	\end{itemize}
 \end{itemize}
 \end{frame}
@@ -469,11 +476,11 @@ Traders can be classified:
 \begin{frame}{For next class}
 \begin{enumerate}
 	%\item Find bid and ask prices for Facebook shares and for Microsoft. Which stock exchange do they come from? 
-	\item Match into groups / message me if you are looking for a group or group members.
-	\item Read the article about GameStop (on Absalon) and any follow-ups you can (be bothered to) find. Discuss in your newly formed groups:
+	\item Match into groups if you want / message me if you are looking for a group or group members.
+	\item Read the article about GameStop (on Absalon). Think/discuss:
 	\begin{itemize}
 		\item What kind of traders are involved on both sides? Based on that fact: why has this story made the news?
-		\item Sentiment aside, would now be a good time to buy GameStop stock? Why/why not?
+		\item Would now be a good time to buy GameStop stock? Why/why not?
 		\item Robinhood (trading app) halted trading in GameStop stocks at some point. Is there a scope for some regulatory intervention to prevent this kind of exclusion of retail traders?
 	\end{itemize} 
 	\item Do exercises 1-3 after Chapter 1 (pages 44-45) in the textbook
