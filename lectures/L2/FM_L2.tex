@@ -17,7 +17,7 @@ Chapter 2 of FPR}
 \author{Egor Starkov}
 
 \date{K{\o}benhavns Unversitet \\
-	Spring 2021}
+	Spring 2022}
 
 
 
@@ -40,118 +40,14 @@ Chapter 2 of FPR}
 \end{frame}
 
 
-\section{Leftovers: Types of markets and types of agents}
-
-\begin{frame}{Types of Markets: Exchange versus over-the-counter}
-	\textbf{Exchange trading}
-	\begin{itemize}
-		\item Organized exchange venues (NYSE, NASDAQ, LSE, ...)
-		\item Generally offer a lot of services
-		\begin{itemize}
-			\item Liquidity and stability through \textit{specialists/market makers}
-			\item Clearing and settlement
-			\item Transparency
-		\end{itemize}
-	\end{itemize}
-	\textbf{Over-the-counter (OTC) trading}
-	\begin{itemize}
-		\item Off-exchange venues
-		\begin{itemize}
-			\item Use quotation systems to match dealers and traders
-			\item However, no guarantee of liquidity (no specialists)...
-			\item ...nor transparency: may not publish trade information
-		\end{itemize}
-	\end{itemize}
-	\textbf{Dark liquidity}: Liquidity in `private exchanges' (not public)
-\end{frame}
-
-
-\begin{frame}{Other dimensions}
-	\begin{itemize}
-		\item Many other aspects in which markets can differ:
-		\begin{itemize}
-			\item Transparency about current orders
-			\item Transparency about past trades
-			\item Fragmentation
-			\item Listing requirements
-			\item ...
-		\end{itemize}
-		\item Who benefits from markets being organized in a particular way? Who loses? 
-	\end{itemize}
-\end{frame}
-
-
-\begin{frame}{Types of players in financial markets}
-	\begin{columns}
-		\begin{column}{0.4\linewidth}
-			\begin{itemize}
-				\item \textbf{Traders/investors}: the end-``consumers'' or suppliers of the asset
-				\item \textbf{Brokers}: the intermediaries who relay investors' orders to the market (investment banks)
-				\item \textbf{Dealers/market-makers}: match orders from different sides of the market
-			\end{itemize}
-		\end{column}
-		\begin{column}{0.6\linewidth}
-			\pause[1]
-			\includegraphics<handout:0>[scale=0.23]{../L1/pics/ag_brokers}
-		\end{column}
-	\end{columns}
-\end{frame}
-
-
-\begin{frame}{Types of traders}
-	\begin{columns}
-		\begin{column}{0.67\linewidth}
-			Traders can be classified:
-			\begin{itemize}
-				\item \structure{Retail investors} vs \structure{institutional investors}
-				\begin{itemize}
-					\item Retail: regular people, individuals with money.
-					\item Institutional: pension funds, mutual funds, hedge funds, private equity funds...
-				\end{itemize}
-				\item \alert{Informed} vs \alert{uninformed} investors
-				\begin{itemize}
-					\item Retail investors and pension funds usually have little ``private information''.
-					\item Hedge funds and short-selling funds have good analytics and can react fast.
-					\item ``Private information''$\neq$``insider information''! Insider trading is banned in most jurisdictions.
-				\end{itemize}
-			\end{itemize}
-		\end{column}
-		\begin{column}{0.33\linewidth}
-			\pause[1]
-			\includegraphics<handout:0>[scale=0.27]{../L1/pics/ag_traders}
-		\end{column}
-	\end{columns}
-\end{frame}
-
-
-
-\section{Let's talk about GameStop}
-
-\begin{frame}{GameStop}
-	1. What kind of traders are involved on both sides? Based on that fact: why has this story made the news?
-\end{frame}
-
-
-\begin{frame}{GameStop}
-	3. Robinhood (trading app) halted trading in GameStop stocks at some point. Is there a scope for some regulatory intervention to prevent this kind of exclusion of retail traders?
-\end{frame}
-
-
-\begin{frame}{GameStop}
-	2. Sentiment aside, would now be a good time to buy GameStop stock? Why/why not?
-	\pause
-	\includegraphics[scale=0.65]{pics/gamestop}
-\end{frame}
-
-
 
 \section{Fundamental value and Prices}
 
 \begin{frame}{Fundamental Value}
 	\begin{itemize}
 		\item We'd like to believe there is some ``objective''/``fundamental'' value of a stock.
-		\item The previous question then amounts to: \\
-		\emph{``Is current price of GME above or below its fundamental value?''}
+		\item The question of whether to buy of sell then often amounts to: \\
+		\emph{``Is the current asset price above or below its fundamental value?''}
 		\pause
 		\item To answer, need to understand what \structure{fundamental value} is.
 		\pause
@@ -180,7 +76,7 @@ Chapter 2 of FPR}
 		\item Question of \textbf{market microstructure}: take the `\alert{fundamental value}' as given and analyze how it \alert{translates into prices} in realistic markets.
 		\pause
 		\begin{itemize}
-			\item In GameStop case, divergence due to bubble(?)
+			\item In GameStop case, divergence was due to bubble(?)
 			\item Another broad reason for divergence: \structure{limited liquidity}
 		\end{itemize}
 		
@@ -229,10 +125,11 @@ Chapter 2 of FPR}
 
 \begin{frame}{Still, what exactly is liquidity?}
 \begin{itemize}
-	\item \alert{Market liquidity} = \visible<handout:0>{``market's ability to facilitate an asset being sold quickly without having to reduce its price very much (or even at all)''}
+	\item \alert{Market liquidity} = \visible<handout:0>{``market's ability to facilitate an asset being sold quickly (for cash) without having to reduce its price very much (or even at all)''}
 	\visible<handout:0>{
 		\begin{itemize}
 			\item Not everyone who wants to trade in a given asset is present in the market at the same time
+			\item Liquidity depends not just on exogenous parameters, but also traders' endogenous behavior
 		\end{itemize}
 	}
 	\pause
@@ -668,7 +565,9 @@ Somewhat volatile on high-frequency data, usually taken as an average over longe
 
 \begin{frame}{Other measures}
 \begin{itemize}
-	\item Measures such as trading volume and trade frequency are also used
+	\item Measures such as \structure{trading volume} and \structure{trade frequency} are also used
+	\item \structure{Time-to-trade} for limit orders is another measure, but difficult to use (depends on order size, depends on past traders' intent -- some post LOs to provide liq-ty, trading is not the final goal)
+	\\[4ex]
 	\item Some measures may contradict each other, e.g.:
 	\begin{itemize}
 		\item trading volume and spreads are both positively correlated with information releases (why?)
