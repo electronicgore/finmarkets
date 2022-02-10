@@ -9,7 +9,7 @@
 
 
 
-\title{Financial Markets Microstructure \\ Exercise class 1}
+\title{Financial Markets Microstructure \\ Exercises after L1}
 
 \author{Egor Starkov}
 
@@ -312,7 +312,7 @@
 	\\
 	}
 	
-	Can any profitable trades be made after market closes?
+	%Can any profitable trades be made after market closes?
 \end{frame}
 
 
@@ -325,95 +325,25 @@
 \end{frame}
 
 
-
-\section{Problems from Lecture 2}
-
-\begin{frame}{Lecture 2}
-From Lecture 2: 
-\begin{itemize}
-	\item problems 1 and 8 from FRP ch.2 (pp.72-76)
-	\item reproduce graphs from lecture ($\approx$ problems 6-7 from FPR ch.2) -- we did that in lecture (duh)
-\end{itemize}
+\begin{frame}{Clarifications}
+	\begin{itemize}
+		\item To clarify: in the previous two slides, I assumed that every trader wants to trade to close their position, so initial position = negative of placed order. You could assume instead that everyone starts with zero positions, and you'd get the same (relative) values for welfare.
+		\item Welfare calculation just multiplies every trader's position (before or after trade) by their valuation for the asset, and sums over traders.
+	\end{itemize}
 \end{frame}
 
 
-\begin{frame}{Problem 1: Market Depth}
-\begin{figure}
-	\includegraphics[width=.7\paperwidth]{pics/Image_LOB}
-\end{figure}
-\end{frame}
-
-
-\begin{frame}{Problem 1: Market Depth}
-	Quoted spreads for different volumes:
-	\begin{figure}
-		\includegraphics[width=.5\paperwidth]{pics/ch2ex1}
-	\end{figure}
+\begin{frame}{Conclusions}
+	\begin{itemize}
+		\item The two formats result in different sets of trades. 
+		\begin{itemize}
+			\item Both outcomes are Pareto-optimal -- there are no profitable trades left to conduct after market closes under either scenario.
+		\end{itemize}
 	
-\end{frame}
-
-
-\begin{frame}{Problem 1: Market Depth}
-\begin{figure}
-	\includegraphics[width=.7\paperwidth]{pics/Graph_LOB}
-\end{figure}
-\end{frame}
-
-
-\begin{frame}{Problem 8: Implementation Shortfall}
-	\begin{quotation}
-		Your client wants to buy $q$ shares in company XYZ at time $0$ and hold them until time $t$. Midprice at time $0$ is $m_0$. Market is not perfectly liquid, so realized [average] purchase price will be $\bar{p} = m_0 + \lambda k q$, where $k \in [0,1]$ is the share of the order fulfilled, $\lambda$ price pressure parameter. Expected midprice at time $t$ is $m_t$ (independent of $k$).
-		
-		Choose $k$ to minimize the resulting implementation shortfall.
-	\end{quotation}
-\end{frame}
-
-
-\begin{frame}{Problem 8: Implementation Shortfall}
-	Implementation shortfall:
-	\begin{align*}
-		IS_t 
-		& = q(m_t-m_0) - k q (m_t - \bar{p}) 
-		\\
-		& = k q(\bar{p} - m_0) + (1-k) q (m_t - m_0)
-		\\
-		& = \lambda (k q)^2 + (1-k) q (m_t - m_0).
-	\end{align*}
-	\pause
-	Find min:
-	\begin{align*}
-		\frac{d IS_t(k)}{dk} &= 2 \lambda q^2 k - q (m_t - m_0) = 0
-		\\
-		\Leftrightarrow k &= \frac{m_t - m_0}{2\lambda q}
-	\end{align*}
-	(don't forget to check the second order condition: $\frac{d^2 IS_t(k)}{dk^2} > 0$)
-\end{frame}
-
-
-\begin{frame}{Problem 8: Implementation Shortfall}
-	$$ k = \frac{m_t - m_0}{2\lambda q} $$
-	\begin{itemize}
-		\item Increasing in $m_t - m_0$:
-		\begin{itemize}
-			\item if asset price is expected to increase, the opportunity cost (regret) of not buying the asset is high.
-		\end{itemize}
-		\item Decreasing in $\lambda$:
-		\begin{itemize}
-			\item the more sensitive is the price, the less you can buy cheaply enough
-		\end{itemize}
-		\item Decreasing in $q$:
-		\begin{itemize}
-			\item (same as above) large orders move prices by more -- costlier to fulfill fully.
-		\end{itemize}
+		\item In our case, call auction generated better welfare results, but this is \textbf{not} a general result.
+		\item Welfare ranking of call vs continuous auction can go either way, and depends on the specific \structure{order}, in which trades arrive at the market.
 	\end{itemize}
 \end{frame}
 
-
-\begin{frame}{Problem 8: Implementation Shortfall}
-	\begin{itemize}
-		\item If you were solving this problem in reality, you would not know $m_t$.
-		\item Instead, treat $m_t$ as your \structure{expectation} of the future price, choose trading strategy to minimize the \structure{expected implementation shortfall}.
-	\end{itemize}
-\end{frame}
 
 \end{document} 
