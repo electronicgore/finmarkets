@@ -34,8 +34,8 @@ Chapter 2 of FPR}
 \begin{frame}{What did we do last week?}
 	\begin{enumerate}
 		\item Introduced \structure{financial markets} broadly speaking and motivate why we wanted to talk about it
-		\item Categorize the most important types of \structure{institutions}:  order-driven markets (auctions) and dealer markets
-		\item Introduced some of the key \structure{concepts and language}: dealer sets bid/ask price, market/limit order
+		\item Characterized \structure{market formats}: order-driven markets (auctions) and dealer markets
+		\item Introduced some of the key \structure{concepts and language}: dealer sets bid/ask price, traders submit market/limit orders
 	\end{enumerate}
 \end{frame}
 
@@ -51,14 +51,16 @@ Chapter 2 of FPR}
 		\pause
 		\item To answer, need to understand what \structure{fundamental value} is.
 		\pause
-		\item \textbf{Short answer}: \alert{discounted cash flow}. Affected by many factors:
-		\begin{enumerate}
-			\item R+D
-			\item Governance
-			\item Marketing
-			\item Competition
-			\item ...
-		\end{enumerate}
+		\item \textbf{Short answer}: \visible<handout:0>{
+			\alert{discounted cash flow}. Affected by many factors:
+			\begin{enumerate}
+				\item R+D
+				\item Governance
+				\item Marketing
+				\item Competition
+				\item ...
+			\end{enumerate}
+		}
 	\end{itemize}
 \end{frame}
 
@@ -170,7 +172,7 @@ Chapter 2 of FPR}
 \end{frame}
 
 
-\begin{frame}{Liquidity dry ups}
+\begin{frame}<handout:0>{Liquidity dry ups}
 	Liquidity can change over time, can dry up in times of instability
 	\begin{center}
 		\includegraphics[scale=0.5]{pics/L2_liquiditylehman}
@@ -181,8 +183,8 @@ Chapter 2 of FPR}
 
 \section{Measures of Liquidity}
 
-\begin{frame}<handout:0>{Liquidity measures}
-There is not a unique measure of liquidity. We will consider several:
+\begin{frame}{Liquidity measures}
+Liquidity is not a very well-defined concept, so it's not immediate how to measure it either. We will consider several measures:
 \begin{enumerate}
 	\item \textbf{Spread measures}: quoted spread, effective spread, realized spread
 	\item \textbf{Volume-weighted average price}: simply using average prices
@@ -273,7 +275,7 @@ When quote data are not available: estimate them using \structure{Roll's measure
 		\begin{center}
 			\includegraphics[scale=0.39]{pics/L2_effectivespread}
 		\end{center}
-		\item Effective spread is often lower (since it captures price improvements)
+		\item Effective spread is often lower (since it captures price improvements); can be larger if there was a big market order
 	\end{itemize}
 	% effective and quoted spreads measure cost of trading for the trader
 \end{frame}
@@ -490,6 +492,8 @@ When quote data are not available: estimate them using \structure{Roll's measure
 	\[
 	|\Delta m_t | = \gamma Vol_t + \epsilon_t.
 	\]
+	Meaningful for single trades, but if $t$ aggregates many trades, $\gamma$ is hard to interpret.
+	
 	In our example: $\gamma = 0.01$ ($Vol_t$ in 100,000EUR)
 	
 	\pause
@@ -502,10 +506,10 @@ When quote data are not available: estimate them using \structure{Roll's measure
 
 
 \begin{frame}<handout:0>{Amihud's Illiquidity Ratio}
-\begin{center}
-	\includegraphics[scale=0.39]{pics/L2_Amihud}
-\end{center}
-Somewhat volatile on high-frequency data, usually taken as an average over longer intervals (month)
+	\begin{center}
+		\includegraphics[scale=0.39]{pics/L2_Amihud}
+	\end{center}
+	Somewhat volatile on high-frequency data, usually taken as an average over longer intervals (month) -- but then it is also hard to interpret.
 \end{frame}
 
 
@@ -592,7 +596,7 @@ Somewhat volatile on high-frequency data, usually taken as an average over longe
 	\begin{itemize}
 		%\item In Absalon, I have attached a commission and fee schedule from Robinhood Financial. More information on \url{www.robinhood.io/}. Discuss the potential effect on other brokerage services.
 		%\item In this course we mostly imply equity markets. Read the article (on Absalon) about corporate bond markets. Discuss how differences in market structures of stock and bond markets affect liquidity in these markets.
-		\item Recreate the graphs and figures and numbers I presented today using the KrispyKreme dataset
+		\item Recreate the graphs and figures and numbers I presented today using the KrispyKreme dataset. Better: calculate the (average) values of all measures for the whole dataset.
 		\item Solve exercise 8 regarding implementation shortfall, on page 75 in the textbook.
 		Discuss the meaning of $m_t$ in this analysis.
 	\end{itemize}
