@@ -513,6 +513,19 @@ When quote data are not available: estimate them using \structure{Roll's measure
 \end{frame}
 
 
+\begin{frame}{On Hasbrouck and Amihud measures}
+\begin{itemize}
+	\item Neither Hasbrouck, nor Amihud measures make immediate sense when applied to aggregate data -- yet this is the most common application.
+	
+	\item Afaik, at least the Hasbrouck measure was born to deal with pre-1983 historical stock data, which only contained aggregated daily prices and volumes, and no intraday data. 
+	
+	\item \cite{hasbrouck_empirical_2007} shows that $\gamma$ is mildly correlated with $\lambda$ under some distributional assumptions
+	
+	\item Bottom line: do not use $\gamma$ or $I$ if you have data that lets you estimate $\lambda$ directly.
+\end{itemize}
+\end{frame}
+
+
 \begin{frame}{Volume based measure}
 \begin{itemize}
 	%\item Let $q_t$ be the order imbalance (net market purchase)
