@@ -16,17 +16,17 @@
 \author{Egor Starkov}
 
 \date{K{\o}benhavns Unversitet \\
-	Spring 2021}
+	Spring 2022}
 
 
 
 \begin{document}
-	\AtBeginSection[]{
-		\frame<beamer>{
-			\frametitle{This lecture:}
-			\tableofcontents[currentsection,currentsubsection]
-	}}
-	\frame[plain]{\titlepage}
+\AtBeginSection[]{
+	\frame<beamer>{
+		\frametitle{This lecture:}
+		\tableofcontents[currentsection,currentsubsection]
+}}
+\frame[plain]{\titlepage}
 
 %\section{Revision}
 
@@ -59,41 +59,38 @@
 %\end{frame}
 
 
-%\begin{frame}{Overview}
-%	Before we start, let's look at an overview of what we'll do in the rest of the course (weeks = weeks of the course, not calendar weeks)
-%	
-%	\textbf{Part 1}: Setting up the models
-%	\begin{itemize}
-%	\item \textit{Lectures 3-4}: Dealer models 1; \structure{Glosten-Milgrom}, fixed trade size; Bayes' Rule; adverse selection, order costs and inventory risk (\structure{Stoll})
-%	\item \textit{Lecture 5}: Dealer models 2; \structure{Kyle}, variable trade size; market depth; estimating liquidity determinants
-%	\item \textit{Lectures 6-7}: Limit order book; \structure{Glosten}: static, random market order demand; market design; \structure{Parlour}: dynamic, endogenous market order demand
-%	\item \textit{Lecture 6}: Problem set 1 assigned
-%	\end{itemize}
-%\end{frame}
-%
-%
-%\begin{frame}{Overview}
-%\textbf{Part 2}: Applying the models
-%\begin{itemize}
-%	\item \textit{Lecture 8}: Fragmentation: costs and benefits
-%	\item \textit{Lecture 9}: Transparency: search costs and order flow transparency
-%	\item \textit{Lecture 10}: Value of liquidity
-%	\item \textit{Lecture 11}: Liquidity and corporate policy
-%	\item \textit{Lecture 10}: Problem set 2 assigned
-%\end{itemize}
-%\end{frame}
-%
-%
-%\begin{frame}{Overview}
-%\textbf{Part 3}: Topics and specialized models
-%\begin{itemize}
-%	\item \textit{Lecture 11}: Digital markets
-%	\item \textit{Lecture 12}: High-frequency trading (\structure{Biais et al.}, \structure{Budish et al.})
-%	\item \textit{Lecture 13}: Public information; optimal disclosure policies; public announcements and trade volumes (\structure{Kondor})
-%	\item \textit{Lecture 14}: Bubbles; herding; common knowledge (\structure{Smith and S{\o}rensen}, \structure{Abreu and Brunnermeier})
-%	\item \textit{Lecture 15}: Auctions (bonus class)
-%\end{itemize}
-%\end{frame}
+\begin{frame}{Overview}
+	Before we start, let's look at an overview of what we'll do in the rest of the course
+	
+	\textbf{Part 1}: Setting up the models
+	\begin{itemize}
+	\item Dealer models 1; \structure{Glosten-Milgrom}, fixed trade size; Bayes' Rule; adverse selection
+	\item Dealer models 2; \structure{Kyle}, variable trade size; market depth; estimating liquidity determinants, inventory risk
+	\item Limit order book; \structure{Glosten}: static, random market order demand; market design; \structure{Parlour}: dynamic, endogenous market order demand
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Overview}
+\textbf{Part 2}: Applying the models
+\begin{itemize}
+	\item Fragmentation: costs and benefits
+	\item Transparency: search costs and order flow transparency
+	\item Value of liquidity
+	\item Liquidity and corporate policy
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Overview}
+\textbf{Part 3}: Topics and specialized models
+\begin{itemize}
+	\item High-frequency trading (\structure{Biais et al.}, \structure{Budish et al.})
+	\item Public information; optimal disclosure policies; public announcements and trade volumes (\structure{Kondor})
+	\item Bubbles; herding; common knowledge (\structure{Smith and S{\o}rensen}, \structure{Abreu and Brunnermeier})
+	\item Auctions (bonus class)
+\end{itemize}
+\end{frame}
 
 
 \begin{frame}{Today}
@@ -149,7 +146,7 @@
 
 \begin{frame}{Types of information}
 	\begin{itemize}
-		\item Different types of information
+		\item Different types of information (it's a spectrum really)
 		\begin{itemize}
 			\item \textbf{Public information}:  asset price may move \textit{without} trade
 			\item \textbf{Private information} possessed by some traders  $\rightarrow$ reveal this information through their trading
@@ -172,7 +169,18 @@
 	
 	\structure{Fama}'s \textbf{efficient markets hypothesis}: {prices} must be {efficient}.
 	\\
-	I.e., they must reflect all available information.
+	I.e., they must reflect all available information. Example: next slide
+\end{frame}
+
+
+\begin{frame}{How Dr. Alchian learned to build the bomb}
+	\small 
+	\begin{quote}
+		We knew they were developing this H-bomb, but we wanted to know, what's in it? What's the fissile material? Well there's thorium, thallium, beryllium, and something else, and we asked Herman Kahn and he said, ‘Can't tell you’… I said, ‘I'll find out’, so I went down to the RAND library and had them get for me the US Government's Dept. of Commerce Yearbook which has items on every industry by product, so I went through and looked up thorium, who makes it, looked up beryllium, who makes it, looked them all up, took me about 10 minutes to do it, and got them. There were about five companies, five of these things, and then I called Dean Witter… they had the names of the companies also making these things, ‘Look up for me the price of these companies…’ and here were these four or five stocks going like this, and then about, I think it was September, this was now around October, one of them started to go like that, from \$2 to around \$10, the rest were going like this, so I thought ‘Well, that's interesting’… I wrote it up and distributed it around the social science group the next day. I got a phone call from the head of RAND calling me in, nice guy, knew him well, he said ‘Armen, we've got to suppress this’… I said ‘Yes, sir’, and I took it and put it away, and that was the first event study.
+		\begin{flushright}
+			--from a 2000 interview with A.Alchian, transcribed by \cite{newhard_stock_2014}
+		\end{flushright}
+	\end{quote}
 \end{frame}
 
 
@@ -184,7 +192,7 @@
 %\end{frame}
 
 
-\begin{frame}{Information and prices}
+\begin{frame}{Types of informational efficiency}
 	There are different kinds of price efficiency:
 	\begin{itemize}
 		\item \textbf{Weak form}: Prices reflect historic (price) information
@@ -195,11 +203,11 @@
 \end{frame}
 
 
-\begin{frame}{Information and prices}
+\begin{frame}{Issues with EMH}
 Issues with EMH:
 \begin{itemize}[<+->]
-	\item \textbf{No-trade theorem}: If traders have private information and care only about fundamentals, nobody should ever trade (Milgrom \& Stokey, 1982)
-	\item \textbf{Grossman-Stiglitz (GS) paradox}: 
+	\item \textbf{No-trade theorem}: If traders have private information and care only about fundamentals, nobody should ever trade (\cite{milgrom_information_1982})
+	\item \textbf{GS informational paradox}: (\cite{grossman_impossibility_1980})
 	\begin{itemize}
 		\item Suppose markets were informationally efficient, then prices would reflect traders' private information
 		\item Thus: no incentive to acquire information (if this is costly)
@@ -263,9 +271,9 @@ So we will not take EMH for granted, but rather see whether it arises in models 
 
 
 
-\section{Glosten and Milgrom (1985)}
+\section{Glosten-Milgrom model}
 
-\begin{frame}{Glosten and Milgrom (1985)}
+\begin{frame}{\cite{glosten_bid_1985}}
 	\begin{quotation}
 		All models are wrong; some models are useful.
 		\begin{flushright}
@@ -464,6 +472,15 @@ This gives us two \structure{equilibrium conditions}.
 		\end{enumerate}
 	\end{exampleblock}
 \end{frame}
+
+
+
+\appendix
+\begin{frame}[allowframebreaks]{References}
+	\bibliography{../teaching}
+	\bibliographystyle{abbrvnat}
+\end{frame}
+
 
 \end{document}
 
