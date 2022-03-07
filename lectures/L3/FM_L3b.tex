@@ -128,22 +128,24 @@
 
 
 \begin{frame}{Analysis. A: Market making}
-\begin{itemize}%[<+->]
-	\item Dealer quotes bid and ask prices on \textit{one unit}
-	\begin{itemize}
-		\item Can revise prices between each incoming trade
+	\begin{itemize}[<+->]
+		\item Dealer quotes bid and ask prices on \textit{one unit}
+		\begin{itemize}
+			\item Can revise prices between each incoming trade
+		\end{itemize}
+		\item Quoted ask price $a_t$ only relevant if next incoming trader decides to buy
+		\begin{itemize}
+			\item Dealer's payoff in this case is given by $\mathbb{E}[a_t-v|\Omega_{t-1}, Buy] = a_t - \mathbb{E}[v|\Omega_{t-1}, Buy]$
+			\item Same for bid $b_t$; payoff: $\mathbb{E}[v|\Omega_{t-1}, Sell] - b_t$
+			\item (Note payoffs above rely on risk-neutrality)
+		\end{itemize}
+		\item Perfect competition among dealers implies zero expected profit $\Rightarrow$ \structure{ask price} and \structure{bid price} are
+		\begin{align*}
+			a_t & = \mathbb{E}[v|\Omega_{t-1}, Buy]; \\
+			b_t &= \mathbb{E}[v|\Omega_{t-1},  Sell].
+		\end{align*}
+		\item Notice that both sides of the equality depend on prices
 	\end{itemize}
-	\item Quoted ask price $a_t$ only relevant if next incoming trader decides to buy
-	\begin{itemize}
-		\item Same for bid $b_t$
-	\end{itemize}
-	\item Risk neutrality and competition implies that the \structure{ask price} and \structure{bid price} are
-	\begin{align*}
-		a_t & = \mathbb{E}[v|\Omega_{t-1}, Buy]; \\
-		b_t &= \mathbb{E}[v|\Omega_{t-1},  Sell].
-	\end{align*}
-	\item Notice that both sides of the equality depend on prices
-\end{itemize}
 \end{frame}
 
 
@@ -221,12 +223,14 @@ This gives us two \structure{equilibrium conditions}.
 			\item either by a noise trader (probability $(1-\pi)\beta_B$) -- no new information, $\mu_t = \mu_{t-1} = \mathbb{E}[v|\Omega_{t-1}]$;
 			\item or by a speculator (probability $\pi \mathbb{P}(v \geq a_t | \Omega_{t-1})$) -- then learn that $v \geq a_t$, so $\mu_t = \mathbb{E} [v | \Omega_{t-1}, v \geq a_t]$.
 		\end{itemize}
-		\item Then $a_t$ is given by (using Bayes' rule and law of total probability):
+		\item Then $a_t$ is given by (using Bayes' rule and law of total probability; N=Noise, I=Informed):
 		\visible<handout:0|2->{
 		\begin{align*}
 			a_t &= \mathbb{E}[v|\Omega_{t-1}, Buy]
 			\\
-			= \frac{\mathbb{P}(Buy,Noise|\Omega_{t-1}, v)}{\mathbb{P}(Buy|\Omega_{t-1}, v)} \cdot \mathbb{E}[v|\Omega_{t-1}] &+ \frac{\mathbb{P}(Buy,Informed|\Omega_{t-1}, v)}{\mathbb{P}(Buy|\Omega_{t-1}, v)} \cdot \mathbb{E} [v | \Omega_{t-1}, v \geq a_t]
+			= \mathbb{P}(N|\Omega_{t-1},Buy) \cdot \mathbb{E}[v|\Omega_{t-1},Buy,N] &+ \mathbb{P}(I|\Omega_{t-1},Buy) \cdot \mathbb{E}[v|\Omega_{t-1},Buy,I]
+			\\
+			= \frac{\mathbb{P}(Buy,N|\Omega_{t-1})}{\mathbb{P}(Buy|\Omega_{t-1})} \cdot \mathbb{E}[v|\Omega_{t-1}] &+ \frac{\mathbb{P}(Buy,I|\Omega_{t-1})}{\mathbb{P}(Buy|\Omega_{t-1})} \cdot \mathbb{E} [v | \Omega_{t-1}, v \geq a_t]
 			\\
 			= \frac{(1-\pi)\beta_B}{(1-\pi) \beta_B + \pi \mathbb{P}(v \geq a_t)} \cdot \mu_{t-1} &+ \frac{\pi \mathbb{P}(v \geq a_t | \Omega_{t-1})}{(1-\pi) \beta_B + \pi \mathbb{P}(v \geq a_t)} \cdot \mathbb{E} [v | \Omega_{t-1}, v \geq a_t],
 		\end{align*}

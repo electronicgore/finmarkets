@@ -210,12 +210,15 @@ Issues with EMH:
 	\item \textbf{GS informational paradox}: (\cite{grossman_impossibility_1980})
 	\begin{itemize}
 		\item Suppose markets were informationally efficient, then prices would reflect traders' private information
-		\item Thus: no incentive to acquire information (if this is costly)
+		\item Thus: \structure{no incentive to acquire information} (if this is costly)
 	\end{itemize} 
 	\item \textbf{Volatility}: prices move a lot, such volatility cannot be justified by public news alone
 	\item \textbf{Process}: \alert{how} does information get incorporated into prices?
+	\begin{itemize}
+		\item Suppose every agent has some private signal about the fundamental, but also knows that the price incorporates all private info of all agents. Then it's optimal to ignore own signal, since it adds nothing to the price signal. But if everyone ignores all signals, price cannot be informative.
+	\end{itemize}
 \end{itemize}
-\pause[6]
+\pause[8]
 So we will not take EMH for granted, but rather see whether it arises in models endogenously.
 \end{frame}
 
@@ -391,9 +394,11 @@ So we will not take EMH for granted, but rather see whether it arises in models 
 	\end{itemize}
 	\item Quoted ask price $a_t$ only relevant if next incoming trader decides to buy
 	\begin{itemize}
-		\item Same for bid $b_t$
+		\item Dealer's payoff in this case is given by $\mathbb{E}[a_t-v|\Omega_{t-1}, Buy] = a_t - \mathbb{E}[v|\Omega_{t-1}, Buy]$
+		\item Same for bid $b_t$; payoff: $\mathbb{E}[v|\Omega_{t-1}, Sell] - b_t$
+		\item (Note payoffs above rely on risk-neutrality)
 	\end{itemize}
-	\item Risk neutrality and competition implies that the \structure{ask price} and \structure{bid price} are
+	\item Perfect competition among dealers implies zero expected profit $\Rightarrow$ \structure{ask price} and \structure{bid price} are
 	\begin{align*}
 		a_t & = \mathbb{E}[v|\Omega_{t-1}, Buy]; \\
 		b_t &= \mathbb{E}[v|\Omega_{t-1},  Sell].
