@@ -366,7 +366,53 @@
 \end{frame}
 
 
+\begin{frame}{Kyle with inventory risk I}
+\begin{itemize}
+	\item Now let's look at how market maker's \alert{inventory risk} can lead to limited depth.
+	\item Assume \structure{no informed trading}: $x = 0$.
+	\item Asset value $v \sim \mathcal{N}(\mu, \sigma^2_v)$
+	\item Market maker has mean-variance preferences over their next-period wealth:
+	\[
+	U(w_{t+1})=\mathbb{E}[w_{t+1}] - \frac{\rho}{2} \mathbb{V}(w_{t+1}),
+	\]
+	where $w$ is composed of cash and asset holdings: $w_{t+1} = (z_t - q_t) v + q_t p_t$
+	\item MM's initial asset position is $z_t$ (initial cash is irrelevant, ignore it).
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Kyle with inventory risk II}
+\begin{itemize}
+	\item To get the pricing schedule, follow the competitive logic:
+	\begin{itemize}
+		\item The market-maker takes some market price $p$ as given, chooses how much $q(p)$ to sell at this price:
+		\begin{align*}
+			\max_q \left\{ \underbrace{(z_t-q)\mathbb{E}[v] + qp}_{\mathbb{E}[w_{t+1}]} - \underbrace{\frac{\rho}{2} (z_t-q)^2 \mathbb{V}(v) }_{ \mathbb{V}(w_{t+1})} \right\}
+		\end{align*}
+		\item FOC: $p - \mu + \rho (z_t-q) \sigma_v^2 = 0 \iff \structure{q(p) =} z_t + \frac{p - \mu}{\rho \sigma_v^2}$
+	\end{itemize}
+	\item For market to clear, need $q(p) = u = q$ (dealer's supply = total traders' market order), so inverting the pricing schedule we get: 
+	$$p(q) = \mu + \rho \sigma_v^2 (q - z_t).$$
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Kyle with inventory risk III}
+$$p(q) = \mu + \rho \sigma_v^2 (q - z_t)$$
+Takeaways:
+\begin{enumerate}
+	\item Depth (dictated by the dealer's willingness to trade at a given price) is limited 
+	\item This is despite traders still being completely price-insensitive in this model!
+	\item Price impact depends on asset riskiness $\sigma_v^2$ and MM's risk aversion $\rho$.
+	\item Midquote depends on $z_t$
+\end{enumerate}
+So really, all the same stuff as in GM with inventory risk.
+\\ The book also looks at versions with many MMs with heterogeneous $\rho$s, and many imperfectly competitive MMs.
+\end{frame}
+
+
 \begin{frame}{Extensions}
+	Other extensions are possible:
 	\begin{enumerate}
 		\item \textbf{Dynamics}
 		\begin{itemize}
@@ -400,13 +446,14 @@
 			\pause \visible<handout:0>{\structure{Increasing price sensitivity reduces $k$'s amount traded, but raises market price, the former outweighs.}}
 		\end{itemize}
 		\pause
-		\item \textbf{Risk averse market makers}
-		\begin{itemize}
-			\item Similar to Stoll (1978) from textbook and GM with risk-aversion that we covered; same takeaways
-			\item See textbook for ver with no asymmetric information. Can add that and imperfect competition.
-			%\item Allows for imperfect competition: depth is a factor of $(K-1)/(K-2)$ of what we found for Stoll
-		\end{itemize}
-		\pause
+		%\item \textbf{Risk averse market makers}
+		%\begin{itemize}
+		%	\item Similar to Stoll (1978) from textbook and GM with risk-aversion that we covered; same takeaways
+		%	\item See the following slides
+		%	%\item See textbook for ver with no asymmetric information. Can add that and imperfect competition.
+		%	%\item Allows for imperfect competition: depth is a factor of $(K-1)/(K-2)$ of what we found for Stoll
+		%\end{itemize}
+		%\pause
 		\item \textbf{Trading costs}
 		\begin{itemize}
 			\item Trivial in GM. Very difficult here, both technically and conceptually.
@@ -419,7 +466,7 @@
 
 \begin{frame}{Homework}
 	\begin{enumerate}
-		\item We will talk about empirical estimation of factors of illiquidity on Wed (ch.5) and begin talking about LOB markets (without dealers; ch.6)
+		\item We will talk about empirical estimation of factors of illiquidity next time (ch.5) and begin talking about LOB markets (without dealers; ch.6)
 		\item Solve ex 3 in ch.4 (p.159): Kyle's model with competition among speculators.
 	\end{enumerate}
 \end{frame}
