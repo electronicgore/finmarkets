@@ -17,7 +17,7 @@
 \author{Egor Starkov}
 
 \date{K{\o}benhavns Unversitet \\
-	Spring 2021}
+	Spring 2022}
 
 
 \begin{document}
@@ -142,8 +142,8 @@
 	\begin{itemize}
 		\item Apart from the usual concerns with old empirical papers...
 		\begin{itemize}
-			\item not much data
-			\item questionable specification
+			\item not much data (20 stocks, 800 transactions each)
+			\item questionable specification (why have both $\lambda_0$ and $\lambda_1$?)
 			\item questionable estimation procedures
 		\end{itemize}
 		\item ...there is the issue of ignoring inventory costs.
@@ -182,17 +182,20 @@
 
 
 \begin{frame}{Including inventory costs (2)}
+	\begin{itemize}
+		\item \textbf{\citet*{madhavan_why_1997}} find that $\lambda$ is higher in the morning, and $\gamma$ higher in the afternoon
+		% more adverse selection in the morning; higher bargaining power for dealers at closing (traders want to unwind positions)
 		\begin{itemize}
-			\item \textbf{\citet*{madhavan_why_1997}} find that $\lambda$ is higher in the morning, and $\gamma$ higher in the afternoon
-			% more adverse selection in the morning; higher bargaining power for dealers at closing (traders want to unwind positions)
-			\begin{itemize}
-				\item Morning trading reveals all the information accumulated during off-market hours. Evening trading driven by traders' desire to close open positions
-				\item \textbf{\cite{bogousslavsky_should_2020}}: closing auctions account for $7.3\%$ of daily trading volume, but contribute nothing to price discovery. Closing prices deviate a lot from midquotes, but revert back quickly. Why? 
-				\pause 
-				Probably because traders rush to close their positions before EoD. But also in part because closing auctions are more closed and are of lower quality, see \textbf{\cite{hu_vestigial_2020}}.
-			\end{itemize}
-			\item \textbf{\cite{lyons_tests_1995}} had data on a FOREX dealer's inventory, and found $\beta$ very large
+			\item Morning trading reveals all the information accumulated during off-market hours. Evening trading driven by traders' desire to close open positions
+			\item \textbf{\cite{bogousslavsky_should_2020}}: closing auctions account for $7.3\%$ of daily trading volume, but contribute nothing to price discovery. Closing prices deviate a lot from midquotes, but revert back quickly. Why? 
+			\pause 
+			Probably because traders rush to close their positions before EoD. But also in part because closing auctions are more closed and are of lower quality, see \textbf{\cite{hu_vestigial_2020}}.
 		\end{itemize}
+		\item \textbf{\cite{lyons_tests_1995}} had data on a FOREX dealer's inventory, and found $\beta$ very large
+		\begin{itemize}
+			\item Probably also because FX dealers really don't like to hold overnight positions
+		\end{itemize}
+	\end{itemize}
 \end{frame}
 
 
@@ -225,7 +228,7 @@
 		\item ...while the \alert{converse} is true for \structure{order processing costs}. Possible reasons:
 		\begin{itemize}
 			\item costs are per-transaction rather than per-unit
-			\item large orders come from institutional traders that get better terms of trade? (Note: Paris Bourse was a pure-LOB market, no dealers)
+			\item large orders come from institutional traders that get better terms of trade? (However: Paris Bourse was a pure-LOB market, no dealers, so this is probably not the reason)
 		\end{itemize}
 	\end{itemize}
 \end{frame}
@@ -233,7 +236,7 @@
 
 \begin{frame}{Probability of Informed Trading}
 	\begin{itemize}
-		\item \textbf{\citet*{easley_liquidity_1996}}: use GM type model to estimate the prob. of informed trading
+		\item \textbf{\citet*{easley_liquidity_1996}}: use GM-type model to estimate the prob. of informed trading
 		\item On any given trading day, w.p. $\alpha$ there is some information event
 		\begin{itemize}
 			\item good or bad
