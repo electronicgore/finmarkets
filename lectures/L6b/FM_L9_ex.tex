@@ -1,0 +1,126 @@
+%%% License: Creative Commons Attribution Share Alike 4.0 (see https://creativecommons.org/licenses/by-sa/4.0/)
+%%% Slides are based heavily on earlier versions of this course taught by Jesper Rudiger.
+
+\documentclass[english,10pt
+,handout
+,aspectratio=169
+]{beamer}
+\input{../FM_preamble.tex}
+
+
+
+
+\begin{document}
+\section{Kyle model}
+
+\begin{frame}{Lecture 9}
+	\begin{itemize}
+		\item solve exercise 3 in chapter 4 (p.159) which explores competition among speculators
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Exercise 4.3}
+	\begin{itemize}
+		\item Consider a Kyle model with many speculators $i \in \{1,2,...,N\}$.
+		\item Every speculator uses a linear strategy
+		$$ x_i = \beta (v-\mu) $$
+		\item Everything else is same as in lecture
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Exercise 4.3.a}
+	\begin{exampleblock}{}
+		(a) Find the equilibrium aggressiveness $\beta$, determine how it depends on $N$ and explain why.
+	\end{exampleblock}
+	
+	\pause
+	
+	Speculator $i$ maximizes the expected profit $\mathbb{E} [x_i (v-p)]$.
+	
+	The clearing price is given by the zero-profit condition:
+	\begin{align*}
+		p = \mu + \lambda [x_i + (N-1) \beta (v-\mu) + u]
+	\end{align*}
+	Plugging it into the expected profit expression and maximizing it w.r.t. $x_i$ yields
+	\begin{align*}
+		x_i &= \underbrace{\frac{1 - \lambda \beta (N-1)}{2 \lambda}}_{=\beta} (v-\mu)
+		\\
+		\Rightarrow
+		\beta &= \frac{1}{\lambda (N+1)}
+	\end{align*}
+\end{frame}
+
+
+\begin{frame}{Exercise 4.3.a}
+	\begin{align*}
+	\beta &= \frac{1}{\lambda (N+1)}
+	\end{align*}
+	
+	\begin{itemize}
+		\item $\beta$ decreasing in $N$: the more traders, the smaller is one trader's share (as in Cournot oligopoly)
+		\item $N \beta$ increasing in $N$: total order size increases in $N$ because with high $N$, each trader suffers less from higher price (due to lower output)
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Exercise 4.3.b}
+	\begin{exampleblock}{}
+		(b) Derive the price impact coefficient $\lambda$ from the dealer's zero-profit condition
+	\end{exampleblock}
+
+	\pause
+	
+	\begin{align*}
+		\lambda = \frac{\mathbb{C}(v,q)}{\mathbb{V}(q)} = \frac{N \beta \sigma^2_v}{(N \beta)^2 \sigma^2_v + \sigma^2_u}	
+		% \frac{ \frac{N}{\lambda (N+1)} \sigma^2_v }{ \left( \frac{N}{\lambda (N+1)} \right)^2 \sigma^2_v + \sigma^2_u }
+	\end{align*}
+	Combining with the expression for $\beta$, we get
+	\begin{align*}
+		\lambda &= \frac{\sqrt{N}}{N+1} \frac{\sigma_v}{\sigma_u} 
+		&
+		\beta = \frac{1}{\sqrt{N}} \frac{\sigma_u}{\sigma_v}
+	\end{align*}
+\end{frame}
+
+
+\begin{frame}{Exercise 4.3.c}
+	\begin{exampleblock}{}
+		(c) What is the market depth in equilibrium, and how is it affected by an increase in the number of informed traders, $N$? What is the economic intuition for this result?
+		Do you think this result is robust?
+	\end{exampleblock}
+	
+	\pause
+	
+	\begin{itemize}
+		\item Depth is $\frac{1}{\lambda} = \frac{N+1}{\sqrt{N}} \frac{\sigma^2_u}{\sigma^2_v} $
+		\item It is increasing in $N$ because traders become more aggressive (relative to their market share) in the presence of competition -- submit larger orders $|x_i|$ given any fixed $v$, -- price reacts less to any fixed order size.
+		\item The conclusion is not 100\% robust...
+	\end{itemize}
+\end{frame}
+
+
+%\begin{frame}{Exercise 4.3.c}
+%	%TODO: rip the pic out of the textbook and elaborate on it -- Fig 4.2? or which one?
+%\end{frame}
+
+
+\begin{frame}{Exercise 4.3.d}
+	\begin{exampleblock}{}
+		(d) Compute the ex-ante expected profit of each informed investor. What is the effect of an increase in $N$ on the aggregate profit of informed investors?
+	\end{exampleblock}
+
+	\pause
+	
+	\begin{align*}
+		\mathbb{E} [x_i(v-p)] = \frac{\sigma_u \sigma_v}{(N+1) \sqrt{N}}
+	\end{align*}
+	\begin{itemize}
+		\item predictably, the profits of each speculator decrease in $N$
+		\item aggregate profit of all speculators $\frac{\sigma_u \sigma_v \sqrt{N}}{N+1}$ also decreases in $N$ (because total aggressiveness $N \beta$ increases away from the monopolistic optimum)
+	\end{itemize}
+\end{frame}
+
+
+\end{document} 
