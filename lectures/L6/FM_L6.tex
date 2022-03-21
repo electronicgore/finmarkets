@@ -11,7 +11,7 @@
 
 \title{Financial Markets Microstructure \\ Lecture 10}
 
-\subtitle{Limit order book\\
+\subtitle{Limit order book, part 1\\
 	Chapter 6.1-6.2 of FPR}
 
 \author{Egor Starkov}
@@ -133,14 +133,14 @@
 
 
 \begin{frame}{LOB Markets: Modelling Issues}
-	A LO is $(t,x,p)$: submission time $t$, quantity $x$, price $p$.
+	A limit order is $(t,x,p)$: submission time $t$, quantity $x$, price $p$.
 	
 	Modelling LOBs properly is very difficult, many factors to account for:
 	\begin{enumerate}
-		\item Traders' action set is large: submit buy/sell LO/MO, how much, choose price if LO
-		\item Dynamics is relevant: choose when to submit, when to cancel/resubmit (since LO might not execute)
-		\item State of LOB is rich: trader's choice depends on other LOs in the book (though not all of them might be observable)
-		\item Private information affects not just valuation, but expectations about LOB evolution...
+		\item Traders' \structure{action set} is large: submit buy/sell LO/MO, how much, choose price if LO
+		\item \structure{Dynamics} is relevant: choose when to submit, when to cancel/resubmit (since LO might not execute)
+		\item \structure{State} of LOB is rich: trader's choice depends on other LOs in the book (though not all of them might be observable)
+		\item Private information affects not just valuation, but \structure{expectations} about LOB evolution...
 	\end{enumerate}
 	So we'll look at very simple models that explore different slices of this problem.
 \end{frame}
@@ -450,6 +450,16 @@
 			\]
 		\end{block}
 		\item (Again: we actually need the opposite -- find $Y_k$ for a given tick $A_k$.)
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Empirical evidence}
+	\begin{itemize}
+		\item \textbf{\cite{sandas_adverse_2001}} estimates Glosten model (in a form similar to example 2 above) via GMM, using intraday snapshots of LOB from Stockholm Stock Exchange and data on market orders 
+		\item Estimates the info content of market orders vs actual pricing schedules, so effectively the $\mathbb{E}[v|\theta_i(q) \geq P'(q)]$ inferred from pricing schedule and the actual $\mathbb{E}[v|\theta_i(q) = P'(q)]$.
+		\item Zero profit condition is tested and rejected: LOB not deep enough to drive average expected profits to zero
+		\item Also, estimated order execution costs are negative for the best bid and ask -- i.e., those limit traders have some intrinsic preference for trading
 	\end{itemize}
 \end{frame}
 
