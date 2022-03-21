@@ -123,78 +123,88 @@
 
 Exercise 4 in chapter 3 (pp. 125-126):
 
-Consider the one-period Glosten-Milgrom model with $v \in \{v^L, v^H\}$ and $\mathbb{P}(v^H)=1/2$. The dealer is competitive and risk neutral, so prices are equal to expected values. With probability $1-\pi$ the trader is a noise trader who buys and sells with equal probability, with probability $\pi$ he is a potential insider. The potential insider can acquire information that perfectly reveals $v$ at a cost $c>0$.
+Consider the one-period Glosten-Milgrom model with $v \in \{v^L, v^H\}$ and $\mathbb{P}(v^H)=1/2$. The dealer is competitive and risk neutral, so prices are equal to expected values. With probability $1-\pi$ the trader is a noise trader who buys and sells with equal probability, with probability $\pi$ he is a potential insider. The potential insider can, before submitting a trade, privately acquire information that perfectly reveals $v$ at some fixed cost $c>0$. If no information is acquired, the potential insider has no private information about $v$. As usual, suppose the dealer cannot distinguish the traders.
+
 
 \begin{enumerate} [label=(\alph*). ]
 
-\item Compute bid-ask prices set by the dealer assuming that he believes that the insider acquires information with probability $\varphi \in [0,1]$.
+\item Compute the bid and ask prices set by the dealer, assuming that he believes that the insider acquires information with probability $\varphi \in [0,1]$.
 
 \begin{solution}
-A potential insider who does not acquire information will always abstain (as long as there is a positive bid-ask spread) whereas an insider who observes $v^H$ ($v^L$) will buy (sell). (You can verify this in the end.)
-
-Use Bayes' Rule to calculate the probability that the trader is an \textit{insider} given a buy order is
-\[
-\mathbb{P}(I|\text{buy}) = \frac{\mathbb{P}(I) \cdot \mathbb{P}(\text{buy}|I)}{\mathbb{P}(\text{buy})} =\frac{\pi \varphi \frac{1}{2}}{\pi \varphi \frac{1}{2} + (1-\pi)\frac{1}{2}} = \frac{\pi \varphi }{\pi \varphi  + (1-\pi)}.
-\]
-Let $\alpha_\varphi = \frac{\pi \varphi }{\pi \varphi  + (1-\pi)}$. Similarly, we can deduce that $\mathbb{P}(I|\text{sell})=\alpha_\varphi$. Letting $m=\frac{v^H+v^L}{2}$, the ask ($a_\varphi$) and bid ($b_\varphi$) prices are
-\begin{align*}
-a_\varphi & = \alpha_\varphi v^H+(1-\alpha_\varphi) m, \\
-b_\varphi & = \alpha_\varphi v^L+(1-\alpha_\varphi) m.
-\end{align*}
-That is, the ask price is the probability that the trader is an (informed) insider times the value given that he is informed, plus the probability that the trader is a noise trader, times the expected value  given that he is a noise trader (which is just the prior expectation $m$).
+	A potential insider who does not acquire information will always abstain (as long as there is a positive bid-ask spread) whereas an insider who observes $v^H$ ($v^L$) will buy (sell). (You can verify this in the end.)
+	
+	Use Bayes' Rule to calculate the probability that the trader is an \textit{insider} given a buy order is
+	\[
+	\mathbb{P}(I|\text{buy}) = \frac{\mathbb{P}(I) \cdot \mathbb{P}(\text{buy}|I)}{\mathbb{P}(\text{buy})} =\frac{\pi \varphi \frac{1}{2}}{\pi \varphi \frac{1}{2} + (1-\pi)\frac{1}{2}} = \frac{\pi \varphi }{\pi \varphi  + (1-\pi)}.
+	\]
+	Let $\alpha_\varphi = \frac{\pi \varphi }{\pi \varphi  + (1-\pi)}$. Similarly, we can deduce that $\mathbb{P}(I|\text{sell})=\alpha_\varphi$. Letting $m=\frac{v^H+v^L}{2}$, the ask ($a_\varphi$) and bid ($b_\varphi$) prices are
+	\begin{gather}
+		\begin{aligned}
+		a_\varphi & = \alpha_\varphi v^H+(1-\alpha_\varphi) m, \\
+		b_\varphi & = \alpha_\varphi v^L+(1-\alpha_\varphi) m.
+		\end{aligned}
+		\label{eq:bidask}
+	\end{gather}
+	That is, the ask price is the probability that the trader is an (informed) insider times the value given that he is informed, plus the probability that the trader is a noise trader, times the expected value  given that he is a noise trader (which is just the prior expectation $m$).
 \end{solution}
+
 
 \item Given these prices, determine the trading profit of an insider who has decided to acquire information.
 
 \begin{solution}
-The trader's profit from acquiring information depends on the belief of the dealer, i.e. the probability that the dealer attaches to the trader acquiring information. Suppose the dealer's belief attaches probability $\varphi$ to the trader being an informed insider. A trader who acquires information then has the following expected profit:
-\[
-u(\varphi) = \frac{1}{2}(v^H - a_\varphi) + \frac{1}{2}(b_\varphi - v^L) - c = (1-\alpha_\varphi) \frac{v^H-v^L}{2}-c.
-\]
-Notice that the dealer's beliefs enters only through the prices.
+	The trader's profit from acquiring information depends on the belief of the dealer, i.e. the probability that the dealer attaches to the trader acquiring information. Suppose the dealer's belief attaches probability $\varphi$ to the trader being an informed insider. A trader who acquires information then has the following expected profit:
+	\[
+	u(\varphi) = \frac{1}{2}(v^H - a_\varphi) + \frac{1}{2}(b_\varphi - v^L) - c = (1-\alpha_\varphi) \frac{v^H-v^L}{2}-c.
+	\]
+	Notice that the dealer's beliefs enters only through the prices.
 \end{solution}
 
-\item Determine the condition on $c$ such that the potential insider never acquires information (i.e., $\phi=0$ is an equilibrium).
+
+\item There exists $\bar{c}$ such that if $c > \bar{c}$, then the potential insider never acquires information (i.e., in equilibrium, $\varphi=0$). Calculate $\bar{c}$.
 
 \begin{solution}
-Notice that $u'(\cdot)<0$, i.e. the trader's potential profits are decreasing in the dealer's belief of the probability that he is informed. Thus, the best potential case for acquiring information is when $\varphi=0$, that is, when the market does not expect the trader to be an informed insider. As a consequence, the trader will never acquire information when $u(0) < 0$, which corresponds to
-\[
-(1-\alpha_0)\frac{v^H-v^L}{2}-c <0 \Leftrightarrow c > \frac{v^H-v^L}{2}.
-\]
-The higher the value volatility, as measure by the distance between the high and the low value, the greater the incentive to acquire information.
+	Notice that $u'(\cdot)<0$, i.e. the trader's potential profits are decreasing in the dealer's belief of the probability that he is informed. Thus, the best potential case for acquiring information is when $\varphi=0$, that is, when the market does not expect the trader to be an informed insider. As a consequence, the trader will never acquire information when $u(0) < 0$, which corresponds to
+	\[
+	(1-\alpha_0)\frac{v^H-v^L}{2}-c <0 \Leftrightarrow c > \frac{v^H-v^L}{2} \equiv \bar{c}.
+	\]
+	The higher the value volatility, as measure by the distance between the high and the low value, the greater the incentive to acquire information.
 \end{solution}
 
-\item Determine the condition on $c$ such that the potential insider always acquires information.
+
+\item There exists $\underline{c}$ such that if $c < \underline{c}$, then the potential insider always acquires information (i.e., in equilibrium, $\varphi=1$). Calculate $\underline{c}$.
 
 \begin{solution}
-Similarly to the previous question, the worst potential case for acquiring information is when $\varphi=1$. Hence, the trader will always acquire information when $u(1) > 0$, which corresponds to
-\[
-(1-\alpha_1)\frac{v^H-v^L}{2}-c > 0 \Leftrightarrow c < (1-\pi) \frac{v^H-v^L}{2}.
-\]
-
+	Similarly to the previous question, the worst potential case for acquiring information is when $\varphi=1$. Hence, the trader will always acquire information when $u(1) > 0$, which corresponds to
+	\[
+	(1-\alpha_1)\frac{v^H-v^L}{2}-c > 0 \Leftrightarrow c < (1-\pi) \frac{v^H-v^L}{2} \equiv \underline{c}.
+	\]
 \end{solution}
 
-\item Consider intermediate values of $c$, and find the mixed-strategy equilibrium (in terms of $\varphi$).
+
+\item Suppose now that $c \in (\underline{c}, \bar{c})$. Find the mixed-strategy equilibrium in which the potential insider learns $v$ with positive probability smaller than one. Describe the equilibrium fully.
 
 \begin{solution}
-Let the probability with which the trader acquires information (his strategy) be denoted by $\sigma$ (recall that $\varphi$ is the dealer's belief about $\sigma$). In equilibrium, we must have $\sigma^*=\varphi^* \in (0,1)$, i.e. the beliefs must be correct (otherwise, the dealer would change his beliefs). Since the trader is playing a strictly mixed information acquisition strategy, we know from standard game theory considerations that he must then be indifferent between acquiring and not acquiring information. Therefore, $u(\varphi^*)=0$. Thus,
-\[
-(1-\alpha_{\varphi^*})\frac{v^H-v^L}{2}-c = 0 \Rightarrow \sigma^*=\varphi^* = \frac{1-\pi}{\pi} \left(\frac{v^H-v^L}{2c} -1 \right).
-\]
-Inspecting the expression, we can make the following observations about equilibrium information acquisition in the mixed-strategy equilibrium. Higher $\pi$ means less probability of acquiring information. This is because more adverse selection leads to a greater spread, and therefore less profitability. Higher value volatility ($v^H-v^L$) leads to higher probability of acquiring information. This is because information is worth more when values are volatile. Higher cost $c$ leads to less probability of acquiring information, since information is more expensive.
+	Let the probability with which the trader acquires information (his strategy) be denoted by $\sigma$ (recall that $\varphi$ is the dealer's belief about $\sigma$). In equilibrium, we must have $\sigma^*=\varphi^* \in (0,1)$, i.e. the beliefs must be correct (otherwise, the dealer would change his beliefs). Since the trader is playing a strictly mixed information acquisition strategy, we know from standard game theory considerations that he must then be indifferent between acquiring and not acquiring information: $u(\varphi^*)=0$. Thus,
+	\begin{align}
+		\label{eq:phistar}
+		(1-\alpha_{\varphi^*})\frac{v^H-v^L}{2}-c = 0 \Rightarrow \sigma^*=\varphi^* = \frac{1-\pi}{\pi} \left(\frac{v^H-v^L}{2c} -1 \right).
+	\end{align}
+	
+	The equilibrium is thus such that the dealer believes that the potential insider acquires information with probability $\varphi^*$ given by \eqref{eq:phistar} and quotes bid and ask prices $a_{\varphi^*}, b_{\varphi^*}$ as given by \eqref{eq:bidask}; and the potential insider learns $v$ with probability $\sigma^*$ given by \eqref{eq:phistar}, submits a buy order if learned that $v = v^H$, a sell order if $v = v^L$, and no order if learned nothing.
 
+	Inspecting the expression, we can make the following observations about equilibrium information acquisition in the mixed-strategy equilibrium. Higher $\pi$ means smaller probability of acquiring information. This is because more adverse selection leads to a greater spread, and therefore less profitable trades. Higher fundamental value volatility ($v^H-v^L$) leads to higher probability of acquiring information. This is because information is worth more when values are volatile. Higher cost $c$ leads to a smaller probability of acquiring information, since information is more expensive.
 \end{solution}
 
 
-\item Describe fully the market equilibrium that will arise for a given $c$. 
-
-\begin{solution}
-  \textit{Case 1:} $c > \frac{v^H-v^L}{2}$. Trader never acquires information ($\sigma^*=0$) and dealer sets prices $a_0$ and $b_0$. 
-  
-  \textit{Case 2:} $(1-\pi) \frac{v^H-v^L}{2} \le c \le \frac{v^H-v^L}{2}$. Trader acquires information with probability $\sigma^*=\frac{1-\pi}{\pi} \left(\frac{v^H-v^L}{2c} -1 \right)$ and dealer sets prices $a_{\sigma^*}$ and $b_{\sigma^*}$. 
-  
-  \textit{Case 3:} $c<(1-\pi) \frac{v^H-v^L}{2}$. Trader always acquires information ($\sigma^*=1$) and dealer sets prices $a_1$ and $b_1$.
-\end{solution}
+%\item Describe fully the market equilibrium that will arise for a given $c$. 
+%
+%\begin{solution}
+%  \textit{Case 1:} $c > \frac{v^H-v^L}{2}$. Trader never acquires information ($\sigma^*=0$) and dealer sets prices $a_0$ and $b_0$. 
+%  
+%  \textit{Case 2:} $(1-\pi) \frac{v^H-v^L}{2} \le c \le \frac{v^H-v^L}{2}$. Trader acquires information with probability $\sigma^*=\frac{1-\pi}{\pi} \left(\frac{v^H-v^L}{2c} -1 \right)$ and dealer sets prices $a_{\sigma^*}$ and $b_{\sigma^*}$. 
+%  
+%  \textit{Case 3:} $c<(1-\pi) \frac{v^H-v^L}{2}$. Trader always acquires information ($\sigma^*=1$) and dealer sets prices $a_1$ and $b_1$.
+%\end{solution}
 
 \end{enumerate}
 
@@ -206,12 +216,12 @@ Inspecting the expression, we can make the following observations about equilibr
 
 This problem considers an issue left open in Section 4.3 in the textbook, which explores inventory risk within the Kyle's model. At the outset of this section, it is assumed that there is no informed trading, i.e., $x = 0$ and $q = u$. Let us now relax this assumption and try to analyze the effects of dealer's risk aversion in Kyle's model in the presence of adverse selection.
 
-So, consider the model laid out in Section 4.2 -- which is \emph{the} Kyle's model we worked with in class, -- with one informed trader, and competitive dealers. However, dealers are not risk neutral. Suppose that there is a representative dealer with mean-variance preferences, risk aversion $\rho$, initial asset holding $z_{0}$, and initial cash holding $c_{0}$. I.e., the dealer's utility from a [random] next period's wealth $w_{t+1} = z_{t+1}p_{t+1} + c_{t+1}$ is $U(w_{t+1}) = \mathbb{E}[w_{t+1}] - \frac{\rho}{2} \mathbb{V}(w_{t+1})$.
+So, consider a combination of the two versions of the Kyle model we have seen in class: we now have one informed trader, a pool of noise traders, and a representative competitive risk-averse dealer with mean-variance preferences, risk aversion $\rho$, initial asset holding $z_{0}$, and initial cash holding $c_{0}$. I.e., the dealer's utility from a [random] next period's wealth $w_{t+1} = z_{t+1}p_{t+1} + c_{t+1}$ is $U(w_{t+1}) = \mathbb{E}[w_{t+1}] - \frac{\rho}{2} \mathbb{V}(w_{t+1})$.
 
-We seek again an equilibrium on a linear form, where the insider trades an amount $x =	\beta v - x_{0}$, and the price satisfies $p = p_{0}+\lambda q$. Now, there are four endogenous parameters, $\beta$, $x_{0}$, $p_{0}$, $\lambda$, with $\beta>0$ and $\lambda>0$.
+We are again looking for a linear equilibrium, where the insider submits an order $x = \beta v - x_{0}$, and the pricing schedule quoted by the dealer is $p = p_{0}+\lambda q$. Now, there are four endogenous parameters, $\beta$, $x_{0}$, $p_{0}$, $\lambda$, with $\beta>0$ and $\lambda>0$.
 
 \begin{enumerate}[label=(\alph*). ]
-\item Take for granted some arbitrary parameters $\beta$, $x_{0}$. The dealer will observe $q=x+u$. 
+\item Take for granted some arbitrary parameters $\beta$, $x_{0}$. The dealer observes $q=x+u$. 
 Use the result from Section 4.2 or lecture slides to find $\mathbb{E}[v|q]$ and $\mathbb{V}[v|q]$ as functions of $\beta$ and the model parameters.
 
 \emph{(Note that it is no longer the case that $q = \beta(v-\mu)+u$, but rather $q+x_{0}-\beta \mu = \beta(v-\mu)+u$.)}
@@ -263,7 +273,7 @@ and
 y(p) =z_{0} +  \frac{p - \mathbb{E}[v|p]}{\rho \mathbb{V}[v|p]} 
 \]
 
-NOTE: To solve this problem, instead of the zero-profit condition we will invoke another feature of competitive agents: they are \emph{price-takers}. Use the following algorithm to obtain the dealer's price schedule: (1) fix some arbitrary price $p$; (2) find supply amount $y(p)$ that maximizes the dealer's profit given this $p$. 
+\emph{(A reminder: To solve this problem, instead of the zero-profit condition you should invoke another feature of competitive agents, namely price-taking. Use the following algorithm to obtain the dealer's price schedule: (1) fix some arbitrary price $p$; (2) find supply amount $y(p)$ that maximizes the dealer's profit given this $p$; (3) invert the supply function $y(p)$ to obtain a pricing schedule $p(q)$.)}
 
 \begin{solution}
 Conditional on $p$, choose supply $q$ to maximize utility
@@ -273,16 +283,16 @@ U(w|p)
 & = \mathbb{E}[v|p](z_{0}-q) + c_{0}+pq - \frac{\rho}{2} \mathbb{V}[v|p](z_{0}-q)^{2}.
 \end{align*}
 Take the FOC wrt. $q$
-\[
--\mathbb{E}[v|p] + p +\rho\mathbb{V}[v|p](z_{0}-q) = 0.
-\]
+\begin{align*}
+	-\mathbb{E}[v|p] + p +\rho\mathbb{V}[v|p](z_{0}-q) = 0.
+\end{align*}
 Solving this for $q$ gives the desired result.
 \end{solution}
 
 
 \item When the market clears at price $p$, then $y(p)=q$. Can you see if there exists a $\lambda>0$ and a number $p_{0}$, such that market clearing fits with our conjecture that $p=p_{0}+\lambda q$? I.e. try to solve the following equation
 \[
-z_{0} +  \frac{p - \mathbb{E}[v|p]}{\rho \mathbb{V}[v|p]} = \frac{p-p_{0}}{\lambda}
+(y(p)=) \quad z_{0} +  \frac{p - \mathbb{E}[v|p]}{\rho \mathbb{V}[v|p]} = \frac{p-p_{0}}{\lambda} \quad (=q)
 \]
 w.r.t. $\lambda$ and $p_0$. Note that they must be such that the equality holds for all $p$.
 
@@ -360,7 +370,7 @@ Together, equations \eqref{eq:x0}, \eqref{eq:p0}, \eqref{eq:eqlambda}, and \eqre
 
 \end{solution}
 
-\item In case $\rho= 0$, the dealer is risk neutral. In this limit case, do you get back the equilibrium found in Section 4.2/in class? How do you find that changes in $\rho$ affect market depth in equilibrium?
+\item In case $\rho= 0$, the dealer is risk neutral, so we are back to the case of pure adverse selection. In this limit case, do you get back the equilibrium found in Section 4.2/in class? How do you find that changes in $\rho$ affect market depth in equilibrium?
 
 \begin{solution}
 When $\rho=0$, this becomes the book's solution for $\lambda$, and we also recover $p_{0}=\mu$. In general, $\lambda$ is increasing in risk aversion $\rho$.
