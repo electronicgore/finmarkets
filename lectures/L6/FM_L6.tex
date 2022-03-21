@@ -9,7 +9,7 @@
 
 
 
-\title{Financial Markets Microstructure \\ Lecture 9}
+\title{Financial Markets Microstructure \\ Lecture 10}
 
 \subtitle{Limit order book\\
 	Chapter 6.1-6.2 of FPR}
@@ -17,7 +17,7 @@
 \author{Egor Starkov}
 
 \date{K{\o}benhavns Unversitet \\
-	Spring 2021}
+	Spring 2022}
 
 
 
@@ -79,7 +79,7 @@
 
 
 
-%\section{LOB Markets}
+\section{LOB Markets: Introduction}
 
 \begin{frame}<handout:0>{Introduction}
 	\begin{itemize}
@@ -104,7 +104,7 @@
 \end{frame}
 
 
-\begin{frame}{Introduction}
+\begin{frame}{LOB Markets: Liquidity Demand}
 	\begin{itemize}
 		\item Most markets are order-driven these days
 		\begin{itemize}
@@ -115,34 +115,35 @@
 		\begin{center}
 			\structure{Trader interacting with the dealer} $\approx$ \alert{Trader interacting with the market}
 		\end{center}
-		But this abstraction is not perfect:
-		\begin{itemize}
-			\item Individual traders \alert{do not have dealer's information}
-			\item But they do have a choice between \structure{demanding and supplying liquidity} (market \& limit orders)
-		\end{itemize}
+		So for a \textbf{liquidity demander} who submits market orders, it does not really matter who to trade against.
 	\end{itemize}
 \end{frame}
 
 
-%\begin{frame}{Introduction}
-%	\begin{itemize}
-%		\item How do \alert{LOB markets} differ from pure \alert{dealer markets}?
-%		\visible<handout:0>{
-%		\begin{itemize}
-%			\item Not much changes for those who submit market orders
-%			\item Limit traders are like dealers, face adverse selection risk, but now also \structure{non-execution risk}
-%			% the two latter risks can represent the fundamentals moving in two different direction
-%		\end{itemize}
-%		}
-%		\item \structure{No exogenous separation} between liquidity providers and demanders in LOB mkts -- any trader can choose between limit and market orders
-%		\visible<handout:0>{
-%		\begin{itemize}
-%			\item Limit traders can get better prices compared to market orders, but at the cost of delay
-%			\item Self-balancing mechanism (e.g., thin LOB -- market orders are costly while limit orders are exec-d quickly -- high incentives to submit limit order)
-%		\end{itemize}
-%		}
-%	\end{itemize}
-%\end{frame}
+\begin{frame}{LOB Markets: Liquidity Providers}
+	But \alert{liquidity provision} works quite differently in LOB markets:
+	\begin{enumerate}
+		\item Traders have a choice between \structure{demanding and supplying liquidity} (market vs limit orders) -- so LO should be no worse than MO for trading
+		\item LO give better prices but suffer from execution risk
+		\item Conditional on electing to trade via LO, traders face a \structure{different informational environment} than the dealer
+		\item Also there's discriminatory pricing: LO execute each at their posted price, while a dealer can clear everything at uniform price.
+	\end{enumerate}
+	We look at the two latter issues today; two former next time.
+\end{frame}
+
+
+\begin{frame}{LOB Markets: Modelling Issues}
+	A LO is $(t,x,p)$: submission time $t$, quantity $x$, price $p$.
+	
+	Modelling LOBs properly is very difficult, many factors to account for:
+	\begin{enumerate}
+		\item Traders' action set is large: submit buy/sell LO/MO, how much, choose price if LO
+		\item Dynamics is relevant: choose when to submit, when to cancel/resubmit (since LO might not execute)
+		\item State of LOB is rich: trader's choice depends on other LOs in the book (though not all of them might be observable)
+		\item Private information affects not just valuation, but expectations about LOB evolution...
+	\end{enumerate}
+	So we'll look at very simple models that explore different slices of this problem.
+\end{frame}
 
 
 %\begin{frame}{Introduction}
@@ -164,7 +165,7 @@
 
 
 
-%\section{Static Analysis: Glosten Model}
+\section{Static Analysis: Glosten Model (continuous)}
 
 \begin{frame}{\cite{glosten_is_1994} model}
 	\begin{itemize}
@@ -260,6 +261,8 @@
 	\end{block}
 \end{frame}
 
+
+\section{Static Analysis: Glosten Model (discrete ticks)}
 
 \begin{frame}{Intermission}
 	\begin{itemize}
@@ -473,7 +476,7 @@
 \end{frame}
 
 
-\begin{frame}{Homework for next week}
+\begin{frame}{Homework}
 	\begin{itemize}
 		\item Thinking in the framework of the discrete model: suppose tick size is actually zero; quotes can be placed in a continuous price space. Suppose that there is price priority. What then is the role of time priority, so that first-come quotes at identical prices are served first?
 		\item If you could choose between trading at discriminatory prices in a limit order book, or to reveal your order size to a dealer, what would influence your choice?
