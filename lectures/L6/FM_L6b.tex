@@ -1,0 +1,458 @@
+%%% License: Creative Commons Attribution Share Alike 4.0 (see https://creativecommons.org/licenses/by-sa/4.0/)
+%%% Slides are based heavily on earlier versions of this course taught by Jesper Rudiger.
+
+\documentclass[english,10pt
+%,handout
+,aspectratio=169
+]{beamer}
+\input{../FM_preamble.tex}
+
+
+
+\title{Financial Markets Microstructure \\ Lecture 11}
+
+\subtitle{Limit order book, part 2\\
+	Chapter 6.2-6.3 of FPR}
+
+\author{Egor Starkov}
+
+\date{K{\o}benhavns Unversitet \\
+	Spring 2022}
+
+
+
+
+\begin{document}
+\AtBeginSection[]{
+\frame<beamer>{
+\frametitle{This lecture:}
+\tableofcontents[currentsection,currentsubsection]
+}}
+\frame[plain]{\titlepage}
+
+
+\begin{frame}{Last time}
+	\begin{itemize}
+		\item \structure{Glosten model}: see how the behavior of competitive liquidity providers in a LOB is different from dealers' behavior.
+		\item Pricing rule: \alert{marginal price} of $q$th unit (on the ask side) is $$P'(q) = \mathbb{E} [v | \theta(q) > P'(q)].$$
+		\item Reminder: in a dealer market, average price when $q$ units are traded is $$p(q) = \mathbb{E} [v | \theta(q) = p(q)].$$
+	\end{itemize}
+\end{frame}
+
+
+\section{Static Analysis: Glosten Model (discrete ticks)}
+
+\begin{frame}{Ticks}
+	\begin{itemize}
+		\item The version of the Glosten model we've seen last time outlines some basic differences between LOB and dealer markets
+		\begin{itemize}
+			\item Adverse selection affects prices differently
+		\end{itemize}
+		\item It neglects the \structure{discreteness of prices}:
+		\begin{itemize}
+			\item Often prices are discrete and must lie at a tick --  tick size is the increment b/w prices
+			\item E.g. at NYSE it was \$1/8 for stocks with prices over one dollar until June 1997, when, under regulatory pressure, it was reduced to \$1/16 and finally, in 2000, to one cent.
+			\item Prioritized limit orders become profitable when there are ticks (since no `marginal undercutting')
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Discrete model: Setup}
+	\begin{itemize}
+		\item \textbf{Asset}: Continue with single asset with value $v \sim G$
+		\item \textbf{Market order $q$} correlated with $v$
+		\begin{itemize}
+			\item Unconditional c.d.f. $F(q)$
+			\item Again, focus on the ask side of the book, $q>0$
+		\end{itemize}
+		\item \textbf{Discrete price grid}
+		\begin{itemize}
+			\item $A_1$ is lowest price tick above $\mu$
+			\item $A_k-A_{k-1}>0$ is the tick size
+		\end{itemize}
+		\item \textbf{Limit orders}
+		\begin{itemize}
+			\item \textit{Time prioritized}: first posted, first executed
+			\item \textit{Display cost}: $C$ per unit (paid regardless of whether order executes)
+			% This display cost is here for the model to work even without adverse selection
+			\item Let $y_k$ denote the amount supplied at price $A_k$
+			\item Let $Y_k=\sum_{j=1}^k y_j$ be cumulative volume (depth) supplied at or below $A_k$
+			% Y_k(A_k) is the inverse of P(q)
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Discrete model: Equilibrium}
+	%Let $\mathbb{E}[v|q \geq Y_k]=\mathbb{E}[v|\theta_i(q) \geq P'(q)]$.
+	Let $\mathbb{E}[v|q \geq Y_k]=\mathbb{E}[v|\theta_i(q) \geq A_k]$.
+	\begin{itemize}
+		\item \textbf{Competition}: Limit orders are supplied at each tick until the \structure{last order earns zero profit}
+		\item \textbf{Zero-profit condition}:
+		\[
+		\mathbb{P}(q \geq Y_k)[A_k-\mathbb{E}[v|q \geq Y_k]] - C = 0,
+		\]
+		solved by
+		\begin{block}{}
+			\[
+			A_k = \underbrace{\mathbb{E}[v| q \geq Y_k]}_{\text{\alert{Adverse selection}}} + \underbrace{\frac{C}{\mathbb{P}(q\geq Y_k)}}_{\text{\alert{Execution risk}}}
+			\]
+		\end{block}
+		(\textbf{NOTE}: \structure{we actually need to solve for $Y_k$ given $A_k$})
+		%\item \textbf{Adverse selection}: Captured by  $\mathbb{E}[v| q \geq Y_k] $
+		%\begin{itemize}
+		%	\item Unlike most of what we had before, this model works even without adverse selection
+		%\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Example 1: Model} 
+	\begin{itemize}
+		\item \textbf{Asset}. Let $g$ be the marginal distribution of $G$ and
+		\[
+		g(v)=\left\{ \begin{aligned}
+		1/2  & \text{ if } v=v^H; \\
+		1/2 & \text{ if } v=v^L,
+		\end{aligned}
+		\right.
+		\]
+		with $v^{H}=\mu + \sigma $ and $v^{L}= \mu - \sigma $.
+		\item \textbf{Traders}. Single trader, who uses a market order.
+		\begin{itemize}
+			\item Prob. $\pi$: risk-neutral speculator (\structure{S}) who knows $v$
+			\item Prob $1-\pi$: noise trader (\structure{N})  who buys/sells with equal probability, and uses large ($q_L$) or small ($q_S<q_L$) order with equal probability:
+			$$
+			\mathbb{P}(q=q_S|\structure{N})= \mathbb{P}(q=q_L|\structure{N})=\mathbb{P}(q=-q_S|\structure{N})=\mathbb{P}(q=-q_L|\structure{N})=1/4
+			$$
+		\end{itemize}
+		\item \textbf{No display cost}. Let $C=0$
+		\item \textbf{Continuous prices}.
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Example 1: Equilibrium}
+	\begin{itemize}
+		\item \textbf{Separating equilibrium}: Look for eq. with $y_{1}=q_{S}$ and $y_{2}=q_{L}-q_{S}$ for some ask prices $v^L<A_1<A_2<v^H$ (hence $Y_1=q_S$ and $Y_2=q_L$)
+		\pause
+		\item \textbf{Speculator}: 
+		\begin{itemize}
+			%\item If $q \notin \{q_S,q_L\}$, speculator reveals himself
+			\item Since $v^H > A_1,A_2$, when observing $v=v^{H}$ speculator buys $q_{L}$ units. 
+			\item When $v=v^L$ buys none since $v^L < A_1,A_2$ (but maybe sells)
+			\item (Shading order (strategically restricting trade size) is not optimal because buying more does not worsen the price of the previous units, unlike in dealer mkt)
+		\end{itemize}
+		\item \textbf{Price}. In equilibrium, price must equal $\mathbb{E}[v|q\geq Y_k]$:
+		\begin{align*}
+			A_1 & =\mathbb{E}[v|q \geq q_{S}] = \mu + \pi \sigma,
+			\\
+			A_2 & = \mathbb{E}[v|q \geq q_{L}] = \mu + \frac{2\pi}{1+\pi} \sigma
+		\end{align*}
+		\item Straightforward that $v^L<A_1<A_2<v^H$. Thus: equilibrium.
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Example 1: Comment}
+	\begin{itemize}
+		\item Bad example for discreteness:
+		\begin{itemize}
+			\item The example does \emph{not} assume fixed ticks...
+			\item But they arise endogenously in equilibrium...
+			\item Due to discreteness of noise traders' strategy
+			\item (A very artificial assumption)
+		\end{itemize}
+		\pause
+		\item Focus on adverse selection:
+		\begin{itemize}
+			\item Price increases in order size
+			\item Not due to informed trader having stronger info, as in Kyle model
+			\item But due to noise traders' order becoming less likely
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Example 2: Model}
+	\begin{itemize}
+		\item \textbf{Market orders}: Exponential distribution, $f(q)=\frac{\theta}{2} e^{-\theta|q|}$
+		\item \textbf{Asset}. Assume `price impact' equation $\mathbb{E}[v|q=x] = \mu + \lambda x$ where $\lambda >0$ is a constant measuring informativeness of order flow
+		\item Thus, we are taking a short-cut and modeling adverse selection in a `reduced form': rather than modeling the informed traders, we model their price impact
+		\item There is some order submission cost $C$
+		\item \textbf{Goal}: find the equation connecting $A_k$ and $Y_k$ (given arbitrary tick grid $A_1,\dots,A_k,\dots$)
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Example 2: Equilibrium}
+	\begin{itemize}
+		\item Focus on \textbf{ask side}: $Y_k>0$. For $q \geq Y_{k}$:
+		\begin{align*}
+			f(q|q \ge Y_k)&=\frac{f(q)}{ \mathbb{P}(q \geq Y_{k})} \\
+			&= \frac{f(q)}{\int^\infty_{Y_k} f(q) dq}\\
+			&= \frac{\frac{\theta}{2} \cdot e^{-\theta q}}{e^{-\theta Y_{k}}/2} \quad \quad \text{ ($|q|=q$ since $q \ge Y_k>0$)}\\
+			& =\theta \cdot e^{-\theta(q-Y_{k})}\\
+			& = e^{Y_k} \left[ \theta \cdot e^{-\theta q} \right]
+		\end{align*}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Example 2: Equilibrium (2)}
+	\begin{itemize}
+		\item The expected value at tick $k$ becomes
+		\begin{align*}
+		\mathbb{E}[v|q \geq Y_{k}] & =  \mu + \lambda \mathbb{E}[q|q \geq Y_{k}]\\
+		&=\mu+ \lambda \int^\infty_{Y_k} q \cdot f(q|q \geq Y_{k}) dq\\
+		&=\mu+ \lambda e^{\theta Y_{k}} \int^\infty_{Y_k} q \cdot \theta \cdot e^{-\theta q} dq\\
+		& =  \mu+ \lambda e^{\theta Y_{k}} \left\{\left[- q \cdot e^{-\theta q} \right]^\infty_{Y_k} -\int^\infty_{Y_k} -e^{-\theta q} dq   \right\}\text{ (int. by parts)} \\
+		& =  \mu+ \lambda e^{\theta Y_{k}} \left\{\left[0+ Y_k \cdot  e^{-\theta Y_k} \right] -\frac{1}{\theta}[0-e^{-\theta Y_k}]   \right\} \\
+		& = \mu + \lambda \left( \frac{1}{\theta }+ Y_{k} \right)
+		\end{align*}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Example 2: Equilibrium (3)}
+	\begin{itemize}
+		\item Hence, the ask price at tick $k$ can be found by solving
+		\[
+		\underbrace{\structure{\mathbb{P}(q \geq Y_k)}}_{e^{-\theta Y_{k}}/2}[A_k-\underbrace{\structure{\mathbb{E}[v|q \geq Y_k]}}_{\mu + \lambda \left( \frac{1}{\theta }+ Y_{k} \right)}] - C = 0,
+		\]
+		which gives
+		\begin{block}{}
+			\[
+			A_k=\mu + \lambda \left( \frac{1}{\theta }+ Y_{k}\right) + \frac{2C}{e^{-\theta Y_{k}}}.
+			\]
+		\end{block}
+		\item (Again: we actually need the opposite -- find $Y_k$ for a given tick $A_k$.)
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Empirical evidence}
+	\begin{itemize}
+		\item \textbf{\cite{sandas_adverse_2001}} estimates Glosten model (in a form similar to example 2 above) via GMM, using intraday snapshots of LOB from Stockholm Stock Exchange and data on market orders 
+		\item Estimates the info content of market orders vs actual pricing schedules, so effectively the $\mathbb{E}[v|\theta_i(q) \geq P'(q)]$ inferred from pricing schedule and the actual $\mathbb{E}[v|\theta_i(q) = P'(q)]$.
+		\item Zero profit condition is tested and rejected: LOB not deep enough to drive average expected profits to zero
+		\item Also, estimated order execution costs are negative for the best bid and ask -- i.e., those limit traders have some intrinsic preference for trading
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Glosten model: Conclusion}
+\begin{itemize}
+	\item Limit traders act in the same capacity as the dealer did before
+	\begin{itemize}
+		\item but face different \alert{informational environment}
+		\item so act differently
+		\item which leads to different market outcomes
+	\end{itemize}
+	\item With discrete ticks and time priority, even competitive limit traders can get positive expected profits
+\end{itemize}
+\end{frame}
+
+
+
+
+\section{Market design}
+
+\begin{frame}{Market design}
+	\begin{itemize}
+		\item There are many dimensions in which legislation or exhange rules can regulate trade
+		\item Today's phrase of the day: ``\structure{unintended consequences}''
+		\begin{itemize}
+			\item Attempts to mitigate a particular inefficiency may have far-fetching consequences
+			\item We will look at a few examples
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Tick size}
+	\begin{itemize}
+		\item Assume \structure{time priority} is the second order after price priority
+		\begin{itemize}
+			\item I.e., first limit order posted at tick executes first
+		\end{itemize}
+		\item Profit of the limit trader at price $A_k$ is:
+		\begin{itemize}
+			\item Zero for the marginal (last) limit order at $A_k$
+			\item Strictly positive for inframarginal orders (if $C>0$) because order executes with higher probability
+		\end{itemize}
+		\item Q: what happens if we \alert{change the tick size}?
+		\pause
+		\visible<handout:0|1->{
+			\item This profit is reduced with \alert{smaller tick sizes}
+			\begin{itemize}
+				\item Hence decreasing tick size drives away limit traders and reduces depth
+				\item But it will also reduce spread (by design) and reduce trading costs for the opposite side of the market (liquidity demanders)
+			\end{itemize}
+		}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Tick size}
+	\begin{itemize}
+		\item Driving away limit traders intuitively also has dynamic repercussions
+		\visible<handout:0>{
+			\begin{itemize}
+				\item LOB is replenished more slowly after trades -- so market orders traded more frequently against non-competitive prices
+			\end{itemize}
+		}
+		\pause
+		\item \cite{goldstein_eighths_2000} explored the NYSE 1997 case (tick size from $\$1/8$ to $\$1/16$)
+		\begin{itemize}
+			\item Trading costs decreased for small orders
+			\item Unclear for large orders
+			\item Aligns with our predictions (smaller spread, smaller depth)
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+%\begin{frame}{Tick size and time priority}
+%	\begin{exampleblock}{}
+%		Suppose that there is no tick; quotes can  be placed in a continuous price space. Suppose that there is price priority. What is then the role of time priority, so that first-come quotes at identical prices are served first?
+%	\end{exampleblock}
+%	
+%	\centering\pause
+%	\emph{``...The size of the trading increment is a
+%		powerful level that is underappreciated by
+%		regulators. The \alert{finer the trading increment},
+%		\structure{the more important price priority becomes
+%			relative to time priority}. In other words, if the
+%		market was designed to trade at continuous
+%		(vs discrete) non‐penny increments you could
+%		always win a trade by quoting the best price
+%		and the \structure{speed game would be non existent}''}
+%	
+%	\begin{flushright}
+%		--Narang, Manoj ``HFT 101 with Tradeworx'',
+%		May 20, 2014
+%	\end{flushright}
+%\end{frame}
+%
+%
+%\begin{frame}{Tick size and time priority}
+%	\begin{itemize}
+%		\item The role of the tick is essentially \textit{to balance price priority and time priority}
+%		\item Larger tick gives more time priority, smaller tick gives more price priority
+%		\item When there is no tick, there is essentially no time priority...
+%		\item However, there is some evidence that ticks may arise \textit{endogenously}. In that case, time priority takes importance again
+%	\end{itemize}
+%\end{frame}
+
+
+\begin{frame}{Priority rules}
+	\begin{itemize}
+		\item With \structure{pro-rata} allocation (limit orders at given tick executed proportionally to their size), as opposed to \alert{time priority}:
+		\begin{itemize}
+			\item The expected profit of all orders at price $A_k$ must be zero (as opposed to strictly positive)
+			\item So execution probabilities must be lower for all orders
+			\item Meaning more orders are posted under pro-rata.
+			% not sure about this last part
+		\end{itemize}
+		\item Lower profits lead to same dynamic consequences as with reducing tick size
+		\item Pro-rata allocation rule used in the electronic futures markets for the leading short-term interest rate and for the two-year U.S. Treasuries.
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Hybrid market}
+	Hybrid market
+	\begin{itemize}
+		\item Suppose a dealer can compete with the limit order book, as follows
+		\item The dealer may observe trade size $q$ before serving the order (and can fulfill the order before it is matched against LOB)
+		\item Can profit by pricing at $\mathbb{E}[v|q=x]$ rather than an average of $\mathbb{E}[v|q \geq y]$ for $y \leq x$ which is used by the LOB
+		\item Especially profitable on small trades
+		\item But the existence of such a dealer invalidates our analysis of the LOB
+		\begin{itemize}
+			\item Profitable limit orders are being picked off
+			\item So limit traders would gain negative profits if they follow the old strategy
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Example with hybrid market}
+	\begin{itemize}
+		\item Example 1 previous lecture continued. Assume an uninformed dealer receives order $q$. Can either send order to LOB or execute himself (at better price) 
+		\pause
+		\item Focus on ask side. Let $A^H_k$ be the hybrid ask price. When dealer observes $q=q_S$, he knows trader is noise trader and thus $\mathbb{E}[v|\structure{N}]=\mu$. 
+		\begin{itemize}
+			\item Can execute order at just below $A^H_1$ and earn profit $A^H_1-\mu$.
+		\end{itemize}
+		\pause
+		\item Hence, only large orders $q=q_L$ are sent to LOB. LOB traders will expect this, and will price as if any order arriving to the LOB is large:
+		\begin{align*}
+			\mathbb{E}[v|q \ge q_S]=\mathbb{E}[v|q \ge q_L]=\mu+\frac{2\pi}{1+\pi} \sigma,
+		\end{align*}
+		and thus $A^H_1=A^H_2=\mu+\frac{2\pi}{1+\pi} \sigma$.
+		\item $A^H_1>A_1$ and $A^H_2=A_2$: hybrid market less liquid than normal market
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Hybrid market}
+	\begin{itemize}
+		\item To be fair:
+		\item Adding a dealer to LOB market decreases liquidity...
+		\begin{itemize}
+			\item ...in ``good times'', when there would've been a thick LOB
+		\end{itemize}
+		\item But this can help in bad times
+		\begin{itemize}
+			\item if LOB is empty then adding a dealer has no adverse effects and will actually increase liquidity
+		\end{itemize}
+		\item So in the end, adding a dealer is like a \structure{liquidity insurance} for the market
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Market Design: conclusion}
+	\begin{itemize}
+		\item Regulation aimed at improving market liquidity can backfire by distorting agents' incentives
+		\item Shameless plug:
+		\begin{itemize}
+			\item If you want to know more about market design, I teach a course on \structure{Mechanism Design} in Fall
+			\item Explore how to design environments in which agents operate (i.e., distort their incentives) in order to generate desired behavior
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+
+
+\begin{frame}{Next week}
+	\begin{itemize}
+		\item Dynamic LOB analysis: traders can choose between limit and market orders
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Homework}
+	\begin{itemize}
+		\item Thinking in the framework of the discrete model: suppose tick size is actually zero; quotes can be placed in a continuous price space. Suppose that there is price priority. What then is the role of time priority, so that first-come quotes at identical prices are served first?
+		% ex1 is on informed trading
+		\item Solve exercise 1 on pages 232-233 (ch.6) in the textbook. Note that you need to use Bayes' rule to assess the conditional distribution over $v$ given a market order of size $q$
+	\end{itemize}
+\end{frame}
+
+
+
+
+
+\appendix
+\begin{frame}<handout:0>[allowframebreaks]{References}
+	\bibliography{../teaching}
+	\bibliographystyle{abbrvnat}
+\end{frame}
+
+
+
+
+\end{document} 
