@@ -135,15 +135,16 @@
 
 \begin{frame}{Example 1: Equilibrium}
 	\begin{itemize}
-		\item \textbf{Separating equilibrium}: Look for eq. with $y_{1}=q_{S}$ and $y_{2}=q_{L}-q_{S}$ for some ask prices $v^L<A_1<A_2<v^H$ (hence $Y_1=q_S$ and $Y_2=q_L$)
+		\item \textbf{Equilibrium}: Look for eq. with $y_{1}=q_{S}$ and $y_{2}=q_{L}-q_{S}$ for some ask prices $v^L<A_1<A_2<v^H$ (hence $Y_1=q_S$ and $Y_2=q_L$). Since $Y_1,Y_2$ given, we look for \structure{$A_1,A_2$}.
 		\pause
 		\item \textbf{Speculator}: 
 		\begin{itemize}
-			%\item If $q \notin \{q_S,q_L\}$, speculator reveals himself
-			\item Since $v^H > A_1,A_2$, when observing $v=v^{H}$ speculator buys $q_{L}$ units. 
-			\item When $v=v^L$ buys none since $v^L < A_1,A_2$ (but maybe sells)
+			\item Since $v^H > A_1,A_2 > v^L$, if $v=v^{H}$ then speculator buys $q_{L}$ units; if $v=v^L$ then sells $q_L$. \only<2>{\alert{Why is this optimal?}}
+			\pause
+			\item If $q \notin \{q_S,q_L\}$, speculator reveals himself -- never optimal
 			\item (Shading order (strategically restricting trade size) is not optimal because buying more does not worsen the price of the previous units, unlike in dealer mkt)
 		\end{itemize}
+		\pause 
 		\item \textbf{Price}. In equilibrium, price must equal $\mathbb{E}[v|q\geq Y_k]$:
 		\begin{align*}
 			A_1 & =\mathbb{E}[v|q \geq q_{S}] = \mu + \pi \sigma,
@@ -165,11 +166,11 @@
 			\item (A very artificial assumption)
 		\end{itemize}
 		\pause
-		\item Focus on adverse selection:
+		\item But focus on adverse selection leading to limited depth:
 		\begin{itemize}
 			\item Price increases in order size
 			\item Not due to informed trader having stronger info, as in Kyle model
-			\item But due to noise traders' order becoming less likely
+			\item But due to noise traders' order becoming (relatively) less likely
 		\end{itemize}
 	\end{itemize}
 \end{frame}
@@ -178,8 +179,10 @@
 \begin{frame}{Example 2: Model}
 	\begin{itemize}
 		\item \textbf{Market orders}: Exponential distribution, $f(q)=\frac{\theta}{2} e^{-\theta|q|}$
-		\item \textbf{Asset}. Assume `price impact' equation $\mathbb{E}[v|q=x] = \mu + \lambda x$ where $\lambda >0$ is a constant measuring informativeness of order flow
-		\item Thus, we are taking a short-cut and modeling adverse selection in a `reduced form': rather than modeling the informed traders, we model their price impact
+		\item \textbf{Asset}. \underline{Assume} `price impact' equation $\mathbb{E}[v|q=x] = \mu + \lambda x$ where $\lambda >0$ is a constant measuring informativeness of order flow
+		\begin{itemize}
+			\item Thus, we are taking a short-cut and modeling adverse selection in a `reduced form': rather than modeling the informed traders, we model their price impact
+		\end{itemize}
 		\item There is some order submission cost $C$
 		\item \textbf{Goal}: find the equation connecting $A_k$ and $Y_k$ (given arbitrary tick grid $A_1,\dots,A_k,\dots$)
 	\end{itemize}
@@ -232,7 +235,7 @@
 \end{frame}
 
 
-\begin{frame}{Empirical evidence}
+\begin{frame}{Glosten: Empirical evidence}
 	\begin{itemize}
 		\item \textbf{\cite{sandas_adverse_2001}} estimates Glosten model (in a form similar to example 2 above) via GMM, using intraday snapshots of LOB from Stockholm Stock Exchange and data on market orders 
 		\item Estimates the info content of market orders vs actual pricing schedules, so effectively the $\mathbb{E}[v|\theta_i(q) \geq P'(q)]$ inferred from pricing schedule and the actual $\mathbb{E}[v|\theta_i(q) = P'(q)]$.
@@ -378,9 +381,9 @@
 \end{frame}
 
 
-\begin{frame}{Example with hybrid market}
+\begin{frame}{Example 1 with hybrid market}
 	\begin{itemize}
-		\item Example 1 previous lecture continued. Assume an uninformed dealer receives order $q$. Can either send order to LOB or execute himself (at better price) 
+		\item Example 1 from before continued. Assume an uninformed dealer receives order $q$. Can either send order to LOB or execute himself (at better price) 
 		\pause
 		\item Focus on ask side. Let $A^H_k$ be the hybrid ask price. When dealer observes $q=q_S$, he knows trader is noise trader and thus $\mathbb{E}[v|\structure{N}]=\mu$. 
 		\begin{itemize}
@@ -397,18 +400,20 @@
 \end{frame}
 
 
-\begin{frame}{Hybrid market}
+\begin{frame}{Hybrid market: conclusions}
 	\begin{itemize}
-		\item To be fair:
-		\item Adding a dealer to LOB market decreases liquidity...
+		\item To be fair: adding a dealer to LOB market... 
 		\begin{itemize}
-			\item ...in ``good times'', when there would've been a thick LOB
+			\item decreases liquidity in ``good times'', when there would've been a thick LOB
+			\item but can help in bad times: if LOB is empty then adding a dealer has no adverse effects and will actually increase liquidity
+			\item So in the end, adding a dealer is like a \structure{liquidity insurance} for the market
 		\end{itemize}
-		\item But this can help in bad times
+		\item More analysis with risk-averse traders in \cite{viswanathan_market_2002}
+		\item Also: the analysis of the example above relied on a bunch of implicit assumptions (which are not necessarily true):
 		\begin{itemize}
-			\item if LOB is empty then adding a dealer has no adverse effects and will actually increase liquidity
+			\item Assumed the dealer had time priority over (could undercut all of) the LOB. If MO-traders can trade against the LOB before the dealer can act, the conclusions are different.
+			\item Assumed the market order revealed enough information. If MO-traders split their orders (trade one unit at a time), dealers no longer have any advantage. (\cite{back_working_2007})
 		\end{itemize}
-		\item So in the end, adding a dealer is like a \structure{liquidity insurance} for the market
 	\end{itemize}
 \end{frame}
 
@@ -438,7 +443,7 @@
 	\begin{itemize}
 		\item Thinking in the framework of the discrete model: suppose tick size is actually zero; quotes can be placed in a continuous price space. Suppose that there is price priority. What then is the role of time priority, so that first-come quotes at identical prices are served first?
 		% ex1 is on informed trading
-		\item Solve exercise 1 on pages 232-233 (ch.6) in the textbook. Note that you need to use Bayes' rule to assess the conditional distribution over $v$ given a market order of size $q$
+		\item Solve exercise 1 after ch.6 (pages 232-233) in the textbook. Note that you need to use Bayes' rule to assess the conditional distribution over $v$ given a market order of size $q$
 	\end{itemize}
 \end{frame}
 
