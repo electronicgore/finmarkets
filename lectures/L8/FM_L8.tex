@@ -8,7 +8,7 @@
 \input{../FM_preamble.tex}
 
 
-\title{Financial Markets Microstructure \\ Lecture 12}
+\title{Financial Markets Microstructure \\ Lectures 13-14}
 
 \subtitle{Market Fragmentation\\
 	Chapter 7 of FPR}
@@ -16,7 +16,7 @@
 \author{Egor Starkov}
 
 \date{K{\o}benhavns Unversitet \\
-	Spring 2021}
+	Spring 2022}
 
 
 \begin{document}
@@ -65,7 +65,9 @@
 		\item All of that has changed in the past 20 years
 		\begin{itemize}
 			\item Today, many (at least high-cap) stocks are \structure{cross-listed} on many exchanges
-			\item Even if a stock is not listed on a given exchange, it can be \structure{admitted for trading}
+			\item Even if a stock is not listed on a given exchange, it can be \structure{admitted for trading} 
+			(factsheet from LSE on absalon clarifies the difference between the two)
+			\item Even listed stocks/assets can be often traded outside the regulated exchanges (dark pools)
 		\end{itemize}
 	\end{itemize}
 \end{frame}
@@ -73,7 +75,7 @@
 
 \begin{frame}{Fragmentation and consolidation}
 	\begin{itemize}
-		\item Refer to markets with multiple venues trading the same stock as \textit{fragmentated} (as opposed to consolidated)
+		\item Refer to markets with multiple venues trading the same stock as \alert{fragmented} (as opposed to consolidated)
 		\item Regulation often tries to create `\structure{virtual consolidation}': make fragmented markets act \textit{as if} they were consolidated
 		\begin{itemize}
 			\item A central concept in the US is the \textit{National Best Bid and Offer} (NBBO): the highest bid and lowest ask price in (any exchange within) the market at a given time
@@ -88,10 +90,10 @@
 \end{frame}
 
 
-\begin{frame}{Priority violations}
+\begin{frame}{Fragmentation and priority violations}
 	\begin{itemize}
-		\item  LOB has different kinds of priority: price, visibility,  time
-		\item In a fragmented market, no overall coordination mechanism, so the following may occur:
+		\item LOB has different kinds of priority: price, visibility,  time
+		\item In a fragmented market, no overall coordination mechanism, so all of these rules can be violated:
 		\begin{itemize}
 			\item Violation of \textbf{visibility priority}. An undisplayed order at a price of 100 might be executed on exchange $A$ even though there are quantities visible at 100 on exchange $B$
 			\item Violation of \textbf{time priority}. A limit order to buy at a price of 100 that was entered at 10:00 AM on exchange $A$ might be filled before an order to buy at 100 that was entered at 9:30 AM on Exchange $B$
@@ -238,8 +240,8 @@
 				Now fragment the market in this Kyle model. Suppose:
 				\begin{enumerate}
 					\item Two noise trader groups: $u=u_{1}+u_{2}$, $u_i$ independent and $u_{i} \sim N(0, \sigma^{2}_{ui})$
-					\item Noise traders trade in separate markets; MMs and informed traders present in both markets (MM competitive; speculators one per market)
-					\item Agents cannot choose their market
+					\item Noise traders trade in separate markets; competitive dealers/MMs present in each market (can only see the order in their market); cannot move between markets
+					\item One speculator trades in both markets (or two speculators trade each in their market -- does not really matter).
 				\end{enumerate}
 			}
 		\end{column}
@@ -278,7 +280,7 @@
 			(v-\mu)\frac{\sigma_{u}}{\sigma_v} = x
 		\]
 		
-		\item \alert{Agg. informed trading greater than in consolidated case}
+		\item \alert{More informed trading} in total under fragmentation than in consolidated case
 		
 		\item To see this, note: 
 		\begin{align*}
@@ -309,9 +311,8 @@
 		
 		\item Of course, greater profits for informed traders
 		
-		\item In the above, we assume one speculator per market. \\
-		If two speculators were to compete in the consolidated mkt, \\
-		the effect is even stronger.
+		\item In the above, we compare one speculator (per market) under fragmentation to one speculator in the consolidated market. \\
+		If consolidation instead made the speculators compete in the consolidated mkt, the effect is even stronger.
 	\end{itemize}
 \end{frame}
 
@@ -324,11 +325,11 @@
 		\]
 		
 		\pause
-		\item What about \structure{aggregate}? Say you want to trade $X$ total.
+		\item What about \structure{aggregate} depth? Say you want to trade $X$ total.
 		\begin{itemize}
-			\item When splitting optimally across two markets $X=x_1+x_2$, will equalize expected marginal prices: $\mathbb{E} p_1 = \mu + \lambda_1 x_1 = \mu + \lambda_2 x_2 = \mathbb{E} p_2$.
+			\item When splitting optimally across two markets $X=x_1+x_2$, you equalize expected marginal prices: $\mathbb{E} p_1 = \mu + \lambda_1 x_1 = \mu + \lambda_2 x_2 = \mathbb{E} p_2$ (solve a cost minimization problem to confirm this).
 			\item So $x_1 = \frac{\lambda_2}{\lambda_1+\lambda_2} X$ and $x_2 = \frac{\lambda_1}{\lambda_1+\lambda_2} X$ and trading moves prices in each market to $p_i = \mu + \frac{\lambda_1 \lambda_2}{\lambda_1 + \lambda_2} X$ compared to $p = \mu + \lambda X$ in consolidated market. Can verify that $\frac{\lambda_1 \lambda_2}{\lambda_1 + \lambda_2} < \lambda$
-			\item \structure{Fragmented market is deeper in aggregate}
+			\item \structure{Fragmented market is deeper in aggregate} (that's why the speculator is more aggressive)
 		\end{itemize}
 	\end{itemize}
 \end{frame}
@@ -336,7 +337,7 @@
 
 \begin{frame}{Fragmented Kyle model: price discovery}
 	\begin{itemize}
-		\item \textbf{Price discovery}. We used the fact that everything is normal and $\mathbb{E}[q]=0$ to obtain (see L5)
+		\item \textbf{Price discovery}. We used the fact that everything is normal and $\mathbb{E}[q]=0$ to obtain (see slides on Kyle)
 		$$
 			\mathbb{E}[v|q] = \mu +\frac{\mathbb{C}(v,q)}{\mathbb{V}(q)} q
 		$$
@@ -346,11 +347,11 @@
 		\end{itemize}
 		\pause
 		\item Doing the magic, get $\mathbb{E}[v|\vec{p}] = \mu + \frac{2}{3}(p_1 - \mu) + \frac{2}{3}(p_2 - \mu)$. With more magic can find $\mathbb{V}(v|\vec{p}) = \frac{\sigma^2_v}{3}$, while in consolidated market $\mathbb{V}(v|p) = \frac{\sigma^2_v}{2}$
-		\item \structure{Better price discovery in fragmented market}
+		\item \structure{Better price discovery in fragmented market} once we combine all the information.
 		\item Because have more signals from which to learn about $v$ 
 		\pause 
 		\begin{itemize}
-			\item although comparing ``one speculator in two mkts'' vs ``one speculator in one mkt''. Two competing insiders would yield \alert{same price discovery} in consolidated market.
+			\item although again comparing ``one speculator in two mkts'' vs ``one speculator in one mkt''. Two competing insiders would yield \alert{same price discovery} in consolidated market.
 		\end{itemize}
 	\end{itemize}
 \end{frame}
@@ -403,10 +404,11 @@
 \begin{frame}{Fragmented Kyle model: liquidity provision}
 	\begin{itemize}
 		\item In the analysis above, traders were chain-bound to their markets
-		\item If speculators could choose, they would split across different markets to avoid competing with each other.
-		%\begin{itemize}
-		%	\item If cannot commit to stay away from each other's market then fragmentation has little effect.
-		%\end{itemize}
+		\item If many speculators could choose a market to participate in, a jointly optimal thing to do is to join different markets to avoid competing with each other.
+		\begin{itemize}
+			\item But note that it is a prisoners' dilemma for them -- it is always \emph{individually} optimal to participate in all markets
+			%\item If cannot commit to stay away from each other's market then fragmentation has little effect.
+		\end{itemize}
 		\pause
 		\item What if noise traders can choose?
 		\pause
@@ -491,7 +493,7 @@
 
 
 \begin{frame}{Glosten model}
-	Competing limit order books may provide better aggregate depth
+	Competing \emph{limit order books} may also provide better aggregate depth
 	\begin{itemize}
 		\item To show this, use LOB model of section 6.2 with display cost $C>0$, tick size $\Delta >0$, \structure{no adverse selection} (asset value is $\mu$)
 		\item Recall: incoming order $q$, limit sell orders posted at cumulative quantity $Y$ and price $A$ satisfy the zero-profit condition
@@ -509,7 +511,7 @@
 \begin{frame}{Glosten model (2)}
 	Now we make the following assumptions:
 	\begin{itemize}
-		\item \textbf{Fragmentation}. Limit orders are supplied in two markets, $I$ and $E$ (cost $C$ same in both)
+		\item \textbf{Fragmentation}. Limit orders are supplied in two markets, $I$ and $E$ (``incumbent'' market and ``entrant'' market); display cost $C$ same in both
 		\begin{itemize}
 			\item At single available ask price $A$, denote cumulative limit sell orders by $Y^I$ and $Y^E$
 		\end{itemize}
@@ -523,19 +525,18 @@
 				\item With prob. 1/2, order first goes to $E$, whatever remains goes to $I$
 			\end{itemize}
 		\end{itemize}
-		\item  \textbf{Trade probability}. We need to model $\mathbb{P}(q_i \geq Y^i)$ for each market
+		\item  \textbf{Trade probability}. Equilibrium condition: zero profit for the marginal trader on each market. We thus need to calculate $\mathbb{P}(q_i \geq Y^i)$ for each market $i$.
 	\end{itemize}
 \end{frame}
 
 
 \begin{frame}{Glosten model: trading probabilities}
 	\begin{itemize}
-		\item This results in the following execution probabilities for the marginal traders
+		\item The execution probabilities for the marginal traders are as follows, where $\bar{Y}=Y^I+Y^E$:
 		\begin{align}
 		\mathbb{P}(q_I \geq Y^I) & = \frac{1}{2} \left[\underbrace{\left(1-\gamma+\frac{\gamma}{2} \right) (1-F(Y^I))}_{\structure{\text{$I$ is executed first}}} + \underbrace{\frac{\gamma}{2}(1-F(\bar{Y}))}_{\structure{\text{$I$ is executed second}}}\right] \tag{7.11} \\
 		\mathbb{P}(q_E \geq Y^E) & = \frac{1}{2} \left[\underbrace{\frac{\gamma}{2} (1-F(Y^E))}_{\structure{\text{$E$ is executed first}}} + \underbrace{\frac{\gamma}{2}(1-F(\bar{Y}))}_{\structure{\text{$E$ is executed second}}}\right] \tag{7.12}
 		\end{align}
-		where $\bar{Y}=Y^I+Y^E$
 	\end{itemize}
 \end{frame}
 
@@ -590,7 +591,7 @@
 		%\item Result relies on $\Delta>0$ -- otherwise at $E$ you can undercut price at $I$ 
 		\item Section 7.4.3: there is a critical value of $\gamma$, below which $Y^E=0$
 		\begin{itemize}
-			\item Once again, a barrier to entry
+			\item Once again, a barrier to entry for new exchanges
 		\end{itemize}
 	\end{itemize}
 \end{frame}
