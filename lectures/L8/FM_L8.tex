@@ -255,7 +255,7 @@
 
 \begin{frame}{Fragmented Kyle model: prices}
 	\begin{itemize}
-		\item \textbf{Prices}.  Since on each market $i=1,2$ we must have $p_i=\mathbb{E}[v|q]$,
+		\item \textbf{Prices}.  Since on each market $i=1,2$ we must have $p_i=\mathbb{E}[v|q_i]$,
 			\begin{align*}
 				p_i &= \mu + \lambda_i q_i = \mu + \lambda_i (x_i + u_i)
 				\\
@@ -307,7 +307,7 @@
 			\item If two separate markets, \textit{greater adverse selection loss}
 		\end{itemize}
 		
-		\item \alert{More informed trading gives greater adverse selection loss}
+		\item \alert{Fragmentation gives greater adverse selection loss}
 		
 		\item Of course, greater profits for informed traders
 		
@@ -329,7 +329,7 @@
 		\begin{itemize}
 			\item When splitting optimally across two markets $X=x_1+x_2$, you equalize expected marginal prices: $\mathbb{E} p_1 = \mu + \lambda_1 x_1 = \mu + \lambda_2 x_2 = \mathbb{E} p_2$ (solve a cost minimization problem to confirm this).
 			\item So $x_1 = \frac{\lambda_2}{\lambda_1+\lambda_2} X$ and $x_2 = \frac{\lambda_1}{\lambda_1+\lambda_2} X$ and trading moves prices in each market to $p_i = \mu + \frac{\lambda_1 \lambda_2}{\lambda_1 + \lambda_2} X$ compared to $p = \mu + \lambda X$ in consolidated market. Can verify that $\frac{\lambda_1 \lambda_2}{\lambda_1 + \lambda_2} < \lambda$
-			\item \structure{Fragmented market is deeper in aggregate} (that's why the speculator is more aggressive)
+			\item \structure{Fragmented market is deeper in aggregate} (that's why the speculation is more aggressive)
 		\end{itemize}
 	\end{itemize}
 \end{frame}
@@ -337,16 +337,17 @@
 
 \begin{frame}{Fragmented Kyle model: price discovery}
 	\begin{itemize}
-		\item \textbf{Price discovery}. We used the fact that everything is normal and $\mathbb{E}[q]=0$ to obtain (see slides on Kyle)
+		\item \textbf{Price discovery}: what is the residual variance $\mathbb{V}(v|q)$? \\
+		We used the fact that everything is normal and $\mathbb{E}[q]=0$ to obtain (see slides on Kyle)
 		$$
-			\mathbb{E}[v|q] = \mu +\frac{\mathbb{C}(v,q)}{\mathbb{V}(q)} q
+			v|q \sim \mathcal{N} \left( \mu +\frac{\mathbb{C}(v,q)}{\mathbb{V}(q)} q, \frac{\sigma^2_v}{2} \right)
 		$$
 		\begin{itemize}
 			\item This still works in vector form with $\vec{q}=(q_1,q_2)$
 			\item ...or with $\vec{p}=(p_1,p_2)$, since $p_i = \mu + \lambda_i q_i$
 		\end{itemize}
 		\pause
-		\item Doing the magic, get $\mathbb{E}[v|\vec{p}] = \mu + \frac{2}{3}(p_1 - \mu) + \frac{2}{3}(p_2 - \mu)$. With more magic can find $\mathbb{V}(v|\vec{p}) = \frac{\sigma^2_v}{3}$, while in consolidated market $\mathbb{V}(v|p) = \frac{\sigma^2_v}{2}$
+		\item Doing the magic, get $\mathbb{E}[v|\vec{p}] = \mu + \frac{2}{3}(p_1 - \mu) + \frac{2}{3}(p_2 - \mu)$ and $\mathbb{V}(v|\vec{p}) = \frac{\sigma^2_v}{3}$
 		\item \structure{Better price discovery in fragmented market} once we combine all the information.
 		\item Because have more signals from which to learn about $v$ 
 		\pause 
@@ -587,7 +588,7 @@
 			\item When market is consolidated, first limit orders always get executed first
 			\item But in fragmented market, you can post limit order on another market at same price, and (maybe) get executed first
 		\end{itemize}
-		\item As argued when analyzing the pro-rata rule, removing time priority may lead to more orders, but these orders may appear more slowly (lower resiliency), or depth increase may be curbed by general eqm effects.
+		\item As we argued when analyzing the pro-rata rule, removing time priority may lead to more orders, but these orders may appear more slowly (lower resiliency), or depth increase may be curbed by general eqm effects.
 		%\item Result relies on $\Delta>0$ -- otherwise at $E$ you can undercut price at $I$ 
 		\item Section 7.4.3: there is a critical value of $\gamma$, below which $Y^E=0$
 		\begin{itemize}
