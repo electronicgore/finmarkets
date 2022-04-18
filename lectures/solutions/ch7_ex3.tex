@@ -1,0 +1,130 @@
+%%% License: Creative Commons Attribution Share Alike 4.0 (see https://creativecommons.org/licenses/by-sa/4.0/)
+%%% Slides are based heavily on earlier versions of this course taught by Jesper Rudiger.
+
+\documentclass[english,10pt
+%,handout
+,aspectratio=169
+]{beamer}
+\input{../FM_preamble.tex}
+
+
+
+\title{Financial Markets Microstructure}
+
+\author{Egor Starkov}
+
+\date{K{\o}benhavns Unversitet \\
+	Spring 2022}
+
+
+
+\begin{document}
+	
+%\frame[plain]{\titlepage}
+\addtocounter{framenumber}{-1}
+
+\begin{frame}{Ch 7, ex 3}
+	\textbf{Payments for order flow. }
+	\begin{itemize}
+		\item One risky security, pays either $v^{H}=\mu +\sigma $ or $v^{L}=\mu -\sigma $ with equal probabilities at $t=1$.
+		\item At $t=0$ investor gives his broker an order to buy or sell one unit.
+		\begin{itemize}
+			\item W.p. $\phi$ \structure{retail investor} is retail investor, buys and sells randomly 50/50.
+			\item W.p. $1-\phi$ \structure{institutional investor}, \alert{informed} w.p. $\alpha$. If uninformed, buys and sells randomly 50/50.
+		\end{itemize}
+		\item Three risk-neutral \structure{dealers} $1,2$, and $3$ post quotes before the broker contacts them.
+		\begin{itemize}
+			\item Broker cannot split his order among dealers
+			\item Dealers have no private information on the payoff of the security
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Ch 7, ex 3, part a}
+	\begin{exampleblock}{}
+		(a) Assume that there is no payment for order flow between the
+		broker and the three dealers. In this case, the broker randomly selects one
+		dealer among those posting the best price for his order. Compute the bid and
+		ask quotes posted by the dealers.
+	\end{exampleblock}
+	
+	\pause
+	
+	If any single dealer posts quotes at a profit, the other two can undercut and attract order flow $\Rightarrow$ we are down to standard Glosten-Milgrom with competitive dealers.
+	\begin{align*}
+		a &= \mathbb{E}[v|\text{buy}] = \mu + \mathbb{P}(\text{informed}|\text{buy}) \sigma
+		\\
+		&= \mu + \frac{(1-\phi)\alpha/2}{(1-\phi)\alpha/2 + \left[\phi+(1-\phi)(1-\alpha) \right]/2} \sigma
+		\\
+		&= \mu + (1-\phi)\alpha \sigma
+		\\
+		b &= \mu - (1-\phi)\alpha \sigma
+	\end{align*}
+\end{frame}
+
+
+\begin{frame}{Ch 7, ex 3, part b}
+	\begin{exampleblock}{}
+		(b) Assume now that dealer 1 has a payment for order flow
+		arrangement under which the broker gives dealer 1 all orders from retail
+		investors and the dealer commits to execute all these orders at the best
+		quotes (i.e., the ask and bid price set by the remaining dealers, 2 and 3).
+		Other orders are sent to dealer 2 or 3 as in question a. What are the quotes
+		posted by dealers 2 and 3? Deduce that the bid-ask spread is higher in this
+		case than where there is no payment for the order flow.
+	\end{exampleblock}
+	
+	\pause
+	
+	Dealers 2 and 3 are still competing with each other $\Rightarrow$ post zero-profit quotes
+	\begin{align*}
+		a &= \mu + \mathbb{P}(\text{informed}|\text{buy,institutional}) \sigma
+		\\
+		&= \mu + \frac{(1-\phi)\alpha/2}{(1-\phi)\alpha/2 + (1-\phi)(1-\alpha)/2} \sigma
+		\\
+		&= \mu + \alpha \sigma > \mu + (1-\phi)\alpha \sigma
+		\\
+		b &= \mu - \alpha \sigma < \mu - (1-\phi)\alpha \sigma
+	\end{align*}
+\end{frame}
+
+
+\begin{frame}{Ch 7, ex 3, part c}
+	\begin{exampleblock}{}
+		(c) Let $P$ be the payment of dealer 1 to the broker. What is the
+		largest possible value of $P$?
+	\end{exampleblock}
+	
+	\pause
+	
+	\begin{itemize}
+		\item Dealer 1's per-order profit is:
+		\begin{itemize}
+			\item $a - \mu = \alpha \sigma$ from buy orders
+			\item $\mu - b = \alpha \sigma$ from sell orders
+		\end{itemize}
+		\item so dealer 1 would be willing to pay up to $\alpha \sigma$ per order.
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Ch 7, ex 3, part d}
+	\begin{exampleblock}{}
+		(d) Is payment for order flow beneficial or detrimental to investors?
+	\end{exampleblock}
+	
+	\pause 
+	
+	\begin{itemize}
+		\item All investors trade at worse prices under order flow payments -- bad.
+		
+		\item Dealer 1 and broker profit from order flow payments.
+		
+		\item If many brokers compete with each other, they may transmit part of the profit to (some?) investors.
+	\end{itemize}
+\end{frame}
+
+
+
+\end{document} 
