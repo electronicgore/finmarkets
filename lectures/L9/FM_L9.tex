@@ -8,7 +8,7 @@
 \input{../FM_preamble.tex}
 
 
-\title{Financial Markets Microstructure \\ Lecture 14}
+\title{Financial Markets Microstructure \\ Lecture 15}
 
 \subtitle{Market Transparency\\
 	Chapter 8 of FPR}
@@ -16,7 +16,7 @@
 \author{Egor Starkov}
 
 \date{K{\o}benhavns Unversitet \\
-	Spring 2021}
+	Spring 2022}
 
 
 \begin{document}
@@ -64,7 +64,7 @@
 			\begin{itemize}
 				\item Market transparency can refer to different information
 				\begin{itemize}
-					\item \textbf{Pre-trade information}: quotes and limit orders
+					\item \textbf{Pre-trade information}: quotes and state of LOB
 					\item \textbf{In-trade information}: trader identity
 					\item \textbf{Post-trade information}: realized trades and prices
 				\end{itemize}
@@ -119,6 +119,8 @@
 
 \section{Pre-trade transparency}
 
+\subsection{Level-1 quote transparency (search costs)}
+
 \begin{frame}{Quote transparency}
 	\begin{itemize}
 		\item In some markets LOB and dealer quotes are visible (possibly at a cost)
@@ -148,21 +150,24 @@
 	\begin{itemize}
 		\item The situation is the same in a financial market with search cost
 		\begin{itemize}
-			\item It doesn't pay to be the cheapest dealer -- can't advertise price
+			\item It doesn't pay to be the cheapest dealer if you can't advertise the price
 			\item Can always increase price and still be preferred due to search cost
+			\item So incentives to exploit the price, no incentives to improve the price
 		\end{itemize}
 		\item Model conclusion does not depend on size of search cost (ignore what textbook says about it)
 		\begin{itemize}
 			\item Although irl frictions probably increase in search cost -- fancier models capture this
 		\end{itemize}
-		\item \structure{Welfare} implications:
+		\item \structure{Welfare} implications of search costs:
 		\begin{itemize}
 			\item \alert{Dealers} have market power $\Rightarrow$ \alert{higher profits}
-			\item All \alert{traders are worse off}, the less sophisticated ones more so
+			\item All \alert{traders are worse off}, the less sophisticated ones more so (if we maintain the assumption their trades are less elastic)
 		\end{itemize}
 	\end{itemize}
 \end{frame}
 
+
+\subsection{Level-2 quote transparency (depth)}
 
 \begin{frame}{Quote transparency}
 	\begin{itemize}
@@ -178,17 +183,18 @@
 \end{frame}
 
 
-\begin{frame} [label=quotes]
-	\frametitle{Uncertainty and price sensitivity}
+\begin{frame}[label=quotes]{Uncertainty and price sensitivity}
 	\begin{itemize}
 		\item Consider a Kyle model with random depth $\lambda$.
 		\item \textbf{Transparent market}: insider demand is inversely related to price sensitivity $\lambda$: $x^T \sim \frac{1}{\lambda}$
 		\item \textbf{Opaque market}: traders face uncertainty, so their demand is inversely related to expected price sensitivity: $x^O \sim \frac{1}{\mathbb{E}(\lambda)}$
 		\item Convex function. Use Jensen's inequality: 
-		\[
-		\mathbb{E}\left(\frac{1}{\lambda}\right) > \frac{1}{\mathbb{E}(\lambda)}
-		\]
-		\item \structure{More trading in transparent market}
+		\begin{align*}
+			\mathbb{E}\left(\frac{1}{\lambda}\right) &> \frac{1}{\mathbb{E}(\lambda)}
+			&\iff & &
+			\mathbb{E} [x^T] &> x^O
+		\end{align*}
+		\item \structure{More (informed) trading in transparent market}
 		\begin{itemize}
 			\item Risk of high $\lambda$ provides stronger incentive to reduce $x$ than the incentive to increase $x$ from the chance of low $\lambda$.
 		\end{itemize}
@@ -196,26 +202,18 @@
 \end{frame}
 
 
+\subsection{Order flow transparency}
+
 \begin{frame}{Order flow transparency}
-	\begin{columns}
-		\begin{column}{0.6\linewidth}
-			{\setstretch{1.3}
-				\begin{itemize}
-					\item In some markets (OTC, FX) an order may be filled simultaneously by different liquidity providers
-					\item What does it matter if they can or cannot observe the whole order flow?
-					\pause
-					\begin{itemize}
-						\item We saw one answer already (Glosten vs Kyle)
-						\item Will now look at another way to model this
-					\end{itemize}
-				\end{itemize}
-			}
-		\end{column}
-		\begin{column}{0.4\linewidth}
-			\pause[1]
-			\includegraphics<handout:0>[width=0.8\linewidth]{pics/cheating}
-		\end{column}
-	\end{columns}
+	\begin{itemize}
+		\item In some markets (OTC, FX) an order may be filled simultaneously by different liquidity providers
+		\item What does it matter if they can or cannot observe the whole order flow?
+		\pause
+		\begin{itemize}
+			\item We saw one answer already (Glosten vs Kyle)
+			\item Will now look at another way to model this
+		\end{itemize}
+	\end{itemize}
 \end{frame}
 
 
@@ -229,13 +227,13 @@
 		\item \textbf{Dealers}: set quotes, competitive, risk neutral
 		\item \textbf{Traders}: two traders arrive, submit unit market orders
 		\begin{itemize}
-			\item With prob. $\pi$: both are informed
+			\item With prob. $\pi$: both are informed (there was an info event)
 			\item With prob. $1-\pi$: both liquidity traders;  one seller, one buyer
 		\end{itemize}
-		\item \textbf{Crucial assumption}: previous point implies higher order flow correlation  when traders are informed. Intuition: 
+		\item \structure{Idea}: higher order flow correlation  when traders are informed. Intuition: 
 		\begin{itemize}
-			\item Informed traders: suppose all learn that the asset value is, say, high, we should all want to buy
-			\item Liquidity traders: suppose pension fund decides it wants a less risky portfolio. (Probably) uncorrelated with other liquidity traders' decisions
+			\item Informed traders: if all learn that the asset value is, say, high, then should all want to buy
+			\item Liquidity traders: suppose pension fund decides it wants a less risky portfolio. (Probably) uncorrelated with other liquidity traders' decisions. We strengthen that to perfect negative correlation for simplicity.
 		\end{itemize}
 	\end{itemize}
 \end{frame}
@@ -255,9 +253,10 @@
 		\end{itemize}
 		\item Transparent ($T$) versus opaque ($O$) market:
 		\begin{itemize}
-			\item $T$ better than $O$ for uninformed: avoid adverse selection premium
+			\item $T$ better than $O$ for the uninformed: avoid adverse selection premium
 			\item Better price discovery in $T$ than in $O$:  private information revealed
-			\item Note: informed order flow may be endogenously reduced in $T$, and then above analysis loses power
+			\item The informed prefer $O$: get better prices
+			%Note: informed traders may prefer to quit the market, but this is only in this ``extreme'' version of the model
 		\end{itemize}
 	\end{itemize}
 \end{frame}
@@ -266,10 +265,12 @@
 
 \section{Post-trade transparency}
 
+\subsection{Info about past trades}
+
 \begin{frame}{Post-trade transparency}
 	\begin{itemize}
-		\item If orders arrive sequentially, what effect does information about past orders have?
-		\item \textbf{Value}: high $v^H$ or low $v^L$ with equal probability
+		\item If orders arrive sequentially, what effect does information about \alert{past orders} have?
+		\item \textbf{Value}: high $v^H$ or low $v^L$ with equal probabilities
 		\begin{itemize}
 			\item Mean: $\mu=(v^H+v^L)/2$
 		\end{itemize}
@@ -289,7 +290,7 @@
 
 
 \begin{frame}{Post-trade transparency: Period 2}
-	\textbf{Opaque market}: First dealer gains informational advantage. Focus on \alert{ask side}
+	\textbf{Opaque market}: One dealer gains informational advantage. Focus on \alert{ask side}
 	\begin{itemize}
 		\item \structure{Period 2}. Denote the dealer who observed period-1 trade by \alert{$I$}, and the other dealer by \alert{$U$}.
 		\begin{itemize}
@@ -329,6 +330,8 @@
 \end{frame}
 
 
+\subsection{Collusion}
+
 \begin{frame}{Post-trade transparency: Collusion}
 	\begin{columns}
 		\begin{column}{0.6\linewidth}
@@ -336,9 +339,9 @@
 				\begin{itemize}
 					\item If dealers are not perfectly competitive, they can try to \structure{collude} to increase their profits
 					\item Cartels are sustained via a threat of \alert{punishment} in case anyone \alert{deviates}
-					\begin{itemize}
-						\item Example: Russia went against OPEC last year, so OPEC flooded the market
-					\end{itemize}
+					%\begin{itemize}
+					%	\item Example: Russia went against OPEC last year, so OPEC flooded the market
+					%\end{itemize}
 					\pause
 					\item Prerequisite for collusion: ability to detect deviations
 					\begin{itemize}
@@ -416,7 +419,7 @@
 		\item In all of the above, transparency leads to reallocation of welfare from insiders to the uninformed.
 		\begin{itemize}
 			\item That's why regulators push for transparency and the market resists
-			\item You can also argue that due to this transparency would reduced informed trading and reduce price discovery
+			\item You can also argue that transparency would reduce informed trading and reduce price discovery
 		\end{itemize}
 		\item Hirshleifer noted that some risk-sharing trades are better conducted before information arrives
 		\begin{itemize}
@@ -494,7 +497,7 @@
 			\item Meaning that they must all sell to him at price SEK 1.05
 			\pause
 			\item The day before this forced trade was due to be executed, trading was halted by the exchange when the price was at SEK 11.00
-			\item Traders seemed unaware of this rule or unaware that Jay-Z had acquired enough stock to trigger the rule, so OMX Stockholm issued to two notices and phoned brokers
+			\item Traders seemed unaware of this rule or unaware that Jay-Z had acquired enough stock to trigger the rule, so OMX Stockholm issued two notices and phoned brokers
 			\item Let's see what happened
 		\end{itemize}
 	\end{itemize}
