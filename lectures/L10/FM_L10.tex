@@ -8,7 +8,7 @@
 \input{../FM_preamble.tex}
 
 
-\title{Financial Markets Microstructure \\ Lecture 15}
+\title{Financial Markets Microstructure \\ Lecture 16}
 
 \subtitle{Value of Liquidity\\
 	Chapter 9 of FPR}
@@ -16,7 +16,7 @@
 \author{Egor Starkov}
 
 \date{K{\o}benhavns Unversitet \\
-	Spring 2021}
+	Spring 2022}
 
 
 \begin{document}
@@ -32,16 +32,16 @@
 	\begin{itemize}
 		\item \structure{Transparency} mostly reallocates welfare across market participants 
 		\begin{itemize}
-			\item Uninformed traders benefit, so T {helps liquidity}
+			\item Uninformed traders benefit from T, so T {helps liquidity}
 			\item Insiders may lose, so T {worsens price discovery}
 			\item Dealers/exchanges may win or lose
 		\end{itemize}
 		\item But transparency may also impede risk sharing, foster collusion, and have adverse effects when it is asymmetrically distributed
-		\item Opaqueness can be good in limit books
-		\begin{itemize}
-			\item Hidden limit orders help uninformed traders hedge their positions 
-			\\where making these orders visible would by itself create adverse price movements
-		\end{itemize}
+		%\item Opaqueness can be good in limit books
+		%\begin{itemize}
+		%	\item Hidden limit orders help uninformed traders hedge their positions 
+		%	\\where making these orders visible would by itself create adverse price movements
+		%\end{itemize}
 	\end{itemize}
 \end{frame}
 
@@ -54,15 +54,15 @@
 		\begin{itemize}
 			\item notes are long-term (2-10y), bills are short-term ($<12$m) US govt loans
 			\item differ only in terms -- so soon-to-mature notes are equivalent to bills
-			\only<2-3|handout:0>{
-				\item \alert{Bliz Quiz}: which is cheaper? (given same face values)
-				\begin{enumerate}
-					\item \structure<3>{note with 6m to maturity}
-					\item bill with 6m to maturity
-					\item neither
-				\end{enumerate}
-			}
-			\pause[4]
+			%\only<2-3|handout:0>{
+			%	\item \alert{Bliz Quiz}: which is cheaper? (given same face values)
+			%	\begin{enumerate}
+			%		\item \structure<3>{note with 6m to maturity}
+			%		\item bill with 6m to maturity
+			%		\item neither
+			%	\end{enumerate}
+			%}
+			%\pause[4]
 			\item but notes trade at a discount relative to bills (i.e., offer higher returns) (as of 1991)
 			\item why? Notes are less liquid (larger spread and brokerage fees). Why less liquid though?
 		\end{itemize}
@@ -98,33 +98,26 @@
 
 \begin{frame}{Liquidity premium (\cite{amihud_asset_1986})}
 	\begin{itemize}
-		\item Before, traders cared only about fundamental value. In this model they care about \structure{resale value} (speculation).
-		\item Consider an asset with \emph{constant} relative spread, $s=(a_t-b_t)/m_t$, where $m_t=(a_t+b_t)/2$
+		\item Before, traders cared only about fundamental value. In this model they care about \structure{resale value}.
+		\item Consider an asset with \emph{constant} relative spread, $s=(a_t-b_t)/m_t$, but fluctuating midprice $m_t$
 		\begin{itemize}
 			\item Note that
 			\[
 			a_t=m_t \left(1+\frac{s}{2}\right) \text{ and } b_t=m_t\left(1-\frac{s}{2}\right)
 			\]
 		\end{itemize}
-		\item Buy at today's ask price $a_t$
-		\begin{itemize}
-			\item Hold the asset for $h$ periods, sell at $b_{t+h}$
-			\item To simplify, suppose zero dividend over this period
-		\end{itemize}
+		\item Consider a trader who plans to:
+		\begin{enumerate}
+			\item buy at $t$, at the respective ask price $a_t$,
+			\item hold the asset for $h$ periods, and sell at $b_{t+h}$.
+		\end{enumerate}
+		To simplify, suppose the asset pays no dividends.
 	\end{itemize}
 \end{frame}
 
 
 \begin{frame}{Deriving the premium: risk-adjusted return} \label{slide:Rr}
 	\begin{itemize}
-		%\item Denote the \alert{market's required} risk-adjusted \alert{return} per period as \alert{$r$}, then
-		%\begin{equation}\tag{9.3}
-		%a_t = \frac{\mathbb{E}(b_{t+h})}{(1+r)^h},
-		%\end{equation}
-		%i.e.,
-		%\begin{equation}\tag{9.4}
-		%m_t=\frac{\mathbb{E}(m_{t+h})}{(1+r)^h} \times \frac{1-\frac{s}{2}}{1+\frac{s}{2}}
-		%\end{equation}
 		\item Let \alert{$r$} denote the risk-adjusted \alert{real return} per period \alert{required by the market}. \hyperlink{slide:reqret}{\beamerbutton{What?}} Then
 		\begin{align*}
 			a_t &= \frac{\mathbb{E}(b_{t+h})}{(1+r)^h},
@@ -185,23 +178,12 @@
 	\begin{itemize}
 		\item Note: what about a round-trip starting from a sale?
 		\begin{itemize}
-			\item From $b_t=\mathbb{E}(a_{t+h})/(1+r)^h$ we get $R \simeq r-s/h$
+			\item From $b_t=\mathbb{E}(a_{t+h})/(1+r)^h$ we get $R \simeq r-s/h$ (and then a round-trip starting from a buy is strictly lossy)
+			\item If $R = r + s/h$, then a round-trip starting from a sale is strictly lossy
 		\end{itemize}
-		\pause
-		\only<2-3|handout:0>{
-			\item \alert{Bliz quiz}: say we know $R$ from market data. What is the right way to find $r$?
-			\begin{enumerate}
-				\item $R = r + s/h$ \only<3>{\structure{$\leftarrow$ OK answer for vast majority of assets}}
-				\item $R = r - s/h$
-				\item \structure<3>{$\#1$ when asset is in positive aggregate supply, $\#2$ when in negative}
-				\item $\#2$ when asset is in positive aggregate supply, $\#1$ when in negative
-				\item $R = r$
-			\end{enumerate}
-		}
-		\pause[4]
-		\item Can expect positive liquidity premium from assets in positive aggregate supply
-		\item Refer to more general model and empirics in \citet*{bongaerts_derivative_2011}
-		\item Empirical evidence confirms positive liquidity premium for stocks, bonds
+		\item Most assets most of the time are in positive aggregate supply -- i.e., buyers have the bargaining power and can demand a positive liquidity premium ($R = r + s/h$).
+		\item Empirical evidence confirms \emph{positive} liquidity premium for stocks, bonds
+		\item More general model and empirics in \citet*{bongaerts_derivative_2011}
 	\end{itemize}
 \end{frame}
 
@@ -210,34 +192,33 @@
 \section{Clientelle effects}
 
 \begin{frame}{Clientelle effects}
-	\begin{columns}
-		\begin{column}{0.7\linewidth}
-			{\setstretch{1.3}
+\begin{columns}
+	\begin{column}{0.7\linewidth}
+		{\setstretch{1.3}
+			\begin{itemize}
+				\item We obtained $R = r + s/h$ in our toy model
+				\item In reality investors differ in $h$, expected holding period
+				\item Consider a toy extension of our toy model, with:
 				\begin{itemize}
-					\item We obtained $R = r + s/h$ in our toy model
-					\item In reality investors differ in $h$, expected holding period
-					\item Toy extension of toy model:
-					\begin{itemize}
-						\item Two types of investors with $h_1 < h_2$
-						\item Two assets with $s_1 < s_2$
-					\end{itemize}
-					\only<2-3|handout:0>{
-						\item \alert{Bliz quiz:} what do you think will happen in equilibrium?
-						\begin{enumerate}
-							\item \structure<3>{$h_1$-investors will only trade in $s_1$-asset and vice versa}
-							\item $h_1$-investors will only trade in $s_2$-asset and vice versa
-							\item returns will be such as to equalize assets' worth for all investors
-						\end{enumerate}
-					}
+					\item Two types of investors with $h_1 < h_2$
+					\item Two assets with $s_1 < s_2$
 				\end{itemize}
-			}
-		\end{column}
-		\begin{column}{0.3\linewidth}
-			\pause[1]
-			\includegraphics<handout:0>[width=0.5\linewidth]{pics/patience}
-		\end{column}
-	\end{columns}
-	
+				%\only<2-3|handout:0>{
+				%	\item \alert{Bliz quiz:} what do you think will happen in equilibrium?
+				%	\begin{enumerate}
+				%		\item \structure<3>{$h_1$-investors will only trade in $s_1$-asset and vice versa}
+				%		\item $h_1$-investors will only trade in $s_2$-asset and vice versa
+				%		\item returns will be such as to equalize assets' worth for all investors
+				%	\end{enumerate}
+				%}
+			\end{itemize}
+		}
+	\end{column}
+	\begin{column}{0.3\linewidth}
+		\pause[1]
+		\includegraphics<handout:0>[width=0.5\linewidth]{pics/patience}
+	\end{column}
+\end{columns}
 \end{frame}
 
 
@@ -253,7 +234,7 @@
 		\pause 
 		\item There exist $R_1,R_2$ (and resp. $r_1,r_2$) which solve this so all ok
 		\begin{itemize}
-			\item There would not be a solution if we assumed the opposite kind of segregation
+			\item There would not be a solution if we assumed the opposite kind of separation
 			\item We also cannot have both groups indifferent between both assets (would need two equalities in 9.10)
 		\end{itemize}
 	\end{itemize}
@@ -268,7 +249,10 @@
 		\end{itemize}
 		\item (would this explain the case of Treasury Bills vs Bonds?) 
 		\item Note: more adverse selection implies larger spread, hence attracts traders with large $h$
-		%NOTE: young are encourage to invest in stocks, old in bonds -- this is due to risk-preferences, but also possibly due to this
+		%NOTE: young are encouraged to invest in stocks, old in bonds -- this is due to risk-preferences, but also possibly due to this
+		\pause\bigskip 
+		\item We assumed that $h$ are fixed, but all the same logic applies if $h$ is random (e.g., traders randomly get liquidity shocks).
+		\item Clientelle effects would then apply whenever different groups of traders have different \emph{distributions} of $h$.
 	\end{itemize}
 \end{frame}
 
@@ -277,7 +261,7 @@
 
 \begin{frame}{Liquidity risk}
 	\begin{itemize}
-		\item Spread $s$ randomly fluctuates over time
+		\item IRL, spread $s$ randomly fluctuates over time
 		\item Further, liquidity of any given asset may be arbitrarily correlated with that of other assets or the whole market
 		\item These are risk factors which can also be priced
 		\item Use the Liquidity CAPM model of \cite{acharya_asset_2005}
@@ -287,7 +271,7 @@
 
 \begin{frame}{reminder: regular CAPM}
 	\begin{itemize}
-		\item The standard CAPM postulates that return on asset $j$ is governed by the correlation of its returns with market returns:
+		\item The standard CAPM postulates that return $r_j$ on asset $j$ is governed by the risk-free rate $r_f$ and a risk premium, which depends on the correlation of $r_j$ with the market return $r_M$:
 		\begin{equation*}
 			\mathbb{E}[r_j] = r_f + \beta_j \left[ \mathbb{E}[r_M] - r_f \right]
 		\end{equation*}
@@ -343,6 +327,22 @@
 %\end{frame}
 
 
+\begin{frame}{Liquidity risk: alternative model}
+	\begin{itemize}
+		\item Earlier in the course we derived the spread given the asset return/value (Glosten-Milgrom)
+		\item Earlier today we did the opposite: derived the required return keeping the spread fixed (Amihud-Mendelson)
+		\item \citet*{duffie_over--counter_2005,duffie_valuation_2007} do both simultaneously! In their model:
+		\begin{itemize}
+			\item Traders are randomly hit with liquidity shocks, so want to buy/sell asset over time depending on their current situation
+			\item But may not always find a trade -- can get stuck with asset when shocked/without asset when not shocked
+			\item This liquidity risk enters the equilibrium asset price
+			\item (And the spread is driven by dealers' market power)
+		\end{itemize}
+		\item Click \hyperlink{slide:DGP}{\beamerbutton{here}} if you want to see the model (you do not need to know it for the exam)
+	\end{itemize}
+\end{frame}
+
+
 
 \section{Arbitrage}
 
@@ -388,126 +388,6 @@
 
 
 
-\section{More general model (OTC markets)}
-
-\begin{frame}{Liquidity premium and OTC markets}
-	\begin{itemize}
-		\item Earlier we derived the midprice keeping the spread fixed
-		\item Now let's do both simultaneously.
-		\item Use model of \citet*{duffie_over--counter_2005,duffie_valuation_2007}:
-		\begin{itemize}
-			\item Consider `over-the-counter' (OTC) market, where trade is \textit{decentralized}
-			\item Instead of a centralized exchange, traders must search for dealers, and search is costly.
-			\item Search costs give market power to dealers and thus produce spread
-		\end{itemize}
-	\end{itemize}
-\end{frame}
-
-
-\begin{frame}{Model}
-	\begin{itemize}
-		\item One asset: pays dividends to its holders each period
-		\begin{itemize}
-			\item Some traders value the dividend at 1 (high value traders), some at $1-c$ (low value traders), where $c \in (0,1)$
-			\item Traders can hold \alert{one} or \alert{zero units} of the asset
-			\item The alternative is a bank which pays interest $r$
-			\item Assume the asset is supplied to fraction $q<1/2$ of the population
-		\end{itemize}
-		\item Continuum of traders randomly switch between high and low value: $j=h,l$
-		\begin{itemize}
-			\item This happens each period to a fraction $\psi$ of traders
-			\item (In the long run, half the traders have high value)
-			\item Switchers would like to trade the asset
-			\item Search for a dealer, and find one with chance $\phi$
-		\end{itemize}
-	\end{itemize}
-\end{frame}
-
-
-\begin{frame}{Model (2)}
-	\begin{itemize}
-		\item Exact \structure{timing} within a period:
-		\begin{enumerate}
-			\item investor receives dividend payoff ($\$1$ or $\$(1-c)$)
-			\item valuation changes w.p. $\psi$
-			\item search ensues; match with a dealer happens w.p. $\phi$
-		\end{enumerate}
-		\item Dealers have some \structure{bargaining power} because they are hard to find
-		\begin{itemize}
-			\item Dealers quote ask $a$ and bid $b$; spread $S=a-b$
-			\item Bargaining power is measured by a parameter $z \in (0,1)$
-			\item Suppose $\bar{a}$ is maximum that buyer will pay,  and $\bar{b}$ is minimum seller will accept
-			\item Define midprice $\mu=(\bar{a}+\bar{b})/2$ to be the asset value for the dealers
-		\end{itemize}
-	\end{itemize}
-\end{frame}
-
-
-\begin{frame}[label=solve]{Solving the OTC search model: setup}
-	\begin{itemize}
-		\item Recall
-		\begin{enumerate}
-			\item Since $q<1/2$, buy side of market is restrained (dealers have all market power)
-			\item $\bar{a}$ is maximum that buyer will pay,  and $\bar{b}$ is minimum seller will accept
-		\end{enumerate}
-		\item \alert{Buy side:} restrained $\rightarrow$ mixed equilibrium. Set \structure{$a=\bar{a}$} and set buy probability conditional on finding dealer (can choose this since buyers are indifferent) to
-		\[
-		p^B = \phi \cdot \frac{\pi_S}{\pi_B},
-		\]
-		\alert{$\pi_S$}: fraction willing to sell; \alert{$\pi_B$}: fraction willing to buy
-		\item \alert{Sell side:} no restraint, sell with prob. 1, bargain over surplus: 
-		\[
-		\structure{b=z\bar{b}+(1-z)\mu}.
-		\]
-	\end{itemize}
-\end{frame}
-
-
-\begin{frame}{Solving the OTC search model: setup (2)}
-	\begin{itemize}
-		\item Method: identify $\bar{a}$ and $\bar{b}$, and then solve for $a$ and $b$
-		\item Denote the present discounted cash-flow value (as of beginning of the period) of an asset owner with private valuation $j$ by $V^0_j$ and that of a non-owner by $V^{no}_j$
-		\item Since non-owner buys if $V^o_h-a \geq V^{no}_h$ and owner sells if $V^{no}_l+b \geq V^o_l$, we get
-		\begin{align}
-		\bar{a} 	&= V^o_h-V^{no}_h, \\
-		\bar{b}	&= V^o_l-V^{no}_l 
-		\end{align}
-		\item So $a=V^o_h-V^{no}_h$ and $b=z(V^o_l-V^{no}_l ) + (1-z)\mu$.
-		\item Finally, we must calculate the value functions
-	\end{itemize}
-\end{frame}
-
-
-\begin{frame}{Solving the OTC search model: setup (3)}
-	\begin{itemize}
-		\item We will just look at two functions, the rest are similar
-		\begin{align*}
-		V^o_h 	& = \frac{1}{1+r} + \frac{(1-\psi)V^o_h}{1+r} + \frac{\psi(1-\phi)V^o_l}{1+r}+\frac{\psi\phi(V^{no}_l+b)}{1+r} \\
-		V^{no}_h 	& = \frac{\psi V^{no}_l}{1+r} + \frac{(1-\psi)(1-p^B)V^{no}_h}{1+r}+\frac{(1-\psi)p^B (V^o_h-\bar{a})}{1+r}
-		\end{align*}
-		\item Calculate $V^o_l$ and $V^{no}_l$. Plug back into (1)-(2) to solve for $\bar{a}$ and $\bar{b}$
-	\end{itemize}
-\end{frame}
-
-
-\begin{frame}{Conclusion (DGP)}
-	\begin{itemize}
-		\item Ask price is then
-		\[
-		a=\frac{1}{r}-\frac{2\psi}{r(1+z)}\left(1-\phi\frac{1-z}{2}\right)S,
-		\]
-		where $S$ is the spread
-		\[
-		S=a-b=\frac{(1+z)c}{2(r+2\psi)+(1-2\psi)\phi(1-z)}
-		\]
-		\item If $\psi>0$ the ask price is less than the $1/r$ which would arise if it were always (efficiently) held by high-value traders
-		\item This is due to liquidity costs: buyers anticipate that they will sell in the future and incur the spread cost
-	\end{itemize}
-\end{frame}
-
-
-
-
 
 \begin{frame}{Conclusion}
 	\begin{itemize}
@@ -525,7 +405,6 @@
 
 \begin{frame}{Exercise}
 	Ex.1 from ch.9 (p.347)
-	%TODO2020: Economist article
 \end{frame}
 
 
@@ -553,6 +432,117 @@
 			\includegraphics<handout:0>[width=\linewidth]{pics/portfolio}
 		\end{column}
 	\end{columns}
+\end{frame}
+
+
+
+\begin{frame}{\citet*{duffie_over--counter_2005,duffie_valuation_2007} Model} \label{slide:DGP}
+\begin{itemize}
+	\item One asset: 
+	\begin{itemize}
+		\item Pays dividends to its holders each period
+		\item Traders can hold \alert{one} or \alert{zero units} of the asset
+		\item The alternative is a bank which pays interest $r$
+		\item Assume the asset is supplied to fraction $q<1/2$ of the population
+	\end{itemize}
+\item Unit mass (continuum) of traders, each has either high or low value for the dividend: $j=h,l$
+	\begin{itemize}
+		\item If $j=h$, value today's dividend at 1 (high value traders); if $j=l$ then value dividend at $1-c$ (low value traders), where $c \in (0,1)$
+		\item Every period, fraction $\psi$ of traders switch (from h to l or vice versa)
+		\item (In the long run, half the traders have high value)
+		\item Switchers would like to trade the asset (h to l $\to$ want to sell; l to h $\to$ want to buy)
+		\item Those willing to trade search for a dealer, find one with probability $\phi < 1$
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{DGP Model (2)}
+\begin{itemize}
+	\item Exact \structure{timing} within a period:
+	\begin{enumerate}
+		\item investor receives dividend payoff ($\$1$ or $\$(1-c)$)
+		\item valuation changes w.p. $\psi$
+		\item if needed, trader looks for a dealer; a match happens w.p. $\phi$
+	\end{enumerate}
+	\item Dealers have some \structure{bargaining power} because they are hard to find
+	\begin{itemize}
+		\item Rejecting a dealer's quote means the trader has to wait one period for a chance to meet another dealer -- costly (and risky) for a trader
+		\item Use standard notation: dealers quote ask $a$ and bid $b$; spread is $S=a-b$; midprice is $\mu = (a+b)/2$
+	\end{itemize}
+	\item Look for a stationary equilibrium with $a$ and $b$ constant over time, and all traders with trading needs (``$h$ without an asset'' and ``$l$ with an asset'') looking for a dealer, and agreeing to trade at $a$ and $b$ respectively iff it is optimal for them (may mix).  
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Solving the DGP model}
+	\begin{itemize}
+		\item Since $q<1/2$, not all buyers get to buy (buyers must be indifferent $\iff$ dealers have all market power)
+		\item Denote $\bar{a}=$ max price that a buyer will pay, and $\bar{b}=$ min price that a seller will accept
+		\item \alert{Buy side:} limited supply $\rightarrow$ mixed equilibrium. Set \structure{$a=\bar{a}$} and set buy probability conditional on finding dealer (can choose this since buyers are indifferent) to
+		\[
+		p^B = \phi \cdot \frac{\pi_S}{\pi_B},
+		\]
+		\alert{$\pi_S$}: fraction willing to sell; \alert{$\pi_B$}: fraction willing to buy
+		\item \alert{Sell side:} no restraint, sell with prob. 1, bargain with the dealer over surplus: 
+		\[
+		\structure{b=z\bar{b}+(1-z)\mu}.
+		\]
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Solving the DGP model (2)}
+	\begin{itemize}
+		\item Method: identify $\bar{a}$ and $\bar{b}$, and then solve for $a$ and $b$
+		\item Denote the present discounted cash-flow value (as of beginning of the period) of an asset owner with private valuation $j$ by $V^0_j$ and that of a non-owner by $V^{no}_j$
+		\item Since non-owner buys if $V^o_h-a \geq V^{no}_h$ and owner sells if $V^{no}_l+b \geq V^o_l$, we get
+		\begin{align}
+			\bar{a} 	&= V^o_h-V^{no}_h, \\
+			\bar{b}	&= V^o_l-V^{no}_l 
+		\end{align}
+		\item So $a=V^o_h-V^{no}_h$ and $b=z(V^o_l-V^{no}_l ) + (1-z)\mu$.
+		\item Finally, we must calculate the value functions
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Solving the DGP model (3)}
+	\begin{itemize}
+		\item We will just look at two functions, the rest are similar
+		\begin{align*}
+			V^o_h 	& = \frac{1}{1+r} + \frac{(1-\psi)V^o_h}{1+r} + \frac{\psi(1-\phi)V^o_l}{1+r}+\frac{\psi\phi(V^{no}_l+b)}{1+r} \\
+			V^{no}_h 	& = \frac{\psi V^{no}_l}{1+r} + \frac{(1-\psi)(1-p^B)V^{no}_h}{1+r}+\frac{(1-\psi)p^B (V^o_h-\bar{a})}{1+r}
+		\end{align*}
+		\item Calculate $V^o_l$ and $V^{no}_l$. Plug back into (1)-(2) to solve for $\bar{a}$ and $\bar{b}$
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{DGP: Results (1)}
+	\begin{itemize}
+		\item Ask price is then
+		\[
+		a=\frac{1}{r}-\frac{2\psi}{r(1+z)}\left(1-\phi\frac{1-z}{2}\right)S,
+		\]
+		where $S$ is the spread
+		\[
+		S=a-b=\frac{(1+z)c}{2(r+2\psi)+(1-2\psi)\phi(1-z)}
+		\]
+		\item If $\psi>0$ the ask price is less than the $1/r$ which would arise if it were always (efficiently) held by high-value traders
+		\item This is due to liquidity costs: buyers anticipate that they will sell in the future and incur the spread cost
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{DGP: Results (2)}
+\begin{itemize}
+	\item The midquote is
+	\begin{align*}
+		\mu = \frac{1}{r} \left(1 - \frac{c}{2}\right) - \frac{c}{2r} \cdot \frac{\phi(1-z)}{2r + 4\psi - (2\psi-1)\phi(1-z)}
+	\end{align*}
+	\item Increasing in $\phi$: larger $\phi$ = smaller prob of not finding a trade $\phi$ = smaller illiquidity risk = more valuable asset
+\end{itemize}
 \end{frame}
 
 \end{document}
