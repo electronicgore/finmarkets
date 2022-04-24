@@ -20,7 +20,7 @@
 	
 	
 \title{\textsc{Financial Markets Microstructure: Problem Set 2}}
-\date{K{\o}benhavns Universitet, Spring 2021}
+\date{K{\o}benhavns Universitet, Spring 2022}
 \author{Egor Starkov}
 
 
@@ -28,8 +28,6 @@
 
 
 %Please email your answer to me by midnight Thursday April 23 if you want feedback. This is voluntary, but at any rate I encourage you to spend time on these exercises to make sure you understand the models. Feel free to write me with any questions you might have.
-
-%NEW: feel free to approach this problem set in groups and/or discuss your solutions with other students.
 
 \quad
 
@@ -63,40 +61,40 @@ What are the implications of such breakdowns for liquidity risk? How do they aff
 
 
 
+%\quad
+%\subsection*{Problem 2 [Ch.9, ex.6]}
+%
+%I asked you to read on your own about a model of over-the-counter trading by Duffie, G{\^a}rleanu \& Pedersen (you did it, right?). Spread in that model is given by
+%\[
+%S=a-b=\frac{(1+z)c}{2(r+2\psi)+(1-2\psi)\phi(1-z)}
+%\]
+%\begin{enumerate}[label=(\alph*). ]
+%	\item Assuming $z<1$, how does the bid-ask spread respond to changes in the probability $\phi$ of finding a dealer? How does the answer depend on the value of the probability $\psi$ that the investor's valuation will change in the future?
+%	
+%	\begin{solution}
+%		\begin{align*}
+%			\frac{\partial S}{\partial \phi} & = -\frac{(1+z)c(1-z)(1-2\psi)}{[2(r+2\psi)+(1-2\psi)\phi(1-z)]^2}
+%		\end{align*}
+%		This fraction is positive if $\psi>1/2$, negative if $\psi<1/2$.
+%	\end{solution}
+%	
+%	
+%	\item What is the intuitive explanation for this result?
+%	
+%	\begin{solution}
+%		 The model has no adverse selection, so the spread is driven by the \textit{bargaining} between dealers and traders. Increasing $\phi$ implies that traders trade with higher probability in the future. There are two effects of this:
+%		\begin{itemize}
+%			\item It increases traders' willingness to pay (higher $S$) since they have less risk of getting `stuck' with the asset if their preferences change
+%			\item It increases traders' bargaining power (lower $S$) since they have higher probability of finding a dealer next period if they do not trade today
+%		\end{itemize}
+%		When $\psi$ is high, first effect dominates, since trader is worried about future trades. When $\psi$ is low, second effect dominates, since trader is more worried about current trade
+%	\end{solution}
+%\end{enumerate}
+
+
+
 \quad
-\subsection*{Problem 2 [Ch.9, ex.6]}
-
-I asked you to read on your own about a model of over-the-counter trading by Duffie, G{\^a}rleanu \& Pedersen (you did it, right?). Spread in that model is given by
-\[
-S=a-b=\frac{(1+z)c}{2(r+2\psi)+(1-2\psi)\phi(1-z)}
-\]
-\begin{enumerate}[label=(\alph*). ]
-	\item Assuming $z<1$, how does the bid-ask spread respond to changes in the probability $\phi$ of finding a dealer? How does the answer depend on the value of the probability $\psi$ that the investor's valuation will change in the future?
-	
-	\begin{solution}
-		\begin{align*}
-			\frac{\partial S}{\partial \phi} & = -\frac{(1+z)c(1-z)(1-2\psi)}{[2(r+2\psi)+(1-2\psi)\phi(1-z)]^2}
-		\end{align*}
-		This fraction is positive if $\psi>1/2$, negative if $\psi<1/2$.
-	\end{solution}
-	
-	
-	\item What is the intuitive explanation for this result?
-	
-	\begin{solution}
-		 The model has no adverse selection, so the spread is driven by the \textit{bargaining} between dealers and traders. Increasing $\phi$ implies that traders trade with higher probability in the future. There are two effects of this:
-		\begin{itemize}
-			\item It increases traders' willingness to pay (higher $S$) since they have less risk of getting `stuck' with the asset if their preferences change
-			\item It increases traders' bargaining power (lower $S$) since they have higher probability of finding a dealer next period if they do not trade today
-		\end{itemize}
-		When $\psi$ is high, first effect dominates, since trader is worried about future trades. When $\psi$ is low, second effect dominates, since trader is more worried about current trade
-	\end{solution}
-\end{enumerate}
-
-
-
-\quad
-\subsection*{Problem 3 [Ch.7, ex.4]}
+\subsection*{Problem 2 [Ch.7, ex.4]}
 
 This problem deals with competition between limit order markets with uniformly distributed market orders. Consider the model of section 7.4.2 (``Glosten model with fragmented market'' from Lectures) and assume that the size of the market order ($\tilde{X}$) has a uniform distribution $[0,\bar{X}]$. That is, $F(x)=x/{\bar{X}}$. We denote by $Y^{*}_{jk}(\gamma)$ the cumulative depth posted at the ask price $A_{k}=\mu+k\Delta$ in market $j \in \{I,E\}$ when the fraction of investors submitting market orders in both markets $I$ and $E$ is $\gamma$, and by $c_{j}$ be the submission cost in market $j$.
 
@@ -217,9 +215,9 @@ This problem deals with competition between limit order markets with uniformly d
 
 
 \quad
-\subsection*{Problem 4}
+\subsection*{Problem 3}
 
-MiFID II, the recent European financial market regulation, requires that firms shall disclose to the client information on the payment or benefit concerned, in a manner that is comprehensive, accurate and understandable (in accordance with the second paragraph of Article 24(9) of MiFID II). Evaluate the possible effects of this regulation.
+MiFID II, the recent European financial market regulation, requires that ``firms shall disclose to the client information on the payment or benefit concerned, in a manner that is comprehensive, accurate and understandable'' (in accordance with the second paragraph of Article 24(9) of MiFID II). Evaluate the possible effects of this regulation.
 
 In particular, suppose that some asset is traded at multiple exchanges. One of the exchanges offers one of the banks a payment for directing order flow originating from bank's clients towards this exchange. This relates either to all order flow, or to order flow from retail investors. How would the bank's obligation to be transparent about this fee towards its clients affect market outcomes?
 
