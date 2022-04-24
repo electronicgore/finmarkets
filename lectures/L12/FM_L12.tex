@@ -85,7 +85,7 @@
 					\pause
 					\item In addition to Moore's Law, \structure<3>{Murphy's Law} does not fail either
 					\begin{itemize}
-						\item If something can go wrong it will, and the scope for failures is as big as ever these days. See \cite{kirilenko_moores_2013} (pp.60-67) for five stories.
+						\item If something can go wrong it will, and the scope for failures is as big as ever these days. See \cite{kirilenko_moores_2013} (pp.60-67) for five \alert{stories}.
 					\end{itemize}
 				\end{itemize}
 			}
@@ -126,21 +126,21 @@
 		\pause[2]
 		\only<2-3|handout:0>{
 			\item \alert{Bliz Quiz:} how many child orders do you think every parent order spawns?
-			\begin{enumerate}
-				\item 5-10
-				\item 20-50
-				\item 100-200
-				\item \structure<3>{400-800}
-			\end{enumerate}
+			%\begin{enumerate}
+			%	\item 5-10
+			%	\item 20-50
+			%	\item 100-200
+			%	\item \structure<3>{400-800}
+			%\end{enumerate}
 		}
 		\only<4-5|handout:0>{
 			\item \alert{Bliz Quiz:} how many of these child orders are market orders?
-			\begin{enumerate}
-				\item \structure<5>{$<1\%$}
-				\item $5-10\%$
-				\item $\approx 50\%$
-				\item $>99\%$
-			\end{enumerate}
+			%\begin{enumerate}
+			%	\item \structure<5>{$<1\%$}
+			%	\item $5-10\%$
+			%	\item $\approx 50\%$
+			%	\item $>99\%$
+			%\end{enumerate}
 		}
 		\pause[5]
 		\item Of the 300 million child orders, less than 0.40 percent are market orders.
@@ -596,7 +596,7 @@
 			\item blockchain is a ``distributed ledger'' technology
 			\item crypto uses blockchain to record transactions in some tokens
 		\end{itemize}
-		\item In addition to below, you can find some economic discussion of crypto in \citet*{nica_cryptocurrencies_2017}
+		\item In addition to below, you can find some economic discussion of crypto in \citet*{nica_cryptocurrencies_2017} and \citet*{halaburda_microeconomics_2020}
 	\end{itemize}
 \end{frame}
 
@@ -617,6 +617,9 @@
 	%Perceived benefits of blockchain/crypto-based markets:
 	\begin{itemize}
 		\item \structure{Decentralization}: no exchange to profit from traders $\Rightarrow$ lower order costs
+		\begin{itemize}
+			\item Even when the market is dominated by exchanges, you do not need to use them to trade (in principle)
+		\end{itemize}
 		\item \structure{Transparency}: transaction history is visible, order flow is visible, counterparty's trading history visible
 		\begin{itemize}
 			\item note: there is very little anonymity, contrary to what some say!
@@ -641,6 +644,20 @@
 		\item \alert{Delay}: blocks are only processed rarely (one per 10 min avg for bitcoin) \hyperlink{blocktime}{\beamerbutton{graph}}
 		\item \alert{Clearing and settlement}: without a trusted mediator, counterparty risk instensifies
 		\item \alert{No transparency requirements}: it is more difficult to enforce \\ disclosure of financial info from firms
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Revealed preference}
+	\begin{itemize}
+		\item But in the end, the final users (traders) don't care about the fancy technology in the backend
+		\item They choose whichever is (1) cheaper and (2) more convenient to use
+		\item So web3 converged to the same centralized system we had before:
+		\begin{itemize}
+			\item crypto is traded via a few centralized exchanges (Binance, Coinbase, ...)
+			\item NFTs barely exist(ed?) outside OpenSea and Rarible
+		\end{itemize}
+		\item Signal founder has a \href{https://moxie.org/2022/01/07/web3-first-impressions.html}{\beamerbutton{nice post}} about it.
 	\end{itemize}
 \end{frame}
 
