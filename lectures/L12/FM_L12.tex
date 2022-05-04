@@ -211,7 +211,7 @@
 
 \begin{frame}{Model: high-frequency trading}
 	\begin{itemize}
-		\item \textbf{HFT}: A fraction $\alpha$ of the institutions invest at $\tau =0$ to become HFT
+		\item \textbf{HFT}: Fraction $\alpha$ of the institutions invest at $\tau =0$ to become HFT
 		\item \textbf{Information}: Let's call HFT \textit{fast} institutions (viz. \textit{slow} institutions)
 		\begin{itemize}
 			\item Fast institutions have better information: learn $v$ at $\tau=1$ whereas slow institutions learn $v$ at $\tau=2$
@@ -220,7 +220,7 @@
 		\item \textbf{Timing}
 		\begin{enumerate}
 			\item Each institution $i$ observes $y_{i}$, and if fast, observes $v$
-			\item Each institution $i$ finds a trading opportunity or not. If yes, chooses whether to buy/sell/abstain
+			\item Each institution $i$ finds a trading opportunity or not. If yes, chooses whether to buy/sell/abstain (one-unit trades only)
 			\item Liquidity providers execute order $\omega$ at price $\mathbb{E}(v|\omega)$
 			(implicit assumption of market maker competition)
 		\end{enumerate}
@@ -348,11 +348,11 @@
 	\begin{itemize}
 		\item SI gain in $P1$ equilibrium is (focus on buy side):
 		\begin{align*}
-		\mathbb{E}[u-a|buy, SI]
-		& = \mathbb{E}[u|buy, SI] - \left[\mu + \frac{\alpha}{\alpha+(1-\alpha)\rho} \epsilon\right] \\
-		& = \mathbb{E}[u|y_{i}=\delta] - \left[\mu + \frac{\alpha}{\alpha+(1-\alpha)\rho} \epsilon\right] \\
-		& = \mu+\delta - \left[\mu + \frac{\alpha}{\alpha+(1-\alpha)\rho} \epsilon\right] \\
-		& = \delta -  \frac{\alpha}{\alpha+(1-\alpha)\rho} \epsilon \equiv \psi(\alpha)
+		\rho \mathbb{E}[u-a|buy, SI]
+		& = \rho \left( \mathbb{E}[u|buy, SI] - \left[\mu + \frac{\alpha}{\alpha+(1-\alpha)\rho} \epsilon\right] \right) \\
+		& = \rho \left( \mathbb{E}[u|y_{i}=\delta] - \left[\mu + \frac{\alpha}{\alpha+(1-\alpha)\rho} \epsilon\right] \right) \\
+		& = \rho \left( \mu+\delta - \left[\mu + \frac{\alpha}{\alpha+(1-\alpha)\rho} \epsilon\right] \right) \\
+		& = \rho \left( \delta -  \frac{\alpha}{\alpha+(1-\alpha)\rho} \epsilon \right) \equiv \psi(\alpha)
 		\end{align*}
 		\item Notice $\psi'(\alpha)<0$.
 	\end{itemize}
@@ -372,6 +372,7 @@
 		\begin{itemize}
 			\item Note: $\phi(\alpha)-\psi(\alpha) > 0$ is independent of $\alpha$
 		\end{itemize}
+		\item \cite{shkilko_every_2020}: periods when HFT is disrupted are characterized by less adverse selection, lower trading costs
 	\end{itemize}
 \end{frame}
 
@@ -380,7 +381,7 @@
 	\begin{itemize}
 		\item \textbf{Cost}: At $\tau=0$, a trader can become a fast institution at cost $C$
 		\item \textbf{Markets}: There is a size-$N$ continuum of markets (this will simplify the maths). An institution of type $n$ can participate in $n \leq N$ markets
-		\item \textbf{Participation}: Type is distributed according to $h(n)$ on $[0, N]$ with
+		\item \textbf{Participation}: Type is distributed according to ``pdf'' $h(n)$ on $[0, N]$ with
 		\[
 		h(n) = \frac{N}{n}
 		\]
@@ -397,7 +398,7 @@
 	\begin{itemize}
 		\item Notice that $n \cdot h(n)=N$: the total number of investments made by type-$n$ institutions is $N$ for all $n$
 		\item Thus: equal amount of $n$ and $n'$ investors \textit{within each market}.
-		\item In other words, $n$ is uniformly distributed within each market: $n \sim U(0,N)$ such that  we get the following fixed-point problem
+		\item In other words, $n$ is uniformly distributed within each market: $n \sim U[0,N]$ such that  we get the following fixed-point problem
 		\[
 		\alpha = \mathbb{P}(n \ge n(\alpha))=\frac{N-n(\alpha)}{N}
 		\]
@@ -407,7 +408,8 @@
 
 \begin{frame}{Endogenous acquisition of technology (3)}
 	\begin{itemize}
-		\item Authors find equilibrium with $\partial \alpha / \partial C<0$. Welfare result:
+		\item Authors find equilibrium with $\partial \alpha / \partial C<0$.
+		\item Welfare result:
 		\begin{block}{}
 			\begin{center}
 				If $\rho>1/2$ then welfare-maximizing value of $\alpha$ is 0.
@@ -458,6 +460,7 @@
 
 
 \begin{frame}[noframenumbering]{\citet*{budish_high-frequency_2015}}
+	% ES = SP500 futures; SPY = SP500 index fund
 	ES and SPY are the two largest instruments tracking SP500. In theory perfectly correlated. Panel (a) shows a trading day.
 	\center
 	\includegraphics[scale=0.7]{pics/HTF_Corr_1}
@@ -564,7 +567,7 @@
 		\item \textbf{Market failure}: Authors argue that this failure is built into the market via processing mechanism
 		\item \textbf{Proposed solution}: Frequent batch auction
 		\begin{itemize}
-			\item Auction every $\tau$ moments. Fast institutions have latency $\delta_{fast}$ and slow institutions latency $\delta_{slow}$. Three intervals:
+			\item Auction every $\tau$ moments. Fast institutions have latency $\delta_{fast}$ and slow institutions latency $\delta_{slow}$. Three intervals, depending on when public signal arrives:
 			\begin{enumerate}
 				\item  $[0,\tau-\delta_{slow}]$: all institutions trade, no AS
 				\item  $[\tau-\delta_{slow},\tau-\delta_{fast}]$: only fast institutions trade, AS
@@ -576,12 +579,13 @@
 \end{frame}
 
 
-\begin{frame}{BCS Conclusion}
+\begin{frame}{HFT Conclusion}
 	\begin{itemize}
 		\item By design, continuous trading generates arbitrage opportunities
 		\item Firms overinvest in speed in attempts to reap these arbitrage profits
 		\item Risk of being sniped contributes to the spread
-		\item Use better market design (frequent auctions) to improve this
+		\item While HFTs can serve as liquidity providers, they do not actually contribute to narrowing the spread
+		\item Use better market design (batch auctions) to improve this
 	\end{itemize}
 \end{frame}
 
