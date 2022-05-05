@@ -15,7 +15,7 @@
 \author{Egor Starkov}
 
 \date{K{\o}benhavns Unversitet \\
-	Spring 2021}
+	Spring 2022}
 
 
 \begin{document}
@@ -31,8 +31,8 @@
 	\begin{itemize}
 		\item \textbf{High-Frequency Trading} generates informational asymmetries between traders
 		\item If the markets are already reasonably good at matching traders with opportunities, fast trading may be strictly bad for welfare
-		\item This inefficiency may be a question of market design
-		\item Use better market design (frequent auctions) to improve this
+		\item While HFTs can provide liquidity, more HFTs does not necessarily improve liquidity
+		\item So it might be optimal to eliminate the speed game, e.g. by moving away from continuous markets to frequent batch auctions
 	\end{itemize}
 \end{frame}
 
@@ -40,124 +40,175 @@
 \begin{frame}{News}
 	\begin{itemize}
 		\item Incomplete information has been pivotal in many of the models we have considered
-		\item Roughly speaking, two types of models
+		\item But we really focused on \structure<1>{asymmetric information}
 		\begin{itemize}
-			\item \structure<1>{Symmetric uncertainty}: e.g. Parlour, DGP
-			\item \alert<1>{Asymmetric uncertainty}: e.g. Glosten-Milgrom
+			\item When \structure<1>{private news} arrive to insiders, they \structure<1>{trade}, everyone else learns from trades
 		\end{itemize}
-		%\item How does uncertainty affect prices/trade?
-		%\item Who would gain from reducing uncertainty in different models?
 		\pause
-		\item When \structure<2>{private news} arrive to insiders, they \structure<2>{trade}, everyone else learns from trades
-		\item When \structure<3>{public} news arrive: \only<2>{...?}
+		\item What about \structure<2>{symmetric uncertainty}? When \structure<2>{public} news arrive: \only<2>{...?}
 		\pause
 		\begin{itemize}
-			\item (in the presence of HFTs, public news $\approx$ HFTs' private news)
 			\item all orders are repriced, but \structure<3>{no trade} \alert<4>{should} take place
 			\pause
 			\item in reality, a lot of trade after public announcements
 		\end{itemize}
+		\item Let's look at how information is aggregated and how this depends on public info!
 	\end{itemize}
 \end{frame}
 
 
-\begin{frame}{Trade after public news}
+%\begin{frame}{Trade after public news}
+%	\begin{itemize}
+%		\item So why do public announcements generate high trading volumes?
+%		\item \textbf{Potential explanations} include:
+%		\begin{itemize}
+%			\item Announcements are made up of public \structure{and private} signals
+%			\item Or traders have \structure{heterogeneous priors} and can therefore `agree to disagree'; announcements then can amplify or mitigate these initial disagreements and so generate trade.
+%		\end{itemize}
+%		\item \textbf{\cite{kondor_more_2012}} provides a fresh look at this: focus on \structure{higher-order beliefs} 
+%	\end{itemize}
+%\end{frame}
+%
+%
+%\begin{frame}{Higher-order beliefs}
+%	Suppose two players are interested in $\theta$, which is unobserved. However, each observe a signal $x_{i}$. Consider player 1's beliefs
+%	\begin{itemize}
+%		\item First-order beliefs: $\mathbb{E}(\theta|x_{1})$
+%		\item Second-order beliefs: $\mathbb{E}(\mathbb{E}(\theta|x_{2})|x_{1})$
+%		\item Third-order beliefs: $\mathbb{E}(\mathbb{E}(\mathbb{E}(\theta|x_{1})|x_{2})|x_{1})$
+%		\item Etc.
+%	\end{itemize}
+%	Higher-order beliefs are beliefs about the beliefs of others.
+%	
+%	\pause\bigskip
+%	In most models so far, traders make decisions based on expectation of fundamental value: \\ no resale $\rightarrow$ higher-order beliefs are irrelevant.
+%	
+%	Even with resale, they are often irrelevant: $\mathbb{E}(\mathbb{E}(\theta|x_{2})|x_{1}) = \mathbb{E}(\theta|x_{1})$.
+%\end{frame}
+
+
+
+\section{Context 1: \cite{hellwig_aggregation_1980}}
+
+\begin{frame}{Context: \cite{hellwig_aggregation_1980}}
 	\begin{itemize}
-		\item So why do public announcements generate high trading volumes?
-		\item \textbf{Potential explanations} include:
+		\item Suppose there is a continuum of traders $i \in [0,1]$ with CARA preferences:
+		\begin{align*}
+			U(W_i)&=-e^{-\gamma W_i}, &
+			W_i & = (\theta - p){d_i}
+		\end{align*}
+		\item One asset, fundamental value $\theta \sim \mathcal{N}(0,1/\tau_\theta)$
+		\item Every trader gets a private signal $x_i = \theta + \epsilon_i$ with $\epsilon_i \sim \mathcal{N}(0,1/\tau_\epsilon)$ and submits a price-contingent demand schedule $d_i(p)$
+		\item Aggregate supply $u_1 \sim \mathcal{N}(0, \sigma^2_u)$ (provided by noise traders)
+		\item Price $p$ is set to clear the market
+		% kinda Kyle, but many informed traders, non-strategic dealer
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Hellwig: eqm}
+	\begin{itemize}
+		\item Conjecture a linear eqm, where price is a linear function of $\theta$ and $u$ (and aggregate $\bar{x} = \int x_i di$, which cancels out in the end)
+		\item $\theta | p,d_i$ is normal with some mean and variance $\Rightarrow$ so is $W_i$
+		(without noise trades, $\theta|p$ is degenerate)
+		
+		\item Then trader $i$'s problem is:
+		\begin{align*}
+			&\max_{d_i} \left\{ \mathbb{E} \left[ -e^{-\gamma W_i} | x_i, p \right] \right\} 
+			\\
+			\text{($W_i$ normal)} \iff 
+			&\max_{d_i} \left\{\mathbb{E} \left[ W_i| x_i, p\right] - \frac{\gamma}{2} \mathbb{V}\left[W_i| x_i, p \right] \right\}
+			\\
+			\Rightarrow & d_i(x_i,p) = \frac{\mathbb{E} \left[ \theta | x_i, p\right] - p}{\gamma \mathbb{V} \left[ \theta| x_i, p\right]}, \quad p= \mathbb{E} \Big[ \mathbb{E} [\theta|x_i,p] \mid p \Big] - \gamma \mathbb{V} \left[ \theta| x_i, p\right] u
+		\end{align*}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Hellwig: conclusion}
+	\begin{itemize}
+		\item $\mathbb{E} \left[ \theta | x_i, p\right] = a x_i + b p$ for $a,b>0$
+		\item Traders \structure{respond to private signals}: high $x_i$ $\Rightarrow$ buy, low $x_i$ $\Rightarrow$ sell
+		\item This is because $i$ believes that when $x_i > p$, this might be because high supply $u$ depressed price, hence a purchase is justified (traders \structure{disagree about the fundamental} value $\theta$)
+		\pause
+		\item What if the traders care not about $\theta$, but the resale value instead?
+	\end{itemize}
+\end{frame}
+
+
+
+\section{Context 2: \cite{brown_technical_1989}}
+
+\begin{frame}{\cite{brown_technical_1989}}
+	\begin{itemize}
+		\item Now consider the same economy but in dynamics: there are two periods $t=1,2$, two populations of traders $i,j \in [0,1]$ with CARA preferences, and early traders need to offload their asset holdings to late traders:
+		\begin{align*}
+			W_i & = (p_2 - p_1) d_i, &
+			W_j & = (\theta - p_2) d_j
+		\end{align*}
+		\item Private signals $x_i = \theta + \epsilon_i$, $z_j = \theta + \epsilon_j$
+		\item Asset aggregate supply $u_1,u_2$ i.i.d. normal
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Brown-Jennings: eqm}
+	\begin{itemize}
+		\item \alert<1>{In $t=2$}, same as Hellwig: 
+		\begin{align*}
+			d_j(x_j,p_2,p_1) &= \frac{\mathbb{E} \left[ \theta | z_j, p_2, p_1\right] - p_2}{\gamma \mathbb{V} \left[ \theta| z_j, p_2, p_1\right]},
+			& 
+			p_2 &= \mathbb{E} \Big[ \mathbb{E} [\theta|z_j, p_2, p_1] \mid p_2, p_1 \Big] - \gamma \mathbb{V} \left[ \theta| z_j, p_2, p_1\right] u_2
+		\end{align*}
+		\pause
+		\item \alert{In $t=1$}, instead of $(\theta|x_i, p_1)$, traders now care about $(p_2|x_i, p_1)$:
+		\begin{align*}
+			d_i(x_i,p_1) &= \frac{\mathbb{E} \left[ p_2|x_i, p_1\right] - p_1}{\gamma \mathbb{V} \left[ \theta| p_2|x_i, p_1\right]}
+		\end{align*}
+		i.e., their \alert{demand depends on} $\mathbb{E} \left[ \mathbb{E} [\theta|z_j, p_2, p_1] | x_i, p_1\right]$ -- their expectation of later investors' expectation of $\theta$.
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Brown-Jennings: conclusions}
+	\begin{itemize}
+		\item \structure{Second-order beliefs} are important for trading volumes in dynamic settings.
+		\item In this specific model, early traders have no reason to believe that late traders' estimate differs from their own:
+		\begin{align*}
+			\mathbb{E} \left[ \mathbb{E} [\theta|z_j, p_2, p_1] | x_i, p_1\right] = \mathbb{E} \left[ \theta | x_i, p_1\right],
+		\end{align*}
+		hence early traders only trade (amongst themselves) for the same reason as before -- they \alert{disagree about the resale value}.
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Brown-Jennings: public signals}
+	\begin{itemize}
+		\item Revealing a \alert{public signal $y$} about $\theta$ at $t=1$ would make traders \structure{agree more} (they would put less weight on $x_i$), hence there would be \structure{less trade} at $t=1$; the less trade, the more informative $y$ is.
+		\item But in reality, there is a lot of trading when public news are revealed (\citet*{bailey_economic_2006}). \textbf{Potential explanations} include:
 		\begin{itemize}
-			\item Announcements are made up of public \structure{and private} signals
+			\item Announcements are made up of public \structure{and private} signals \\
+			(in the presence of HFTs, public news $\approx$ HFTs' private news)
 			\item Or traders have \structure{heterogeneous priors} and can therefore `agree to disagree'; announcements then can amplify or mitigate these initial disagreements and so generate trade.
 		\end{itemize}
-		\item \textbf{\cite{kondor_more_2012}} provides a fresh look at this: focus on \structure{higher-order beliefs} 
+		\item Turns out, there's another explanation: if you craft a more elaborate information structure, you can generate disagreement from public news!
 	\end{itemize}
 \end{frame}
 
 
-\begin{frame}{Higher-order beliefs}
-	Suppose two players are interested in $\theta$, which is unobserved. However, each observe a signal $x_{i}$. Consider player 1's beliefs
-	\begin{itemize}
-		\item First-order beliefs: $\mathbb{E}(\theta|x_{1})$
-		\item Second-order beliefs: $\mathbb{E}(\mathbb{E}(\theta|x_{2})|x_{1})$
-		\item Third-order beliefs: $\mathbb{E}(\mathbb{E}(\mathbb{E}(\theta|x_{1})|x_{2})|x_{1})$
-		\item Etc.
-	\end{itemize}
-	Higher-order beliefs are beliefs about the beliefs of others.
-	
-	\pause\bigskip
-	In most models so far, traders make decisions based on expectation of fundamental value: \\ no resale $\rightarrow$ higher-order beliefs are irrelevant.
-	
-	Even with resale, they are often irrelevant: $\mathbb{E}(\mathbb{E}(\theta|x_{2})|x_{1}) = \mathbb{E}(\theta|x_{1})$.
-\end{frame}
 
-
-%\begin{frame}{Public Information in a `standard model'}
-%	Let's think about public information in a Glosten-Milgrom model
-%	
-%	\begin{itemize}
-%		\item \textbf{Value}: $\theta=\theta_1 + \theta_2$, where $\theta_1, \theta_2 \in \{-1,0,1\}$ are distributed independently with equal probability
-%		\item \textbf{Traders}:
-%		\begin{itemize}
-%			\item With prob. $\pi$: risk-neutral \structure{speculator} who observes $\theta_2$
-%			\item With prob. $1-\pi$: \structure{noise trader}, buy/sell with equal probability
-%		\end{itemize}
-%		\item \textbf{Public signal}: $ y = \theta_1$
-%		\only<2-3|handout:0>{
-%			\item \alert{Bliz Quiz}: how does the public signal affect outcomes?
-%			\begin{itemize}
-%				\item nothing changes
-%				\item \structure<3>{midprice changes, spread ($\approx$ volume) doesn't}
-%				\item spread changes, midprice doesn't
-%				\item both midprice and spread change
-%			\end{itemize}
-%		}
-%	\end{itemize}
-%\end{frame}
-%
-%
-%\begin{frame}{Public Information in a `standard model' (2)}
-%	\begin{itemize}
-%		\item \textbf{Equilibrium ask price}: 
-%		\[
-%		%a=\theta_1+\frac{\frac{1}{3}(\pi+(1-\pi)\frac{1}{2})}{\frac{1}{3}(\pi+(1-\pi)\frac{1}{2})+\frac{2}{3}(1-\pi)\frac{1}{2}}=\theta_1+\frac{1+\pi}{1+\pi+2(1-\pi)}.
-%		a = \mathbb{E}[v|\theta_1,\text{buy}] = \theta_1 + \frac{ \pi/3 }{ \pi/3 + (1-\pi)/2}
-%		\]
-%		\item \textbf{Role of public information}: Whereas prices react to public information, trading probability is independent
-%		\item \textbf{Beliefs}: Higher-order beliefs are of no importance in this model: market makers and speculators care only about $\mathbb{E}[\theta]$
-%		\item \textbf{Why?} \pause This is a model without resale, so you only care about the fundamental value, not about a potential resale price
-%	\end{itemize}
-%\end{frame}
-%
-%
-%\begin{frame}{Kondor's contribution}
-%	\begin{itemize}
-%		\item \textbf{Idea} 
-%		\begin{itemize}
-%			\item Short-term traders with different trading times often interact
-%			\item Eg. currency traders often trade during the opening hours of their local exchange and then `close their positions' at the end of the day
-%			\item Example: London traders offload their position to NY traders 
-%			\item Thus, the London traders (only) care about the re-sale value, which depends on the NY traders' valuations: \structure{second-order beliefs} matter
-%		\end{itemize}
-%		\item \textbf{Public announcements}
-%		\begin{itemize}
-%			\item Cause traders to agree more on the fundamental value of assets
-%			\item But may cause them to disagree about the valuations of other traders
-%		\end{itemize}
-%		\item \textbf{Disagreement}: Diverging second-order beliefs lead traders to trade
-%	\end{itemize}
-%\end{frame}
-
+\section{\cite{kondor_more_2012}: beliefs}
 
 \begin{frame}{\cite{kondor_more_2012}: Example}
 	\begin{itemize}
-		\item Two groups of traders, $I$ and $J$
+		\item Two groups of traders again, $I$ and $J$
 		\item Fundamental value has two components: $\theta=\theta_{I}+\theta_{J}$
-		\item I-trader signal: $x^{i} = \theta_{I}+\epsilon^{i}$
-		\item J-trader signal: $z^{j} = \theta_{J}+\epsilon^{j}$
+		\item I-trader signal: $x_i = \theta_{I}+\epsilon^{i}$
+		\item J-trader signal: $z_j = \theta_{J}+\epsilon^{j}$
 		\item Public signal: $y = \theta + \eta$
 		\item Suppose $\theta_{I},\theta_{J}, \epsilon^{i}, \epsilon^{j}, \eta$ are independent and normal with zero mean
 	\end{itemize}
-	Feature that generates disagreement: private signals about \\different aspects of the fundamentals, $\theta_I$ and $\theta_J$.
+	Main features: public signal about all of $\theta$, private signals about \emph{different aspects} of the fundamentals, $\theta_I$ and $\theta_J$.
 \end{frame}
 
 
@@ -166,14 +217,14 @@
 	\begin{itemize}
 		\item Traders' beliefs about $\theta$ are
 		\begin{align*}
-			\mathbb{E}(\theta|z^{j}) & =\mathbb{E}(\theta_{J}|z^{j})+\mathbb{E}(\theta_{I}|z^{j})=a_J z^{j}+0, a_J>0 \\
-			\mathbb{E}(\theta|x^{i}) &=\mathbb{E}(\theta_{J}|x^{i})+\mathbb{E}(\theta_{I}|x^{i})=a_I x^{i}+0, a_I>0
+			\mathbb{E}(\theta|z_j) & =\mathbb{E}(\theta_{J}|z_j)+\mathbb{E}(\theta_{I}|z_j)=a_J z_j+0, a_J>0 \\
+			\mathbb{E}(\theta|x_i) &=\mathbb{E}(\theta_{J}|x_i)+\mathbb{E}(\theta_{I}|x_i)=a_I x_i+0, a_I>0
 		\end{align*}
 		\item $I$-trader's second-order belief is
 		\[
-		\mathbb{E}(\mathbb{E}(\theta|z^{j})|x^{i})=\mathbb{E}(\theta) = 0,
+		\mathbb{E}(\mathbb{E}(\theta|z_j)|x_i)=\mathbb{E}(a_J z_j | x_i) = 0,
 		\]
-		where the first equality holds because $x^{i}$ and $z^{j}$ are independent
+		i.e., $\mathbb{E}(\mathbb{E}(\theta|z_j)|x_i) = \mathbb{E}(\theta)$ because $x_i$ and $z_j$ are independent
 	\end{itemize}
 \end{frame}
 
@@ -183,31 +234,36 @@
 	\begin{itemize}
 		\item Traders' beliefs about $\theta$ are
 		\begin{align*}
-			\mathbb{E}(\theta|z^{j}, y) & =\mathbb{E}(\theta_{J}|z^{j},y)+\mathbb{E}(\theta_{I}|z^{j},y)=(b_J z^{j}+c_Jy)+d_J y,  \\
-			\mathbb{E}(\theta|x^{i}, y) & =\mathbb{E}(\theta_{J}|x^{i},y)+\mathbb{E}(\theta_{I}|x^{i},y)=(b_I x^{i}+c_I y)+d_I y,
+			\mathbb{E}(\theta|z_j, y) & =\mathbb{E}(\theta_{J}|z_j,y)+\mathbb{E}(\theta_{I}|z_j,y)=(b_J z_j+c_Jy)+d_J y,  \\
+			\mathbb{E}(\theta|x_i, y) & =\mathbb{E}(\theta_{J}|x_i,y)+\mathbb{E}(\theta_{I}|x_i,y)=(b_I x_i+c_I y)+d_I y,
 		\end{align*}
-		where $b_k,c_k,d_k>0$ and $b_k<a_k$. First-order beliefs \structure{converge}
+		where $b_k,c_k,d_k>0$ and $b_k<a_k$. \\
+		First-order beliefs of $i$-traders \structure{converge} due to public signal
+		\pause
 		\item But $I$-agent's second-order belief  is
 		\begin{align*}
-			\mathbb{E}(\mathbb{E}(\theta|z^{j},y)|x^{i},y)
-			&=b_J\mathbb{E}(z^{j}|x^{i},y)+(c_J+d_J)y, \\
-			&=b_J(ey-fx^{i})+(c_J+d_J)y 
+			\mathbb{E}(\mathbb{E}(\theta|z_j,y)|x_i,y)
+			&=b_J\mathbb{E}(z_j|x_i,y)+(c_J+d_J)y, \\
+			&=b_J(ey-fx_i)+(c_J+d_J)y 
 		\end{align*}
 		where $e,f>0$. 
-		\alert{Decreasing in $x_i$} -- second-order beliefs \structure{diverge}
+		
 	\end{itemize}
 \end{frame}
 
 
 \begin{frame}{Example: Conclusion}
 	\begin{itemize}
-		\item Claim: divergence leads to trade (will show later)
-		\item Further, the divergence grows the more precise public info is
-		\begin{itemize}
-			\item Recall: no divergence in the absence of a public signal
-		\end{itemize}
+		\item $\mathbb{E}(\mathbb{E}(\theta|z_j,y)|x_i,y)$ is \alert{decreasing in $x_i$} and the weight on $x_i$ \emph{increases} with the precision of $y$
+		\item i.e., second-order beliefs \structure{diverge} among $i$-traders: the more precise $y$ is, the less $I$-traders agree about the resale value of the asset $\Rightarrow$ more trade among $i$!
+		\item This disagreement generates trade after public signals.
+		\item The remainder of the slides presents the Kondor's trading model and derivations in \emph{slightly} more detail.
 	\end{itemize}
 \end{frame}
+
+
+
+\section{\cite{kondor_more_2012}: trade model}
 
 
 \begin{frame}{\cite{kondor_more_2012}: Full(er) Model}
@@ -218,12 +274,12 @@
 			\item I-traders liquidate all their positions and sell to J-traders
 			\item $\theta$ (distributed as before) is realized and J-traders consume asset
 		\end{enumerate}
-		\item \textbf{Traders}: Price takers, $i, j\sim u(0,1)$, demand $d_i$, util $u(W_i)=-e^{-\gamma W_i}$ and   
+		\item \textbf{Traders}: Price takers, $i, j \sim U(0,1)$, demand $d_i(p_t)$, util $u(W_i)=-e^{-\gamma W_i}$ and  wealth 
 		\begin{align*}
-			W_I & = {d_I}(p_2-p_1); &
-			W_J & = {d_J}(\theta-p_2).
+			W_I & = (p_2-p_1){d_I}; &
+			W_J & = (\theta-p_2){d_J}.
 		\end{align*}
-		\item \textbf{Supply}: Time-$t$ asset supply  $u_t$: \\$u_1 \sim \mathcal{N}(0,1/\delta^2_1)$, $u_2\sim \mathcal{N}(0,1/\delta^2_2)$ ($u_2 \equiv u_1 + \varDelta u_2$)
+		\item \textbf{Supply}: Time-$t$ asset supply  $u_t$ (from noise traders): \\$u_1 \sim \mathcal{N}(0,1/\delta^2_1)$, $u_2\sim \mathcal{N}(0,1/\delta^2_2)$ ($u_2 \equiv u_1 + \varDelta u_2$)
 	\end{itemize}
 \end{frame}
 
@@ -234,17 +290,17 @@
 		\item \textbf{Random supply}: Implies that prices are not completely informative.
 		\item \textbf{I traders}: Solve
 		\[
-			\max_{d_I} \mathbb{E}\left[ -e^{-\gamma W_I}| x^i, y, p_1 \right]
+			\max_{d_I} \mathbb{E}\left[ -e^{-\gamma W_I}| x_i, y, p_1 \right]
 		\]
 		\begin{itemize}
 			\item CARA utility and normal distributions $\Rightarrow$ can rewrite $I$ traders' problem as
 		\end{itemize}
 		\[
-			\max_{d_I} \left\{\mathbb{E}\left[W_I| x^i, y, p_1\right]-\frac{\gamma}{2} \mathbb{V}\left[W_I| x^i, y, p_1\right]\right\}
+			\max_{d_I} \left\{\mathbb{E}\left[W_I| x_i, y, p_1\right]-\frac{\gamma}{2} \mathbb{V}\left[W_I| x_i, y, p_1\right]\right\}
 		\]
 		\item \textbf{J traders}: Solve
 		\[
-			\max_{d_J} \left\{\mathbb{E}\left[W_J| z^j, y, p_1, p_2\right]-\frac{\gamma}{2} \mathbb{V}\left[W_J| z^j, y, p_1, p_2\right] \right\}
+			\max_{d_J} \left\{\mathbb{E}\left[W_J| z_j, y, p_1, p_2\right]-\frac{\gamma}{2} \mathbb{V}\left[W_J| z_j, y, p_1, p_2\right] \right\}
 		\]
 	\end{itemize}
 \end{frame}
@@ -254,10 +310,10 @@
 	\begin{itemize}
 		\item Taking the FOC and solving for the demands we get 
 		\begin{align}
-			d^*_{1,i} &= \frac{\tau^2_{p_2}}{\gamma}(\mathbb{E}[p_2| x^i, y, p_1]-p_1), \label{eqfoc1} \\
-			d^*_{2,j} &= \frac{\tau^2_\theta}{\gamma} (\mathbb{E}[\theta| z^j, y, p_1, p_2]-p_2), \label{eqfoc2}
+			d^*_{1,i} &= \frac{\tau^2_{p_2}}{\gamma}(\mathbb{E}[p_2| x_i, y, p_1]-p_1), \label{eqfoc1} \\
+			d^*_{2,j} &= \frac{\tau^2_\theta}{\gamma} (\mathbb{E}[\theta| z_j, y, p_1, p_2]-p_2), \label{eqfoc2}
 		\end{align}
-		where $\tau^2_{p_2}=1/\mathbb{V}(p_2| x^i, y, p_1)$ and $\tau^2_{\theta}=\mathbb{V}(\theta| z^j, y, p_1, p_2)$
+		where $\tau^2_{p_2}=1/\mathbb{V}(p_2| x_i, y, p_1)$ and $\tau^2_{\theta}=\mathbb{V}(\theta| z_j, y, p_1, p_2)$
 		\item In order to calculate expectations, need to make a conjecture about prices
 	\end{itemize}
 \end{frame}
@@ -265,7 +321,7 @@
 
 \begin{frame}{Analysis: Linear prices and price signals}
 	\begin{itemize}
-		\item \textbf{Equilibrium}: Find equilibrium with linear price function/demand
+		\item \textbf{Equilibrium}: Look for equilibrium with linear price function/demand
 		\begin{align}
 			p_1 & = \frac{1}{e_1}\left[a_1 \theta_I + c_1 y - u_1 \right]\label{price1}\\
 			p_2 & =\frac{1}{e_2}\left[ b_2 \theta_J + c_2 y +  g_2 q_1-u_2 \right], \label{price2}
@@ -285,15 +341,15 @@
 	\begin{itemize}
 		\item \textbf{Rewrite expectation}. All variables jointly normal $\rightarrow$ linear expressions
 		\begin{align}
-		\mathbb{E}[p_2| x^i, y, p_1] &=\mathbb{E}[p_2| x^i, y, q_1] = a^e_1 x^i+b^e_1 y +c^e_1 q_1;   \label{exp1} \\
-		\mathbb{E}[\theta| z^j, y, p_1, p_2] &= \mathbb{E}[\theta| z^j, y, q_1, q_2] =  a^e_2 z^j+b^e_2 y +c^e_2 q_1 +d^e_2 q_2. \label{exp2}
+		\mathbb{E}[p_2| x_i, y, p_1] & = a^e_1 x_i+b^e_1 y +c^e_1 q_1;   \label{exp1} \\
+		\mathbb{E}[\theta| z_j, y, p_1, p_2] & =  a^e_2 z_j+b^e_2 y +c^e_2 q_1 +d^e_2 q_2. \label{exp2}
 		\end{align}
 		\item \textbf{Rewrite FOC}. Plugging \eqref{exp1} and \eqref{exp2} into \eqref{eqfoc1} and \eqref{eqfoc2} we get
 		\begin{align}
-		d^*_{1,i} &= \frac{\tau^2_{p_2}}{\gamma}(a^e_1 x^i+b^e_1 y +c^e_1 q_1 - p_1); \label{eqfocb1} \\
-		d^*_{2,j} &= \frac{\tau^2_\theta}{\gamma}(a^e_2 z^j+b^e_2 y +c^e_2 q_1 +d^e_2 q_2 - p_2). \label{eqfocb2}
+		d^*_{1,i} &= \frac{\tau^2_{p_2}}{\gamma}(a^e_1 x_i+b^e_1 y +c^e_1 q_1 - p_1); \label{eqfocb1} \\
+		d^*_{2,j} &= \frac{\tau^2_\theta}{\gamma}(a^e_2 z_j+b^e_2 y +c^e_2 q_1 +d^e_2 q_2 - p_2). \label{eqfocb2}
 		\end{align}
-		\item \textbf{Market clearing}: $u_1=\int_0^1 d^*_{1,i} di$ and $u_2=\int_0^1 d^*_{2,j} dj$
+		\item \textbf{Market clearing}: $u_1=\int_0^1 d^*_{1,i} di$ and $u_2=\int_0^1 d^*_{2,j} dj$ determine $p_1$ and $p_2$ resp.
 	\end{itemize}
 \end{frame}
 
@@ -303,10 +359,10 @@
 		\item \textbf{Matching coefficients}: From market clearing, can show that $p_t$ is linear function as conjectured
 		\item \textbf{Equilibrium demand}: Matching up all the coefficients, we can then show that
 		\begin{align}
-		d^*_{1,i} &=  a_1 x^i+c_1 y -e_1 p_1; \label{eqdem1} \\
-		d^*_{2,j} &= b_2 z^j+c_2 y + g_2q_1-e_2 p_2. \label{eqdem2}
+		d^*_{1,i} &=  a_1 x_i+c_1 y -e_1 p_1; \label{eqdem1} \\
+		d^*_{2,j} &= b_2 z_j+c_2 y + g_2q_1-e_2 p_2. \label{eqdem2}
 		\end{align} 
-		\item Demand is increasing in private signal ($x^i$/$z^j$), in public signal ($y$), in price signal ($q_1$), and decreasing in price ($p_t$) 
+		\item Demand is increasing in private signal ($x_i$/$z_j$), in public signal ($y$), in price signal ($q_1$), and decreasing in price ($p_t$) 
 		(recall that traders are price takers)
 	\end{itemize}
 \end{frame}
@@ -317,10 +373,10 @@
 		\item Let's look at what drives the agents' demands. Rewrite period-2 demand as 
 		\begin{block}{}
 			\begin{equation} \label{eqdem2z}
-			d^*_{2,j} = b_2 (z^j - q_2) 
+			d^*_{2,j} = b_2 (z_j - q_2) 
 			\end{equation}
 		\end{block}
-		\item Notice that $z^j$ is $j$'s private signal and  $q_2$ is a noisy signal of all the other agents' signals
+		\item Notice that $z_j$ is $j$'s private signal and  $q_2$ is a noisy signal of all the other agents' signals
 		\item Thus, if $j$ believes to have received a better signal than everybody else, he will buy, otherwise sell
 		\item This is a standard story: $J$-traders trade due to a \textbf{difference in opinion} -- they think the asset is worth more/less than others
 	\end{itemize}
@@ -331,11 +387,11 @@
 	\begin{itemize}
 		\item Market clearing in period 2 together with \eqref{eqfoc2} implies
 		\[
-		p_2 = \int_0^1 \mathbb{E}[\theta|z^j, y , q_1, q_2] dj - \frac{\gamma}{\tau^2_\theta}u_2
+		p_2 = \int_0^1 \mathbb{E}[\theta|z_j, y , q_1, q_2] dj - \frac{\gamma}{\tau^2_\theta}u_2
 		\]
 		\item Rewrite period-1 demand using this:
 		\[
-			d^*_{1,i} = \frac{\tau^2_{p_2}}{\gamma} \left( \underbrace{\mathbb{E}\left[ \int_0^1 \mathbb{E}[\theta \mid z^j, y , q_1, q_2 ] dj -\frac{\gamma}{\tau^2_\theta}u_2 \mid x^i,y,q_1 \right]}_{\text{2nd order expectation}}-p_1 \right)
+			d^*_{1,i} = \frac{\tau^2_{p_2}}{\gamma} \left( \underbrace{\mathbb{E}\left[ \int_0^1 \mathbb{E}[\theta \mid z_j, y , q_1, q_2 ] dj -\frac{\gamma}{\tau^2_\theta}u_2 \,\bigg|\, x_i,y,q_1 \right]}_{\text{2nd order expectation}}-p_1 \right)
 		\]
 		\item $I$-trader demand in period 1 is thus a function of a \textbf{second-order expectation}: 
 		The more $i$ expects $J$ traders to value the asset, the more he buys 
@@ -406,11 +462,10 @@
 
 \begin{frame}{Kondor: Conclusion}
 	\begin{itemize}
-		\item The introduction of public announcements that affect second-order beliefs is new in this setting
-		\item The results are quite surprising, and go against many standard intuitions
-		\item In particular, public announcements may increase trading volumes and price volatility
-		\item Rather than being a welfare analysis, this goes toward explaining some empirical puzzles 
-		\item In particular, it should allow us to predict better which stocks will react strongly to announcements
+		\item Public announcements can affect second-order beliefs, thereby generating trade and increasing price volatility!
+		\item This requires some very specific assumptions on the information structure in the market though...
+		\item The model goes primarily towards explaining some empirical puzzles; not clear whether we should base welfare analysis on it.
+		\item But it should allow us to predict better which stocks will react strongly to announcements
 	\end{itemize}
 \end{frame}
 
