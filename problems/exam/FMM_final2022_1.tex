@@ -1,0 +1,336 @@
+%%% License: Creative Commons Attribution Share Alike 4.0 (see https://creativecommons.org/licenses/by-sa/4.0/)
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[a4paper]{article}
+
+\usepackage{amssymb}
+%\usepackage{enumerate}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{extramarks} % Required for headers and footers
+\usepackage[usenames,dvipsnames]{color} % Required for custom colors
+\usepackage{graphicx} % Required to insert images
+\usepackage{listings} % Required for insertion of code
+\usepackage{courier} % Required for the courier font
+\usepackage[table]{xcolor}
+\usepackage{amsfonts,amsmath,amsthm,parskip,setspace}
+\usepackage[section]{placeins}
+\usepackage[a4paper]{geometry}
+\usepackage[USenglish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{tikz}
+\usepackage{hyperref}
+\usepackage[hyphenbreaks]{breakurl}
+\usepackage[]{url}
+\usepackage[shortlabels]{enumitem}
+\usepackage{framed}
+\usepackage{pdfpages}
+
+
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.6in
+
+\linespread{1.1} % Line spacing
+
+
+
+%----------------------------------------------------------------------------------------
+%   FORMATTING
+%----------------------------------------------------------------------------------------
+% Set up the header and footer
+\pagestyle{fancy}
+\lhead[c]{\textbf{{\color[rgb]{.5,0,0} K{\o}benhavns\\Universitet }}} % Top left header
+\chead{\textbf{{\color[rgb]{.5,0,0} \Class }}\\ \hmwkTitle  } % Top center head
+\rhead{\instructor \\ \theprofessor} % Top right header
+\lfoot{\lastxmark} % Bottom left footer
+\cfoot{} % Bottom center footer
+\rfoot{Page\ \thepage\ of\ \protect\pageref{LastPage}} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+
+
+% Other formatting stuff
+%\setlength\parindent{12pt}
+\setlength{\parskip}{5 pt}
+%\theoremstyle{definition} \newtheorem{ex}{\textbf{\Large{Exercise & #}\\}}
+\usepackage{titlesec}
+\titleformat{\section}[hang]{\normalfont\bfseries\Large}{Problem \thesection:}{0.5em}{}
+
+
+
+
+%----------------------------------------------------------------------------------------
+%	NAME AND CLASS SECTION
+%----------------------------------------------------------------------------------------
+\newcommand{\hmwkTitle}{Exam} % Assignment title
+\newcommand{\Class}{Financial Markets Microstructure} % Course/class
+\newcommand{\instructor}{Spring 2022} % TA
+\newcommand{\theprofessor}{Prof. Egor Starkov} % Professor
+
+
+
+
+%----------------------------------------------------------------------------------------
+%   SOLUTIONS
+%----------------------------------------------------------------------------------------
+\newif\ifsolutions
+\solutionstrue
+
+
+
+
+\begin{document}
+
+{\ifsolutions \else	
+	\includepdf{FMMexam_frontpage22.pdf}
+\fi}
+
+\begin{center}
+		\LARGE\textbf{Final exam {\ifsolutions solutions \fi}}
+\end{center}
+
+{\ifsolutions \else	
+Write up your responses to questions below and submit them to Digital Exam. The deadline to submit the responses is Jun 9, 22:00. No cooperation with other students is permitted.
+
+Be concise, but show your work and explain your answers. Some questions may require you to make additional assumptions beyond those provided in the question; be clear about the assumptions you make. Some questions are open ended in that they may not have a unique correct answer. You are allowed to refer to textbooks, lecture notes, slides, problem sets, etc.
+\fi}
+
+
+
+\section{Twitter buyout}
+In April 2022, when Elon Musk has announced his intent to buy Twitter at \$54.20 per share, but no official acceptance from Twitter's Board of Directors has been issued, the following tweet has been made by the Saudi Prince Alwaleed bin Talal, head of Kingdom Holding Company, which owns 5.2 percent of Twitter:
+\begin{quote}
+``I don't believe that the proposed offer by @elonmusk (\$54.20) comes close to the intrinsic value of @Twitter given its growth prospects ... I reject this offer.''
+\\ (\url{https://twitter.com/Alwaleed_Talal/status/1514615956986757127})
+\end{quote}
+
+Twitter stock closing price on NYSE on April 13th (day before the tweet) was \$45.85, and on April 14th (day of the tweet) was \$45.08.
+
+\begin{enumerate}
+	\item Explain how the price movement on April 14th could be rationalized by the quoted tweet.
+	
+	\item The Prince claimed the intrinsic value of Twitter was much higher than \$54.20 per stock, but the market price was significantly lower than that. Based on the course material, provide at least three possible explanations for this discrepancy.
+\end{enumerate}
+
+
+\ifsolutions
+\subsection*{Solution}
+	\begin{enumerate}
+		\item A major shareholder sent a signal that they might not agree to the buyout, reducing the probability that other investors will receive the buyout value of \$54.20 (which is above the market consensus valuation), which reduced the expected payoff of twitter stock as perceived by the investors.
+		
+		(The Prince also claimed the fundamental value is above \$54.20, which should have been a good signal about the fundamental value but wasn't, possibly because other traders disagree or did not find this claim credible.)
+		
+		
+		\item More explanations are possible, but the simplest ones are: (1) The Prince values Twitter stock more than other investors due to some idiosyncratic preference (like it giving him access to internal Twitter data that could be used for political purposes); (2) the Prince has some insider/private information about Twitter's true value; (3) investors vary in their risk-aversion, with most investors being more risk-averse than the Prince and thus having lower valuation of the Twitter stock, which leads to the market valuation being lower as well.
+	\end{enumerate}
+\fi
+
+
+
+\section{Liquidity premium with liquidity shocks}
+	When we looked at the Amihud-Mendelson model of illiquidity premium in class, we assumed that all traders have the same holding period $h$. This problem asks you to reconsider this model when instead of a fixed holding period $h$, all traders have a fixed probability $\lambda$ with which a need to sell the asset arises in any given period.
+	
+	In particular, consider an asset, whose (mid-)price grows at a constant rate $R$: $\mu_t = \mu_{t-1} (1+R)$, and which is traded with a constant relative half-spread $\frac{s}{2}$. Consider a market consisting of identical investors who consider buying the asset in period $t$ at the current ask price $a_t = \mu_t \left(1+\frac{s}{2}\right)$. In every period $\tau > t$, if the investor is still holding the asset, a liquidity shock arrives with probability $\lambda$, which forces the investor to sell the asset at then-current bid price $b_\tau$. The asset yields no dividends.
+	The investor's outside option is putting money in a bank which yields return $r$ and is a perfectly liquid investment.
+	
+	\begin{enumerate}
+		\item Derive the nominal return $R$ on the asset that should establish in equilibrium. (It should make the investors exactly indifferent between investing in the asset and pursuing their outside options.)
+		
+		\item How does $R$ depend on $\lambda$? On $s$? Explain.
+		\emph{NOTE: a formal argument coupled with an intuitive explanation is preferred. You can provide a purely intuitive argument for partial credit if you were unable to derive the exact expression for $R$.}
+	\end{enumerate}
+
+
+\ifsolutions
+\subsection*{Solution}
+\begin{enumerate}
+	\item The invested amount should be exactly equal to the expected discounted cash flow from a sale, where the discount rate is $r$:
+	\begin{align}
+		\mu_t\left( 1+\frac{s}{2} \right) 
+		&= \lambda \frac{\mu_{t+1}\left(1-\frac{s}{2}\right)}{1+r} + (1-\lambda) \lambda \frac{\mu_{t+2}\left(1-\frac{s}{2}\right)}{(1+r)^2} + (1-\lambda)^2 \lambda \frac{\mu_{t+3}\left(1-\frac{s}{2}\right)}{(1+r)^3} + ...
+		\label{eq:AM1}
+	\end{align}
+	The idea behind the expression above is as follows: with probability $\lambda$ the investor receives a liquidity shock and has to sell in the first period after investment, in which case the return is the asset sale price $b_{t+1} = \mu_{t+1}\left(1-\frac{s}{2}\right)$, and the investor discounts that return by factor $1+r$. The right-hand side of the expression above consists of an infinite series of terms like this, for each period $\tau \in \{t+1,t+2,t+3,...\}$. The probability of receiving a liquidity shock in period $\tau$ is equal to the joint probability of not receiving a shock in any of the periods from $t+1$ to $\tau-1$ and getting a shock at $\tau$, which amounts to $(1-\lambda)^{\tau-(t+1)} \lambda$. The sale price in period $\tau$ is $b_\tau = \mu_{\tau} \left(1-\frac{s}{2}\right) = \mu_t (1+R)^{\tau-t} \left(1-\frac{s}{2}\right)$. Finally, the discount factor for period $\tau$ is $(1+r)^{-(\tau-t)}$.
+	
+	Equation \eqref{eq:AM1} can then be rewritten as
+	\begin{align*}
+		\mu_t\left( 1+\frac{s}{2} \right) 
+		&= \lambda \mu_t \left( 1 - \frac{s}{2} \right) \left[ \frac{1+R}{1+r} + \frac{(1-\lambda)(1+R)^2}{(1+r)^2} + \frac{(1-\lambda)^2(1+R)^3}{(1+r)^3} + ... \right]
+	\end{align*}
+	Note that the big bracket on the right-hand side is an infinite geometric series $\Sigma = \beta_0 + \beta_1 + \beta_2 + ...$ with first term $\beta_0 = \frac{1+R}{1+r}$ and factor $\delta = \frac{(1-\lambda)(1+R)}{1+r}$ (so $\beta_k = \beta_0 \delta^k$). The equality in \eqref{eq:AM1} must hold, meaning that the sum must be convergent, so $\delta < 1$. Using the formula for the sum of an infinite geometric progression, $\Sigma = \frac{\beta_0}{1-\delta}$, we get:
+	\begin{align*}
+		\mu_t\left( 1+\frac{s}{2} \right) 
+		&= \lambda \mu_t \left( 1 - \frac{s}{2} \right) \frac{\frac{1+R}{1+r}}{1-\frac{(1-\lambda)(1+R)}{1+r}}
+		\\
+		\iff
+		\left( 1+\frac{s}{2} \right) &= \lambda \left( 1 - \frac{s}{2} \right) \frac{1+R}{1+r - (1-\lambda)(1+R)}
+		\\
+		\iff
+		(1+r) \left( 1 + \frac{s}{2} \right) &= (1+R) \left[ \lambda \left( 1 - \frac{s}{2} \right) + (1-\lambda) \left( 1 + \frac{s}{2} \right) \right]
+	\end{align*}
+	\begin{equation}
+		\iff
+		1+R = (1+r) \frac{1 + \frac{s}{2}}{1 + \frac{s}{2} (1-2\lambda)}
+		\label{eq:AM2}
+	\end{equation}
+
+	\item From \eqref{eq:AM2} we see that given $r$, $R$ is increasing in both $s$ and $\lambda$, which is quite intuitive: $s$ increases the asset illiquidity that the investor is exposed to, which increases the illiquidity premium required by the investor, and $\lambda$ increases the probability with which (decreases the average time before) the investor is exposed to this illiquidity, which has the same effect.
+\end{enumerate}
+\fi
+
+
+
+
+
+\section{Dynamic limit order book with adverse selection: \\Effects of algorithmic trading}
+	This problem explores the effects of informed trading in a version of the Parlour model that we have seen in class.
+	Suppose that there is one asset, whose fundamental value $v$ is unknown, and whose market valuation evolves according to $\mu_t = \mathbb{E}[v \mid \Omega_t] = \mu_{t-1} + \epsilon_t$, where $\epsilon_t \in \{-\sigma, \sigma\}$ with equal probabilities is period-$t$ news, publicly announced at the end of period $t$ (after any period-$t$ orders are submitted).\footnote{Object $\Omega_t$ denotes all public information available to the market at (the end of) period $t$.} 
+	In every period $t$, one risk-neutral trader arrives at the market. With probability $\pi$ the trader is \emph{informed} and already knows this period's news $\epsilon_t$. With probability $1-\pi$ the trader is \emph{uninformed} but has an idiosyncratic valuation $y_t \in \{-\sigma, \sigma\}$ with equal probabilities, which is independent of all $\{\epsilon_t\}$. The period-$t$ uninformed trader thus values the asset at $v+y_t$.
+	
+	Suppose that in every period, there is one ask price $a_t = \mu_{t-1} + S$ and one bid price $b_t = \mu_{t-1} - S$, where $S$ denotes the half-spread, constant across periods. Each arriving trader can choose between submitting a limit order for one unit at the respective price or a market order against an existing order in the limit order book. A limit order is valid for one period and is automatically cancelled if it is not traded against by the next trader. 
+	Suppose further that a limit order submitted in period $t$ can be automatically cancelled or repriced when $\epsilon_t$ is revealed, so a limit sell order submitted in period $t$ is effectively priced at $a_{t+1} = \mu_t + S$, and a limit buy order at $b_{t+1} = \mu_t - S$. 
+	Let $d_t \in \{\varnothing,MS,LS,LB,MB\}$ denote the order submitted by period-$t$ trader, where $d_t = \varnothing$ means the trader abstains from trading, and the other four denote, respectively, the market sell, limit sell, limit buy, and market buy orders.
+	
+	\begin{enumerate}
+		\item What is the expected utility of a period-$t$ \emph{informed} trader from using a limit buy order, as a function of its execution probability $p_{MS}$?
+		
+		\item What is the expected utility of a period-$t$ \emph{uninformed} trader from using a limit buy order, as a function of its execution probability $p_{MS}$?
+		
+		\item What are the expected utilities that the informed and uninformed traders get from using a market buy order (assuming a limit sell order is in the book)?
+		
+		\item Conjecture that when $y_t=+\sigma$, the \emph{uninformed} trader uses a market buy order with probability $\alpha$, assuming one is available, and a limit buy order w.p. $1-\alpha$; when $\epsilon_t=+\sigma$, the \emph{informed} trader uses MB w.p. $\beta$ and LB w.p. $1-\beta$; and symmetric strategies are used when $y_t/\epsilon_t=-\sigma$. Calculate the spread level $S^U$ (as a function of $\alpha,\beta$) that renders the uninformed traders indifferent between market and limit orders.
+		
+		\item Calculate the spread level $S^I$ (as a function of $\alpha,\beta$) that renders the uninformed traders indifferent between market and limit orders. How does it compare to $S^U$? Explain this relation intuitively: which group of traders is more willing to provide liquidity and why?
+		
+		\item Taking $S$ as exogenous, what kind of pure-strategy equilibria can arise for different levels of $S$? (Note that relation of $S$ and $S^I,S^U$ determines $\alpha$ and $\beta$, which, in turn, determine $S^I$ and $S^U$.)
+		
+		\item Where do you expect the equilibrium spread $S$ to be, relative to the interval that you identified. (Who has the power to determine $S$? Would these traders prefer higher or lower $S$? Calculate the equilibrium $S$ if you can.)
+		
+		\emph{NOTE: you can attempt to answer this question intuitively for partial credit if you have not answered some or all of the parts 1-6 above.}
+		
+		\item Turns out, this problem was about algorithmic trading all along! In particular, suppose that it is exactly algorithmic trading that gives the limit traders their ability to reprice their limit orders before they are picked off. Explain intuitively the implications of algorithmic trading in the context of this model.
+		
+		\emph{NOTE: you are expected to make an educated guess about the results in the absence of algotrading; you are not expected to analyze the whole model without repricing. You can attempt to answer this question even if you have not answered some or all of the parts 1-7 above.}
+	\end{enumerate}
+	
+	
+
+
+\ifsolutions
+\subsection*{Solution}
+This solution assumes that all limit orders are always automatically repriced, in line with the suggestion to consider LS order in period $t$ as priced at $a_{t+1}$ and LB as priced at $b_{t+1}$. One could alternatively consider a problem, in which a limit trader strategically decides whether to reprice or not (which would only be relevant for an uninformed trader). Such a setup may yield different results, but would still be considered correct.
+\begin{enumerate}
+	\item The informed trader's expected utility from a limit buy order is
+	\begin{align}
+		U^I_{LB}
+		&= \mathbb{E}\Big[ (v-b_{t+1}) p_{MS} \mid \mu_{t-1}, \epsilon_t, d_{t+1}=MS \Big]
+		\nonumber
+		\\
+		&= \Big( (\mu_t+ \mathbb{E}[\epsilon_{t+1} \mid \epsilon_t, d_{t+1}=MS]) - (\mu_t-S) \Big) p_{MS} 
+		\nonumber
+		\\
+		&= \Big( S +  \mathbb{E}[\epsilon_{t+1} \mid \epsilon_t, d_{t+1}=MS] \Big) p_{MS}.
+		\label{eq:uilb}
+	\end{align}
+	Note that while the informed trader knows $\epsilon_t$, they do not know $\epsilon_{t+1}$, and the event that their limit order executes may be informative about $\epsilon_{t+1}$.
+	
+	\item The uninformed trader's expected utility from a limit buy order is
+	\begin{align}
+		U^U_{LB}
+		&= \mathbb{E}\Big[ (v+y_t-b_{t+1}) p_{MS} \mid \mu_{t-1}, d_{t+1}=MS \Big]
+		\nonumber
+		\\
+		&= \Big( (\mu_{t-1} + \mathbb{E}[\epsilon_{t} + \epsilon_{t+1} \mid d_{t+1}=MS] + y_t) - (\mu_{t-1} + \mathbb{E}[\epsilon_{t} \mid d_{t+1}=MS] - S) \Big) p_{MS}
+		\nonumber
+		\\
+		&= \Big( \mathbb{E}[ \epsilon_{t+1} \mid d_{t+1}=MS] + y_t + S \Big) p_{MS}.
+		\label{eq:uulb}
+	\end{align}
+	The uninformed trader has no prior knowledge of either $\epsilon_t$ or $\epsilon_{t+1}$, but the former is irrelevant (since the trader can reprice after $\epsilon_t$ is revealed), and the trader can make inferences about the latter from the event $d_{t+1} = MS$.
+	
+	\item The informed trader's expected utility from using a market buy order is given by
+	\begin{align}
+		U^I_{MB}
+		&= \mathbb{E}[v \mid \mu_{t-1},\epsilon_{t}] - a_t 
+		\nonumber
+		\\
+		&= (\mu_{t-1} + \epsilon_t) - (\mu_{t-1} + S)
+		\nonumber
+		\\
+		&= \epsilon_t - S.
+		\label{eq:uimb}
+	\end{align}
+	For the uninformed trader we have
+	\begin{align}
+		U^U_{MB}
+		&= (\mathbb{E}[v \mid \mu_{t-1}] + y_t) - a_t 
+		\nonumber
+		\\
+		&= (\mu_{t-1} + y_t) - (\mu_{t-1} + S)
+		\nonumber
+		\\
+		&= y_t - S.
+		\label{eq:uumb}
+	\end{align}
+	
+	\item Given $\alpha$ and $\beta$, we can calculate $p_{MS}$ and the expectations that enter the utilities above:
+	\begin{align*}
+		p_{MS} &= \pi \frac{\beta}{2} + (1-\pi) \frac{\alpha}{2},
+		\\
+		\mathbb{E}[\epsilon_{t+1} \mid \epsilon_t, d_{t+1}=MS] = \mathbb{E}[\epsilon_{t+1} \mid d_{t+1}=MS] &= \frac{\pi \frac{\beta}{2}}{\pi \frac{\beta}{2} + (1-\pi) \frac{\alpha}{2}} \cdot (-\sigma) + \frac{(1-\pi) \frac{\alpha}{2}}{\pi \frac{\beta}{2} + (1-\pi) \frac{\alpha}{2}} \cdot 0
+		\\
+		&= \frac{-\pi \beta \sigma}{\pi \beta + (1-\pi) \alpha}.
+	\end{align*}
+	The cutoff $S^U$ must be such that $U^U_{MB} = U^U_{LB}$ (it is trivial to verify that the indifference on the sell side yields the same condition):
+	\begin{align*}
+		\sigma - S^U &= \left( \frac{-\pi \beta \sigma}{\pi \beta + (1-\pi) \alpha} + \sigma + S^U \right) \cdot \left(\pi \frac{\beta}{2} + (1-\pi) \frac{\alpha}{2}\right)
+		\\
+		\iff 
+		S^U &= \frac{2-(1-\pi)\alpha}{2 + (1-\pi)\alpha + \pi \beta} \sigma.
+	\end{align*}
+	
+	\item The cutoff $S^I$ must be such that $U^I_{MB} = U^I_{LB}$:
+	\begin{align*}
+		\sigma - S^U &= \left( \frac{-\pi \beta \sigma}{\pi \beta + (1-\pi) \alpha} + S^U \right) \cdot \left(\pi \frac{\beta}{2} + (1-\pi) \frac{\alpha}{2}\right)
+		\\
+		\iff 
+		S^I &= \frac{2+\pi \beta}{2 + (1-\pi)\alpha + \pi \beta} \sigma.
+	\end{align*}
+	It is easy to see that $S^I > S^U$. Since trader of type $\theta \in \{I,U\}$ prefers market orders when $S < S^\theta$ and limit orders when $S > S^\theta$, it follows then that informed traders use market orders at least as often as the uninformed traders ($\beta \geq \alpha$ in equilibrium). This is because the informed traders trade based on their private information and have no other trading concerns -- but their informational advantage can only be capitalized on via market orders, since $\epsilon_t$ is publicly revealed before any trade can happen with a limit order.
+
+	\item Three cases are possible with pure strategies:
+	\begin{enumerate}
+		\item $S > S^I$: then $\alpha=\beta=0$, so no traders use market orders (an indirect way to notice this is to observe that market orders yield negative profit). The cutoff then evaluates to $S^I_1 = \sigma$. However, if no traders use market orders, then there is no point to using limit orders, leading to a market breakdown. Therefore, if $S > \sigma$, then there is no trade in equilibrium.
+		
+		\item $S \in (S^U, S^I]$: then $\alpha=0,\beta=1$. The cutoffs in this case evaluate to $S^I_2 = \sigma$, $S^U_2 = \frac{2}{2+\pi} \sigma$. Therefore, when $S \in \left(\frac{2}{2+\pi} \sigma, \sigma\right]$, there exists an equilibrium, in which the uninformed traders use limit orders, while the informed traders use market traders whenever possible (a simple verification confirms that both types get weakly positive profits from their respective strategies, so abstaining is not strictly optimal, and the remaining order types -- LS/MS when a buy is prescribed and LB/MB when a sell is prescribed, -- yield negative expected profit).
+		
+		\item $S \leq S^U$: then $\alpha=\beta=1$. The cutoff then evaluates to $S^U_3 = \frac{1+\pi}{3}\sigma$. So when $S \leq \frac{1+\pi}{3}\sigma$, there exists an equilibrium in which all traders use market orders \emph{whenever possible} and limit orders otherwise (a similar verification to the one mentioned in the previous point is required). 
+		Note that this is, indeed, an equilibrium: despite all traders' preference for market orders, not all of them have the opportunity to trade via a MO (since an appropriate limit order may not be in the LOB), in which case they will have to submit a limit order.
+	\end{enumerate}
+	Note that if $S \in \left( \frac{1+\pi}{3}\sigma, \frac{2}{2+\pi} \sigma \right)$ then no pure-strategy equilibrium exists (but a mixed-strategy equilibrium exists, in which $\beta = 1$, and $\alpha$ solves $S = S^U$).
+	
+	\item The prices are set by the (endogenously selected) limit order traders, whereas traders submitting market orders can only choose whether to trade or not at a given price. It is in the limit order traders' interest to maximize $S$, since this increases their profits -- as long as future traders are willing to trade against their limit orders. This is a reason to believe that $S$ would be up to either $\frac{1+\pi}{3}\sigma$, or $\sigma$. Comparing the expected profits from submitting limit orders at the two price levels yields that both the informed and the uninformed traders get higher expected profit when setting $S=\frac{1+\pi}{3}\sigma$, since then the gain from a lower execution risk outweighs the loss from a worse price, compared to $S=\sigma$.
+	
+	A possible countervailing force is competition. If limit order traders are competitive, the competition may drive the spread down to $S = 0$. When taken literally, however, this model has no competition, since there can be at most one limit order per period and limit orders are automatically cancelled after one period.
+	
+	\item Algorithmic trading that allows automatic repricing of limit orders mitigates the risks of limit orders, mainly the risk of being picked off after unfavorable news is revealed. This reduces the liquidity providers' exposure to adverse selection, thereby making liquidity provision more attractive and improving market liquidity as a result.\footnote{The actual logic at play is slightly more convoluted. The equilibrium (half-)spread $S$ derived in part 6 is given by ``the largest spread that uninformed traders are willing to tolerate while still trading with market orders''. Reducing adverse selection and making limit orders more appealing reduces this level. So the equilibrium liquidity is improved due to reducing the limit order traders' market power, which, in turn, is due to the limit orders becoming more appealing.}
+	%
+	%Further, algotrading reduces the value of the informed traders' informational advantage: 
+\end{enumerate}
+\fi
+
+
+
+\end{document}
