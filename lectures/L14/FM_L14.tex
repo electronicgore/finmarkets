@@ -15,7 +15,7 @@
 \author{Egor Starkov}
 
 \date{K{\o}benhavns Unversitet \\
-	Spring 2021}
+	Spring 2022}
 
 
 \begin{document}
@@ -30,11 +30,13 @@
 
 \begin{frame}{Previously on FMM}
 	\begin{itemize}
-		\item Wrapped up \textbf{HFT}
-		\item \textbf{Kondor}: effects of public information
+		%\item Wrapped up \textbf{HFT}
+		\item Information and trading volumes:
 		\begin{itemize}
-			\item Trading volumes increase around public announcements
-			\item Possible explanation through second-order beliefs
+			\item Private signals create disagreement $\to$ generate trade, which reveals and aggregates private info
+			\item Public signals should theoretically mitigate disagreement and lead to less trade
+			\item But IRL trading volumes increase around public announcements
+			\item \textbf{Kondor}: Possible explanation through second-order beliefs
 		\end{itemize}
 	\end{itemize}
 \end{frame}	
@@ -88,7 +90,8 @@
 	\begin{columns}
 		\begin{column}{0.55\linewidth}
 			\center
-			\includegraphics[width=0.95\linewidth]{pics/housing}
+			\only<1>{\includegraphics[width=0.95\linewidth]{pics/housing}}
+			\only<2>{\includegraphics[width=0.95\linewidth]{pics/housing2}}
 		\end{column}
 		\begin{column}{0.45\linewidth}
 			\begin{itemize}
@@ -104,13 +107,15 @@
 	\begin{columns}
 		\begin{column}{0.55\linewidth}
 			\center
-			\includegraphics[width=\linewidth]{pics/bitcoin}
+			\only<1>{\includegraphics[width=\linewidth]{pics/bitcoin}}
+			\only<2>{\includegraphics[width=\linewidth]{pics/bitcoin2}}
 		\end{column}
 		\begin{column}{0.45\linewidth}
 			\begin{itemize}
-				\item \textbf{Bitcoin} burst pretty badly at the end of 2017.
-				\item New iteration over the past year? (Look at where the graph ends and at the current price)
-				\item \textbf{Dogecoin} is a bubble that does not pretend to be anything else.
+				\item \textbf{Bitcoin} grew and burst pretty badly at the end of 2017.
+				\pause 
+				\item ...and is just pretty volatile overall
+				\item (to be fair, like with any fiat currency, not clear what bitcoin's fundamental value is, so can say that any positive price is a bubble)
 			\end{itemize}
 		\end{column}
 	\end{columns}
@@ -165,7 +170,7 @@
 		\item In \textbf{financial markets}: momentum trading, positive-feedback trading
 		\item In 1992, a wave (a herd?) of articles showing that  herding could be result of rational \structure{informational cascade}
 		\item Today we look at this and other `rational' explanations
-		\item Note: the original article may be a bit heavy for our purposes. I will follow the retelling in \cite{smith_observational_2011}.
+		\item Note: the original article may be a bit heavy for our purposes. I will follow the retelling in \cite{smith_observational_2011}; \cite{bikhchandani_herd_2000} is a good (simpler) alternative.
 	\end{itemize}
 \end{frame}
 
@@ -204,7 +209,7 @@
 
 \begin{frame}{Model: Beliefs}
 	\begin{itemize}
-		\item The big unknown is $v$. There are many beliefs about $v$ we can look at. Represent all beliefs as probabilities of $v=H$ conditional on relevant info.
+		\item Represent all beliefs $p$ about $v$ as probabilities of $v=H$ conditional on relevant info.
 		\item Arriving agent's \structure{prior belief} is $p_t \sim F(p|v)$
 		\begin{itemize}
 			\item Composed of the initial public prior -- e.g., $1/2$
@@ -230,26 +235,26 @@
 		\begin{itemize}
 			\item where $\bar{r} = \frac{m-L}{H-L}$
 		\end{itemize}
-		\item Use Bayes' rule to compute $r_t$: 
+		\item Use Bayes' rule to compute $r_t$: (this is reliant on the prior being $1/2$)
 		\[r_t = \frac{p_t q_t}{p_t q_t + (1-p_t) (1-q_t)}\]
 		\item Meaning that $d_t = 1$ iff $p_t \geq \bar{p}_t$, where
-		\[ \frac{\bar{p}_t}{1-\bar{p}_t} = \frac{q_t}{1-q_t} \cdot \frac{1-\bar{r}}{\bar{r}} \]
+		\[ \frac{\bar{p}_t}{1-\bar{p}_t} = \frac{1-q_t}{q_t} \cdot \frac{\bar{r}}{1-\bar{r}} \]
 	\end{itemize}
 \end{frame}
 
 
 \begin{frame}{Herds and cascades}
-	\[ \frac{\bar{p}_t}{1-\bar{p}_t} = \frac{q_t}{1-q_t} \cdot \frac{1-\bar{r}}{\bar{r}} \]
+	\[ \frac{\bar{p}_t}{1-\bar{p}_t} = \frac{1-q_t}{q_t} \cdot \frac{\bar{r}}{1-\bar{r}} \]
 	\vspace{-1em}
 	\begin{itemize}
-		\item Note $\bar{p}_t$ depends on $q_t$
-		\item If distribution of $p_t$ is bounded ($p_t \in [\underline{p},\bar{p}]$), then can arrive to such $q_t$ that $\bar{p}_t > \bar{p}$ or $\bar{p}_t < \underline{p}$
+		\item Note $\bar{p}_t$ depends on $q_t$ (negatively: lower public belief $\to$ need higher private belief to justify investment)
+		\item If distribution of $p_t$ is bounded ($p_t \in [\underline{p},\bar{p}]$), then can arrive to such an extreme $q_t$ that either $\bar{p}_t > \bar{p}$, or $\bar{p}_t < \underline{p}$
 		\begin{itemize}
 			\item Then agent at $t$ ignores his private info altogether and his behavior is fully determined by public information ($q_t$)
 			\item $\Rightarrow$ agent at $t+1$ faces same public info as agent at $t$ $\Rightarrow$ it overpowers private info $\Rightarrow$ decision at $t+1$ is also uninformative etc
 			\item a \alert{herd} begins due to cascade
 		\end{itemize}
-		\item Such $q_t$ will be based on finite number of private signals $\Rightarrow$ \alert{may be incorrect}
+		\item Such $q_t$ will be based on finite number of private signals $\Rightarrow$ \alert{herd may be incorrect}
 	\end{itemize}
 \end{frame}
 
@@ -298,20 +303,20 @@
 
 \begin{frame}{More layered model}
 	\begin{itemize}
-		\item However, previous result in part due to model simplicity
+		\item However, the GM result is in part due to model simplicity
 		\item \cite{avery_multidimensional_1998} expand on this analysis
 		\begin{itemize}
 			\item Suppose $v \in \{0,\frac{1}{2},1\}$
 			\item If $v=\frac{1}{2}$, this is perfectly revealed by the private signal: $S_{t}=\frac{1}{2}$
-			\item If $v \in \{0,1\}$, trader $t$ receives informative signal: $\mathbb{P}(S_{t}=v)=p_{t}$
-			\item Furthermore, a proportion $\mu \in \{\mu^{H}, \mu^{L}\}$ of traders have perfect information: $p_{t}=1$ after a good signal
-			\item The remaining traders have noisy info: $p_{t} \in (\frac{1}{2},1)$ after a good signal
+			\item If $v \in \{0,1\}$, trader $t$ receives informative signal with precision $\rho_t \equiv \mathbb{P}(S_{t}=v)$
+			\item Furthermore, a proportion $\mu \in \{\mu^{H}, \mu^{L}\}$ of traders have perfect information: $\rho_{t}=1$ after a good signal
+			\item The remaining traders have noisy info: $\rho_{t} \in (\frac{1}{2},1)$ after a good signal
 		\end{itemize}
 		\pause
 		\item Three levels of uncertainty (for MM): 
 		\begin{itemize}
 			\item Event uncertainty: $v=1/2$ (\alert{no event}) or $v \in \{0,1\}$ (\structure{event})
-			\item Value uncertainty: if event, $v=1$ or $v=0$
+			\item Value uncertainty: if event, \structure{$v=1$} or \alert{$v=0$}
 			\item Composition uncertainty: many informed traders ($\mu^{H}$: \structure{well-informed economy}) or few ($\mu^{L}$: \alert{poorly-informed economy})
 		\end{itemize}
 	\end{itemize}
@@ -631,7 +636,7 @@
 	Three of first five traders buy  
 	\begin{itemize}
 		\item Since economy poorly informed: herd buying starts
-		\item Market thinks it's likely that economy is well informed: price goes up
+		\item MM thinks it's likely that economy is well informed: price goes up
 	\end{itemize}
 \end{frame}
 
