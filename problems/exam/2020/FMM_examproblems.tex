@@ -1,0 +1,372 @@
+\ifexam
+
+\subsection*{Problem 1}
+
+In the Glosten-Milgrom model, as well as many other models we had in the class (e.g., Glosten, Parlour, Duffie-Garleanu-Pedersen, etc), strategic traders are restricted to trading at most one unit of the asset. Without this restriction, they would be willing to buy or sell infinite amounts.
+
+\begin{enumerate}%[noitemsep]
+	\item What factors preclude or disincentivize such behavior in the real world?
+	\item Is it reasonable to model these factors as an exogenous constraint on trade size? If not, how would you incorporate them in the Glosten-Milgrom model?
+\end{enumerate}
+
+
+\begin{solution}
+	%This problem addresses knowledge point ``Account for the standard theoretical models used to model financial markets'' as well as competency point ``Explain and discuss key theoretical concepts from academic articles, as well as discuss their interpretation'' as set in the learning outcomes for the course.
+	
+	The possible factors include the following:
+	\begin{itemize}
+		\item \textbf{Limited liquidity/positive price impact.} The models under consideration effectively assume traders to be competitive, i.e., (1) infinitesimally small, and for that reason (2) not internalizing their impact on the market price. In the real world any trade of nontrivial quantity of the asset will have a non-zero price impact. This is not captured in the GM model, but it is the main driving force behind Kyle model, which can be seen as ``GM model with price impact''.
+		
+		\item \textbf{Risk aversion.} If traders are risk-averse, they would not be willing to assume infinite positions, since those entail infinite risks. If we assume that informed traders in the GM model are risk-averse then we can dispose with the assumption of fixed trade size, although this gives rise to the next issue.
+		
+		\item \textbf{Need to blend in with noise traders.} The informed traders obtain a better price on their trades by mimicking the behavior of uninformed traders. If uninformed traders have particular trade patterns (e.g., always trade a single unit at a time) then informed traders have incentives to mimic these patterns (restrict their order sizes). This aspect can be introduced into the model without affecting its conclusions: it can be shown that if informed traders can submit larger orders, they will never do so as long as noise traders operate in unit orders only.
+		
+		\item \textbf{Funding liquidity/leverage/short-selling constraints.} In order to take a large long position in an asset that is currently underpriced, the trader must have the liquid funds to do so. Similarly, short sales typically require a margin (collateral). All investors have some limits on the funds at their disposal, which yields a natural upper bound on the size of positions they can take. Relatedly, borrowing money in order to trade is typically subject to leverage constraints. Capturing all of these constraints as an exogenous limit on trade size is reasonable, but one should keep in mind that these limits may differ across traders.
+	\end{itemize}
+\end{solution}
+
+
+
+
+\quad
+\subsection*{Problem 2}
+
+Consider an asymmetric Glosten-Milgrom model in which the fundamental value $v$ is $v=10$ with probability $\gamma < 1/2$ and $v=5$ w.p. $1-\gamma$. The arriving trader can submit a buy or a sell order for one unit of the asset. The trader is informed w.p. $\pi$ and is a noise trader w.p. $1-\pi$. In the latter case the trader submits a buy order w.p. $\rho > 1/2$ and a sell order w.p. $1-\rho$ independently of $v$. The informed trader knows $v$ and trades so as to maximize profit. The dealer is risk-neutral and competitive.
+
+\begin{enumerate}
+	\item Derive the ask and bid quotes set by the dealer.
+	\item Calculate the bid-ask spread. How would the spread react to an increase in $\rho$? How does your answer depend on $\pi$? 
+	\item What is the intuition behind this dependence on $\pi$?
+\end{enumerate}
+
+\begin{solution}
+	%This problem addresses skill point ``Analyze price formation in different types of financial markets and derive results on measures such as liquidity and market depth'' as set in the learning outcomes for the course.
+	
+	\begin{enumerate}
+		\item Dealer is competitive, so the quotes will capture the expected value of the asset conditional on buy and sell orders respectively.
+		\begin{align*}
+			a =& \mathbb{E} \left[ v | \text{buy} \right]
+			\\
+			=& \mathbb{E} \left[ v | \text{buy,noise} \right] \mathbb{P}\left( \text{noise} | \text{buy} \right) + \mathbb{E} \left[ v | \text{buy,informed} \right] \mathbb{P}\left( \text{informed} | \text{buy} \right)
+			\\
+			=& (10\gamma + 5(1-\gamma)) \frac{(1-\pi)\rho}{\pi \gamma + (1-\pi)\rho} + 10 \frac{\pi \gamma}{\pi \gamma + (1-\pi)\rho}
+			\\
+			=& \mu + 5 (1-\gamma) \frac{\pi \gamma}{\pi \gamma + (1-\pi)\rho},
+		\end{align*}
+		where $\mu = \mathbb{E}[v] = 5 + 5\gamma$. Similarly,
+		\begin{align*}
+			b =& \mathbb{E} \left[ v | \text{sell} \right] = \mu - 5\gamma \frac{\pi (1-\gamma)}{\pi (1-\gamma) + (1-\pi)(1-\rho)}.
+		\end{align*}
+		
+		\item The spread is given by
+		\begin{align*}
+			S = a - b = \frac{5 \pi \gamma (1-\gamma)}{\left[ \pi \gamma + (1-\pi)\rho \right] \left[ \pi (1-\gamma) + (1-\pi)(1-\rho) \right]}.
+		\end{align*}
+		Its derivative w.r.t. $\rho$ is
+		\begin{align*}
+			\frac{\partial S}{\partial \rho} = -S \frac{(1-\pi)\left[ \pi(1-2\gamma) + (1-\pi)(1-2\rho) \right]}{\left[ \pi \gamma + (1-\pi)\rho \right] \left[ \pi (1-\gamma) + (1-\pi)(1-\rho) \right]}.
+		\end{align*}
+		The denominator is positive, hence the spread reacts positively to an increase in $\rho$ if and only if
+		\begin{align*}
+			\pi(1-2\gamma) + (1-\pi)(1-2\rho) < 0
+			\Leftrightarrow \pi < \frac{\rho - 1/2}{\rho - \gamma}.
+		\end{align*}
+		(The assumption $\gamma < 1/2 < \rho$ is important for the sign of the final inequality.)
+		%which holds if $\pi$ is small, while $\gamma$ and $\rho$ are large (as long as our assumption that $\gamma < 1/2 < \rho$ holds). Conversely, if $\pi$ is large given $\gamma$ and $\rho$ then the spread would get narrower when $\rho$ increases.
+		
+		\item In this problem the spread is asymmetric across buy and sell orders. When $\rho$ increases, there is relatively less informed trading on the buy side (so the buy-side half-spread $a-\mu$ shrinks), but more on the sell side. The final effect on $S$ is thus determined by which of these two components dominates.
+		
+		Each half-spread is most sensitive to parameters when the probability of informed trading in the respective direction is close to $50\%$ -- this is the state of maximal uncertainty, -- while otherwise the order flow is very likely to be either informative, or not, and comparable parameter value changes do not affect this probability as strongly. 
+		Given our parameter assumptions, if $\pi < \frac{\rho - 1/2}{\rho - \gamma}$ then $\mathbb{P}(informed|sell)$ is closer to $1/2$ than $\mathbb{P}(informed|buy)$, hence the sell-side effect dominates, and vice versa.
+	\end{enumerate}
+\end{solution}
+
+
+
+
+
+\quad
+\subsection*{Problem 3}
+
+This question is based on the Kondor model.
+Suppose that the fundamental value of the asset is given by the sum of $L$ individual components:
+\[ \theta = \theta_1 + \theta_2 + ... + \theta_L, \]
+where each component $\theta_l \sim \text{i.i.d.}\mathcal{N}(0,\sigma^2)$. There are two strategic traders, label them $i$ and $j$. Trader $i$ observes the first $I$ components of $\theta$ (denote their sum as $x_i = \theta_1 + ... + \theta_I)$), while trader $j$ observes the last $J$ components (denote their sum as $x_j = \theta_{L-J+1} + ... + \theta_L$). Assume $I + J < L$, so there are no components observed by both traders, but there are some which are not observed by either one (denote their sum as $x_k = \theta_{I+1} + ... + \theta_{L-J}$). In addition, both traders observe the same public signal $y = \theta + \epsilon$, where $\epsilon \sim \mathcal{N}(0,\sigma^2_\epsilon)$.
+
+In answering the questions below, you can use the following fact:
+
+\begin{quotation}
+	If $q = v + u$, where $v \sim \mathcal{N}(\mu_v, \sigma_v^2)$ and $u \sim \mathcal{N}(\mu_u, \sigma_u^2)$, and the two are independent, then: (1) $q \sim \mathcal{N}(\mu_v+\mu_u, \sigma^2_v + \sigma^2_u)$, and (2) $\mathbb{E}[v|q] = \mathbb{E}[v] + (q-\mathbb{E}[q])\frac{\mathbb{C}(v,q)}{\mathbb{V}(q)}$.% = \mathbb{E}[v] + (q-\mathbb{E}[q])\frac{\sigma_v^2}{\sigma^2_v + \sigma^2_u}.
+\end{quotation}
+\begin{enumerate}%[noitemsep]
+	\item Calculate $\mathbb{E}\left[ \theta | x_j, y \right]$, i.e., trader $j$'s asset valuation conditional on the information available to him.\footnote{In general, conditioning on $x_j$ is not the same as conditioning on $(\theta_{L-J+1}, ..., \theta_L)$, since the latter contains more information. But the two are equivalent in this problem.}
+	
+	\item Calculate the second-order expectation $\mathbb{E} \left[ \mathbb{E}\left[ \theta | x_j, y \right] \mid x_i, y \right]$, i.e., trader $i$'s expectation of trader $j$'s valuation, conditional on $i$'s information. 
+	
+	\emph{HINT: you should get an expression of the form $\mathbb{E} \left[ \mathbb{E}\left[ \theta | x_j, y \right] \mid x_i, y \right] = \alpha y + \beta \left(y-x_i\right)$. You need to find $\alpha$ and $\beta$.}
+	
+	\item Take the coefficient $\beta$ you have obtained in part 2 (if you did everything correctly, it should be positive). It captures the degree of divergence of second-order beliefs: the higher is trader $I$'s private signal of asset value, the lower he expects $J$'s valuation to be, and the higher is $\beta$, the stronger this effect is. How does $\beta$ depend on $I$, the number of components that trader $i$ observes? Explain the inuition behind this.
+	
+	\item How does $\beta$ depend on $J$, the number of components that trader $j$ observes? Explain the inuition behind this.
+\end{enumerate}
+\emph{NOTE: if you could not solve part 2, you can still try to provide an educated guess for the directions and the reasons of the effects in parts 3 and 4.}
+
+
+\begin{solution}
+	\begin{enumerate}
+		\item We have
+		\begin{align}
+			\mathbb{E}\left[ \theta | x_j, y \right] =& \mathbb{E}\left[ \sum_{l=1}^L \theta_l \mid x_j, y \right] \nonumber
+			\\
+			=& \mathbb{E}\left[ x_j + x_i + x_k \mid x_j, y \right] \nonumber
+			\\
+			=& x_j + \mathbb{E}\left[ x_i + x_k \mid x_j, y \right] \label{eq:K1}
+			%\\
+			%=& x_j + \mathbb{E}\left[ x_i + x_k \mid y \right],
+		\end{align}
+		%where the last equality holds because components in $x_j$ contain no information about the other components $(\theta_1, ..., \theta_{L-J})$. 
+		To calculate the latter expectation we notice that $y = x_j + x_i + x_k + \epsilon$, where $x_j$ is known (to $j$). Applying the fact given in the problem, we infer that
+		\begin{align*}
+			\mathbb{E}\left[ x_i + x_k \mid x_j, y \right]
+			=& \alpha (y-x_j),
+		\end{align*}
+		where $\alpha = \frac{(L-J)\sigma^2}{(L-J)\sigma^2 + \sigma^2_\epsilon}$.
+		Plugging it back into \eqref{eq:K1}, we get
+		\begin{align}
+			\mathbb{E}\left[ \theta | x_j, y \right] =& \alpha y + (1-\alpha) x_j. \label{eq:K2}
+		\end{align}
+		
+		\item Plugging \eqref{eq:K2} into the target expectation, we get
+		\begin{align}
+			\mathbb{E} \left[ \mathbb{E}\left[ \theta | x_j, y \right] \mid x_i, y \right]
+			&= \mathbb{E} \left[ \alpha y + (1-\alpha) x_j \mid x_i, y \right] \nonumber
+			\\
+			&= \alpha y + (1-\alpha) \mathbb{E} \left[ x_j \mid x_i, y \right] \label{eq:K3}
+		\end{align}
+		Recalling again that $y = x_i + x_j + x_k + \epsilon$ and applying the fact we obtain
+		\begin{align*}
+			\mathbb{E} \left[ x_j \mid x_i, y \right] = (y-x_i) \frac{J\sigma^2}{(L-I)\sigma^2 + \sigma^2_\epsilon}
+		\end{align*}
+		Plugging this back into \eqref{eq:K3}, we finally get the desired expression 
+		\begin{align*}
+			\mathbb{E} \left[ \mathbb{E}\left[ \theta | x_j, y \right] \mid x_i, y \right] &= \alpha y + \beta \left(y-x_i\right),
+			\\
+			\text{where } \beta &= (1-\alpha)\frac{J\sigma^2}{(L-I)\sigma^2 + \sigma^2_\epsilon}
+			\\
+			&= \frac{ J \sigma^2 \sigma^2_\epsilon}{\left[ (L-J)\sigma^2 + \sigma^2_\epsilon \right] \left[ (L-I)\sigma^2 + \sigma^2_\epsilon \right]} > 0
+		\end{align*}
+		
+		\item Weight $\beta$ is increasing in $I$, i.e., as trader $i$ gets to observe more components, the divergence amplifies. For example, suppose $\theta_1 > 0$ and $\theta_2 = 0$. Then increasing $I$ from one to two will lead trader $i$ to amplify the inference he makes from $\theta_1$ and decrease his opinion about $j$'s valuation -- even though $\theta_2$ by itself is uninformative. However, even though $\theta_2$ does not contain any information about the actual asset value in this example, it leads trader $i$ to believe that information in $y-x_i$ is more likely to be observed by trader $j$. This is because $i$ knows that $j$ observes share $J/(L-I+1)$ of components that constitute $y-x_i$.
+		
+		\item Weight $\beta$ is increasing in $J$, i.e., as trader $j$ gets to observe more components, the divergence amplifies:
+		\begin{align*}
+			\frac{\partial \beta_2}{\partial J} = \beta_2 \left( \frac{1}{J} + \frac{\sigma^2}{(L-J)\sigma^2 + \sigma^2_\epsilon} \right) < 0
+		\end{align*}
+		The intuition is the same as in part 3: as $J$ increases, trader $i$ perceives it to be more probable that $j$ observes whatever components are responsible for the information in $y-x_i$.
+	\end{enumerate}
+\end{solution}
+
+
+
+
+\quad
+\subsection*{Problem 4}
+
+Below you can find an Economist article from July 17, 2019 on the liquidity of the corporate bond market.\footnote{Also available at: \url{https://www.economist.com/finance-and-economics/2019/07/11/why-everybody-is-concerned-about-corporate-bond-liquidity}}
+The article mentions that the actual liquidity in that market is well below what the investors seem to expect it to be. What are the possible consequences of such misalignment? Should we attempt to alleviate it by making the market more transparent? How does it relate to the discussion of market transparency we had in class?
+
+\begin{solution}
+	A surface-level consequence is that the investors are exposed to more risk than they account for, since they may be unable to unwind their positions when they decide to do so. This is, in itself, an inefficiency that we would typically want to correct.
+	
+	The counterargument is also described in the article: this false belief in liquidity leads investors to hold bonds, which they would or could not invest in otherwise due to liquidity risk. This by itself creates some liquidity, supplied by such traders. An attempt to correct the investors' belief would lead to the market's suffering liquidity dropping even further, completely paralyzing the bond market and leading to a crash, which is not the most desirable outcome.
+	
+	In the end, the blanket conclusion we made about opaque markets -- that opaqueness hurts the uninformed traders while benefitting other market participants, -- gets an extra layer in this setting, in that the aggregate effects of transparency may be so catastrophic that the uninformed traders will lose more than they gain if the market is made more transparent.
+\end{solution}
+
+%\newpage
+
+\subsubsection*{Buttonwood -- Why everybody is concerned about corporate-bond liquidity}
+
+In September 2007 Britain suffered its first bank run in a century. Television pictures showed a long queue of depositors outside a branch of Northern Rock. Alistair Darling watched in dismay from Portugal, where he and his fellow European Union finance ministers were gathered. ``They’re behaving perfectly rationally, you know,'' Mervyn King, the governor of the Bank of England, said in the smarty-pants manner that economists are cherished for. Mr Darling was uncharmed. ``It was not what I wanted to hear,'' he recalled.
+
+What Lord King probably had in mind was a well-thumbed textbook model. Banks have a liquidity mismatch. One side of the balance-sheet is hard-to-sell loans; the other side is deposits that can be withdrawn in a trice. If depositors believe that a bank is sound, there will be no runs on it. But if enough start to demand their deposits back, it makes sense for everybody to join the rush.
+
+This model can also be applied in other areas. Take the corporate-bond market. Every policy body of stature, from the IMF to the European Central Bank (ECB), has worried about a growing mismatch between investors' expectations that they can sell out at any moment and an underlying shortage of liquidity in the market. More investors are using corporate-bond funds as an alternative to cash. But fewer dealers are willing to trade bonds in size. A big scare could feasibly start a run.
+
+The dynamics of capital-market runs are similar to those of bank runs. You see them in currency crises. Foreign-exchange reserves, say, are slim relative to the scale of local-currency assets held by flighty investors. Should enough of those investors sell out, others will soon follow. The result is a rout. There is a similar pattern with investment funds that promise speedy withdrawals but hold assets that cannot be sold quickly. Bad news prompts withdrawals. The speedy get paid. Other investors then try to get out, too. But the fund cannot sell assets fast enough. It is forced to suspend redemptions.
+
+Such trouble is especially likely with corporate bonds, which are inherently illiquid. In contrast with trading in shares, where buy and sell orders are matched on electronic order books, corporate bonds are traded over-the-counter. Bonds are not as standardised as shares. A company may have bonds of several different maturities. If you want to buy or sell, you call a dealer.
+
+The ease with which investors can trade bonds—the market’s liquidity—depends a lot, then, on the readiness of dealer banks to stockpile securities. Where there is heavy selling, dealers would ideally warehouse cheaper bonds for when people want to buy again. But since the financial crisis new rules have made it less cost-effective for banks to use capital for trading of any kind. The inventory of corporate bonds held by dealers has fallen sharply in the past decade. 
+
+As the role of dealers has shrunk, the thirst for instant liquidity has increased. Derisory yields on the safest government debt have drawn investors towards riskier securities, including corporate bonds. A cheap and convenient way to invest in them is to buy an exchange-traded fund, or
+ETF. These are low-cost investment funds that hold a basket of bonds, usually mirroring a benchmark index. They trade on stock exchanges just as listed shares do. The ease of buying and selling bond ETFs is a big part of their appeal. They are also often used as depositories for spare cash. Studies are divided on whether
+ETFs make the underlying bonds more or less liquid. But there are concerns that in a stressed market, outflows from ETFs might make a bad situation worse. And it is not hard to make a case that the corporate-bond market has become more fragile. Many firms in America have issued lots of bonds to buy back their own shares. With extra leverage comes more risk. Half of all investment-grade bonds have a credit rating of
+BBB. In a recession a chunk of those bonds will be downgraded to junk. Many mutual funds and ETF s can hold only investment-grade bonds. If a lot of bonds have to change hands quickly, that could easily overwhelm the market’s limited liquidity. Prices might fall a long way.
+
+Just how messy the next big shake-out in the corporate-bond market is depends on many things: on how weak the economy gets; on how many BBB borrowers can avert a downgrade; on how quickly funds can be raised to buy at fire-sale prices. For now, it seems rational to hold bonds that afford a little extra yield. Smart-alecks say this will surely end badly. But who wants to hear that?
+
+\fi
+
+
+
+
+
+%\newpage
+\ifreexam
+
+\subsection*{Problem 1}
+
+The Parlour model explores traders' choices between market and limit orders. Its bottom line, as we argued in class, is that limit orders result in more favorable prices but at the cost of the execution risk. In particular, we ignored the potential effects of asymmetric information. Suppose now instead that with some probability public information (news) can arrive between periods $t$ and $t+1$ (but not at any other time, and all of these facts are commonly known). This will produce an asymmetry in the sense that trader at $t+1$ will be able to act upon this information, while limit orders submitted by trader $t$ are independent of this news.
+
+Answer the following questions using convincing intuitive arguments. Proceed via backwards induction: i.e., holding previous traders' strategies fixed, state how the strategy of a trader in a given period changes. You do not need to analyze a formal model, but you are welcome to do so if you want to. 
+
+\begin{enumerate}%[noitemsep]
+	\item How will the behavior of traders who arrive at $t+2$ or later change due to the possible arrival of news?
+	\item What about the trader who arrives at $t+1$?
+	\item What about the trader who arrives at $t$?
+	\item Now suppose that if the period-$t$ trader submitted a limit order, he can revise/cancel his limit order after the news arrives. How do your answers to parts 1-3 change?
+\end{enumerate}
+
+\begin{solution}
+	\begin{enumerate}
+		\item All quotes will reflect the new information, but the trade-off between market and limit orders will remain the same.
+		
+		\item The trader at $t+1$ will have a wider range of possible asset valuations, since in addition to idiosyncratic valuation he will know the innovation to the fundamental value. Hence holding fixed the limit order strategy of $t$-trader, the trader at $t+1$ will use market orders with higher probability. This effect is state-dependent: good news increases the probability of a market buy order and decreases the probability of any sell order (if the distribution of idiosyncratic valuations $y_t$ is not too strange). The effect is flipped for bad news.
+		
+		\item Public information affects the strategic environment of time-$t$ trader in two dimensions. On the one hand, his limit order, if submitted, has a higher execution probability. This makes limit orders more appealing and would lead to time-$t$ trader using more limit orders and less market orders. On the other hand, limit orders can now be picked off: a sell limit order becomes more likely to be executed in case of ``good news'' about asset valuation -- i.e., the $t$-trader sells too cheaply on average. This will make limit orders less appealing, since price improvement they yield may be completely offset by adverse selection. 
+		
+		The formal analysis can help answer which of the two effects above dominates and whether  time-$t$ trader will end up using limit orders more or less actively relative to market orders, although the exact conclusion will depend on the assumptions about the distributions of $y_t$ (the idiosyncratic component) and $\epsilon_t$ (the public news component).
+		
+		\item If time-$t$ trader can cancel and revise his limit order before it can be picked off by the $t+1$-trader, then the revision will incorporate the public information, and the expected payoff of time-$t$ trader from submitting a limit order will remain exactly the same as in the absence of news. Therefore, his choice between market and limit orders will not be affected.
+		
+		If there is some chance that $t+1$-trader can manage to trade before $t$-trader can revise his quotes, then the effect from part 3 applies to the extent proportional to that chance. (Note parallels to the Budish-Cramton-Shim model.)
+	\end{enumerate}
+\end{solution}
+
+
+
+
+\quad
+\subsection*{Problem 2}
+
+This question investigates the inventory risk in uncertain environments within the Stoll model framework. Consider a three-period model, $t \in \{0,1,2\}$. There is one asset, whose fundamental value evolves as $\mu_{t+1} = \mu_t + \epsilon_t$, where $\epsilon_t \sim \mathcal{N}(0,\sigma_\epsilon^2)$. The respective $\mu_t$ is observed at the beginning of period $t$.
+
+In periods $t \in \{0,1\}$ the representative dealer must provide quote schedule $p(q)$ for any incoming order size $q$ (where $q>0$ means a buy order and $q<0$ means a sell order). In period $t=0$ one trader arrives for sure and submits an order denoted by $q_0$. In period $1$ one trader arrives with probability $\lambda$ and, if he does, submits an order $q_1 = -q_0$. In period $t=2$ the asset is paid out: every owner of the asset receives a payment $\mu_2$ per unit and the asset has no future value.
+
+Dealer has mean-variance preferences over his final wealth $w_2$. I.e., in every period he maximizes
+\[ U(w_2) = \mathbb{E}[w_2] - \frac{\rho}{2} \mathbb{V}(w_2). \]
+His initial position in the asset is neutral: $z_0=0$. The initial cash holdings $c_0$ are also normalized to zero. (The dealer can borrow cash and short the asset at no cost). The dealer behaves competitively (is a price-taker).
+
+\begin{enumerate}
+	\item Consider period $t=1$. Denote the dealer's position at the beginning of the period as $z_1$. Derive the dealer's quote schedule $p_1(q)$ given $z_1$.
+	
+	\item What is the price at which trade will happen at $t=1$?
+	
+	\item Consider period $t=0$. Derive the dealer's quote schedule $p_0(q)$. 
+	
+	\item Explain how $p_0(q)$ depends on $\lambda$ and why.
+	
+	\emph{NOTE: if you could not solve parts 1-3, you can still try to make an educated guess here.}
+	
+	%\item Suppose $q_0 \in \{-L,L\}$, a buy or a sell with equal probabilities. Calculate the dealer's ex ante expected profit and expected utility. How do they depend on $\lambda$? 
+	%
+	%\item Your friend has seen your answer to part 4 and is asking you: ``But shouldn't a competitive dealer always get zero expected profit?'' What is your response?
+	
+	\item The problem assumes $q_1 = -q_0$, i.e., that the order flow is perfectly negatively autocorrelated. How justified is this assumption? How does it relate to the dealer's pricing decisions?
+	
+	\emph{NOTE: if you could not solve parts 1-4, you can still answer this question.}
+\end{enumerate}
+
+
+\begin{solution}
+	\begin{enumerate}
+		\item This part is identical to the Stoll model we had in class. The dealer is a price-taker, so he chooses the optimal asset supply $y_1$ given any price $p$. We derive the resulting asset supply schedule $y_1(p)$, invert it and invoke market clearing condition $y_1=q_1$ to derive the price schedule $p_1(q)$. Asset supply $y_1$ is chosen to maximize
+		\begin{align*}
+			U_1(y_1) &= \mathbb{E}[w_2] - \frac{\rho}{2} \mathbb{V}(w_2)
+			\\
+			&= p y_1 + \mu_1 (z_1-y_1) - \frac{\rho}{2} (z_1-y_1)^2 \sigma^2_\epsilon
+		\end{align*}
+		Taking the first order condition and substituting $q = y_1$, we end up with
+		\[ p_1(q) = \mu_1 + \rho \sigma^2_\epsilon (q-z_1). \]
+		
+		\item The problem states that $q_1 = -q_0$, meaning that $q-z_1 = 0$, so $p_1 = \mu_1$.
+		
+		\item Whenever the dealer trades $y_0$ at $t=0$, two continuations are possible: with probability $\lambda$ an order $y_1 = -y_0$ will arrive at $t=1$, in which case
+		\[ w_2 = p_0 y_0 + p_1 y_1 = (p_0 - \mu_1) y_0. \]
+		With probability $1-\lambda$ no trader will arrive at $t=1$, so
+		\[ w_2 = p_0 y_0 + \mu_2 z_2 = (p_0 - \mu_2) y_0. \]
+		Therefore, the dealer's objective function at time $t=0$ is
+		\begin{align}
+			U_0(y_0) &= (p_0 - \mu_0) y_0 - \frac{\rho}{2} \left[ \lambda \sigma^2_\epsilon + (1-\lambda) 2 \sigma^2_\epsilon \right] y_0^2 \label{eq:S1}
+		\end{align}
+		Maximizing this expression w.r.t. $y_0$ for given $p_0$ and invoking the market clearing condition $q_0 = y_0$, we obtain
+		\begin{equation}
+			p_0(q) = \mu_0 + \rho (2-\lambda) \sigma_\epsilon^2 q \label{eq:S2}
+		\end{equation}
+		
+		\item Larger $\lambda$ decreases the price impact coefficient. Higher $\lambda$ means that the dealer faces a higher chance of unwinding his inventory at $t=1$ and not staying stuck with it until $t=2$. This reduces the dealer's exposure to volatility in the asset's fundamental value $\mu_t$ (which is priced because the dealer is risk-averse), and so reduces the dealer's required risk premium.
+		
+		%\item Plugging \eqref{eq:S2} into \eqref{eq:S1}, we get
+		%\begin{align*}
+		%	U_0(q) &= \frac{\rho}{2} (2-\lambda) \sigma_\epsilon^2 q^2.
+		%\end{align*}
+		%Since $q \in \{-L,L\}$ with equal probabilities, the expected utility is then
+		%\begin{align}
+		%	\mathbb{E} [U_0(q)] &= \frac{\rho}{2} (2-\lambda) \sigma_\epsilon^2 L^2. \label{eq:S3}
+		%\end{align}
+		%The expected profit is simply
+		%\[ \mathbb{E}[w_2] = (2-\lambda) \sigma_\epsilon^2 L^2 \]
+		%(since the intial wealth $w_0$ was normalized to zero).
+		%
+		%Both of the above are positive and decreasing in $\lambda$. This is because both depend on the risk premium
+		%
+		%\item The dealer's ex ante expected utility in \eqref{eq:S3} is strictly positive.
+		
+		\item In the real world, order flow from traders is typically positively autocorrelated (although this depends on the time scale). This may be due to traders splitting their large orders and feeding them to the market as a series of small orders, or due to different traders acting upon the same piece of news. In this respect the assumption is disconnected from the real world.
+		
+		However, in this problem the dealer dislikes holding on to any inventory due to the risk this exposes him to, and this feeds into his pricing decisions so as to create negative autocorrelation in the order flow. E.g., if the dealer has purchased a unit of the asset at $t=0$, then he would set lower prices $p_1(q)$ in the following period so as to incentivize buyers and discourage sellers, which creates respective pressure on the order flow.
+		
+		%The two observations above can be reconciled by saying that either the dealer manages his inventory via trades on the interdealer markets (which is not captured by our model above), or by saying that the two effects operate on different time scales: positive autocorrelation arises in the scope of seconds, or maybe minutes, while the inventory effects dominate in the scope of hours.
+		That said, we are looking at the representative dealer in this model -- a fictional agent meant to represent the aggregate of all individual dealers in the market. While any single dealer can be non-trivially risk-averse, the market as a whole can absorb quite significant positions before distorting the prices due to inventory concerns. Therefore, it may be reasonable to believe that the representative dealer's degree of risk aversion is quite small, so this driver of negative autocorrelation should be weak.
+	\end{enumerate}
+\end{solution}
+
+
+
+
+%\quad
+%\subsection*{Problem 3}
+%
+%a
+%
+%
+%\begin{solution}
+%	b
+%\end{solution}
+
+
+
+
+\quad
+\subsection*{Problem 3}
+
+Many real-world trading platforms have ``circuit breakers'' -- automatic safeguards which halt all trading in an asset if its price changes too drastically over a short time. Using the material of the course, discuss what consequences can the existence of such circuit breakers have in terms of market outcomes (liquidity, traders' risk exposure and willingness to trade, price discovery).
+
+% If you struggle coming up with arguments, you can draw inspiration from this ESMA report: \url{https://tinyurl.com/CircuitBreakers2020}
+
+
+\begin{solution}
+	The most basic arguments that can be made are as follows.
+	\begin{itemize}
+		\item Circuit breakers halt trade on a platform, which by definition kills all liquidity for the duration of the halt, thus existence of CBs can be seen as a liquidity risk.
+		
+		\item CBs are triggered by the excess volatility of the asset price, hence they effectively put an upper bound on this volatility (on the particular time frame of minutes, but not on the micro-scale of milliseconds, and not on the long-run volatility). This provides a form of insurance to traders who hold positions in this asset, and so decreases their risk exposure. This is likely to increase the investors' willingness to trade, more so for those who are not capable or willing to monitor the asset price continuously -- i.e., the less sophisticated and the less informed investors. As we know, presence of such investors makes the market more liquid, and this boost to liquidity can reasonably outweigh the liquidity risk mentioned above, improving the overall market liquidity.
+		
+		\item By design, CBs may hurt price discovery, since the asset price can no longer adjust rapidly in response to news. Higher share of uninformed investors in the market mentioned above also slows down price discovery in the presence of CBs. Higher-order arguments can be made (e.g., ``uninformed investors slow the price discovery down by just enough to avoid triggering CBs, which in the end improves the average speed of price discovery'').
+	\end{itemize}
+	
+	Many of the more subtle arguments, as well as empirical estimates of the actual effects, can be found in ESMA working paper No. 1, 2020 (``Market impacts of circuit breakers – Evidence from EU trading venues'', available at \url{https://www.esma.europa.eu/sites/default/files/library/esmawp-2020-1_market_impacts_of_circuit_breakers.pdf}).
+\end{solution}
+
+\fi

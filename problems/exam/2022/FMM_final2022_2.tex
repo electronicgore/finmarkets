@@ -1,0 +1,390 @@
+%%% License: Creative Commons Attribution Share Alike 4.0 (see https://creativecommons.org/licenses/by-sa/4.0/)
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[a4paper]{article}
+
+\usepackage{amssymb}
+%\usepackage{enumerate}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{extramarks} % Required for headers and footers
+\usepackage[usenames,dvipsnames]{color} % Required for custom colors
+\usepackage{graphicx} % Required to insert images
+\usepackage{listings} % Required for insertion of code
+\usepackage{courier} % Required for the courier font
+\usepackage[table]{xcolor}
+\usepackage{amsfonts,amsmath,amsthm,parskip,setspace}
+\usepackage[section]{placeins}
+\usepackage[a4paper]{geometry}
+\usepackage[USenglish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{tikz}
+\usepackage{hyperref}
+\usepackage[hyphenbreaks]{breakurl}
+\usepackage[]{url}
+\usepackage[shortlabels]{enumitem}
+\usepackage{framed}
+\usepackage{pdfpages}
+
+
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.6in
+
+\linespread{1.1} % Line spacing
+
+
+
+%----------------------------------------------------------------------------------------
+%   FORMATTING
+%----------------------------------------------------------------------------------------
+% Set up the header and footer
+\pagestyle{fancy}
+\lhead[c]{\textbf{{\color[rgb]{.5,0,0} K{\o}benhavns\\Universitet }}} % Top left header
+\chead{\textbf{{\color[rgb]{.5,0,0} \Class }}\\ \hmwkTitle  } % Top center head
+\rhead{\instructor \\ \theprofessor} % Top right header
+\lfoot{\lastxmark} % Bottom left footer
+\cfoot{} % Bottom center footer
+\rfoot{Page\ \thepage\ of\ \protect\pageref{LastPage}} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+
+
+% Other formatting stuff
+%\setlength\parindent{12pt}
+\setlength{\parskip}{5 pt}
+%\theoremstyle{definition} \newtheorem{ex}{\textbf{\Large{Exercise & #}\\}}
+\usepackage{titlesec}
+\titleformat{\section}[hang]{\normalfont\bfseries\Large}{Problem \thesection:}{0.5em}{}
+
+
+
+
+%----------------------------------------------------------------------------------------
+%	NAME AND CLASS SECTION
+%----------------------------------------------------------------------------------------
+\newcommand{\hmwkTitle}{Exam} % Assignment title
+\newcommand{\Class}{Financial Markets Microstructure} % Course/class
+\newcommand{\instructor}{Spring 2022} % TA
+\newcommand{\theprofessor}{Prof. Egor Starkov} % Professor
+
+
+
+
+%----------------------------------------------------------------------------------------
+%   SOLUTIONS
+%----------------------------------------------------------------------------------------
+\newif\ifsolutions
+\solutionstrue
+
+
+
+
+\begin{document}
+
+{\ifsolutions \else	
+	\includepdf{FMMexam_frontpage22_2.pdf}
+\fi}
+
+\begin{center}
+		\LARGE\textbf{Final re-exam {\ifsolutions solutions \fi}}
+\end{center}
+
+{\ifsolutions \else	
+Write up your responses to questions below and submit them to Digital Exam. The deadline to submit the responses is Aug 27, 22:00. No cooperation with other students is permitted.
+
+Be concise, but show your work and explain your answers. Be clear about the assumptions you make. Some questions are open ended in that they may not have a unique correct answer. You are allowed to refer to textbooks, lecture notes, slides, problem sets, etc.
+\fi}
+
+
+\section{Isolated markets}
+	The war in Ukraine led to the isolation of the Russian financial market: both Russian companies' and Russian investors' access to foreign capital markets got heavily restricted, and vice versa, as a result of other countries' sanctions and Russia's own regulations.
+	
+	Discuss the implications of such an isolation for:
+	\begin{enumerate}
+		\item Allocative efficiency: will Russian and foreign assets be allocated efficiently among investors? Why/why not?
+		
+		\item Informational efficiency: will Russian and foreign assets be priced efficiently? Why/why not?
+	\end{enumerate}
+
+
+\ifsolutions
+\subsection*{Solution}
+\begin{enumerate}
+	\item No, it is likely efficient for Russians to hold some foreign assets in their portfolios and vice versa, for diversification reasons (country risk in financial assets is both significant and easily diversifiable). Removing such an opportunity hurts the allocative efficiency in financial markets.
+	
+	\item In the short run, the invasion and the isolation had created a significant uncertainty about the Russian firms' future prospects and their fundamental value. Unless asset prices are strong-form efficient, which they never are, this implies that asset prices would, on average, be further away from the fundamental value, i.e., less efficient.
+	
+	In the medium to long run, the uncertainty above would be resolved. However, there would still be fewer participants in both Russian and foreign financial markets -- due to Russian investors being cut off from the foreign markets and vice versa. This leads to worse price discovery and less efficient prices in both markets. One could, however, argue that such ``cross-polination'' was not significant enough in the first place for its shutdown to have a meaningful effect.
+\end{enumerate}
+\fi
+
+
+
+\section{Islandsbanki}
+	\begin{quote}
+		COPENHAGEN, April 19 2022 (Reuters) -- Iceland said on Tuesday a sale of the state’s remaining share in Islandsbanki would not go ahead as planned due to lack of transparency in a sale of the bank’s shares last month.
+		...
+		
+		``The implementation of the sale did not fully meet the government’s expectations, including transparency and clear disclosure of information,'' it said in a statement. ...
+		
+		The state sold off 35\% of Islandsbanki last year in Iceland’s largest ever initial public offering. ... 
+		In January, state holding company Icelandic State Financial Investments (ISFI) got permission to sell its remaining 65\% stake, of which 22.5\% were sold last month ... in an oversubscribed auction.\footnote{\url{https://www.reuters.com/article/iceland-banks-islandsbanki-idUSL2N2WH0NS}}
+	\end{quote}
+	
+	In the context of the case presented above, answer the following question:
+	how can the lack of transparency and clear disclosure of information affect the results during such a stock offering?
+
+
+\ifsolutions
+\subsection*{Solution}
+	We have seen in class that transparency typically benefits the uninformed and harms the informed investors, since it partly negates the informational advantage that the latter have. If the effect on the uninformed investors dominates, their reduced willingness to participate in non-transparent public offerings leads to lower prices and thus lower revenue for the seller.
+	
+	If the market is mainly driven by the informed investors, they would be more willing to participate in an opaque auction. This is not necessarily better for the seller, since the informed traders' profit comes at a cost to both the uninformed traders and the seller (assuming the seller is uninformed; this seller's loss can be missed from only looking at competitive dealer markets, which we did throughout the course, and which does not apply to the situation at hand). So in the end, opaqueness likely harms the seller regardless of the composition of the buyer population.
+\fi
+
+
+
+
+\section{Dynamic limit order book with adverse selection}
+
+	\emph{NOTE: this problem is long and difficult. Make as much progress as you can and show your work.}
+	
+	This problem explores the effects of informed trading in a version of the Parlour model that we have seen in class.
+	Suppose that there is one asset, whose fundamental value $v$ is unknown, and whose market valuation evolves according to $\mu_t = \mathbb{E}[v \mid \Omega_t] = \mu_{t-1} + \epsilon_t$, where $\epsilon_t \in \{-\sigma, \sigma\}$ with equal probabilities is period-$t$ news, publicly announced at the end of period $t$ (after any period-$t$ orders are submitted).\footnote{Object $\Omega_t$ denotes all public information available to the market at (the end of) period $t$.} 
+	In every period $t$, one risk-neutral trader arrives at the market. With probability $\pi$ the trader is \emph{informed} and already knows this period's news $\epsilon_t$. With probability $1-\pi$ the trader is \emph{uninformed} but has an idiosyncratic valuation $y_t \in \{-\sigma, \sigma\}$ with equal probabilities, which is independent of all $\{\epsilon_t\}$. The period-$t$ uninformed trader thus values the asset at $v+y_t$.
+	
+	Suppose that in every period, there is one ask price $a_t = \mu_{t-1} + S$ and one bid price $b_t = \mu_{t-1} - S$, where $S$ denotes the half-spread, constant across periods. 
+	Each arriving trader can choose between submitting a limit order for one unit at the respective price or a market order against an existing order in the limit order book. A limit order is valid for one period and is automatically cancelled if it is not traded against by the next trader.\footnote{To be clear: a limit order submitted in period $t$ can \textbf{not} be cancelled or repriced when $\epsilon_t$ is revealed.}
+	Let $d_t \in \{\varnothing,MS,LS,LB,MB\}$ denote the order submitted by period-$t$ trader, where $d_t = \varnothing$ means the trader abstains from trading, and the other four denote, respectively, the market sell, limit sell, limit buy, and market buy orders.
+	
+	\begin{enumerate}
+		\item What is the expected utility of a period-$t$ \emph{informed} trader from using a limit buy order, as a function of its execution probability $p_{MS}$?
+		
+		\item What is the expected utility of a period-$t$ \emph{uninformed} trader from using a limit buy order, as a function of its execution probability $p_{MS}$?
+		
+		\item What are the expected utilities that the informed and uninformed traders get from using a market buy order (assuming a limit sell order is in the book)? How do they depend on $\epsilon_{t-1}$?
+	\end{enumerate}
+	
+	We shall look for equilibrium in which traders use a market order if they get a good price, while otherwise an uninformed trader uses a limit order, and an informed trader abstains. I.e., in the presence of a fitting limit order in the book, trading strategies $d^I_t(\epsilon_{t}, \epsilon_{t-1})$ and $d^U_t(y_t, \epsilon_{t-1})$ for the informed and the uninformed traders are given by:
+	\begin{align*}
+		d^I_t(+\sigma, +\sigma) &= MB
+		& d^U_t(+\sigma, +\sigma) &= MB
+		\\
+		d^I_t(+\sigma, -\sigma) &= LS
+		& d^U_t(+\sigma, -\sigma) &= LB
+		\\
+		d^I_t(-\sigma, +\sigma) &= LB
+		& d^U_t(-\sigma, +\sigma) &= LS
+		\\
+		d^I_t(-\sigma, -\sigma) &= MS
+		& d^U_t(-\sigma, -\sigma) &= MS
+	\end{align*}
+	
+	\begin{enumerate}[resume]
+		\item Derive the execution probabilities $p_{MS}$. Are they different for the informed and the uninformed traders? Why/why not?
+		
+		\item For which values of $S$ is it optimal for a period-$t$ trader to use a market buy order when $\epsilon_{t-1}=\sigma$ and $\epsilon_t/y_t=+\sigma$ (for the informed/uninformed trader, respectively)?
+		
+		\item For which values of $S$ are $d^I_t(+\sigma, -\sigma) = LS$ and $d^U_t(+\sigma, -\sigma) = LB$ the optimal strategies in their respective cases?
+		
+		\item Argue that your answers to the two previous questions apply also to the four remaining cases (a very short verbal argument is expected). Derive the final conditions that $S$ must satisfy for the strategies assumed above to constitute an equilibrium.
+		
+		\item Do the conditions you derived above impose any restrictions on $\pi$? If yes, explain intuitively why the desired equilibrium may not exist when $\pi$ is out of bounds.
+		
+		\item The equilibrium under consideration involves informed traders sometimes trading \emph{against} their private information (when $\epsilon_t=+\sigma$ they may submit a limit \emph{sell} order and vice versa). Discuss intuitively why such a situation arises.
+		
+		\emph{NOTE: you can attempt to answer this question even if you have not answered some or all of the parts 4-9 above.}
+		
+		\item Finally, most of the problem above looked at one specific equilibrium. Are there any other equilibria of this game (for a given $S$)?
+		
+		\emph{NOTE: this is a bonus question, i.e., it is extremely long and difficult. You are welcome to attempt it and show your work after you have solved the rest of the exam, but you are not expected to provide a complete answer.}
+	\end{enumerate}
+
+
+
+
+\ifsolutions
+\subsection*{Solution}
+\begin{enumerate}
+	\item The informed trader's expected utility from a limit buy order is
+	\begin{align}
+		U^I_{LB}
+		&= \Big( \mathbb{E}[v \mid \mu_{t-1}, \epsilon_t, d_{t+1}=MS] - b_t \Big) p_{MS} 
+		\nonumber
+		\\
+		&= \Big( (\mu_t + \mathbb{E}[\epsilon_{t+1} \mid \epsilon_t, d_{t+1}=MS]) - (\mu_{t-1} - S) \Big) p_{MS}
+		\nonumber
+		\\
+		&= \Big( \epsilon_t + \mathbb{E}[\epsilon_{t+1} \mid \epsilon_t, d_{t+1}=MS] + S \Big) p_{MS}.
+		\label{eq:uilb}
+	\end{align}
+	Note that while the informed trader knows $\epsilon_t$, they do not know $\epsilon_{t+1}$, and the event that their limit order executes may be informative about $\epsilon_{t+1}$.
+	
+	\item The uninformed trader's expected utility from a limit buy order is
+	\begin{align}
+		U^U_{LB}
+		&= \Big( \mathbb{E}[v \mid \mu_{t-1}, d_{t+1}=MS] + y_t - b_t \Big) p_{MS} 
+		\nonumber
+		\\
+		&= \Big( (\mu_{t-1} + \mathbb{E}[\epsilon_{t} + \epsilon_{t+1} \mid d_{t+1}=MS] + y_t) - (\mu_{t-1} - S) \Big) p_{MS}
+		\nonumber
+		\\
+		&= \Big( \mathbb{E}[\epsilon_{t} + \epsilon_{t+1} \mid d_{t+1}=MS] + y_t + S \Big) p_{MS}.
+		\label{eq:uulb}
+	\end{align}
+	The uninformed trader has no prior knowledge of either $\epsilon_t$ or $\epsilon_{t+1}$, but can make inferences about them from the event $d_{t+1} = MS$.
+	
+	\item The informed trader's expected utility from using a market buy order is given by
+	\begin{align}
+		U^I_{MB}
+		&= \mathbb{E}[v \mid \mu_{t-1},\epsilon_{t}] - a_{t-1} 
+		\nonumber
+		\\
+		&= (\mu_{t-1} + \epsilon_t) - (\mu_{t-2} + S)
+		\nonumber
+		\\
+		&= (\mu_{t-1} - \mu_{t-2}) + \epsilon_t - S
+		\nonumber
+		\\
+		&= \epsilon_{t-1} + \epsilon_t - S.
+		\label{eq:uimb}
+	\end{align}
+	For the uninformed trader we have
+	\begin{align}
+		U^U_{MB}
+		&= (\mathbb{E}[v \mid \mu_{t-1}] + y_t) - a_{t-1} 
+		\nonumber
+		\\
+		&= (\mu_{t-1} + y_t) - (\mu_{t-2} + S)
+		\nonumber
+		\\
+		&= (\mu_{t-1} - \mu_{t-2}) + y_t - S
+		\nonumber
+		\\
+		&= \epsilon_{t-1} + y_t - S.
+		\label{eq:uumb}
+	\end{align}
+	The limit sell order placed at $t-1$ is priced at $a_{t-1} = \mu_{t-2} + S$, hence it does not incorporate the last period's news shock $\epsilon_{t-1}$. So if $\epsilon_{t-1}=\sigma$, asset value has increased since the limit order was placed, which is not reflected in $a_{t-1}$, and so the period-$t$ trader gets to buy the asset cheaply and gets higher utility because of that. Conversely, if $\epsilon_{t-1}=-\sigma$, the limit sell order from $t-1$ overprices the asset relative to its market valuation in $t$, so using a market buy order yields lower utility.
+	
+	\item For the uninformed trader, $p_{MS}$ and all the relevant expectations given the assumed equilibrium strategies are given by:
+	\begin{align}
+		p_{MS}^U &= \frac{\pi}{4} + \frac{1-\pi}{4} = \frac{1}{4};
+		\label{eq:pums}
+		\\
+		\mathbb{E}[\epsilon_{t+1} \mid d_{t+1}=MS] &= -\sigma \cdot \mathbb{P}(I \mid d_{t+1}=MS) + \frac{\sigma - \sigma}{2} \cdot \mathbb{P}(U \mid d_{t+1}=MS)
+		\nonumber
+		\\
+		&= -\sigma \pi;
+		\label{eq:eut+1}
+		\\
+		\mathbb{E}[\epsilon_{t} \mid d_{t+1}=MS] &=  -\sigma .
+		\label{eq:eut}
+	\end{align}
+	
+	For the informed trader:
+	\begin{align}
+		p_{MS}^I(\epsilon_t) = \mathbb{P}(d_{t+1}=MS \mid \epsilon_t) &= \begin{cases}
+			0 & \text{ if } \epsilon_t = +\sigma,
+			\\
+			\frac{\pi}{2}+\frac{1-\pi}{2} = \frac{1}{2} & \text{ if } \epsilon_t = -\sigma;
+		\end{cases}
+		\label{eq:pims}
+		\\
+		\mathbb{E}[\epsilon_{t+1} \mid \epsilon_t=-\sigma, d_{t+1}=MS] &= \frac{\pi}{\pi + (1-\pi)} (-\sigma) + \frac{1-\pi}{\pi + (1-\pi)} \cdot \frac{\sigma-\sigma}{2}
+		\nonumber
+		\\
+		&= -\pi \sigma;
+		\label{eq:eit}
+	\end{align}
+	and we do not compute $\mathbb{E}[\epsilon_{t+1} \mid \epsilon_t=+\sigma, d_{t+1}=MS]$ since it is irrelevant (because $p_{MS}=0$ in that case).
+	
+	As argued above, $\epsilon_t$ affects the appeal of a market order relative to a limit order for trader at $t+1$ -- and the assumed strategy profile does indeed assume that the informed trader's behavior at $t+1$ depends on $\epsilon_t$. Therefore, the execution probability $p_{MS}$ of a limit buy order depends on $\epsilon_t$, and the knowledge of $\epsilon_t$ allows the informed trader to better estimate $p_{MS}$.
+	
+	\item Look first at the uninformed trader when $\epsilon_{t-1} = y_t = +\sigma$. Plugging these values and \eqref{eq:pums}--\eqref{eq:eut} into \eqref{eq:uulb} and \eqref{eq:uumb}, we get
+	\begin{align*}
+		U^U_{MB}(+\sigma, +\sigma) &= 2 \sigma - S
+		\\
+		U^U_{LB}(+\sigma, +\sigma) &= \Big( (-\sigma-\pi\sigma)+ \sigma + S \Big) \frac{1}{4} = \frac{S - \pi \sigma}{4}
+		\\
+		U^U_{LS}(+\sigma, +\sigma) &= U^U_{LB}(-\sigma, -\sigma) = \Big( (-\sigma-\pi\sigma)- \sigma + S \Big) \frac{1}{4} = \frac{S - (2+\pi) \sigma}{4}
+		\\
+		U^U_{MS}(+\sigma, +\sigma) &= U^U_{MB}(-\sigma, -\sigma) = -2\sigma - S,
+	\end{align*}
+	where the first equations in the two latter lines follow from the symmetry of the model. Note that $U^U_{LB}(+\sigma, +\sigma)>U^U_{LS}(+\sigma, +\sigma)$ and $U^U_{MS}(+\sigma, +\sigma) < 0$. Then MB is optimal for U if $U^U_{MB}(+\sigma, +\sigma) \geq \max \left\{ 0, U^U_{LB}(+\sigma, +\sigma) \right\}$, which is equivalent to $S \leq \min \left\{ 2\sigma, \frac{8+\pi}{5}\sigma \right\} \iff S \leq \frac{8+\pi}{5}\sigma$.
+	
+	Now consider the informed trader when $\epsilon_{t-1} = \epsilon_t = +\sigma$. Plugging these values and \eqref{eq:pims}--\eqref{eq:eit} into \eqref{eq:uilb} and \eqref{eq:uimb}, we get
+	\begin{align*}
+		U^I_{MB}(+\sigma, +\sigma) &= 2 \sigma - S
+		\\
+		U^I_{LB}(+\sigma, +\sigma) &= 0
+		\\
+		U^I_{LS}(+\sigma, +\sigma) &= U^I_{LB}(-\sigma, -\sigma) = \Big( - \sigma - \pi \sigma + S \Big) \frac{1}{2}
+		\\
+		U^I_{MS}(+\sigma, +\sigma) &= U^I_{MB}(-\sigma, -\sigma) = -2\sigma - S,
+	\end{align*}
+	where the second line follows from $p_{MS}^I(\epsilon_t=+\sigma) = 0$. Note that $U^I_{MS}(+\sigma, +\sigma) < 0$. Then MB is optimal for I if $U^I_{MB}(+\sigma, +\sigma) \geq \max \left\{ 0, U^I_{LS}(+\sigma, +\sigma) \right\}$, which is equivalent to $S \leq \min \left\{ 2\sigma, \frac{5+\pi}{3}\sigma \right\} \iff S \leq \frac{5+\pi}{3}\sigma$.
+	
+	Market buy order is then optimal in both cases when $S \leq \min \left\{ \frac{8+\pi}{5}\sigma, \frac{5+\pi}{3}\sigma \right\} \iff S \leq \frac{8+\pi}{5}\sigma$.
+	
+	\item Start again with the uninformed trader when $\epsilon_{t-1} = -\sigma$ and $y_t = +\sigma$. From \eqref{eq:uulb} and \eqref{eq:uumb} we get
+	\begin{align*}
+		U^U_{MB}(+\sigma, -\sigma) &= - S
+		\\
+		U^U_{LB}(+\sigma, -\sigma) &= \Big( (-\sigma-\pi\sigma)+ \sigma + S \Big) \frac{1}{4} = \frac{S - \pi \sigma}{4}
+		\\
+		U^U_{LS}(+\sigma, -\sigma) &= U^U_{LB}(-\sigma, +\sigma) = \Big( (-\sigma-\pi\sigma)- \sigma + S \Big) \frac{1}{4} = \frac{S - (2+\pi) \sigma}{4}
+		\\
+		U^U_{MS}(+\sigma, -\sigma) &= U^U_{MB}(-\sigma, +\sigma) = - S.
+	\end{align*}
+	Note that either market order yields negative profit, and $U^U_{LB}(+\sigma, -\sigma) > U^U_{LS}(+\sigma, -\sigma)$. Then LB is optimal if $U^U_{LB}(+\sigma, -\sigma) \geq 0$ $\iff S \geq \pi \sigma$.
+	
+	For the informed trader, when $\epsilon_{t-1} = -\sigma$ and $\epsilon_t = +\sigma$, \eqref{eq:uilb} and \eqref{eq:uimb} yield
+	\begin{align*}
+		U^I_{MB}(+\sigma, -\sigma) &= -S
+		\\
+		U^I_{LB}(+\sigma, -\sigma) &= 0
+		\\
+		U^I_{LS}(+\sigma, -\sigma) &= U^I_{LB}(-\sigma, +\sigma) = \Big( - \sigma - \pi \sigma + S \Big) \frac{1}{2}
+		\\
+		U^I_{MS}(+\sigma, -\sigma) &= U^I_{MB}(-\sigma, +\sigma) = -S,
+	\end{align*}
+	where either market order yields negative profit, so LS is optimal if $U^I_{LS}(+\sigma, -\sigma) \geq 0 \iff S \geq (1+\pi)\sigma$.
+	
+	\item The model is fully symmetric w.r.t. buy/sell sides, hence the conditions for the optimality of market buy orders are exactly the same as the conditions we would get for the optimality of market sell orders in their respective cases. The same applies to the two remaining cases, $d^I_t(-\sigma, +\sigma)$ and $d^U_t(-\sigma, +\sigma)$, which are completely symmetric to the respective cases $d^I_t(+\sigma, -\sigma)$ and $d^U_t(+\sigma, -\sigma)$, respectively.
+	
+	Combining the conditions from the previous two questions, we get that the desired equilibrium can be sustained only if
+	\begin{align}
+		S &\in \left[ \max \left\{\pi \sigma, (1+\pi)\sigma \right\}, \min \left\{ \frac{8+\pi}{5}\sigma, \frac{5+\pi}{3}\sigma \right\} \right]
+		\nonumber
+		\\
+		\iff S &\in \left[ (1+\pi)\sigma, \frac{8+\pi}{5}\sigma \right].
+		\label{eq:scond}
+	\end{align}
+	
+	\item For the interval in \eqref{eq:scond} to be nonempty, we need $1+\pi \leq \frac{8+\pi}{5} \iff \pi \leq 3/4$. The bounds on $S$ come from two sources (actually more than that, but these two are the tightest). Firstly, $U^I_{LS}(+\sigma, -\sigma) \geq 0$: the spread must be large enough to reward limit orders from informed traders. Putting in a limit order, however, is associated with adverse selection, since a limit order is more likely to execute when $\epsilon_{t+1}=-\sigma$. The higher is $\pi$, the more severe this adverse selection is. Secondly, $U^U_{MB}(+\sigma,+\sigma) \geq U^U_{LB}(+\sigma,+\sigma)$: the spread must be small enough for the market orders to not be too costly relative to limit orders for the uninformed traders. While higher $\pi$ makes limit orders less appealing for the same reason as above, thus relaxing this constraint, this channel is not as strong for uninformed investors because their primary concern is spread $S$. This is in the sense that U are choosing between MB and LB in equilibrium, while I are choosing between LS and abstaining -- so the uninformed investors are twice as sensitive to the spread.
+	
+	\item Such a countertrading occurs in cases when both past and future price movements turn out to be unfavorable. E.g., if $\epsilon_t = +\sigma$, the informed trader in period $t$ has private information that the asset is worth more than the rest of the market currently believes. However, if $\epsilon_{t-1} = -\sigma$, the current limit orders in the LOB do not reflect this current valuation, since they do not reflect the previous period's bad news. This makes market buy orders unappealing, since the ask price is high relative to the current market valuation $\mu_{t-1}$. On the other hand, a limit buy order is also unlikely to succeed, since $\epsilon_t$ is revealed before any market orders can be submitted, so any trader who could trade against a limit buy order would know of the asset's high valuation, meaning they are unlikely to sell at the low price $b_t$.
+	
+	Therefore, the informed trader is unable to capitalize on their knowledge that the asset is currently underpriced (partly because it is not, in fact, underpriced by the LOB). However, if the spread $S$ is large enough, they can capitalize on the knowledge of the future price movements. In the scenario above, $(\epsilon_t,\epsilon_{t-1})=(+\sigma,-\sigma)$, putting in a limit sell order is profitable because the spread is large enough for such an order to yield a profit, and the fact that this order is underpriced relative to $\mu_t$ makes it more likely to execute.
+	
+	\item From the analysis above, at least one other equilibrium is relatively salient, which is identical to the one under consideration, except $d^I_t(+\sigma, -\sigma) = d^I_t(-\sigma, +\sigma) = \varnothing$: instead of countertrading, the informed traders abstain in case of unfavorable price movements. These trading strategies can be sustained in equilibrium when $S \in \left[ \pi \sigma, \min \left\{ (1+\pi)\sigma, \frac{8+\pi}{5} \sigma \right\} \right]$.
+	
+	My guess from bruteforcing all other possible equilibria is that no other equilibria exist (any conjectured strategy profile leads to a collection of mutually exclusive conditions on $S$), but it was a very preliminary analysis, so the conclusion may be wrong.
+\end{enumerate}
+\fi
+
+
+
+\end{document}
