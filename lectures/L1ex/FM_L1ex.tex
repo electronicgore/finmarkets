@@ -308,7 +308,7 @@
 	Suppose limit order traders' valuation is equal to their price, market order buyers have valuation 10, market order sellers have valuation 0
 	
 	{\center
-		\includegraphics[width=.6\linewidth]{pics/Efficiency3}
+		\includegraphics[width=.6\linewidth]{pics/Efficiency4}
 	\\
 	}
 	
@@ -318,16 +318,19 @@
 
 \begin{frame}{Welfare}
 	We can also do a welfare calculation, using the post market holdings of each type
-	\quad
-	\center
-	\includegraphics[width=.6\linewidth]{pics/Welfare3}
-	\quad
+	
+	{\center
+	\includegraphics[width=.6\linewidth]{pics/Welfare4}
+	\\
+	}
+	
+	Note there's too much trade in cont auction: T1 buys 100 (valuation 3), T4 buys 200 (val 2.5), T7 sells 400 (val 4) -- if these three met, they would reverse trades.
 \end{frame}
 
 
 \begin{frame}{Clarifications}
 	\begin{itemize}
-		\item To clarify: in the previous two slides, I assumed that every trader wants to trade to close their position, so initial position = negative of placed order. You could assume instead that everyone starts with zero positions, and you'd get the same (relative) values for welfare.
+		\item To clarify: in the previous two slides, I assumed that every trader starts with zero position.
 		\item Welfare calculation just multiplies every trader's position (before or after trade) by their valuation for the asset, and sums over traders.
 	\end{itemize}
 \end{frame}
@@ -336,12 +339,11 @@
 \begin{frame}{Conclusions}
 	\begin{itemize}
 		\item The two formats result in different sets of trades. 
+		\item \alert{Call auction} is \structure{welfare-maximizing} given the orders, is also \structure{Pareto-optimal} -- there are no profitable trades left to conduct after market closes
+		\item \alert{Continuous auction} acts based on limited info (about future orders), results in \structure{too much trade and less welfare}.
 		\begin{itemize}
-			\item Both outcomes are Pareto-optimal -- there are no profitable trades left to conduct after market closes under either scenario.
+			\item Some of the traders might regret their trades after seeing other trades in the market; there is scope for further welfare-improving trades that reverse some of those that happened.
 		\end{itemize}
-	
-		\item In our case, call auction generated better welfare results, but this is \textbf{not} a general result.
-		\item Welfare ranking of call vs continuous auction can go either way, and depends on the specific \structure{order}, in which trades arrive at the market.
 	\end{itemize}
 \end{frame}
 
