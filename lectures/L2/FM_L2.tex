@@ -323,9 +323,10 @@ When quote data are not available: estimate them using \structure{Roll's measure
 			\item Effective spread: what was the trading cost faced by the last trader
 		\end{itemize}
 		These are (imperfect) measures of the cost of executing a market order now
-		\item The \structure{realized spread} is more relevant to a market maker (liquidity provider):
+		\item The \structure{realized spread} is more relevant to a market maker (liquidity provider) or a researcher:
 		\begin{itemize}
 			\item It measures the cost of taking a position (long or short) for an amount of time
+			\item Can also be interpreted as the long-run (informational) impact of trades on prices
 		\end{itemize}
 	\end{itemize}
 \end{frame}
@@ -386,14 +387,15 @@ When quote data are not available: estimate them using \structure{Roll's measure
 
 \begin{frame}{Lee-Ready precision}
 	\begin{itemize}
-		\item \citet{odders-white_occurrence_2000}: large-scale ($>400$k transactions) test of Lee-Ready algorithm with NYSE data
+		\item \citet{odders-white_occurrence_2000}: large-scale (144 NYSE stocks over 3 months; $>400$k transactions) test of Lee-Ready algorithm with NYSE data
 		\item 85\% correct
 		\item Most mistakes with:
+		\pause 
 		\begin{itemize}
 			\item trades at the midpoint
 			\item small transactions
 			\item transactions in large-cap / frequently traded stocks
-			\item (why?)
+			%\item (why?)
 		\end{itemize}
 	\end{itemize}
 \end{frame}
@@ -439,12 +441,13 @@ When quote data are not available: estimate them using \structure{Roll's measure
 
 \begin{frame}{Roll's model}
 	\begin{itemize}
-		\item Roll's observed that although $\epsilon_t$ and $d_t$ are i.i.d., $\Delta d_t = d_t - d_{t-1}$ is mean-reverting:
+		\item Roll's observed that although $\epsilon_t$ and $d_t$ are i.i.d., $\Delta d_t = d_t - d_{t-1}$ is mean-reverting, yielding:
 		\begin{align*}
-			Cov(\Delta d_t, \Delta d_{t-1})	&= -1
-			\\
-			\pause[2]
-			\visible<handout:0|+->{\Rightarrow Cov(\Delta p_t, \Delta p_{t-1}) &= Cov(p_t-p_{t-1}, p_{t-1}-p_{t-2})}
+			%Cov(\Delta d_t, \Delta d_{t-1})	&= -1
+			%\\
+			%\pause[2]
+			Cov(\Delta p_t, \Delta p_{t-1}) 
+			\visible<handout:0|+->{&= Cov(p_t-p_{t-1}, p_{t-1}-p_{t-2})}
 			\\
 			\visible<handout:0|+->{&=Cov \left( \frac{S}{2}d_t - \frac{S}{2}d_{t-1} + \epsilon_t, \frac{S}{2}d_{t-1} - \frac{S}{2}d_{t-2} + \epsilon_{t-1} \right)}
 			\\
@@ -454,7 +457,7 @@ When quote data are not available: estimate them using \structure{Roll's measure
 			\\
 			\visible<handout:0|+->{&= \frac{S^2}{4} \mathbb{E} [-d_{t-1}^2] = \frac{-S^2}{4}}
 		\end{align*}
-		\item Intuitively: $\Delta d_t>0$ means that we go from a sale to a buy - the next change must be opposite
+		\item Intuitively: if $\Delta d_t>0$, this means that we go from a sale to a buy - then the next change must be opposite
 	\end{itemize}
 \end{frame}
 
