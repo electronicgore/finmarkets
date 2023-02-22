@@ -110,12 +110,14 @@
 \begin{frame}{Determinants of liquidity}
 	\begin{itemize}[<+->]
 		\item Last week: \alert{illiquidity} $\Rightarrow$ deviation of realized prices from the asset's fundamental value.
-		\item Source of illiquidity: \visible<handout:0>{\alert{market thinness}}. Or so I told you...
-		\item If that was the only reason, trivial solution for efficiency: \visible<handout:0>{add many dealers}.
+		\item Source of illiquidity: \visible<handout:0>{\alert{market thinness}} (too few traders present in the market at a given time). Or so I told you...
+		\item If that was the only reason, trivial solutions for efficiency:
 		\begin{itemize}
-			\item Unsurprisingly, this does not close the spread.
+			\item \visible<handout:0>{coordinate on a time (that's how farmers' markets work!)}
+			\item or \visible<handout:0>{add many dealers (that's how many markets work!)}
+			\item This narrows down the spread, but does not close it.
 		\end{itemize}
-		\item So \structure{what drives the spread}?
+		\item So \structure{what drives the spread}? (apart from market thinness)
 		\begin{itemize}
 			\item To answer that, first talk about \structure{what drives the prices}.
 		\end{itemize}
@@ -124,23 +126,46 @@
 
 
 \begin{frame}{Price determinants}
-	Stock prices move around all the time
-	\begin{itemize}
-		\item Media reports are full of ex post rationalizations 
-		%\item Look at CNN Money reports (on absalon)
-		\item But these can be pretty arbitrary (see \href{https://www.smbc-comics.com/comic/markets}{\uline{this SMBC comic}} and \href{https://twitter.com/stonksgoingUP1}{@stonksgoingUP1} on twitter)
-	\end{itemize}
-	What actually determines stock prices and their movement?
+	\begin{columns}
+		\begin{column}{0.5\linewidth}
+			{\setstretch{1.3}
+				\begin{itemize}
+					\item Stock prices move around all the time
+					\item Media reports are full of ex post rationalizations...
+					%\item Look at CNN Money reports (on absalon)
+					\item ...but these can be pretty arbitrary $\rightarrow$
+					\item What actually \alert{determines stock prices} and their movement?
+				\end{itemize}
+			}
+		\end{column}
+		\begin{column}{0.4\linewidth}
+			\pause[1]
+			\href{https://www.smbc-comics.com/comic/markets}{\includegraphics<handout:0>[width=\linewidth]{pics/1592665375-20200620}}
+		\end{column}
+	\end{columns}
 \end{frame}
 
 
 \begin{frame}{Price determinants}
-	In this course: everybody agrees on assets' future cash flows ($\approx$value), \textit{conditional} on fundamentals. Broadly speaking, three reasons for trading:
+	Prices result from clearing the market. Two options:
 	\begin{itemize}
-		\item \textbf{Risk}: Getting the right risk profile (relevant to trader)
-		\item (Funding) \textbf{Liquidity}: Trader needs liquid funds or has excess funds to invest (relevant to trader)
-		\item \textbf{Speculation}: Different expectations of fundamentals because different \alert{information} (relevant to everyone)
+		\item everyone agrees on asset value $\rightarrow$ no trade (not the case in reality);
+		\item traders have \structure<1>{different valuations} \only<1>{(\alert{\textbf{why?}})} $\rightarrow$ prices clear demand and supply
 	\end{itemize}
+	\pause 
+	
+	In this course: everybody agrees* on assets' future \emph{cash flows conditional on fundamentals}. 
+	\pause 
+	\\$\Rightarrow$ Reasons for trading:
+	\begin{itemize}
+		\item Traders have different value from the same cash flows
+		\begin{itemize}
+			\item \textbf{Risk}: Getting the right risk profile
+			\item (Funding) \textbf{Liquidity}: Trader needs liquid funds or has excess funds to invest
+		\end{itemize}
+		\item Traders have \textbf{private information} about the fundamentals
+	\end{itemize}
+	\textcolor{gray}{*IRL, people are very noisy in decision-making and disagree a lot with each other and even with past selves given the same info \citep*{kahneman_noise_2021}}
 \end{frame}
 
 
@@ -148,11 +173,11 @@
 	\begin{itemize}
 		\item Different types of information (it's a spectrum really)
 		\begin{itemize}
-			\item \textbf{Public information}:  asset price may move \textit{without} trade
+			\item \textbf{Public information}: when revealed, asset price may move \textit{without} trade
 			\item \textbf{Private information} possessed by some traders  $\rightarrow$ reveal this information through their trading
 		\end{itemize}
 		\pause
-		\item Draw a wedge between \alert{legal} and \structure{academic} ($\leftarrow$ \structure{our}) definitions of \textbf{private information}
+		\item Reminder: we draw a wedge between \alert{legal} and \structure{academic} ($\leftarrow$ \structure{our}) definitions of \textbf{private information}
 		\begin{itemize}
 			\item \alert{Legal}: insider info is that which is only available to a restricted number of people. Trading based on insider info is illegal in most jurisdictions.
 			\item \structure{Academic}: some agents may be better at analyzing publicly available info, thus have better info about fundamentals.
@@ -165,7 +190,7 @@
 	\begin{quotation}
 		``Fundamentally, in a system in which the knowledge of the relevant facts is dispersed among many people, prices can act to coordinate the separate actions of different people.'' -- \structure{Von Hayek}
 	\end{quotation}
-	\pause
+	\pause\bigskip 
 	
 	\structure{Fama}'s \textbf{efficient markets hypothesis}: {prices} must be {efficient}.
 	\\
@@ -193,7 +218,7 @@
 
 
 \begin{frame}{Types of informational efficiency}
-	There are different kinds of price efficiency:
+	There are different kinds of \structure{price efficiency}:
 	\begin{itemize}
 		\item \textbf{Weak form}: Prices reflect historic (price) information
 		\item \textbf{Semi-strong form}: Prices reflect all public information
@@ -223,17 +248,33 @@ So we will not take EMH for granted, but rather see whether it arises in models 
 \end{frame}
 
 
+%\begin{frame}[<handout:0>]
+%	\begin{columns}
+%		\begin{column}{0.55\linewidth}
+%			\href{https://www.smbc-comics.com/?id=3379}{\includegraphics[width=\linewidth]{pics/20140603}}
+%		\end{column}
+%		\begin{column}{0.4\linewidth}
+%			\begin{enumerate}
+%				\item sorry. 
+%				\item find a mistake in this one. 
+%				\item here's another one: \url{https://www.smbc-comics.com/comic/efficient}
+%			\end{enumerate}
+%		\end{column}
+%	\end{columns}
+%\end{frame}
+
+
 \begin{frame}{Asset value}
 	\begin{itemize}
 		\item Let's try to figure out how price efficiency looks like in math.
-		\item \structure{Information}: $\Omega_t$ captures the market's (public) knowledge at time $t$ -- ever more is known: 
-		\structure{$\Omega_{t+1}=(\Omega_t, I_{t+1})$}. 
+		\item \structure{Information}: $\Omega_t$ captures the market's (public) knowledge at time $t$: 
+		\structure{$\Omega_{t+1}=(\Omega_t, I_{t+1})$} ($I_{t+1}$ is the new info + assume perfect memory). 
 		
 		\item \structure{Market valuation} ($\neq$ price) of an asset = expectation of underlying \structure{fundamental value} $v$ given information $\Omega_{t}$:
 		\begin{align*}
 			\mu_t &= \mathbb{E} \left[ v | \Omega_t \right].
 		\end{align*}
-		Think of $v$ as the sum of discounted cash flows: $v = \sum_{s=t}^{\infty} \delta^{s-t} c_s$ (uncertain at $t$).
+		Think of $v$ as the sum of discounted cash flows: $v = \sum_{s=t}^{\infty} \delta^{s-t} c_s$ (uncertain as of $t$).
 	\end{itemize}
 \end{frame}
 
@@ -277,12 +318,23 @@ So we will not take EMH for granted, but rather see whether it arises in models 
 \section{Glosten-Milgrom model}
 
 \begin{frame}{\cite{glosten_bid_1985}}
-	\begin{quotation}
-		All models are wrong; some models are useful.
-		\begin{flushright}
-			-- \structure{George Box}
-		\end{flushright}
-	\end{quotation}
+	\begin{columns}
+		\begin{column}{0.6\linewidth}
+			{\setstretch{1.3}
+			\begin{quotation}
+				All models are wrong; some models are useful.
+				\begin{flushright}
+					-- \structure{George Box}
+				\end{flushright}
+			\end{quotation}
+			}
+		\end{column}
+		\begin{column}{0.4\linewidth}
+			\pause[1]
+			\href{https://www.smbc-comics.com/comic/mammoth}{\includegraphics<handout:0>[width=\linewidth]{pics/1646852046-20220309}}
+		\end{column}
+	\end{columns}
+	
 \end{frame}
 
 
@@ -290,39 +342,37 @@ So we will not take EMH for granted, but rather see whether it arises in models 
 	\begin{itemize}
 		\item The simplest model explaining \structure{spread} through private information.
 		\item Spread is driven by adverse selection
-		\item Dynamic model, periods $t = 1,2,...$
+		
+		\pause \bigskip
+		
+		\item Dynamic model, periods $t = 1,2,...$; \\
+		(though we will be analyzing the stage game for a given period -- essentially static)
 		\item Two players in every period:
 		\begin{itemize}
 			\item trader and dealer
 			\item \alert{dealer} long-lived; trader new every period
 			\item \alert{trader} can be informed or not
 		\end{itemize}
+		\item One asset with fundamental value $v$ (unknown), common belief $v \sim F(v)$
 	\end{itemize}
 \end{frame}
 
 
 
 \begin{frame}{GM85: Model (1)}
-	\textbf{Trader:} is either a speculator or a noise trader, can submit a market order to buy or sell one unit of the asset.
+	\textbf{Trader:} is either a speculator or a noise trader, can submit a market order $d_t \in \{1, -1\}$ to buy or sell one unit of the asset with fundamental value $v$ (or do nothing, $d_t=0$)
 	\begin{itemize}
-		\item \structure{Speculator} (probability $\pi$): has private information.
+		\item \structure{Speculator} (probability $\pi$): has private information about $v$.
 		\begin{itemize}
-			\item Risk neutral, chooses his market order $d$ to maximize expected profits:
-			\begin{equation*}
-				d_t= \left\{
-				\begin{aligned}
-				1	& \text{ if buy}; \\
-				0	& \text{ if abstain}; \\
-				-1	& \text{ if sell}.
-				\end{aligned}
-				\right.
-			\end{equation*}
-			\item `Hides' behind noise traders
+			\item We will usually assume speculator simply knows $v$ (not much changes if he only has a noisy private signal about it).
+			\item Risk neutral, chooses his market order $d_t$ to maximize expected profit $d_t \cdot (v-p_t)$:
+			%\item `Hides' behind noise traders
 		\end{itemize}
-		\item \structure{Noise trader} (probability $1-\pi$): trades for exogenous reasons (hedging, liquidity).
+		\item \structure{Noise trader} (probability $1-\pi$): no pvt info about $v$; trades for other reasons (hedging, liquidity).
 		\begin{itemize}
-			\item Buys with fixed probability $\beta_B$; sells w.p. $\beta_S$; abstains w.p. $1-\beta_B - \beta_S$
-			\item \alert{Important}: we often assume that these traders behave in a certain way (behavior types) but they can be perfectly rational!
+			\item We assume he follows some fixed strategy: buys with probability $\beta_B$; sells w.p. $\beta_S$; abstains w.p. $1-\beta_B - \beta_S$
+			\item \alert{Important}: this assumption is for simplicity only; this strategy can be perfectly rational! We just don't model what generates it.
+			\\E.g., could say noise traders choose $d_t$ to maximize profit $\mathbb{E}[d_t(v+y_t-p_t)]$, where $y$ is $t$-trader's idiosyncratic valuation (due to risk, time, liquidity preferences...)
 		\end{itemize}
 	\end{itemize}
 \end{frame}
@@ -335,7 +385,8 @@ So we will not take EMH for granted, but rather see whether it arises in models 
 		\item Willing to trade \alert{exactly one unit} (buy/sell/no trade) each period
 		\item Sets \alert{bid and ask prices} (for a single unit)
 		\item Quote price before seing trade (limit order)
-		\item Does not know whether trader is speculator or noise trader
+		\item Does not know whether trader is speculator or noise trader (but knows $\pi$)
+		\item Expected profit from trade is $\mathbb{E}[-d_t(v-p_t)]$
 		\item \structure{Competitive}: prices=expected asset value conditional on information
 		\item Trading is sequential: market orders served one by one
 	\end{itemize}
@@ -362,12 +413,12 @@ So we will not take EMH for granted, but rather see whether it arises in models 
 
 \begin{frame}{GM85: Model (3)}
 \begin{itemize}
-	\item \textbf{Asset value}:
-	\begin{itemize}
-		\item Random asset value $v$ drawn from distribution
-		\item Assume $v$ is the fundamental (terminal) value
-		\item Speculators know $v$ perfectly (not much changes if they don't)
-	\end{itemize}
+	%\item \textbf{Asset value}:
+	%\begin{itemize}
+	%	\item Random asset value $v$ drawn from distribution
+	%	\item Assume $v$ is the fundamental (terminal) value
+	%	\item Speculators know $v$ perfectly (not much changes if they don't)
+	%\end{itemize}
 	\item \textbf{Equilibrium}:
 	\begin{itemize}
 		\item An equilibrium consists of \structure{bid and ask prices} and \structure{speculator's strategy}
@@ -377,13 +428,13 @@ So we will not take EMH for granted, but rather see whether it arises in models 
 \end{frame}
 
 
-\begin{frame}{Some questions}
-\begin{itemize}[<+->]
-	\item Why are there no uninformed speculators?
-	\item What is the role of the dealer? What functions does he fulfill?
-	\item Why is the dealer willing to trade with better-informed speculators?
-\end{itemize}
-\end{frame}
+%\begin{frame}{Some questions}
+%\begin{itemize}[<+->]
+%	\item Why are there no uninformed speculators?
+%	\item What is the role of the dealer? What functions does he fulfill?
+%	\item Why is the dealer willing to trade with better-informed speculators?
+%\end{itemize}
+%\end{frame}
 
 
 \begin{frame}{Analysis. A: Market making}
@@ -398,7 +449,7 @@ So we will not take EMH for granted, but rather see whether it arises in models 
 		\item Same for bid $b_t$; payoff: $\mathbb{E}[v|\Omega_{t-1}, Sell] - b_t$
 		\item (Note payoffs above rely on risk-neutrality)
 	\end{itemize}
-	\item Perfect competition among dealers implies zero expected profit $\Rightarrow$ \structure{ask price} and \structure{bid price} are
+	\item Perfect competition among dealers implies zero expected profit from either trade type $\Rightarrow$ \structure{ask price} and \structure{bid price} are
 	\begin{align*}
 		a_t & = \mathbb{E}[v|\Omega_{t-1}, Buy]; \\
 		b_t &= \mathbb{E}[v|\Omega_{t-1},  Sell].
