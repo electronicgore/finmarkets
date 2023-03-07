@@ -16,7 +16,7 @@
 \author{Egor Starkov}
 
 \date{K{\o}benhavns Unversitet \\
-	Spring 2022}
+	Spring 2023}
 
 
 
@@ -46,42 +46,39 @@
 \end{frame}
 
 
-\section{Glosten-Milgrom}
+\section{Glosten-Milgrom (reviewed and continued)}
+
 
 \begin{frame}{GM85: Overview}
 	\begin{itemize}
-		\item Dynamic model, periods $t = 1,2,...$
+		\item Dynamic model, periods $t = 1,2,...$; \\
+		(though we will be analyzing the stage game for a given period -- essentially static)
 		\item Two players in every period:
 		\begin{itemize}
 			\item trader and dealer
 			\item \alert{dealer} long-lived; trader new every period
 			\item \alert{trader} can be informed or not
 		\end{itemize}
+		\item One asset with fundamental value $v$ (unknown), common belief $v \sim F(v)$
 	\end{itemize}
 \end{frame}
 
 
+
 \begin{frame}{GM85: Model (1)}
-	\textbf{Trader:} is either a speculator or a noise trader, can submit a market order to buy or sell one unit of the asset.
+	\textbf{Trader:} is either a speculator or a noise trader, can submit a market order $d_t \in \{1, -1\}$ to buy or sell one unit of the asset with fundamental value $v$ (or do nothing, $d_t=0$)
 	\begin{itemize}
-		\item \structure{Speculator} (probability $\pi$): has private information.
+		\item \structure{Speculator} (probability $\pi$): has private information about $v$.
 		\begin{itemize}
-			\item Risk neutral, chooses his market order $d$ to maximize expected profits:
-			\begin{equation*}
-				d_t= \left\{
-				\begin{aligned}
-				1	& \text{ if buy}; \\
-				0	& \text{ if abstain}; \\
-				-1	& \text{ if sell}.
-				\end{aligned}
-				\right.
-			\end{equation*}
-			\item `Hides' behind noise traders
+			\item We will usually assume speculator simply knows $v$ (not much changes if he only has a noisy private signal about it).
+			\item Risk neutral, chooses his market order $d_t$ to maximize expected profit $d_t \cdot (v-p_t)$:
+			%\item `Hides' behind noise traders
 		\end{itemize}
-		\item \structure{Noise trader} (probability $1-\pi$): trades for exogenous reasons (hedging, liquidity).
+		\item \structure{Noise trader} (probability $1-\pi$): no pvt info about $v$; trades for other reasons (hedging, liquidity).
 		\begin{itemize}
-			\item Buys with fixed probability $\beta_B$; sells w.p. $\beta_S$; abstains w.p. $1-\beta_B - \beta_S$
-			\item \alert{Important}: we often assume that these traders behave in a certain way (behavior types) but they can be perfectly rational!
+			\item We assume he follows some fixed strategy: buys with probability $\beta_B$; sells w.p. $\beta_S$; abstains w.p. $1-\beta_B - \beta_S$
+			\item \alert{Important}: this assumption is for simplicity only; this strategy can be perfectly rational! We just don't model what generates it.
+			\\E.g., could say noise traders choose $d_t$ to maximize profit $\mathbb{E}[d_t(v+y_t-p_t)]$, where $y$ is $t$-trader's idiosyncratic valuation (due to risk, time, liquidity preferences...)
 		\end{itemize}
 	\end{itemize}
 \end{frame}
@@ -94,7 +91,8 @@
 		\item Willing to trade \alert{exactly one unit} (buy/sell/no trade) each period
 		\item Sets \alert{bid and ask prices} (for a single unit)
 		\item Quote price before seing trade (limit order)
-		\item Does not know whether trader is speculator or noise trader
+		\item Does not know whether trader is speculator or noise trader (but knows $\pi$)
+		\item Expected profit from trade is $\mathbb{E}[-d_t(v-p_t)]$
 		\item \structure{Competitive}: prices=expected asset value conditional on information
 		\item Trading is sequential: market orders served one by one
 	\end{itemize}
@@ -102,33 +100,18 @@
 
 
 \begin{frame}{GM85: Model (3)}
-\begin{itemize}
-	\item \textbf{Asset value}:
 	\begin{itemize}
-		\item Random asset value $v$ drawn from distribution
-		\item Assume $v$ is the fundamental (terminal) value
-		\item Speculators know $v$ perfectly (not much changes if they don't)
+		\item \textbf{Equilibrium}:
+		\begin{itemize}
+			\item An equilibrium consists of \structure{bid and ask prices} and \structure{speculator's strategy}
+			\item They must be such that: (i) prices are competitive (zero profit for MM), (ii) speculator best-responds to prices (maximizes expected gain).
+		\end{itemize}
 	\end{itemize}
-	\item \textbf{Equilibrium}:
-	\begin{itemize}
-		\item An equilibrium consists of \structure{bid and ask prices} and \structure{speculator's strategy}
-		\item They must be such that: (i) prices are competitive (zero profit for MM), (ii) speculator best-responds to prices (maximizes expected gain).
-	\end{itemize}
-\end{itemize}
-\end{frame}
-
-
-\begin{frame}{Some questions}
-\begin{itemize}%[<+->]
-	\item Why are there no uninformed speculators?
-	\item What is the role of the dealer? What functions does he fulfill?
-	\item Why is the dealer willing to trade with better-informed speculators?
-\end{itemize}
 \end{frame}
 
 
 \begin{frame}{Analysis. A: Market making}
-	\begin{itemize}[<+->]
+	\begin{itemize}
 		\item Dealer quotes bid and ask prices on \textit{one unit}
 		\begin{itemize}
 			\item Can revise prices between each incoming trade
@@ -139,7 +122,7 @@
 			\item Same for bid $b_t$; payoff: $\mathbb{E}[v|\Omega_{t-1}, Sell] - b_t$
 			\item (Note payoffs above rely on risk-neutrality)
 		\end{itemize}
-		\item Perfect competition among dealers implies zero expected profit $\Rightarrow$ \structure{ask price} and \structure{bid price} are
+		\item Perfect competition among dealers implies zero expected profit from either trade type $\Rightarrow$ \structure{ask price} and \structure{bid price} are
 		\begin{align*}
 			a_t & = \mathbb{E}[v|\Omega_{t-1}, Buy]; \\
 			b_t &= \mathbb{E}[v|\Omega_{t-1},  Sell].
@@ -150,48 +133,48 @@
 
 
 \begin{frame}{Analysis. B: Informed trading}
-\begin{itemize}
-	\item Speculator knows $v$. Given prices $a_t$ and $b_t$, the expected profits $\Pi$ are:
-	\begin{equation*}
-		\Pi(v,a_t,b_t,d_t)= \left\{
-		\begin{aligned}
-		&v - a_t  	&& \text{ if } d_t=1; \quad && (Buy)\\
-		&0			&&\text{ if } d_t=0; \quad && (Abstain)\\
-		&b_t - v 	&& \text{ if } d_t=-1. \quad && (Sell)
-		\end{aligned}
-		\right.
-	\end{equation*}
-	\pause
-	\item Speculator's best response to $(a_t,b_t)$ is: (assume $a_t \geq b_t$)
 	\begin{itemize}
-		\item Buy when $v > a_t$, i.e. when $v$ is large enough
-		\item Sell when $v<b_t$, i.e. when $v$ is small enough
-		\item Abstain if $a_t > v > b_t$
+		\item Speculator knows $v$. Given prices $a_t$ and $b_t$, the expected profits $\Pi$ are:
+		\begin{equation*}
+			\Pi(v,a_t,b_t,d_t)= \left\{
+			\begin{aligned}
+				&v - a_t  	&& \text{ if } d_t=1; \quad && (Buy)\\
+				&0			&&\text{ if } d_t=0; \quad && (Abstain)\\
+				&b_t - v 	&& \text{ if } d_t=-1. \quad && (Sell)
+			\end{aligned}
+			\right.
+		\end{equation*}
+		\pause
+		\item Speculator's best response to $(a_t,b_t)$ is: (assume $a_t \geq b_t$)
+		\begin{itemize}
+			\item Buy when $v > a_t$, i.e. when $v$ is large enough
+			\item Sell when $v<b_t$, i.e. when $v$ is small enough
+			\item Abstain if $a_t > v > b_t$
+		\end{itemize}
 	\end{itemize}
-\end{itemize}
 \end{frame}
 
 
 \begin{frame}{Analysis. C: Equilibrium definition}
-Dealer must make zero profit ({competition}), traders must trade optimally.
-This gives us two \structure{equilibrium conditions}.
-\begin{itemize}
-	\item Let $\sigma_t$ denote the speculator's strategy, where $\sigma_t(d_t|v)$ is the probability that the speculator places order $d_t$ if value is $v$
-	\item \alert{An equilibrium} consists of \structure{prices $(a_t,b_t)$} and \structure{strategy $\sigma_t$} such that:
-	\begin{enumerate}
-		\item the ask and bid prices  solve 
-		\begin{align*}
-		a_t & = \mathbb{E}[v| \Omega_{t-1}, Buy]; \\
-		b_t & = \mathbb{E}[v| \Omega_{t-1}, Sell],
-		\end{align*}
-		given $\sigma_t$
-		\item for each $v$, $\sigma_t$ solves 
-		\[
-		\max_{\sigma_t } \, \{\sigma_t(1|v) [v-a_t] + \sigma_t(-1|v)[b_t-v] \},
-		\]
-		given $(a_t,b_t)$.
-	\end{enumerate} 
-\end{itemize}
+	Dealer must make zero profit ({competition}), traders must trade optimally.
+	This gives us two \structure{equilibrium conditions}.
+	\begin{itemize}
+		\item Let $\sigma_t$ denote the speculator's strategy, where $\sigma_t(d_t|v)$ is the probability that the speculator places order $d_t$ if value is $v$
+		\item \alert{An equilibrium} consists of \structure{prices $(a_t,b_t)$} and \structure{strategy $\sigma_t$} such that:
+		\begin{enumerate}
+			\item the ask and bid prices  solve 
+			\begin{align*}
+				a_t & = \mathbb{E}[v| \Omega_{t-1}, Buy]; \\
+				b_t & = \mathbb{E}[v| \Omega_{t-1}, Sell],
+			\end{align*}
+			given $\sigma_t$
+			\item for each $v$, $\sigma_t$ solves 
+			\[
+			\max_{\sigma_t } \, \{\sigma_t(1|v) [v-a_t] + \sigma_t(-1|v)[b_t-v] \},
+			\]
+			given $(a_t,b_t)$.
+		\end{enumerate} 
+	\end{itemize}
 \end{frame}
 
 

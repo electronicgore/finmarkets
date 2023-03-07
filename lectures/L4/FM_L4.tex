@@ -16,7 +16,7 @@ Chapter 3.4-3.7 of FPR}
 \author{Egor Starkov}
 
 \date{K{\o}benhavns Unversitet \\
-	Spring 2022}
+	Spring 2023}
 
 
 \begin{document}
@@ -259,12 +259,12 @@ Chapter 3.4-3.7 of FPR}
 		\item \structure{Dealer} has some \alert{inventory} $z_t$ of the stock
 		\item Dealer is \alert{risk averse}
 		\begin{itemize}
-			\item For concreteness, assume mean-variance preferences:
+			\item For concreteness, assume mean-variance preferences over next-period wealth:
 			\[
 			U(w_{t+1})=\mathbb{E}[w_{t+1}] - \frac{\rho}{2} \mathbb{V}(w_{t+1}),
 			\]
 			where $\rho>0$ measures risk aversion
-			\item (equivalent to CARA expected utility preferences)
+			\item (equivalent to CARA expected utility preferences when returns are normal)
 		\end{itemize}
 	\end{itemize}
 \end{frame}
@@ -272,15 +272,14 @@ Chapter 3.4-3.7 of FPR}
 
 \begin{frame}{GM-IRE: Dealer's utility}
 	\begin{itemize}
-		\item As usual, let $\mu = \mathbb{E}[v]$.
-		\item Let also $\sigma^2 = \mathbb{V}(v)$.
+		\item As usual, let $\mu = \mathbb{E}[v]$, $\sigma^2 = \mathbb{V}(v)$, and remember that $z_t$ is the current inventory.
 		\item Dealer's utility is
 		\begin{align*}
-			\text{if no orders:}\quad & U(w_{t+1}|N) = \visible<handout:0>{ z_t \mu - \frac{\rho}{2}z_t^2 \sigma^2 }
+			\text{if no orders:}\quad & U(w_{t+1}|N) = \visible<handout:0|2->{ z_t \mu - \frac{\rho}{2}z_t^2 \sigma^2 }
 			\\
-			\text{if Buy order:}\quad & U(w_{t+1}|B) = \visible<handout:0>{ \left[(z_t-1)\mu + a_t\right] - \frac{\rho}{2}(z_t-1)^2 \sigma^2 }
+			\text{if Buy order:}\quad & U(w_{t+1}|B) = \visible<handout:0|2->{ \left[(z_t-1)\mu + a_t\right] - \frac{\rho}{2}(z_t-1)^2 \sigma^2 }
 			\\
-			\text{if Sell order:}\quad & U(w_{t+1}|S) = \visible<handout:0>{ \left[(z_t+1)\mu - b_t\right] - \frac{\rho}{2}(z_t+1)^2 \sigma^2 }
+			\text{if Sell order:}\quad & U(w_{t+1}|S) = \visible<handout:0|2->{ \left[(z_t+1)\mu - b_t\right] - \frac{\rho}{2}(z_t+1)^2 \sigma^2 }
 		\end{align*}
 	\end{itemize}
 \end{frame}
@@ -293,9 +292,9 @@ Chapter 3.4-3.7 of FPR}
 		\item (assume all competing dealers have same inventory $z_t$)
 	\end{itemize}
 		\begin{align*}
-			U(w_{t+1}|B)=U(w_{t+1}|N) \quad & \Rightarrow \quad a_t = \visible<handout:0>{ \mu -\frac{\rho}{2} \sigma^2 (2z_t - 1) }
+			U(w_{t+1}|B)=U(w_{t+1}|N) \quad & \Rightarrow \quad a_t = \visible<handout:0>{ \structure{\mu - \rho \sigma^2 z_t} \alert{+ \frac{\rho}{2} \sigma^2} }
 			\\
-			U(w_{t+1}|S)=U(w_{t+1}|N) \quad & \Rightarrow \quad b_t = \visible<handout:0>{ \mu -\frac{\rho}{2} \sigma^2 (2z_t + 1) }
+			U(w_{t+1}|S)=U(w_{t+1}|N) \quad & \Rightarrow \quad b_t = \visible<handout:0>{ \structure{\mu - \rho \sigma^2 z_t} \alert{- \frac{\rho}{2} \sigma^2} }
 		\end{align*}
 \end{frame}
 
@@ -313,7 +312,7 @@ Chapter 3.4-3.7 of FPR}
 			\item Depends on dealer's inventory $z_t$. Dealer demands risk premium for taking a position in the asset.
 			\item Effects depend on risk paratements $\rho$ and $\sigma^2$
 			\item To emphasize: prices here are \alert{not efficient}
-			\item Can you benefit from this as a trader? \pause \structure{Yes, in the sense that you can buy cheaper if you happen to look for a trade that reduces dealer risk exposure}
+			\item This inefficiency would in principle also motivate traders to submit the ``right'' orders -- arbitrage! (Not present in the model, since our traders are not strategic.)
 		\end{itemize}
 	\end{itemize}
 \end{frame}
@@ -488,36 +487,31 @@ Chapter 3.4-3.7 of FPR}
 
 
 
-\section{Price dynamics with illiquidity}
+%\section{Price dynamics with illiquidity}
+%
+%\begin{frame}{Price dynamics with illiquidity}
+%	\begin{itemize}
+%		\item In practice, incoming market orders may, in the short run, move the transaction price beyond the update in expected value
+%		\begin{itemize}
+%			\item This is not due to adverse selection
+%			\item The effect may die out rapidly if caused by trading commissions/fees
+%			\item The effect may die out more slowly if caused by risk-averse dealers who slowly bring back their positions toward a target holding $z^*$
+%		\end{itemize}
+%		\item More on the speed of price discovery in chapter 5 / next week
+%	\end{itemize}
+%\end{frame}
 
-\begin{frame}{Price dynamics with illiquidity}
-	\begin{itemize}
-		\item In practice, incoming market orders may, in the short run, move the transaction price beyond the update in expected value
-		\begin{itemize}
-			\item This is not due to adverse selection
-			\item The effect may die out rapidly if caused by trading commissions/fees
-			\item The effect may die out more slowly if caused by risk-averse dealers who slowly bring back their positions toward a target holding $z^*$
-		\end{itemize}
-		\item More on the speed of price discovery in chapter 5 / next week
-	\end{itemize}
-\end{frame}
 
-
-\begin{frame}{Price dynamics}
-	\includegraphics[width=0.85\linewidth]{pics/PriceDiscovery_Image}
-\end{frame}
+%\begin{frame}{Price dynamics}
+%	\includegraphics[width=0.85\linewidth]{pics/PriceDiscovery_Image}
+%\end{frame}
 
 
 \begin{frame}{Summary}
 	\begin{itemize}
-		\item The spread is not only driven by adverse selection: order costs and inventory risk have an effect as well
-		\item However, we would expect the dynamic effect of these three different mechanisms to be different
-		\begin{itemize}
-			\item Order costs: only instantaneous effect 
-			\item Inventory risk: medium-run effect, but should be zero in the long run
-			\item Adverse selection/information: long-run effect 
-		\end{itemize}
-		\item Next week we exploit this to estimate the importance of each mechanism
+		\item The spread is driven not only by adverse selection: order costs and inventory risk have an effect as well
+		\item How can we figure out which of these factors are more/less important? By their long-term effects! Will talk about that soon.
+		\item But before we go there, next time: what affects market \emph{depth}?
 	\end{itemize}
 \end{frame}
 
