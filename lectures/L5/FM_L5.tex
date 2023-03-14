@@ -17,7 +17,7 @@
 \author{Egor Starkov}
 
 \date{K{\o}benhavns Unversitet \\
-	Spring 2022}
+	Spring 2023}
 
 
 \begin{document}
@@ -30,17 +30,16 @@
 
 \frame[plain]{\titlepage}
 
-%\section{Revision and problems}
 
 \begin{frame}{Previously on...}
 	\begin{enumerate}
 		\item The spread is not only driven by adverse selection: order costs and inventory risk have an effect as well
-		\item However, we would expect the dynamic effect of these three different mechanisms to be different
-		\begin{itemize}
-			\item Order costs: only short-run effect 
-			\item Inventory risk: medium-run effect, but should be zero in the long run
-			\item Adverse selection: long-run effect 
-		\end{itemize}
+		%\item However, we would expect the dynamic effect of these three different mechanisms to be different
+		%\begin{itemize}
+		%	\item Order costs: only short-run effect 
+		%	\item Inventory risk: medium-run effect, but should be zero in the long run
+		%	\item Adverse selection: long-run effect 
+		%\end{itemize}
 	\end{enumerate}
 \end{frame}
 
@@ -70,8 +69,8 @@
 		\item Two comments on that, from the cases you read:
 		\item \textbf{Point 1}: risk-aversion in markets may stem from market risks, rather than inherent risk-aversion in preferences.
 		\begin{itemize}
-			\item \underline{Standard story}: $u(w)$ is concave in future wealth (e.g., CARA or CRRA prefs), and $w \sim z \cdot v + ...$ (position $\times$ asset value), hence $u(v)$ is concave in $v$, more so for higher $z$.
-			\item \underline{Alternative}: $u(w)$ is linear (risk-neutrality), but low $v$ creates higher risk of margin calls, which are costly $\Rightarrow$ $u(v)$ is again concave in $v$.
+			\item \underline{Standard story}: $u(w)$ is concave in future wealth (e.g., MeanVar/CARA/CRRA prefs), and $w \sim z \cdot v + ...$ (position $\times$ asset value), hence $u(v)$ is concave in $v$, more so for higher $z$.
+			\item \underline{Alternative}: $u(w)$ is linear (risk-neutrality), but low $v$ creates higher risk of margin calls, which are costly: $w \sim z \cdot \left( v - c \cdot \mathbb{I} \{ v < \underline{v}, z>0 \} \right) + ...$ $\Rightarrow$ $u(v)$ is again concave in $v$.
 			\item Either story leads to dealer's inventory affecting their willingness to buy/sell
 		\end{itemize}
 	\end{itemize}
@@ -91,14 +90,6 @@
 \end{frame}
 
 
-%\begin{frame}{Exercises from last time}
-%	\begin{itemize}
-%		\item In Absalon, I have attached an article from the Economist, December 14 2013, on the Volcker rule. Discuss the claim that \emph{``In practice banks will probably respond by making markets for a narrow range of securities that already trade frequently, and thus might reasonably be expected to do so in the future. Meanwhile, the securities that now change hands less frequently are likely to be shunned, making them even harder to trade.''}
-%		\item Two other Bloomberg articles are on Einar Aas and his exclusion from Nasdaq. Use this case to discuss how risk aversion can stem from regulation.
-%	\end{itemize}
-%\end{frame}
-
-
 \begin{frame}{Today}
 	\begin{itemize}
 		\item \textbf{Trade size}
@@ -108,16 +99,6 @@
 			\item (Spoiler: mostly the same factors as with liquidity)
 			\item Will look at Kyle (1985) model -- an alternative to GM that allows flexible trade size
 		\end{itemize}
-		%\item \textbf{Empirical estimation}
-		%\begin{itemize}
-		%	\item Before we looked at how to estimate the spread, but without a theory for what drives it
-		%	\item Thus: talk about estimating drivers of the spread
-		%	\item Furthermore:
-		%	\begin{itemize}
-		%		\item Look at estimating price impact/depth
-		%		\item Look at estimating proportion of informed trading
-		%	\end{itemize}
-		%\end{itemize}
 	\end{itemize}
 \end{frame}
 
@@ -158,17 +139,18 @@
 
 \begin{frame}{Setup: Broad strokes}
 	\begin{itemize}
-		\item \structure{Speculator}: has private information
+		\item A \alert{call auction}; orders come from a ``large'' speculator and a population of noise traders; market cleared by a dealer.
+		\item \structure{Speculator/informed trader}: has private information
 		\begin{itemize}
 			\item Trades using a `large' speculative market order
 			\item Strategically moderates order size to reduce price impact
 			\item `Hides' behind noise traders who submit a random size order
 		\end{itemize}
-		\item \structure{Market makers/dealers (MM)}
+		\item Representative \structure{market maker (MM)/dealer}
 		\begin{itemize}
 			\item Risk neutral and competitive (zero profits)
-			\item Observes aggregate order flow, but cannot distinguish speculative orders from noise orders
-			\item In Kyle model orders are cleared by the MM in \textit{batches}, as opposed to one-by-one in Glosten \& Milgrom
+			\item Clears orders in \textit{batches} (as opposed to one-by-one in Glosten \& Milgrom)
+			\item Cannot distinguish speculative orders from noise orders in a batch
 		\end{itemize}
 	\end{itemize}
 \end{frame}
@@ -181,11 +163,12 @@
 	\begin{itemize}
 		\item Places market order $x$
 		\item If the order clears at price $p$: gain is $x(v-p)$
-		\item Does \alert{not know} $p$ when choosing $x$: maximizes expected gain (risk neutral) given $\mathbb{E}[p|x]$
+		\item Does \alert{not know} $p$ when choosing $x$: maximizes \emph{expected} gain (risk neutral) given $\mathbb{E}[p|x]$
 	\end{itemize}
 	\item \structure{Noise trader}: Has random demand $u \sim \mathcal{N}(0, \sigma^2_u)$
 	\item \structure{MM}: Submits a supply schedule of $(q,p)$ combinations:
 	\begin{itemize}
+		\item ``If the order imbalance is $q=x+u$, I will absorb it at price $p$''
 		\item Observes aggregate flow $q=x+u$, but not $x$ and $u$
 		\item Competitive (zero profit): $p = \mathbb{E}[v|q]$
 	\end{itemize}
@@ -214,21 +197,23 @@
 
 \begin{frame}{Linear equilibrium: outline}
 \begin{itemize}
+	\item The equilibrium is described by the speculator's strategy $x(v)$ and the dealer's pricing schedule $p(q)$.
+	\pause
 	\item Look for equilibrium where speculator's strategy is linear: \alert{$x=\beta(v-\mu)$}
 	\begin{itemize}
-		\item Note: $\beta$ is endogenously determined by the equilibrium
+		\item Note: $\beta$ is endogenously determined by the equilibrium, we'll derive it
 		\item $\beta>0$ measures speculator \textit{aggression}
 	\end{itemize}
-	\item MM knows the speculator's strategy:
+	\item MM knows the speculator's strategy (in eqm):
 	\begin{itemize}
 		\item Observes $q=x+u=\beta(v-\mu)+u$, and wants to \alert{estimate $v$}
 		\item Intuitively, \alert{$\mathbb{E}[v|q] = \mu + \lambda  q$}, where $\lambda $ is the regression coefficient $\mathbb{C}(v,q)/\mathbb{V}(q)$, and recall that $\mu=\mathbb{E}[v]$. (This is derived formally in the following slides.)
 	\end{itemize}
 	\item Since $p=\mathbb{E}[v|q]$, we can use the conditional expectation to get a price impact equation 
 	\[
-	p-\mu=\lambda q.
+	p=\mu+\lambda q.
 	\]
-	As before, $1/\lambda$ is a measure of market depth
+	Here $1/\lambda$ would be a measure of market depth
 \end{itemize}
 \end{frame}
 
@@ -260,7 +245,7 @@
 		\setcounter{enumi}{1}
 		\item Use Bayes' rule to derive the conditional density: $f(v|q) = f(v) \frac{f(q|v)}{f(q)} $.
 		\\
-		(remember that pdf of $x \sim \mathcal{N}(\mu,\sigma^2)$ is \structure{$f(x)=\frac{1}{\sqrt{2 \pi \sigma^2}} e^{-\frac{(x-\mu)^2}{2 \sigma^2}}$})
+		(reminder: if $y \sim \mathcal{N}(\mu,\sigma^2)$ then its pdf is \structure{$f(y)=\frac{1}{\sqrt{2 \pi \sigma^2}} e^{-\frac{(y-\mu)^2}{2 \sigma^2}}$})
 		\begin{align*}
 			f(v|q) = f(v) \frac{f(q|v)}{f(q)} 
 			&= \sqrt{\frac{2\pi (\beta^2 \sigma^2_v+\sigma^2_u)}{2 \pi \sigma^2_v \cdot 2 \pi \sigma^2_u}} e^{- \frac{(v-\mu)^2}{2\sigma^2_v} - \frac{(q-\beta(v-\mu))^2}{2\sigma^2_u } + \frac{q^2}{2(\beta^2 \sigma^2_v + \sigma^2_u)}}
@@ -488,8 +473,9 @@ So really, all the same stuff as in GM with inventory risk.
 			\item Market maker $k$ supplies $y^k=\phi(p-\mu)$
 			\item Market clears at price $p$ with $\sum y^k = q$
 			\item Strategic market maker takes into account effect of orders on profits
-			\item Now: $p=\mu+\lambda q$ where $\lambda = \alpha (K-1)/(K-2) > \alpha$. Why? 
-			\pause \visible<handout:0>{\structure{Increasing price sensitivity reduces $k$'s amount traded, but raises market price, the former outweighs.}}
+			\item Now: $p=\mu+\lambda q$ where $\lambda = \alpha (K-1)/(K-2) > \alpha$. 
+			%Why? 
+			%\pause \visible<handout:0>{\structure{Increasing price sensitivity reduces $k$'s amount traded, but raises market price, the former outweighs.}}
 		\end{itemize}
 		\pause
 		%\item \textbf{Risk averse market makers}
@@ -504,7 +490,7 @@ So really, all the same stuff as in GM with inventory risk.
 		\begin{itemize}
 			\item Trivial in GM. Very difficult here, both technically and conceptually.
 			\item Don't know how many trades there are, don't know the total volume (not $q$ -- some noise traders' orders could've cancelled each other out)
-			\item Taking costs as a function of order imbalance $|q|$ (even constant) makes the normal model intractable (no linear trading strategy, no linear pricing)
+			\item Even taking costs as a linear function of order imbalance $|q|$ makes things difficult
 		\end{itemize}
 	\end{enumerate}
 \end{frame}

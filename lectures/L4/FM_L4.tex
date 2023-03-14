@@ -254,16 +254,17 @@ Chapter 3.4-3.7 of FPR}
 
 \begin{frame}{Glosten-Milgrom model: Inventory risk edition}
 	\begin{itemize}
-		\item Suppose for simplicity there are \structure{no speculators} ($\pi=0$)
+		\item Suppose for simplicity there are \structure{no speculators} ($\pi=0$)...
+		\item ...but there are public news about asset value: $\mu_{t+1} = \mu_t + \epsilon_t$  (where $\mu_t = \mathbb{E}[v|\Omega_t]$)
 		\item Noise traders behave as usual
-		\item \structure{Dealer} has some \alert{inventory} $z_t$ of the stock
+		\item \structure{Dealer} has some \alert{inventory} $z_t$ of the stock and $c_t$ of cash
 		\item Dealer is \alert{risk averse}
 		\begin{itemize}
 			\item For concreteness, assume mean-variance preferences over next-period wealth:
 			\[
 			U(w_{t+1})=\mathbb{E}[w_{t+1}] - \frac{\rho}{2} \mathbb{V}(w_{t+1}),
 			\]
-			where $\rho>0$ measures risk aversion
+			where $w_t = z_t \mu_t + c_t$ and $\rho>0$ measures risk aversion
 			\item (equivalent to CARA expected utility preferences when returns are normal)
 		\end{itemize}
 	\end{itemize}
@@ -272,14 +273,14 @@ Chapter 3.4-3.7 of FPR}
 
 \begin{frame}{GM-IRE: Dealer's utility}
 	\begin{itemize}
-		\item As usual, let $\mu = \mathbb{E}[v]$, $\sigma^2 = \mathbb{V}(v)$, and remember that $z_t$ is the current inventory.
+		\item As usual, let $\mathbb{E}[\epsilon_t] = 0$, $\mathbb{V}(\epsilon_t) = \sigma^2$, and remember that $z_t$ is the current inventory.
 		\item Dealer's utility is
 		\begin{align*}
-			\text{if no orders:}\quad & U(w_{t+1}|N) = \visible<handout:0|2->{ z_t \mu - \frac{\rho}{2}z_t^2 \sigma^2 }
+			\text{if no orders:}\quad & U(w_{t+1}|N) = \visible<handout:0|2->{ z_t \mu_t + c_t - \frac{\rho}{2}z_t^2 \sigma^2 }
 			\\
-			\text{if Buy order:}\quad & U(w_{t+1}|B) = \visible<handout:0|2->{ \left[(z_t-1)\mu + a_t\right] - \frac{\rho}{2}(z_t-1)^2 \sigma^2 }
+			\text{if Buy order:}\quad & U(w_{t+1}|B) = \visible<handout:0|2->{ \left[(z_t-1)\mu_t + c_t + a_t\right] - \frac{\rho}{2}(z_t-1)^2 \sigma^2 }
 			\\
-			\text{if Sell order:}\quad & U(w_{t+1}|S) = \visible<handout:0|2->{ \left[(z_t+1)\mu - b_t\right] - \frac{\rho}{2}(z_t+1)^2 \sigma^2 }
+			\text{if Sell order:}\quad & U(w_{t+1}|S) = \visible<handout:0|2->{ \left[(z_t+1)\mu_t + c_t - b_t\right] - \frac{\rho}{2}(z_t+1)^2 \sigma^2 }
 		\end{align*}
 	\end{itemize}
 \end{frame}
@@ -292,9 +293,9 @@ Chapter 3.4-3.7 of FPR}
 		\item (assume all competing dealers have same inventory $z_t$)
 	\end{itemize}
 		\begin{align*}
-			U(w_{t+1}|B)=U(w_{t+1}|N) \quad & \Rightarrow \quad a_t = \visible<handout:0>{ \structure{\mu - \rho \sigma^2 z_t} \alert{+ \frac{\rho}{2} \sigma^2} }
+			U(w_{t+1}|B)=U(w_{t+1}|N) \quad & \Rightarrow \quad a_t = \visible<handout:0>{ \structure{\mu_t - \rho \sigma^2 z_t} \alert{+ \frac{\rho}{2} \sigma^2} }
 			\\
-			U(w_{t+1}|S)=U(w_{t+1}|N) \quad & \Rightarrow \quad b_t = \visible<handout:0>{ \structure{\mu - \rho \sigma^2 z_t} \alert{- \frac{\rho}{2} \sigma^2} }
+			U(w_{t+1}|S)=U(w_{t+1}|N) \quad & \Rightarrow \quad b_t = \visible<handout:0>{ \structure{\mu_t - \rho \sigma^2 z_t} \alert{- \frac{\rho}{2} \sigma^2} }
 		\end{align*}
 \end{frame}
 
@@ -307,7 +308,7 @@ Chapter 3.4-3.7 of FPR}
 			\item Increasing in risk-aversion coeff $\rho$ and asset value volatility $\sigma^2$
 		\end{itemize}
 		\pause
-		\item \alert{Midquote} is $m_t = \mu - \rho \sigma^2 z_t$
+		\item \alert{Midquote} is $m_t = \mu_t - \rho \sigma^2 z_t$
 		\begin{itemize}
 			\item Depends on dealer's inventory $z_t$. Dealer demands risk premium for taking a position in the asset.
 			\item Effects depend on risk paratements $\rho$ and $\sigma^2$

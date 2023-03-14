@@ -9,7 +9,7 @@
 
 
 
-\title{Financial Markets Microstructure \\ Lecture 8}
+\title{Financial Markets Microstructure \\ Lecture 9}
 
 \subtitle{Empirics of illiquidity\\
 	Chapter 5 of FPR}
@@ -17,7 +17,7 @@
 \author{Egor Starkov}
 
 \date{K{\o}benhavns Unversitet \\
-	Spring 2022}
+	Spring 2023}
 
 
 \begin{document}
@@ -53,11 +53,15 @@
 	\begin{itemize}
 		\item Earlier we looked at how to estimate the spread, but without a theory for what drives it
 		\item Today: talk about estimating drivers of the spread
-		\item Furthermore:
 		\begin{itemize}
-			\item Look at estimating price impact/depth
-			\item Look at estimating proportion of informed trading
+			\item Knowing what drives illiquidity helps understand how to eliminate (or exploit) it
 		\end{itemize}
+		%\item Furthermore:
+		%\begin{itemize}
+		%	\item Look at estimating price impact/depth
+		%	\item Look at estimating the amount of adverse selection in the market (proportion of informed trading)
+		%\end{itemize}
+		\item Note: most estimates mentioned today are pretty old, and I could not find a lot of more recent ones -- a fine thesis topic!
 	\end{itemize}
 \end{frame}
 
@@ -92,7 +96,7 @@
 		\begin{itemize}
 			\item $\lambda$: price impact related to information
 			\item $\beta$: price impact related to MM risk aversion
-			\item $\gamma$: order-processing cost
+			\item $\gamma$: order-processing cost (including dealer profits!)
 		\end{itemize}
 		\item Data:
 		\begin{itemize}
@@ -140,11 +144,11 @@
 
 \begin{frame}{Issues}
 	\begin{itemize}
-		\item Apart from the usual concerns with old empirical papers...
+		\item Apart from a few ad hoc concerns...
 		\begin{itemize}
 			\item not much data (20 stocks, 800 transactions each)
+			\item poor dataset (neither $d_t$, nor quotes are observed; prices $p_t$ were rounded to $\$1/8$ back then)
 			\item questionable specification (why have both $\lambda_0$ and $\lambda_1$?)
-			\item questionable estimation procedures
 		\end{itemize}
 		\item ...there is the issue of ignoring inventory costs.
 		\item In the short run, the effect of MM risk aversion would be similar
@@ -165,14 +169,14 @@
 		\begin{equation}\tag{5.17}
 		q_t = \phi q_{t-1} + \eta_t
 		\end{equation}
-		\item Then (5.14) is modified to \hyperlink{derivation}{\beamerbutton{Derivation}}
+		\item Then (5.14) becomes \hyperlink{derivation}{\beamerbutton{Derivation}}
 		\begin{equation} \tag{5.21}
 		\Delta p_t = \gamma \Delta d_t + \lambda (q_t - \phi q_{t-1}) + \beta q_t + \epsilon_t
 		\end{equation}
-		\item They estimate the model for 20 major NYSE stocks: 
+		\item They estimate the model for 20 major NYSE stocks (mostly ignoring volumes)
 		\begin{align*}
 			\phi &= -0.74	& \lambda &= 9.59\% S
-			\\
+			&&&
 			\beta &= 28.65\% S	& \gamma &= 61.76\% S
 		\end{align*}
 		%NOTE: negative phi makes sense with inventory costs
@@ -183,7 +187,7 @@
 
 \begin{frame}{Including inventory costs (2)}
 	\begin{itemize}
-		\item \textbf{\citet*{madhavan_why_1997}} find that $\lambda$ is higher in the morning, and $\gamma$ higher in the afternoon
+		\item \textbf{\citet*{madhavan_why_1997}} find that $\lambda$ is higher in the morning, and $\beta+\gamma$ higher in the afternoon
 		% more adverse selection in the morning; higher bargaining power for dealers at closing (traders want to unwind positions)
 		\begin{itemize}
 			\item Morning trading reveals all the information accumulated during off-market hours. Evening trading driven by traders' desire to close open positions
