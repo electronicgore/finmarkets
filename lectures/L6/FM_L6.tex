@@ -83,6 +83,7 @@
 
 \begin{frame}<handout:0>{Introduction}
 	\begin{itemize}
+		\item Note: this and the next two lectures draw a bit from the \cite{parlour_limit_2008} survey in addition to the textbook.
 		\item There's a reason that first models of financial markets (GM and Kyle) explored dealer markets...
 	\end{itemize}
 \end{frame}
@@ -125,7 +126,7 @@
 	\begin{enumerate}
 		\item Traders have a choice between \structure{demanding and supplying liquidity} (market vs limit orders) -- so LO should be no worse than MO for trading
 		\item LO give better prices but suffer from execution risk
-		\item Conditional on electing to trade via LO, traders face a \structure{different informational environment} than the dealer
+		\item Conditional on electing to trade via LO, traders face a \structure{different informational environment} from the dealer (dealer knows more about what's happening in a market)
 		\item Also there's discriminatory pricing: LO execute each at their posted price, while a dealer can clear everything at uniform price.
 	\end{enumerate}
 	We look at the two latter issues today; two former next time.
@@ -181,154 +182,90 @@
 			\item How are prices different from dealer markets?
 			\item How is LOB depth determined?
 		\end{itemize}
+		\item Note: I changed the notation relative to the book to stay closer to what we had before
 	\end{itemize}
 \end{frame}
 
 
-\begin{frame}{Continuous model: Limit order book}
+\begin{frame}{Continuous model: Limit order book (asset supply)}
 \begin{itemize}
-	\item \textbf{Single asset}: Unknown value $v$ with cumulative distribution  $G(v)$
-	\item \textbf{Limit order book} (composed by competitive limit traders): 
+	\item \textbf{Single asset}: Unknown value $v$ with cdf $G(v)$
+	\item \textbf{Limit order book}: 
 	\begin{itemize}
 		\item Focus on the ask side of the market (limit orders to sell vs market order to buy)
-		\item Prices vary with volume $q$. Posted limit orders: $P'(q)$
-		\item A market buy order of size $q$ will `walk up the book' until the final bit of it is cleared at price $P'(q)$
-		\item The entire payment for buying volume $q$ is then
-		\[
-		P(q) = \int_0^q P'(\tilde{q}) \, d\tilde{q}.
-		\]
-		\item The average price is 
-		\[
-		p(q) = \frac{P(q)}{q}.
-		\]
+		\item Assume a continuum of competitive limit traders, each submits an infinitesimally small order
+		\item Let $p(q) \equiv$ price of $q$th unit (increasing in $q$ due to price priority)
+		\item A market buy order of size $q$ will `walk up the book' until the final bit of it is cleared at price $p(q)$
+		\item The entire payment for buying volume $q$ is then $P(q) \equiv \int_0^q p(\tilde{q}) \, d\tilde{q}$.
+		\item The average price per unit is $\bar{p}(q) \equiv \frac{P(q)}{q}$  -- the (inverse) \structure{supply curve}
 	\end{itemize}
 	\pause
-	\item Sanity check: in the Kyle model, did the dealer announce \alert{marginal price $P'(q)$} or \structure{average price $p(q)$} schedule?
+	\item Bliz quiz: in the Kyle model, did the dealer announce \alert{marginal price $p(q)$} or \structure{average price $\bar{p}(q)$} schedule?
 \end{itemize}
 \end{frame}
 
 
-\begin{frame}{Continuous model: Marginal rate of substitution}
-	\begin{columns}
-		\begin{column}{0.7\linewidth}
-			\begin{itemize}
-				\item \textbf{Single market trader} $i$ per period (as in GM/Kyle)
-				\item $\theta_i(q)$ is trader $i$'s marginal rate of substitution (marginal valuation for $q$th unit of the asset)
-				\item If an incoming trader $i$ chooses a market buy order $q$ and parts with cash $P(q)$, we should have: \[\theta_i(q) = P'(q).\]
-				\item Assume $\mathbb{E}[v|\theta_i(q) = \theta]$ is strictly increasing in $\theta$
-				\begin{itemize}
-					\item If incoming traders are to some extent informed, it's reasonable to suppose that for a given $q$, higher $\theta_i(q)$ indicates higher $v$
-					\item In the Kyle model we derived it, here we'll just assume that this holds.
-				\end{itemize}
-			\end{itemize}
-		\end{column}
-		\begin{column}{0.3\linewidth}
-			\includegraphics[scale=0.2]{pics/glosten1}
-			\vspace{3em}
-		\end{column}
-	\end{columns}
-\end{frame}
-
-
-\begin{frame}{Continuous model: Market makers}
-	\begin{itemize}	
-		\item \textbf{Limit traders} are competitive, post limit orders
-		\item Limit price $P'(q)$ quoted for the $q$-th unit is relevant only if the trader places a market order of $q$ or larger, i.e. $\theta_i(q) \geq P'(q)$
-		\item Hence, if supply is competitive then
-		\[
-		\structure{P'(q) = \mathbb{E}[v|\theta_i(q) \geq P'(q)]}
-		\]
-		%\item Notice that all we know if limit price $P'(q)$ is `hit' is that the trader's marginal valuation was \textit{at least} $P'(q)$
+\begin{frame}{Continuous model: Market orders (asset demand)}
+	\begin{itemize}
+		\item \textbf{Single market[-order] trader} per period (as in GM/Kyle)
+		\item Abstract view: assume some total utility $U(x|v)$ from buying $x$ units, increasing in $v$, increasing and concave in $x$, and $\frac{\partial^2 U(x|v)}{\partial x \partial v} > 0$.
+		\item Trader then \alert{demands quantity $x$} that solves
+		\begin{align*}
+			\max_{x} \left\{ U(x|v) - P(x) \right\}
+			&&
+			\Rightarrow
+			&&
+			\structure{U'(x|v) = P'(x)} = p(x)
+		\end{align*}\vspace{-0.6cm}
+		\begin{itemize}
+			\item If trader was perfectly informed, then $U(x|v) = v \cdot x$
+			\item Assume again some superposition of informed and uninformed traders, $U(x|v)$ is average over types
+		\end{itemize}
+		\item Abusing notation, $U'(x|v)$ is average trader's marginal valuation for $x$th unit of the asset
+		\item The cross-derivative implies that $\mathbb{E}[v|U'(x|v) = p]$ for a given $x$ is strictly increasing in $p$
+		\begin{itemize}
+			\item the fact that the trader stopped at a higher marginal price $p$ suggests higher $v$
+		\end{itemize}
 	\end{itemize}
 \end{frame}
 
 
-\begin{frame}{Continuous model: Equilibrium}
-	The assumed correlation of $v$ and $q$ implies that
-	\begin{align}
-	P'(q) = \mathbb{E}[v|\theta_i(q) \geq P'(q)] > \mathbb{E}[v|\theta_i(q) = P'(q)]
-	\end{align}
-	\pause
-	\begin{block}{Implications}
-		\begin{itemize}
-			\item Thus, market makers (ex post) profit on the sale of the last units
-			\item At small realized trades, $q \simeq 0$, MM always profit
-			\item Even with continuous prices, there is a non-zero \structure{inside spread} between ask and bid prices as the order size goes to zero (contrast with Kyle)
-			% The reason is that in the limit order market, liquidity suppliers cannot make their quotes contingent on the total size of market orders. As a result, the limit orders at the top of the book are more exposed to adverse selection.
-			\item After a trade of size $q$, new expected asset value is below $P'(q)$. \pause 
-			
-			\structure{New expected value = $\mathbb{E}[v|\theta_i(q)=P'(q)]<\mathbb{E}[v|\theta_i(q) \ge P'(q)]=P'(q)$}. Often new limit orders will be posted below $P'(q)$ -- price reversal.
-		\end{itemize}
-	\end{block}
+\begin{frame}{Continuous model: Market makers}
+\begin{itemize}	
+	\item \textbf{Limit[-order] traders} are competitive, post limit orders
+	\begin{itemize}
+		\item Think of a continuum of traders, each posts a limit order for one (infinitesimally small) unit of the asset
+	\end{itemize}
+	%\item Equilibrium/market-clearing condition: $x=q$ (demand=supply)
+	\item Limit price $p(q)$ quoted for the $q$-th unit is relevant (=is traded against) iff $$x \geq q \iff U'(x) \geq p(q)$$
+	\item Hence, if supply is competitive then in equilibrium,
+	\[
+	\structure{p(q) = \mathbb{E}[v| x \geq q]}
+	\]
+	(as before - price of trade equals the expected value of the traded asset. The conditioning event is the interesting part)
+\end{itemize}
 \end{frame}
 
 
-%\section{Static Analysis: Glosten Model (discrete ticks)}
-%
-%\begin{frame}{Intermission}
-%	\begin{itemize}
-%		\item The general model above outlines some basic differences between LOB and dealer markets
-%		\begin{itemize}
-%			\item Adverse selection affects prices differently
-%		\end{itemize}
-%		\item It neglects the \structure{discreteness of prices}:
-%		\begin{itemize}
-%			\item Often prices are discrete and must lie at a tick --  tick size is the increment b/w prices
-%			\item E.g. at NYSE it was \$1/8 for stocks with prices over one dollar until June 1997, when, under regulatory pressure, it was reduced to \$1/16 and finally, in 2000, to one cent.
-%			\item Prioritized limit orders become profitable when there are ticks (since no `marginal undercutting')
-%		\end{itemize}
-%	\end{itemize}
-%\end{frame}
-%
-%
-%\begin{frame}{Discrete model: Setup}
-%	\begin{itemize}
-%		\item \textbf{Asset}: Continue with single asset with value $v \sim G$
-%		\item \textbf{Market order $q$} correlated with $v$
-%		\begin{itemize}
-%			\item Unconditional c.d.f. $F(q)$
-%			\item Again, focus on the ask side of the book, $q>0$
-%		\end{itemize}
-%		\item \textbf{Discrete price grid}
-%		\begin{itemize}
-%			\item $A_1$ is lowest price tick above $\mu$
-%			\item $A_k-A_{k-1}>0$ is the tick size
-%		\end{itemize}
-%		\item \textbf{Limit orders}
-%		\begin{itemize}
-%			\item \textit{Time prioritized}: first posted, first executed
-%			\item \textit{Display cost}: $C$ per unit (paid regardless of whether order executes)
-%			% This display cost is here for the model to work even without adverse selection
-%			\item Let $y_k$ denote the amount supplied at price $A_k$
-%			\item Let $Y_k=\sum_{j=1}^k y_j$ be cumulative volume (depth) supplied at or below $A_k$
-%			% Y_k(A_k) is the inverse of P(q)
-%		\end{itemize}
-%	\end{itemize}
-%\end{frame}
-%
-%
-%\begin{frame}{Discrete model: Equilibrium}
-%	%Let $\mathbb{E}[v|q \geq Y_k]=\mathbb{E}[v|\theta_i(q) \geq P'(q)]$.
-%	Let $\mathbb{E}[v|q \geq Y_k]=\mathbb{E}[v|\theta_i(q) \geq A_k]$.
-%	\begin{itemize}
-%		\item \textbf{Competition}: Limit orders are supplied at each tick until the \structure{last order earns zero profit}
-%		\item \textbf{Zero-profit condition}:
-%		\[
-%		\mathbb{P}(q \geq Y_k)[A_k-\mathbb{E}[v|q \geq Y_k]] - C = 0,
-%		\]
-%		solved by
-%		\begin{block}{}
-%			\[
-%			A_k = \underbrace{\mathbb{E}[v| q \geq Y_k]}_{\text{\alert{Adverse selection}}} + \underbrace{\frac{C}{\mathbb{P}(q\geq Y_k)}}_{\text{\alert{Execution risk}}}
-%			\]
-%		\end{block}
-%		(\textbf{NOTE}: \structure{we actually need to solve for $Y_k$ given $A_k$})
-%		%\item \textbf{Adverse selection}: Captured by  $\mathbb{E}[v| q \geq Y_k] $
-%		%\begin{itemize}
-%		%	\item Unlike most of what we had before, this model works even without adverse selection
-%		%\end{itemize}
-%	\end{itemize}
-%\end{frame}
+\begin{frame}{Continuous model: Equilibrium}
+The assumed correlation of $v$ and $x$ implies that
+\begin{align}
+	p(q) = \mathbb{E}[v|x \geq q] > \mathbb{E}[v|x = q]
+\end{align}
+(to compare, in the Kyle model we had $\bar{p}(q) = \mathbb{E}[v|x = q]$)
+\pause
+\begin{block}{Implications}
+	\begin{itemize}
+		\item Thus, market makers (ex post) profit on the sale of the last units
+		\item At small realized trades, $q \simeq 0$, MM always profit
+		\item Even with continuous prices, there is a non-zero \structure{inside spread} between ask and bid prices as the order size goes to zero (contrast with Kyle)
+		% The reason is that in the limit order market, liquidity suppliers cannot make their quotes contingent on the total size of market orders. As a result, the limit orders at the top of the book are more exposed to adverse selection.
+		\item After a trade of size $q$, new expected asset value is below $p(q)$. \pause 
+		
+		\structure{New expected value = $\mathbb{E}[v|x=q]<\mathbb{E}[v|x \geq q]=p(q)$}. Often new limit orders will be posted below $p(q)$ -- price reversal.
+	\end{itemize}
+\end{block}
+\end{frame}
 
 
 \begin{frame}{Conclusion}
@@ -340,7 +277,7 @@
 			\item so act differently
 			\item which leads to different market outcomes
 		\end{itemize}
-		\item With discrete ticks and time priority, even competitive limit traders can get positive profit
+		\item Competitive limit traders may get positive or negative profit ex post, depending on the order they trade against, but get zero profit on average.
 	\end{itemize}
 \end{frame}
 
@@ -349,7 +286,7 @@
 	\begin{itemize}
 		\item What happens if we restrict prices to discrete ticks?
 		\item Many aspects of market design (tick size, priority rules) are all double-edged swords, swing them carefully
-		%\item Dynamic analysis: traders can choose between limit and market orders
+		\item (maybe) Dynamic analysis: traders can choose between limit and market orders
 	\end{itemize}
 \end{frame}
 
