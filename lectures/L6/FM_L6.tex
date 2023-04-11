@@ -83,7 +83,11 @@
 
 \begin{frame}<handout:0>{Introduction}
 	\begin{itemize}
-		\item Note: this and the next two lectures draw a bit from the \cite{parlour_limit_2008} survey in addition to the textbook.
+		\item \textcolor<2>{gray}{Note: this and the next two lectures draw a bit from the \cite{parlour_limit_2008} survey in addition to the textbook.}
+		\item \textcolor<2>{gray}{Note: the notation will also be a bit different from the book to stay closer to what we used before}
+		
+		\pause \bigskip 
+		
 		\item There's a reason that first models of financial markets (GM and Kyle) explored dealer markets...
 	\end{itemize}
 \end{frame}
@@ -182,7 +186,6 @@
 			\item How are prices different from dealer markets?
 			\item How is LOB depth determined?
 		\end{itemize}
-		\item Note: I changed the notation relative to the book to stay closer to what we had before
 	\end{itemize}
 \end{frame}
 
@@ -221,7 +224,7 @@
 			\item If trader was perfectly informed, then $U(x|v) = v \cdot x$
 			\item Assume again some superposition of informed and uninformed traders, $U(x|v)$ is average over types
 		\end{itemize}
-		\item Abusing notation, $U'(x|v)$ is average trader's marginal valuation for $x$th unit of the asset
+		\item Abusing notation, $U'(x|v)$ is average/representative trader's marginal valuation for $x$th unit of the asset
 		\item The cross-derivative implies that $\mathbb{E}[v|U'(x|v) = p]$ for a given $x$ is strictly increasing in $p$
 		\begin{itemize}
 			\item the fact that the trader stopped at a higher marginal price $p$ suggests higher $v$
@@ -252,7 +255,9 @@ The assumed correlation of $v$ and $x$ implies that
 \begin{align}
 	p(q) = \mathbb{E}[v|x \geq q] > \mathbb{E}[v|x = q]
 \end{align}
-(to compare, in the Kyle model we had $\bar{p}(q) = \mathbb{E}[v|x = q]$)
+(to compare, in the Kyle model we had \only<1>{\alert{what pricing schedule?}}
+\pause 
+$\bar{p}(q) = \mathbb{E}[v|x = q]$)
 \pause
 \begin{block}{Implications}
 	\begin{itemize}
