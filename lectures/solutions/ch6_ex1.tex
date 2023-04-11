@@ -27,37 +27,40 @@
 	This exercise considers a two-period model of an LOB.
 	\begin{itemize}
 		\item \textbf{Security}: Value $v \sim g(v)=\frac{1}{2\sigma} e^{-\frac{|v-\mu|}{\sigma}}$
+		\begin{itemize}
+			\item Useful fact: $\mathbb{E}[v|v \ge z]=z+\sigma$.
+		\end{itemize}
 		\item \textbf{Trader}: 
 		\begin{itemize}
-			\item Type \textcolor{blue}{$I$}. With prob. $\pi$, knows $v$ and maximizes exp. utility
-			\item Type \textcolor{blue}{$N$}. With prob. $1-\pi$, buys/sells (with equal prob.) $x$ shares, with $x \sim f(x)=\frac{1}{2}\theta e^{-\theta |x|}$ 
+			\item Type \textcolor{blue}{$I$}. With prob. $\pi_0$, knows $v$ and maximizes exp. utility
+			\item Type \textcolor{blue}{$N$}. With prob. $1-\pi_0$, buys/sells (with equal prob.) $x_N$ shares, with $x_N \sim f(x_N)=\frac{1}{2}\theta e^{-\theta |x_N|}$ 
 		\end{itemize}
-		\item \textbf{Tick}: Tick size is nil ($\Delta=0$)
+		\item \textbf{Tick}: Tick size is nil ($\Delta=0$), prices are continuous
 	\end{itemize}
-	Notice that $\mathbb{E}[v|v \ge z]=z+\sigma$.
 \end{frame}
 
 
 \begin{frame}{Exercise 6.1.a}
 	\begin{exampleblock}{}
-		(a) Let $Y(A)$ be the cumulative depth up to ask price $A$ in the book and $A^*$ be the lowest ask price in the LOB. Show that when $v \ge A^*$, the optimal strategy of the informed trader is to buy $Y(v)$ shares.
+		(a) Let $q(A)$ be the cumulative depth up to ask price $A$ in the book and $A^*$ be the lowest ask price in the LOB. Show that when $v \ge A^*$, the optimal strategy $x^*(v)$ of the informed trader is to buy $x^*(v)=q(v)$ shares.
 	\end{exampleblock}
 
 	\pause
 
 	\begin{itemize}
-		\item Let $P'(q) \equiv \{A: q=Y(A)\}$ be marginal price.
+		\item Let $p(q) \equiv \{A: x=q(A)\}$ be the marginal price schedule.
 		
-		Notice $P'(q) = Y^{-1}(q)$.
-		\item The trader's profit from buying $q$ units is $\int_0^q (v-P'(y)) \, dy.$
-		\item Take the FOC wrt. $q$
+		Note that it's just the inverse of $q(A)$: $p(q(A)) = A$ and $q(p(q'))=q'$.
+		\item The trader's profit from buying $x$ units is $\int_0^x (v-p(q)) \, dq.$
+		\item Take the FOC wrt. $x$
 		\[
-		v-P'(q)=0 \Leftrightarrow P'(q)=v.
+		v-p(x^*)=0 \Leftrightarrow p(x^*)=v.
 		\]
-		\item Denote the optimal strategy by $q^*(v)$ and use the definition of $P'(q)$:
-		\[
-		P'(q^*)=v \Leftrightarrow Y(P'(q^*))=Y(v) \Leftrightarrow Y(Y^{-1}(q^*))=Y(v) \Leftrightarrow q^*= Y(v).
-		\]
+		\item Denote the optimal strategy by $x^*(v)$. Then:
+		$q(p(x^*(v)))=x^*(v)=q(v)$.
+		%\[
+		%p(x^*)=v \Leftrightarrow q(p(x^*))=q(v) \Leftrightarrow q(q^{-1}(x^*))=q(v) \Leftrightarrow x^*= q(v).
+		%\]
 	\end{itemize}
 \end{frame}
 
@@ -67,43 +70,38 @@
 		(b) Using part (a) and the zero-profit condition show that in eqm:
 		\begin{center}
 			$
-			Y(A)=\frac{1}{\theta} \left[\ln \left(\frac{1-\pi}{\pi}\right) + \ln \left(\frac{A-\mu}{\sigma}\right) + \frac{A-\mu}{\sigma}\right]\text{ if } A>A^*.
+			q(A)=\frac{1}{\theta} \left[\ln \left(\frac{1-\pi_0}{\pi_0}\right) + \ln \left(\frac{A-\mu}{\sigma}\right) + \frac{A-\mu}{\sigma}\right]\text{ if } A>A^*.
 			$
 		\end{center}
 	\end{exampleblock}
 
 	\pause
-
-	\begin{itemize}
-		\item Part (a) implies that $v=P'(q^*)$. Zero-profit condition is $P'(q) = \mathbb{E} [v | q^*(v) \geq q]$.
-		
-		\item Use the latter to write the marginal price:
-		\[
-			P'(q) = \alpha(q) \mathbb{E}[v|v \ge P'(q)]+(1-\alpha(q))\mathbb{E}[v],
-		\]
-		where 
-		\begin{align*}
-			\alpha(q) &\equiv \mathbb{P}(I|\text{buy} \geq q) = \frac{\mathbb{P}(I)\mathbb{P}(\text{buy} \geq q|I) }{\mathbb{P}(\text{buy} \geq q)} 
-			\\
-			&= \frac{\pi \mathbb{P}(v \ge P'(q))}{\pi \mathbb{P}(v \ge P'(q))+(1-\pi)\mathbb{P}(x \ge q)}
-		\end{align*}.
-	\end{itemize}
+	Zero-profit condition is $p(q) = \mathbb{E} [v | x \geq q]$ ($x$ is the incoming mkt order), can be expanded into:
+	\[
+		p(q) = \pi(q) \mathbb{E}[v|v \ge p(q)]+(1-\pi(q))\mathbb{E}[v],
+	\]
+	where the first term incorporates the $v=p(x^*(v))$ shown in (a), and
+	\begin{align*}
+		\pi(q) &\equiv \mathbb{P}(I|x \geq q) = \frac{\mathbb{P}(I)\mathbb{P}(x \geq q|I) }{\mathbb{P}(x \geq q)} 
+		\\
+		&= \frac{\pi_0 \mathbb{P}(v \ge p(q))}{\pi_0 \mathbb{P}(v \ge p(q))+(1-\pi_0)\mathbb{P}(x_N \ge q)}.
+	\end{align*}
 \end{frame}
 
 
 \begin{frame}{Exercise 6.1.b (2)}
 	\begin{itemize}
-		\item Compute the ingredients of $\alpha(q)$:
+		\item Compute the ingredients of $\pi(q)$:
 		\begin{align*}
-			\mathbb{P}(v \ge P'(q)) 	&=\int_{P'(q)}^\infty g(v) dv = \frac{1}{2} e^{-\frac{P'(q)-\mu}{\sigma}} \\
-			\mathbb{P}(x \ge q)	&=\int_q^\infty f(x) dx = \frac{1}{2}e^{-\theta q}
+			\mathbb{P}(v \ge p(q)) 	&=\int_{p(q)}^\infty g(v) dv = \frac{1}{2} e^{-\frac{p(q)-\mu}{\sigma}} \\
+			\mathbb{P}(x_N \ge q)	&=\int_q^\infty f(x_N) dx_N = \frac{1}{2}e^{-\theta q}
 		\end{align*}
-		\item Plug them back into $\alpha(q)$:
+		\item Plug them back into $\pi(q)$:
 		\begin{align*}
-			\alpha(q)
-			& =\frac{\pi \frac{1}{2} e^{-\frac{P'(q)-\mu}{\sigma}}}{\pi \frac{1}{2} e^{-\frac{P'(q)-\mu}{\sigma}} + (1-\pi)\frac{1}{2}e^{-\theta q}} 
+			\pi(q)
+			& =\frac{\pi_0 \frac{1}{2} e^{-\frac{p(q)-\mu}{\sigma}}}{\pi_0 \frac{1}{2} e^{-\frac{p(q)-\mu}{\sigma}} + (1-\pi_0)\frac{1}{2}e^{-\theta q}} 
 			\\
-			& = \frac{e^{\theta q-\frac{P'(q)-\mu}{\sigma}}}{e^{\theta q-\frac{P'(q)-\mu }{\sigma}} + \frac{1-\pi}{\pi}} 
+			& = \frac{e^{\theta q-\frac{p(q)-\mu}{\sigma}}}{e^{\theta q-\frac{p(q)-\mu }{\sigma}} + \frac{1-\pi_0}{\pi_0}} 
 		\end{align*}
 	\end{itemize}
 \end{frame}
@@ -113,34 +111,33 @@
 	\begin{itemize}
 		\item Going back to the marginal price, we had
 		\begin{align*}
-			P'(q) &= \alpha(q) \mathbb{E}[v|v \ge P'(q)]+(1-\alpha(q))\mathbb{E}[v]
+			p(q) &= \pi(q) \mathbb{E}[v|v \ge p(q)]+(1-\pi(q))\mathbb{E}[v]
 		\end{align*}
-		\item Recall hint: $\mathbb{E}[v|v \ge P'(q)]=P'(q)+\sigma$. Plug this together with $\alpha(q)$ into the expression above:
+		\item Recall the hint: $\mathbb{E}[v|v \ge p(q)]=p(q)+\sigma$. Plug this and $\pi(q)$ into the expression above:
 		\begin{align*}
-			&P'(q) = \alpha(q) (P'(q)+\sigma) + (1-\alpha(q)) \mu 
+			&p(q) = \pi(q) (p(q)+\sigma) + (1-\pi(q)) \mu 
 			\\
-			& \Leftrightarrow \frac{1-\pi}{\pi} \cdot \frac{P'(q)-\mu}{\sigma} = e^{\theta q - \frac{P'(q)-\mu}{\sigma}}  \\
-			& \Leftrightarrow \ln \left( \frac{1-\pi}{\pi} \right) + \ln \left( \frac{P'(q)-\mu}{\sigma} \right) = \theta q - \frac{P'(q)-\mu}{\sigma} 
+			& \Leftrightarrow \frac{1-\pi_0}{\pi_0} \cdot \frac{p(q)-\mu}{\sigma} = e^{\theta q - \frac{p(q)-\mu}{\sigma}}  \\
+			& \Leftrightarrow \ln \left( \frac{1-\pi_0}{\pi_0} \right) + \ln \left( \frac{p(q)-\mu}{\sigma} \right) = \theta q - \frac{p(q)-\mu}{\sigma} 
 		\end{align*}
-		Finally, substitute $Y(A)=q(A)$ and $A=P'(q)$ and re-arrange to get result.
+		Finally, solve for $q$ (recall $p(q(A))=A$) to get the result.
 	\end{itemize}
 \end{frame}
 
 
 \begin{frame}{Exercise 6.1.c}
 	\begin{exampleblock}{}
-		(c) Show that the book becomes thinner on the ask side when (i) $\pi$ increases or (ii) $\sigma$ increases. What is the economic intuition for this result.
+		(c) Show that the book becomes thinner on the ask side when (i) $\pi_0$ increases or (ii) $\sigma$ increases. What is the economic intuition for this result.
 	\end{exampleblock}
 
 	\pause
-
 	$$
-		Y(A)=\frac{1}{\theta} \left[\ln \left(\frac{1-\pi}{\pi}\right) + \ln \left(\frac{A-\mu}{\sigma}\right) + \frac{A-\mu}{\sigma}\right]\text{ if } A>A^*.
+		q(A)=\frac{1}{\theta} \left[\ln \left(\frac{1-\pi_0}{\pi_0}\right) + \ln \left(\frac{A-\mu}{\sigma}\right) + \frac{A-\mu}{\sigma}\right]\text{ if } A>A^*.
 	$$
 	\begin{itemize}
-		\item \textbf{Informed trading}. 
+		\item \textbf{Share of informed traders}. 
 		\[
-		\frac{\partial Y(A)}{\partial \pi} = \frac{1}{\theta}\left[ -\frac{\pi}{1-\pi}\cdot \frac{1}{\pi^2}\right]=\frac{1}{\theta}\left[ -\frac{1}{\pi(1-\pi)}\right]<0
+		\frac{\partial q(A)}{\partial \pi_0} = \frac{1}{\theta}\left[ -\frac{\pi_0}{1-\pi_0}\cdot \frac{1}{\pi_0^2}\right]=\frac{1}{\theta}\left[ -\frac{1}{\pi_0(1-\pi_0)}\right]<0
 		\]
 		More informed trading implies greater risk when posting orders
 	\end{itemize}
@@ -149,11 +146,11 @@
 
 \begin{frame}{Exercise 6.1.c}
 	\begin{exampleblock}{}
-		(c) Show that the book becomes thinner on the ask side when (i) $\pi$ increases or (ii) $\sigma$ increases. What is the economic intuition for this result.
+		(c) Show that the book becomes thinner on the ask side when (i) $\pi_0$ increases or (ii) $\sigma$ increases. What is the economic intuition for this result.
 	\end{exampleblock}
 
 	$$
-		Y(A)=\frac{1}{\theta} \left[\ln \left(\frac{1-\pi}{\pi}\right) + \ln \left(\frac{A-\mu}{\sigma}\right) + \frac{A-\mu}{\sigma}\right]\text{ if } A>A^*.
+		q(A)=\frac{1}{\theta} \left[\ln \left(\frac{1-\pi_0}{\pi_0}\right) + \ln \left(\frac{A-\mu}{\sigma}\right) + \frac{A-\mu}{\sigma}\right]\text{ if } A>A^*.
 	$$
 	
 	\begin{itemize}
