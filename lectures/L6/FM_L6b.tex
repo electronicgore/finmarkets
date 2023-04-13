@@ -108,6 +108,16 @@
 \end{frame}
 
 
+\begin{frame}{Discrete Glosten model: comments}
+	\begin{itemize}
+		\item The pricing rule seems to be exactly the same as in the continuous model...
+		\item ...but this is only for the marginal units! 
+	\end{itemize}
+	\bigskip 
+	Either way, let's now look at a few examples to practice applying this pricing rule!
+\end{frame}
+
+
 \begin{frame}{Example 1: Setup} 
 	\begin{itemize}
 		\item \textbf{Asset}. Let $g$ be the marginal distribution of $G$ and
@@ -130,16 +140,6 @@
 		\item \textbf{No display cost}. Let $C=0$
 		\item \textbf{Continuous prices}.
 	\end{itemize}
-\end{frame}
-
-
-\begin{frame}{Discrete Glosten model: comments}
-	\begin{itemize}
-		\item The pricing rule seems to be exactly the same as in the continuous model...
-		\item ...but this is only for the marginal units! 
-	\end{itemize}
-	\bigskip 
-	Either way, let's now look at a few examples to practice applying this pricing rule!
 \end{frame}
 
 
@@ -334,7 +334,11 @@
 			\item The expected profit of all orders at price $A_k$ must be zero (as opposed to strictly positive)
 			\item So execution probabilities must be lower for all orders
 		\end{itemize}
-		\item Lower profits lead to same dynamic consequences as with reducing tick size
+		\item Lower profits lead to the same consequences as with reducing tick size
+		\begin{itemize}
+			\item Less liquidity provision in the long run
+			\item Lower LOB resiliency (slower replenishment)
+		\end{itemize}
 		\item Pro-rata allocation rule used in the electronic futures markets for the leading short-term interest rate and for the two-year U.S. Treasuries.
 	\end{itemize}
 \end{frame}
@@ -343,7 +347,7 @@
 \begin{frame}{Hybrid market}
 	Hybrid market
 	\begin{itemize}
-		\item Suppose a dealer can compete with the limit order book, as follows
+		\item Suppose a \alert{dealer} can compete with the limit order book, as follows
 		\item The dealer may observe trade size $x$ before serving the order (and can fulfill the order before it is matched against LOB)
 		\item Can profit by pricing at $\mathbb{E}[v|x=q]$ rather than an average of $\mathbb{E}[v|x \geq y]$ for $y \leq q$ which is used by the LOB
 		\item Especially profitable on small trades
@@ -351,6 +355,7 @@
 		\begin{itemize}
 			\item Profitable limit orders are being picked off
 			\item So limit traders would gain negative profits if they follow the old strategy $\Rightarrow$ incentive to change their strategy (or quit the market)
+			\item Liquidity demanders might also change their trading behavior
 		\end{itemize}
 	\end{itemize}
 \end{frame}
@@ -370,7 +375,7 @@
 			\mathbb{E}[v|x \ge x_S]=\mathbb{E}[v|x \ge x_L]=\mu+\frac{2\pi}{1+\pi} \sigma,
 		\end{align*}
 		and thus $A^H_1=A^H_2=\mu+\frac{2\pi}{1+\pi} \sigma$.
-		\item $A^H_1>A_1$ and $A^H_2=A_2$: hybrid market less liquid than normal market
+		\item $A^H_1>A_1$ and $A^H_2=A_2$: hybrid market less liquid than normal market 
 	\end{itemize}
 \end{frame}
 
@@ -387,6 +392,7 @@
 		\item Also: the analysis of the example above relied on a bunch of implicit assumptions (which are not necessarily true):
 		\begin{itemize}
 			\item Assumed the dealer had time priority over (could undercut all of) the LOB. If MO-traders can trade against the LOB before the dealer can act, the conclusions are different.
+			\item Assumed the dealer is a monopolist -- competitive dealers would yield different predictions.
 			\item Assumed the market order revealed enough information. If MO-traders split their orders (trade one unit at a time), dealers no longer have any advantage. (\cite{back_working_2007})
 		\end{itemize}
 	\end{itemize}
@@ -396,11 +402,11 @@
 \begin{frame}{Market Design: conclusion}
 	\begin{itemize}
 		\item Regulation aimed at improving market liquidity can backfire by distorting agents' incentives
-		\item Shameless plug:
-		\begin{itemize}
-			\item If you want to know more about market design, I teach a course on \structure{Mechanism Design} in Fall
-			\item Explore how to design environments in which agents operate (i.e., distort their incentives) in order to generate desired behavior
-		\end{itemize}
+		%\item Shameless plug:
+		%\begin{itemize}
+		%	\item If you want to know more about market design, I teach a course on \structure{Mechanism Design} in Fall
+		%	\item Explore how to design environments in which agents operate (i.e., distort their incentives) in order to generate desired behavior
+		%\end{itemize}
 	\end{itemize}
 \end{frame}
 
