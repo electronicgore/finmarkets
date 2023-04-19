@@ -8,7 +8,7 @@
 \input{../FM_preamble.tex}
 
 
-\title{Financial Markets Microstructure \\ Lectures 13-14}
+\title{Financial Markets Microstructure \\ Lecture 13}
 
 \subtitle{Market Fragmentation\\
 	Chapter 7 of FPR}
@@ -16,7 +16,7 @@
 \author{Egor Starkov}
 
 \date{K{\o}benhavns Unversitet \\
-	Spring 2022}
+	Spring 2023}
 
 
 \begin{document}
@@ -33,7 +33,7 @@
 	\begin{itemize}
 		\item Models of order-driven markets
 		\item (Glosten's model): limit traders provide liquidity in a way similar but not same to dealers
-		\item (Parlour's model): needier traders more likely to use MOs. Also LOB is resilient / self-replenishing
+		\item (Foucault's model): needier traders more likely to use MOs. Also LOB is resilient / self-replenishing
 		\item Market design: measures directed at improving liquidity can backfire by distorting incentives
 	\end{itemize}
 \end{frame}
@@ -83,9 +83,9 @@
 		\end{itemize}
 		\pause
 		\item EU's \alert{ban} of countries' ``\alert{concentration rules}'' aims for a different kind of consolidation -- one where all stocks can be traded on same exchange rather than spread around local exchanges.
-		\begin{itemize}
-			\item We're not going to talk much about this dimension.
-		\end{itemize}
+		%\begin{itemize}
+		%	\item We're not going to talk much about this dimension.
+		%\end{itemize}
 	\end{itemize}
 \end{frame}
 
@@ -227,7 +227,7 @@
 		\]
 		\item MM makes zero profit:  insider's gain is noise traders' loss
 		\[
-		\underbrace{\mathbb{E}[x(p-v)]}_{\structure{\text{Insider gain}}} = \underbrace{\mathbb{E}[u(\lambda u)]}_{\structure{\text{Noise loss}}} = \lambda \sigma^{2}_{u} = \frac{\sigma_{v}\sigma_{u}}{2}
+		\underbrace{\mathbb{E}[x(v-p)]}_{\structure{\text{Insider gain}}} = \underbrace{\mathbb{E}[u(\lambda u)]}_{\structure{\text{Noise loss}}} = \lambda \sigma^{2}_{u} = \frac{\sigma_{v}\sigma_{u}}{2}
 		\]
 	\end{itemize}
 \end{frame}
@@ -304,15 +304,15 @@
 			\[
 			\frac{\sigma_{v}(\sigma_{u1}+\sigma_{u2})}{2} > \frac{\sigma_{v} \sigma_{u}}{2}
 			\]
-			\item If two separate markets, \textit{greater adverse selection loss}
+			%\item If two separate markets, \textit{greater adverse selection loss}
 		\end{itemize}
 		
 		\item \alert{Fragmentation gives greater adverse selection loss}
 		
-		\item Of course, greater profits for informed traders
+		\item Of course, also greater profits for informed traders
 		
 		\item In the above, we compare one speculator (per market) under fragmentation to one speculator in the consolidated market. \\
-		If consolidation instead made the speculators compete in the consolidated mkt, the effect is even stronger.
+		If we have different speculators in the two markets who would compete in the consolidated mkt, the effect is even stronger.
 	\end{itemize}
 \end{frame}
 
@@ -496,14 +496,14 @@
 \begin{frame}{Glosten model}
 	Competing \emph{limit order books} may also provide better aggregate depth
 	\begin{itemize}
-		\item To show this, use LOB model of section 6.2 with display cost $C>0$, tick size $\Delta >0$, \structure{no adverse selection} (asset value is $\mu$)
-		\item Recall: incoming order $q$, limit sell orders posted at cumulative quantity $Y$ and price $A$ satisfy the zero-profit condition
+		\item To show this, use LOB model of section 6.2 with display cost $C>0$, tick size $\Delta >0$, \structure{no adverse selection} (asset value is $\mu$, only the non-execution risk is relevant)
+		\item Recall: incoming order $x$, limit sell orders posted at cumulative quantity $q$ and price $A$ satisfy the zero-profit condition
 		\[
-		0 = \mathbb{P}(q \geq Y)[A-\mu]-C,
+		0 = \mathbb{P}(x \geq q)[A-\mu]-C,
 		\]
 		solved by 
 		\begin{equation} \tag{6.7}
-		A= \mu + \frac{C}{\mathbb{P}(q \geq Y)}.
+		A= \mu + \frac{C}{\mathbb{P}(x \geq q)}.
 		\end{equation}
 	\end{itemize}
 \end{frame}
@@ -514,29 +514,29 @@
 	\begin{itemize}
 		\item \textbf{Fragmentation}. Limit orders are supplied in two markets, $I$ and $E$ (``incumbent'' market and ``entrant'' market); display cost $C$ same in both
 		\begin{itemize}
-			\item At single available ask price $A$, denote cumulative limit sell orders by $Y^I$ and $Y^E$
+			\item At single available ask price $A$, denote cumulative limit sell orders by $q^I$ and $q^E$
 		\end{itemize}
 		\item \textbf{Market orders}. 
 		\begin{itemize}
-			\item Market order is $Buy$ with chance 1/2, and of size $q \sim F(q)$
-			\item With probability $1-\gamma$, the entire order goes to $I$
+			\item Market order is $Buy$ with chance 1/2, and of size $x \sim F(x)$
+			\item With probability $1-\gamma$, the entire order goes to $I$ (never continues to $E$ even if unfilled)
 			\item With probability $\gamma$, the incoming order is split:
 			\begin{itemize}
 				\item With prob. 1/2, order first goes to $I$, whatever remains goes to $E$
 				\item With prob. 1/2, order first goes to $E$, whatever remains goes to $I$
 			\end{itemize}
 		\end{itemize}
-		\item  \textbf{Trade probability}. Equilibrium condition: zero profit for the marginal trader on each market. We thus need to calculate $\mathbb{P}(q_i \geq Y^i)$ for each market $i$.
+		\item  \textbf{Trade probability}. Equilibrium condition: zero profit for the marginal trader on each market. We thus need to calculate $\mathbb{P}(x_i \geq q^i)$ for each market $i$.
 	\end{itemize}
 \end{frame}
 
 
 \begin{frame}{Glosten model: trading probabilities}
 	\begin{itemize}
-		\item The execution probabilities for the marginal traders are as follows, where $\bar{Y}=Y^I+Y^E$:
+		\item The execution probabilities for the marginal traders are as follows, where $\bar{q}=q^I+q^E$:
 		\begin{align}
-		\mathbb{P}(q_I \geq Y^I) & = \frac{1}{2} \left[\underbrace{\left(1-\gamma+\frac{\gamma}{2} \right) (1-F(Y^I))}_{\structure{\text{$I$ is executed first}}} + \underbrace{\frac{\gamma}{2}(1-F(\bar{Y}))}_{\structure{\text{$I$ is executed second}}}\right] \tag{7.11} \\
-		\mathbb{P}(q_E \geq Y^E) & = \frac{1}{2} \left[\underbrace{\frac{\gamma}{2} (1-F(Y^E))}_{\structure{\text{$E$ is executed first}}} + \underbrace{\frac{\gamma}{2}(1-F(\bar{Y}))}_{\structure{\text{$E$ is executed second}}}\right] \tag{7.12}
+		\mathbb{P}(x_I \geq q^I) & = \frac{1}{2} \left[\underbrace{\left(1-\gamma+\frac{\gamma}{2} \right) (1-F(q^I))}_{\structure{\text{$I$ is executed first}}} + \underbrace{\frac{\gamma}{2}(1-F(\bar{q}))}_{\structure{\text{$I$ is executed second}}}\right] \tag{7.11} \\
+		\mathbb{P}(x_E \geq q^E) & = \frac{1}{2} \left[\underbrace{\frac{\gamma}{2} (1-F(q^E))}_{\structure{\text{$E$ is executed first}}} + \underbrace{\frac{\gamma}{2}(1-F(\bar{q}))}_{\structure{\text{$E$ is executed second}}}\right] \tag{7.12}
 		\end{align}
 	\end{itemize}
 \end{frame}
@@ -544,12 +544,12 @@
 
 \begin{frame}{Glosten model: equilibrium}
 	\begin{itemize}
-		\item If both markets active ($Y^I>0$ and $Y^E>0$) then (6.7) holds for both
+		\item If both markets active ($q^I>0$ and $q^E>0$) then (6.7) holds for both
 		\item Then the probabilities in (7.11) and (7.12) must be identical, implying
 		\[
-		\left(1-\gamma + \frac{\gamma}{2}\right)(1-F(Y^I)) = \frac{\gamma}{2}(1-F(Y^E))
+		\left(1-\gamma + \frac{\gamma}{2}\right)(1-F(q^I)) = \frac{\gamma}{2}(1-F(q^E))
 		\]
-		\item When $\gamma < 1$, this implies $F(Y^I) > F(Y^E)$, so $Y^I > Y^E$
+		\item When $\gamma < 1$, this implies $F(q^I) > F(q^E)$, so $q^I > q^E$
 		%\item More orders and greater execution probability in market $I$
 		\item Why? 
 		\pause
@@ -560,22 +560,17 @@
 \end{frame}
 
 
-\begin{frame}{Glosten model: comparing volumes}
-	We can relate $Y^I, Y^E$ and $Y$ as follows. (Recall $\bar{Y}=Y^I+Y^E$).
+\begin{frame}{Glosten model: comparing depth}
+	We can relate $q^I, q^E$ and depth $q^C$ in a consolidated mkt as follows. (Recall $\bar{q}=q^I+q^E$).
 	\begin{itemize}
-		\item  Equation (6.7) also holds with single platform. This implies $\mathbb{P}(q_I \geq Y^I) = \mathbb{P}(q \geq Y)$ 
-		\item By (7.11): $2\times \mathbb{P}(q_I \geq Y^I) =$ weighted avg. of $1-F(Y^I)$ and $1-F(\bar{Y})$
-		\item But with a single platform: $\mathbb{P}(q \geq Y)=\frac{1}{2} [1-F(Y)]$
+		\item  The pricing equation (6.7) also holds with single platform. This implies $\mathbb{P}(x_I \geq q^I) = \mathbb{P}(x \geq q^C)$ 
+		\item By (7.11): $\mathbb{P}(x_I \geq q^I) = \frac{1}{2} \Big[$ weighted avg. of $1-F(q^I)$ and $1-F(\bar{q}) \Big]$
+		\item But with a single platform: $\mathbb{P}(x \geq q^C)=\frac{1}{2} [1-F(q^C)]$
 		\item Hence (since zero-profit cond implies these probabilities are equal):
 		\[
-		Y^I<Y<Y^I+Y^E = \bar{Y}.
+		q^I<q^C<q^I+q^E = \bar{q}.
 		\]
-		\begin{block}{}
-			\begin{center}
-				Fragmentation leads to greater aggregate volume $\bar{Y}$
-			\end{center}
-		\end{block}
-		\item Fragmented LOB market is deeper than consolidated LOB market
+		\item \structure{Fragmented} LOB market is \structure{deeper} than consolidated LOB market
 	\end{itemize}
 \end{frame}
 
@@ -588,9 +583,10 @@
 			\item When market is consolidated, first limit orders always get executed first
 			\item But in fragmented market, you can post limit order on another market at same price, and (maybe) get executed first
 		\end{itemize}
-		\item As we argued when analyzing the pro-rata rule, removing time priority may lead to more orders, but these orders may appear more slowly (lower resiliency), or depth increase may be curbed by general eqm effects.
+		\item As we argued when analyzing the pro-rata rule, removing time priority may lead to more orders in the short run, but there might also be general eqm effects
+		\\ (lower liq provider profit $\to$ fewer liq providers in the mkt $\to$ less depth and lower resiliency)
 		%\item Result relies on $\Delta>0$ -- otherwise at $E$ you can undercut price at $I$ 
-		\item Section 7.4.3: there is a critical value of $\gamma$, below which $Y^E=0$
+		\item Section 7.4.3: there is a critical value of $\gamma$, below which $q^E=0$
 		\begin{itemize}
 			\item Once again, a barrier to entry for new exchanges
 		\end{itemize}
