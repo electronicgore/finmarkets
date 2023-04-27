@@ -16,7 +16,7 @@
 \author{Egor Starkov}
 
 \date{K{\o}benhavns Unversitet \\
-	Spring 2022}
+	Spring 2023}
 
 
 \begin{document}
@@ -163,7 +163,7 @@
 		\item Recall that $\ln x^h = h \ln x$
 		\item So taking logs of (9.5) we get
 		\[
-		h \ln (1+R) = h\ln (1+r) + \ln(1+\frac{s}{2}) - \ln(1-\frac{s}{2}) 
+		h \ln (1+R) = h\ln (1+r) + \ln \left(1+\frac{s}{2} \right) - \ln \left( 1-\frac{s}{2} \right) 
 		\]
 		and assuming $r, R,$ and $s$ are small we apply the approximation
 		\[
@@ -232,7 +232,7 @@
 			\frac{1}{h_2} \leq \frac{R_2 - R_1}{s_2 - s_1} \leq \frac{1}{h_1}
 		\end{equation}
 		\pause 
-		\item There exist $R_1,R_2$ (and resp. $r_1,r_2$) which solve this so all ok
+		\item There exist $R_1,R_2$ (and $r$) which solve this so all ok
 		\begin{itemize}
 			\item There would not be a solution if we assumed the opposite kind of separation
 			\item We also cannot have both groups indifferent between both assets (would need two equalities in 9.10)
@@ -370,10 +370,11 @@
 					\begin{itemize}
 						\item Gist: arbitraging is itself a costly activity (due to leverage and short-selling constraints)
 					\end{itemize}
-					\item But in what we saw, \alert{there are no arbitrage opportunities}
+					\item But in what we saw, there are, strictly speaking, no arbitrage opportunities
 					\begin{itemize}
 						\item Arbitrageurs are subject to all the same liquidity costs
 						\item So in the toy model we saw, it looks as if there is arbitrage, but there are no actual opportunities
+						\item In the end, it's all about semantics and how you define ``arbitrage''
 					\end{itemize}
 				\end{itemize}
 			}
