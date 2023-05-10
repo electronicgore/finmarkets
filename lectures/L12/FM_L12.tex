@@ -15,7 +15,7 @@
 \author{Egor Starkov}
 
 \date{K{\o}benhavns Unversitet \\
-	Spring 2022}
+	Spring 2023}
 
 
 \begin{document}
@@ -217,12 +217,12 @@
 			\item Fast institutions have better information: learn $v$ at $\tau=1$ whereas slow institutions learn $v$ at $\tau=2$
 			\item Fast institutions find a trading opportunity with probability one, slow institutions with probability $\rho<1$
 		\end{itemize}
-		\item \textbf{Timing}
+		\item \textbf{Timing} (within period $\tau=1$):
 		\begin{enumerate}
 			\item Each institution $i$ observes $y_{i}$, and if fast, observes $v$
-			\item Each institution $i$ finds a trading opportunity or not. If yes, chooses whether to buy/sell/abstain (one-unit trades only)
-			\item Liquidity providers execute order $\omega$ at price $\mathbb{E}(v|\omega)$
-			(implicit assumption of market maker competition)
+			\item Each institution $i$ finds a trading opportunity or not. If yes, chooses whether to buy/sell/abstain (one-unit trades only): $d_i \in \{-1,0,1\}$.
+			\item Liquidity providers execute order $d_i$ at price $\mathbb{E}(v|d_i)$
+			(implicit assumption of market maker competition + no aggregate order flow transparency)
 		\end{enumerate}
 	\end{itemize}
 \end{frame}
@@ -313,8 +313,8 @@
 
 \begin{frame}{When do we have multiple equilibria?}
 	\begin{itemize}
-		\item \textbf{P3 equilibrium}: Always exists. If dealers believe only fast institutions trade $\rightarrow$  high $a$. But then only optimal for fast institutions to trade.
-		\item \textbf{Proposition}: $P1$ equilibrium exists if $\alpha<\alpha_{P1} \equiv \frac{\rho(\epsilon-\delta)}{\rho(\epsilon-\delta)+\delta}$. Proof. 
+		\item \alert{P3 equilibrium}: Always exists. If dealers believe only fast institutions trade $\rightarrow$  high $a$. But then only optimal for fast institutions to trade.
+		\item \textbf{Proposition}: \alert{P1 equilibrium} exists if $\alpha<\alpha_{P1} \equiv \frac{\rho(\epsilon-\delta)}{\rho(\epsilon-\delta)+\delta}$. Proof. 
 		\begin{enumerate}
 			\item Suppose institutions expect $a=\mu + \frac{\alpha}{\alpha+(1-\alpha)\rho} \epsilon$ 
 			\item Notice $\mu-\epsilon+\delta<\mu<a$: FI never buy with bad news (\structure{$\beta^{F}_{BH}=0$ optimal})
@@ -323,23 +323,23 @@
 			\item Notice $\mu+\delta>\mu+\epsilon/2>\mu+\epsilon-\delta >a$: SI with high valuation always buys (\structure{$\beta^{S}_{H}=1$ is optimal}).
 			\item Conditional on this, $\mathbb{E}[v|buy]=\mu + \frac{\alpha}{\alpha+(1-\alpha)\rho} \epsilon$ (\structure{$a$ is optimal price}). \qed
 		\end{enumerate}
-		\item Similarly, can find values of $\alpha$ s.t. $P2$ equilibrium exists
-		\item $P1$ is Pareto dominant for $\alpha<\alpha_{P1}$. 
+		\item Similarly, can find values of $\alpha$ s.t. \alert{P2 equilibrium} exists
+		\item P1 is Pareto dominant for $\alpha<\alpha_{P1}$. 
 	\end{itemize}
 \end{frame}
 
 
 \begin{frame}{Institution gain (Fast Institutions)}
 	\begin{itemize}
-		\item FI gain in $P1$ equilibrium is (focus on buy side):
+		\item FI gain in P1 equilibrium is (focus on buy side):
 		\begin{align*}
 		\mathbb{E}[u-a|buy, FI]
 		& = \mathbb{E}[u|buy, FI] - \left[\mu + \frac{\alpha}{\alpha+(1-\alpha)\rho} \epsilon\right] \\
 		& = \mathbb{E}[u|v=\mu+\epsilon] - \left[\mu + \frac{\alpha}{\alpha+(1-\alpha)\rho} \epsilon\right] \\
 		& = \mu+\epsilon - \left[\mu + \frac{\alpha}{\alpha+(1-\alpha)\rho} \epsilon\right] \\
-		& = \frac{(1-\alpha)\rho}{\alpha+(1-\alpha)\rho} \epsilon \equiv \phi(\alpha)
+		& = \frac{(1-\alpha)\rho}{\alpha+(1-\alpha)\rho} \epsilon \equiv \pi_F(\alpha)
 		\end{align*}
-		\item Notice $\phi'(\alpha)<0$.
+		\item Notice $\pi_F'(\alpha)<0$.
 	\end{itemize}
 \end{frame}
 
@@ -352,16 +352,16 @@
 		& = \rho \left( \mathbb{E}[u|buy, SI] - \left[\mu + \frac{\alpha}{\alpha+(1-\alpha)\rho} \epsilon\right] \right) \\
 		& = \rho \left( \mathbb{E}[u|y_{i}=\delta] - \left[\mu + \frac{\alpha}{\alpha+(1-\alpha)\rho} \epsilon\right] \right) \\
 		& = \rho \left( \mu+\delta - \left[\mu + \frac{\alpha}{\alpha+(1-\alpha)\rho} \epsilon\right] \right) \\
-		& = \rho \left( \delta -  \frac{\alpha}{\alpha+(1-\alpha)\rho} \epsilon \right) \equiv \psi(\alpha)
+		& = \rho \left( \delta -  \frac{\alpha}{\alpha+(1-\alpha)\rho} \epsilon \right) \equiv \pi_S(\alpha)
 		\end{align*}
-		\item Notice $\psi'(\alpha)<0$.
+		\item Notice $\pi_S'(\alpha)<0$.
 	\end{itemize}
 \end{frame}
 
 
 \begin{frame}{Institution gain}
 	\begin{itemize}
-		\item Both $\phi(\alpha)$ and $\psi(\alpha)$ are decreasing in $\alpha$: all trader types lose when proportion of fast traders increases
+		\item Both $\pi_F(\alpha)$ and $\pi_S(\alpha)$ are decreasing in $\alpha$: all trader types lose when proportion of fast traders increases
 		\item This result holds generally (when we focus on the Pareto-dominant equilibria)
 		\begin{itemize}
 			\item Fast institutions lose because there is more price impact of trades (more adverse selection)
@@ -370,7 +370,7 @@
 		\end{itemize}
 		\item So more HFT  is always `bad' for existing traders, but beneficial for institutions that switch to become HFT
 		\begin{itemize}
-			\item Note: $\phi(\alpha)-\psi(\alpha) > 0$ is independent of $\alpha$
+			\item Note: $\pi_F(\alpha)-\pi_S(\alpha) > 0$ is independent of $\alpha$
 		\end{itemize}
 		\item \cite{shkilko_every_2020}: periods when HFT is disrupted are characterized by less adverse selection, lower trading costs
 	\end{itemize}
@@ -387,8 +387,8 @@
 		\]
 		\item \textbf{Optimal investment}: Invest in becoming fast institution if
 		\begin{align*}
-		& \phi(\alpha) \cdot n - C \geq \psi(\alpha) \cdot n  \\
-		\Leftrightarrow \, & n \geq \frac{C}{\phi(\alpha)-\psi(\alpha)} \equiv n(\alpha)
+		& \pi_F(\alpha) \cdot n - C \geq \pi_S(\alpha) \cdot n  \\
+		\Leftrightarrow \, & n \geq \frac{C}{\pi_F(\alpha)-\pi_S(\alpha)} \equiv n(\alpha)
 		\end{align*}
 	\end{itemize}
 \end{frame}
@@ -461,28 +461,28 @@
 
 \begin{frame}[noframenumbering]{\citet*{budish_high-frequency_2015}}
 	% ES = SP500 futures; SPY = SP500 index fund
-	ES and SPY are the two largest instruments tracking SP500. In theory perfectly correlated. Panel (a) shows a trading day.
+	ES and SPY are the two largest instruments tracking S\&P500. In theory perfectly correlated. Panel (a) shows a trading day.
 	\center
 	\includegraphics[scale=0.7]{pics/HTF_Corr_1}
 \end{frame}
 
 
 \begin{frame}[noframenumbering]{\citet*{budish_high-frequency_2015}}
-	ES and SPY are the two largest instruments tracking SP500. In theory perfectly correlated. Panel (b) shows a trading hour.
+	ES and SPY are the two largest instruments tracking S\&P500. In theory perfectly correlated. Panel (b) shows a trading hour.
 	\center
 	\includegraphics[scale=0.7]{pics/HTF_Corr_2}
 \end{frame}
 
 
 \begin{frame}[noframenumbering]{\citet*{budish_high-frequency_2015}}
-	ES and SPY are the two largest instruments tracking SP500. In theory perfectly correlated. Panel (c) shows a trading minute.
+	ES and SPY are the two largest instruments tracking S\&P500. In theory perfectly correlated. Panel (c) shows a trading minute.
 	\center
 	\includegraphics[scale=0.7]{pics/HTF_Corr_3}
 \end{frame}
 
 
 \begin{frame}[noframenumbering]{\citet*{budish_high-frequency_2015}}
-	ES and SPY are the two largest instruments tracking SP500. In theory perfectly correlated. Panel (d) shows a high-frequency breakdown.
+	ES and SPY are the two largest instruments tracking S\&P500. In theory perfectly correlated. Panel (d) shows a high-frequency breakdown.
 	\center
 	\includegraphics[scale=0.7]{pics/HTF_Corr_4}
 \end{frame}
@@ -581,6 +581,7 @@
 
 \begin{frame}{HFT Conclusion}
 	\begin{itemize}
+		\item Effects of speed are similar to those of informed trading
 		\item By design, continuous trading generates arbitrage opportunities
 		\item Firms overinvest in speed in attempts to reap these arbitrage profits
 		\item Risk of being sniped contributes to the spread
