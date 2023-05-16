@@ -15,7 +15,7 @@
 \author{Egor Starkov}
 
 \date{K{\o}benhavns Unversitet \\
-	Spring 2022}
+	Spring 2023}
 
 
 \begin{document}
@@ -48,7 +48,7 @@
 		\item What about \structure<2>{symmetric uncertainty}? When \structure<2>{public} news arrive: \only<2>{...?}
 		\pause
 		\begin{itemize}
-			\item all orders are repriced, but \structure<3>{no trade} \alert<4>{should} take place
+			\item Glosten-Milgrom/Glosten/Foucault: all orders are repriced, but \structure<3>{no trade} \alert<4>{should} take place
 			\pause
 			\item in reality, a lot of trade after public announcements
 		\end{itemize}
@@ -92,15 +92,16 @@
 
 \begin{frame}{Context: \cite{hellwig_aggregation_1980}}
 	\begin{itemize}
-		\item Suppose there is a continuum of traders $i \in [0,1]$ with CARA preferences:
+		\item A model of how disagreement leads to trading. Forget about liquidity takers/makers.
+		\item Suppose there is a continuum of ex ante symmetric traders $i \in [0,1]$ with CARA prefs:
 		\begin{align*}
 			U(W_i)&=-e^{-\gamma W_i}, &
 			W_i & = (\theta - p){d_i}
 		\end{align*}
 		\item One asset, fundamental value $\theta \sim \mathcal{N}(0,1/\tau_\theta)$
 		\item Every trader gets a private signal $x_i = \theta + \epsilon_i$ with $\epsilon_i \sim \mathcal{N}(0,1/\tau_\epsilon)$ and submits a price-contingent demand schedule $d_i(p)$
-		\item Aggregate supply $u_1 \sim \mathcal{N}(0, \sigma^2_u)$ (provided by noise traders)
-		\item Price $p$ is set to clear the market
+		\item Aggregate supply $u \sim \mathcal{N}(0, \sigma^2_u)$ (provided by noise traders)
+		\item Price $p$ is set to clear the market (by some non-trading market-maker/``the invisible hand''/...)
 		% kinda Kyle, but many informed traders, non-strategic dealer
 	\end{itemize}
 \end{frame}
