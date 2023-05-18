@@ -15,7 +15,7 @@
 \author{Egor Starkov}
 
 \date{K{\o}benhavns Unversitet \\
-	Spring 2022}
+	Spring 2023}
 
 
 \begin{document}
@@ -160,7 +160,7 @@
 
 \section{Herd Behavior in Financial Markets}
 
-\begin{frame}{\cite{smith_pathological_2000}: Introduction}
+\begin{frame}{Herding: Introduction}
 	\begin{itemize}
 		\item \textbf{Herding}: ignoring private information in favor of ``wisdom of the crowd''
 		\begin{enumerate}
@@ -170,7 +170,8 @@
 		\item In \textbf{financial markets}: momentum trading, positive-feedback trading
 		\item In 1992, a wave (a herd?) of articles showing that  herding could be result of rational \structure{informational cascade}
 		\item Today we look at this and other `rational' explanations
-		\item Note: the original article may be a bit heavy for our purposes. I will follow the retelling in \cite{smith_observational_2011}; \cite{bikhchandani_herd_2000} is a good (simpler) alternative.
+		\item Note: I will follow the presentation in \cite{bikhchandani_herd_2000}. 
+		\\See \cite{bikhchandani_information_2021} for a comprehensive review of the literature.
 	\end{itemize}
 \end{frame}
 
@@ -201,7 +202,7 @@
 			\item $u(0,v) = 0$,
 			\item $u(1,L) = L-m < 0$,
 			\item $u(1,H) = H-m > 0$,
-			\item (say for now that price (midquote) $m$ is fixed)
+			\item (say for now that price (midquote) $m$ is fixed and there is no spread: $a=b=m$)
 		\end{itemize}
 	\end{itemize}
 \end{frame}
@@ -210,19 +211,14 @@
 \begin{frame}{Model: Beliefs}
 	\begin{itemize}
 		\item Represent all beliefs $p$ about $v$ as probabilities of $v=H$ conditional on relevant info.
-		\item Arriving agent's \structure{prior belief} is $p_t \sim F(p|v)$
-		\begin{itemize}
-			\item Composed of the initial public prior -- e.g., $1/2$
-			\item and private signal (informative of $v$, so relevant to other traders)
-		\end{itemize}
 		\item \structure{``Market belief''} $q_t$
 		\begin{itemize}
-			\item Based on the public prior
-			\item and decisions at $t = 1,2,...,t-1$
+			\item $q_0$ is the public prior belief -- e.g., $1/2$;
+			\item $q_t$ incorporates info contained in decisions at $t = 1,2,...,t-1$
 		\end{itemize}
-		\item Agent's decision is then based on his \structure{posterior belief} $r_t$
+		\item Period-$t$ agent observes $q_t$ and a \structure{private signal} $\eta_t$ and forms \structure{private belief} $r_t$.
 		\begin{itemize}
-			\item Composed from $p_t$ and $q_t$
+			\item Suppose $\eta_t \in \{h,l\}$ with $\mathbb{P}(\eta_t=h | v=H) = \mathbb{P}(\eta_t=l | v=L) = \rho$.
 		\end{itemize}
 		\item All beliefs calculated using Bayes' rule
 	\end{itemize}
@@ -231,30 +227,34 @@
 
 \begin{frame}{Decisions}
 	\begin{itemize}
-		\item Agent behaves optimally $\Rightarrow$ chooses $d_t=1$ iff $r_t \geq \bar{r}$
-		\begin{itemize}
-			\item where $\bar{r} = \frac{m-L}{H-L}$
-		\end{itemize}
-		\item Use Bayes' rule to compute $r_t$: (this is reliant on the prior being $1/2$)
-		\[r_t = \frac{p_t q_t}{p_t q_t + (1-p_t) (1-q_t)}\]
-		\item Meaning that $d_t = 1$ iff $p_t \geq \bar{p}_t$, where
-		\[ \frac{\bar{p}_t}{1-\bar{p}_t} = \frac{1-q_t}{q_t} \cdot \frac{\bar{r}}{1-\bar{r}} \]
+		\item Agent behaves optimally $\Rightarrow$ chooses $d_t=1$ iff $r_t \geq \bar{r} \equiv \frac{m-L}{H-L}$.
+		\item Use Bayes' rule to compute $r_t(\eta_t,q_t)$:
+		%\[r_t = \frac{p_t q_t}{p_t q_t + (1-p_t) (1-q_t)}\]
+		\begin{align*}
+			r_t(h,q_t) &= \frac{q_t \rho}{q_t \rho + (1-q_t) (1-\rho)}
+			\\
+			r_t(l,q_t) &= \frac{q_t (1-\rho)}{q_t (1-\rho) + (1-q_t) \rho}
+		\end{align*}
+		Note $r_t(h,q_t) > q_t > r_t(l,q_t)$.
 	\end{itemize}
 \end{frame}
 
 
 \begin{frame}{Herds and cascades}
-	\[ \frac{\bar{p}_t}{1-\bar{p}_t} = \frac{1-q_t}{q_t} \cdot \frac{\bar{r}}{1-\bar{r}} \]
-	\vspace{-1em}
 	\begin{itemize}
-		\item Note $\bar{p}_t$ depends on $q_t$ (negatively: lower public belief $\to$ need higher private belief to justify investment)
-		\item If distribution of $p_t$ is bounded ($p_t \in [\underline{p},\bar{p}]$), then can arrive to such an extreme $q_t$ that either $\bar{p}_t > \bar{p}$, or $\bar{p}_t < \underline{p}$
+		\item If $r_t(h,q_t) > \bar{r} > r_t(l,q_t)$ then the agent follows their signal 
+		\\$\to$ their action is informative 
+		\\$\to$ public belief is updated: $q_{t+1}(q_t,d_t=1) = r_t(h,q_t)$; $q_{t+1}(q_t,d_t=0) = r_t(l,q_t)$.
+		
+		\item If $r_t(h,q_t) > r_t(l,q_t) > \bar{r}$ then the agent chooses $d_t=1$ regardless of private signal 
+		\\$\to$ action uninformative $\to$ $q_{t+1} = q_t$ 
+		\\$\to$ next agent will also ignore private signal!
 		\begin{itemize}
-			\item Then agent at $t$ ignores his private info altogether and his behavior is fully determined by public information ($q_t$)
-			\item $\Rightarrow$ agent at $t+1$ faces same public info as agent at $t$ $\Rightarrow$ it overpowers private info $\Rightarrow$ decision at $t+1$ is also uninformative etc
-			\item a \alert{herd} begins due to cascade
+			\item Everyone ignores private signals and chooses the same action (we have a \alert{herd})
+			\item Market belief $q_t$ is frozen in place; private information is not aggregated!
+			\item This \alert{herd may be incorrect} (unless $q_t=0$ or $q_t=1$)
+			\item (Same happens if $\bar{r} > r_t(h,q_t) > r_t(l,q_t)$ with $d_t=0$)
 		\end{itemize}
-		\item Such $q_t$ will be based on finite number of private signals $\Rightarrow$ \alert{herd may be incorrect}
 	\end{itemize}
 \end{frame}
 
@@ -264,15 +264,15 @@
 		\item A few incorrect signals can be enough enough to set off a herd
 		\item A small piece of information `cascades' through the system
 		\item Each agent is rational, but together they may seem stupid: their information taken together is very precise, but there is no information aggregation
-		\item A particular example of how a herd may arise: \hyperlink{EXP}{\beamerbutton{here}}
+		\item A specific example with numbers of how a herd may arise: \hyperlink{EXP}{\beamerbutton{here}}
 	\end{itemize}
 \end{frame}
 
 
 \begin{frame}{Herds and cascades: comments}
 	\begin{itemize}
-		\item Incorrect herds only occur if distribution of $p_t$ is bounded -- otherwise there will always exist private signals that can overpower the public info
-		\item In a slightly richer model, the opposite outcome is also possibe -- state of permanent uncertainty in which everyone acts solely on their private signal, ignoring public information
+		\item Incorrect herds only occur if distribution of $\eta_i$ is bounded -- otherwise strong enough signals could overpower the public info
+		\item In a slightly richer model, the opposite outcome is also possible -- state of permanent uncertainty in which everyone acts solely on their private signal, ignoring public information
 		\item Terminology:
 		\begin{itemize}
 			\item \structure{Herd} = action convergence ($d_{t+1} = d_t$ from some point onwards)
@@ -285,17 +285,14 @@
 
 \begin{frame}{What if we introduce a price?}
 	\begin{itemize}
-		\item Remaining discussion of herds follows \cite{bikhchandani_herd_2000}
-		\item As before: asset value $v$, and each trader starts with prior $p_t$
+		\item As before: unknown asset value $v$, and each trader receives a private signal $\eta_i$
 		\item With probability $\pi$ the trader is a noise trader, who buys/sells/abstains with equal probability, w.p. $1-\pi$ rational as above
-		\item A risk-neutral market maker quotes competitive bid-ask prices
+		\item A risk-neutral market maker quotes competitive bid-ask \structure<1>{prices}
 		\item What will happen?
 		\begin{itemize}
-			\only<2|handout:0>{
-				\item \alert{Bliz quiz}: will there be herding in such model (with positive probability)? y/n
-			}
-			\pause[3]
-			\item This is standard Glosten-Milgrom, no herds
+			\pause
+			\item This is standard Glosten-Milgrom, so no herds!
+			\item Prices adjust in such a way that following private signals is optimal, and prices themselves then incorporate all private signals!
 		\end{itemize}
 	\end{itemize}
 \end{frame}
@@ -307,8 +304,8 @@
 		\item \cite{avery_multidimensional_1998} expand on this analysis
 		\begin{itemize}
 			\item Suppose $v \in \{0,\frac{1}{2},1\}$
-			\item If $v=\frac{1}{2}$, this is perfectly revealed by the private signal: $S_{t}=\frac{1}{2}$
-			\item If $v \in \{0,1\}$, trader $t$ receives informative signal with precision $\rho_t \equiv \mathbb{P}(S_{t}=v)$
+			\item If $v=\frac{1}{2}$, this is perfectly revealed by the private signal: $\eta_{t}=\frac{1}{2}$
+			\item If $v \in \{0,1\}$, trader $t$ receives informative signal with precision $\rho_t \equiv \mathbb{P}(\eta_{t}=v)$
 			\item Furthermore, a proportion $\mu \in \{\mu^{H}, \mu^{L}\}$ of traders have perfect information: $\rho_{t}=1$ after a good signal
 			\item The remaining traders have noisy info: $\rho_{t} \in (\frac{1}{2},1)$ after a good signal
 		\end{itemize}
@@ -341,12 +338,12 @@
 \begin{frame}{Other types of herding: Reputational herding}
 	A brief example.
 	\begin{itemize}
-		\item \textbf{Two  managers}: Invest or not in project of unknown value (gets imperfect signal $s \in \{1,0\}$)
-		\item \textbf{Type}: Manager is smart or dumb (doesn't know). If both managers smart, observe same $s$; if one or both dumb, observe independent $s$ %(also uncorrelated with $v$)
-		\item \textbf{Payoffs}:  Manager \structure{maximizes his expected reputation}
+		\item \textbf{Two  managers}: Invest or not in project of unknown value (gets imperfect signal $\eta \in \{1,0\}$)
+		\item \textbf{Type}: Each manager either smart or dumb (doesn't know). If both managers smart, observe same $\eta$; if one or both dumb, observe independent signals $\eta$ %(also uncorrelated with $v$)
+		\item \textbf{Payoffs}:  Managers \structure{maximizes their reputation} (want to appear smart)
 		\item \textbf{Herding}: Manager 1 moves first, then manager 2 
 		\begin{itemize}
-			\item If manager 1 invests, manager 2 can deduce that $s_1=1$. Suppose $s_2=0$. 
+			\item If manager 1 invests, manager 2 can deduce that $\eta_1=1$. Suppose $\eta_2=0$. 
 			\\ Then one of the two (or both) must be dumb. 
 			\item If manager 2 does not invest, he reveals this. If player 1's investment then 
 			\\succeeds, people will assume that manager 2 is the dumb manager
@@ -361,9 +358,9 @@
 	\begin{itemize}
 		\item \textbf{Herding}: may occur when private information cannot be easily aggregated
 		\item \textbf{Price mechanism}: alleviates problem by providing private incentives to trade and thus reveal information, which is then incorporated into prices
-		\item \textbf{Multi-layered uncertainty}: Implies that herds may still occur 
+		\item \textbf{Multi-layered uncertainty}: can make the herds occur even with flexible prices
 		\item \textbf{Aside}: \emph{Momentum trading} often assumed to be a `behavioral feature': but it may be perfectly rational
-		\item \textbf{Empirical estimation of herding}: some conclusions can be tested in the data but to a very limited extent; see \cite{bikhchandani_herd_2000} for details.
+		\item \textbf{Empirical estimation of herding}: some conclusions can be tested in the data but to a very limited extent; see \cite{bikhchandani_herd_2000} and \cite{bikhchandani_information_2021} for details.
 	\end{itemize}
 \end{frame}
 
@@ -532,15 +529,13 @@
 \begin{frame}{Herding example: Setup} \label{EXP}
 	\begin{itemize}
 		\item This example follows that in \cite{bikhchandani_herd_2000}
+		\item Suppose $q_0 = 1/2$
 		\item \textbf{Payoffs}: Let $L-m = -1$; $H-m = 1$
 		\begin{itemize}
 			\item Then $\bar{r} = 1/2$
 			\item Suppose that agents flip a $50/50$ coin whenever indifferent
 		\end{itemize}
-		\item \textbf{Private signals}: $S_t \in \{-1,1\}$, correct w.p. $p$, i.e. $\mathbb{P}(S_t=1|v=H) = \mathbb{P}(S_t=-1|v=L) = p$ and $\mathbb{P}(S_t=1|v=L) = \mathbb{P}(S_t=-1|v=H) = 1-p$.
-		
-		Then private priors are $p_t = p$ if $S_t = 1$ and $p_t = 1-p$ if $S_t = -1$
-		\item For our example, suppose the following signal sequence realized: $\{\structure{+1},\alert{ -1, -1, -1, -1, ...}\}$
+		\item Suppose the following signal sequence realized: $\{\structure{h},\alert{ l, l, l, ...}\}$
 		\item Denote by $\mathbb{I}_i$ agent $i$'s information set
 	\end{itemize}
 \end{frame}
@@ -549,13 +544,13 @@
 \begin{frame}{Herding example: Analysis}
 	\textbf{First agent}
 	\begin{itemize}
-		\item Information set $\mathbb{I}_1=\{S_1=1\}$
-		\item Notice
+		\item Information set $\mathbb{I}_1=\{\eta_1=h\}$
+		\item Then
 		\[
-			r_1 = \mathbb{P}(v=H|\mathbb{I}_1) = p_1 = \frac{\frac{1}{2} p}{\frac{1}{2} p+\frac{1}{2} (1-p)} = p 
+			r_1(h,1/2) = \mathbb{P}(v=H|\mathbb{I}_1) = \frac{\frac{1}{2} \rho}{\frac{1}{2} \rho+\frac{1}{2} (1- \rho)} = \rho 
 		\]
-		\item Since $p>1/2$: invest.
-		\item \textbf{Thus}, given $S_1=1$, first agent invests: $d_1=1$
+		\item Since $\rho>1/2$: invest.
+		\item \textbf{Thus}, given $\eta_1=h$, first agent invests: $d_1=1$
 	\end{itemize}
 \end{frame}
 
@@ -563,15 +558,15 @@
 \begin{frame}{Herding example: Analysis (2)}
 	\textbf{Second agent}
 	\begin{itemize}
-		\item Second agent can perfectly deduce first agent's signal: $S_1=1$ if $d_1=1$, $S_1=-1$ otherwise.
+		\item Second agent can perfectly deduce first agent's signal: $\eta_1=h$ if $d_1=1$, $\eta_1=l$ otherwise.
 		\begin{itemize}
-			\item In other words, $q_2 = r_1$, no information is lost.
-			\item Therefore, his information set is $\mathbb{I}_2=\{S_1=1,S_2=-1\}$
+			\item In other words, $q_2 = r_1 = \rho$, no information is lost.
+			\item Second agent receives $\eta_2=l$, his information set is $\mathbb{I}_2=\{\eta_1=1,\eta_2=-1\}$
 		\end{itemize}
 		\item Signals are \emph{symmetric}, so
-		\[ r_2 = \mathbb{P}(v=H|\mathbb{I}_2)	 = \frac{\frac{1}{2} p(1-p)}{\frac{1}{2} p(1-p)+\frac{1}{2} (1-p)p} = 1/2 \]
-		\item Thus, second agent is indifferent
-		\item Suppose coin-toss decides invest: $d_2=1$
+		\[ r_2(l,\rho) = \mathbb{P}(v=H|\mathbb{I}_2) = \frac{\frac{1}{2} \rho(1-\rho)}{\frac{1}{2} \rho(1-\rho)+\frac{1}{2} (1-\rho)\rho} = 1/2 \]
+		\item Thus, second agent is indifferent, flips a coin to decide. If $d_2 = 0$ then we are back to $q_3=1/2$.
+		\item But suppose the coin-toss decides invest: $d_2=1$
 	\end{itemize}
 \end{frame}
 
@@ -580,17 +575,17 @@
 	\textbf{Third agent}
 	\begin{itemize}
 		\item Third agent can also perfectly deduce the first agent's signal
-		\item Information set is $\mathbb{I}_3=\{S_1=1, d_2=1, S_3=-1\}$. Furthermore,  
+		\item Information set is $\mathbb{I}_3=\{\eta_1=h, d_2=1, \eta_3=l\}$. Furthermore,  
 		\begin{align*}
-		\mathbb{P}(d_2=1|v=H)	&=p +(1-p) (1/2)=(1+p)/2\\
-		\mathbb{P}(d_2=1|v=L)	& =p(1/2) +(1-p)=1-p/2
+		\mathbb{P}(d_2=1|v=H)	&= \rho +(1-\rho) (1/2)=(1+\rho)/2\\
+		\mathbb{P}(d_2=1|v=L)	&= \rho(1/2) +(1-\rho)=1-\rho/2
+		\\
+		\Rightarrow q_3(q_2=\rho,d_2=1) &= \frac{\rho \frac{1+\rho}{2}}{\rho \frac{1+\rho}{2} + (1-\rho) \left(1-\frac{\rho}{2}\right)}
+		\\
+		\Rightarrow r_3(l,q_3) &= 
+		 \frac{\rho \frac{1+\rho}{2}(1-\rho)}{\rho\frac{1+\rho}{2}(1-\rho) + (1-\rho) \left(1-\frac{\rho}{2}\right)\rho} 
+		=\frac{1+\rho}{3}>\frac{1}{2}
 		\end{align*}
-		\item Thus
-		\[
-			\mathbb{P}(v=H|\mathbb{I}_3) 	
-			 = \frac{\frac{1}{2}p \frac{1+p}{2}(1-p)}{\frac{1}{2}p\frac{1+p}{2}(1-p)+\frac{1}{2}(1-p)(1-\frac{p}{2})p} 
-			=\frac{1}{3} + \frac{p}{3}>\frac{1}{2}
-		\]
 		\item Hence, $d_3=1$
 	\end{itemize}
 \end{frame}
@@ -599,14 +594,11 @@
 \begin{frame}{Herding example: Analysis (4)}
 	\textbf{Fourth agent}
 	\begin{itemize}
-		\item Information set   $\mathbb{I}_4=\{S_1=1,d_2=d_3=1, S_4=-1\}$
+		\item Information set   $\mathbb{I}_4=\{\eta_1=h,d_2=d_3=1, \eta_4=l\}$
 		\item Agent four knows that agent three would have invested regardless of his signal
-		\item So he doesn't learn anything from $d_3$. In consequence:
-		\[
-		\mathbb{P}(v=H|\mathbb{I}_4) =\mathbb{P}(v=H|\mathbb{I}_3) 	=\frac{1}{3} + \frac{p}{3}		
-		\]
+		\item So he doesn't learn anything from $d_3$. So $q_4 = q_3$ and $r_4(l,q_4) = r_3(l,q_3)$
 		\item Hence $d_4=1$
-		\item Same for all subsequent agents: $d_i=I$ for all $i$
+		\item Same for all subsequent agents: $d_i=1$ for all $i$, regardless of $\eta_i$!
 		\item We have a herd! -- and a very inefficient one at that! (Look at signals) \hyperlink{HERD}{\beamerbutton{back}}
 	\end{itemize}
 \end{frame}
@@ -616,13 +608,13 @@
 \begin{frame}{Herding with prices example} \label{layers}
 	Take an extreme case of Avery and Zemsky's model: suppose the following parameter values
 	\begin{itemize}
-		\item $\mathbb{P}(V=1/2)=0.9999$: very small prior probability of an `event'; $\mathbb{P}(V=1)=\mathbb{P}(V=0)=0.00005$
+		\item $\mathbb{P}(v=1/2)=0.9999$: very small prior probability of an `event'; $\mathbb{P}(v=1)=\mathbb{P}(v=0)=0.00005$
 		\item $\frac{\mathbb{P}(\mu=\mu^{H})}{\mathbb{P}(\mu=\mu^{L})}=99$: high prior probability of a well-informed economy
 		\item If economy is poorly informed: all traders have $p_{i}=0.51$, i.e. very poor signal about value
 	\end{itemize}
 	Suppose we're in an unlikely state of the world
 	\begin{enumerate}
-		\item Value is low ($V=0$) implying that there is an event
+		\item Value is low ($v=0$) implying that there is an event
 		\item The economy is poorly informed ($\mu=\mu^L$)
 	\end{enumerate}
 	How will  market learn state of the world? Let's look at a  simulation
