@@ -17,7 +17,7 @@ Chapter 2 of FPR}
 \author{Egor Starkov}
 
 \date{K{\o}benhavns Unversitet \\
-	Spring 2023}
+	Spring 2025}
 
 
 
@@ -60,7 +60,7 @@ Chapter 2 of FPR}
 				\item Competition
 				\item ...
 			\end{enumerate}
-			Also affected by the representative agent's preferences (discounting, risk-aversion, income profile)
+			Also affected by investors' preferences (discounting, risk-aversion, income profile)
 		}
 	\end{itemize}
 \end{frame}
@@ -158,7 +158,7 @@ Chapter 2 of FPR}
 
 \begin{frame}{Why do we care about liquidity?}
 \begin{itemize}
-	\item Traders: liquidity provides a measure of trading costs
+	\item Traders: liquidity provides a measure of trading costs, affects how costly it is to implement a given theoretical trading strategy
 	\item Regulators:
 	\begin{enumerate}
 		\item Efficiency is tricky to measure in financial markets: liquidity provides a proxy
@@ -173,12 +173,12 @@ Chapter 2 of FPR}
 \end{frame}
 
 
-\begin{frame}<handout:0>{Liquidity dry ups}
-	Liquidity can change over time, can dry up in times of instability
-	\begin{center}
-		\includegraphics[scale=0.5]{pics/L2_liquiditylehman}
-	\end{center}
-\end{frame}
+%\begin{frame}<handout:0>{Liquidity dry ups}
+%	Liquidity can change over time, can dry up in times of instability
+%	\begin{center}
+%		\includegraphics[scale=0.5]{pics/L2_liquiditylehman}
+%	\end{center}
+%\end{frame}
 
 
 
@@ -188,14 +188,15 @@ Chapter 2 of FPR}
 Liquidity is not a very well-defined concept, so it's not immediate how to measure it either. We will consider several measures:
 \begin{enumerate}
 	\item \textbf{Spread measures}: quoted spread, effective spread, realized spread
-	\item \textbf{Volume-weighted average price}: simply using average prices
-	\item \textbf{Price impact}: How much does the price move after a trade
+	\item \textbf{Implementation measures}: volume-weighted average price, price impact, implementation shortfall
+	%\item \textbf{Volume-weighted average price}: simply using average prices
+	%\item \textbf{Price impact}: How much does the price move after a trade
 	\item \textbf{Non-trading measures}: trading volumes
+	\item \textit{Missing data estimators}: Lee-Ready algorithm for trade direction, Roll's measure for quotes
 \end{enumerate}
+%When trade direction is not available: estimate via \structure{Lee-Ready algorithm}. 
 
-When trade direction is not available: estimate via \structure{Lee-Ready algorithm}. 
-
-When quote data are not available: estimate them using \structure{Roll's measure}
+%When quote data are not available: estimate them using \structure{Roll's measure}
 \end{frame}
 
 
@@ -513,7 +514,7 @@ When quote data are not available: estimate them using \structure{Roll's measure
 	\begin{center}
 		\includegraphics[scale=0.39]{pics/L2_Amihud}
 	\end{center}
-	Somewhat volatile on high-frequency data, usually taken as an average over longer intervals (month) -- but then it is also hard to interpret.
+	Somewhat volatile on high-frequency data. Usually calculated for daily data and/or then averaged over a longer interval (month) -- but then it is also hard to interpret.
 \end{frame}
 
 
@@ -529,6 +530,22 @@ When quote data are not available: estimate them using \structure{Roll's measure
 \end{itemize}
 \end{frame}
 
+
+\section{Implementation Measures}
+
+\begin{frame}{Implementation Measures}
+	We can also look at measures of how costly it is for traders to implement a given trade in reality, as opposed to ``paper trading'' (looking at trades-you-could-have-done).
+	
+	\pause\bigskip 
+	\begin{block}{Example}
+		[Perold (1988) observed that] from 1965 to 1986, a paper portfolio based
+		on the Value Line ranking system outperformed the market by 20\% per year,
+		and the real Value Line fund, which implemented the trades recommended in
+		the newsletter, outperformed the market by only 2.5\% per year, emphasizing
+		that the quality of implementation is at least as important as the investment
+		idea itself. \citep{anand_performance_2012}
+	\end{block}
+\end{frame}
 
 \begin{frame}{Volume based measure}
 \begin{itemize}
@@ -550,9 +567,9 @@ When quote data are not available: estimate them using \structure{Roll's measure
 \begin{frame}{Implementation shortfall}
 	\begin{itemize}
 		%\item The previous measures the time it takes to execute order %TODO - ???
-		\item Aim at time 0: to (net) purchase $q$ shares
+		\item Aim at time 0: to (net) purchase $q$ shares at current (mid)price $m_0$
 		\begin{itemize}
-			\item By time $t$, fraction $\kappa_t$ has been executed, at an average execution price $\bar{p}_t$
+			\item Suppose by time $t$, fraction $\kappa_t$ has been executed, at an average execution price $\bar{p}_t$
 			\item The realized trading gain is $\kappa_t q(m_t-\bar{p}_t)$
 			\item An ideal gain from immediate execution without price impact would have been $q(m_t - m_0)$
 			\item The difference is the \alert{implementation shortfall}:
@@ -581,6 +598,17 @@ When quote data are not available: estimate them using \structure{Roll's measure
 	Breaking down the shortfall into opportunity cost and execution cost
 	\center
 	\includegraphics[scale=0.39]{pics/L2_is2}
+\end{frame}
+	
+	
+\begin{frame}{Implementation shortfall}
+	\begin{itemize}
+		\item \citet{anand_performance_2012} show evidence that top market performers have a consistently negative implementation shortfall.
+		\item ``there is more to a trading strategy than just selecting a broker''
+		\begin{itemize}
+			\item (e.g., when to trade, how much, how to react to market movements...)
+		\end{itemize}
+	\end{itemize}
 \end{frame}
 
 

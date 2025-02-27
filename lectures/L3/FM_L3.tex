@@ -16,7 +16,7 @@
 \author{Egor Starkov}
 
 \date{K{\o}benhavns Unversitet \\
-	Spring 2023}
+	Spring 2025}
 
 
 
@@ -299,9 +299,9 @@ So we will not take EMH for granted, but rather see whether it arises in models 
 
 
 \begin{frame}{Informational efficiency (2)}
-	\begin{itemize}
-	 \item Also, $\mathbb{E}[\epsilon_{s}\epsilon_t]=0$, $\forall s \ne t$.
-	\item Price innovation is equal to the valuation innovation:
+\begin{itemize}
+	\item Also, $\mathbb{E}[\epsilon_{s}\epsilon_t]=0$, $\forall s \ne t$.
+	\item Under efficiency, price innovation is equal to the valuation innovation:
 	\[
 	p_{t+1} - p_t = \mu_{t+1} - \mu_t = \epsilon_{t+1}
 	\]
@@ -310,6 +310,17 @@ So we will not take EMH for granted, but rather see whether it arises in models 
 	\mathbb{E}[p_{t+1}|\Omega_{t}] = p_t
 	\]
 	\item When we have informational efficiency, the price is a \alert{martingale}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Interim conclusion}
+\begin{itemize}
+	\item We asked the questions of ``why do people trade?'' and ``how are prices determined?''
+	\item One set of answers: informational reasons for trade; prices aggregate private info to some extent
+	\item Some say prices must be informationally efficient -- reflect the market valuation perfectly, so aggregate all available information
+	\item Just shown that efficiency must imply that price is a martingale. It's a testable implication: if price movements are not random, then prices are not efficient.
+	\item Next: study one model of informational trading, see whether it predicts efficiency.
 \end{itemize}
 \end{frame}
 
@@ -361,7 +372,7 @@ So we will not take EMH for granted, but rather see whether it arises in models 
 \begin{frame}{GM85: Model (1)}
 	\textbf{Trader:} is either a speculator or a noise trader, can submit a market order $d_t \in \{1, -1\}$ to buy or sell one unit of the asset with fundamental value $v$ (or do nothing, $d_t=0$)
 	\begin{itemize}
-		\item \structure{Speculator} (probability $\pi$): has private information about $v$.
+		\item \structure{Speculator/informed trader} (probability $\pi$): has private information about $v$.
 		\begin{itemize}
 			\item We will usually assume speculator simply knows $v$ (not much changes if he only has a noisy private signal about it).
 			\item Risk neutral, chooses his market order $d_t$ to maximize expected profit $d_t \cdot (v-p_t)$:
