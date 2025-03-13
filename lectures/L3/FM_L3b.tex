@@ -16,7 +16,7 @@
 \author{Egor Starkov}
 
 \date{K{\o}benhavns Unversitet \\
-	Spring 2023}
+	Spring 2025}
 
 
 
@@ -218,7 +218,7 @@
 			= \frac{(1-\pi)\beta_B}{(1-\pi) \beta_B + \pi \mathbb{P}(v \geq a_t)} \cdot \mu_{t-1} &+ \frac{\pi \mathbb{P}(v \geq a_t | \Omega_{t-1})}{(1-\pi) \beta_B + \pi \mathbb{P}(v \geq a_t)} \cdot \mathbb{E} [v | \Omega_{t-1}, v \geq a_t],
 		\end{align*}
 		}
-		meaning that in the end, $a_t \geq \mu_{t-1}$.
+		meaning that in the end, \structure{$a_t \geq \mu_{t-1}$}.
 	\end{itemize}
 \end{frame}
 
@@ -238,26 +238,41 @@
 			\visible<handout:0|2->{
 			\item where $\mathbb{P}(Sell|\Omega_{t-1}, v) = (1-\pi) \beta_S + \pi \mathbb{P}(v\leq b_t)$,
 			}
-			\item so $b_t \leq \mu_{t-1}$, and we have confirmed that indeed $a_t \geq b_t$.
+			\item so \structure{$b_t \leq \mu_{t-1}$}, and we have confirmed that indeed $a_t \geq b_t$.
+		\end{itemize}
+		\pause[3]
+		\item These prices $a_t, b_t$ together with the speculator's trading strategy constitute the equilibrium.
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Analysis. E: Profits}
+	\begin{itemize}
+		\item \structure{Informed traders} earn positive profit (since know $v$ and have an option of doing nothing)
+		\item Dealers assumed competitive, hence zero profit
+		\item \alert{Uninformed traders} incur a loss
+		\begin{itemize}
+			\item Although this is because we modeled this as a zero-sum game and explicitly ignored the uninformed traders' potential trading motives.
 		\end{itemize}
 	\end{itemize}
 \end{frame}
 
 
-\begin{frame}{Analysis. E: Price efficiency}
+\begin{frame}{Analysis. F: Price efficiency}
 	\begin{itemize}
-		\item $\mu_t \equiv \mathbb{E}[v | \Omega_t]$ is the expectation of $v$ \textit{after} the time-$t$ trade order is observed. Note that in our model:
+		\item $\mu_t \equiv \mathbb{E}[v | \Omega_t]$ is the expectation of $v$ \emph{after} the time-$t$ trade order is observed (by the dealer and outside observers). Note that in our model:
 		$$\mu_t = \begin{cases}
-			a_t & \text{ if buy order at } t;
+			a_t > \mu_{t-1} & \text{ if buy order at } t;
 			\\
-			b_t & \text{ if sell order at } t.
+			b_t < \mu_{t-1} & \text{ if sell order at } t.
 		\end{cases} $$
 		\item Meaning market price is efficient: $p_t = \mu_t$
 		\begin{itemize}
-			\item in \alert{semi-strong} form,
-			\item not in the \alert{strong} form (equivalent to $p_t = v$)
+			\item in \alert{semi-strong} form (prices anticipate and incorporate all information conveyed through trades),
+			\item not in the \alert{strong} form (which would be equivalent to $p_t = v$)
 		\end{itemize}
-		\item This is because dealers are \structure{competitive}
+		\pause 
+		\item This is because dealers are \structure{competitive} -- dealers' market power would ruin efficiency
 		%\item let $s^a_t = a_t - p_t$ and $s^b_t = b_t - p_t$ denote the `half-spreads'.
 	\end{itemize}
 \end{frame}
@@ -268,8 +283,10 @@
 
 \section{GM example}
 
-\begin{frame}{Example (as in book)}
+\begin{frame}{Example (as in the book)}
 \begin{itemize}
+	\item Let's do an example similar to your homework; calculate the prices more explicitly.
+	\bigskip 
 	\item \textbf{Single period}: Suppose only one period (drop $t$ subscript, drop $\Omega$)
 	\item \textbf{Binary outcome}: $v \in \{ v^H, v^L\}$, with prior $\theta=\mathbb{P}(v^H) $ 
 	\item \textbf{Prior value}: What is the prior value of the asset before trading?
@@ -392,23 +409,8 @@
 
 \section{GM: conclusions}
 
-\begin{frame}[label=overview]{Model overview: Glosten and Milgrom}
-	\structure{Model}
-	\begin{itemize}
-		\item \textbf{Dealer model}: Prices are set each period, discriminative, normally competitive (zero profits)
-		\item \textbf{Non-market clearing}: Only one unit traded  - not market clearing (traders may wish to buy/sell more)
-		\item Only \textbf{fundamental value} matters,  no speculation/resale
-	\end{itemize}
-	\structure{Discussion}
-	\begin{itemize}
-		\item \textbf{Insights}: Adverse selection as a driver of the spread
-		\item \textbf{Shortcomings}: Trade fixed amount, trade once, no resale
-		\item \textbf{Advantages}: (Relatively) simple analysis, flexible %, trader is not price-taker (realizes price-impact)
-	\end{itemize}
-\end{frame}
 
-
-\begin{frame}{Summary}
+\begin{frame}{GM: Summary of the findings}
 	What did we learn from the Glosten and Milgrom model?
 	\begin{enumerate}
 		\item Information, prices and the spread
@@ -426,6 +428,22 @@
 			\item Informed speculation increases spreads, but improves price discovery - dilemma for regulators
 		\end{itemize}
 	\end{enumerate}
+\end{frame}
+
+
+\begin{frame}[label=overview]{GM: Discussion}
+\structure{(anti?)Features}
+\begin{itemize}
+	\item \textbf{Dealer model}: Prices are set each period, discriminative, normally competitive (zero profits)
+	\item \textbf{Non-market clearing}: Only one unit traded  - not market clearing (traders may wish to buy/sell more)
+	\item Only \textbf{fundamental value} matters,  no speculation/resale
+\end{itemize}
+\structure{Discussion}
+\begin{itemize}
+	\item \textbf{Insights}: Adverse selection as a driver of the spread
+	\item \textbf{Shortcomings}: Trade fixed amount, trade once, no resale
+	\item \textbf{Advantages}: (Relatively) simple analysis, flexible %, trader is not price-taker (realizes price-impact)
+\end{itemize}
 \end{frame}
 
 

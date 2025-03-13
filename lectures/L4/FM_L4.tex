@@ -16,7 +16,7 @@ Chapter 3.4-3.7 of FPR}
 \author{Egor Starkov}
 
 \date{K{\o}benhavns Unversitet \\
-	Spring 2023}
+	Spring 2025}
 
 
 \begin{document}
@@ -273,8 +273,8 @@ Chapter 3.4-3.7 of FPR}
 
 \begin{frame}{GM-IRE: Dealer's utility}
 	\begin{itemize}
-		\item As usual, let $\mathbb{E}[\epsilon_t] = 0$, $\mathbb{V}(\epsilon_t) = \sigma^2$, and remember that $z_t$ is the current inventory.
-		\item Dealer's utility is
+		\item As usual, let $\mathbb{E}[\epsilon_t] = 0$, $\mathbb{V}(\epsilon_t) = \sigma^2$, and remember that $z_t$ is the current inventory, and $w_t = z_t \mu_t + c_t$.
+		\item Dealer's utility at the end of period $t$ is
 		\begin{align*}
 			\text{if no orders:}\quad & U(w_{t+1}|N) = \visible<handout:0|2->{ z_t \mu_t + c_t - \frac{\rho}{2}z_t^2 \sigma^2 }
 			\\
@@ -287,7 +287,7 @@ Chapter 3.4-3.7 of FPR}
 
 
 \begin{frame}{GM-IRE: Quotes}
-	To derive equilibrium \alert{quotes}, use \structure{zero-profit condition}
+	To derive equilibrium \alert{quotes}, use the \structure{zero-profit condition}
 	\begin{itemize}
 		\item i.e., ensure that the dealer's expected utility does not change after trading
 		\item (assume all competing dealers have same inventory $z_t$)
@@ -313,7 +313,7 @@ Chapter 3.4-3.7 of FPR}
 			\item Depends on dealer's inventory $z_t$. Dealer demands risk premium for taking a position in the asset.
 			\item Effects depend on risk paratements $\rho$ and $\sigma^2$
 			\item To emphasize: prices here are \alert{not efficient}
-			\item This inefficiency would in principle also motivate traders to submit the ``right'' orders -- arbitrage! (Not present in the model, since our traders are not strategic.)
+			\item This inefficiency would in principle also motivate traders to submit the ``right'' orders -- arbitrage! (Not present in this model, since we assumed traders are not strategic and not sensitive to the price.)
 		\end{itemize}
 	\end{itemize}
 \end{frame}
@@ -511,6 +511,9 @@ Chapter 3.4-3.7 of FPR}
 \begin{frame}{Summary}
 	\begin{itemize}
 		\item The spread is driven not only by adverse selection: order costs and inventory risk have an effect as well
+		\begin{itemize}
+			\item Price efficiency is lost once these new factors come into play
+		\end{itemize}
 		\item How can we figure out which of these factors are more/less important? By their long-term effects! Will talk about that soon.
 		\item But before we go there, next time: what affects market \emph{depth}?
 	\end{itemize}
@@ -526,28 +529,13 @@ Chapter 3.4-3.7 of FPR}
 			\item How does inventory risk manifest in this story?
 			\item Explain why such inventory risk can be priced even by risk-neutral agents.
 		\end{itemize}
-		\item Negative oil futures prices were registered last year (blog post on absalon or \href{https://streetwiseprofessor.com/wti-wtf/}{\uline{here}}).
+		\item Negative oil futures prices were registered in 2020 (blog post on absalon or \href{https://streetwiseprofessor.com/wti-wtf/}{\uline{here}}).
 		\begin{itemize}
 			\item Why did it happen? How do negative prices make sense?
 			\item How does inventory risk manifest in this story?
 			\item Explain why such inventory risk can be priced even by risk-neutral agents.
 		\end{itemize}
 	\end{itemize}
-	
-	%(Also remember about the GM problems.)
-
-	%\begin{itemize}
-	%	\item for next Wednesday:
-	%	\begin{itemize}
-	%		\item In Absalon, I have attached an article from the Economist, December 14 2013, on the Volcker rule. Discuss the claim that \emph{``In practice banks will probably respond by making markets for a narrow range of securities that already trade frequently, and thus might reasonably be expected to do so in the future. Meanwhile, the securities that now change hands less frequently are likely to be shunned, making them even harder to trade.''}
-	%		\item Two other Bloomberg articles are on Einar Aas and his exclusion from Nasdaq. Use this case to discuss how risk aversion (and so inventory risk) can stem from regulation.
-	%	\end{itemize}
-	%	\item for this Friday:
-	%	\begin{itemize}
-	%		\item If you are bored, solve Exercise 9 on page 128 about the bid-ask spread in the mean-SD model
-	%		\item If you feel like a challenge, solve exercise 10 on page 128
-	%	\end{itemize}
-	%\end{itemize}
 \end{frame}
 
 

@@ -17,7 +17,7 @@
 \author{Egor Starkov}
 
 \date{K{\o}benhavns Unversitet \\
-	Spring 2023}
+	Spring 2025}
 
 
 \begin{document}
@@ -204,118 +204,86 @@
 		\item Note: $\beta$ is endogenously determined by the equilibrium, we'll derive it
 		\item $\beta>0$ measures speculator \textit{aggression}
 	\end{itemize}
-	\item MM knows the speculator's strategy (in eqm):
+	\item MM's pricing is driven by the zero-profit condition: $p=\mathbb{E}[v|q]$
 	\begin{itemize}
-		\item Observes $q=x+u=\beta(v-\mu)+u$, and wants to \alert{estimate $v$}
-		\item Intuitively, \alert{$\mathbb{E}[v|q] = \mu + \lambda  q$}, where $\lambda $ is the regression coefficient $\mathbb{C}(v,q)/\mathbb{V}(q)$, and recall that $\mu=\mathbb{E}[v]$. (This is derived formally in the following slides.)
+		\item In eqm, MM knows the speculator's strategy ($x=\beta(v-\mu)$)
+		\item So MM observes $q=x+u=\beta(v-\mu)+u$, and wants to \alert{estimate $v$}
+		%\item Intuitively, \alert{$\mathbb{E}[v|q] = \mu + \lambda  q$}, where $\lambda $ is the regression coefficient $\mathbb{C}(v,q)/\mathbb{V}(q)$, and recall that $\mu=\mathbb{E}[v]$. (This is derived formally in the following slides.)
 	\end{itemize}
-	\item Since $p=\mathbb{E}[v|q]$, we can use the conditional expectation to get a price impact equation 
-	\[
-	p=\mu+\lambda q.
-	\]
-	Here $1/\lambda$ would be a measure of market depth
+	%\item Since $p=\mathbb{E}[v|q]$, we can use the conditional expectation to get a price impact equation 
+	%\[
+	%p=\mu+\lambda q.
+	%\]
+	%Here $1/\lambda$ would be a measure of market depth
 \end{itemize}
 \end{frame}
 
 
-\begin{frame}{Aside: Deriving the distribution of $v|q$}
-	\begin{block}{Claim}
-		If $q=\beta(v-\mu) + u$ and $v,u$ are joint normal then $v|q$ is normal, with
+\begin{frame}{Aside: Hitchhiker's guide to normal updating}
+	Updating normal beliefs with normal signals might seem daunting at first, but here's how it works.
+	\pause 
+	\begin{itemize}
+		\item Suppose there is some uncertain \structure<1>{variable $x$} and our prior belief is that \structure<1>{$x \sim \mathcal{N}(\mu_x, \sigma^2_x)$}
+		\item This prior belief is said to have \alert<1>{precision $\tau_x \equiv \frac{1}{\sigma^2_x}$}.
+		\pause 
+		\item Suppose we get \structure<2>{signal $y$} about $x$ with \alert<2>{precision $\tau_\epsilon$}. 
+		\\I.e., we observe \structure<2>{$y = x + \epsilon$}, where $\epsilon \sim \mathcal{N}\left( 0, \frac{1}{\tau_\epsilon} \right)$ (so $\tau_\epsilon \equiv \frac{1}{\sigma^2_\epsilon}$).
+		\pause 
+		\item Then our \structure{posterior belief} about $x$ has \alert{precision $\tau_{x|\epsilon} = \tau_x + \tau_\epsilon$}, and the posterior mean weighs the prior mean $\mu_x$ and the signal $y$ according to their precisions: 
 		\begin{align*}
-			\mathbb{E}[v|q] &= \mathbb{E}[v] + \frac{\mathbb{C}(v,q)}{\mathbb{V}(q)} (q-\mathbb{E}[q]),
-			\\
-			\mathbb{V}(v|q) &= 1/(1/\sigma^2_v + \beta^2 / \sigma^2_u).
+			x|y &\sim \mathcal{N} \left( \alert{\frac{\tau_x}{\tau_x + \tau_\epsilon}} \mu_x + \alert{\frac{\tau_\epsilon}{\tau_x + \tau_\epsilon}} y ,\; \frac{1}{\tau_{x|\epsilon}} \right)
 		\end{align*}
-	\end{block}
-	%\structure{Proof}:
-	\begin{enumerate}
-		\item Will show for our case ($v \sim \mathcal{N}(\mu, \sigma^2_v)$, $u \sim \mathcal{N}(0, \sigma^2_u)$, and $v \perp u$). In this case:
-		\begin{align*}
-			q    & \sim \mathcal{N}(0, \beta^2 \sigma^2_v+\sigma^2_u),
-			\\
-			q|v & \sim \mathcal{N}(\beta(v-\mu), \sigma^2_u).
-		\end{align*}
-		Also, note that $\mathbb{C}(v,q)= \mathbb{C}(v, \beta(v-\mu)+u)=\beta\sigma^2_v$
-	\end{enumerate}
+		(you can verify this by directly calculating the conditional pdf)
+	\end{itemize}
 \end{frame}
 
 
-\begin{frame}%{Aside: Normal information model (2)}
-	\begin{enumerate}
-		\setcounter{enumi}{1}
-		\item Use Bayes' rule to derive the conditional density: $f(v|q) = f(v) \frac{f(q|v)}{f(q)} $.
-		\\
-		(reminder: if $y \sim \mathcal{N}(\mu,\sigma^2)$ then its pdf is \structure{$f(y)=\frac{1}{\sqrt{2 \pi \sigma^2}} e^{-\frac{(y-\mu)^2}{2 \sigma^2}}$})
+\begin{frame}{Deriving the distribution of $v|q$}
+	In our case:
+	\begin{itemize}
+		\item $v \sim \mathcal{N}(\mu, \sigma^2_v)$,
+		\item $q=\beta(v-\mu) + u$, where $u \sim \mathcal{N}(0, \sigma^2_u)$, $u \perp v$.
+		\pause \medskip 
+		\item So the prior precision (of the belief about $v$) is $\tau_v \equiv \visible<handout:0>{\frac{1}{\sigma^2_v}}$, 
+		\item and the signal is $\tilde{q} \equiv \visible<handout:0>{\frac{q}{\beta} + \mu = v + \frac{u}{\beta}}$, which has precision $\tau_{\tilde{q}} = \visible<handout:0>{\frac{\beta^2}{\sigma^2_u}}$
+		\pause \medskip 
+		\item Then 
 		\begin{align*}
-			f(v|q) = f(v) \frac{f(q|v)}{f(q)} 
-			&= \sqrt{\frac{2\pi (\beta^2 \sigma^2_v+\sigma^2_u)}{2 \pi \sigma^2_v \cdot 2 \pi \sigma^2_u}} e^{- \frac{(v-\mu)^2}{2\sigma^2_v} - \frac{(q-\beta(v-\mu))^2}{2\sigma^2_u } + \frac{q^2}{2(\beta^2 \sigma^2_v + \sigma^2_u)}}
+			v|q & \sim \mathcal{N} \left( \frac{\tau_v}{\tau_v + \tau_{\tilde{q}}} \mu + \frac{\tau_{\tilde{q}}}{\tau_v + \tau_{\tilde{q}}} \tilde{q} ,\; \frac{1}{\tau_v + \tau_{\tilde{q}}} \right)
 			\\
-			&= \frac{1}{\sqrt{2 \pi \frac{\sigma^2_v \sigma^2_u}{\beta^2 \sigma^2_v+\sigma^2_u}}} e^{-\alert{\left[ \frac{(v-\mu)^2}{2\sigma^2_v} + \frac{(q-\beta(v-\mu))^2}{2\sigma^2_u } \right]} + \frac{q^2}{2(\beta^2 \sigma^2_v + \sigma^2_u)}}
+			& \sim \mathcal{N} \left( \visible<handout:0>{\mu + \frac{\beta \sigma^2_v}{\beta^2 \sigma^2_v + \sigma^2_u} q,\; \left( \frac{1}{\sigma^2_v}+\frac{\beta^2}{\sigma^2_u} \right)^{-1} } \right)
 		\end{align*}
-		\item $f(v|q)$ looks like a normal pdf! From the leading fraction infer that  $\mathbb{V}(v|q) = \frac{\sigma^2_v \sigma^2_u}{\beta^2 \sigma^2_v+\sigma^2_u}$
-		
-	\end{enumerate}
-\end{frame}
-
-
-\begin{frame}
-	\begin{enumerate}
-		\setcounter{enumi}{3}
-		\item Rearrange the terms in the power to have the $2\mathbb{V}(v|q)$ in the denominator:
-		\begin{align*}
-			&- \frac{(v-\mu)^2}{2\sigma^2_v} - \frac{(q-\beta(v-\mu))^2}{2\sigma^2_u } + \frac{q^2}{2(\beta^2 \sigma^2_v + \sigma^2_u)} =
-			\\
-			&= - \frac{(v-\mu)^2 \sigma^2_u}{2\sigma^2_v \sigma^2_u} - \frac{(q-\beta(v-\mu))^2 \sigma^2_v}{2 \sigma^2_v \sigma^2_u } + \frac{\frac{q^2}{\beta^2 \sigma^2_v + \sigma^2_u} \sigma^2_v  \sigma^2_u}{2 \sigma^2_v  \sigma^2_u} \
-			\\
-			&= \frac{1}{\frac{2 \sigma^2_v \sigma^2_u}{\beta^2 \sigma^2_v+\sigma^2_u}} \left[ -\frac{(v-\mu)^2 \sigma^2_u}{\beta^2 \sigma^2_v+\sigma^2_u} - \frac{(q-\beta(v-\mu))^2 \sigma^2_v}{\beta^2 \sigma^2_v+\sigma^2_u} + \frac{q^2 \sigma^2_v  \sigma^2_u}{ \left(\beta^2 \sigma^2_v + \sigma^2_u \right)^2} \right]
-		\end{align*}
-		\item And then rewrite the square bracket as a parabola of $v$:
-		\begin{align*}
-			&= \frac{1}{2\mathbb{V}(v|q)} \left[ \alert{-v^2} \frac{ \sigma^2_u + \beta^2 \sigma^2_v }{\beta^2 \sigma^2_v+\sigma^2_u} \alert{+ 2v} \frac{ \mu \sigma^2_u + \beta^2 \mu \sigma^2_v + \beta q \sigma^2_v }{\beta^2 \sigma^2_v+\sigma^2_u} + ... \right]
-			\\
-			&= \frac{-\left( v - \frac{\mu \sigma^2_u + \beta^2 \mu \sigma^2_v + \beta q \sigma^2_v}{\beta^2 \sigma^2_v + \sigma^2_u} \right)^2 }{2\mathbb{V}(v|q)}
-			= \frac{-\left( v-\alert{\mu-\frac{\beta \sigma^2_v}{\beta^2 \sigma^2_v + \sigma^2_u}q } \right)^2 }{2\mathbb{V}(v|q)}
-		\end{align*} 
-		(I leave it to you to confirm that the "..." part works out)
-	\end{enumerate}
-\end{frame}
-
-
-\begin{frame}
-	\begin{enumerate}
-		\setcounter{enumi}{5}
-		\item Putting everything together:
-		\[
-			f(v|q) = \frac{1}{\sqrt{2 \pi \frac{\sigma^2_v \sigma^2_u}{\beta^2 \sigma^2_v+\sigma^2_u}}} e^{-\frac{\left( v - \mu - \frac{\beta \sigma^2_v}{\beta^2 \sigma^2_v + \sigma^2_u}q \right)^2 }{2 \frac{\sigma^2_v \sigma^2_u}{\beta^2 \sigma^2_v+\sigma^2_u}}}
-		\]
-		This is indeed a pdf of the normal distribution with 
-		\begin{align*}
-			\mathbb{E}[v|q] &= \alert{\mu+\frac{\beta \sigma^2_v}{\beta^2 \sigma^2_v + \sigma^2_u}q} = \mathbb{E}[v] + \frac{\mathbb{C}(v,q)}{\mathbb{V}(q)} (q-\mathbb{E}[q]),
-			\\
-			\mathbb{V}[v|q] &= \structure{ \left( \frac{1}{\sigma^2_v}+\frac{\beta^2}{\sigma^2_u} \right)^{-1}},
-		\end{align*}
-		as claimed. 
-	\end{enumerate}
+	\end{itemize}
 \end{frame}
 
 
 \begin{frame}{Dealer's strategy}
-	\[
-		\mathbb{E}[v|q] = \mathbb{E}[v] + \frac{\mathbb{C}(v,q)}{\mathbb{V}(q)} (q-\mathbb{E}[q]) = \mu + \frac{\mathbb{C}(v,q)}{\mathbb{V}(q)} q,
-	\]
-	From zero profit condition: \alert{$p = \mathbb{E}[v|q]$}, hence
-	\begin{align*}
+	%\[
+	%	\mathbb{E}[v|q] = \mathbb{E}[v] + \frac{\mathbb{C}(v,q)}{\mathbb{V}(q)} (q-\mathbb{E}[q]) = \mu + \frac{\mathbb{C}(v,q)}{\mathbb{V}(q)} q,
+	%\]
+	Going back to the zero profit condition: 
+	%\alert{$p = \mathbb{E}[v|q]$}, hence
+	\begin{align*}\\
+		p &= \mathbb{E}[v|q]
+		\\ \iff
+		p &= \mu + \frac{\beta \sigma^2_v}{\beta^2 \sigma^2_v + \sigma^2_u} q
+		\\ \iff 
 		p &= \mu + \lambda q,
 		\\
-		\text{where } \lambda &\equiv \frac{\mathbb{C}(v,q)}{\mathbb{V}(q)} = \frac{\beta \sigma^2_v}{\beta^2 \sigma^2_v + \sigma^2_u}
+		\text{where } \lambda &\equiv \frac{\beta \sigma^2_v}{\beta^2 \sigma^2_v + \sigma^2_u} 
+		\; \left( = \frac{\mathbb{C}(v,q)}{\mathbb{V}(q)} \right)
 	\end{align*}
+	Here $\lambda$ is the \structure{price impact} coefficient.
+	\\
+	Conversely, $1/\lambda$ is a measure of \alert{market depth}
 \end{frame}
 
 
 \begin{frame}{Speculator's strategy}
-	The speculator takes for granted the pricing rule $p=\mu+\lambda q$
+	Back to the speculator's problem.
+	The speculator takes for granted the MM's pricing rule $p=\mu+\lambda q$
 	\begin{itemize}
-		\item The \structure{profit} is $\Pi(x) = x(v-p) = x(v-\mu-\lambda x - \lambda u)$
+		\item Speculator's \structure{profit} is $\Pi(x) = x(v-p) = x(v-\mu-\lambda x - \lambda u)$
 		\item \structure{Expected profit} is $ \mathbb{E}[\Pi(x)] = x(v-\mu-\lambda x)$, since $\mathbb{E}[u]=0$
 		\item Speculator chooses $x$ to maximize $\mathbb{E}[\Pi(x)]$. Using the first-order condition:
 		\begin{align*}
@@ -326,7 +294,7 @@
 			\text{where } \alert{\beta} &\alert{=1/(2\lambda)}
 		\end{align*}
 		\item Confirmed that it is optimal for the speculator to use a linear strategy!
-		\item Note analogy to monopoly problem: \visible<handout:0|2->{\structure{trade-off between trading more and trading at better price}}
+		\item Note analogy to monopoly problem: \visible<handout:0|2->{\structure{trade-off b/w trading more and trading at better price}}
 	\end{itemize}
 \end{frame}
 
@@ -376,7 +344,7 @@
 		\end{align*}
 		Comment: speculator expects a positive profit (could abstain). Competitive risk-neutral MM earns zero profits. Noise traders lose. Same as in GM.
 		\pause
-		\item Market maker's perceived posterior (after observing $q$) \textbf{variance} of $v$ is
+		\item Market maker's \textbf{posterior variance} of $v$ is
 		\[
 		\mathbb{V}(v|q) = \frac{1}{1/\sigma^2_v + \beta^2/\sigma^2_u} = \frac{\sigma^2_v}{2}
 		\]
