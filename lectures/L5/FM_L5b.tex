@@ -9,7 +9,7 @@
 
 
 
-\title{Financial Markets Microstructure \\ Lecture 9}
+\title{Financial Markets Microstructure \\ Lecture 8}
 
 \subtitle{Empirics of illiquidity\\
 	Chapter 5 of FPR}
@@ -17,7 +17,7 @@
 \author{Egor Starkov}
 
 \date{K{\o}benhavns Unversitet \\
-	Spring 2023}
+	Spring 2025}
 
 
 \begin{document}
@@ -108,18 +108,18 @@
 
 \begin{frame}{How to estimate?}
 	\begin{itemize}
-		\item Take GM model with order costs. There have:
+		\item Consider a market with \structure{adverse selection} and \structure{order costs}.
+		\item Suppose prices are ex post efficient (apart from order costs), then:
 		\begin{align*}
 			p_t &= \mu_t + \gamma d_t
 			\\
 			\Rightarrow \varDelta p_t &= \mu_t - \mu_{t-1} + \gamma \varDelta d_t
 		\end{align*}
 		\pause
-		\item Further,
+		\item and market valuation $\mu_t$ evolves due to order flow $q_t$ and other public news $\varepsilon_t$:
 		\begin{align*}
 			\mu_t = \mu_{t-1} + \lambda q_t + \varepsilon_t
 		\end{align*}
-		order flow is informative; also let $\varepsilon_t$ include all other kinds of public news
 		\item Then
 		\begin{align*}
 			\varDelta p_t &= \lambda q_t + \gamma \varDelta d_t + \varepsilon_t
@@ -150,7 +150,7 @@
 			\item poor dataset (neither $d_t$, nor quotes are observed; prices $p_t$ were rounded to $\$1/8$ back then)
 			\item questionable specification (why have both $\lambda_0$ and $\lambda_1$?)
 		\end{itemize}
-		\item ...there is the issue of ignoring inventory costs.
+		\item ...there is the issue of ignoring \structure{inventory costs}.
 		\item In the short run, the effect of MM risk aversion would be similar
 		\begin{equation} \tag{5.14}
 		\Delta p_t = \gamma \Delta d_t + (\lambda + \beta) q_t + \epsilon_t
@@ -296,6 +296,8 @@
 		\item How do investors form their expectations of liquidity?
 		\item Can we \emph{measure investors' expectations} of liquidity?
 	\end{enumerate}
+	\item Fill in the midterm evaluations if you have any comments (link on absalon)
+	\item Start looking at problem set 1
 \end{itemize}
 \end{frame}
 
@@ -321,16 +323,16 @@
 \begin{frame}[label=derivation, noframenumbering]{Derivation of (5.21)}
 	Suppose $q_t=\phi q_{t-1}+\eta_{t}$. 
 	\begin{itemize}
-		\item \textbf{Adverse selection.} Notice that value equation is now
+		\item \textbf{Adverse selection.} Notice that the market valuation now evolves as
 		\[
 		\mu_t=\mu_{t-1}+\lambda[q_t-\mathbb{E}[q_t|\Omega_{t-1}]]+\epsilon_t.
 		\]
-		Only non-expected part of order flow carries information. 
+		(Only non-expected part of order flow carries information.)
 		\item \textbf{Price.} The price equation then becomes
 		\[
 		p_t=m_t+\beta q_t+\lambda[q_t-\mathbb{E}[q_t|\Omega_{t-1}]]+\gamma d_t,
 		\]
-		where $m_t=\mu_t-\beta z_t$ is the `mid-price' from the Stoll model 
+		where $m_t=\mu_t-\beta z_t$ is the `mid-price' from the Stoll model (or GM/Kyle models with inventory risk)
 	\end{itemize}
 \end{frame}
 
@@ -348,7 +350,7 @@
 		\]
 		\item Substitute in to get
 		\[
-		\Delta p_t =(\lambda+\beta)q_{t-1} - \lambda\phi  q_{t-1}+\gamma \Delta d_t+\epsilon_t.
+		\Delta p_t =(\lambda+\beta)q_{t} - \lambda\phi  q_{t-1}+\gamma \Delta d_t+\epsilon_t.
 		\]
 		\hyperlink{extending}{\beamerbutton{Back}}
 	\end{itemize}
