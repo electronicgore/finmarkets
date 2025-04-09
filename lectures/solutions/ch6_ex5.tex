@@ -1,0 +1,167 @@
+%%% License: Creative Commons Attribution Share Alike 4.0 (see https://creativecommons.org/licenses/by-sa/4.0/)
+%%% Slides are based heavily on earlier versions of this course taught by Jesper Rudiger.
+
+\documentclass[english,10pt
+%,handout
+,aspectratio=169
+]{beamer}
+\input{../FM_preamble.tex}
+
+
+
+\title{Financial Markets Microstructure \\ Exercises}
+
+\author{Egor Starkov}
+
+\date{K{\o}benhavns Unversitet \\
+	Spring 2025}
+
+
+
+\begin{document}
+%	\AtBeginSection[]{
+%		\frame<beamer>{
+%			\frametitle{This class:}
+%			\tableofcontents[currentsection,currentsubsection]
+%	}}
+%	
+%\frame[plain]{\titlepage}
+%\addtocounter{framenumber}{-1}
+
+
+%\begin{frame}{Plan}
+%	\begin{itemize}
+%		\item L7: Ch 6, ex 5 (p 235)
+%		\item L8: Ch 7, ex 3 (p 276)
+%		\item PS1: ex 3
+%		%\item L9: 
+%	\end{itemize}
+%\end{frame}
+
+
+
+%\section{Ch 6, ex 5}
+
+\begin{frame}{Ch 6, ex 5}
+	\textbf{Make/take fees and bid-ask spreads.} 
+	
+	Consider the Foucault (Parlour) model. Trading platforms often charge different fees for market and limit orders. 
+	\begin{itemize}
+		\item Let $f_{mo}$ be the fee per share paid by a market order placer and 
+		\item $f_{lo}$ the fee per share for a limit order placer when the limit order \emph{executes} (there is no entry fee for limit orders).
+		\item Finally let $f$ be the total fee earned by the platform on each trade, $f=f_{mo}+f_{lo}$.
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Foucault model: lecture ver}
+	The model we have seen \structure{in class}:
+	\begin{itemize}
+		\item \textbf{Exogenous prices}. Bid and ask prices exogenously given as $A>v>B$
+		\item \textbf{Traders}. Arriving trader chooses btw limit or market order (one unit)
+		\begin{itemize}
+			\item Limit order valid one period. Choice depends on prob. of limit order being executed, i.e. `hit' by a market order from the next trader
+			\item Valuation: $v+y$. $y$ is uniformly distributed on $(-Y,Y)$, unobserved and independent across traders. $v$ is known and common to all.
+		\end{itemize}
+		\item \textbf{Profits}. Let $P^B_M (P^S_M)$ be prob. of next-period market buy (sell) order
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Foucault (Parlour) model: lecture vs book ver}
+	\begin{itemize}
+		\item Model from lecture differs slightly from model \alert{in the book} (Sections 6.4.1-2):
+		\begin{itemize}
+			\item we made $A$ and $B$ exogenous, the book derives them;
+			\item we let $y_i \sim U[-Y,Y]$, the book assumes $y_i \in \{-Y,Y\}$;
+			\item in 6.4.1 the textbook initially sets up a much more general model, but never actually solves it;
+			\item in lecture, we had to assume that if LOB is empty on either side, it is filled by noise traders at same prices. The book's model doesn't need this
+		\end{itemize}
+		\item For the problem today we stick to the textbook version (Section 6.4.2)
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Ch 6, ex 5, part a}
+	\begin{exampleblock}{}
+		(a) Compute bid and ask quotes in equilibrium
+	\end{exampleblock}
+	
+	\only<1>{How do?}
+	
+	\pause
+	
+	How should traders behave in equilibrium?
+	\begin{itemize}
+		\item If $y_i = Y$ then buy
+		\begin{itemize}
+			\item indifferent between market buy (if available) and limit buy
+		\end{itemize}
+		\item If $y_i = -Y$ then sell
+		\begin{itemize}
+			\item indifferent between market sell (if available) and limit sell
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Ch 6, ex 5, part a}
+	Consider $y_i = Y$. 
+	\begin{itemize}
+		\item Profit from market buy is $v+Y-A-f_{mo}$.
+		\item Profit from limit buy is $(v+Y-B-f_{lo})P_M^S$.
+		\item Indifference $\Rightarrow$ the two are equal. This gives a condition on $A,B$ given $v,Y,f_{mo},f_{lo},P_M^S$. 
+		\item But $P_M^S$ is uncertain -- even if next trader has $y_i=-Y$, how does he choose between MS and LS?
+		\begin{itemize}
+			\item In equilibrium: $t+1$-trader always chooses a market order whenever possible.
+			\item Idea: limit trader at $t$ can set a price that is $\epsilon$-better for $t+1$ than submitting a limit order. So anything different from the above cannot be an equilibrium.
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Ch 6, ex 5, part a}
+	So the indifference condition when $y_i=Y$ is:
+	\[ v+Y-A-f_{mo} = (v+Y-B-f_{lo})1/2 \]
+	Same for trader with $y_i = -Y$:
+	\[ B-(v-Y)-f_{mo} = (A-(v-Y)-f_{lo})1/2 \]
+	Solve the two for $A,B$ to get:
+	\begin{align*}
+		A &= v + \frac{1}{3}(Y+f_{lo}-2f_{mo})
+		\\
+		B &= v - \frac{1}{3}(Y+f_{lo}-2f_{mo})
+	\end{align*}
+\end{frame}
+
+
+\begin{frame}{Ch 6, ex 5, part b}
+	\begin{exampleblock}{}
+		(b) Show that the bid-ask spread decreases in $f_{mo}$ and increases in $f_{lo}$. Explain.
+	\end{exampleblock}
+	
+	\pause
+	
+	\[ S = \frac{2}{3}(Y+f_{lo}-2f_{mo}) \]
+	\begin{itemize}
+		\item if limit orders expensive then the price improvement from LO compared to MO (=spread) must be large to offset this cost, make LO competitive with MO
+		\item vice versa for $f_{mo}$
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Ch 6, ex 5, part c}
+	\begin{exampleblock}{}
+		(c) Trading platforms often subsidize traders who submit limit orders. That is, they set $f_{lo}<0$ and $f_{mo}>0$, maintaining that this practice ultimately helps to narrow the spread and benefits traders submitting market orders. Holding the total trading fee fixed, is this argument correct?
+	\end{exampleblock}
+	
+	\pause
+	
+	This \structure{does} narrow down the nominal spread, but does \alert{NOT} benefit market traders.
+	
+	Consider a MB order. Trader pays
+	\[ A+f_{mo} = v + \frac{1}{3}(Y+f_{lo}+f_{mo}) \]
+	which only depends on total $f=f_{lo}+f_{mo}$ and not on how it is split between $f_{lo}$ and $f_{mo}$. 
+\end{frame}
+
+
+\end{document} 

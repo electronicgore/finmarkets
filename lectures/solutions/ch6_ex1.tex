@@ -9,12 +9,12 @@
 
 
 
-\title{Financial Markets Microstructure \\ Exercise class 3}
+\title{Financial Markets Microstructure \\ Exercise after chapter 6}
 
 \author{Egor Starkov}
 
 \date{K{\o}benhavns Unversitet \\
-	Spring 2020}
+	Spring 2025}
 
 
 
@@ -35,7 +35,7 @@
 			\item Type \textcolor{blue}{$I$}. With prob. $\pi_0$, knows $v$ and maximizes exp. utility
 			\item Type \textcolor{blue}{$N$}. With prob. $1-\pi_0$, buys/sells (with equal prob.) $x_N$ shares, with $x_N \sim f(x_N)=\frac{1}{2}\theta e^{-\theta |x_N|}$ 
 		\end{itemize}
-		\item \textbf{Tick}: Tick size is nil ($\Delta=0$), prices are continuous
+		\item \textbf{Tick}: Tick size is zero, prices are continuous
 	\end{itemize}
 \end{frame}
 
@@ -156,7 +156,7 @@
 	\begin{itemize}
 		\item \textbf{Value uncertainty}. 
 		\[
-		\frac{\partial Y(A)}{\partial \sigma} = \frac{1}{\theta} \left[ -\frac{\sigma}{A-\mu}\frac{A-\mu}{\sigma^2} - \frac{A-\mu}{\sigma^2}\right]=\frac{1}{\theta} \left[ -\frac{1}{\sigma} - \frac{A-\mu}{\sigma^2}\right]<0
+		\frac{\partial q(A)}{\partial \sigma} = \frac{1}{\theta} \left[ -\frac{\sigma}{A-\mu}\frac{A-\mu}{\sigma^2} - \frac{A-\mu}{\sigma^2}\right]=\frac{1}{\theta} \left[ -\frac{1}{\sigma} - \frac{A-\mu}{\sigma^2}\right]<0
 		\]
 		More value uncertainty implies greater risk when posting orders
 	\end{itemize}

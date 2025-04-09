@@ -9,7 +9,7 @@
 
 
 
-\title{Financial Markets Microstructure \\ Lecture 11}
+\title{Financial Markets Microstructure \\ Lecture 10}
 
 \subtitle{Limit order book, part 2\\
 	Chapter 6.2-6.3 of FPR}
@@ -17,7 +17,7 @@
 \author{Egor Starkov}
 
 \date{K{\o}benhavns Unversitet \\
-	Spring 2023}
+	Spring 2025}
 
 
 
@@ -145,14 +145,14 @@
 
 \begin{frame}{Example 1: Equilibrium}
 	\begin{itemize}
-		\item \textbf{Equilibrium}: Look for eq. with $q_{1}=x_{S}$ and $q_{2}=x_{L}$ for some ask prices $v^L<A_1<A_2<v^H$. In this prb: $q_1,q_2$ given, we look for \structure{$A_1,A_2$}.
+		\item \textbf{Equilibrium}: Look for eq. with $q_{1}=x_{S}$ and $q_{2}=x_{L}$ for some ask prices $\mu<A_1<A_2<v^H$. In this prb: $q_1,q_2$ given, we look for \structure{$A_1,A_2$}.
 		\pause
 		\item \textbf{Speculator}: 
 		\begin{itemize}
-			\item If $x \notin \{x_S,x_L\}$, speculator reveals himself -- never optimal
-			\item Since $v^H > A_1,A_2 > v^L$, if $v=v^{H}$ then speculator buys $x_L$ units; if $v=v^L$ then sells $x_L$. \only<2>{\\ \alert{Why is it not optimal to shade the order?}}
+			\item If $x > x_L$, speculator reveals himself -- never optimal
+			\item Since $v^H > A_1,A_2 > \mu$, if $v=v^{H}$ then speculator buys $x_L$ units; (and if $v=v^L$ then sells $x_L$). \only<2>{\\ \alert{Why is it not optimal to shade the order?}}
 			\pause
-			\item (Shading order (strategically restricting trade size) is not optimal because buying more does not worsen the price of the previous units, unlike in dealer mkt)
+			\item Shading order (strategically restricting trade size) is not optimal for the speculator because buying more does not worsen the price of the previous units, unlike in dealer mkt
 		\end{itemize}
 		\pause 
 		\item \textbf{Price}. In equilibrium, price must equal $\mathbb{E}[v|x\geq q_k]$:
@@ -161,7 +161,7 @@
 			\\
 			A_2 & = \mathbb{E}[v|x \geq x_{L}] = \mu + \frac{2\pi}{1+\pi} \sigma
 		\end{align*}
-		\item Obvious that $v^L<A_1<A_2<v^H$. Thus: equilibrium.
+		\item Obvious that indeed, $\mu<A_1<A_2<v^H$. Thus: equilibrium.
 	\end{itemize}
 \end{frame}
 
@@ -293,15 +293,15 @@
 		\item Profit of the limit trader at price $A_k$ is:
 		\begin{itemize}
 			\item Zero for the marginal (last) limit order at $A_k$
-			\item Strictly positive for inframarginal orders (if $C>0$) because order executes with higher probability
+			\item Strictly positive for inframarginal orders because (1) order executes with higher probability and (2) info content of mkt order is weaker
 		\end{itemize}
 		\item Q: what happens if we \alert{change the tick size}?
 		\pause
 		\visible<handout:0|1->{
 			\item This profit is reduced with \alert{smaller tick sizes}
 			\begin{itemize}
-				\item Hence decreasing tick size drives away limit traders and reduces depth
-				\item But it will also reduce spread (by design) and reduce trading costs for the opposite side of the market (liquidity demanders)
+				\item Hence in the long(er) run, decreasing tick size drives away limit traders and reduces depth
+				\item But it will also reduce spread (by design) and reduce trading costs for the opposite side of the market (liquidity takers)
 			\end{itemize}
 		}
 	\end{itemize}
@@ -380,7 +380,7 @@
 \end{frame}
 
 
-\begin{frame}{Hybrid market: conclusions}
+\begin{frame}{Hybrid market: conclusions 1}
 	\begin{itemize}
 		\item To be fair: adding a dealer to LOB market... 
 		\begin{itemize}
@@ -388,13 +388,21 @@
 			\item but can help in bad times: if LOB is empty then adding a dealer has no adverse effects and will actually increase liquidity
 			\item So in the end, adding a dealer is like a \structure{liquidity insurance} for the market
 		\end{itemize}
-		\item More analysis of hybrid markets with risk-averse traders: see \cite{viswanathan_market_2002}
-		\item Also: the analysis of the example above relied on a bunch of implicit assumptions (which are not necessarily true):
+		\item Banks and other systemic internalizers with their dark pools can act as dealers too, picking off the good orders and forwarding the rest to the market. 
 		\begin{itemize}
-			\item Assumed the dealer had time priority over (could undercut all of) the LOB. If MO-traders can trade against the LOB before the dealer can act, the conclusions are different.
-			\item Assumed the dealer is a monopolist -- competitive dealers would yield different predictions.
-			\item Assumed the market order revealed enough information. If MO-traders split their orders (trade one unit at a time), dealers no longer have any advantage. (\cite{back_working_2007})
+			\item Recent regulation heavily restricted banks and platforms in how much they can internalize their clients' trades.
 		\end{itemize}
+		\item More analysis of hybrid markets with risk-averse traders: see \cite{viswanathan_market_2002} 
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Hybrid market: conclusions 2}
+	Analysis of the example above relied on a bunch of implicit \alert{assumptions} (which are not necessarily true):
+	\begin{itemize}
+		\item Assumed the dealer had time priority over (could undercut all of) the LOB. If MO-traders can trade against the LOB before the dealer can act, the conclusions are different.
+		\item Assumed the dealer is a monopolist -- competitive dealers would yield different predictions.
+		\item Assumed the market order revealed enough information. If MO-traders split their orders (trade one unit at a time), dealers no longer have any advantage. (\cite{back_working_2007})
 	\end{itemize}
 \end{frame}
 
