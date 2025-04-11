@@ -8,7 +8,7 @@
 \input{../FM_preamble.tex}
 
 
-\title{Financial Markets Microstructure \\ Lecture 13}
+\title{Financial Markets Microstructure \\ Lecture 12}
 
 \subtitle{Market Fragmentation\\
 	Chapter 7 of FPR}
@@ -16,7 +16,7 @@
 \author{Egor Starkov}
 
 \date{K{\o}benhavns Unversitet \\
-	Spring 2023}
+	Spring 2025}
 
 
 \begin{document}
@@ -79,7 +79,7 @@
 		\item Regulation often tries to create `\structure{virtual consolidation}': make fragmented markets act \textit{as if} they were consolidated
 		\begin{itemize}
 			\item A central concept in the US is the \textit{National Best Bid and Offer} (NBBO): the highest bid and lowest ask price in (any exchange within) the market at a given time
-			\item US regulation requires that trade always takes place at the NBBO
+			\item US regulation requires that trade always takes place at the NBBO (brokers should trade at best prices; exchanges often must forward orders to other exchanges if a better quote is avaiable there)
 		\end{itemize}
 		\pause
 		\item EU's \alert{ban} of countries' ``\alert{concentration rules}'' aims for a different kind of consolidation -- one where all stocks can be traded on same exchange rather than spread around local exchanges.
@@ -358,48 +358,48 @@
 \end{frame}
 
 
-\begin{frame}
-	More details for the previous slide:
-	\begin{align*}
-		\mathbb{E}[v|p] &= \mathbb{E}[v] + (\mathbb{C}(v,p_1), \mathbb{C}(v,p_2)) \cdot \mathbb{V}^{-1}(p) \cdot \left(\vec{p} - \mathbb{E}[\vec{p}] \right)^T;
-		\\
-		\mathbb{V}(v|p) &= \mathbb{V}(v) - \mathbb{C}(v,p) \cdot \mathbb{V}^{-1}(p) \cdot \mathbb{C}^T(v,p)
-		\\
-		p_i &= \mu + \lambda_i \beta_i (v-\mu) + \lambda_i u_i; \qquad \beta_i = \frac{1}{2\lambda_i} = \frac{\sigma_{ui}}{\sigma_v};
-		\\
-		\mathbb{C}(v,p_i) &= \lambda_i \beta_i \sigma_v^2 = \frac{\sigma_v^2}{2}
-		\\
-		\mathbb{V}(p) &= \left(
-			\begin{array}{c c}
-				\mathbb{V}(p_1)		& \mathbb{C}(p_1,p_2)
-				\\
-				\mathbb{C}(p_1,p_2)	& \mathbb{V}(p_2)	
-			\end{array}
-		\right) = \left(
-			\begin{array}{c c}
-				\lambda_1^2 (\beta_1^2\sigma_v^2 + \sigma_{u1}^2)	& \lambda_1 \lambda_2 \beta_1 \beta_2 \sigma_v^2
-				\\
-				\lambda_1 \lambda_2 \beta_1 \beta_2 \sigma_v^2	& \lambda_2^2 (\beta_2^2\sigma_v^2 + \sigma_{u2}^2)
-			\end{array}
-		\right)
-		\\
-		&= \frac{\sigma_v^2}{4} \left(
-			\begin{array}{c c}
-				2	& 1
-				\\
-				1	& 2
-			\end{array}
-		\right)
-		\\
-		\Rightarrow \mathbb{V}^{-1}(p) &= \frac{4}{3 \sigma_v^2} \left(
-			\begin{array}{c c}
-				2	& -1
-				\\
-				-1	& 2
-			\end{array}
-		\right)
-	\end{align*}
-\end{frame}
+%\begin{frame}
+%	More details for the previous slide:
+%	\begin{align*}
+%		\mathbb{E}[v|p] &= \mathbb{E}[v] + (\mathbb{C}(v,p_1), \mathbb{C}(v,p_2)) \cdot \mathbb{V}^{-1}(p) \cdot \left(\vec{p} - \mathbb{E}[\vec{p}] \right)^T;
+%		\\
+%		\mathbb{V}(v|p) &= \mathbb{V}(v) - \mathbb{C}(v,p) \cdot \mathbb{V}^{-1}(p) \cdot \mathbb{C}^T(v,p)
+%		\\
+%		p_i &= \mu + \lambda_i \beta_i (v-\mu) + \lambda_i u_i; \qquad \beta_i = \frac{1}{2\lambda_i} = \frac{\sigma_{ui}}{\sigma_v};
+%		\\
+%		\mathbb{C}(v,p_i) &= \lambda_i \beta_i \sigma_v^2 = \frac{\sigma_v^2}{2}
+%		\\
+%		\mathbb{V}(p) &= \left(
+%			\begin{array}{c c}
+%				\mathbb{V}(p_1)		& \mathbb{C}(p_1,p_2)
+%				\\
+%				\mathbb{C}(p_1,p_2)	& \mathbb{V}(p_2)	
+%			\end{array}
+%		\right) = \left(
+%			\begin{array}{c c}
+%				\lambda_1^2 (\beta_1^2\sigma_v^2 + \sigma_{u1}^2)	& \lambda_1 \lambda_2 \beta_1 \beta_2 \sigma_v^2
+%				\\
+%				\lambda_1 \lambda_2 \beta_1 \beta_2 \sigma_v^2	& \lambda_2^2 (\beta_2^2\sigma_v^2 + \sigma_{u2}^2)
+%			\end{array}
+%		\right)
+%		\\
+%		&= \frac{\sigma_v^2}{4} \left(
+%			\begin{array}{c c}
+%				2	& 1
+%				\\
+%				1	& 2
+%			\end{array}
+%		\right)
+%		\\
+%		\Rightarrow \mathbb{V}^{-1}(p) &= \frac{4}{3 \sigma_v^2} \left(
+%			\begin{array}{c c}
+%				2	& -1
+%				\\
+%				-1	& 2
+%			\end{array}
+%		\right)
+%	\end{align*}
+%\end{frame}
 
 
 \begin{frame}{Fragmented Kyle model: liquidity provision}
@@ -544,7 +544,7 @@
 
 \begin{frame}{Glosten model: equilibrium}
 	\begin{itemize}
-		\item If both markets active ($q^I>0$ and $q^E>0$) then (6.7) holds for both
+		\item If both markets active ($q^I>0$ and $q^E>0$) then the zero-profit condition holds for both
 		\item Then the probabilities in (7.11) and (7.12) must be identical, implying
 		\[
 		\left(1-\gamma + \frac{\gamma}{2}\right)(1-F(q^I)) = \frac{\gamma}{2}(1-F(q^E))
@@ -563,7 +563,7 @@
 \begin{frame}{Glosten model: comparing depth}
 	We can relate $q^I, q^E$ and depth $q^C$ in a consolidated mkt as follows. (Recall $\bar{q}=q^I+q^E$).
 	\begin{itemize}
-		\item  The pricing equation (6.7) also holds with single platform. This implies $\mathbb{P}(x_I \geq q^I) = \mathbb{P}(x \geq q^C)$ 
+		\item  The pricing equation also holds with a single platform. This implies $\mathbb{P}(x_I \geq q^I) = \mathbb{P}(x \geq q^C)$ 
 		\item By (7.11): $\mathbb{P}(x_I \geq q^I) = \frac{1}{2} \Big[$ weighted avg. of $1-F(q^I)$ and $1-F(\bar{q}) \Big]$
 		\item But with a single platform: $\mathbb{P}(x \geq q^C)=\frac{1}{2} [1-F(q^C)]$
 		\item Hence (since zero-profit cond implies these probabilities are equal):
