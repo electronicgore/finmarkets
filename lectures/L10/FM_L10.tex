@@ -8,7 +8,7 @@
 \input{../FM_preamble.tex}
 
 
-\title{Financial Markets Microstructure \\ Lecture 16}
+\title{Financial Markets Microstructure \\ Lecture 14}
 
 \subtitle{Value of Liquidity\\
 	Chapter 9 of FPR}
@@ -16,7 +16,7 @@
 \author{Egor Starkov}
 
 \date{K{\o}benhavns Unversitet \\
-	Spring 2023}
+	Spring 2025}
 
 
 \begin{document}
@@ -160,8 +160,8 @@
 \begin{frame}{Appendix on the approximation}
 	\begin{itemize}
 		\item To get the approximation of the previous slide, we must use the approximation $\ln (1+x) \simeq x$ for small $x$
-		\item Recall that $\ln x^h = h \ln x$
-		\item So taking logs of (9.5) we get
+		\item Recall further that $\ln x^h = h \ln x$
+		\item So taking logs of both sides of $(1+R)^h = (1+r)^h \times \frac{1+\frac{s}{2}}{1-\frac{s}{2}}$, we get
 		\[
 		h \ln (1+R) = h\ln (1+r) + \ln \left(1+\frac{s}{2} \right) - \ln \left( 1-\frac{s}{2} \right) 
 		\]
@@ -169,21 +169,21 @@
 		\[
 		hR \simeq hr+\frac{s}{2}- \left(-\frac{s}{2}\right)
 		\]
-		\item Rearranging we get the result
+		\item Rearranging the terms, we get $R \simeq r+\frac{s}{h}$.
 	\end{itemize}
 \end{frame}
 
 
 \begin{frame}{Discussion}
 	\begin{itemize}
-		\item Note: what about a round-trip starting from a sale?
-		\begin{itemize}
-			\item From $b_t=\mathbb{E}(a_{t+h})/(1+r)^h$ we get $R \simeq r-s/h$ (and then a round-trip starting from a buy is strictly lossy)
-			\item If $R = r + s/h$, then a round-trip starting from a sale is strictly lossy
-		\end{itemize}
-		\item Most assets most of the time are in positive aggregate supply -- i.e., buyers have the bargaining power and can demand a positive liquidity premium ($R = r + s/h$).
+		%\item Note: what about a round-trip starting from a sale?
+		%\begin{itemize}
+		%	\item From $b_t=\mathbb{E}(a_{t+h})/(1+r)^h$ we get $R \simeq r-s/h$ (and then a round-trip starting from a buy is strictly lossy)
+		%	\item If $R = r + s/h$, then a round-trip starting from a sale is strictly lossy
+		%\end{itemize}
+		%\item Most assets most of the time are in positive aggregate supply -- i.e., buyers have the bargaining power and can demand a positive liquidity premium ($R = r + s/h$).
 		\item Empirical evidence confirms \emph{positive} liquidity premium for stocks, bonds
-		\item More general model and empirics in \citet*{bongaerts_derivative_2011}
+		\item For a nore general model and empirics, see \citet*{bongaerts_derivative_2011}
 	\end{itemize}
 \end{frame}
 
@@ -294,7 +294,7 @@
 		\[
 		\mathbb{E}[R_j-s_j]=r_f + \lambda_M \beta_j
 		\]
-		where $\lambda_M = \mathbb{E}[R_M-s_M]-r_f$ is the risk premium and
+		where $\lambda_M = \mathbb{E}[R_M-s_M]-r_f$ is the market risk premium and
 		\[
 		\beta_j=\frac{\mathbb{C}(R_j-s_j, R_M-s_M)}{\mathbb{V}(R_M-s_M)}
 		\]
@@ -365,24 +365,21 @@
 							\item No arbitrage opportunities exist \only<3>{\structure{$\leftarrow$ my answer}}
 						\end{enumerate}
 					}
-					\pause[4]
-					\item Textbook spends an obscene amount of paper arguing \alert{why arbitrage cannot be realized} in our case (assets with same cash flows but different liquidity)
+					\only<4|handout:1>{
+					\item Depending on semantics:
 					\begin{itemize}
-						\item Gist: arbitraging is itself a costly activity (due to leverage and short-selling constraints)
+						\item \structure{arbitrage in nominal prices} cannot be realized due to limited liquidity...
+						\item (also, arbitrage itself is costly, due to leverage and short-selling constraints)
+						\item ...so there is \alert{no real arbitrage}
 					\end{itemize}
-					\item But in what we saw, there are, strictly speaking, no arbitrage opportunities
-					\begin{itemize}
-						\item Arbitrageurs are subject to all the same liquidity costs
-						\item So in the toy model we saw, it looks as if there is arbitrage, but there are no actual opportunities
-						\item In the end, it's all about semantics and how you define ``arbitrage''
-					\end{itemize}
+					}
 				\end{itemize}
 			}
 		\end{column}
 		\begin{column}{0.3\linewidth}
 			\pause[1]
 			\includegraphics<handout:0>[width=\linewidth]{pics/arbitrage}
-			\vspace{3em}
+			%\vspace{3em}
 		\end{column}
 	\end{columns}
 \end{frame}
@@ -392,7 +389,7 @@
 
 \begin{frame}{Conclusion}
 	\begin{itemize}
-		\item Empirically the authors find evidence on both a \structure{liquidity premium} and a \structure{liquidity risk premium} on stocks
+		\item Empirical research finds evidence on both a \structure{liquidity premium} and a \structure{liquidity risk premium} on stocks
 		\item Further, overall market liquidity may vanish at crisis times when asset prices drop rapidly
 		\begin{itemize}
 			\item Important risk for investors, especially speculators
