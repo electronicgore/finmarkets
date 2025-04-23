@@ -96,7 +96,7 @@ What are the implications of such breakdowns for liquidity risk? How do they aff
 \quad
 \subsection*{Problem 2 [Ch.7, ex.4]}
 
-This problem deals with competition between limit order markets with uniformly distributed market orders. Consider the model of section 7.4.2 (``Glosten model with fragmented market'' from Lectures) and assume that the size of the market order ($\tilde{X}$) has a uniform distribution $[0,\bar{X}]$. That is, $F(x)=x/{\bar{X}}$. We denote by $Y^{*}_{jk}(\gamma)$ the cumulative depth posted at the ask price $A_{k}=\mu+k\Delta$ in market $j \in \{I,E\}$ when the fraction of investors submitting market orders in both markets $I$ and $E$ is $\gamma$, and by $c_{j}$ be the submission cost in market $j$.
+This problem deals with competition between limit order markets with uniformly distributed market orders. Consider the model of section 7.4.2 (``Glosten model with fragmented market'' from Lectures) and assume that the size of the market order, $x$, has a uniform distribution $[0,\bar{X}]$. That is, $F(x)=x/{\bar{X}}$. We denote by $q_{jk}(\gamma)$ the cumulative depth posted at the ask price $A_{k}=\mu+k\Delta$ in market $j \in \{I,E\}$ when the fraction of investors submitting market orders in both markets $I$ and $E$ is $\gamma$, and by $c_{j}$ be the submission cost in market $j$.
 
 \begin{solution}
 	\noindent \textbf{General comment}. In this question, we are investigating the exact same model as in 7.4.2, but just making a specific assumption about $F(\cdot)$. When you get questions like these that build directly on a model in the book, the best way to proceed is to follow closely the steps of the book (or the slides). In the hints I posted, I gave you relevant equations. Thus, it is a question of updating these equations and then using the results to answer the questions.
@@ -104,50 +104,50 @@ This problem deals with competition between limit order markets with uniformly d
 
 
 \begin{enumerate}[label=(\alph*). ]
-	\item Assume that $2c_{I} \leq \Delta$ and that $\gamma=0$. Show that the equilibrium cumulative depth at price $A_{1}$ is\footnote{The $A_{1}$ was misprinted as $A_{k}$ in the problem text in the book.}  
+	\item Assume that $2c_{I} \leq \Delta$ and that $\gamma=0$. Show that the equilibrium cumulative depth at price $A_{1}$ is\footnote{The $A_{1}$ is misprinted as $A_{k}$ in the problem text in the book.}  
 	\[
-	Y^{*}_{I1}(0)=\bar{X}\left( 1-\frac{2c_{I}}{\Delta}\right).
+	q_{I1}(0)=\bar{X}\left( 1-\frac{2c_{I}}{\Delta}\right).
 	\]
 	
 	\textbf{Hint:} Use (7.13).
 	
 	\begin{solution}
-		With $\gamma=0$ there is effectively only one market, $I$. Let $Y_{I}=Y^{*}_{I1}(0)$, which is the volume supplied at $A_{1}$. This is given by equation (7.13). (Notice parallels to (6.6).) Here, the display cost is $c_{I}$. The assumption $2c_{I} \leq \Delta$ assures that $Y_{I} \leq \bar{X}$, and hence $1-F(Y_{I}) \leq 1$. I.e. the assumption assures that the probability is well-defined. Thus, (7.13) yields
+		With $\gamma=0$ there is effectively only one market, $I$. Let $q_{I} \equiv q_{I1}(0)$, which is the volume supplied at $A_{1}$. This is given by equation (7.13). (Notice parallels to (6.6).) Here, the display cost is $c_{I}$. The assumption $2c_{I} \leq \Delta$ assures that $q_{I} \leq \bar{X}$, and hence $1-F(q_{I}) \leq 1$. I.e. the assumption assures that the probability is well-defined. Thus, (7.13) yields
 		\[
-		\frac{1}{2}\left(1-\frac{Y_{I}}{\bar{X}}\right) (A_{1}-\mu) = c_{I}.
+		\frac{1}{2}\left(1-\frac{q_{I}}{\bar{X}}\right) (A_{1}-\mu) = c_{I}.
 		\]
-		Solve for $Y_{I}$ and substitute $\Delta=A_1-\mu$ to get the result.
+		Solve for $q_{I}$ and substitute $\Delta=A_1-\mu$ to get the result.
 	\end{solution}
 	
 	
-	\item Now suppose that $\gamma$ is high enough and that the other parameters are such that $Y^{*}_{I1}(\gamma)>0$, $Y^{*}_{E1}(\gamma)>0$, but $Y^{*}_{I1}(\gamma)+Y^{*}_{E1}(\gamma)<\bar{X}$. Compute $Y^{*}_{I1}(\gamma)$ and $Y^{*}_{E1}(\gamma)$ as a function of $\gamma$. Deduce further from the result that the conditions  $Y^{*}_{I1}(\gamma)>0$ and $Y^{*}_{E1}(\gamma)>0$ are satisfied if $\frac{4c_{I}}{\Delta(2-\gamma)+2c_{E}}<1$ and $\frac{4c_{E}}{\Delta+2c_{I}}<\gamma$. Moreover, deduce that the condition $Y^{*}_{I1}(\gamma)+Y^{*}_{E1}(\gamma)<\bar{X}$ is satisfied if $4(\gamma c_{I}+(2-\gamma)c_{E})>(2-\gamma)\gamma \Delta$.
+	\item Now suppose that $\gamma$ is high enough and that the other parameters are such that $q_{I1}(\gamma)>0$, $q_{E1}(\gamma)>0$, but $q_{I1}(\gamma)+q_{E1}(\gamma)<\bar{X}$. Compute $q_{I1}(\gamma)$ and $q_{E1}(\gamma)$ as a function of $\gamma$. Deduce further from the result that the conditions  $q_{I1}(\gamma)>0$ and $q_{E1}(\gamma)>0$ are satisfied if $\frac{4c_{I}}{\Delta(2-\gamma)+2c_{E}}<1$ and $\frac{4c_{E}}{\Delta+2c_{I}}<\gamma$. Moreover, deduce that the condition $q_{I1}(\gamma)+q_{E1}(\gamma)<\bar{X}$ is satisfied if $4(\gamma c_{I}+(2-\gamma)c_{E})>(2-\gamma)\gamma \Delta$.
 	
-	\textbf{Hint:} You need the equations (7.11), (7.12), (7.14) and (7.15) to get the system of equations that pins down $Y_I$ and $Y_E$. You can then either solve the algebra by muscle (or use some computer algebra system\footnote{A popular choice is Wolfram Alpha available at \url{https://www.wolframalpha.com}. I personally prefer open-source alternatives like (wx)Maxima (\url{https://wxmaxima-developers.github.io/wxmaxima/}) or SageMath (\url{https://www.sagemath.org/}).} to provide that muscle for you) or try to rewrite the two equilibrium conditions so as to eliminate either $Y_I$ or $Y_E$. 
+	\textbf{Hint:} You need the equations (7.11), (7.12), (7.14) and (7.15) to get the system of equations that pins down $q_I \equiv q_{I1}(\gamma)$ and $q_E \equiv q_{E1}(\gamma)$. You can then either solve the algebra by muscle or use some computer algebra system. 
 	
 	\begin{solution}
-		Simplify notation by denoting the depths by $Y_{I}$ and $Y_{E}$. We use equations (7.14) and (7.15) to describe the equilibrium, and refer to (7.11) and (7.12) to get the execution probabilities. In particular, (7.14) becomes
+		We use equations (7.14) and (7.15) to describe the equilibrium, and refer to (7.11) and (7.12) to get the execution probabilities. In particular, (7.14) becomes
 		\begin{equation} \label{one}
-			\frac{1}{2} \left[ \left( 1-\gamma+\frac{\gamma}{2}\right)\left(1-\frac{Y_{I}}{\bar{X}}\right)+\frac{\gamma}{2}\left(1-\frac{Y_{I}}{\bar{X}}-\frac{Y_{E}}{\bar{X}}\right)\right] = \frac{c_{I}}{\Delta}.
+			\frac{1}{2} \left[ \left( 1-\gamma+\frac{\gamma}{2}\right)\left(1-\frac{q_{I}}{\bar{X}}\right)+\frac{\gamma}{2}\left(1-\frac{q_{I}}{\bar{X}}-\frac{q_{E}}{\bar{X}}\right)\right] = \frac{c_{I}}{\Delta}.
 		\end{equation}
-		This is linear in $Y_{I}$ and $Y_{E}$, thanks to the uniform distribution. Notice that the assumption that $Y^{*}_{I1}(\gamma)+Y^{*}_{E1}(\gamma)<\bar{X}$ implies that $1-F(Y^{*}_{I1}(\gamma)+Y^{*}_{E1}(\gamma))>0$, that is to say, since the supply at the first tick $A_1$ is smaller than the largest possible order ($\overline{X}$), then there is always a probability that the marginal order at $A_1$ executes, even if the market is the second to get served. If $Y^{*}_{I1}(\gamma)+Y^{*}_{E1}(\gamma) \ge \bar{X}$, then the marginal order at $A_1$ is only executed if the market is the first to get served (i.e. $1-F(Y^{*}_{I1}(\gamma)+Y^{*}_{E1}(\gamma))=0$ and the second term in the square brackets in \eqref{one} drops out).
+		This is linear in $q_{I}$ and $q_{E}$, thanks to the uniform distribution. Notice that the assumption that $q_{I1}(\gamma)+q_{E1}(\gamma)<\bar{X}$ implies that $1-F(q_{I1}(\gamma)+q_{E1}(\gamma))>0$, that is to say, since the supply at the first tick $A_1$ is smaller than the largest possible order ($\overline{X}$), then there is always a probability that the marginal order at $A_1$ executes, even if the market is the second to get served. If $q_{I1}(\gamma)+q_{E1}(\gamma) \ge \bar{X}$, then the marginal order at $A_1$ is only executed if the market is the first to get served (i.e. $1-F(q_{I1}(\gamma)+q_{E1}(\gamma))=0$ and the second term in the square brackets in \eqref{one} drops out).
 		
 		Rewrite \eqref{one} to get
 		\begin{equation} \label{two}
-			\bar{X} \left(1-\frac{2c_{I}}{\Delta} \right) = Y_{I} + \frac{\gamma}{2} Y_{E}.
+			\bar{X} \left(1-\frac{2c_{I}}{\Delta} \right) = q_{I} + \frac{\gamma}{2} q_{E}.
 		\end{equation}
-		You can already from this deduce that $Y_{I}$ will be lower than in (a). We now repeat the exercise with $E$'s equilibrium condition. Now, (7.15) becomes
+		You can already from this deduce that $q_{I}$ will be lower than in (a). We now repeat the exercise with $E$'s equilibrium condition. Now, (7.15) becomes
 		\begin{equation} \label{three}
-			\frac{\gamma}{4} \left[ \left(1-\frac{Y_{E}}{\bar{X}} \right) + \left(1-\frac{Y_{I}}{\bar{X}}-\frac{Y_{E}}{\bar{X}}\right)\right] = \frac{c_{E}}{\Delta},
+			\frac{\gamma}{4} \left[ \left(1-\frac{q_{E}}{\bar{X}} \right) + \left(1-\frac{q_{I}}{\bar{X}}-\frac{q_{E}}{\bar{X}}\right)\right] = \frac{c_{E}}{\Delta},
 		\end{equation}
 		rewritten as
 		\begin{equation} \label{four}
-			\bar{X}\left(1-\frac{2c_{E}}{\gamma \Delta}\right) = \frac{1}{2} Y_{I}+Y_{E}.
+			\bar{X}\left(1-\frac{2c_{E}}{\gamma \Delta}\right) = \frac{1}{2} q_{I}+q_{E}.
 		\end{equation}
-		This leaves us with two conditions, \eqref{two} and \eqref{four}, which have a unique solution for any $\gamma \in (0,1)$.\footnote{To solve, use one equation to eliminate $Y_I$ or $Y_E$ in the other equation, and solve by hand or plug into solver such as wolfram alpha.} This solution is given by
+		This leaves us with two conditions, \eqref{two} and \eqref{four}, which have a unique solution for any $\gamma \in (0,1)$. This solution is given by
 		\[
-		Y_{I} = \frac{2 \bar{X}}{4-\gamma} \left(2-\gamma+\frac{2c_{E}-4c_{I}}{\Delta} \right) \text{ and } Y_{E}=\frac{2\bar{X}}{4-\gamma}\left(1+\frac{2\gamma c_{I}-4c_{E}}{\gamma \Delta} \right).
+		q_{I} = \frac{2 \bar{X}}{4-\gamma} \left(2-\gamma+\frac{2c_{E}-4c_{I}}{\Delta} \right) \text{ and } q_{E}=\frac{2\bar{X}}{4-\gamma}\left(1+\frac{2\gamma c_{I}-4c_{E}}{\gamma \Delta} \right).
 		\]
-		We can then check that that the necessary conditions given in the question are true: The conditions for $Y_{I}>0$ and $Y_{E}>0$ are straightforward. The third condition, $Y_{I}+Y_{E}<\bar{X}$, is equivalent to
+		We can then check that that the necessary conditions given in the question are true: The conditions for $q_{I}>0$ and $q_{E}>0$ are straightforward. The third condition, $q_{I}+q_{E}<\bar{X}$, is equivalent to
 		\[
 		\frac{2}{4-\gamma} \left(3-\gamma + \frac{(2\gamma-4)c_{E}-3\gamma c_{I}}{\gamma \Delta} \right) < 1,
 		\]
@@ -166,7 +166,7 @@ This problem deals with competition between limit order markets with uniformly d
 	\begin{solution}
 		When $\gamma=1$, market $I$ no longer has 'priority'. The three conditions from (b) correspond to $4c_{I} < \Delta + 2c_{E}$, $4c_{E}<\Delta+2c_{I}$, and $4(c_{I}+c_{E})>\Delta$. If $c_{I}=c_{E}=c$ they are all satisfied when $2c < \Delta < 8c$. If $\Delta$ is an interior point of the interval $(2c, 8c)$, continuity allows us to vary $c_{E}$ and $c_{I}$ around $c$ whilst satisfying all the conditions.
 		
-		NOTE: the third condition ($Y_I+Y_E > \bar{X}$) is per se not necessary for such coexistence, but it is necessary for the first two conditions to look the way they do. As we shall see in part (e), if the third condition does not hold, the conditions for $Y_I > 0$ and $Y_E > 0$ look differently.
+		NOTE: the third condition ($q_I+q_E > \bar{X}$) is per se not necessary for such coexistence, but it is necessary for the first two conditions to look the way they do. As we shall see in part (e), if the third condition does not hold, the conditions for $q_I > 0$ and $q_E > 0$ look differently.
 	\end{solution}
 	
 	
@@ -181,18 +181,18 @@ This problem deals with competition between limit order markets with uniformly d
 	
 	
 	
-	\item Consider the case $\gamma=1$ and suppose that $4(c_{I}+c_{E})<\Delta$ and $4c_{I}<\Delta$. Compute $Y^{*}_{I1}(1)$ and $Y^{*}_{E1}(1)$.
+	\item Consider the case $\gamma=1$ and suppose that $4(c_{I}+c_{E})<\Delta$ and $4c_{I}<\Delta$. Compute $q_{I1}(1)$ and $q_{E1}(1)$.
 	
-	\textbf{Hint:} Notice that now we are violating one of the conditions given in (b). What effect does this have on $F(Y_{I}+Y_{E})$? Take account of this when writing up (7.14) and (7.15).
+	\textbf{Hint:} Notice that now we are violating one of the conditions given in (b). What effect does this have on $F(q_{I}+q_{E})$? Take account of this when writing up (7.14) and (7.15).
 	
 	\begin{solution}
-		Now the condition $Y_{I}+Y_{E}<\bar{X}$ is no longer satisfied, implying that $1-F(Y_{I}+Y_{E})=0$. I.e., the marginal limit order never executes if the competing market gets the first part of the order.  Substituting this and $\gamma=1$ into (7.14) and (7.15) we get
+		Now the condition $q_{I}+q_{E}<\bar{X}$ is no longer satisfied, implying that $1-F(q_{I}+q_{E})=0$. I.e., the marginal limit order never executes if the competing market gets the first part of the order.  Substituting this and $\gamma=1$ into (7.14) and (7.15) we get
 		\[
-		\frac{1}{2} \left[\frac{1}{2} \left(1-\frac{Y_{I}}{\bar{X}}\right)\right]=\frac{c_{I}}{\Delta} \text{ and } \frac{1}{4} \left[\left(1-\frac{Y_{E}}{\bar{X}}\right)\right]=\frac{c_{E}}{\Delta}.
+		\frac{1}{2} \left[\frac{1}{2} \left(1-\frac{q_{I}}{\bar{X}}\right)\right]=\frac{c_{I}}{\Delta} \text{ and } \frac{1}{4} \left[\left(1-\frac{q_{E}}{\bar{X}}\right)\right]=\frac{c_{E}}{\Delta}.
 		\]
 		Thus, 
 		\[
-		Y_{I} = \bar{X}\left(1-\frac{4c_{I}}{\Delta}\right) \text{ and } Y_{E} = \bar{X}\left(1-\frac{4c_{E}}{\Delta}\right).
+		q_{I} = \bar{X}\left(1-\frac{4c_{I}}{\Delta}\right) \text{ and } q_{E} = \bar{X}\left(1-\frac{4c_{E}}{\Delta}\right).
 		\]
 		Since the execution probability of the marginal order is independent of the competing market, the posting cost of the competing platform now has no effect on market depth. In fact, the market depth is almost the same as in the 'monopoly' case in (a), except it takes account for the fact that traders initially make a choice of platform. Notice however that in general, the expected profits of limit orders are not independent across the two platforms: the execution probability of earlier orders (i.e. those that are not marginal) may still depend on the competing market.
 	\end{solution}
@@ -201,12 +201,12 @@ This problem deals with competition between limit order markets with uniformly d
 	
 	\item Under the assumptions in question (e), what is the number of shares offered at price $A_{k}>A_{1}$? Is the result different when $\gamma=0$?
 	
-	\textbf{Hint:} Look at the values of $Y^{*}_{I1}$ in the two cases.
+	\textbf{Hint:} Look at the values of $q_{I1}$ in the two cases.
 	
 	\begin{solution}
-		In $(e)$, the assumptions made imply  $Y_{I}+Y_{E} \geq \bar{X}$. Recall that here, $Y_I$ and $Y_E$ are shorthand for $Y^*_{I1}(1)$ and $Y^*_{E1}(1)$, the orders posted at ask price $A_1$. Thus the total number of orders posted at $A_1$ is $Y^*_{I1}(1)+Y^*_{E1}(1) \geq \bar{X}$, implying that even the largest possible order ($\bar{X}$) will be filled at price $A_1$. So there can be no (profitable) orders at higher ask prices. 
+		In $(e)$, the assumptions made imply  $q_{I}+q_{E} \geq \bar{X}$. Recall that here, $q_I$ and $q_E$ are shorthand for $q_{I1}(1)$ and $q_{E1}(1)$, the orders posted at ask price $A_1$. Thus the total number of orders posted at $A_1$ is $q_{I1}(1)+q_{E1}(1) \geq \bar{X}$, implying that even the largest possible order ($\bar{X}$) will be filled at price $A_1$. So there can be no (profitable) orders at higher ask prices. 
 		
-		If $\gamma=0$, then our result from (a) tells us that $Y^{*}_{I1}<\bar{X}$, and thus we can still have profitable orders at higher ask prices.
+		If $\gamma=0$, then our result from (a) tells us that $q_{I1}<\bar{X}$, and thus we can still have profitable orders at higher ask prices.
 	\end{solution}
 
 \end{enumerate}
