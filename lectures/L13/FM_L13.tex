@@ -15,7 +15,7 @@
 \author{Egor Starkov}
 
 \date{K{\o}benhavns Unversitet \\
-	Spring 2023}
+	Spring 2025}
 
 
 \begin{document}
@@ -51,6 +51,7 @@
 			\item Glosten-Milgrom/Glosten/Foucault: all orders are repriced, but \structure<3>{no trade} \alert<4>{should} take place
 			\pause
 			\item in reality, a lot of trade after public announcements
+			\item (Budish-Cramton-Shim offer one explanation: HFTs rush to snipe stale quotes when news arrive)
 		\end{itemize}
 		\item Let's look at how information is aggregated and how this depends on public info!
 	\end{itemize}
@@ -102,6 +103,7 @@
 		\item Every trader gets a private signal $\eta_i = v + \epsilon_i$ with $\epsilon_i \sim \mathcal{N}(0,1/\tau_\epsilon)$ and submits a price-contingent demand schedule $x_i(p)$
 		\item Aggregate supply $u \sim \mathcal{N}(0, \sigma^2_u)$ (provided by noise traders)
 		\item Price $p$ is set to clear the market (by some non-trading market-maker/``the invisible hand''/...)
+		$\to$ $p$ is informative about average signal
 		% kinda Kyle, but many informed traders, non-strategic dealer
 	\end{itemize}
 \end{frame}
@@ -109,8 +111,8 @@
 
 \begin{frame}{Hellwig: eqm}
 	\begin{itemize}
-		\item Conjecture a linear eqm, where price is a linear function of $v$ and $u$ (and aggregate $\bar{x} = \int \eta_i di$, which cancels out in the end, conditional on $v$)
-		\item $v | p,x_i$ is normal with some mean and variance $\Rightarrow$ so is $W_i$
+		\item Conjecture a linear eqm, where price is a linear function of $v$ and $u$ (and aggregate signal $\bar{\eta} = \int \eta_i di$, which is irrelevant given $v$ and $u$)
+		\item $v | p, \eta_i$ is normal with some mean and variance $\Rightarrow$ so is $W_i$
 		(without noise trades, $v|p$ is degenerate)
 		
 		\item Then trader $i$'s problem is:
@@ -131,7 +133,7 @@
 		\item $\mathbb{E} \left[ v | \eta_i, p\right] = a \eta_i + b p$ for $a,b>0$
 		\item Traders \structure{respond to private signals}: high $\eta_i$ $\Rightarrow$ buy, low $\eta_i$ $\Rightarrow$ sell
 		\item This is because $i$ believes that when $\eta_i > p$, this might be because high supply $u$ depressed price, hence a purchase is justified (traders \structure{disagree about the fundamental} value $v$)
-		\pause
+		\pause\bigskip
 		\item What if the traders care not about $v$, but the resale value instead?
 	\end{itemize}
 \end{frame}
@@ -219,7 +221,7 @@
 
 
 \begin{frame}{Example: Before public announcement}
-	\textbf{No public news} ($\nu$ not observed)
+	\textbf{Benchmark: No public news} ($\nu$ not observed)
 	\begin{itemize}
 		\item Traders' beliefs about $v$ are
 		\begin{align*}
@@ -292,7 +294,7 @@
 
 \begin{frame}{Analysis: Trader maximization}
 	\begin{itemize}
-		\item \textbf{Random supply}: Implies that prices are not completely informative.
+		\item \textbf{Random supply}: Implies that prices are not perfectly informative.
 		\item \textbf{I traders}: Solve
 		\[
 			\max_{x_I} \mathbb{E}\left[ -e^{-\gamma W_I}| \eta_i, \nu, p_1 \right]
@@ -318,7 +320,7 @@
 			x^*_{1,i} &= \frac{\tau^2_{p_2}}{\gamma}(\mathbb{E}[p_2| \eta_i, \nu, p_1]-p_1), \label{eqfoc1} \\
 			x^*_{2,j} &= \frac{\tau^2_v}{\gamma} (\mathbb{E}[v| \eta_j, \nu, p_1, p_2]-p_2), \label{eqfoc2}
 		\end{align}
-		where $\tau^2_{p_2}=1/\mathbb{V}(p_2| \eta_i, \nu, p_1)$ and $\tau^2_{v}=\mathbb{V}(v| \eta_j, \nu, p_1, p_2)$
+		where $\tau^2_{p_2}=1/\mathbb{V}(p_2| \eta_i, \nu, p_1)$ and $\tau^2_{v}=1/\mathbb{V}(v| \eta_j, \nu, p_1, p_2)$
 		\item In order to calculate expectations, need to make a conjecture about prices
 	\end{itemize}
 \end{frame}
@@ -396,7 +398,7 @@
 		\]
 		\item Rewrite period-1 demand using this:
 		\[
-			x^*_{1,i} = \frac{\tau^2_{p_2}}{\gamma} \left( \underbrace{\mathbb{E}\left[ \int_0^1 \mathbb{E}[v \mid \eta_j, \nu , \mu_1, \mu_2 ] dj -\frac{\gamma}{\tau^2_v}u_2 \,\bigg|\, \eta_i,\nu,\mu_1 \right]}_{\text{2nd order expectation}}-p_1 \right)
+			x^*_{1,i} = \frac{\tau^2_{p_2}}{\gamma} \left( \underbrace{\mathbb{E}\left[ \int_0^1 \mathbb{E}[v \mid \eta_j, \nu , \mu_1, \mu_2 ] dj -\frac{\gamma}{\tau^2_v}u_2 \,\bigg|\, \eta_i,\nu,\mu_1 \right]}_{\text{2nd-order expectation}}-p_1 \right)
 		\]
 		\item $I$-trader demand in period 1 is thus a function of a \textbf{second-order expectation}: 
 		The more $i$ expects $J$ traders to value the asset, the more he buys 
@@ -407,7 +409,7 @@
 \begin{frame}{Results}
 	\begin{itemize}
 		\item In the paper, Kondor considers a more general information structure where there is a common factor about which $I$ and $J$ both learn.
-		\item He then defines \textit{weakly correlated} information structures in which the common factor  is not too important
+		\item He then defines \textit{weakly correlated} information structures in which the common factor  is not too important -- otherwise we're back in \citet{brown_technical_1989} world
 		\item In the above, we have disregarded the common factor, so what we analyzed is automatically a weakly correlated information structure
 		\begin{block}{Main result}
 			If the information structure is \textit{weakly correlated}, then trading intensity, volume and informational content of prices \structure{increase} in both periods when there is more public info.
@@ -423,7 +425,7 @@
 		\item Timing
 		\begin{enumerate}
 			\item I-traders and J-traders trade
-			\item I-traders sell all their holdings to J-traders
+			\item I-traders sell all their holdings to J-traders and quit
 			\item $v$ is realized and J-traders consume
 		\end{enumerate}
 		\item Let $\mu$ be the proportion of J-traders
@@ -443,7 +445,7 @@
 		%\begin{itemize}
 		%	\item When prices become more correlated with fundamentals, J-traders can better forecast them
 		%\end{itemize}
-		\item When $\mu$ is small, the results of model 1 are close to those of model 2
+		\item When $\mu$ is small, the results of model 2 are close to those of model 1
 		\item But when $\mu$ is high, public information crowds out private information, and public signals have the usual effect
 		\begin{itemize}
 			\item I.e., there will be less disagreement and less trade
@@ -458,9 +460,9 @@
 		\item In general, the model provides an explanation for trade after public announcements
 		\item \citet*{bailey_economic_2006} find that price volatility and trading volumes increase after earnings announcements
 		\begin{itemize}
-			\item They find that the effect is larger for cross-listed stock
+			\item They find that the effect is larger for cross-listed stocks
+			\item Kondor argues that cross-listing is roughly equivalent to lower market integration: lower $\mu$
 		\end{itemize}
-		\item Kondor argues that cross-listing is roughly equivalent to lower market integration: lower $\mu$
 	\end{itemize}
 \end{frame}
 

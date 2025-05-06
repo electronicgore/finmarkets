@@ -8,14 +8,14 @@
 \input{../FM_preamble.tex}
 
 
-\title{Financial Markets Microstructure \\ Lectures 17 \& 18}
+\title{Financial Markets Microstructure \\ Lecture 16}
 
 \subtitle{Algo-trading, High-Frequency Trading, and Blockchain}
 
 \author{Egor Starkov}
 
 \date{K{\o}benhavns Unversitet \\
-	Spring 2023}
+	Spring 2025}
 
 
 \begin{document}
@@ -110,6 +110,9 @@
 			\item but also for better \alert{execution} via order-splitting.
 		\end{itemize}
 		\item \cite{beason_anatomy_2019} give some (actually a lot of) info on how algorithms work for large \structure{institutional investors} (a typical counterpart to HFT nowadays)
+		\begin{itemize}
+			\item I also put on absalon a 2020 SEC report on algo-trading that gives a bird's-eye overview
+		\end{itemize}
 		\item ``Parent'' orders are split (by algorithms) into many ``child'' orders that are routed to markets
 	\end{itemize}
 \end{frame}
@@ -282,11 +285,11 @@
 			\item If you think buyers will have high valuations $\rightarrow$ set high $a$
 			\item If $a$ is high, only traders with high valuations will buy
 		\end{itemize}
-		\item \textbf{Assumption}:  $\frac{\epsilon}{2} < \delta < \epsilon$: both $v$ and $y$ matter; $v$ more so.
-		\item \textbf{Value ranking}: Let $V^i_j$ be the value of a type-$i$ institution with type-$j$ information. Then the assumption implies
+		\item \textbf{Assumption}:  $\frac{\epsilon}{2} < \delta < \epsilon$: both $v$ and $y$ matter; $v$ more so. Then
 		\[
-		V^F_{GH}>V^S_H>V^F_{GL}>\mu>V^F_{BH}>V^S_L>V^F_{BL}.
+		V^F_{GH}>V^S_H>V^F_{GL}>\mu>V^F_{BH}>V^S_L>V^F_{BL},
 		\]
+		where $V^i_j$ is the value of a type-$i$ institution with type-$j$ information.
 		\item \textbf{Equilibrium types}: We focus here on the pure strategy equilibria. There will be three types of equilibria: P1, P2 and P3.
 	\end{itemize}
 \end{frame}
@@ -418,8 +421,8 @@
 		\item Hence: in 'well-functioning' markets, equilibrium has too much HFT
 		\item Because HFT effects are:
 		\begin{itemize}
-			\item \emph{more trading opportunities} -- personal benefit
-			\item \emph{pvt info about $v$} -- personal gain, social cost (worse prices for eveerybody)
+			\item \emph{more trading opportunities} -- personal and social benefit
+			\item \emph{pvt info about $v$} -- personal benefit, social cost (worse prices for everybody)
 		\end{itemize}
 	\end{itemize}
 \end{frame}
@@ -638,7 +641,7 @@
 	\begin{itemize}
 		\item \alert{Limited processing capacity}: block size and frequency is $\approx$fixed
 		\begin{itemize}
-			\item Visa: 150m tx/day; Bitcoin (15.02.21): 300k tx/day
+			\item Visa: 150m tx/day; Bitcoin: 300k tx/day (15.02.21)
 		\end{itemize}
 		\item \alert{Order costs} and \alert{execution risk}: you have to bid for your transaction to be accepted into a block.
 		\begin{itemize}
@@ -647,8 +650,8 @@
 			\item There are concerns that miners inflate fees (\cite{lehar_miner_2020})
 		\end{itemize}
 		\item \alert{Delay}: blocks are only processed rarely (one per 10 min avg for bitcoin) \hyperlink{blocktime}{\beamerbutton{graph}}
-		\item \alert{Clearing and settlement}: without a trusted mediator, counterparty risk instensifies
-		\item \alert{No transparency requirements}: it is more difficult to enforce \\ disclosure of financial info from firms
+		\item \alert{Clearing and settlement}: without a trusted mediator, counterparty and security risks instensify \hyperlink{apesgone}{\beamerbutton{pic}}
+		\item \alert{No transparency requirements}: it is more difficult to enforce disclosure of financial info by firms/coin issuers
 	\end{itemize}
 \end{frame}
 
@@ -662,15 +665,7 @@
 			\item crypto is traded via a few centralized exchanges (Binance, Coinbase, ...)
 			\item NFTs barely exist(ed?) outside OpenSea and Rarible
 		\end{itemize}
-		\item Signal founder has a \href{https://moxie.org/2022/01/07/web3-first-impressions.html}{\beamerbutton{nice post}} about it.
-	\end{itemize}
-\end{frame}
-
-
-\begin{frame}{Crypto: Conclusion}
-	\begin{itemize}
-		\item generally cool and good
-		\item crypto and blockchain have potential, but they are not a panacea
+		\item Signal founder has a \href{https://moxie.org/2022/01/07/web3-first-impressions.html}{\underline{nice post}} about it.
 	\end{itemize}
 \end{frame}
 
@@ -696,6 +691,14 @@
 	\includegraphics[width=0.7\paperwidth]{pics/blocktime}
 	
 	Histogram of time between blocks (\cite{lehar_miner_2020}) \hyperlink{problems}{\beamerbutton{back}}
+\end{frame}
+
+
+\begin{frame}<handout:0>[label=apesgone]
+	\centering
+	\includegraphics[width=0.7\paperwidth]{pics/apes}
+	
+	An example of a problem from a lack of trusted intermediary \hyperlink{problems}{\beamerbutton{back}}
 \end{frame}
 
 \end{document} 
