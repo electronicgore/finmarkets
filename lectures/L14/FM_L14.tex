@@ -8,14 +8,14 @@
 \input{../FM_preamble.tex}
 
 
-\title{Financial Markets Microstructure \\ Lecture 20}
+\title{Financial Markets Microstructure \\ Lecture 18}
 
 \subtitle{Asset Price Bubbles}
 
 \author{Egor Starkov}
 
 \date{K{\o}benhavns Unversitet \\
-	Spring 2023}
+	Spring 2025}
 
 
 \begin{document}
@@ -103,23 +103,23 @@
 \end{frame}
 
 
-\begin{frame}[handout:0]{Examples of bubbles}
-	\begin{columns}
-		\begin{column}{0.55\linewidth}
-			\center
-			\only<1>{\includegraphics[width=\linewidth]{pics/bitcoin}}
-			\only<2>{\includegraphics[width=\linewidth]{pics/bitcoin2}}
-		\end{column}
-		\begin{column}{0.45\linewidth}
-			\begin{itemize}
-				\item \textbf{Bitcoin} grew and burst pretty badly at the end of 2017.
-				\pause 
-				\item ...and is just pretty volatile overall
-				\item (to be fair, like with any fiat currency, not clear what bitcoin's fundamental value is, so can say that any positive price is a bubble)
-			\end{itemize}
-		\end{column}
-	\end{columns}
-\end{frame}
+%\begin{frame}[handout:0]{Examples of bubbles}
+%	\begin{columns}
+%		\begin{column}{0.55\linewidth}
+%			\center
+%			\only<1>{\includegraphics[width=\linewidth]{pics/bitcoin}}
+%			\only<2>{\includegraphics[width=\linewidth]{pics/bitcoin2}}
+%		\end{column}
+%		\begin{column}{0.45\linewidth}
+%			\begin{itemize}
+%				\item \textbf{Bitcoin} grew and burst pretty badly at the end of 2017.
+%				\pause 
+%				\item ...and is just pretty volatile overall
+%				\item (to be fair, like with any fiat currency, not clear what bitcoin's fundamental value is, so can say that any positive price is a bubble)
+%			\end{itemize}
+%		\end{column}
+%	\end{columns}
+%\end{frame}
 
 
 \begin{frame}[handout:0]{Examples of bubbles}
@@ -171,7 +171,7 @@
 		\item In 1992, a wave (a herd?) of articles showing that  herding could be result of rational \structure{informational cascade}
 		\item Today we look at this and other `rational' explanations
 		\item Note: I will follow the presentation in \cite{bikhchandani_herd_2000}. 
-		\\See \cite{bikhchandani_information_2021} for a comprehensive review of the literature.
+		\\See \cite{bikhchandani_information_2024} for a comprehensive review of the literature.
 	\end{itemize}
 \end{frame}
 
@@ -262,8 +262,8 @@
 \begin{frame}{What triggers the herd?} \label{HERD}
 	\begin{itemize}
 		\item A few incorrect signals can be enough enough to set off a herd
-		\item A small piece of information `cascades' through the system
-		\item Each agent is rational, but together they may seem stupid: their information taken together is very precise, but there is no information aggregation
+		\item A small amount of information `cascades' through the system
+		\item Each agent is rational, but together they may seem stupid: their information taken together is very precise, but information aggregation fails
 		\item A specific example with numbers of how a herd may arise: \hyperlink{EXP}{\beamerbutton{here}}
 	\end{itemize}
 \end{frame}
@@ -306,11 +306,11 @@
 			\item Suppose $v \in \{0,\frac{1}{2},1\}$
 			\item If $v=\frac{1}{2}$, this is perfectly revealed by the private signal: $\eta_{t}=\frac{1}{2}$
 			\item If $v \in \{0,1\}$, trader $t$ receives informative signal with precision $\rho_t \equiv \mathbb{P}(\eta_{t}=v)$
-			\item Furthermore, a proportion $\mu \in \{\mu^{H}, \mu^{L}\}$ of traders have perfect information: $\rho_{t}=1$ after a good signal
-			\item The remaining traders have noisy info: $\rho_{t} \in (\frac{1}{2},1)$ after a good signal
+			\item Furthermore, a proportion $\mu \in \{\mu^{H}, \mu^{L}\}$ of traders have perfect information: $\rho_{t}=1$
+			\item The remaining $1-\mu$ traders have noisy info: $\rho_{t} \in (\frac{1}{2},1)$
 		\end{itemize}
 		\pause
-		\item Three levels of uncertainty (for MM): 
+		\item Three levels of uncertainty: 
 		\begin{itemize}
 			\item Event uncertainty: $v=1/2$ (\alert{no event}) or $v \in \{0,1\}$ (\structure{event})
 			\item Value uncertainty: if event, \structure{$v=1$} or \alert{$v=0$}
@@ -360,7 +360,7 @@
 		\item \textbf{Price mechanism}: alleviates problem by providing private incentives to trade and thus reveal information, which is then incorporated into prices
 		\item \textbf{Multi-layered uncertainty}: can make the herds occur even with flexible prices
 		\item \textbf{Aside}: \emph{Momentum trading} often assumed to be a `behavioral feature': but it may be perfectly rational
-		\item \textbf{Empirical estimation of herding}: some conclusions can be tested in the data but to a very limited extent; see \cite{bikhchandani_herd_2000} and \cite{bikhchandani_information_2021} for details.
+		\item \textbf{Empirical estimation of herding}: some conclusions can be tested in the data but to a very limited extent; see \cite{bikhchandani_herd_2000} and \cite{bikhchandani_information_2024} for details.
 	\end{itemize}
 \end{frame}
 
@@ -446,13 +446,12 @@
 
 \begin{frame}{Definition of a bubble}
 	\begin{itemize}
-		\item In this setting, let's use a very strict definition of a bubble
-		\item In particular, notice that after $t_0+\eta\kappa$, the mispricing is known by enough traders to correct it
+		\item In this setting, let's use a very strict definition of a bubble: 
+		\\mispricing should be well-known to traders to count as a bubble
 		\begin{block}{Definition}
 			A bubble is persistent mispricing \emph{beyond $t_0+\eta \kappa$}
 		\end{block}
-		\item Thus, in this definition it is not enough that the asset is priced over its value for there to be a bubble
-		\item The mispricing must be well-known to traders
+		\item After $t_0+\eta\kappa$, the mispricing is known by enough traders to correct it, should they want to
 	\end{itemize}
 \end{frame}
 
@@ -493,7 +492,7 @@
 		\item If informed traders decide to coordinate their actions around this event (eg. use the strategy `sell when event occurs'), it can become pivotal
 		\item Example from article: in 1980s trade data had big market impact in the US; in 1990s Alan Greenspan's statements were more influential
 		\begin{itemize}
-			\item If sufficiently many people react to an event you must too - even if the event carries little/no information by itself
+			\item If sufficiently many people react to an event, then you must too - even if the event carries little/no information by itself
 		\end{itemize}
 	\end{itemize}
 \end{frame}
@@ -610,7 +609,7 @@
 	\begin{itemize}
 		\item $\mathbb{P}(v=1/2)=0.9999$: very small prior probability of an `event'; $\mathbb{P}(v=1)=\mathbb{P}(v=0)=0.00005$
 		\item $\frac{\mathbb{P}(\mu=\mu^{H})}{\mathbb{P}(\mu=\mu^{L})}=99$: high prior probability of a well-informed economy
-		\item If economy is poorly informed: all traders have $p_{i}=0.51$, i.e. very poor signal about value
+		\item If economy is poorly informed: all traders have $\rho_{i}=0.51$, i.e. very poor signal about value
 	\end{itemize}
 	Suppose we're in an unlikely state of the world
 	\begin{enumerate}
