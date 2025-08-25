@@ -1,0 +1,346 @@
+%%% License: Creative Commons Attribution Share Alike 4.0 (see https://creativecommons.org/licenses/by-sa/4.0/)
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[a4paper]{article}
+
+\usepackage{amssymb}
+%\usepackage{enumerate}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{extramarks} % Required for headers and footers
+\usepackage[usenames,dvipsnames]{color} % Required for custom colors
+\usepackage{graphicx} % Required to insert images
+\usepackage{listings} % Required for insertion of code
+\usepackage{courier} % Required for the courier font
+\usepackage[table]{xcolor}
+\usepackage{amsfonts,amsmath,amsthm,parskip,setspace}
+\usepackage[section]{placeins}
+\usepackage[a4paper]{geometry}
+\usepackage[USenglish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{tikz}
+\usepackage{hyperref}
+\usepackage[hyphenbreaks]{breakurl}
+\usepackage[]{url}
+\usepackage[shortlabels]{enumitem}
+\usepackage{framed}
+\usepackage{pdfpages}
+
+
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.6in
+
+\linespread{1.1} % Line spacing
+
+
+
+%----------------------------------------------------------------------------------------
+%   FORMATTING
+%----------------------------------------------------------------------------------------
+% Set up the header and footer
+\pagestyle{fancy}
+\lhead[c]{\textbf{{\color[rgb]{.5,0,0} K{\o}benhavns\\Universitet }}} % Top left header
+\chead{\textbf{{\color[rgb]{.5,0,0} \Class }}\\ \hmwkTitle  } % Top center head
+\rhead{\instructor \\ \theprofessor} % Top right header
+\lfoot{\lastxmark} % Bottom left footer
+\cfoot{} % Bottom center footer
+\rfoot{Page\ \thepage\ of\ \protect\pageref{LastPage}} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+
+
+% Other formatting stuff
+%\setlength\parindent{12pt}
+\setlength{\parskip}{5 pt}
+%\theoremstyle{definition} \newtheorem{ex}{\textbf{\Large{Exercise & #}\\}}
+\usepackage{titlesec}
+\titleformat{\section}[hang]{\normalfont\bfseries\Large}{Problem \thesection:}{0.5em}{}
+
+
+
+
+%----------------------------------------------------------------------------------------
+%	NAME AND CLASS SECTION
+%----------------------------------------------------------------------------------------
+\newcommand{\hmwkTitle}{Exam} % Assignment title
+\newcommand{\Class}{Financial Markets Microstructure} % Course/class
+\newcommand{\instructor}{Spring 2023} % TA
+\newcommand{\theprofessor}{Prof. Egor Starkov} % Professor
+
+
+
+
+%----------------------------------------------------------------------------------------
+%   SOLUTIONS
+%----------------------------------------------------------------------------------------
+\newif\ifsolutions
+\solutionstrue
+
+
+
+
+\begin{document}
+
+{\ifsolutions \else	
+	\includepdf{FMMexam_frontpage23_1.pdf}
+\fi}
+
+\begin{center}
+		\LARGE\textbf{Final re-exam {\ifsolutions solutions \fi}}
+\end{center}
+
+{\ifsolutions \else	
+Write up your responses to questions below and submit them to Digital Exam. The deadline to submit the responses is Aug 28, 21:00. No cooperation with other students is permitted.
+
+Be concise, but show your work and explain your answers. Some questions may require you to make additional assumptions beyond those provided in the question; be clear about the assumptions you make. Some questions are open ended in that they may not have a unique correct answer. You are allowed to refer to textbooks, lecture notes, slides, problem sets, etc.
+\fi}
+
+
+
+\section{Spread dynamics in Glosten-Milgrom model}
+
+Consider a standard Glosten-Milgrom model:
+\begin{itemize}
+	\item asset fundamental value is $v \in \{v^L, v^H\}$, the two realizations are considered equally probable ex ante;
+	\item a competitive dealer sequentially quotes bid $b_t$ and ask $a_t$ prices for one unit of the asset each period;
+	\item one trader arrives at the market per period and can submit a market buy or sell order for one unit or do nothing: $d_t \in \{-1,0,1\}$; 
+	\item with probability $\pi$ the trader is informed and knows $v$ and chooses $d_t$ to maximize profit; with complementary probability $1-\pi$ the trader is uninformed and submits either a buy or a sell order with equal probabilities regardless of $v$.
+\end{itemize}
+Answer the following questions.
+
+\begin{enumerate}
+	\item Calculate the first-period market valuation $\mu_0 = \mathbb{E} [v]$, the ask and bid prices $a_1, b_1$, and the relative spread $s_1 = \frac{a_1-b_1}{\mu_0}$.
+	\item Suppose the first order was a sell: $d_1 = -1$. Calculate the second-period market valuation $\mu_1 = \mathbb{E} [v | d_1 = -1]$, the ask and bid prices $a_2, b_2$, and the relative spread $s_2 = \frac{a_2-b_2}{\mu_1}$.
+	\item How does $s_2$ compare to $s_1$? Give an intuitive explanation for why. Do you expect this trend to continue from $s_2$ to $s_3$ and onwards?
+\end{enumerate}
+
+
+
+\ifsolutions
+\subsection*{Solution}
+
+\begin{enumerate}
+	\item $\mu_0 = \mathbb{E}[v] = \frac{v^H+v^L}{2}$; $a_1 = \mathbb{E}[v|d_1=1] = \mu_0 + \pi \frac{v^H-v^L}{2}$; $b_1 = \mathbb{E}[v|d_1=-1] = \mu_0 - \pi \frac{v^H-v^L}{2}$; $s_1 = \frac{a_1-b_1}{\mu_0} = 2\pi \frac{v^H - v^L}{v^H+v^L}$.
+	
+	\item After a sell order, we have $\mu_1 = b_1 = \mu_0 - \pi \frac{v^H-v^L}{2} = \frac{(1-\pi)v^H + (1+\pi)v^L}{2}$. Note in particular that $\mathbb{P}(v^H|d_1=-1) = \frac{1-\pi}{2}$ and $\mathbb{P}(v^L|d_1=-1) = \frac{1+\pi}{2}$. 
+	Then the quotes are (where $I_2$ and $U_2$ correspond to the events of the second trader being informed or uninformed, respectively):
+	\begin{align*}
+		a_2 &= \mathbb{E}[v|d_1=-1,d_2=1] 
+		\\
+		&= \mathbb{E}[v|I_2,d_1=-1,d_2=1] \cdot \mathbb{P}[I_2|d_1=-1,d_2=1] + \mathbb{E}[v|U_2,d_1=-1,d_2=1] \cdot \mathbb{P}[U_2|d_1=-1,d_2=1]
+		\\
+		&= v^H \cdot \frac{\pi \cdot \mathbb{P}(v^H|d_1=-1)}{\mathbb{P}(d_2=1|d_1=-1)} + \mu_1 \cdot \frac{(1-\pi) \cdot \frac{1}{2}}{\mathbb{P}(d_2=1|d_1=-1)}
+		\\
+		&= v^H \cdot \frac{\pi}{\pi+1} + \mu_1 \cdot \frac{1}{\pi+1} = \frac{v^H+v^L}{2} = \mu_0,
+	\end{align*}
+	and similarly
+	\begin{align*}
+		b_2 &= v^L \cdot \mathbb{P}[I_2|d_1=-1,d_2=-1] + \mu_1 \cdot \mathbb{P}[U_2|d_1=-1,d_2=-1]
+		\\
+		&= v^L \cdot \frac{\pi \cdot \frac{1+\pi}{2}}{\pi \cdot \frac{1+\pi}{2} + (1-\pi)\frac{1}{2}} + \mu_1 \cdot \frac{(1-\pi)\frac{1}{2}}{\pi \cdot \frac{1+\pi}{2} + (1-\pi)\frac{1}{2}}
+		\\
+		&= v^H \cdot \frac{(1-\pi)^2}{2(1+\pi^2)} + v^L \cdot \frac{(1+\pi)^2}{2(1+\pi^2)}.
+	\end{align*}
+	The relative spread is hence $s_2 = \frac{2\pi}{1+\pi^2} \cdot \frac{v^H-v^L}{(1-\pi)v^H + (1+\pi)v^L}$.
+	
+	\item The comparison is ambiguous and depends on the model parameters:
+	\begin{align*}
+		s_2 < s_1 \iff \frac{\pi}{1+\pi^2} > \frac{v^H-v^L}{v^H+v^L}.
+	\end{align*}
+	There are two countervailing forces at play here. First, it is immediate that for the absolute spreads, $S_2 \equiv a_2-b_2 < a_1-b_1 \equiv S_1$. Intuitively this means that the second order is less informative about the fundamental than the first one. This is because we started from the state of maximal uncertainty ($v^H$ and $v^L$ being equally likely), so the first order is extremely informative; after that we inevitably move towards either $v^H$ or $v^L$ being more likely, hence an additional signal is by definition less informative. The future absolute spreads $S_t$ then depend on how close $\mu_{t-1}$ is to $\mu_0$. As discussed in class, while in the short run $\mu_{t-1}$ can fluctuate arbitrarily, in the long run the market valuation converges to the true fundamental value, $\mu_t \to v$, hence on average we move towards certainty, and the spreads should close down over time.
+	
+	For relative spreads, there is a countervailing force coming from the denominator in $s_t = \frac{a_t-b_t}{\mu_{t-1}}$. The changes in the midquote directly affect the relative spread: and the lower is the midquote, the higher is the spread, and vice versa. Then the first piece of news could be so strongly negative that it crashes $\mu_1$ and makes the smaller absolute spread $S_2$ actually look large in relative terms, overpowering the effect above. But the long-run intuition still suggests that as $\mu_t \to v$, the absolute spread converges to zero, and hence so should the relative spread (assuming $v^L>0$).
+\end{enumerate}
+
+\fi
+
+
+
+
+\section{Dynamic LOB markets with naive traders}
+
+This problem explores a version of the Foucault/Parlour model that we have seen in class.
+Suppose that there is one asset, whose fundamental value $v$ is unknown, and whose market valuation evolves according to $\mu_t = \mathbb{E}[v \mid \Omega_t] = \mu_{t-1} + \epsilon_t$, where $\epsilon_t \in \{-\sigma, 0, \sigma\}$ with equal probabilities is period-$t$ news, publicly announced at the end of period $t$ (after any period-$t$ orders are submitted).\footnote{Object $\Omega_t$ denotes all public information available to the market at (the end of) period $t$.} 
+In every period $t$, one risk-neutral trader arrives at the market (who only knows $\mu_{t-1}$ but not $\epsilon_{t}$, and has no idiosyncratic preference for the asset).
+
+Suppose that in every period, there is one ask price $a_t = \mu_{t-1} + S$ and one bid price $b_t = \mu_{t-1} - S$, where $S$ denotes the half-spread, constant across periods. 
+Each arriving trader can choose between submitting a limit order for one unit at the respective price or a market order against an existing order in the limit order book. A limit order is valid for one period and is automatically cancelled if it is not traded against by the next trader.\footnote{To be clear: a limit order submitted in period $t$ can \textbf{not} be cancelled or repriced when $\epsilon_t$ is revealed.}
+Let $d_t \in \{\varnothing,MS,LS,LB,MB\}$ denote the order submitted by period-$t$ trader, where $d_t = \varnothing$ means the trader abstains from trading, and the other four denote, respectively, the market sell, limit sell, limit buy, and market buy orders.
+
+Assume first as usual that all traders are strategic and profit-maximizing.
+
+\begin{enumerate}
+	\item What is the expected utility of a period-$t$ trader from using a limit buy order, as a function of its execution probability $p_{MS}$? What about a market buy order?
+	
+	\item Derive the period-$t$ trader's optimal trading strategy as a function of $\epsilon_{t-1}$ and $S$.
+	
+	\emph{Hint: it might be useful to consider cases $S=0$, $S\in (0,\sigma)$, $S=\sigma$, and $S>\sigma$.}
+	
+	\item Explain why in equilibrium with trade it should be that $S=\sigma$. Explain intuitively how the equilibrium looks, why this should be the market-clearing price, and what the traders' equilibrium profits are.
+\end{enumerate}
+
+Now, assume instead that all traders are \emph{naive} in that they do not account for adverse selection when submitting limit orders. That is, when they submit a limit order, they expect that the asset's value conditional on trade is $\mu_{t-1}$ (on average).\footnote{The traders still estimate trading probabilities $p_{MS}$, $p_{MB}$ correctly.}
+
+\begin{enumerate}[resume]
+	\item What is the subjective expected utility of a period-$t$ naive trader from using a limit buy order, as a function of its execution probability $p_{MS}$? What about a market buy order?
+	
+	\item Derive the period-$t$ naive trader's equilibrium trading strategy and the respective trading probabilities in an equilibrium with $S>0$.
+	
+	\emph{Bonus: characterize the set of equilibria as fully as you can.}
+	
+	\item Compare the equilibrium you found in part 5 to the equilibrium from part 3. Explain intuitively how they are different and what drives the difference between the two.
+\end{enumerate}
+
+
+\ifsolutions
+\subsection*{Solution}
+
+\begin{enumerate}
+	\item The strategic trader's expected utility from a limit buy order is
+	\begin{align}
+		U^S_{LB}
+		&= \Big( \mathbb{E}[v \mid \mu_{t-1}, d_{t+1}=MS] - b_t \Big) p_{MS} 
+		\nonumber
+		\\
+		&= \Big( (\mu_{t-1} + \mathbb{E}[\epsilon_{t} \mid d_{t+1}=MS]) - (\mu_{t-1} - S) \Big) p_{MS}
+		\nonumber
+		\\
+		&= \Big( \mathbb{E}[\epsilon_{t} \mid d_{t+1}=MS] + S \Big) p_{MS}.
+		\label{eq:uslb}
+	\end{align}
+	For a market buy order we have
+	\begin{align}
+		U^S_{MB}
+		&= \mathbb{E}[v \mid \mu_{t-1}] - a_{t-1} 
+		\nonumber
+		\\
+		&= \mu_{t-1} - (\mu_{t-2} + S)
+		\nonumber
+		\\
+		&= \epsilon_{t-1} - S.
+		\label{eq:usmb}
+	\end{align}
+	
+	\item A market buy is only profitable (relative to abstaining from trade) if $S \leq \epsilon_{t-1}$. Since $S \geq 0$, this is only possible if $\epsilon_{t-1} \in \{0,\sigma\}$ (and if $S>0$, then only if $\epsilon_{t-1}=\sigma$). Similarly, a market sell order is only profitable if $\epsilon_{t-1} \in \{0,-\sigma\}$, implying that $\mathbb{E}[\epsilon_{t} \mid d_{t+1}=MS] \in [-\sigma,0]$. A limit buy order is only profitable if $S \geq - \mathbb{E}[\epsilon_{t} \mid d_{t+1}=MS] \in [0,\sigma]$. Let us consider the following cases, depending on the spread:
+	\begin{itemize}
+		\item If $S=0$ then after $\epsilon_{t-1}=\sigma$ a market buy order is strictly profitable and all three other order types yield a weakly negative profit, hence MB is optimal. Similarly, after  $\epsilon_{t-1}=-\sigma$ MS is optimal. Therefore, $\mathbb{E}[\epsilon_{t} \mid d_{t+1}=MS] < 0$ and $\mathbb{E}[\epsilon_{t} \mid d_{t+1}=MB] > 0$. Limit buy and limit sell thus yield a strictly negative profit (for any $\epsilon_{t-1}$) and are never used. After $\epsilon_{t}=0$ both market order types yield zero profit, so the agent is indifferent between those and doing nothing.
+		
+		\item If $S \in (0,\sigma)$ then market buy and market sell can only ever yield positive profit after $\epsilon_{t}=\sigma$ and $\epsilon_{t}=-\sigma$, respectively. Thus $\mathbb{E}[\epsilon_{t} \mid d_{t+1}=MS] = -\sigma$ and $\mathbb{E}[\epsilon_{t} \mid d_{t+1}=MB] = \sigma$, which implies that the profits from the limit buy and sell limit orders are given by $(S-\sigma)p_{MS}$ and $(S-\sigma)p_{MB}$, respectively, which are negative. The limit orders are thus never used, and MB/MS are indeed optimal after $\epsilon_{t}=\sigma,-\sigma$, respectively. After $\epsilon_{t-1}=0$ all order types yield negative profit, hence abstinence is optimal.
+		
+		\item If $S = \sigma$ then the logic above implies that the limit orders yield zero profit (regardless of $\epsilon_{t-1}$), and the same applies to market buy after $\epsilon_{t-1}=\sigma$ and market sell after $\epsilon_{t}=-\sigma$ (and in other cases market orders yield negative profit). The trader is thus indifferent between all the zero-profit alternatives for all respective $\epsilon_{t-1}$.
+		
+		\item If $S > \sigma$ then market orders can never be profitable, meaning $p_{MS}=p_{MB}=0$, so the limit orders yield zero profit, and the traders are indifferent between submitting limit orders (that never execute) and doing nothing.
+	\end{itemize}
+	The trader's resulting optimal strategy is summarized in Table \ref{table:trading_strat}.
+	\begin{table}
+		\centering
+		\begin{tabular}{|c||c|c|c|c|}
+			\hline 
+			$d_{t}$ & $S=0$ & $S\in(0,\sigma)$ & $S=\sigma$ & $S>\sigma$\tabularnewline
+			\hline 
+			\hline 
+			$\epsilon_{t-1}=\sigma$ & $MB$ & $MB$ & $\{MB,LB,LS,\varnothing\}$ & $\{LB,LS,\varnothing\}$\tabularnewline
+			\hline 
+			$\epsilon_{t-1}=0$ & $\{MB,MS,\varnothing\}$ & $\varnothing$ & $\{LB,LS,\varnothing\}$ & $\{LB,LS,\varnothing\}$\tabularnewline
+			\hline 
+			$\epsilon_{t-1}=-\sigma$ & $MS$ & $MS$ & $\{MS,LB,LS,\varnothing\}$ & $\{LB,LS,\varnothing\}$\tabularnewline
+			\hline 
+		\end{tabular}
+		\caption{Optimal trading strategy for a strategic trader.}
+		\label{table:trading_strat}
+	\end{table}
+
+	\item As suggested by the previous part, if $S<\sigma$, then all traders want to take liquidity and not provide liquidity (i.e., all traders use market orders and no one uses limit orders). The exact opposite happens when $S>\sigma$. Therefore, only at $S=\sigma$ is the market balanced in terms of both market and limit orders potentially being used in equilibrium.
+	In particular, we can consider an equilibrium, in which the trader uses MB after $\epsilon_{t-1}=+\sigma$, MS after $\epsilon_{t-1}=-\sigma$ (if there are any appropriate limit orders in the book), and mixes between LB and LS otherwise.
+	
+	In such an equilibrium, all traders get zero profit, but trade is possible. The ask and bid prices on the limit orders are such that they exactly foresee the news that will arrive, and negate the risk of being picked off (think of the Glosten-Milgrom model with no uninformed traders). Given such a defensive pricing, market orders yield exactly zero profit, since all information is already internalized in the price. Limit orders also yield zero profit, since any attempt to widen the spread for profit would result in complete trade breakdown.
+	
+	\item The naive trader's expected utility from a limit buy order is
+	\begin{align}
+		U^S_{LB}
+		&= \Big( \mathbb{E}[v \mid \mu_{t-1}, d_{t+1}=MS] - b_t \Big) p_{MS} 
+		\nonumber
+		\\
+		&= \Big( \mathbb{E}[v \mid \mu_{t-1}] - b_t \Big) p_{MS} 
+		\nonumber
+		\\
+		&= \Big( (\mu_{t-1} - (\mu_{t-1} - S) \Big) p_{MS}
+		\nonumber
+		\\
+		&= S \cdot p_{MS}.
+		\label{eq:unlb}
+	\end{align}
+	In the above, the equality between the first and the second lines follows from the trader's naivete.
+	
+	For a market buy order we have the same as for the strategic trader:
+	\begin{align}
+		U^S_{MB}
+		&= \mathbb{E}[v \mid \mu_{t-1}] - a_{t-1} 
+		\nonumber
+		\\
+		&= \mu_{t-1} - (\mu_{t-2} + S)
+		\nonumber
+		\\
+		&= \epsilon_{t-1} - S.
+		\label{eq:unmb}
+	\end{align}
+	
+	\item There is an equilibrium with trade with $S=0$ (where traders mix between the two limit orders when $\epsilon_{t-1}=0$ and trade via a market order otherwise), but we are not interested in it. From here onwards suppose $S>0$.
+	
+	Note from \eqref{eq:unlb} that if $S>0$ (and there is trade in equilibrium), a naive trader always expects a positive profit from a limit buy order (same for limit sell), hence providing liquidity is always better than doing nothing. 
+	
+	If $S>0$ and $\epsilon_{t-1} = 0$, \eqref{eq:unmb} suggests that market orders are unprofitable, so the trader submits a random limit order. To get an equilibrium with trade, we hence want market orders to be optimal after $\epsilon_{t-1} \in {-\sigma,\sigma}$. If $\epsilon_{t-1}=\sigma$, a market buy is preferred to limit buy if and only if $\sigma - S \geq S \cdot p_{MS} \iff S \leq \frac{\sigma}{1+p_{MS}}$. Similarly, MS is preferred to LS after $\epsilon_{t-1}=-\sigma$ if and only if $S \leq \frac{\sigma}{1+p_{MB}}$.
+	Hence for any $S \in \left( 0, \frac{3}{4}\sigma \right]$ market orders are uniquely optimal after news, and $p_{MS}=p_{MB}=1/3$.\footnote{There also exist equilibria for $S \in \left( \frac{3}{4}\sigma, \sigma \right]$ where traders mix between limit and market orders after news.}
+	
+	\item Naive traders ignore adverse selection, and are thus more eager than strategic traders to use limit orders to profit on the spread, ignoring the risk of being picked off (but still accounting for the execution risk). Such traders expect to receive positive profit from limit orders, and hence market orders should also yield positive profits (at least after news), which puts an upper bound on the spread. Worth noting that these traders' expectations regarding limit orders are incorrect, and their naivete would lead them to run at a loss.
+\end{enumerate}
+\fi
+
+
+
+
+\section{He liked the bonds}
+
+Read the article on AMI bonds attached at the end of this exam.\footnote{This text is a part of a Bloomberg opinion piece, available at \url{https://www.bloomberg.com/opinion/articles/2023-04-10/ftx-lost-track-of-its-money}. You should ignore the text on the first page before the headline ``He liked the bonds'' and all text on the last page after the headline ``APE Endgame''.}
+
+You are to take the role of a financial market regulator in an internal discussion about this case (e.g., a SEC analyst making a presentation to your colleagues). Write a memo discussing this case, with an emphasis on the following:
+\begin{enumerate}
+	\item How did the described manipulation affect market participants?
+	\item What kinds of remedies can you suggest to mitigate such exploits in the future? 
+	\item What kinds of side effects could your remedies have?
+\end{enumerate}
+\emph{NOTE: you can use the help of chatbots/AI/LLMs such as chatGPT. If you do, state clearly how they were used and which parts of the answer are mainly written by a LLM and which by you.}
+
+\ifsolutions
+\subsection*{Solution}
+	The question is, obviously, open-ended; below are some example points that could be made in an answer.
+
+	The effects were that the investors in Chatham's funds overpaid in commissions; post-trade information available to other investors (trade prices) was distorted.
+	
+	The article mentions that one remedy would have been to trade the bonds on the open market at the market price. The brokers should have the incentive to quote the fair price, but due to them knowing that Chatham would almost-certainly buy the bonds back, such an incentive is absent. It would similarly be absent for any other party that would be asked to quote a price without having to actually take a position at this price (if, e.g., we tried to force the brokers to solicit bids from other traders, such traders would not care about their bids if they expected Chatham to win regardless).
+	
+	One possible solution could be to strengthen the external audit requirements for funds like Chatham, yet that would come at a significant additional cost of compliance that would be passed on to investors, so it is not clear whether such a measure would actually improve investors' welfare. 
+\fi
+
+
+
+{\ifsolutions \else	
+	\includepdf[pages=-]{AMI_bonds.pdf}
+\fi}
+
+
+
+
+\end{document}

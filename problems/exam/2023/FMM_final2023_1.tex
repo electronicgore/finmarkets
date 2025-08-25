@@ -1,0 +1,397 @@
+%%% License: Creative Commons Attribution Share Alike 4.0 (see https://creativecommons.org/licenses/by-sa/4.0/)
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[a4paper]{article}
+
+\usepackage{amssymb}
+%\usepackage{enumerate}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{extramarks} % Required for headers and footers
+\usepackage[usenames,dvipsnames]{color} % Required for custom colors
+\usepackage{graphicx} % Required to insert images
+\usepackage{listings} % Required for insertion of code
+\usepackage{courier} % Required for the courier font
+\usepackage[table]{xcolor}
+\usepackage{amsfonts,amsmath,amsthm,parskip,setspace}
+\usepackage[section]{placeins}
+\usepackage[a4paper]{geometry}
+\usepackage[USenglish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{tikz}
+\usepackage{hyperref}
+\usepackage[hyphenbreaks]{breakurl}
+\usepackage[]{url}
+\usepackage[shortlabels]{enumitem}
+\usepackage{framed}
+\usepackage{pdfpages}
+
+
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.6in
+
+\linespread{1.1} % Line spacing
+
+
+
+%----------------------------------------------------------------------------------------
+%   FORMATTING
+%----------------------------------------------------------------------------------------
+% Set up the header and footer
+\pagestyle{fancy}
+\lhead[c]{\textbf{{\color[rgb]{.5,0,0} K{\o}benhavns\\Universitet }}} % Top left header
+\chead{\textbf{{\color[rgb]{.5,0,0} \Class }}\\ \hmwkTitle  } % Top center head
+\rhead{\instructor \\ \theprofessor} % Top right header
+\lfoot{\lastxmark} % Bottom left footer
+\cfoot{} % Bottom center footer
+\rfoot{Page\ \thepage\ of\ \protect\pageref{LastPage}} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+
+
+% Other formatting stuff
+%\setlength\parindent{12pt}
+\setlength{\parskip}{5 pt}
+%\theoremstyle{definition} \newtheorem{ex}{\textbf{\Large{Exercise & #}\\}}
+\usepackage{titlesec}
+\titleformat{\section}[hang]{\normalfont\bfseries\Large}{Problem \thesection:}{0.5em}{}
+
+
+
+
+%----------------------------------------------------------------------------------------
+%	NAME AND CLASS SECTION
+%----------------------------------------------------------------------------------------
+\newcommand{\hmwkTitle}{Exam} % Assignment title
+\newcommand{\Class}{Financial Markets Microstructure} % Course/class
+\newcommand{\instructor}{Spring 2023} % TA
+\newcommand{\theprofessor}{Prof. Egor Starkov} % Professor
+
+
+
+
+%----------------------------------------------------------------------------------------
+%   SOLUTIONS
+%----------------------------------------------------------------------------------------
+\newif\ifsolutions
+\solutionstrue
+
+
+
+
+\begin{document}
+
+{\ifsolutions \else	
+	\includepdf{FMMexam_frontpage23_1.pdf}
+\fi}
+
+\begin{center}
+		\LARGE\textbf{Final exam {\ifsolutions solutions \fi}}
+\end{center}
+
+{\ifsolutions \else	
+Write up your responses to questions below and submit them to Digital Exam. The deadline to submit the responses is Jun 8, 21:00. No cooperation with other students is permitted.
+
+Be concise, but show your work and explain your answers. Some questions may require you to make additional assumptions beyond those provided in the question; be clear about the assumptions you make. Some questions are open ended in that they may not have a unique correct answer. You are allowed to refer to textbooks, lecture notes, slides, problem sets, etc.
+\fi}
+
+
+
+\section{Estimating spread with informative order flow}
+
+Suppose you want to estimate the average spread for a given stock, but only have access to trade data (prices, directions, volumes). You hence decide to use the Roll's model that we have seen in class. At the same time, you find its assumption about the uninformative order flow unrealistic and want to relax it.
+You believe instead that some traders are informed, and the prices reflect that (as in, e.g., the Glosten-Milgrom world), which leads to $\mathbb{E}(d_t \epsilon_{t})=\rho > 0$ in the Roll's model.
+\begin{enumerate}
+	\item Can you estimate $\rho$ from trade data? If yes, explain in a few words how you would do it (you do not need to spell out the formal estimation procedure). If no, explain why and suggest another way to estimate spread.
+	\item Assuming you know (or have a good estimate for) the value of $\rho$, provide an estimator for spread $S$.
+	%\item Your colleague disagrees with you and argues that the order flow is uninformative, and the market overinfers: $\mathbb{E}(d_t \epsilon_{t})= 0$, $\mathbb{E}(d_t \epsilon_{t+1})=\rho > 0$. While you disagree, you derive the estimator anyway.
+\end{enumerate}
+
+\ifsolutions
+\subsection*{Solution}
+	\paragraph{Question 1.}
+	By definition, $\rho \equiv \mathbb{E}(d_t \epsilon_{t})$. It is said in the problem that we can observe trade directions $d_t$. However, $\epsilon_t = m_t - m_{t-1}$ is not directly observed, since midquotes $m_t$ are unknown. It is, however, true, that $m_t = p_t - \frac{d_t S}{2}$, so $\epsilon_{t} = \Delta p_t - \frac{\Delta d_t S}{2}$ -- it is given by the innovation in price, adjusted for the spread. We could then estimate $\rho$ simultaneously with $S$ by using, e.g., the Generalized Method of Moments, given the estimator for $S$ presented below and
+	\begin{align*}
+		\hat{\rho} = \mathbb{E} \left[ d_t \left( \Delta p_t - \frac{\Delta d_t S}{2} \right) \right].
+	\end{align*}
+	
+	In principle, since we are interested in $\epsilon_{t}$ as an informational innovation, we could also look at a long-run price impact $p_{t+\tau} - p_t$ for some large enough $\tau$ instead of $\varDelta p_t$, adjusted for the spread accordingly. This would filter out any short-run fluctuations caused by inventory risk or order processing costs.
+	
+	
+	\paragraph{Question 2.}
+	Suppose the following:
+	\begin{enumerate}
+		\item All trades have the same size. $d=1$: buy, $d=-1$: sell
+		\item Arriving orders are i.i.d. with $\mathbb{P}(d_t =1)=\frac{1}{2}$
+		\item Midquote is random walk: $m_t = m_{t-1} + \epsilon_t$  , where $\epsilon_t$ are i.i.d. shocks
+		\item Market orders are informative about price movements: $\mathbb{E}(d_t \epsilon_{t})=\rho > 0$ (but maintain $\mathbb{E}(d_t \epsilon_{t+1})=0$).
+		\item Spread $S = a_t-b_t$ is constant.
+	\end{enumerate}
+	Then
+	\[
+	p_t = m_t + \frac{d_t S}{2}.
+	\]
+	\begin{align*}
+		Cov(\Delta p_t, \Delta p_{t-1}) 
+		&= Cov(p_t-p_{t-1}, p_{t-1}-p_{t-2})
+		\\
+		&=Cov \left( \frac{S}{2}d_t - \frac{S}{2}d_{t-1} + \epsilon_t, \frac{S}{2}d_{t-1} - \frac{S}{2}d_{t-2} + \epsilon_{t-1} \right)
+		\\
+		&= \frac{S^2}{4} Cov \left( d_t-d_{t-1}, d_{t-1}-d_{t-2} + \frac{2}{S}\epsilon_{t-1} \right)
+		\\
+		&= \frac{S^2}{4} \mathbb{E}\left[\left( d_t-d_{t-1} \right) \left( d_{t-1}-d_{t-2} + \frac{2}{S} \epsilon_{t-1} \right) \right]
+		\\
+		&= \frac{S^2}{4} \mathbb{E} \left[ -d_{t-1}^2 - \frac{2}{S} \rho \right] = \frac{-S^2 - 2 \rho S}{4}
+	\end{align*}
+	Denoting $C \equiv Cov(\Delta p_t, \Delta p_{t-1})$, we then have
+	\begin{align*}
+		S^2 + 2\rho S + 4C = 0
+		\\ \Rightarrow 
+		S = -\rho \pm \sqrt{ \rho^2 - 4C }.
+	\end{align*}
+	Recall that for $\rho=0$, our estimator was $\hat{S} = 2 \sqrt{-Cov(\Delta p_t, \Delta p_{t-1})}$. This corresponds to the positive root above, hence our new spread estimator is
+	\begin{align*}
+		\hat{S} = -\rho + \sqrt{ \rho^2 - 4Cov(\Delta p_t, \Delta p_{t-1}) }
+	\end{align*}
+	
+	
+	Note: the book talks briefly about the Roll model with adverse selection in Box 5.1. It argues that in the presence of adverse selection, the Roll estimator underestimates the spread by a factor of $\sqrt{(\lambda+\gamma)/\gamma}$. In order for this answer to be accepted, the student must then explain what $\lambda$ and $\gamma$ are, and how they can be estimated.
+	
+	
+	%Suppose the following:
+	%\begin{enumerate}
+	%	\item All trades have the same size. $d=1$: buy, $d=-1$: sell
+	%	\item Arriving orders are i.i.d. with $\mathbb{P}(d_t =1)=\frac{1}{2}$
+	%	\item Midquote is random walk: $m_t = m_{t-1} + \epsilon_t$  , where $\epsilon_t$ are i.i.d. shocks
+	%	\item Market orders are informative about future price movements: $\mathbb{E}(d_t \epsilon_{t+1})=\rho > 0$ (but maintain $\mathbb{E}(d_t \epsilon_t)=0$).
+	%	\item Spread $S = a_t-b_t$ is constant.
+	%\end{enumerate}
+	%Then
+	%\[
+	%p_t = m_t + \frac{d_t S}{2}.
+	%\]
+	%\begin{align*}
+	%	Cov(\Delta p_t, \Delta p_{t-1}) 
+	%	&= Cov(p_t-p_{t-1}, p_{t-1}-p_{t-2})
+	%	\\
+	%	&=Cov \left( \frac{S}{2}d_t - \frac{S}{2}d_{t-1} + \epsilon_t, \frac{S}{2}d_{t-1} - \frac{S}{2}d_{t-2} + \epsilon_{t-1} \right)
+	%	\\
+	%	&= \frac{S^2}{4} Cov \left( d_t-d_{t-1} + \frac{2}{S}\epsilon_t, d_{t-1}-d_{t-2} \right)
+	%	\\
+	%	&= \frac{S^2}{4} \mathbb{E}\left[\left( d_t-d_{t-1} + \frac{2}{S} \epsilon_t \right) (d_{t-1}-d_{t-2}) \right]
+	%	\\
+	%	&= \frac{S^2}{4} \mathbb{E} \left[ -d_{t-1}^2 + \frac{2}{S} \rho \right] = \frac{-S^2 + 2 \rho S}{4}
+	%\end{align*}
+	%Denoting $C \equiv Cov(\Delta p_t, \Delta p_{t-1})$, we then have
+	%\begin{align*}
+	%	S^2 - 2\rho S + 4C = 0
+	%	\\ \Rightarrow 
+	%	S = \rho \pm \sqrt{ \rho^2 - 4C }.
+	%\end{align*}
+	%Recall that for $\rho=0$, our estimator was $\hat{S} = 2 \sqrt{-Cov(\Delta p_t, \Delta p_{t-1})}$. This corresponds to the positive root above, hence our new spread estimator is
+	%\begin{align*}
+	%	\hat{S} = \rho + \sqrt{ \rho^2 - 4Cov(\Delta p_t, \Delta p_{t-1}) }
+	%\end{align*}
+	
+\fi
+
+
+
+
+\section{Order splitting}
+Splitting a large order into multiple smaller orders is an important instrument that traders have for moderating their price impact, but it also has general equilibrium implications for order pricing. This problem explores these implications in the context of the Glosten-Milgrom model.
+
+There is one asset traded in a dealer market with a representative (competitive) risk-neutral dealer, who is tasked with quoting an ask price $a_1$ and a bid price $b_1$ for one unit of the asset at all times. The dealer believes that the asset's fundamental value is distributed as $v \sim U[\mu - \sigma, \mu + \sigma]$.
+
+The dealer's belief is that any arriving trader is risk-neutral and either informed with probability $\pi$, or uninformed with probability $1-\pi$. An informed trader knows $v$ and selects the profit-maximizing trade given $v$. An uninformed (noise) trader wants to buy or sell with equal probabilities, and would like to trade either one (with probability $1-\gamma$) or two (w.p. $\gamma$) units of the asset. To trade two units, the trader remains in the market after the first trade and submits another order. The dealer observes the trader's identity and can offer different quotes $a_2$ and $b_2$ to a repeat trader.
+
+\begin{enumerate}
+	\item Explain why in such a market, an informed trader would never profit by trading more than two units.
+	\item Calculate the ask price $a_1$ that a dealer would quote for the first unit.
+	\item Calculate the ask price for ``repeat'' purchases, $a_2$.
+	\item Compare these quotes with what would have been offered in a pure limit order book market (without a dealer), according to the Glosten model (with no order display cost). Would the market-order-traders prefer to trade in a dealer market or a LOB market?
+	\item Now assume instead that the dealer cannot see the trader's identity, so quote $a_2$ is also ``public''. This means that it is taken either by the original trader who wanted to trade two units, or by a second trader willing to buy (the dealer's beliefs about the second trader are the same as about the first). Calculate the ask quote $a_2^O$. How does it compare to the quote $a_2$ derived above? Would the traders prefer their identity to be observable or not?
+\end{enumerate}
+
+
+\ifsolutions
+\subsection*{Solution}
+\begin{enumerate}
+	\item An uninformed trader never trades more than two units. Hence if the dealer observes that a trader wants to trade a third unit, the immediate inference is that the trader must be informed. The respective quotes $a_3,b_3$ are then determined from the zero-profit equations $a_3 = \mathbb{E} [v \mid v \geq a_3]$, $b_3 = \mathbb{E} [v \mid v \leq b_3]$ (which already include the informed trader's optimal strategy ``buy only if $v \geq a_3$; sell only if $v \leq b_3$'').
+	These have unique solutions $a_3 = \mu + \sigma$, $b_3 = \mu - \sigma$. Trading at these prices yields zero profit to an informed trader.
+	
+	Note that the same logic applies to switching trade directions (submitting a ``buy'' after a ``sell'' or vice versa). 
+	
+	\item Let $x \in \{-2,-1,1,2\}$ denote the total signed quantity that the trader plans to buy.
+	The informed trader buys the first unit ($x \geq 1$) if the marginal profit from doing so is positive, i.e., if $v - a_1 \geq 0 \iff v \geq a_1$. It is convenient to introduce $\sigma_1 = a_1 - \mu$ and say that the informed trader buys the first unit at price $a_1$ if $v > \mu + \sigma_1$. %For a meaningful equilibrium we need $\sigma_1 < \sigma$.
+	
+	The zero-profit condition for the dealer, $a_1 = \mathbb{E} [ v \mid x \geq 1]$, can be expanded using the law of iterated expectations as follows, where $I$ and $U$ denote the events of trader being informed or uninformed, respectively.
+	\begin{align*}
+		a_1 &= \mathbb{E} [ v \mid x \geq 1]
+		\\
+		&= \mathbb{E} [ v \mid U, x \geq 1] \cdot \mathbb{P} [ U \mid x \geq 1 ] + \mathbb{E} [ v \mid I, x \geq 1] \cdot \mathbb{P} [ I \mid x \geq 1 ]
+		\\
+		&= \mu \cdot \frac{(1-\pi)/2}{\pi \frac{\sigma - \sigma_1}{2 \sigma} + \frac{1-\pi}{2}} + \left( \frac{(\mu + \sigma) + (\mu + \sigma_1)}{2} \right) \cdot \frac{\pi \frac{\sigma - \sigma_1}{2 \sigma}}{\pi \frac{\sigma - \sigma_1}{2 \sigma} + \frac{1-\pi}{2}}
+		\\
+		&= \mu + \frac{\sigma + \sigma_1}{2} \cdot \frac{\pi \frac{\sigma - \sigma_1}{2 \sigma}}{\pi \frac{\sigma - \sigma_1}{2 \sigma} + \frac{1-\pi}{2}}.
+	\end{align*}
+	From the trader's optimality above, $a_1 = \mu + \sigma_1$, which yields:
+	\begin{align*}
+		\mu + \sigma_1 &= \mu + \frac{\sigma + \sigma_1}{2} \cdot \frac{\pi \frac{\sigma - \sigma_1}{2 \sigma}}{\pi \frac{\sigma - \sigma_1}{2 \sigma} + \frac{1-\pi}{2}}
+		\\
+		\Leftrightarrow
+		\frac{\sigma_1}{2} \cdot \left( 2 - \frac{\pi \frac{\sigma - \sigma_1}{2 \sigma}}{\pi \frac{\sigma - \sigma_1}{2 \sigma} + \frac{1-\pi}{2}} \right)
+		&= \frac{\sigma}{2} \cdot \frac{\pi \frac{\sigma - \sigma_1}{2 \sigma}}{\pi \frac{\sigma - \sigma_1}{2 \sigma} + \frac{1-\pi}{2}}
+		\\
+		\Leftrightarrow
+		2\sigma \sigma_1 - \pi \sigma_1^2 &= \pi \sigma^2
+		\\
+		\Rightarrow
+		\sigma_1 &= \frac{1 - \sqrt{1 - \pi^2}}{\pi} \sigma
+	\end{align*}
+	(since the positive root yields $\sigma_1 > \sigma$, which is nonsense).
+	Hence we have $a_1 = \mu + \sigma_1$, where $\sigma_1$ is as above
+	
+	\item Similarly to the above, the informed trader buys the second unit at price $a_2$ only if $v > \mu + \sigma_2$, where $\sigma_2 = a_2 - \mu$. We are looking for $\sigma_2 \in (\sigma_1, \sigma)$. The dealer's zero-profit condition now is
+	\begin{align*}
+		a_2 &= \mathbb{E} [ v \mid x \geq 2]
+		\\
+		&= \mathbb{E} [ v \mid U, x \geq 2] \cdot \mathbb{P} [ U \mid x \geq 2 ] + \mathbb{E} [ v \mid I, x \geq 2] \cdot \mathbb{P} [ I \mid x \geq 2 ]
+		\\
+		&= \mu \cdot \frac{(1-\pi) \frac{\gamma}{2}}{\pi \frac{\sigma - \sigma_2}{2 \sigma} + (1-\pi) \frac{\gamma}{2}} + \left( \frac{(\mu + \sigma) + (\mu + \sigma_2)}{2} \right) \cdot \frac{\pi \frac{\sigma - \sigma_2}{2 \sigma}}{\pi \frac{\sigma - \sigma_2}{2 \sigma} + (1-\pi) \frac{\gamma}{2}}
+		\\
+		&= \mu + \frac{\sigma + \sigma_2}{2} \cdot \frac{\pi \frac{\sigma - \sigma_2}{2 \sigma}}{\pi \frac{\sigma - \sigma_2}{2 \sigma} + (1-\pi) \frac{\gamma}{2}}.
+	\end{align*}
+	Plugging in $a_2 = \mu + \sigma_2$, we get
+	\begin{align*}
+		\sigma_2 &= \frac{\sigma + \sigma_2}{2} \cdot \frac{\pi \frac{\sigma - \sigma_2}{2 \sigma}}{\pi \frac{\sigma - \sigma_2}{2 \sigma} + (1-\pi) \frac{\gamma}{2}}
+		\\
+		\Leftrightarrow
+		0 &= \pi \sigma^2 - 2 \sigma \left( \pi + (1-\pi)\gamma \right) \sigma_2 + \pi \sigma_2^2
+		\\
+		\Rightarrow
+		\sigma_2 &= \frac{ \pi + (1-\pi) \gamma - \sqrt{ (2\pi + (1-\pi)\gamma) (1-\pi) \gamma } }{\pi} \sigma.
+	\end{align*}
+	
+	\item Recall that in the Glosten model, a trader who submits a limit order can only condition their price on the event that their limit order executes, but not on the total order size. In our setup, there would be two limit orders on the ask side of the market for one unit each. The price of the first unit would then be $a_1 = \mathbb{E} [ v \mid x \geq 1]$, and the price of the second unit $a_2 = \mathbb{E} [ v \mid x \geq 2]$ -- exactly the same as in the dealer model above. This serves to show that when market-order traders split their orders, the dealer has no informational advantage over the LOB traders. The market-order traders then do not care whether they trade against a dealer or a limit order book.
+	
+	%An alternative line of reasoning could suggest that the real limit order book markets are anonymous, in the sense that a limit order trader cannot discriminate based on whether a given market order comes from a new trader or one who has previously submitted the same order. A dealer, in contrast, could distinguish the two, and offer different prices as suggested above. Then the prices derived above would apply in a dealer market, but the argument presented in the following part would apply to the LOB markets.
+	
+	\item Intuitively, suppose the dealer believes that with probability $\lambda$ they trade against the second order of the first trader, and with probability $1-\lambda$ against the first order of the second trader. The competitive ask quote would then satisfy $a_2^O = \lambda \mathbb{E} [v \mid x \geq 2] + (1-\lambda) \mathbb{E} [v \mid x \geq 1]$, so it would be $a_2^O \in (a_1, a_2)$.\footnote{This is not strictly correct, since $\mathbb{E} [v \mid x \geq 2]$ itself depends on $a_2$.}
+	Since $a_1 < a_2^O < a_2$, all market-order traders (who trade two units) would prefer an opaque market, since they get better prices in such a market, due to the dealer allowing for a possibility that a new uninformed trader arrives. Note, however, that this is only true for the ``first'' trader in the market -- it is not obvious how the prices for the second and later traders would change.
+	
+	%*Note: the above is more of an intuitive point, since it is a bit challenging to formalize. It is true that trader 1 would pay less for the second unit and trader 2 would pay more for the first unit under opaqueness than under transparency. However, the inference becomes muddled after that: e.g., the fourth trade could come from traders 2, 3, or 4, depending on trading strategies. A stationary equilibrium is also difficult to conceptualize in this setup, since the domain of $v$ is predetermined, so with the accumulation of trade flow the quotes will converge to the true $v$.
+	
+	A formal derivation is $a_2^O$ is quite cumbersome, and the students were not expected to complete it; an intuitive argument like the one above would suffice. For completeness, the full derivation is presented below. We are looking for an ask price $a_2^O$ (which is only relevant if the second order is a buy) in an opaque market conditional on the first order being a buy. Define again $\sigma_2^O \equiv a_2^O - \mu$ and guess that $\sigma_2^O > \sigma_1$ (verify at the end). The contingencies that generate a $(buy,buy)$ order sequence, together with their ex ante (unconditional) probabilities, are as follows:
+	\begin{enumerate}
+		\item The first trader was uninformed and wanted to buy two units: probability $(1-\pi)\frac{\gamma}{2}$; $\mathbb{E}[v]=\mu$;\footnote{To be clear, notation is used loosely in this list, and the expectations $\mathbb{E}[v]$ actually mean conditional expectations, conditional on the respective cases.}
+		\item The first trader was informed and $v$ is high enough to justify two buys: probability $\pi \frac{\sigma - \sigma_2^O}{2\sigma}$; infer that $v \in [\mu+\sigma_2^O, \mu+\sigma]$, so $\mathbb{E}[v] = \mu + \frac{\sigma_2^O + \sigma}{2}$ in this case;
+		\item The first trader left after buying one unit, and the second trader wants to buy at least one unit. The first trader leaves if:
+		\begin{enumerate}
+			\item uninformed, only wanted to buy one unit (probability $(1-\pi)\frac{1-\gamma}{2}$); in this case the expected value of the asset conditional on the second order being a buy order is exactly $\mathbb{E}[v]=a_1$;
+			\item informed, and $v$ is not high enough to warrant buying second unit (probability $\pi \frac{\sigma_2^O - \sigma_1}{2\sigma}$; infer that $v \in [\mu+\sigma_1, \mu+\sigma_2^O]$). Note that in this case if the second trader is also informed, he would also not want to buy at price $a_2^O$. Hence a second buy order can only come from an uninformed trader (probability $\frac{1-\pi}{2}$ on top of the probability above) and would not provide any information about $v$ beyond $v \in [\mu+\sigma_1, \mu+\sigma_2^O]$, hence in this case $\mathbb{E}[v] = \mu + \frac{\sigma_1 + \sigma_2^O}{2}$.
+		\end{enumerate}
+	\end{enumerate}
+	The total probability of all contingencies above is 
+	\begin{multline*}
+		(1-\pi) \frac{\gamma}{2} + \pi \frac{\sigma - \sigma_2^O}{2\sigma} + (1-\pi)\frac{1-\gamma}{2} + \pi \frac{\sigma_2^O - \sigma_1}{2\sigma} \cdot \frac{1-\pi}{2}
+		= \frac{1-\pi}{2} \cdot \left( 1 + \pi \frac{\sigma_2^O - \sigma_1}{2\sigma} \right) + \pi \frac{\sigma - \sigma_2^O}{2\sigma}
+	\end{multline*}
+	Taking the expectation of $v$ over the cases above, we get that
+	\begin{align*}
+		a_2^O = \mu + \sigma_2^O
+		=& \frac{(1-\pi)\frac{\gamma}{2} }{ \frac{1-\pi}{2} \cdot \left( 1 + \pi \frac{\sigma_2^O - \sigma_1}{2\sigma} \right) + \pi \frac{\sigma - \sigma_2^O}{2\sigma} } \cdot \mu 
+		+ \frac{\pi \frac{\sigma - \sigma_2^O}{2\sigma} }{ \frac{1-\pi}{2} \cdot \left( 1 + \pi \frac{\sigma_2^O - \sigma_1}{2\sigma} \right) + \pi \frac{\sigma - \sigma_2^O}{2\sigma} } \cdot \left(\mu + \frac{\sigma_2^O + \sigma}{2}\right)
+		\\
+		&+ \frac{(1-\pi)\frac{1-\gamma}{2} }{ \frac{1-\pi}{2} \cdot \left( 1 + \pi \frac{\sigma_2^O - \sigma_1}{2\sigma} \right) + \pi \frac{\sigma - \sigma_2^O}{2\sigma} } \cdot a_1
+		+ \frac{\pi \frac{\sigma_2^O - \sigma_1}{2\sigma} \cdot \frac{1-\pi}{2} }{ \frac{1-\pi}{2} \cdot \left( 1 + \pi \frac{\sigma_2^O - \sigma_1}{2\sigma} \right) + \pi \frac{\sigma - \sigma_2^O}{2\sigma} } \cdot \left( \mu + \frac{\sigma_1 + \sigma_2^O}{2} \right) 
+		\\
+		=& \mu + \frac{ \pi \frac{\sigma - \sigma_2^O}{2\sigma} \cdot \frac{\sigma_2^O + \sigma}{2} + (1-\pi)\frac{1-\gamma}{2} \cdot \sigma_1 + \pi \frac{\sigma_2^O - \sigma_1}{2\sigma} \cdot \frac{1-\pi}{2} \cdot \frac{\sigma_1 + \sigma_2^O}{2} 
+			}{ 
+		\frac{1-\pi}{2} \cdot \left( 1 + \pi \frac{\sigma_2^O - \sigma_1}{2\sigma} \right) + \pi \frac{\sigma - \sigma_2^O}{2\sigma} }
+		%\sigma_1 &= \frac{1 - \sqrt{1 - \pi^2}}{\pi} \sigma
+	\end{align*}
+	\begin{align*}
+		\Rightarrow 
+		\sigma_2^O \cdot \left[ \frac{1-\pi}{2} \cdot \left( 1 + \pi \frac{\sigma_2^O - \sigma_1}{2\sigma} \right) + \pi \frac{\sigma - \sigma_2^O}{2\sigma} \right]
+		= \frac{1-\pi}{2} (1-\gamma) \sigma_1 + \frac{\pi}{4\sigma} \left( \sigma^2 - \frac{1+\pi}{2} (\sigma_2^O)^2 - \frac{1-\pi}{2} \sigma_1^2 \right)
+		\\ \iff 
+		(\sigma_2^O)^2 \cdot \frac{\pi(1-\pi)}{4\sigma} + \sigma_2^O \cdot \left( \frac{\pi(1-\pi) \sigma_1}{2\sigma} - 1 \right) + \left( (1-\pi)(1-\gamma) \sigma_1 + \frac{\pi \sigma}{2} - \frac{\pi(1-\pi)\sigma_1^2}{4\sigma} \right) = 0.
+	\end{align*}
+	The above is a quadratic equation w.r.t. $\sigma_2^O$, hence can be solved using the standard methods. Plotting the solution numerically shows that indeed $\sigma_2^O < \sigma_2$ (and demonstrates which root is relevant). For low enough $\pi$ and $\gamma$ it is also true that $\sigma_2^O > \sigma_1$, as assumed. If the parameters are such that this does not hold, then $a_2^O = a_1$ is the corner solution.
+\end{enumerate}
+\fi
+
+
+
+
+\section{The fall of FTX}
+
+FTX, a large crypto exchange, has collapsed in the Fall of 2022. You can find the timeline of the collapse in the article from Investopedia attached at the end of this exam.\footnote{Original article available at \url{https://www.investopedia.com/what-went-wrong-with-ftx-6828447}.}
+You are to answer the following question: 
+\begin{quote}
+	``How does the fall of FTX affect the other participants of the crypto market?''
+\end{quote}
+
+\begin{enumerate}
+	\item Consult a chatbot/AI/LLM (hereinafter referred to as LLM) on this issue.\footnote{For example, you can use openAI's ChatGPT: \url{https://chat.openai.com}.} Show both your prompt and the response (and mention which LLM you used).
+	
+	\emph{NOTE: for best results, you may want to phrase your own prompt, rather than just copy the question above.}
+	
+	\item Discuss the response you got. Does it make sense? Is it applicable to the situation at hand?
+	
+	\item Is there anything you would like to add to the LLM response, using the knowledge you obtained in the course?
+\end{enumerate}
+
+
+\ifsolutions
+\subsection*{Solution}
+\begin{enumerate}
+	\item The student is evaluated based on the quality of their prompt. E.g., it should be immediate that the LLM did not take this course and likely has no idea it exists, hence mentioning the course is not constructive. At the same time, mentioning ``microstructure'' may in principle frame the LLM's responses in a more relevant key. Finally, given that the collapse of FTX is a recent event, the LLMs are unlikely to have information relevant to the specific case (which, e.g., openAI usually mentions in its responses) -- so it makes sense to ask more generic, counterfactual questions, such as ``How would a collapse of a large cryptocurrency exchange affect other market participants?''
+	Finally, the investopedia text is presented in the exam to give the unaware students a chance to get acquainted with the case, not to be fed to the LLM. It is implied that the text is short enough to be processed by the student without the help of the LLM -- and the benefit of the LLM is in accessing the broader body of knowledge, as opposed to extracting core points from a short text.
+	
+	%\item \textbf{Prompt:} ``How does a collapse of a financial exchange affect other market participants?''
+	%\\ \textbf{Response:} (from ChatGPT, retrieved May 10, 2023)
+	%\\The collapse of a financial exchange can have significant impacts on other market participants. Here are a few ways in which it can affect them:
+	%
+	%\begin{enumerate}
+	%	\item Losses: One of the most direct impacts of a financial exchange collapse is that market participants who have investments in that exchange can suffer losses. For example, if a stock exchange collapses, investors who hold stocks listed on that exchange may lose the value of their investments. Similarly, if a currency exchange collapses, traders who hold positions in that currency may suffer losses.
+	%	
+	%	\item Systemic risk: The collapse of a major financial exchange can also pose a systemic risk to the broader financial system. If the exchange is a major player in the market, its collapse can trigger a chain reaction of failures and losses across other exchanges and institutions. This can lead to a wider economic crisis, as happened during the global financial crisis of 2008.
+	%	
+	%	\item Reduced liquidity: The collapse of a financial exchange can also reduce liquidity in the market. This can happen if the exchange was a major source of liquidity for a particular asset class or market segment. When liquidity dries up, it can become harder for market participants to buy and sell assets, which can lead to wider price fluctuations and increased volatility.
+	%	
+	%	\item Loss of confidence: Finally, a financial exchange collapse can lead to a loss of confidence among market participants. If investors and traders lose faith in the integrity of the financial system, they may be more hesitant to invest or participate in the market, which can have further negative impacts on liquidity, pricing, and stability.
+	%\end{enumerate}
+	
+	\item In my experience, the LLM responses are typically vague, but mostly relevant. If forced to speculate on the specific case of FTX, the LLM can hypothesize about the reasons for the collapse that do not have much in common with the realized timeline (such as security issues); these can be rebuked by the student.
+	Alternatively, if the LLM suggests hypothetical consequences that would be instantly testable using widely accessible data, the student is expected to do the fact-checking (e.g., ``investors can lose confidence in crypto'' or ``other exchanges would gain market share by capturing orphaned traders'' can both be easily tested by looking up trading volumes on competing crypto exchanges, such as Coinbase or Binance).
+	
+	%All four items are applicable in this case. Item (a) is straightforward (though the last part about the currency market is questionable). Item (b) is quite relevant in case of FTX in the context of crypto markets, since FTX and Alameda had significant stakes in many other crypto companies, which would presumably need to be withdrawn to pay the creditors (and this is also somewhat ironic, since not long ago FTX and Alameda were bailing out a lot of crypto companies to avoid systemic contagion). Item (c) can be seen as a temporary shock, with the traders simply switching to other exchanges in the longer run. Item (d) is related to item (b) in the sense of this collapse having a systemic effect on the investors' confidence in the whole crypto market.
+	
+	\item Open question. An easy answer would be to discuss the consequences of market fragmentation, which the LLMs tend to not mention (fragmentation might either increase or decrease after FTX demise, depending on where traders migrate to), and with it market transparency (the ease to aggregate information from different platforms).
+\end{enumerate}
+
+\fi
+
+
+{\ifsolutions \else	
+	\includepdf[pages=-]{FTX.pdf}
+\fi}
+
+
+
+
+\end{document}
