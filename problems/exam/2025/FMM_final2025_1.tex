@@ -1,0 +1,278 @@
+%%% License: Creative Commons Attribution Share Alike 4.0 (see https://creativecommons.org/licenses/by-sa/4.0/)
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[a4paper]{article}
+
+\usepackage{amssymb}
+%\usepackage{enumerate}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{extramarks} % Required for headers and footers
+\usepackage[usenames,dvipsnames]{color} % Required for custom colors
+\usepackage{graphicx} % Required to insert images
+\usepackage{listings} % Required for insertion of code
+\usepackage{courier} % Required for the courier font
+\usepackage[table]{xcolor}
+\usepackage{amsfonts,amsmath,amsthm,parskip,setspace}
+\usepackage[section]{placeins}
+\usepackage[a4paper]{geometry}
+\usepackage[USenglish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{tikz}
+\usepackage{hyperref}
+\usepackage[hyphenbreaks]{breakurl}
+\usepackage[]{url}
+\usepackage[shortlabels]{enumitem}
+\usepackage{framed}
+\usepackage{pdfpages}
+
+
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.6in
+
+\linespread{1.1} % Line spacing
+
+
+
+%----------------------------------------------------------------------------------------
+%   FORMATTING
+%----------------------------------------------------------------------------------------
+% Set up the header and footer
+\pagestyle{fancy}
+\lhead[c]{\textbf{{\color[rgb]{.5,0,0} K{\o}benhavns\\Universitet }}} % Top left header
+\chead{\textbf{{\color[rgb]{.5,0,0} \Class }}\\ \hmwkTitle  } % Top center head
+\rhead{\instructor \\ \theprofessor} % Top right header
+\lfoot{\lastxmark} % Bottom left footer
+\cfoot{} % Bottom center footer
+\rfoot{Page\ \thepage\ of\ \protect\pageref{LastPage}} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+
+
+% Other formatting stuff
+%\setlength\parindent{12pt}
+\setlength{\parskip}{5 pt}
+%\theoremstyle{definition} \newtheorem{ex}{\textbf{\Large{Exercise & #}\\}}
+\usepackage{titlesec}
+\titleformat{\section}[hang]{\normalfont\bfseries\Large}{Problem \thesection:}{0.5em}{}
+
+
+
+
+%----------------------------------------------------------------------------------------
+%	NAME AND CLASS SECTION
+%----------------------------------------------------------------------------------------
+\newcommand{\hmwkTitle}{Exam} % Assignment title
+\newcommand{\Class}{Financial Markets Microstructure} % Course/class
+\newcommand{\instructor}{Spring 2025} % TA
+\newcommand{\theprofessor}{Prof. Egor Starkov} % Professor
+
+
+
+
+%----------------------------------------------------------------------------------------
+%   SOLUTIONS
+%----------------------------------------------------------------------------------------
+\newif\ifsolutions
+\solutionstrue
+
+
+
+
+\begin{document}
+
+{\ifsolutions \else	
+	\includepdf{FMMexam_frontpage25_1.pdf}
+\fi}
+
+\begin{center}
+		\LARGE\textbf{Final exam {\ifsolutions solutions \fi}}
+\end{center}
+
+{\ifsolutions \else	
+Write up your responses to questions below and submit them to Digital Exam before the deadline. No cooperation with other students is permitted.
+
+Be concise, but show your work and explain your answers. Some questions may require you to make additional assumptions beyond those provided in the question; be clear about the assumptions you make. Some questions are open ended in that they may not have a unique correct answer. You are allowed to refer to textbooks, lecture notes, slides, problem sets, etc.
+\fi}
+
+
+
+
+
+
+\section{HFT with limited liquidity supply}
+
+Consider a Biais-Foucault-Moinas model of high-frequency trading that we considered in class. We assumed in that model that fast institutions (FI) always find trading opportunities, whereas slow institutions (SI) find trading opportunities with a fixed probability $\rho < 1$.
+
+Suppose now instead that there is a fixed supply of liquidity in the market, denoted by $\xi \in (0,1)$. FI are the first to dip into this liquidity, and then SI split among themselves whatever liquidity is left. For example, if the share of institutions that are fast, $\alpha$, is such that $\alpha \leq \xi$, then all FI find a trading opportunity. Then the $1-\alpha$ slow institutions have to split the remaining $\xi-\alpha$ trading opportunities, so each individual SI gets to trade with probability $\rho(\alpha) = \frac{\xi-\alpha}{1-\alpha}$.
+
+Keep the rest of the model as presented in class. Explain how this tweak changes the incentives to invest in speed: would you expect the equilibrium FI share $\alpha^*$ to be higher when SI's trading probability is exogenous ($\rho$) or endogenous in the way described above ($\rho = \rho(\alpha)$)? Why?
+
+\emph{Note: you do not need to provide closed-form solutions. You are, however, expected to verbally identify the main consequence(s) of such a tweak.}
+
+\ifsolutions
+\subsection*{Solution}
+	While the specific answer will depend on the specific $\rho, \xi$, and other primitives, we can make a few conjectures.
+
+	Endogenizing the trading opportunities introduces a new negative externality of the FI share $\alpha$ on slow investors when $\alpha < \xi$: higher $\alpha$ now leads to lower $\rho(\alpha)$ for SI. This makes it relatively more appealing to invest in speed, and suggests that the equilibrium share $\alpha^*$ would be higher than with exogenous $\rho$.
+	
+	Further, for $\alpha > \xi$, SI do not get to trade at all with endogenous $\rho(\alpha)$, and the access of FI to liquidity decreases in $\alpha$, since there would not be enough liquidity for all FI. This introduces a negative externality of $\alpha$ on FI when $\alpha > \xi$, but given that SI have no access to liquidity at all, the effect described in the previous paragraph is likely to dominate.
+\fi
+
+
+
+
+
+\section{Kyle model with information acquisition}
+
+Consider a single-period Kyle model, where the speculator does not know the asset's fundamental value $v$ perfectly, but instead decides how much to invest in a noisy signal about $v$. In particular, suppose that before submitting an order, the speculator chooses $\sigma^2_s$, pays cost $c(\sigma^2_s)$, and then receives signal $s \sim \mathcal{N}(v, \sigma^2_s)$. 
+
+After that, the game proceeds as in the regular Kyle model. The speculator chooses their trade size, $x \in \mathbb{R}$, to maximize their expected profit $\Pi_I \equiv \mathbb{E} [x(v-p)]$. The noise traders submit a random market order $u \sim \mathcal{N}(0,\sigma^2_u)$. The competitive dealer observes the aggregate order imbalance $q=x+u$ and quotes a price $p(q)$ at which they are willing to absorb it. All agents have a common prior belief that $v \sim \mathcal{N}(\mu, \sigma^2_v)$.
+
+\begin{enumerate}
+	\item Fix some signal precision $\sigma^2_s$ for the speculator and suppose they follow a strategy that is linear in the signal $s$: $x(s) = \beta (s-\mu)$ for some $\beta$. Derive the price schedule $p(q)$ that the dealer would offer given the equilibrium $\beta$ and $\sigma^2_s$. Specifically, show that $p(q) = \mu + \lambda q$ and provide an expression for $\lambda$.
+	
+	\item Derive the speculator's optimal trading strategy $x(s)$ given $\sigma^2_s$ and the dealer's pricing schedule $p(q) = \mu + \lambda q$.
+	
+	\item Calculate the speculator's expected trading profit for given $\sigma^2_s, \sigma^2_v$, and $\lambda$.
+	
+	\item Suppose now the speculator's information cost is given by $c(\sigma^2_s) = \frac{\gamma}{{\sigma^2_s}}$ for some information cost parameter $\gamma$. Derive the amount of information $\tau_s \equiv \frac{1}{\sigma^2_s}$ the speculator acquires as a function of $\lambda, \gamma, \sigma^2_v$. 
+	
+	\item How does the speculator's information choice depend on $\gamma$ and $\sigma_v^2$ given $\lambda$? How does it depend on $\lambda$? How does it depend on $\sigma^2_u$ in equilibrium? Explain.
+\end{enumerate}
+
+
+\ifsolutions
+\subsection*{Solution}
+
+\begin{enumerate}
+	\item Dealer is competitive, hence must in equilibrium get zero profit on any trade. The pricing schedule is then given as $p(q) = \mathbb{E}[v|q]$. We know that 
+	\begin{align*}
+		q = x + u 
+		&= \beta(s-\mu) + u,
+	\end{align*}
+	so we can represent the volume signal as $\tilde{q} \equiv \frac{q}{\beta} + \mu = v + \varepsilon$, where $\varepsilon \sim \mathcal{N}\left( 0, \frac{1}{\tau_q} \right)$ and $\tau_q = \left( \frac{\sigma^2_u}{\beta^2} + \sigma^2_s \right)^{-1}$ (recall, the idea is to express the signal about $v$ as $v+\varepsilon$, where $\varepsilon$ is zero-mean noise). Then we have that
+	\begin{align*}
+		p(q) = \mathbb{E}[v|q] 
+		&= \frac{\tau_v}{\tau_v + \tau_q} \mu + \frac{\tau_q}{\tau_v + \tau_q} \tilde{q} 
+		\\
+		&= \mu + \frac{\tau_q}{\tau_v + \tau_q} \cdot \frac{q}{\beta}
+		\\
+		&= \mu + \frac{\beta \sigma^2_v}{\beta^2 \sigma^2_v + \beta^2\sigma^2_s + \sigma^2_u} q,
+	\end{align*}
+	where $\tau_v = \frac{1}{\sigma^2_v}$. The price impact coefficient is then given by $\lambda = \frac{\beta \sigma^2_v}{\beta^2 \sigma^2_v + \beta^2\sigma^2_s + \sigma^2_u}$.
+	
+	\item The speculator's problem is the same as in the baseline Kyle model: 
+	$$x(s) = \arg \max_x \left\{ x(v-p) | x \right\} = \frac{\mathbb{E}[v|s] - \mu}{2\lambda}.$$
+	Since the speculator's signal precision is $\tau_s = \frac{1}{\sigma^2_s}$, we have
+	\begin{align*}
+		\mathbb{E}[v|s] &= \frac{\tau_v}{\tau_v+\tau_s} \mu + \frac{\tau_s}{\tau_v+\tau_s} s
+		%\\
+		%&= \mu + \frac{\tau_s}{\tau_v+\tau_s} (s-\mu)
+		\\
+		&= \mu + \frac{\sigma^2_v}{\sigma^2_v + \sigma^2_s} (s-\mu)
+		\\
+		\Rightarrow
+		x(s) &= \frac{1}{2\lambda} \cdot \frac{\sigma^2_v}{\sigma^2_v + \sigma^2_s} (s-\mu),
+	\end{align*}
+	or $\beta = \frac{1}{2\lambda} \cdot \frac{\sigma^2_v}{\sigma^2_v + \sigma^2_s}$.
+	
+	\item The speculator's expected trading profit is
+	\begin{align*}
+		\mathbb{E} [x(v-p) ] 
+		%&= \mathbb{E} \left[ \beta(s-\mu) \cdot \left( v - \mu - \lambda u - \lambda \beta(s-\mu) \right) \right]
+		%\\
+		&= \mathbb{E}_s \left[ \beta (s-\mu) \cdot \left( \mathbb{E}[v - \mu|s] - \lambda \beta (s-\mu) \right) \right]
+		\\
+		&= \mathbb{E}_s \left[ \beta (s-\mu) \cdot \left( \frac{\sigma^2_v}{\sigma^2_v + \sigma^2_s} (s-\mu) - \frac{\sigma^2_v}{2 (\sigma^2_v + \sigma^2_s) } (s-\mu) \right) \right]
+		\\
+		&= \beta \frac{\sigma^2_v}{2(\sigma^2_v + \sigma^2_s)} (\sigma^2_v + \sigma^2_s)
+		= \frac{\beta \sigma^2_v}{2}
+		\\
+		&= \frac{\sigma^4_v}{4 \lambda (\sigma^2_v + \sigma^2_s)},
+	\end{align*}
+	since $\mathbb{E}[(s-\mu)^2] = \sigma^2_v + \sigma^2_s$.
+	
+	\item The speculator's expected profit is given by trading profit net of information cost:
+	\begin{align*}
+		\frac{\sigma^4_v}{4 \lambda (\sigma^2_v + \sigma^2_s)} - \frac{\gamma}{\sigma^2_s}.
+	\end{align*}
+	Maximizing that over $\sigma^2_s$, we get the First-Order Condition
+	\begin{align*}
+		&-\frac{\sigma^4_v}{4 \lambda (\sigma^2_v + \sigma^2_s)^{2}} + \frac{\gamma}{\sigma^4_s} = 0
+		\\ \Rightarrow 
+		&\tau_s = \frac{1}{\sigma^2_s} = \frac{1}{2\sqrt{\lambda \gamma}} - \frac{1}{\sigma^2_v}.
+	\end{align*}
+	
+	\item We can see that the speculator acquires more information (chooses higher precision $\tau_s$/lower variance $\sigma^2_s$) when:
+	\begin{itemize}
+		\item $\gamma$ is lower -- information is cheaper;
+		\item $\sigma^2_v$ is higher -- information is more valuable since the fundamental is more uncertain;
+		\item $\lambda$ is lower -- price impact is lower, so the information is easier to act on;
+		\item $\sigma^2_u$ is higher -- having more noise trades makes the market deeper (lower $\lambda$). Note that the general equilibrium effect is smaller than $\frac{\partial \tau_s}{\partial \lambda} \cdot \frac{\partial \lambda}{\partial \sigma^2_u}$, since the market-maker would anticipate higher $\sigma^2_s$ and adjust depth accordingly:
+		\begin{align*}
+			\frac{d \tau_s}{d \sigma^2_u} &= \frac{\partial \tau_s}{\partial \lambda} \left( \frac{\partial \lambda}{\partial \sigma^2_u} + \frac{\partial \lambda}{\partial \tau_s} \cdot \frac{d \tau_s}{d \sigma^2_u} \right)
+			&\Rightarrow &&
+			\frac{d \tau_s}{d \sigma^2_u} &= \frac{ \frac{\partial \tau_s}{\partial \lambda} \cdot \frac{\partial \lambda}{\partial \sigma^2_u} }{ 1 - \frac{\partial \tau_s}{\partial \lambda} \cdot \frac{\partial \lambda}{\partial \tau_s}}.
+		\end{align*}
+	\end{itemize}
+\end{enumerate}
+\fi
+
+
+
+
+\section{0dte traders}
+
+\begin{enumerate}
+	\item Which motives for trading have we proposed throughout the course as reasons for trading in financial markets? Mention and briefly describe them.
+	
+	\item Read the essay attached at the end of this exam. Which of the motives above drive the behavior of the retail traders mentioned in the essay? Are there any other motives driving them that we have not discussed?
+\end{enumerate}
+
+\ifsolutions
+\subsection*{Solution}
+\begin{enumerate}
+	\item In one of the slides, we emphasized the following main reasons for which agents trade.
+	
+	\textbf{Informational}: investor has (or believes he has) private information relative to other agents in the market, which allows them to predict future price movements and trade at a profit.
+	\\
+	\textbf{Liquidity}: investor trades due to either having excess liquidity (too much free cash -- optimal to buy illiquid assets that generate higher return), or encountering a need for liquidity (sell some illiquid assets from the portfolio in exchange for liquid cash).
+	\\
+	\textbf{Hedging}: investor buys or sells a given asset in order to hedge the risks in the rest of their portfolio.
+	
+	We briefly discussed various other motives (e.g., exploiting arbitrage opportunities; providing liquidity can be a self-contained profitable activity; an activist investor may be buying up a company's shares in order to affect its governance), but the bulk of the course implied one of the three primary motives.
+	
+	
+	\item One could argue that out of the above, the informational motive describes traders' behavior most accurately: they \emph{believe} they have private information that allows them to beat the market. They may enter the market due to liquidity motive (the desire to earn a return on their free cash), but it alone would not justify intraday trading. 
+	It should be noted that there is a legitimate hedging motive in trading 0dte options too, see Adams et al. (2024).\footnote{Adams, Greg and Fontaine, Jean-Sebastien and Ornthanalai, Chayawat, The Market for 0DTE: The Role of Liquidity Providers in Volatility Attenuation (May 03, 2024). Available at SSRN: \url{http://dx.doi.org/10.2139/ssrn.4881008}}
+	However, it does not appear to be driving the behavior of the traders discussed in the essay
+	
+	One factor that we did not discuss in this course that is also likely relevant in this case is risk-loving: the individuals invest in highly risky assets with zero (or negative, after all the commissions) expected return simply because they get positive expected utility from such risky gambles. 
+	
+	
+\end{enumerate}
+\fi
+
+
+
+{\ifsolutions \else	
+	\includepdf[pages=-]{0dte.pdf}
+\fi}
+
+
+
+
+\end{document}

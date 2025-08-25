@@ -1,0 +1,278 @@
+%%% License: Creative Commons Attribution Share Alike 4.0 (see https://creativecommons.org/licenses/by-sa/4.0/)
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[a4paper]{article}
+
+\usepackage{amssymb}
+%\usepackage{enumerate}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{extramarks} % Required for headers and footers
+\usepackage[usenames,dvipsnames]{color} % Required for custom colors
+\usepackage{graphicx} % Required to insert images
+\usepackage{listings} % Required for insertion of code
+\usepackage{courier} % Required for the courier font
+\usepackage[table]{xcolor}
+\usepackage{amsfonts,amsmath,amsthm,parskip,setspace}
+\usepackage[section]{placeins}
+\usepackage[a4paper]{geometry}
+\usepackage[USenglish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{tikz}
+\usepackage{hyperref}
+\usepackage[hyphenbreaks]{breakurl}
+\usepackage[]{url}
+\usepackage[shortlabels]{enumitem}
+\usepackage{framed}
+\usepackage{pdfpages}
+
+
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.6in
+
+\linespread{1.1} % Line spacing
+
+
+
+%----------------------------------------------------------------------------------------
+%   FORMATTING
+%----------------------------------------------------------------------------------------
+% Set up the header and footer
+\pagestyle{fancy}
+\lhead[c]{\textbf{{\color[rgb]{.5,0,0} K{\o}benhavns\\Universitet }}} % Top left header
+\chead{\textbf{{\color[rgb]{.5,0,0} \Class }}\\ \hmwkTitle  } % Top center head
+\rhead{\instructor \\ \theprofessor} % Top right header
+\lfoot{\lastxmark} % Bottom left footer
+\cfoot{} % Bottom center footer
+\rfoot{Page\ \thepage\ of\ \protect\pageref{LastPage}} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+
+
+% Other formatting stuff
+%\setlength\parindent{12pt}
+\setlength{\parskip}{5 pt}
+%\theoremstyle{definition} \newtheorem{ex}{\textbf{\Large{Exercise & #}\\}}
+\usepackage{titlesec}
+\titleformat{\section}[hang]{\normalfont\bfseries\Large}{Problem \thesection:}{0.5em}{}
+
+
+
+
+%----------------------------------------------------------------------------------------
+%	NAME AND CLASS SECTION
+%----------------------------------------------------------------------------------------
+\newcommand{\hmwkTitle}{Exam} % Assignment title
+\newcommand{\Class}{Financial Markets Microstructure} % Course/class
+\newcommand{\instructor}{Spring 2025} % TA
+\newcommand{\theprofessor}{Prof. Egor Starkov} % Professor
+
+
+
+
+%----------------------------------------------------------------------------------------
+%   SOLUTIONS
+%----------------------------------------------------------------------------------------
+\newif\ifsolutions
+\solutionstrue
+
+
+
+
+\begin{document}
+
+{\ifsolutions \else	
+	\includepdf{FMMexam_frontpage25_2.pdf}
+\fi}
+
+\begin{center}
+		\LARGE\textbf{Final re-exam {\ifsolutions solutions \fi}}
+\end{center}
+
+{\ifsolutions \else	
+Write up your responses to questions below and submit them to Digital Exam. The deadline to submit the responses is Aug 18, 21:00. No cooperation with other students is permitted.
+
+Be concise, but show your work and explain your answers. Some questions may require you to make additional assumptions beyond those provided in the question; be clear about the assumptions you make. Some questions are open ended in that they may not have a unique correct answer. You are allowed to refer to textbooks, lecture notes, slides, problem sets, etc.
+\fi}
+
+
+
+
+
+
+\section{Inventory risk and demand for liquidity}
+
+Consider a Kyle model with inventory risk and no informed trading that we considered in class. How does the dealer's pricing schedule in that model depend on the variance of the incoming market order, $\sigma^2_u$? Explain the intuition behind this result and which modelling assumptions are responsible for this conclusion.
+
+
+\ifsolutions
+\subsection*{Solution}
+	The dealer's pricing schedule in the mentioned model does not depend on $\sigma^2_u$ (see slide deck L7, slide 23). This is because the dealer's pricing decisions are guided by the premium they require for holding on to the inventory given the uncertainty in the asset valuation. There is no informed trading that attempts to hide between noise traders' orders. This model further assumes that the dealer maximizes their one-period-ahead wealth, which abstracts away from how the question of how the dealer will unravel their inventory. Finally, the dealers are assumed to be competitive. Therefore, there is no reason for the variance of liquidity demand to affect the pricing offered by the dealer. If, however, any of the aforementioned assumptions were altered, the result would be different.
+\fi
+
+
+
+
+
+\section{Kyle model with public information acquisition}
+
+Consider a single-period Kyle model, where the speculator does not know the asset's fundamental value $v$ perfectly, but instead decides how much to \emph{publicly} invest in a noisy signal about $v$. In particular, suppose that before submitting an order, the speculator chooses $\sigma^2_s$, pays cost $c(\sigma^2_s)$, and then receives signal $s \sim \mathcal{N}(v, \sigma^2_s)$. All other agents in the market (specifically, the market-maker) observe the speculator's choice of $\sigma^2_s$.
+
+After that, the game proceeds as in the regular Kyle model. The speculator chooses their trade size, $x \in \mathbb{R}$, to maximize their expected profit $\Pi_I \equiv \mathbb{E} [x(v-p)]$. The noise traders submit a random market order $u \sim \mathcal{N}(0,\sigma^2_u)$. The competitive dealer observes the aggregate order imbalance $q=x+u$ and quotes a price $p(q)$ at which they are willing to absorb it. All agents have a common prior belief that $v \sim \mathcal{N}(\mu, \sigma^2_v)$.
+
+One can verify that for a given signal precision $\sigma^2_s$ and speculator's strategy $x(s) = \beta (s-\mu)$ for some $\beta$, the competitive dealer's price schedule is given by $p(q) = \mu + \lambda q$ with $\lambda = \frac{\beta \sigma^2_v}{\beta^2 \sigma^2_v + \beta^2\sigma^2_s + \sigma^2_u}$. One can then verify that the speculator indeed optimally trades according to $x(s) = \beta (s-\mu)$ with $\beta = \frac{1}{2\lambda} \cdot \frac{\sigma^2_v}{\sigma^2_v + \sigma^2_s}$.
+
+\begin{enumerate}
+	\item Give a plausible justification to the assumption that the speculator's choice of $\sigma^2_s$ is \emph{observable} to other market participants.
+	
+	%\item Fix some signal precision $\sigma^2_s$ for the speculator and suppose they follow a strategy that is linear in signal $s$: $x(s) = \beta (s-\mu)$ for some $\beta$. Derive the price schedule $p(q)$ that the dealer would offer given the equilibrium $\beta$ and $\sigma^2_s$.
+	
+	%\item Derive the speculator's optimal trading strategy $x(s)$ given $\sigma^2_s$ and the dealer's pricing schedule $p(q) = \mu + \lambda q$.
+	
+	\item Solve for equibrium speculator's trading aggressiveness $\beta$ and the price impact $\lambda$ in terms of model parameters and $\sigma^2_s$.
+	
+	\item Calculate the speculator's expected trading profit for given $\sigma^2_s, \sigma^2_v$.
+	
+	\item Suppose now the speculator's information cost is given by $c(\sigma^2_s) = \frac{\gamma}{\sqrt{\sigma^2_s}}$ for some information cost parameter $\gamma$. Derive the amount of information $\tau_s \equiv \frac{1}{\sigma^2_s}$ the speculator acquires as a function of $\lambda, \gamma, \sigma^2_v$. 
+	
+	\item How does the speculator's information choice depend on $\gamma$, $\sigma_v^2$, and $\sigma^2_u$ in equilibrium? Explain.
+	
+	\item Answer intuitively: after committing publicly to some level of $\sigma^2_s$, would the speculator want to secretly change $\sigma^2_s$? Why or why not? Explain.
+\end{enumerate}
+
+
+\ifsolutions
+\subsection*{Solution}
+
+\begin{enumerate}
+	\item We can think of the speculator as a hedge fund, and of their information acquisition efforts as the size of their research department, in terms of headcount and funding. The funds would likely advertise information like this to attract clients, so it would not be a stretch to assume that other market participants can readily observe it.
+	
+	%\item Dealer is competitive, hence must in equilibrium get zero profit on any trade. The pricing schedule is then given as $p(q) = \mathbb{E}[v|q]$. We know that 
+	%\begin{align*}
+	%	q = x + u 
+	%	&= \beta(s-\mu) + u,
+	%\end{align*}
+	%which we can represent the volume signal as $\tilde{q} \equiv \frac{q}{\beta} + \mu = v + \varepsilon$, where $\varepsilon \sim \mathcal{N}\left( 0, \frac{1}{\tau_q} \right)$, where $\tau_q = \left( \frac{\sigma^2_u}{\beta^2} + \sigma^2_s \right)^{-1}$ (recall, the idea is to express the signal about $v$ as $v+\varepsilon$, where $\varepsilon$ is zero-mean noise). Then we have that
+	%\begin{align*}
+	%	p(q) = \mathbb{E}[v|q] 
+	%	&= \frac{\tau_v}{\tau_v + \tau_q} \mu + \frac{\tau_q}{\tau_v + \tau_q} \tilde{q} 
+	%	\\
+	%	&= \mu + \frac{\tau_q}{\tau_v + \tau_q} \cdot \frac{q}{\beta}
+	%	\\
+	%	&= \mu + \frac{\beta \sigma^2_v}{\beta^2 \sigma^2_v + \beta^2\sigma^2_s + \sigma^2_u} q,
+	%\end{align*}
+	%where $\tau_v = \frac{1}{\sigma^2_v}$. The price impact coefficient is then given by $\lambda = \frac{\beta \sigma^2_v}{\beta^2 \sigma^2_v + \beta^2\sigma^2_s + \sigma^2_u}$.
+	%
+	%\item The speculator's problem is the same as in the baseline Kyle model: 
+	%$$x(s) = \arg \max_x \left\{ x(v-p) | x \right\} = \frac{\mathbb{E}[v|s] - \mu}{2\lambda}.$$
+	%Since the speculator's signal precision is $\tau_s = \frac{1}{\sigma^2_s}$, we have
+	%\begin{align*}
+	%	\mathbb{E}[v|s] &= \frac{\tau_v}{\tau_v+\tau_s} \mu + \frac{\tau_s}{\tau_v+\tau_s} s
+	%	%\\
+	%	%&= \mu + \frac{\tau_s}{\tau_v+\tau_s} (s-\mu)
+	%	\\
+	%	&= \mu + \frac{\sigma^2_v}{\sigma^2_v + \sigma^2_s} (s-\mu)
+	%	\\
+	%	\Rightarrow
+	%	x(s) &= \frac{1}{2\lambda} \cdot \frac{\sigma^2_v}{\sigma^2_v + \sigma^2_s} (s-\mu),
+	%\end{align*}
+	%or $\beta = \frac{1}{2\lambda} \cdot \frac{\sigma^2_v}{\sigma^2_v + \sigma^2_s}$.
+	
+	\item We have
+	\begin{align*}
+		\lambda &= \frac{\beta \sigma^2_v}{\beta^2 \sigma^2_v + \beta^2\sigma^2_s + \sigma^2_u}
+		&
+		\beta &= \frac{1}{2\lambda} \cdot \frac{\sigma^2_v}{\sigma^2_v + \sigma^2_s}
+		\\
+		\Rightarrow
+		\lambda &= \frac{\sigma^2_v}{2 \sqrt{ \sigma^2_u (\sigma^2_v + \sigma^2_s) }}
+		&
+		\beta &= \sqrt{ \frac{\sigma^2_u}{\sigma^2_v + \sigma^2_s} }
+	\end{align*}
+	
+	\item The speculator's expected trading profit is
+	\begin{align*}
+		\mathbb{E} [x(v-p) ] 
+		%&= \mathbb{E} \left[ \beta(s-\mu) \cdot \left( v - \mu - \lambda u - \lambda \beta(s-\mu) \right) \right]
+		%\\
+		&= \mathbb{E}_s \left[ \beta (s-\mu) \cdot \left( \mathbb{E}[v - \mu|s] - \lambda \beta (s-\mu) \right) \right]
+		\\
+		&= \mathbb{E}_s \left[ \beta (s-\mu) \cdot \left( \frac{\sigma^2_v}{\sigma^2_v + \sigma^2_s} (s-\mu) - \frac{\sigma^2_v}{2 (\sigma^2_v + \sigma^2_s) } (s-\mu) \right) \right]
+		\\
+		&= \beta \frac{\sigma^2_v}{2(\sigma^2_v + \sigma^2_s)} (\sigma^2_v + \sigma^2_s)
+		= \frac{\beta \sigma^2_v}{2}
+		\\
+		&= \frac{\sigma^2_v}{2} \cdot \sqrt{ \frac{\sigma^2_u}{\sigma^2_v + \sigma^2_s} },
+	\end{align*}
+	since $\mathbb{E}[(s-\mu)^2] = \sigma^2_v + \sigma^2_s$.
+	
+	\item The speculator's expected profit is given by trading profit net of information cost:
+	\begin{align*}
+		\frac{\sigma^2_v}{2} \cdot \sqrt{ \frac{\sigma^2_u}{\sigma^2_v + \sigma^2_s} } - \frac{\gamma}{\sqrt{\sigma^2_s}}.
+	\end{align*}
+	Maximizing that over $\sigma^2_s$, we get the First-Order Condition
+	\begin{align*}
+		&-\frac{\sigma^2_v \sigma_u}{4 (\sigma^2_v + \sigma^2_s)^{\frac{3}{2}}} + \frac{\gamma}{2(\sigma^2_s)^{\frac{3}{2}}} = 0
+		\\ \Rightarrow 
+		&\tau_s = \frac{1}{\sigma^2_s} = \left( \frac{\sigma^2_u}{4\gamma^2 \sigma^2_v} \right)^{\frac{1}{3}} - \frac{1}{\sigma^2_v}.
+	\end{align*}
+	
+	\item We can see that the speculator acquires more information (chooses higher precision $\tau_s$/lower variance $\sigma^2_s$) when:
+	\begin{itemize}
+		\item $\gamma$ is lower -- information is cheaper;
+		\item $\sigma^2_u$ is higher -- having more noise trades makes the market deeper (lower $\lambda$);
+		\item $\sigma^2_v$ is ``average'' -- information is more valuable when the fundamental is more uncertain, but this is offset by the higher price impact that a more informed speculator faces. Therefore, as $\sigma^2_v$ increases, in equilibrium it sometimes pays off for the speculator to commit to a lower $\sigma^2_s$ in order to increase the market depth and mitigate the price impact.
+	\end{itemize}
+	
+	\item Yes. On top of direct costs $c(\tau_s)$, the speculator in this model incurs indirect costs of $\tau_s$, which stem from $\lambda$. Specifically, $\tau_s$ is factored by the market-maker into the depth of the pricing schedule the speculator faces when trading -- i.e., costs stem from the observability of $\tau_s$ or, in other words, from the market maker's expectation of the speculator's $\tau_s$. In turn, the benefits of $\tau_s$ come from the actually chosen amount of information (not the other agents' expectation of it) -- more private information about $v$ means larger scope for profitable trades. Therefore, secretly increasing $\tau_s$ brings additional benefit but does not increase the ``indirect costs''.
+\end{enumerate}
+\fi
+
+
+
+
+
+\section{Frozen Concentrated Orange Juice}
+
+Read a brochure about the Frozen Concentrated Orange Juice (FCOJ) future market attached at the end of this exam text. Answer the following questions.
+\begin{enumerate}
+	\item According to the brochure, what are the two main goals of the FCOJ future market?
+	
+	\item According to the brochure, what two types of traders participate in the FCOJ future markets? Which of these traders, do you think, are more likely to have informational advantage?
+	
+	\item The figure on p.1 of the report shows that orange crop utilization for sake of producing FCOJ has been steadily declining in both absolute and relative terms during 1992--2011. The last Figure on p.3 of the report, however, shows that both trading volume and open interest in FCOJ futures has remained steady during that period. So the FCOJ market has been declining, but the FCOJ futures market has not. Propose an explanation for this discrepancy. How does it relate to market goals you identified in question 1?
+\end{enumerate}
+
+\ifsolutions
+\subsection*{Solution}
+\begin{enumerate}
+	\item Price discovery and risk transfer.
+	\item Commercial/hedging traders (related to citrus, juice-packing, or retail business) and speculative traders (everyone else). Speculators only have access to public information, while commercial traders have relevant insider information from their business activities. (It is, however, possible, that speculators are better at processing publicly available information than commercial traders, so they would have a different kind of informational advantage.)
+	\item While the relevance of FCOJ as a commodity has declined, this financial asset ``remains the most visible price discovery mechanism for the [citrus] industry''. I.e., this asset is relevant to other forms of juices and other types of citrus, and serves as a proxy asset for hedgers seeking to insure against risks in citrus/citrus juice markets more broadly, and enables price discovery in those markets.
+\end{enumerate}
+\fi
+
+
+
+
+
+{\ifsolutions \else	
+	\includepdf[pages=-]{ICE_FCOJ_Brochure.pdf}
+\fi}
+
+
+
+
+\end{document}
